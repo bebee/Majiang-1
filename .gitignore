@@ -1,0 +1,6 @@
+.idea
+bin-debug
+bin-release
+libs
+wingProperties.json
+runtime
