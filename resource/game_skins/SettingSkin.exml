@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='utf-8'?>
+<e:Skin class="SettingSkin" width="670" height="380" xmlns:e="http://ns.egret.com/eui" xmlns:mui="mui.*" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*">
+	<e:Image source="setting_huawen" x="395" y="33"/>
+	<e:Image source="setting_huawen" y="33" x="278" scaleX="-1"/>
+	<e:Image source="setting_line" x="430" y="94" height="150"/>
+	<e:Label text="音乐" x="28" y="115" size="24" fontFamily="微软雅黑" textColor="0xA97144" width="59" height="26" textAlign="center" verticalAlign="middle"/>
+	<e:Label y="185" textColor="0xA97144" verticalAlign="middle" text="音效" fontFamily="微软雅黑" textAlign="center" width="59" height="26" size="24" x="28"/>
+	<e:Label y="152" textColor="0xA97144" verticalAlign="middle" text="静音" fontFamily="微软雅黑" textAlign="center" width="59" height="26" size="24" x="438"/>
+</e:Skin>

@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='utf-8'?>
+<e:Skin class="RuleSkin" width="844" height="558" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*">
+	<e:Image source="setting_huawen" x="517" y="46"/>
+	<e:Image y="46" x="332" scaleX="-1" source="setting_huawen"/>
+	<e:Scroller id="_scroller" width="766" height="411" y="116" x="39">
+		<e:Group id="_group">
+			<e:layout>
+				<e:VerticalLayout horizontalAlign="center" verticalAlign="top"/>
+			</e:layout>
+		</e:Group>
+	</e:Scroller>
+	<e:Image source="rule_img" y="97" x="39"/>
+</e:Skin>

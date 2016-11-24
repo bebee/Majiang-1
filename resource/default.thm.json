@@ -1,0 +1,27 @@
+{
+  "autoGenerateExmlsList": true,
+  "exmls": [
+    "resource/game_skins/ChatListSkin.exml",
+    "resource/game_skins/ChatPaoSkin.exml",
+    "resource/game_skins/ChatSkin.exml",
+    "resource/game_skins/CreateSkin.exml",
+    "resource/game_skins/DialogSkin.exml",
+    "resource/game_skins/DissolutionSkin.exml",
+    "resource/game_skins/HornSkin.exml",
+    "resource/game_skins/JoinPasswordSkin.exml",
+    "resource/game_skins/JoinSkin.exml",
+    "resource/game_skins/LoginSkin.exml",
+    "resource/game_skins/mainSkin.exml",
+    "resource/game_skins/MessageSkin.exml",
+    "resource/game_skins/RecordItemSkin.exml",
+    "resource/game_skins/RecordSkin.exml",
+    "resource/game_skins/RecordXItemSkin.exml",
+    "resource/game_skins/RoleInfoSkin.exml",
+    "resource/game_skins/RuleSkin.exml",
+    "resource/game_skins/SettingSkin.exml",
+    "resource/game_skins/ShopItemSkin.exml",
+    "resource/game_skins/ShopSkin.exml",
+    "resource/mui_skins/EHSliderSkin.exml"
+  ],
+  "skins": {}
+}

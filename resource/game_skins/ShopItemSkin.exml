@@ -1,0 +1,6 @@
+<?xml version='1.0' encoding='utf-8'?>
+<e:Skin class="ShopItemSkin" width="230" height="307" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+	<e:Image source="shop_bg1" y="0" x="0"/>
+	<e:Image id="_icon" source="m_icon1" horizontalCenter="0.5" verticalCenter="-35"/>
+	<e:Label id="_labels" text=" ￥100" x="14" y="226" width="202" height="59" textAlign="center" verticalAlign="middle" lineSpacing="5"/>
+</e:Skin>

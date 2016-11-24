@@ -1,0 +1,6 @@
+<?xml version='1.0' encoding='utf-8'?>
+<e:Skin class="DialogSkin" width="825" height="539" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+	<e:Image id="_dialog_bg" left="0" right="0" top="0" bottom="0" source="loadingeff_bg" scale9Grid="61,59,30,32"/>
+	<e:Image id="_title_img" source="dialog_head_img" horizontalCenter="0" top="8"/>
+	<e:Image id="_title" source="shop_txt" top="23" horizontalCenter="0"/>
+</e:Skin>

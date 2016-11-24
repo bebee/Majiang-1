@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='utf-8'?>
+<e:Skin class="RecordSkin" width="870" height="580" xmlns:e="http://ns.egret.com/eui" xmlns:ns1="*" xmlns:w="http://ns.egret.com/wing">
+	<e:Image source="panel_1" width="785" height="457" scale9Grid="18,19,26,17" y="87" x="43"/>
+	<e:Scroller id="_scroller" width="778" height="444" x="46" y="96">
+		<e:Group id="_group" height="396">
+			<e:layout>
+				<e:VerticalLayout horizontalAlign="center" verticalAlign="top" gap="0" paddingLeft="0" paddingTop="0"/>
+			</e:layout>
+		</e:Group>
+	</e:Scroller>
+</e:Skin>

@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='utf-8'?>
+<e:Skin class="DissolutionSkin" width="670" height="388" xmlns:e="http://ns.egret.com/eui" xmlns:ns1="*" xmlns:w="http://ns.egret.com/wing">
+	<e:Image source="panel_1" width="586" height="190" x="42" y="99" scale9Grid="19,19,25,16" locked="true"/>
+	<e:Image id="_img1" x="260" y="133" source="diss_dui"/>
+	<e:Image id="_img2" y="133" x="520" source="diss_dui"/>
+	<e:Image id="_img3" source="diss_dui" y="203" x="260"/>
+	<e:Image id="_img4" source="diss_dui" y="203" x="520"/>
+	<e:Label id="_label1" x="24" y="134" width="224" height="38" textColor="0xA07A4B" size="18" fontFamily="微软雅黑" textAlign="right" verticalAlign="middle" bold="true"/>
+	<e:Label id="_label2" y="134" textColor="0xA07A4B" verticalAlign="middle" fontFamily="微软雅黑" textAlign="right" bold="true" width="224" size="18" height="38" x="284"/>
+	<e:Label id="_label3" y="204" textColor="0xA07A4B" verticalAlign="middle" fontFamily="微软雅黑" textAlign="right" bold="true" width="224" size="18" height="38" x="24"/>
+	<e:Label id="_label4" y="204" textColor="0xA07A4B" verticalAlign="middle" fontFamily="微软雅黑" textAlign="right" bold="true" width="224" size="18" height="38" x="284"/>
+</e:Skin>
