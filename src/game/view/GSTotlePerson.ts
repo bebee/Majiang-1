@@ -124,6 +124,8 @@ class GSTotlePerson extends eui.Component
 
         var new_card:number = this.pserson.new_card;
 
+        console.log(">>  " + new_card);
+
         if(new_card > 0)
         {
             this.card_group = new eui.Group();

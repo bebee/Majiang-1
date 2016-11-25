@@ -51,7 +51,7 @@ class TimeEffectView implements IUpdate{
 
     reset(){
 
-        this.stop = false;
+        this.stop = true;
         this.view.visible = false;
     }
 

@@ -49,7 +49,7 @@ class GSScene extends egret.DisplayObjectContainer {
 
         this.gameLogo = new egret.Bitmap(GameRes.getUI("game_logo"));
         this.gameLogo.x = (GSConfig.width - this.gameLogo.width) >> 1;
-        this.gameLogo.y = (GSConfig.height - this.gameLogo.height >> 1) - 90;
+        this.gameLogo.y = (GSConfig.height - this.gameLogo.height >> 1) - 110;
 
         this.addChild(this.bg);
         this.addChild(this.gameLogo);
@@ -64,7 +64,7 @@ class GSScene extends egret.DisplayObjectContainer {
         this.roomIDText = new egret.TextField();
         this.roomIDText.x = 15;
         this.roomIDText.y = 20;
-        this.roomIDText.size = 14;
+        this.roomIDText.size = 18;
         this.addChild(this.roomIDText);
 
 
@@ -117,7 +117,7 @@ class GSScene extends egret.DisplayObjectContainer {
         this.ruleText.anchorOffsetY = 30;
         this.ruleText.textAlign = egret.HorizontalAlign.CENTER;
         this.ruleText.x = GSConfig.width >> 1;
-        this.ruleText.y = 290;
+        this.ruleText.y = 285;
 
         this.addChild(this.ruleText);
 

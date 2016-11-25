@@ -10,6 +10,8 @@ class S1
         if(obj["data"])
         {
             GlobalData.getInstance().sendLogin = false;
+
+            GlobalData.getInstance().connCount = 0;
             
             GlobalData.getInstance().player.update(obj["data"]);
 

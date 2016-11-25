@@ -151,7 +151,7 @@ class Weixin {
         var body:BodyMenuShareAppMessage = new BodyMenuShareAppMessage();
         body.title = "" + title;
         body.desc = "" + str;
-        body.link = "http://mj.h5sd.com/wdmj/index.html";
+        body.link = "" + GameConfig.wei_href_address;
         body.imgUrl = "http://mj.h5sd.com/wdmj/weishare.png";
         body.type = "link";
         body.dataUrl = "";
@@ -199,20 +199,20 @@ class Weixin {
 
                 body.title = "跟我一起开房的点此链接！";
 
-                body.link = "http://mj.h5sd.com/wdmj/index.html?roomid=" + roomid;
+                body.link = GameConfig.wei_href_address + "?roomid=" + roomid;
             }
             else
             {
                 body.title = "这麻将！三天不打，上房揭瓦！";
                 body.desc = "私房麻将馆，好友组局，微信登录，玩牌交友两不误！";
-                body.link = "http://mj.h5sd.com/wdmj/index.html";
+                body.link = ""+ GameConfig.wei_href_address;
             }
         }
         else
         {
             body.title = "这麻将！三天不打，上房揭瓦！";
             body.desc = "私房麻将馆，好友组局，微信登录，玩牌交友两不误！";
-            body.link = "http://mj.h5sd.com/wdmj/index.html";
+            body.link = "" + GameConfig.wei_href_address;
         }
 
         body.imgUrl = "http://mj.h5sd.com/wdmj/weishare.png";
@@ -246,11 +246,11 @@ class Weixin {
         body.title = "这麻将！三天不打，上房揭瓦！";
         if(roomid)
         {
-            body.link = "http://mj.h5sd.com/wdmj/index.html?roomid=" + roomid;
+            body.link =  GameConfig.wei_href_address + "?roomid=" + roomid;
         }
         else
         {
-            body.link = "http://mj.h5sd.com/wdmj/index.html";
+            body.link = "" + GameConfig.wei_href_address;
         }
 
         body.imgUrl = "http://mj.h5sd.com/wdmj/weishare.png";

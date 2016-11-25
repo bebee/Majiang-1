@@ -11,6 +11,11 @@ class Player
     public channel:string;
 
     /**
+     * code
+     */
+    public code:string;
+
+    /**
      * 玩家的平台开放编号
      */
     public openid:string;

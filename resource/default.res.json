@@ -1,11 +1,11 @@
 {
 	"groups":[
 	{
-		"keys":"shop_icon,blue_game_btn,head_001,head_bg,head_kuang_bg,horn_bg,horn_icon,money_bg,money_icon,notice_bg,red_game_btn,rule_icon,set_icon,dialog_bg,close_btn,lymj_bg,lymj_text,yellow_game_btn,panel_1,dialog_head_img,btn_blue,img_line,btn_green,btn_red,gameui_json,game_bg,card,JS_share_button_png,JS_continue_button_png,game_button_quit_png,game_button_setting_png,game_siri_png,game_talk_png,btn_cheng,lashen_15,card_add,voice_icon,rule,logo,game_weixin_button,game_jiesan_button,game_invite_button,game_start_button,share_img,setting_huawen,create_btn_img,create_kspj,create_password_bg,create_qd,room_btn,select_center,select_left,create_xz0,create_xz1,check_off_btn,check_on_btn,create_btn,start_btn,clickeff_btn,joingame_txt,record_img1,record_img2,record_txt,radio_btn,setting_progressbar_bg,setting_progressbar1,setting_txt,sound_close_btn,sound_open_btn,shop_txt,shop_dialog_head_img,setting_line,rule_img,select_right,clickeff_of_btn,joinpassword_txt,random_img,bind_img,msg_title,diss_cuo,diss_dui,diss_title,activit_jian,rule_txt",
+		"keys":"shop_icon,blue_game_btn,head_001,head_bg,head_kuang_bg,horn_bg,horn_icon,money_bg,money_icon,notice_bg,red_game_btn,rule_icon,set_icon,dialog_bg,close_btn,lymj_bg,lymj_text,yellow_game_btn,panel_1,dialog_head_img,btn_blue,img_line,btn_green,btn_red,gameui_json,game_bg,card,JS_share_button_png,JS_continue_button_png,game_button_quit_png,game_button_setting_png,game_siri_png,game_talk_png,btn_cheng,lashen_15,card_add,voice_icon,rule,logo,game_weixin_button,game_jiesan_button,game_invite_button,game_start_button,share_img,setting_huawen,create_btn_img,create_kspj,create_password_bg,create_qd,room_btn,select_center,select_left,create_xz0,create_xz1,check_off_btn,check_on_btn,create_btn,start_btn,clickeff_btn,joingame_txt,record_img1,record_img2,record_txt,radio_btn,setting_progressbar_bg,setting_progressbar1,setting_txt,sound_close_btn,sound_open_btn,shop_txt,shop_dialog_head_img,setting_line,rule_img,select_right,clickeff_of_btn,joinpassword_txt,random_img,bind_img,msg_title,diss_cuo,diss_dui,diss_title,activit_jian,rule_txt,card_0,card_1,card_2,card_3,card_4,card_5,card_6,card_7,card_8,card_9",
 		"name":"preload"
 	},
 	{
-		"keys":"lgoin_loading_eff1,loadingeff_bg,game_scene",
+		"keys":"loadingeff_bg,game_scene",
 		"name":"login"
 	},
 	{
@@ -46,11 +46,6 @@
 		"name":"joingame_txt",
 		"type":"image",
 		"url":"assets/JoinDialog/joingame_txt.png"
-	},
-	{
-		"name":"lgoin_loading_eff1",
-		"type":"image",
-		"url":"assets/login/lgoin_loading_eff1.png"
 	},
 	{
 		"name":"loadingeff_bg",
@@ -330,7 +325,7 @@
 	},
 	{
 		"name":"gameui_json",
-		"subkeys":"F_budan,F_cheng,F_chi,F_gang,F_guo,F_hu,F_peng,F_ting,JS_close,JS_dot,JS_fangpao,JS_hulogo,JS_liuju,JS_lose,JS_lose_bg,JS_win,JS_win_bg,bg_001,bg_002,card_0,card_1,card_2,card_3,card_4,card_5,card_6,card_7,card_8,card_9,card_cha,card_jiangli1,card_jiangli2,game_bao_bg,game_baopai,game_bg_time,game_buttons_bg,game_fight,game_gang_bg,game_hanbao_BG,game_head_dirBG,game_head_lixian,game_head_null,game_head_room,game_hl_time,game_logo,game_mark,game_ready,game_show_kuang,game_zhuang,img_pjjs,match_pic_jian,match_pic_pop,sptFangPao,sptWin,ting_icon1,ting_icon2",
+		"subkeys":"F_budan,F_cheng,F_chi,F_gang,F_guo,F_hu,F_peng,F_ting,JS_close,JS_dot,JS_fangpao,JS_hulogo,JS_liuju,JS_lose,JS_lose_bg,JS_win,JS_win_bg,bg_001,bg_002,card_cha,card_jiangli1,card_jiangli2,game_bao_bg,game_baopai,game_bg_time,game_buttons_bg,game_fight,game_gang_bg,game_hanbao_BG,game_head_dirBG,game_head_lixian,game_head_null,game_head_room,game_hl_time,game_logo,game_mark,game_ready,game_show_kuang,game_zhuang,img_pjjs,match_pic_jian,match_pic_pop,sptFangPao,sptWin,time_0,time_1,time_10,time_11,time_12,time_13,time_14,time_15,time_16,time_2,time_3,time_4,time_5,time_6,time_7,time_8,time_9,ting_icon1,ting_icon2",
 		"type":"sheet",
 		"url":"assets/card/gameui.json"
 	},
@@ -1033,5 +1028,55 @@
 		"name":"sound_card_hover",
 		"type":"sound",
 		"url":"assets/sound/other/sound_card_hover.mp3"
+	},
+	{
+		"name":"card_0",
+		"type":"image",
+		"url":"assets/main/card_0.png"
+	},
+	{
+		"name":"card_1",
+		"type":"image",
+		"url":"assets/main/card_1.png"
+	},
+	{
+		"name":"card_2",
+		"type":"image",
+		"url":"assets/main/card_2.png"
+	},
+	{
+		"name":"card_3",
+		"type":"image",
+		"url":"assets/main/card_3.png"
+	},
+	{
+		"name":"card_4",
+		"type":"image",
+		"url":"assets/main/card_4.png"
+	},
+	{
+		"name":"card_5",
+		"type":"image",
+		"url":"assets/main/card_5.png"
+	},
+	{
+		"name":"card_6",
+		"type":"image",
+		"url":"assets/main/card_6.png"
+	},
+	{
+		"name":"card_7",
+		"type":"image",
+		"url":"assets/main/card_7.png"
+	},
+	{
+		"name":"card_8",
+		"type":"image",
+		"url":"assets/main/card_8.png"
+	},
+	{
+		"name":"card_9",
+		"type":"image",
+		"url":"assets/main/card_9.png"
 	}]
 }

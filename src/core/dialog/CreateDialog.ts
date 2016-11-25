@@ -15,7 +15,7 @@ class CreateDialog extends BaseDialog
     private _xy:any = {
         1:{x:198, y:113},
         2:{x:403, y:113},
-        3:{x:607, y:113},
+        3:{x:607, y:113}
     };
     private m_UI:CreateUI;
 
@@ -237,7 +237,10 @@ class CreateDialog extends BaseDialog
         {
             var ck:mui.ERadio = this.checkBoxSize[i]["item"];
 
-            if(ck.selectIndex == 1) arr.push(i);
+            if(ck.selectIndex == 1)
+            {
+                arr.push(i);
+            }
         }
 
         SocketManager.getInstance().getGameConn().send(2, {"args":{"type":1,"round":this.roudList[this.selectIndex], "rules":arr, "pass":"0"}});  //创建房间

@@ -115,5 +115,6 @@ class Main extends eui.UILayer {
         else GameSound._volume = +NativeApi.getLocalData("sound_volume");
 
         if(!NativeApi.getLocalData("switch")) NativeApi.setLocalData("switch", 1);
+
     }
 }

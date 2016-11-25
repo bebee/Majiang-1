@@ -13,7 +13,6 @@ class LoginScene extends eui.Component
 
     _loading_group:eui.Group;
     load_jindu:eui.Label;
-    _effimg:eui.Image;
     _label_info:eui.Label;
 
     onComplete()
@@ -90,8 +89,6 @@ class LoginScene extends eui.Component
     public onIn():void
     {
         SceneManager.open(GameMainScene, "GameMainScene");
-        
-        EffectUtils.removeRotationEffect(this._effimg);
 
         SceneManager.close("LoginScene", true);
 

@@ -86,6 +86,8 @@ module Global
 			this.ipwarmGroup = new eui.Group();
 			this.ipwarmGroup.width = GameConfig.curWidth();
 			this.ipwarmGroup.height = 50;
+			this.ipwarmGroup.touchEnabled = false;
+			this.ipwarmGroup.touchChildren = false;
 		}
 
 		if (!this.ipwarmSprite)
@@ -115,7 +117,7 @@ module Global
 		this.ipwarmGroup.y = GameConfig.curHeight();
 
 		var my = this;
-		egret.Tween.get(my.ipwarmGroup, {loop:false}).to({y:GameConfig.curHeight() - my.ipwarmGroup.height + 5},1000).to({}, 2000).to({y:GameConfig.curHeight()},1000).call(function ()
+		egret.Tween.get(my.ipwarmGroup, {loop:false}).to({y:GameConfig.curHeight() - my.ipwarmGroup.height + 5},1000).to({}, 5000).to({y:GameConfig.curHeight()},1000).call(function ()
 		{
 			group.removeChild(my.ipwarmGroup);
 			my.ipwarmisshow = false;

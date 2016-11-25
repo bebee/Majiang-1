@@ -313,6 +313,46 @@
 		{
 			"compress":false,
 			"key":"logo"
+		},
+		{
+			"compress":false,
+			"key":"card_0"
+		},
+		{
+			"compress":false,
+			"key":"card_1"
+		},
+		{
+			"compress":false,
+			"key":"card_2"
+		},
+		{
+			"compress":false,
+			"key":"card_3"
+		},
+		{
+			"compress":false,
+			"key":"card_4"
+		},
+		{
+			"compress":false,
+			"key":"card_5"
+		},
+		{
+			"compress":false,
+			"key":"card_6"
+		},
+		{
+			"compress":false,
+			"key":"card_7"
+		},
+		{
+			"compress":false,
+			"key":"card_8"
+		},
+		{
+			"compress":false,
+			"key":"card_9"
 		}],
 		"sort":0
 	}],
@@ -323,10 +363,6 @@
 	{
 		"compress":false,
 		"key":"game_bg"
-	},
-	{
-		"compress":false,
-		"key":"lgoin_loading_eff1"
 	},
 	{
 		"compress":false,

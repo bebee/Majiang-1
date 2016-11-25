@@ -48,22 +48,36 @@ class Heart
 
                 if(this.loginTime > 5)
                 {
-                    if(!GameLayerManager.gameLayer().messagBox) GameLayerManager.gameLayer().messagBox = new MessageDialog();
+                    var p = GlobalData.getInstance().player;
 
-                    GameLayerManager.gameLayer().messagBox.showMsg(function (r)
+                    if(this.loginTime <= 10 && p.code)
                     {
-                        GlobalData.getInstance().sendLogin = false;
+                        SocketManager.getInstance().getGameConn().send(1, {"args":{"uid":p.uid, "code":p.code, "length":p.code.length}});
+                    }
+                    else
+                    {
+                        if(!GameLayerManager.gameLayer().messagBox) GameLayerManager.gameLayer().messagBox = new MessageDialog();
 
-                        if(r)
+                        GameLayerManager.gameLayer().messagBox.showMsg(function (r)
                         {
-                            location.reload();
-                        }
-                        else
-                        {
-                            location.reload();
-                        }
+                            if(GlobalData.getInstance().connCount < 2)
+                            {
+                                this.createConn();
 
-                    },"当前网络状况不佳，请刷新重试！");
+                                var p = GlobalData.getInstance().player;
+
+                                if(p.code) SocketManager.getInstance().getGameConn().send(1, {"args":{"uid":p.uid, "code":p.code, "length":p.code.length}});
+                            }
+                            else
+                            {
+                                location.reload();
+                            }
+
+                            GlobalData.getInstance().connCount++;
+
+                        },"当前网络状况不佳，请刷新重试！");
+                    }
+
                 }
             }
 
