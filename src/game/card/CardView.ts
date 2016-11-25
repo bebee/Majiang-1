@@ -227,6 +227,7 @@ class CardView extends egret.DisplayObjectContainer {
         this.scaleX = this.scaleY = 1;
         this.visible = true;
         this.unactivate();
+        egret.Tween.removeTweens(this);
     }
 
     reDraw() {

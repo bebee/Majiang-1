@@ -654,8 +654,8 @@ class GSView extends egret.Sprite {
             // this.mark.x = cardView.x - this.mark.width / 2 + offx;
             // this.mark.y = cardView.y - this.mark.height + offy;
 
-            this.mark.x = cardView.x + offx;
-            this.mark.y = cardView.y + offy;
+            this.mark.x = cardView.pos.x + offx;
+            this.mark.y = cardView.pos.y + offy;
 
             egret.Tween.get(this.mark, {loop: true})
                 .to({y: this.mark.y - 20, scaleX: 1, scaleY: 1}, 300, egret.Ease.sineOut)
