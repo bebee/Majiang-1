@@ -37,7 +37,7 @@ class FuncSelectView extends egret.DisplayObjectContainer {
 
             var icon = new egret.Bitmap;
 
-            icon.x = -i * 100;
+            icon.x = -i * 120;
 
             this.selectCon.addChild(icon);
 

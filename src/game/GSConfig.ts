@@ -233,12 +233,16 @@ class GSConfig{
 
                 o.x = pos.x + ox;
                 o.y = pos.y - oy;
+                o.sx = o.x + 20;
+                o.sy = o.y;
 
                 break;
             case 2:
 
                 o.x = pos.x - oy;
                 o.y = pos.y - ox;
+                o.sx = o.x;
+                o.sy = o.y-20;
 
                 break;
             case 3:
@@ -246,12 +250,16 @@ class GSConfig{
                 o.x = pos.x - ox;
                 o.y = pos.y + oy;
 
+                o.sx = o.x - 20;
+                o.sy = o.y ;
+
                 break;
             case 4:
 
                 o.x = pos.x + oy;
                 o.y = pos.y + ox;
-
+                o.sx = o.x;
+                o.sy = o.y+20;
                 break;
 
         }

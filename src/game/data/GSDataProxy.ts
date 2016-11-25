@@ -489,6 +489,7 @@ class GSDataProxy {
         if (fen){
 
             console.log("尾局分张");
+
             GSData.i.game_state = -2;
         }
         GSController.i.catchCard(1);
