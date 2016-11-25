@@ -1,2 +1,1 @@
-# sichuanmajiang
-四川麻将客户端
+# 白城麻将
