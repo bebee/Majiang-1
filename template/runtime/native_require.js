@@ -111,6 +111,7 @@ var game_file_list = [
 	"bin-debug/game/view/GSView.js",
 	"bin-debug/game/view/MJView.js",
 	"bin-debug/game/view/PersonItem.js",
+	"bin-debug/game/view/TimeEffectView.js",
 	"bin-debug/Main.js",
 	"bin-debug/model/player.js",
 	"bin-debug/network/agreement/GameParse.js",

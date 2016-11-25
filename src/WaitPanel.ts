@@ -1,9 +1,8 @@
-  /**
-    * 通讯等待类
-    * 和服务端通讯时的显示效果
-    */
-class WaitPanel extends egret.Sprite
-  {
+/**
+* 通讯等待类
+* 和服务端通讯时的显示效果
+*/
+class WaitPanel extends egret.Sprite {
 
     private waitImg: egret.Bitmap;
 
@@ -13,15 +12,13 @@ class WaitPanel extends egret.Sprite
 
     private h: number = 0;
 
-    constructor(type:number = 1)
-    {
+    constructor(type: number = 1) {
         super();
 
         this.createView();
     }
 
-    private createView(): void
-    {
+    private createView(): void {
         this.w = egret.MainContext.instance.stage.stageWidth;
         this.h = egret.MainContext.instance.stage.stageHeight;
 
@@ -40,8 +37,7 @@ class WaitPanel extends egret.Sprite
         this.waitImg.y = this.h / 2;
         this.waitImg.anchorOffsetX = this.waitImg.width / 2;
         this.waitImg.anchorOffsetY = this.waitImg.height / 2;
-        
+
         EffectUtils.rotationEffect(this.waitImg, 1000);
     }
-
 }
