@@ -138,20 +138,39 @@ class SocketHandler {
             break;
         }
 
-        if(!GameLayerManager.gameLayer().messagBox) GameLayerManager.gameLayer().messagBox = new MessageDialog();
-
-        GameLayerManager.gameLayer().messagBox.showMsg(function (r)
+        if(GlobalData.getInstance().connCount > 0)
         {
-            if(r)
-            {
-                location.reload();
-            }
-            else
-            {
-                location.reload();
-            }
+            if(!GameLayerManager.gameLayer().messagBox) GameLayerManager.gameLayer().messagBox = new MessageDialog();
 
-        },"您已经掉线，请点击确定重连！");
+            GameLayerManager.gameLayer().messagBox.showMsg(function (r)
+            {
+                if(GlobalData.getInstance().connCount < 2)
+                {
+                    this.createConn();
+
+                    var p = GlobalData.getInstance().player;
+
+                    if(p.code) SocketManager.getInstance().getGameConn().send(1, {"args":{"uid":p.uid, "code":p.code, "length":p.code.length}});
+                }
+                else
+                {
+                    location.reload();
+                }
+
+            },"您已经掉线，请点击确定重连！");
+        }
+        else
+        {
+            this.createConn();
+
+            var p = GlobalData.getInstance().player;
+
+            if(p.code) SocketManager.getInstance().getGameConn().send(1, {"args":{"uid":p.uid, "code":p.code, "length":p.code.length}});
+        }
+
+
+        GlobalData.getInstance().connCount++;
+
     }
     
     onClose(){

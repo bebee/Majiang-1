@@ -168,19 +168,19 @@ class GSController extends egret.EventDispatcher{
             case 4://进入每轮牌局结算界面
                 GSData.i.readyFlag = 0;
                 this.gsResultView.visible = true;
-                this.visibleTwoFuncButton(false,false);
                 this.closeGSView();
 
                 break;
             case 5://总结算界面
-                this.gsView.visible = false;
+                this.closeGSView();
                 this.gsResultView.visible = false;
-                this.visibleTwoFuncButton(false,false);
+
                 break;
         }
     }
 
     closeGSView(){
+        this.visibleTwoFuncButton(false,false);
 
         this.gsView.visible = false;
         this.hideFuncSelectMenu();
@@ -219,7 +219,7 @@ class GSController extends egret.EventDispatcher{
     //刷新杠的分数
     updateGangCur(){
 
-        for(var i:number = 1; i <=4 ;i++){
+        for(var i:number = 1; i <= 4 ;i++){
 
             this.gsView.headViews[i].numText.text = "" + GSData.i.gangCurs[i];
 
@@ -831,7 +831,7 @@ class GSController extends egret.EventDispatcher{
     //根据pos设置轮盘方向
     setBoomDir(pos:number){
 
-        this.gsView.centerBoom.bg.rotation = 90 * pos;
+        this.gsView.centerBoom.bg.rotation = 90 * pos - 180;
 
     }
     setArrowDir(dir:number){
