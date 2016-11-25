@@ -90,7 +90,7 @@ class GSConfig{
     };
     //
     static catchPos = {
-        1: {x: 0, y: 0,dx:10,dy:0},
+        1: {x: 0, y: 0,dx:15,dy:0},
         2: {x: 0, y: 0,dx:0,dy:-15},
         3: {x: 0, y: 0,dx:-5,dy:0},
         4: {x: 0, y: 0,dx:0,dy:15}

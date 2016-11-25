@@ -117,7 +117,7 @@ class GSView extends egret.Sprite {
 
         var view: MJView = this.MJViews[1];
         var card: CardView;
-        for (var j: number = 0; j < 13; j++) {
+        for (var j: number = 0; j < view.handCon.numChildren; j++) {
             card = <CardView>view.getHandCard(j);
             if (!card || card.index < 0) {
                 continue;
@@ -214,7 +214,7 @@ class GSView extends egret.Sprite {
             var view: MJView = _this.MJViews[1];
             var card: CardView;
 
-            for (var j: number = 0; j < 13; j++) {
+            for (var j: number = 0; j < view.handCon.numChildren; j++) {
                 card = <CardView>view.getHandCard(j);
                 if (!card || card.index < 0) {
                     continue;
@@ -243,7 +243,7 @@ class GSView extends egret.Sprite {
     clearTips() {
         var view: MJView = this.MJViews[1];
         var card: CardView;
-        for (var i: number = 0; i < 13; i++) {
+        for (var i: number = 0; i < view.handCon.numChildren; i++) {
             card = <CardView>view.getHandCard(i);
             if (!card || card.index < 0) {
                 continue;
@@ -268,14 +268,14 @@ class GSView extends egret.Sprite {
 
         this.frontEffectContainer = new egret.DisplayObjectContainer;
 
-
         this.addChild(this.backUIContainer);
 
-        this.MJViews = [null,
-            <MJView>this.addChild(new MJView(1)),
-            <MJView>this.addChild(new MJView(2)),
-            <MJView>this.addChild(new MJView(3)),
-            <MJView>this.addChild(new MJView(4))];
+        this.MJViews = [];
+        for(var i:number = 1; i <= 4; i++){
+            var mjView = new MJView(i);
+            this.addChild(mjView);
+            this.MJViews[i] = mjView;
+        }
 
         this.mark = new egret.Bitmap(RES.getRes("game_mark"));
         this.mark.anchorOffsetX = this.mark.width >> 1;
@@ -319,7 +319,7 @@ class GSView extends egret.Sprite {
 
         //this.drawLine();
 
-        for (var i: number = 1; i <= GSConfig.playerCount; i++) {
+        for (var i: number = 1; i <= 4; i++) {
 
             var readyIcon = new egret.Bitmap(GameRes.getUI("game_ready"));
             readyIcon.anchorOffsetX = readyIcon.width >> 1;
@@ -445,19 +445,66 @@ class GSView extends egret.Sprite {
     //更新房间信息
     updateRoom() {
 
-        for (var i: number = 1; i <= GSConfig.playerCount; i++) {
+        for (var i: number = 1; i <= 4; i++) {
 
             var headView = this.headViews[i];
 
             var player: RoomPlayer = GSData.i.getRoomPlayerByDir(i);
 
-            headView.updateData(player);
+            headView.player = player;
+
+            if(player == null){
+
+                headView.nullPlayer();
+
+                //this.visibleReadyIcon(this.readyIcons[i],false);
+
+                //this.visibleKillIcon(headView.headIcon.killIcon,false);
+
+                continue;
+            }
+
+            if(player.status == "offline"){
+
+                headView.headIcon.offlineImg.visible = true;
+
+                //this.visibleReadyIcon(this.readyIcons[i],false);
+
+            }else{
+
+                headView.headIcon.offlineImg.visible = false;
+
+                //this.visibleReadyIcon(this.readyIcons[i],true);
+
+            }
+
+            if(i > 1) {
+                //this.visibleKillIcon(headView.headIcon.killIcon, true);
+            }
+
+            headView.nameText.text = player.nick;
+
+            headView.idText.text = player.uid;
+
+            headView.headIcon.setHeadPic(player.pic);
 
         }
 
-
-
     }
+
+/*    visibleReadyIcon(icon,boo){
+
+        if(GSData.i.game_state == 1 || GSData.i.game_state == 2) {
+            icon.visible = boo;
+        }
+    }
+    visibleKillIcon(icon,boo){
+
+        if(GSData.i.game_state == 1 && GSData.i.ownPos == 1){
+
+            icon.visible = boo;
+        }
+    }*/
 
     //获取头像
     getHeadView(dir: number): GSHeadView {
@@ -492,6 +539,9 @@ class GSView extends egret.Sprite {
             mjView.clear();
 
         }
+
+        this.centerBoom.reset();
+
     }
 
 

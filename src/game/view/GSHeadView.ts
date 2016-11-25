@@ -91,10 +91,6 @@ class GSHeadView extends egret.Sprite{
         this.headIcon.visibleRoomOwn(bool);
 
     }
-/*    visibleKill(boo:boolean){
-
-        this.headIcon.killIcon.visible = boo;
-    }*/
 
     nullPlayer(){
 
@@ -106,34 +102,6 @@ class GSHeadView extends egret.Sprite{
 
     player:RoomPlayer;
 
-    updateData(player:RoomPlayer){
-
-        this.player = player;
-
-        if(player == null){
-
-            this.nullPlayer();
-
-            return;
-        }
-
-        this.headIcon.offlineImg.visible = player.status == "offline";
-
-        //this.headIcon.setHeadImg(player.pic);
-        //this.headIcon.setHeadImg("http://img5.imgtn.bdimg.com/it/u=3367843572,1393769595&fm=21&gp=0.jpg");
-
-        this.nameText.text = player.nick;
-
-        this.idText.text = player.uid;
-
-        this.headIcon.setHeadPic(player.pic);
-
-/*        if(player.pos > 1 && GSData.i.ownPos == 1){
-
-            this.visibleKill(true);
-        }*/
-
-    }
     //等待的显示
     waitView(){
 
@@ -147,19 +115,6 @@ class GSHeadView extends egret.Sprite{
         this.numText.y = 45;
     }
 
-    //游戏进行时的显示
-/*    playView(){
-
-        this.nameText.x = 87;
-        this.nameText.y = - 10;
-
-        this.idText.x = 87;
-        this.idText.y = 12;
-
-        this.numText.x = 87;
-        this.numText.y = -10;
-
-    }*/
 
     reset(){
 

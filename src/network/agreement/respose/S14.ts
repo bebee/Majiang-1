@@ -9,10 +9,16 @@ class S14
 
         var vote = obj.data.vote;
 
+        var time:number = +obj.data.timestamp;
+
         var dialog:DissolutionDialog = StackManager.findDialog(DissolutionDialog, "DissolutionDialog");
 
         if(dialog)
         {
+            Heart.getInstance().dissolutionTime = (time + 300) - (Date.now() / 1000);
+
+            console.log((time + 300), (Date.now() / 1000));
+            
             for(var k in vote)
             {
                 dialog.plist[k] = vote[k];
@@ -26,7 +32,6 @@ class S14
             {
                 dialog.show();
                 dialog.refresh();
-                //dialog.showMsgDialog();
             }
 
         }

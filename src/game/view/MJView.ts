@@ -88,6 +88,23 @@ class MJView extends egret.DisplayObjectContainer{
 
         }
     }
+    //移除立牌
+    removeIndexPai(){
+
+        for(var i:number = this.handCon.numChildren - 1 ; i >=0 ;i--){
+
+            var cardView: CardView = <CardView> this.handCon.getChildAt(i);
+
+            if(cardView.index > -1){
+
+                this.handCon.removeChild(cardView);
+
+                CardView.returnCardView(cardView);
+
+            }
+
+        }
+    }
 
     clear(){
 

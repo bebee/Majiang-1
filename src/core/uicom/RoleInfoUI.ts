@@ -16,6 +16,8 @@ class RoleInfoUI extends eui.Component
 
     public _ip:eui.Label;
 
+    public _rate:eui.Label;
+
     onComplete()
     {
 

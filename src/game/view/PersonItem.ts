@@ -187,9 +187,15 @@ class PersonItem extends egret.DisplayObjectContainer {
 
             this.cardViews.push(cardView);
         }
+        //判断手牌长度进行间隔错位
+        if(GSConfig.handLens[pais.length]){
 
-        this.hupaiPos.x = cardView.pos.x + this.hupaiDis;
-        this.hupaiPos.y = this.currPos.y;
+
+            cardView.posView(cardView.pos.x + 10,this.currPos.y);
+        }
+
+        /*this.hupaiPos.x = cardView.pos.x + this.hupaiDis;
+        this.hupaiPos.y = this.currPos.y;*/
     }
     //添加胡牌 1:点炮 2:自摸
     addHuPai(pai:any){
@@ -206,6 +212,7 @@ class PersonItem extends egret.DisplayObjectContainer {
     switchPai(action:number,group:any[])
     {
         if(!group) return;
+
 
         switch(action){
 

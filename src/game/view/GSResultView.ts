@@ -120,9 +120,10 @@ class GSResultView extends egret.DisplayObjectContainer{
             if(GSData.i.result.hupaiPos == person_pos){
 
                 personItem.updateHuLogo(1);
+/*
 
                 if(!GSData.i.result.dianPaoPos){
-                    //自摸删除一张手牌
+
                     for(var k:number = 0 ;k < person.left.length;k++){
 
                         if(person.left[k].number == pai.number && person.left[k].type == pai.type)
@@ -132,10 +133,13 @@ class GSResultView extends egret.DisplayObjectContainer{
                             break;
                         }
                     }
+                    person.left.push(pai);
                 }
+*/
+
                 personItem.updatePai(person);
 
-                personItem.addHuPai(pai);
+                //personItem.addHuPai(pai);
 
             }else if(GSData.i.result.dianPaoPos == person_pos){
 

@@ -9,4 +9,6 @@
 	<e:Label id="_label2" y="134" textColor="0xA07A4B" verticalAlign="middle" fontFamily="微软雅黑" textAlign="right" bold="true" width="224" size="18" height="38" x="284"/>
 	<e:Label id="_label3" y="204" textColor="0xA07A4B" verticalAlign="middle" fontFamily="微软雅黑" textAlign="right" bold="true" width="224" size="18" height="38" x="24"/>
 	<e:Label id="_label4" y="204" textColor="0xA07A4B" verticalAlign="middle" fontFamily="微软雅黑" textAlign="right" bold="true" width="224" size="18" height="38" x="284"/>
+	<e:Label id="time_text" x="72" y="256" width="529" textAlign="center" verticalAlign="middle" size="20" bold="true" fontFamily="微软雅黑" height="30" textColor="0xA07A4B"/>
+	<e:Label id="_desc" y="311" width="427" height="34" verticalAlign="middle" textAlign="center" fontFamily="微软雅黑" size="25" textColor="0xBC4741" horizontalCenter="0" text="请等待其他玩家表态"/>
 </e:Skin>
