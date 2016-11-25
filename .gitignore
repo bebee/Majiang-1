@@ -3,3 +3,5 @@ bin-debug
 bin-release
 libs
 wingProperties.json
+template
+template/runtime
