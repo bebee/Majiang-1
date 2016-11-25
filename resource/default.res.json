@@ -1,20 +1,20 @@
 {
 	"groups":[
 		{
-			"keys":"",
-			"name":"preload"
+			"keys":"loadingeff_bg,lgoin_loading_eff1,game_scene",
+			"name":"loading"
 		},
 		{
-			"keys":"agreement_text,checkbox_off_btn,checkbox_on_btn,lgoin_loading_eff1,loadingeff_bg,login_wei_btn,logo,main_bg",
+			"keys":"main_bg,logo,login_wei_btn,checkbox_on_btn,checkbox_off_btn,agreement_text",
 			"name":"login"
 		},
 		{
-			"keys":"chat_0_0,chat_0_1,chat_0_10,chat_0_11,chat_0_2,chat_0_3,chat_0_4,chat_0_5,chat_0_6,chat_0_7,chat_0_8,chat_0_9,chat_1_0,chat_1_1,chat_1_10,chat_1_11,chat_1_2,chat_1_3,chat_1_4,chat_1_5,chat_1_6,chat_1_7,chat_1_8,chat_1_9,music_game,music_scene,sound_card_hover,sound_clock,sound_dianpao,sound_dice,sound_down,sound_duijukaishi,sound_huang,sound_lost,sound_other_player_enter,sound_other_player_leave,sound_ready,sound_select_group,sound_specialremind,sound_throw,sound_win,1_1_0,1_2_0,1_3_0,1_4_0,1_5_0,1_6_0,1_7_0,1_8_0,1_9_0,2_1_0,2_2_0,2_3_0,2_4_0,2_5_0,2_6_0,2_7_0,2_8_0,2_9_0,3_1_0,3_2_0,3_3_0,3_4_0,3_5_0,3_6_0,3_7_0,3_8_0,3_9_0,4_1_0,4_2_0,4_3_0,bao_0,bugang_0,cha_0,chi_0,dianpao_0,gang_0,jiugang_0,xuanfenggang_0,yaogang_0,zimo_0,1_1_1,1_2_1,1_3_1,1_4_1,1_5_1,1_6_1,1_7_1,1_8_1,1_9_1,2_1_1,2_2_1,2_3_1,2_4_1,2_5_1,2_6_1,2_7_1,2_8_1,2_9_1,3_1_1,3_2_1,3_3_1,3_4_1,3_5_1,3_6_1,3_7_1,3_8_1,3_9_1,4_1_1,4_2_1,4_3_1,bao_1,bugang_1,cha_1,chi_1,dianpao_1,gang_1,jiugang_1,xuanfenggang_1,yaogang_1,zimo_1",
-			"name":"sound"
+			"keys":"sound_open_btn,sound_close_btn,setting_txt,setting_progressbar_bg,setting_progressbar1,setting_line,setting_huawen,radio_btn,rule_txt,rule_img,num_bgimg,joinpassword_txt,joingame_txt,clickeff_of_btn,clickeff_btn,start_btn,select_right,select_left,select_center,room_btn,random_img,create_xz1,create_xz0,create_qd,create_password_bg,create_kspj,create_btn_img,create_btn,check_on_btn,check_off_btn,ting_icon2,ting_icon1,time_9,time_8,time_7,time_6,time_5,time_4,time_3,time_2,time_16,time_15,time_14,time_13,time_12,time_11,time_10,time_1,time_0,sptWin,sptFangPao,match_pic_pop,match_pic_jian,img_pjjs,game_zhuang,game_weixin_button,game_talk,game_start_button,game_siri,game_show_kuang,game_ready,game_mark,game_logo,game_jiesan_button,game_invite_button,game_hl_time,game_head_room,game_head_null,game_head_lixian,game_head_dirBG,game_hanbao_BG,game_gang_bg,game_fight,game_buttons_bg,game_button_setting,game_button_quit,game_bg_time,game_baopai,game_bao_bg,card_jiangli2,card_jiangli1,card_cha,bg_002,bg_001,JS_win_bg,JS_win,JS_share_button,JS_lose_bg,JS_lose,JS_liuju,JS_hulogo,JS_fangpao,JS_dot,JS_continue_button,JS_close,Z_43,Z_42,Z_41,Z_39,Z_38,Z_37,Z_36,Z_35,Z_34,Z_33,Z_32,Z_31,Z_29,Z_28,Z_27,Z_26,Z_25,Z_24,Z_23,Z_22,Z_21,Z_19,Z_18,Z_17,Z_16,Z_15,Z_14,Z_13,Z_12,Z_11,M_33,M_32,M_31,M_23,M_22,M_21,M_13,M_12,M_11,F_ting,F_peng,F_hu,F_guo,F_gang,F_chi,F_cheng,F_budan,diss_title,diss_dui,diss_cuo,record_txt,record_img2,record_img1,yellow_game_btn,voice_icon,shop_icon,shop_dialog_head_img,share_img,set_icon,rule_icon,red_game_btn,panel_1,notice_bg,msg_title,money_icon,money_bg,lymj_text,lymj_bg,lashen_15,img_line,horn_icon,horn_bg,head_kuang_bg,head_bg,head_001,dialog_head_img,dialog_bg,close_btn,card_add,btn_red,btn_green,btn_cheng,btn_blue,blue_game_btn,game_bg,bind_img,shop_txt,activit_jian,rule,agreement",
+			"name":"game"
 		},
 		{
-			"keys":"agreement,rule,activit_jian,shop_txt,bind_img,game_bg,blue_game_btn,btn_blue,btn_cheng,btn_green,btn_red,card_add,close_btn,dialog_bg,dialog_head_img,game_scene,head_001,head_bg,head_kuang_bg,horn_bg,horn_icon,img_line,lashen_15,lymj_bg,lymj_text,money_bg,money_icon,msg_title,notice_bg,panel_1,red_game_btn,rule_icon,set_icon,share_img,shop_dialog_head_img,shop_icon,voice_icon,yellow_game_btn,record_img1,record_img2,record_txt,diss_cuo,diss_dui,diss_title,F_budan,F_cheng,F_chi,F_gang,F_guo,F_hu,F_peng,F_ting,M_11,M_12,M_13,M_21,M_22,M_23,M_31,M_32,M_33,Z_11,Z_12,Z_13,Z_14,Z_15,Z_16,Z_17,Z_18,Z_19,Z_21,Z_22,Z_23,Z_24,Z_25,Z_26,Z_27,Z_28,Z_29,Z_31,Z_32,Z_33,Z_34,Z_35,Z_36,Z_37,Z_38,Z_39,Z_41,Z_42,Z_43,JS_close,JS_continue_button,JS_dot,JS_fangpao,JS_hulogo,JS_liuju,JS_lose,JS_lose_bg,JS_share_button,JS_win,JS_win_bg,bg_001,bg_002,card_cha,card_jiangli1,card_jiangli2,game_bao_bg,game_baopai,game_bg_time,game_button_quit,game_button_setting,game_buttons_bg,game_fight,game_gang_bg,game_hanbao_BG,game_head_dirBG,game_head_lixian,game_head_null,game_head_room,game_hl_time,game_invite_button,game_jiesan_button,game_logo,game_mark,game_ready,game_show_kuang,game_siri,game_start_button,game_talk,game_weixin_button,game_zhuang,img_pjjs,match_pic_jian,match_pic_pop,sptFangPao,sptWin,time_0,time_1,time_10,time_11,time_12,time_13,time_14,time_15,time_16,time_2,time_3,time_4,time_5,time_6,time_7,time_8,time_9,ting_icon1,ting_icon2,check_off_btn,check_on_btn,create_btn,create_btn_img,create_kspj,create_password_bg,create_qd,create_xz0,create_xz1,random_img,room_btn,select_center,select_left,select_right,start_btn,clickeff_btn,clickeff_of_btn,joingame_txt,joinpassword_txt,num_bgimg,rule_img,rule_txt,radio_btn,setting_huawen,setting_line,setting_progressbar1,setting_progressbar_bg,setting_txt,sound_close_btn,sound_open_btn",
-			"name":"game"
+			"keys":"zimo_1,yaogang_1,xuanfenggang_1,jiugang_1,gang_1,dianpao_1,chi_1,cha_1,bugang_1,bao_1,4_3_1,4_2_1,4_1_1,3_9_1,3_8_1,3_7_1,3_6_1,3_5_1,3_4_1,3_3_1,3_2_1,3_1_1,2_9_1,2_8_1,2_7_1,2_6_1,2_5_1,2_4_1,2_3_1,2_2_1,2_1_1,1_9_1,1_8_1,1_7_1,1_6_1,1_5_1,1_4_1,1_3_1,1_2_1,1_1_1,zimo_0,yaogang_0,xuanfenggang_0,jiugang_0,gang_0,dianpao_0,chi_0,cha_0,bugang_0,bao_0,4_3_0,4_2_0,4_1_0,3_9_0,3_8_0,3_7_0,3_6_0,3_5_0,3_4_0,3_3_0,3_2_0,3_1_0,2_9_0,2_8_0,2_7_0,2_6_0,2_5_0,2_4_0,2_3_0,2_2_0,2_1_0,1_9_0,1_8_0,1_7_0,1_6_0,1_5_0,1_4_0,1_3_0,1_2_0,1_1_0,sound_win,sound_throw,sound_specialremind,sound_select_group,sound_ready,sound_other_player_leave,sound_other_player_enter,sound_lost,sound_huang,sound_duijukaishi,sound_down,sound_dice,sound_dianpao,sound_clock,sound_card_hover,music_scene,music_game,chat_1_9,chat_1_8,chat_1_7,chat_1_6,chat_1_5,chat_1_4,chat_1_3,chat_1_2,chat_1_11,chat_1_10,chat_1_1,chat_1_0,chat_0_9,chat_0_8,chat_0_7,chat_0_6,chat_0_5,chat_0_4,chat_0_3,chat_0_2,chat_0_11,chat_0_10,chat_0_1,chat_0_0",
+			"name":"sound"
 		}
 	],
 	"resources":[
@@ -92,11 +92,6 @@
 			"name":"dialog_head_img",
 			"type":"image",
 			"url":"assets/game/main/dialog_head_img.png"
-		},
-		{
-			"name":"game_scene",
-			"type":"image",
-			"url":"assets/game/main/game_scene.jpg"
 		},
 		{
 			"name":"head_001",
@@ -949,6 +944,21 @@
 			"url":"assets/game/setting/sound_open_btn.png"
 		},
 		{
+			"name":"game_scene",
+			"type":"image",
+			"url":"assets/loading/game_scene.jpg"
+		},
+		{
+			"name":"lgoin_loading_eff1",
+			"type":"image",
+			"url":"assets/loading/lgoin_loading_eff1.png"
+		},
+		{
+			"name":"loadingeff_bg",
+			"type":"image",
+			"url":"assets/loading/loadingeff_bg.png"
+		},
+		{
 			"name":"agreement_text",
 			"type":"image",
 			"url":"assets/login/agreement_text.png"
@@ -962,16 +972,6 @@
 			"name":"checkbox_on_btn",
 			"type":"image",
 			"url":"assets/login/checkbox_on_btn.png"
-		},
-		{
-			"name":"lgoin_loading_eff1",
-			"type":"image",
-			"url":"assets/login/lgoin_loading_eff1.png"
-		},
-		{
-			"name":"loadingeff_bg",
-			"type":"image",
-			"url":"assets/login/loadingeff_bg.png"
 		},
 		{
 			"name":"login_wei_btn",

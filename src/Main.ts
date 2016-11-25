@@ -56,14 +56,40 @@ class Main extends eui.UILayer {
         RES.loadConfig("resource/default.res.json", "resource/");
     }
 
-    private onConfigComplete(event: RES.ResourceEvent): void {
+    private onConfigComplete(): void {
         RES.removeEventListener(RES.ResourceEvent.CONFIG_COMPLETE, this.onConfigComplete, this);
 
         var theme = new eui.Theme("resource/default.thm.json", this.stage);
         theme.addEventListener(eui.UIEvent.COMPLETE, this.onThemeLoadComplete, this);
+
+        RES.addEventListener(RES.ResourceEvent.GROUP_COMPLETE, this.onResourceLoadComplete, this);
+        RES.loadGroup("loading");
     }
 
+    private isThemeLoadEnd: boolean = false;
+
     private onThemeLoadComplete(): void {
+        this.isThemeLoadEnd = true;
+        this.createScene();
+    }
+
+    private isResourceLoadEnd: boolean = false;
+
+    private onResourceLoadComplete(): void {
+        RES.removeEventListener(RES.ResourceEvent.GROUP_COMPLETE, this.onResourceLoadComplete, this);
+
+        this.isResourceLoadEnd = true;
+        this.createScene();
+    }
+
+    private createScene() {
+        if (this.isThemeLoadEnd && this.isResourceLoadEnd) {
+            this.startCreateScene();
+        }
+    }
+
+    protected startCreateScene(): void {
+
         NativeApi.setLocalData("codes", GameConfig.code);
 
         GlobalData.getInstance().player = new Player();
