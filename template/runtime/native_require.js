@@ -42,7 +42,6 @@ var game_file_list = [
 	"bin-debug/core/load/DialogLoding.js",
 	"bin-debug/core/PopUpManager.js",
 	"bin-debug/core/scene/GameMainScene.js",
-	"bin-debug/core/scene/LoginScene.js",
 	"bin-debug/core/SceneManager.js",
 	"bin-debug/core/StackManager.js",
 	"bin-debug/core/uicom/ChatListUI.js",
@@ -182,6 +181,7 @@ var game_file_list = [
 	"bin-debug/utils/TipsPanel.js",
 	"bin-debug/utils/UtilsClass/BitmapBlink.js",
 	"bin-debug/utils/UtilsClass/TipsUtils.js",
+	"bin-debug/view/loading/LoadingScene.js",
 	"bin-debug/WaitPanel.js",
 	//----auto game_file_list end----
 ];

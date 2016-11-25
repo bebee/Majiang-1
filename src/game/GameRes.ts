@@ -9,18 +9,19 @@ class GameRes{
 
     static getUI(name:string){
 
-        GameRes.uiSheet || (GameRes.uiSheet = RES.getRes("gameui_json"));
-
-        return GameRes.uiSheet.getTexture(name) ;
-
+        // GameRes.uiSheet || (GameRes.uiSheet = RES.getRes("gameui_json"));
+        //
+        // return GameRes.uiSheet.getTexture(name) ;
+        return RES.getRes(name);
     }
 
     static getCard(name:string){
 
-        GameRes.cardSheet || (GameRes.cardSheet = RES.getRes("card"));
+        // GameRes.cardSheet || (GameRes.cardSheet = RES.getRes("card"));
+        //
+        // return GameRes.cardSheet.getTexture(name) ;
 
-        return GameRes.cardSheet.getTexture(name) ;
-
+        return RES.getRes(name);
     }
 
     static createCenterButton(ancX:number,ancY:number,x:number,y:number,res:string,text:string = ""){

@@ -70,7 +70,8 @@ class Main extends eui.UILayer {
 
     private onThemeLoadComplete(): void {
         this.isThemeLoadEnd = true;
-        this.createScene();
+        // this.createScene();
+        this.startCreateScene();
     }
 
     private isResourceLoadEnd: boolean = false;
@@ -88,13 +89,9 @@ class Main extends eui.UILayer {
         }
     }
 
-    protected startCreateScene(): void {
+    private startCreateScene(): void {
 
         NativeApi.setLocalData("codes", GameConfig.code);
-
-        GlobalData.getInstance().player = new Player();
-
-        SceneManager.open(LoginScene, "LoginScene");
 
         if (!NativeApi.getLocalData("music_volume")) NativeApi.setLocalData("music_volume", 1);
         else GameMusic._volume = +NativeApi.getLocalData("music_volume");
@@ -103,5 +100,9 @@ class Main extends eui.UILayer {
         else GameSound._volume = +NativeApi.getLocalData("sound_volume");
 
         if (!NativeApi.getLocalData("switch")) NativeApi.setLocalData("switch", 1);
+
+        GlobalData.getInstance().player = new Player();
+
+        SceneManager.open(LoadingScene, "LoadingScene");
     }
 }

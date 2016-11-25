@@ -3,44 +3,41 @@ import HttpRequest = egret.HttpRequest;
  * 主界面
  */
 
-class GameMainScene extends eui.Component
-{
+class GameMainScene extends eui.Component {
     /**
      * 功能小按钮列表
      */
-    private iconList:any =
+    private iconList: any =
     {
-        1:{source:"shop_icon", click:"", name:"shop"},
-        2:{source:"set_icon", click:"", name:"set"},
-        3:{source:"rule_icon", click:"", name:"rule"}
+        1: {source: "shop_icon", click: "", name: "shop"},
+        2: {source: "set_icon", click: "", name: "set"},
+        3: {source: "rule_icon", click: "", name: "rule"}
 
     };
 
-    private btn_create:mui.EButton;
+    private btn_create: mui.EButton;
 
-    private btn_join:mui.EButton;
+    private btn_join: mui.EButton;
 
-    private btn_record:mui.EButton;
+    private btn_record: mui.EButton;
 
-    private btn_add:eui.Image;
+    private btn_add: eui.Image;
 
-    public constructor()
-    {
+    public constructor() {
         super();
 
-        this.addEventListener(eui.UIEvent.COMPLETE,this.onComplete,this);
+        this.addEventListener(eui.UIEvent.COMPLETE, this.onComplete, this);
 
         this.skinName = "mainSkin";
 
         this.touchChildren = true;
 
 
-        var sss:any = {"role":"user","mod":"mod_auths","fun":"auth_signature","args":{}};
+        var sss: any = {"role": "user", "mod": "mod_auths", "fun": "auth_signature", "args": {}};
 
-        var arr:Array<string> = ["closeWindow","hideMenuItems","onMenuShareAppMessage","onMenuShareTimeline","startRecord", "stopRecord", "onVoiceRecordEnd", "playVoice", "pauseVoice", "stopVoice", "onVoicePlayEnd", "uploadVoice", "downloadVoice"];
+        var arr: Array<string> = ["closeWindow", "hideMenuItems", "onMenuShareAppMessage", "onMenuShareTimeline", "startRecord", "stopRecord", "onVoiceRecordEnd", "playVoice", "pauseVoice", "stopVoice", "onVoicePlayEnd", "uploadVoice", "downloadVoice"];
 
-        HttpHandler.sendMsgCallBack("http://" + GameConfig.http_address.ip + ":" + GameConfig.http_address.port, "action=" + JSON.stringify(sss), function (obj)
-        {
+        HttpHandler.sendMsgCallBack("http://" + GameConfig.http_address.ip + ":" + GameConfig.http_address.port, "action=" + JSON.stringify(sss), function (obj) {
             var some = JSON.parse(obj.message);
 
             GameConfig.pushData(some);
@@ -50,22 +47,21 @@ class GameMainScene extends eui.Component
         }, egret.URLRequestMethod.POST, this);
     }
 
-    head_group:eui.Group;
-    icon_group:eui.Group;
+    head_group: eui.Group;
+    icon_group: eui.Group;
 
-    _money:eui.Image;
-    _money_text:eui.Label;
-    _name:eui.Label;
+    _money: eui.Image;
+    _money_text: eui.Label;
+    _name: eui.Label;
 
-    _head_click:eui.Image;
-    _head:eui.Image;
+    _head_click: eui.Image;
+    _head: eui.Image;
 
-    _uid:eui.Label;
+    _uid: eui.Label;
 
-    bg_img:eui.Image;
+    bg_img: eui.Image;
 
-    onComplete()
-    {
+    onComplete() {
         this.initIconList();
 
         this.btn_create = new mui.EButton("blue_game_btn");
@@ -86,8 +82,7 @@ class GameMainScene extends eui.Component
         /**
          * 打开加入游戏
          */
-        this.btn_join.addEventListener(egret.TouchEvent.TOUCH_TAP, function ()
-        {
+        this.btn_join.addEventListener(egret.TouchEvent.TOUCH_TAP, function () {
             StackManager.open(JoinDialog, "JoinDialog");
 
         }, this);
@@ -95,8 +90,7 @@ class GameMainScene extends eui.Component
         /**
          * 打开创建游戏
          */
-        this.btn_create.addEventListener(egret.TouchEvent.TOUCH_TAP, function ()
-        {
+        this.btn_create.addEventListener(egret.TouchEvent.TOUCH_TAP, function () {
             StackManager.open(CreateDialog, "CreateDialog");
 
         }, this);
@@ -104,8 +98,7 @@ class GameMainScene extends eui.Component
         /**
          * 打开战绩
          */
-        this.btn_record.addEventListener(egret.TouchEvent.TOUCH_TAP, function ()
-        {
+        this.btn_record.addEventListener(egret.TouchEvent.TOUCH_TAP, function () {
             StackManager.open(RecordDialog, "RecordDialog");
 
             // var rt:egret.RenderTexture = new egret.RenderTexture();
@@ -121,24 +114,21 @@ class GameMainScene extends eui.Component
         /**
          * 打开说明
          */
-        this.btn_add.addEventListener(egret.TouchEvent.TOUCH_TAP, function ()
-        {
+        this.btn_add.addEventListener(egret.TouchEvent.TOUCH_TAP, function () {
             StackManager.open(TipsDialog, "TipsDialog");
-            
+
         }, this);
 
         /**
          * 打开玩家信息
          */
-        this._head_click.addEventListener(egret.TouchEvent.TOUCH_TAP, function ()
-        {
-            var d:RoleInfoDialog = StackManager.findDialog(RoleInfoDialog, "RoleInfoDialog");
-            if(d)
-            {
+        this._head_click.addEventListener(egret.TouchEvent.TOUCH_TAP, function () {
+            var d: RoleInfoDialog = StackManager.findDialog(RoleInfoDialog, "RoleInfoDialog");
+            if (d) {
                 d.show();
                 d.refreshRole();
             }
-        },this);
+        }, this);
 
         /**
          * 添加金钱说明
@@ -153,13 +143,11 @@ class GameMainScene extends eui.Component
     /**
      * 初始化功能小按钮
      */
-    private initIconList():void
-    {
-        for(var k in this.iconList)
-        {
+    private initIconList(): void {
+        for (var k in this.iconList) {
             var some = this.iconList[k];
 
-            var lb:mui.EButton = new mui.EButton(some.source+"", "", 20);
+            var lb: mui.EButton = new mui.EButton(some.source + "", "", 20);
             this.icon_group.addChild(lb);
             lb.x += (+k - 1) * 95;
             //if(+k != 1) lb.x += 5;
@@ -172,12 +160,10 @@ class GameMainScene extends eui.Component
      * 功能小按钮点击效果
      * @param e
      */
-    private onClick(e:egret.TouchEvent):void
-    {
+    private onClick(e: egret.TouchEvent): void {
         var n = e.currentTarget.name;
 
-        switch (n)
-        {
+        switch (n) {
             case "shop":
                 StackManager.open(ShopDialog, "ShopDialog");
                 break;
@@ -190,14 +176,13 @@ class GameMainScene extends eui.Component
         }
     }
 
-    createChildren()
-    {
+    createChildren() {
         super.createChildren();
 
-        var _shpBeMask:egret.Shape = new egret.Shape();
-        _shpBeMask.graphics.lineStyle( 0x000000 );
+        var _shpBeMask: egret.Shape = new egret.Shape();
+        _shpBeMask.graphics.lineStyle(0x000000);
         _shpBeMask.graphics.beginFill(0xffffff, 1);
-        _shpBeMask.graphics.drawRoundRect( 2, 2, this._head.width - 4, this._head.height - 4, 30, 30);
+        _shpBeMask.graphics.drawRoundRect(2, 2, this._head.width - 4, this._head.height - 4, 30, 30);
         _shpBeMask.graphics.endFill();
         _shpBeMask.x = this._head.x;
         _shpBeMask.y = this._head.y;
@@ -208,30 +193,27 @@ class GameMainScene extends eui.Component
 
         this.update();
 
-        if(GameConfig.roomid)
-        {
+        if (GameConfig.roomid) {
             GSData.i.roomID = +GameConfig.roomid;
-            SocketManager.getInstance().getGameConn().send(3, {"args":{"roomid":+GameConfig.roomid, "pass":"0"}});
+            SocketManager.getInstance().getGameConn().send(3, {"args": {"roomid": +GameConfig.roomid, "pass": "0"}});
         }
 
-        var num:number = Math.floor(Math.random() * GlobalData.getInstance().gamewarmList.length);
+        var num: number = Math.floor(Math.random() * GlobalData.getInstance().gamewarmList.length);
         GlobalData.getInstance().hornList.push(GlobalData.getInstance().gamewarmList[num]);
 
         egret.setTimeout(this.onWeiJs, this, 1000);
     }
 
-    private onWeiJs():void
-    {
+    private onWeiJs(): void {
         Weixin.onMenuShareAppMessage();
         Weixin.onMenuShareTimeline();
         Weixin.hideMenuItems();
     }
-    
-    public update():void
-    {
+
+    public update(): void {
         var my = this;
 
-        var player:Player = GlobalData.getInstance().player;
+        var player: Player = GlobalData.getInstance().player;
 
         this._money_text.text = "" + player.cur;
 
@@ -240,15 +222,12 @@ class GameMainScene extends eui.Component
         this._uid.text = "ID：" + player.uid;
 
 
-        RES.getResByUrl(GlobalData.getInstance().player.pic, function(t:egret.Texture)
-        {
-            if(t)
-            {
+        RES.getResByUrl(GlobalData.getInstance().player.pic, function (t: egret.Texture) {
+            if (t) {
                 GlobalData.getInstance().player.playerHeadTexture = t;
                 my._head.source = t;
             }
-            else
-            {
+            else {
                 my._head.source = "head_001";
 
                 GlobalData.getInstance().player.playerHeadTexture = my._head.texture;

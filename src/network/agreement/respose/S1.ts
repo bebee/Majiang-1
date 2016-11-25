@@ -13,7 +13,7 @@ class S1
             
             GlobalData.getInstance().player.update(obj["data"]);
 
-            SceneManager.find("LoginScene").onIn();
+            SceneManager.find("LoadingScene").onIn();
         }
     }
 }
