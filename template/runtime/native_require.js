@@ -183,6 +183,7 @@ var game_file_list = [
 	"bin-debug/utils/UtilsClass/TipsUtils.js",
 	"bin-debug/view/loading/LoadingScene.js",
 	"bin-debug/WaitPanel.js",
+	"bin-debug/core/scene/LoginScene.js",
 	//----auto game_file_list end----
 ];
 
