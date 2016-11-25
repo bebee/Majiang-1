@@ -138,6 +138,8 @@ class GSScene extends egret.DisplayObjectContainer {
         this.gameFight.visible = false;
         this.gameFightTop.visible = false;
 
+        egret.Tween.get(this.startButton,{loop:true}).to({alpha:.5},600).to({alpha:1},600);
+
     }
 
     playFight() {

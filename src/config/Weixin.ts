@@ -105,12 +105,32 @@ class Weixin {
     {
         var str:string = "";
 
+        var title:string = "大赢家-";
         if(arr && arr.length > 0)
         {
+            arr.sort(function (a, b)
+            {
+                if(Number(a.cur) < Number(b.cur))
+                {
+                    return 1;
+                }
+                else
+                {
+                    return -1;
+                }
+            });
+
             for(var i = 0; i < arr.length; i++)
             {
                 var p = arr[i];
-                str += "\n" + p.nick + "：" + p.cur;
+                if(i == 0)
+                {
+                    title += p.nick + ":" + p.cur + "分";
+                }
+                else
+                {
+                    str += p.nick + ":" + p.cur + "分\n";
+                }
             }
         }
 
@@ -126,9 +146,11 @@ class Weixin {
             Global.showShare();
         }
 
+        console.log(str);
+
         var body:BodyMenuShareAppMessage = new BodyMenuShareAppMessage();
-        body.title = "这麻将！三天不打，上房揭瓦！";
-        body.desc = "房间号：" + GSData.i.roomID + str;
+        body.title = "" + title;
+        body.desc = "" + str;
         body.link = "http://mj.h5sd.com/wdmj/index.html";
         body.imgUrl = "http://mj.h5sd.com/wdmj/weishare.png";
         body.type = "link";
@@ -173,7 +195,7 @@ class Weixin {
                 var p = GSData.i.roomPlayers[1];
                 name = p.nick;
 
-                body.desc = "房　主：" + name + "\n\n房间号：" + strroomid + "\n\n" + GSData.i.rules;
+                body.desc = "房　主：" + name + " 房间号：" + strroomid + " " + GSData.i.rules;
 
                 body.title = "跟我一起开房的点此链接！";
 

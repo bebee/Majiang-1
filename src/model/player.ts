@@ -57,6 +57,17 @@ class Player
      */
     public sex:number = 0;
 
+    /**
+     * 掉线率
+     */
+    public drop_rate:number;
+
+    /**
+     * 游戏次数
+     * @type {Array}
+     */
+    public game_times:number;
+
 
     public playerInfo:Array<any> = [];
 

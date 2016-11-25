@@ -184,7 +184,20 @@ class GSDataProxy {
 
             } else {//自己的牌
 
-                this.gData.sortHandPai(shou);
+                //判断长度
+                if(GSConfig.handLens[shou.length]){
+
+                    var startPai = shou.pop();
+
+                    this.gData.sortHandPai(shou);
+
+                    shou.push(startPai);
+
+                }else{
+
+                    this.gData.sortHandPai(shou);
+
+                }
 
                 this.gData.setHandPais(1, shou);
 
@@ -204,7 +217,7 @@ class GSDataProxy {
     S2C_DeletePai(pos: number, pai: any) {
         var dir = this.gData.getDir(pos);
         this.gData.removeHandPai(dir, pai);
-        GSController.i.updateHandCardView(dir);
+        GSController.i.updateMJView(dir);
     }
 
     //更新功能菜单，吃蹦杠
@@ -473,8 +486,11 @@ class GSDataProxy {
 
         this.gData.turnDir = (fen ? 0 : 1);
 
-        if (fen) console.log("尾局分张");
+        if (fen){
 
+            console.log("尾局分张");
+            GSData.i.game_state = -2;
+        }
         GSController.i.catchCard(1);
 
         GSController.i.updateCenterInfo();
@@ -703,8 +719,17 @@ class GSDataProxy {
             GSController.i.removePoolCard(poolPaiDir);
         }
         GSController.i.setArrowDir(dir);
-        GSController.i.updateHandCardView(dir);
+        GSController.i.updateMJView(dir);
         GSController.i.playEffect(dir, action);
+
+        if(dir == 1){
+
+            GSController.i.playTimeEffect(true,true);
+        }else{
+            GSController.i.playTimeEffect(true,false);
+
+        }
+
     }
 
     //S2C 更新打入池中的牌子
@@ -728,13 +753,24 @@ class GSDataProxy {
     }
     S2C_FinalResult(result:any) {
 
+        this.gData.result = result;
+
+        if(this.gData.game_state == -2){//分张 延时
+
+            egret.setTimeout(this.delay_Final,this,1200);
+
+        }else{
+
+            this.delay_Final();
+        }
+    }
+    delay_Final(){
+
         this.gData.game_state = 4;
 
         this.gData.roundStarted = true;
 
-        this.gData.result = result;
-
-        var hupai = result.hupai;
+        var hupai = this.gData.result.hupai;
 
         //流局
         if (hupai == 0) {
@@ -770,7 +806,7 @@ class GSDataProxy {
             //手牌排序
             for (var i: number = 0; i < 4; i++) {
 
-                var left = result.person[i].left;
+                var left = this.gData.result.person[i].left;
 
                 this.gData.sortHandPai(left);
 
@@ -779,7 +815,10 @@ class GSDataProxy {
             GSController.i.playEffect(huDir, 99);
         }
         GSController.i.hupaiShow();
+
     }
+
+
 
     //同步继续游戏
     S2C_ContinueGame(obj:any){
@@ -872,8 +911,8 @@ class GSDataProxy {
 
         }
 
-        this.gData.roomPlayers = [];
 
+        this.gData.roomPlayers = [];
 
         //online leave offline
 
@@ -920,6 +959,10 @@ class GSDataProxy {
         }
 
         delete this.gData.roomPlayerMap[leave_uid];
+
+
+        Global.showIP(this.gData.roomPlayers);
+
 
         this.gData.roomOwnDir = this.gData.getDir(1);
 
@@ -1049,7 +1092,7 @@ class GSDataProxy {
 
             if(obj.data.pai.length == 14)
             {
-                this.gData.allPais[1].catchPai = this.gData.allPais[1].handPais.pop();
+                this.gData.allPais[1].catchPai = this.gData.allPais[1].handPais.shift();
             }
 
             this.gData.zhuangPos = obj.data.zhuang;

@@ -24,6 +24,10 @@ class DissolutionUI extends eui.Component
 
     public btn_false:mui.EButton;
 
+    public time_text:eui.Label;
+
+    public _desc:eui.Label;
+
     onComplete()
     {
         this.btn_true = new mui.EButton("btn_green","同  意", 24);

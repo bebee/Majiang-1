@@ -68,8 +68,6 @@ class GSController extends egret.EventDispatcher{
         GameLayerManager.gameLayer().openMainLayer();
 
         this.showStateView();
-
-
         //this.gsView.visible = true;
 
         //测试
@@ -189,7 +187,8 @@ class GSController extends egret.EventDispatcher{
         this.gsView.clearTips();
         this.gsView.clearMJView();
         this.scene.ruleText.visible = false;
-        
+        this.scene.readyButton.visible = false;
+        this.scene.waitText.visible = false;
 
         GameDispatcher.ins.dispatchEvent(EventType.Trigger_Play_Point);
         GameDispatcher.ins.dispatchEvent(EventType.Trigger_Play_Tips);
@@ -383,6 +382,7 @@ class GSController extends egret.EventDispatcher{
             for (var i: number = 1; i <= 4; i++) {
 
                 var readyIcon = this.gsView.readyIcons[i];
+
                 var killIcon = this.gsView.getHeadView(i).headIcon.killIcon;
 
                 readyIcon.visible = (GSData.i.readyFlag >> i & 1) == 1;
@@ -397,7 +397,6 @@ class GSController extends egret.EventDispatcher{
 
             }
         }
-
     }
 
     //更新庄家
@@ -416,12 +415,19 @@ class GSController extends egret.EventDispatcher{
 
             this.gsView.getHeadView(i).visibleRoomOwn((GSData.i.roomOwnFlag >> i & 1) == 1);
 
-
-
         }
-
-
     }
+
+    //播放时间特效
+    playTimeEffect(boo:boolean,shake:boolean = false){
+
+        if(boo) {
+            this.gsView.centerBoom.timeEffect.play(shake);
+        }else{
+            this.gsView.centerBoom.timeEffect.reset();
+        }
+    }
+
 
     //抓牌
     catchCard(dir:number) {
@@ -434,9 +440,9 @@ class GSController extends egret.EventDispatcher{
 
         var cardView = CardView.create(dir, 1, catchPai);
 
-        cardView.index = GSData.i.getHandPais(dir).length;
+        cardView.index = GSData.i.getHandPais(dir).length - 1;
 
-        cardView.posView(pos.x + pos.dx, pos.y + pos.dy);
+        cardView.posView(pos.x, pos.y);
 
         mjView.addHandCard(cardView);
 
@@ -448,10 +454,17 @@ class GSController extends egret.EventDispatcher{
 
             cardView.addClick(this.onCardClick, this);
 
-            cardView.x += 20;
             cardView.y = pos.y - 30;
 
             egret.Tween.get(cardView).to({y: pos.y}, 200);
+
+            this.activateCard = null;
+
+            this.playTimeEffect(true,true);
+
+        }else{
+
+            this.playTimeEffect(true,false);
         }
     }
     //更新剩余牌数量 和圈数
@@ -476,68 +489,100 @@ class GSController extends egret.EventDispatcher{
 
     //胡牌
     hupaiShow(){
+
+
+        //摊牌
+        //遍历index大于-1的牌
         var hupai = GSData.i.result.hupai;
+
 
         if(hupai != 0) {
 
             //胡牌的玩家方向
             var huDir = GSData.i.getDir(GSData.i.result.hupaiPos);
 
+            var left = GSData.i.getResultPersonLeft(huDir);
+
             //别人点炮
             if (hupai.type == 17) {
-                //创建个胡牌
-                var pos = GSConfig.catchPos[huDir];
 
-                this.createHandCard(huDir, 3, hupai.pai, pos.x + pos.dx, pos.y + pos.dy);
+                left.push(hupai.pai);
 
-                this.removePoolCard(GSData.i.getDir(GSData.i.result.dianPaoPos));
+                var dianPaoDir = GSData.i.getDir(GSData.i.result.dianPaoPos);
 
+                this.removePoolCard(dianPaoDir);
+
+            }else{
+
+                for(var k:number = 0 ;k < left.length;k++){
+
+                    if(left[k].number == hupai.pai.number && left[k].type == hupai.pai.type)
+                    {
+                        left.splice(k,1);
+
+                        break;
+                    }
+                }
+                left.push(hupai.pai);
             }
         }
-        //摊牌
-        //遍历index大于-1的牌
 
         for(var i:number = 1 ;i <= 4;i++){
 
-            var isShowPai:boolean = false;
-
-            if(i > 1) isShowPai = true;
-
             var mjView = this.gsView.MJViews[i];
 
+            mjView.removeIndexPai();
+
             var left = GSData.i.getResultPersonLeft(i);
-                //GSData.i.result.person[GSData.i.getPos(i)-1].left;
-
-            for(var k:number = mjView.handCon.numChildren - 1 ; k >= 0;k-- ){
-
-                var cardView: CardView = <CardView> mjView.handCon.getChildAt(k);
-
-                if(cardView.index > -1){
-
-                    cardView.parent.removeChild(cardView);
-                    CardView.returnCardView(cardView);
-
-                }
-
-            }
 
             var cur = GSConfig.dymnicHandPos[i];
 
-            for(var k = 0 ; k < left.length;k++){
-
-                var cardView: CardView = CardView.create(i,3,left[k]);
-
-                var o = GSConfig.getPosByIndex(i,3,k);
-
-                cardView.posView(cur.x + o.x,cur.y + o.y);
-
-                mjView.addHandCard(cardView);
-            }
+            this.createIndexPais(mjView,cur.x,cur.y,i,3,left,true,false);
 
         }
+
+
+
+
         //等待结算
         egret.setTimeout(_=>{this.intoResultView()},this,3000);
     }
+    //创建立牌 返回抓牌区
+    createIndexPais(mjView:MJView,sx:number,sy:number,dir:number,style:number,pais:any,visible:boolean = true,activate:boolean = true){
+
+        for(var i:number = 0 ; i < pais.length;i++){
+
+            var cardView: CardView = CardView.create(dir,style,pais[i]);
+            cardView.index = i;
+            var o = GSConfig.getPosByIndex(dir,style,i);
+
+            cardView.posView(sx + o.x,sy + o.y);
+
+            cardView.visible = visible;
+
+            mjView.addHandCard(cardView);
+
+            if (dir == 1 && activate) {
+                cardView.addClick(this.onCardClick, this);
+                cardView.activate();
+            }
+
+        }
+        var catchPos = GSConfig.catchPos[dir];
+        //如果出牌长度范围
+        if(GSConfig.handLens[pais.length]){
+
+            catchPos.x = cardView.pos.x + catchPos.dx;
+            catchPos.y = cardView.pos.y + catchPos.dy;
+            cardView.posView(catchPos.x,catchPos.y);
+
+        }else{
+            o = GSConfig.getPosByIndex(dir,style,i);
+            catchPos.x = sx + o.x + catchPos.dx;
+            catchPos.y = sy + o.y + catchPos.dy;
+        }
+    }
+
     //进入结算界面
     intoResultView(){
 
@@ -545,17 +590,9 @@ class GSController extends egret.EventDispatcher{
 
         this.gsResultView.update();
 
-        //this.visibleZhuang();
     }
-    //重置游戏界面层数据和显示
-/*    resetGame(){
-        this.clear();
-        this.gsView.reset();
-        this.gsView.visible = false;
-        GSData.i.reset();
-    }*/
 
-    createHandCard(dir:number,style:number,pai:any,x:number,y:number){
+/*    createHandCard(dir:number,style:number,pai:any,x:number,y:number){
 
         var cardView = CardView.create(dir,style,pai);
 
@@ -567,19 +604,24 @@ class GSController extends egret.EventDispatcher{
 
         return cardView;
 
-    }
+    }*/
 
-
+    //初次发牌
     createAllHandPai(){
 
         var style = 1;
 
-        for(var dir:number = 1; dir <= GSConfig.playerCount ;dir++){
+        for(var dir:number = 1; dir <= 4 ;dir++){
 
             var pais = GSData.i.getHandPais(dir);
 
             var pos = GSConfig.handPos[dir];
 
+            var mjView = this.gsView.MJViews[dir];
+
+            this.createIndexPais(mjView,pos.x,pos.y,dir,style,pais,false);
+
+/*
             for(var i:number = 0; i<13;i++) {
 
                 var o = GSConfig.getPosByIndex(dir,style,i);
@@ -597,9 +639,9 @@ class GSController extends egret.EventDispatcher{
             //初始抓牌位置
 
             o = GSConfig.getPosByIndex(dir,style,13);
-
-            GSConfig.catchPos[dir].x = pos.x + o.x;
-            GSConfig.catchPos[dir].y = pos.y + o.y;
+            var catchPos = GSConfig.catchPos[dir];
+            catchPos.x = pos.x + o.x + catchPos.dx;
+            catchPos.y = pos.y + o.y + catchPos.dy;*/
 
         }
     }
@@ -612,8 +654,6 @@ class GSController extends egret.EventDispatcher{
 
         egret.Tween.get(this.activateCard).to({y:this.activateCard.pos.y-25},50);
 
-        //this.activateCard.y = this.activateCard.pos.y - 20;
-
     }
     moveBack(){
 
@@ -621,13 +661,13 @@ class GSController extends egret.EventDispatcher{
 
             egret.Tween.get(this.activateCard).to({y:this.activateCard.pos.y},50);
 
-            //this.activateCard.y = this.activateCard.pos.y;
-
             this.activateCard = null;
         }
     }
 
     onCardClick(e:egret.TouchEvent){
+
+        if(GSData.i.game_state == -1 || GSData.i.game_state == -2) return;
 
         var cardView:CardView = <CardView>e.currentTarget;
 
@@ -639,7 +679,7 @@ class GSController extends egret.EventDispatcher{
 
         }else{
 
-            if(GSData.i.turnDir == 1 && GSConfig.handLens[GSData.i.getHandPais(1).length] && GSData.i.isShowFunc == false && this.allowPushCard){
+            if(GSData.i.turnDir == 1 && GSConfig.handLens[GSData.i.getHandPais(1).length] && this.allowPushCard){
 
                 //进入打牌
 
@@ -657,9 +697,10 @@ class GSController extends egret.EventDispatcher{
 
                 EffectUtils.showTips("等待其他玩家杠牌，请稍后...", 5);
 
-            }else{
-                this.moveBack();
             }
+            /*else{
+                this.moveBack();
+            }*/
 
         }
 
@@ -687,6 +728,8 @@ class GSController extends egret.EventDispatcher{
     //添加池中牌显示
     pushPoolCard(dir:number,pai:any) {
 
+
+
         var mjview = GSController.i.gsView.MJViews[dir];
 
         var cardView: CardView = CardView.create(dir, 4, pai);
@@ -698,7 +741,9 @@ class GSController extends egret.EventDispatcher{
         mjview.addPoolCard(cardView);
 
         //刷新手牌显示
-        this.updateHandCardView(dir);
+        this.updateMJView(dir);
+
+        this.playTimeEffect(false);
 
         //显示新出的牌
         GameDispatcher.ins.dispatchEvent(EventType.Trigger_Play_Tips, [dir, pai]);
@@ -734,7 +779,10 @@ class GSController extends egret.EventDispatcher{
 
         if(GSData.i.roundStartHasFunction && GSData.i.game_state == 3) {
 
+            this.moveBack();
+
             this.gsView.funcSelectView.visible = true;
+
             this.gsView.funcSelectView.updateFuncView(GSData.i.funcSelects);
 
             //TODO 相关手牌提示
@@ -764,240 +812,6 @@ class GSController extends egret.EventDispatcher{
 
         //TODO 相关手牌提示
         GameDispatcher.ins.dispatchEvent(EventType.Trigger_Prompt, false);
-    }
-
-
-
-    //更新手上的所有牌(四方向)
-    updateHandCardView(dir:number){
-
-        this.activateCard = null;
-
-        var mjView = this.gsView.MJViews[dir];
-
-        mjView.removeAllHandCard();
-        //遍历功能牌
-        var funcPais = GSData.i.getFuncPais(dir);
-
-        var startPos = GSConfig.handPos[dir];
-
-        var funcLen = funcPais.length;
-
-        var disO = {x:0,y:0};
-
-        var count:number = 0;
-
-        for(var i:number = 0 ; i <funcLen;i++){
-
-            var obj = funcPais[i];
-
-            var action = obj.action;
-
-            var pais = obj.pais;
-
-            switch(action){
-
-                case 1://吃
-                case 2://碰
-
-                    for(var j:number = 0;j < pais.length;j++) {
-
-                        var jpai = pais[j];
-
-                        var kLen:number = jpai.pai.length;
-
-                        disO.x = startPos.dx * count;
-                        disO.y = startPos.dy * count;
-
-                        count ++;
-
-                        for (var k: number = 0; k < kLen; k++) {
-
-                            var cardView: CardView = CardView.create(dir, 3, jpai.pai[k]);
-
-                            var o = GSConfig.getPosByIndex(dir, 3, k);
-
-                            cardView.posView(startPos.x + disO.x + o.x, startPos.y + disO.y + o.y);
-
-                            mjView.addHandCard(cardView);
-
-                        }
-                    }
-                    break;
-                case 22://幺九杠
-
-                    for(var j:number = 0;j < pais.length;j++) {
-
-                        var jpai = pais[j];
-
-                        var kLen:number = jpai.pai.length;
-
-                        disO.x = startPos.dx * count;
-                        disO.y = startPos.dy * count;
-
-                        count ++;
-
-                        for (var k: number = 0; k < kLen; k++) {
-
-                            var cardView: CardView = CardView.create(dir, 3, jpai.pai[k], jpai.ever[k]);
-
-                            var o = GSConfig.getPosByIndex(dir, 3, k);
-
-                            cardView.posView(startPos.x + disO.x + o.x, startPos.y + disO.y + o.y);
-
-                            mjView.addHandCard(cardView);
-
-                        }
-                    }
-                    break;
-                case 23://旋风杠
-
-                    break;
-                case 24://暗杠
-                    //上杠牌的位置
-                    var g = GSConfig.diePaiPos[dir];
-
-                    var style:number;
-
-                    for(var j:number = 0;j < pais.length;j++) {
-
-                        var jpai = pais[j];
-
-                        disO.x = startPos.dx * count;
-                        disO.y = startPos.dy * count;
-
-                        count ++;
-
-                        for (var k: number = 0; k < 4; k++) {
-                            var gx: number = 0;
-                            var gy: number = 0;
-
-                            if (k == 3) {
-                                (dir == 1) && (style = 3) || (style = 2);
-                                gx = g.x;
-                                gy = g.y;
-                            } else {
-                                style = 2;
-                            }
-                            var cardView: CardView = CardView.create(dir, style, jpai.pai[k]);
-
-                            var o = GSConfig.getPosByIndex(dir, style, k);
-
-                            cardView.posView(startPos.x + disO.x + o.x + gx, startPos.y + disO.y + o.y + gy);
-
-                            mjView.addHandCard(cardView);
-
-                        }
-                        if(dir == 2){
-                            cardView.parent.setChildIndex(cardView,cardView.parent.numChildren - 1);
-                        }
-                    }
-
-
-                    break;
-                case 25://明杠
-
-                    var g = GSConfig.diePaiPos[dir];
-
-                    var style:number = 3;
-
-                    for(var j:number = 0;j < pais.length;j++) {
-
-                        var jpai = pais[j];
-
-                        disO.x = startPos.dx * count;
-                        disO.y = startPos.dy * count;
-
-                        count++;
-
-                        for (var k: number = 0; k < 4; k++) {
-                            var gx: number = 0;
-                            var gy: number = 0;
-                            if (k == 3) {
-                                gx = g.x;
-                                gy = g.y;
-                            }
-                            var cardView: CardView = CardView.create(dir, style, jpai.pai[k]);
-
-                            var o = GSConfig.getPosByIndex(dir, style, k);
-
-                            cardView.posView(startPos.x + disO.x + o.x + gx, startPos.y + disO.y + o.y + gy);
-
-
-                            mjView.addHandCard(cardView);
-
-                        }
-                        if(dir == 2){
-
-                            cardView.parent.setChildIndex(cardView,cardView.parent.numChildren - 1);
-                        }
-                    }
-                    break;
-                case 26://中发白杠
-
-                    for(var j:number = 0;j < pais.length;j++) {
-
-                        var jpai = pais[j];
-
-                        disO.x = startPos.dx * count;
-                        disO.y = startPos.dy * count;
-
-                        count++;
-
-                        for (var k: number = 0; k < 3; k++) {
-
-                            var cardView: CardView = CardView.create(dir, 3, jpai.pai[k], jpai.ever[k]);
-
-                            var o = GSConfig.getPosByIndex(dir, 3, k);
-
-                            cardView.posView(startPos.x + disO.x + o.x, startPos.y + disO.y + o.y);
-
-                            mjView.addHandCard(cardView);
-
-                        }
-                    }
-                    break;
-            }
-
-        }
-
-        //有功能牌
-        if(funcLen > 0){
-
-            disO.x = startPos.dx * count;
-            disO.y = startPos.dy * count;
-
-        }
-
-        GSConfig.dymnicHandPos[dir].x = startPos.x + disO.x;
-        GSConfig.dymnicHandPos[dir].y = startPos.y + disO.y;
-
-        //遍历手中牌
-        var handPais = GSData.i.getHandPais(dir);
-
-        var isTouch : boolean = dir == 1 ? true : false;
-
-        for(var i:number = 0 ;i < handPais.length;i++){
-
-            var cardView:CardView = CardView.create(dir, 1, handPais[i]);
-
-            var o = GSConfig.getPosByIndex(dir,1,i);
-
-            cardView.posView(startPos.x + disO.x + o.x ,startPos.y + disO.y + o.y);
-
-            cardView.index = i;
-
-            mjView.addHandCard(cardView);
-
-            if(isTouch) this.addCardClick(cardView);
-
-        }
-
-        o = GSConfig.getPosByIndex(dir,1,handPais.length);
-
-        GSConfig.catchPos[dir].x = startPos.x + disO.x + o.x;
-        GSConfig.catchPos[dir].y = startPos.y + disO.y + o.y;
-
     }
 
     addCardClick(view:CardView){
@@ -1039,229 +853,242 @@ class GSController extends egret.EventDispatcher{
 
     }
 
-    //更新所有断线上来的牌局
-    updateRebackPais(){
 
-        for(var dir:number = 1; dir <= GSConfig.playerCount ;dir++){
+    updateRebackPais() {
 
-            var pos = GSConfig.handPos[dir];
-            var sPosX:number = pos.x;
-            var sPosY:number = pos.y;
-            var mjView:MJView = this.gsView.MJViews[dir];
-            var catctPos = GSConfig.catchPos[dir];
+        for(var i:number = 1; i <=4 ;i++) {
 
-            var handPais = GSData.i.getHandPais(dir);
-            var poolPais = GSData.i.getPoolPais(dir);
-            var funcPais = GSData.i.getFuncPais(dir);
+            this.updateMJView(i,true);
+        }
+    }
+    /*
+        更新牌面
+        updatePool 是否更新池牌
+     */
+    updateMJView(dir:number,updatePool:boolean = false) {
 
-            //解析功能牌型
-            if(funcPais.length > 0){
+        if (dir == 1) this.activateCard = null;
 
-                for(var i:number = 0 ; i <funcPais.length;i++) {
+        var mjView = this.gsView.MJViews[dir];
 
-                    var obj = funcPais[i];
+        mjView.removeAllHandCard();
 
-                    var action = obj.action;
+        var pos = GSConfig.handPos[dir];
+        var sPosX: number = pos.x;
+        var sPosY: number = pos.y;
+        var mjView: MJView = this.gsView.MJViews[dir];
 
-                    var pais = obj.pais;
+        var catctPos = GSConfig.catchPos[dir];
 
-                    switch (action) {
+        var handPais = GSData.i.getHandPais(dir);
+        var poolPais = GSData.i.getPoolPais(dir);
+        var funcPais = GSData.i.getFuncPais(dir);
 
-                        case 1://吃
-                        case 2://碰
+        //解析功能牌型
+        if (funcPais.length > 0) {
 
-                            for (var j: number = 0; j < pais.length; j++) {
+            for (var i: number = 0; i < funcPais.length; i++) {
 
-                                var jpai = pais[j];
+                var obj = funcPais[i];
 
-                                var kLen: number = jpai.pai.length;
+                var action = obj.action;
 
-                                for (var k: number = 0; k < kLen; k++) {
+                var pais = obj.pais;
 
-                                    var cardView: CardView = CardView.create(dir, 3, jpai.pai[k]);
+                switch (action) {
 
-                                    var o = GSConfig.getPosByIndex(dir, 3, k);
+                    case 1://吃
+                    case 2://碰
 
-                                    cardView.posView(sPosX + o.x, sPosY + o.y);
+                        for (var j: number = 0; j < pais.length; j++) {
 
-                                    mjView.addHandCard(cardView);
+                            var jpai = pais[j];
 
-                                }
-                                sPosX += pos.dx;
-                                sPosY += pos.dy;
+                            var kLen: number = jpai.pai.length;
+
+                            for (var k: number = 0; k < kLen; k++) {
+
+                                var cardView: CardView = CardView.create(dir, 3, jpai.pai[k]);
+
+                                var o = GSConfig.getPosByIndex(dir, 3, k);
+
+                                cardView.posView(sPosX + o.x, sPosY + o.y);
+
+                                mjView.addHandCard(cardView);
+
                             }
-                            break;
-                        case 22://幺九杠
-                            for(var j:number = 0;j < pais.length;j++) {
+                            sPosX += pos.dx;
+                            sPosY += pos.dy;
+                        }
+                        break;
+                    case 22://幺九杠
+                        for (var j: number = 0; j < pais.length; j++) {
 
-                                var jpai = pais[j];
+                            var jpai = pais[j];
 
-                                for (var k: number = 0; k < 3; k++) {
+                            for (var k: number = 0; k < 3; k++) {
 
-                                    var cardView: CardView = CardView.create(dir, 3, jpai.pai[k], jpai.ever[k]);
+                                var cardView: CardView = CardView.create(dir, 3, jpai.pai[k], jpai.ever[k]);
 
-                                    var o = GSConfig.getPosByIndex(dir, 3, k);
+                                var o = GSConfig.getPosByIndex(dir, 3, k);
 
-                                    cardView.posView(sPosX + o.x, sPosY + o.y);
+                                cardView.posView(sPosX + o.x, sPosY + o.y);
 
-                                    mjView.addHandCard(cardView);
+                                mjView.addHandCard(cardView);
 
-                                }
-                                sPosX += pos.dx;
-                                sPosY += pos.dy;
                             }
+                            sPosX += pos.dx;
+                            sPosY += pos.dy;
+                        }
 
-                            break;
-                        case 24://暗杠
+                        break;
+                    case 24://暗杠
 
-                            //上杠牌的位置
-                            var g = GSConfig.diePaiPos[dir];
+                        //上杠牌的位置
+                        var g = GSConfig.diePaiPos[dir];
 
-                            var style:number;
+                        var style: number;
 
-                            for(var j:number = 0;j < pais.length;j++) {
+                        for (var j: number = 0; j < pais.length; j++) {
 
-                                var jpai = pais[j];
+                            var jpai = pais[j];
 
-                                for (var k: number = 0; k < 4; k++) {
-                                    var gx: number = 0;
-                                    var gy: number = 0;
+                            for (var k: number = 0; k < 4; k++) {
+                                var gx: number = 0;
+                                var gy: number = 0;
 
-                                    if (k == 3) {
-                                        (dir == 1) && (style = 3) || (style = 2);
-                                        gx = g.x;
-                                        gy = g.y;
-                                    } else {
-                                        style = 2;
-                                    }
-                                    var cardView: CardView = CardView.create(dir, style, jpai.pai[k]);
-
-                                    var o = GSConfig.getPosByIndex(dir, style, k);
-
-                                    cardView.posView(sPosX + o.x+ gx, sPosY + o.y+ gy);
-
-                                    mjView.addHandCard(cardView);
-
+                                if (k == 3) {
+                                    (dir == 1) && (style = 3) || (style = 2);
+                                    gx = g.x;
+                                    gy = g.y;
+                                } else {
+                                    style = 2;
                                 }
-                                sPosX += pos.dx;
-                                sPosY += pos.dy;
-                                if(dir == 2){
-                                    cardView.parent.setChildIndex(cardView,cardView.parent.numChildren - 1);
-                                }
+                                var cardView: CardView = CardView.create(dir, style, jpai.pai[k]);
+
+                                var o = GSConfig.getPosByIndex(dir, style, k);
+
+                                cardView.posView(sPosX + o.x + gx, sPosY + o.y + gy);
+
+                                mjView.addHandCard(cardView);
+
                             }
-
-
-
-                            break;
-                        case 25://明杠
-
-                            var g = GSConfig.diePaiPos[dir];
-
-                            var style:number = 3;
-
-                            for(var j:number = 0;j < pais.length;j++) {
-
-                                var jpai = pais[j];
-
-                                for (var k: number = 0; k < 4; k++) {
-                                    var gx: number = 0;
-                                    var gy: number = 0;
-                                    if (k == 3) {
-                                        gx = g.x;
-                                        gy = g.y;
-                                    }
-                                    var cardView: CardView = CardView.create(dir, style, jpai.pai[k]);
-
-                                    var o = GSConfig.getPosByIndex(dir, style, k);
-
-                                    cardView.posView(sPosX + o.x + gx, sPosY + o.y + gy);
-
-                                    mjView.addHandCard(cardView);
-
-                                }
-                                sPosX += pos.dx;
-                                sPosY += pos.dy;
-                                if (dir == 2) {
-
-                                    cardView.parent.setChildIndex(cardView, cardView.parent.numChildren - 1);
-                                }
+                            sPosX += pos.dx;
+                            sPosY += pos.dy;
+                            if (dir == 2) {
+                                cardView.parent.setChildIndex(cardView, cardView.parent.numChildren - 1);
                             }
-                            break;
-                        case 26:
+                        }
 
-                            for(var j:number = 0;j < pais.length;j++) {
 
-                                var jpai = pais[j];
+                        break;
+                    case 25://明杠
 
-                                for (var k: number = 0; k < 3; k++) {
+                        var g = GSConfig.diePaiPos[dir];
 
-                                    var cardView: CardView = CardView.create(dir, 3, jpai.pai[k], jpai.ever[k]);
+                        var style: number = 3;
 
-                                    var o = GSConfig.getPosByIndex(dir, 3, k);
+                        for (var j: number = 0; j < pais.length; j++) {
 
-                                    cardView.posView(sPosX + o.x, sPosY + o.y);
+                            var jpai = pais[j];
 
-                                    mjView.addHandCard(cardView);
-
+                            for (var k: number = 0; k < 4; k++) {
+                                var gx: number = 0;
+                                var gy: number = 0;
+                                if (k == 3) {
+                                    gx = g.x;
+                                    gy = g.y;
                                 }
-                                sPosX += pos.dx;
-                                sPosY += pos.dy;
-                            }
-                            break;
-                    }
+                                var cardView: CardView = CardView.create(dir, style, jpai.pai[k]);
 
+                                var o = GSConfig.getPosByIndex(dir, style, k);
+
+                                cardView.posView(sPosX + o.x + gx, sPosY + o.y + gy);
+
+                                mjView.addHandCard(cardView);
+
+                            }
+                            sPosX += pos.dx;
+                            sPosY += pos.dy;
+                            if (dir == 2) {
+
+                                cardView.parent.setChildIndex(cardView, cardView.parent.numChildren - 1);
+                            }
+                        }
+                        break;
+                    case 26:
+
+                        for (var j: number = 0; j < pais.length; j++) {
+
+                            var jpai = pais[j];
+
+                            for (var k: number = 0; k < 3; k++) {
+
+                                var cardView: CardView = CardView.create(dir, 3, jpai.pai[k], jpai.ever[k]);
+
+                                var o = GSConfig.getPosByIndex(dir, 3, k);
+
+                                cardView.posView(sPosX + o.x, sPosY + o.y);
+
+                                mjView.addHandCard(cardView);
+
+                            }
+                            sPosX += pos.dx;
+                            sPosY += pos.dy;
+                        }
+                        break;
                 }
 
-            }
-
-
-            GSConfig.dymnicHandPos[dir].x = sPosX;
-            GSConfig.dymnicHandPos[dir].y = sPosY;
-
-            //解析手牌
-            if(handPais.length > 0) {
-                for (var i: number = 0; i < handPais.length; i++) {
-                    var o = GSConfig.getPosByIndex(dir, 1, i);
-                    var cardView: CardView = CardView.create(dir, 1, handPais[i]);
-                    cardView.posView(sPosX + o.x, sPosY + o.y);
-                    cardView.index = i;
-                    mjView.addHandCard(cardView);
-                    if (dir == 1) {
-                        cardView.addClick(this.onCardClick, this);
-                        cardView.activate();
-                    }
-                }
-                //设置抓牌区位置
-                var o = GSConfig.getPosByIndex(dir, 1, i);
-
-
-                if(handPais.length == 14){
-                    catctPos.x = cardView.pos.x ;
-                    catctPos.y = cardView.pos.y ;
-                    cardView.posView(catctPos.x + catctPos.dx,catctPos.y + catctPos.dy);
-
-                }else{
-                    catctPos.x = sPosX + o.x;
-                    catctPos.y = sPosY + o.y;
-                }
-            }
-            //初始抓牌位置
-
-            /*o = GSConfig.getPosByIndex(dir,style,13);
-
-            GSConfig.catchPos[dir].x = pos.x + o.x;
-            GSConfig.catchPos[dir].y = pos.y + o.y;*/
-
-            //池牌
-            for(var i:number = 0;i<poolPais.length;i++ ){
-                var cardView:CardView = CardView.create(dir,4,poolPais[i]);
-                var o = GSConfig.getPoolPos(dir,i);
-                cardView.posView(o.x,o.y);
-                mjView.addPoolCard(cardView);
             }
 
         }
 
+
+        GSConfig.dymnicHandPos[dir].x = sPosX;
+        GSConfig.dymnicHandPos[dir].y = sPosY;
+
+        //解析手牌
+        if (handPais.length > 0) {
+
+            this.createIndexPais(mjView, sPosX, sPosY, dir, 1, handPais);
+
+            /*for (var i: number = 0; i < handPais.length; i++) {
+             var o = GSConfig.getPosByIndex(dir, 1, i);
+             var cardView: CardView = CardView.create(dir, 1, handPais[i]);
+             cardView.posView(sPosX + o.x, sPosY + o.y);
+             cardView.index = i;
+             mjView.addHandCard(cardView);
+             if (dir == 1) {
+             cardView.addClick(this.onCardClick, this);
+             cardView.activate();
+             }
+             }
+
+             //设置抓牌区位置
+
+             //符合手牌长度 错位最后一张牌
+             if(GSConfig.handLens[handPais.length]){
+             catctPos.x = cardView.pos.x + catctPos.dx;
+             catctPos.y = cardView.pos.y + catctPos.dy;
+             cardView.posView(catctPos.x,catctPos.y);
+
+             }else{
+             var o = GSConfig.getPosByIndex(dir, 1, i);
+             catctPos.x = sPosX + o.x + catctPos.dx;
+             catctPos.y = sPosY + o.y + catctPos.dy;
+             }
+             }*/
+
+            if (updatePool) {
+                //池牌
+                for (var i: number = 0; i < poolPais.length; i++) {
+                    var cardView: CardView = CardView.create(dir, 4, poolPais[i]);
+                    var o = GSConfig.getPoolPos(dir, i);
+                    cardView.posView(o.x, o.y);
+                    mjView.addPoolCard(cardView);
+                }
+            }
+        }
         //TODO 相关手牌提示
         //GameDispatcher.ins.dispatchEvent(EventType.Pai_Tips, true);
     }

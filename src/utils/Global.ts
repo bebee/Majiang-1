@@ -19,9 +19,113 @@ module Global
 	 * 分享图片
 	 */
 	export var share_img:eui.Image;
-
 	export var share_sprite:egret.Sprite;
 
+	/**
+	 * IP相同提醒
+	 */
+	export var ipwarmGroup:eui.Group;
+	export var ipwarmSprite:egret.Sprite;
+	export var ipwarmLabel:eui.Label;
+	export var ipwarmisshow:boolean = false;
+
+	/**
+	 * 手机震动
+	 * @param num 震动时间
+     */
+	export function phoneVibrate(num:number = 2000):void
+	{
+		if(navigator.vibrate)
+		{
+			navigator.vibrate(num);
+		}
+	}
+
+	/**
+	 * 显示IP相同提示
+	 * @param arr
+     */
+	export function showIP(arr:Array<any> = []):void
+	{
+		if(this.ipwarmisshow) return;
+
+		if(!arr || arr.length <= 0) return;
+
+		var isT:boolean = false;
+
+		for(var i = 0; i < arr.length; i++)
+		{
+			var pi = arr[i];
+
+			if(!pi) continue;
+
+			for(var j = 0; j < arr.length; j++)
+			{
+				var pj = arr[j];
+
+				if(!pj) continue;
+
+				if(+pi.uid == +pj.uid) continue;
+
+				if(pi.ip ==  pj.ip)
+				{
+					isT = true;
+					break;
+				}
+			}
+
+			if(isT) break;
+		}
+
+		if(!isT) return;
+
+
+		this.ipwarmisshow = true;
+		if (!this.ipwarmGroup)
+		{
+			this.ipwarmGroup = new eui.Group();
+			this.ipwarmGroup.width = GameConfig.curWidth();
+			this.ipwarmGroup.height = 50;
+		}
+
+		if (!this.ipwarmSprite)
+		{
+			this.ipwarmSprite = new egret.Sprite();
+			this.ipwarmSprite.graphics.clear();
+			this.ipwarmSprite.graphics.beginFill(0x0, 0.5);
+			this.ipwarmSprite.graphics.drawRoundRect(0, 0, this.ipwarmGroup.width, this.ipwarmGroup.height, 30, 30);
+			this.ipwarmSprite.graphics.endFill();
+			this.ipwarmGroup.addChild(this.ipwarmSprite);
+		}
+
+		if(!this.ipwarmLabel)
+		{
+			this.ipwarmLabel = new eui.Label();
+			this.ipwarmLabel.horizontalCenter = 0;
+			this.ipwarmLabel.verticalCenter = 0;
+			this.ipwarmLabel.textAlign = "center";
+			this.ipwarmLabel.size = 20;
+			this.ipwarmLabel.fontFamily = GameConfig.FontFamily;
+			this.ipwarmLabel.text = "注意：有玩家IP地址相同，请点击玩家头像查看";
+			this.ipwarmGroup.addChild(this.ipwarmLabel);
+		}
+
+		var group = GameLayerManager.gameLayer();
+		group.addChild(this.ipwarmGroup);
+		this.ipwarmGroup.y = GameConfig.curHeight();
+
+		var my = this;
+		egret.Tween.get(my.ipwarmGroup, {loop:false}).to({y:GameConfig.curHeight() - my.ipwarmGroup.height + 5},1000).to({}, 2000).to({y:GameConfig.curHeight()},1000).call(function ()
+		{
+			group.removeChild(my.ipwarmGroup);
+			my.ipwarmisshow = false;
+		},my);
+	}
+
+	/**
+	 * 显示聊天气泡
+	 * @param some
+     */
 	export function showPao(some:any):void
 	{
 		var my = this;
@@ -278,5 +382,57 @@ module Global
 		{
 			GameLayerManager.gameLayer().effectLayer.removeChild(this._voiceImg);
 		}
+	}
+
+	/**
+	 * 根据秒获得时间字符串
+	 * @param seconds
+	 * @returns {string}
+	 */
+	export function  getStringBySeconds(millisecond:number):string
+	{
+
+		if(!(millisecond >= 1000)) return "00:00:00";
+		var seconds: number = Math.floor(millisecond / 1000);
+
+		var hour:number = Math.floor(seconds / 3600);
+
+		var minutes:number = Math.floor(seconds / 60);
+
+		var sec:number =  Math.floor(seconds % 60);
+
+		minutes %= 60;
+
+		var s:string = "";
+
+		if(hour < 10)
+		{
+			s += "0";
+		}
+
+		if(hour > 24){
+			var day = 0;
+			day =  Math.floor(hour / 24);
+			hour -= day * 24;
+			s += day + "天 ";
+		}
+
+		s += hour.toString() + ":";
+
+		if(minutes < 10)
+		{
+			s += "0";
+		}
+
+		s += minutes.toString() + ":";
+
+		if(sec < 10)
+		{
+			s += "0";
+		}
+
+		s += sec.toString();
+
+		return s;
 	}
 }

@@ -64,9 +64,27 @@ class DissolutionDialog extends BaseDialog
         this.isClick = true;
     }
 
+    public onTimes(t:number)
+    {
+        this.m_UI.time_text.text = "若无人拒绝，房间将在 " + Global.getStringBySeconds(t * 1000) + " 后解散";
+    }
+
     public refresh():void
     {
         if(!this.plist) return;
+
+        if(this.isClick)
+        {
+            this.m_UI.btn_false.visible = false;
+            this.m_UI.btn_true.visible = false;
+            this.m_UI._desc.visible = true;
+        }
+        else
+        {
+            this.m_UI.btn_false.visible = true;
+            this.m_UI.btn_true.visible = true;
+            this.m_UI._desc.visible = false;
+        }
 
         var index:number = 1;
 
@@ -140,6 +158,8 @@ class DissolutionDialog extends BaseDialog
                 if(isan)
                 {
                     EffectUtils.showTips("因有玩家拒绝解散，房间未能解散", 5);
+
+                    Heart.getInstance().dissolutionTime = 0;
                 }
                 else
                 {

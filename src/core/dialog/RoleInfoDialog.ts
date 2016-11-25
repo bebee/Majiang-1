@@ -60,6 +60,7 @@ class RoleInfoDialog extends BaseDialog
 
         this.m_UI._ip.text = "I P：" + player.ip;
 
+        this.m_UI._rate.text = "游戏次数：" + player.game_times + "  掉线率：" + player.drop_rate + "%";
 
         RES.getResByUrl(player.pic, function(t:egret.Texture)
         {

@@ -116,7 +116,7 @@ class CardView extends egret.DisplayObjectContainer {
         this.countText.bold = true;
         this.countText.background = true;
         this.countText.backgroundColor = 0;
-        this.countText.textColor = 0x00ff00;
+        this.countText.textColor = 0x8ebd49;
         //this.countText.x = 24;
         this.countText.y = 70;
 

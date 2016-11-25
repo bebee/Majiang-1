@@ -11,6 +11,9 @@ class CenterBoom extends egret.DisplayObjectContainer{
     leftCountText:egret.TextField;
     roundCountText:egret.TextField;
 
+    timeEffect:TimeEffectView;
+
+
     constructor(){
         super();
         this.initView();
@@ -79,7 +82,22 @@ class CenterBoom extends egret.DisplayObjectContainer{
         this.visibleArrow(false);
 
         egret.Tween.get(this.arrow,{loop:true}).to({alpha:0},300).to({alpha:1},300);
+
+        this.timeEffect = new TimeEffectView(this.shakeCallback);
+
+        GSUpdate.i.addUpdate(this.timeEffect);
+
+        this.addChild(this.timeEffect.view);
+
     }
+
+    //震动回调
+    shakeCallback(){
+        Global.phoneVibrate(2000);  //让手机震动
+
+        console.log("----shake----");
+    }
+
 
     updateLeftCount(left:number){
 
@@ -119,5 +137,9 @@ class CenterBoom extends egret.DisplayObjectContainer{
     }
     visibleArrow(bool:boolean){
         this.arrow.visible = bool;
+    }
+
+    reset(){
+        this.timeEffect.reset()
     }
 }

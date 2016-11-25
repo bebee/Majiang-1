@@ -83,8 +83,8 @@ class BaseDialog extends eui.Component
 	 */
     public destroy(): void {
 
-    }	
-    
+    }
+
 
 	/**
 	 * 面板是否弹出状态
