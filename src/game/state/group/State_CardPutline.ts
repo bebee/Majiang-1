@@ -9,7 +9,7 @@ class State_CardPutline extends BaseState{
 
     showDelayTime:number = 60;
 
-    moveDownTime:number = 200;
+    moveDownTime:number = 220;
 
     //显示计数器
     showTime:number;
@@ -38,15 +38,22 @@ class State_CardPutline extends BaseState{
             if (this.showTime >= this.showDelayTime) {
 
                 GameSound.PlaySound("sound_card_hover");
+
                 for (var i:number = 1; i <= 4; i++) {
 
                     var cardView:CardView = this.mjviews[i].getHandCard(this.showIndex);
 
                     cardView.visible = true;
 
-                    cardView.y -= GSConfig.moveUpDis;
+                    cardView.x = GSConfig.width >> 1;
+                    cardView.y = GSConfig.height >> 1;
+                    cardView.scaleX = cardView.scaleY = .1;
 
-                    egret.Tween.get(cardView).to({y:cardView.pos.y},this.moveDownTime).call(this.tweenEnd,this,[cardView]);
+                    //cardView.y -= GSConfig.moveUpDis;
+
+                    egret.Tween.get(cardView).to({x:cardView.pos.x,y:cardView.pos.y,scaleX:1,scaleY:1},this.moveDownTime).call(this.tweenEnd,this,[cardView]);
+
+                    //egret.Tween.get(cardView).to({y:cardView.pos.y},this.moveDownTime).call(this.tweenEnd,this,[cardView]);
                 }
 
                 this.showTime = 0;
@@ -72,7 +79,7 @@ class State_CardPutline extends BaseState{
 
             }
 
-            this.delay(3,200);
+            this.delay(3,300);
 
         }
 
@@ -92,7 +99,7 @@ class State_CardPutline extends BaseState{
 
             }
 
-            this.delay(4,200);
+            this.delay(4,300);
 
         }
 

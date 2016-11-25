@@ -466,6 +466,12 @@ class GSController extends egret.EventDispatcher{
 
             this.playTimeEffect(true,false);
         }
+
+        if(GSData.i.game_state == -2){
+
+            this.playTimeEffect(false,false);
+        }
+
     }
     //更新剩余牌数量 和圈数
     updateCenterInfo(){
@@ -540,9 +546,6 @@ class GSController extends egret.EventDispatcher{
             this.createIndexPais(mjView,cur.x,cur.y,i,3,left,true,false);
 
         }
-
-
-
 
         //等待结算
         egret.setTimeout(_=>{this.intoResultView()},this,3000);
@@ -737,6 +740,12 @@ class GSController extends egret.EventDispatcher{
         var o = GSConfig.getPoolPos(dir, pai.poolIndex);
 
         cardView.posView(o.x, o.y);
+
+        cardView.x = o.sx;
+        cardView.y = o.sy;
+        cardView.scaleX = cardView.scaleY = 1.5;
+
+        egret.Tween.get(cardView).to({x:o.x,y:o.y,scaleX:1,scaleY:1},400,egret.Ease.backIn);
 
         mjview.addPoolCard(cardView);
 

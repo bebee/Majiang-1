@@ -48,6 +48,8 @@ class GSData{
     //轮到哪个方位抓牌
     turnDir:number;
 
+    fen:boolean;
+
     funcSelects : any;
 
     chiObj:any;//属于funcSelects里的
@@ -155,6 +157,7 @@ class GSData{
         this.isShowFunc = false;
         this.zhuangFlag = 0;
 
+        this.fen = false;
 
         this.allPais[1] = {handPais:null,catchPai:null,funcPais:[],poolPais:[]};
         this.allPais[2] = {handPais:null,catchPai:null,funcPais:[],poolPais:[]};
