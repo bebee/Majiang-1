@@ -239,7 +239,7 @@ class CreateDialog extends BaseDialog
 
             if(ck.selectIndex == 1)
             {
-                arr.push(i);
+                if(i != 3) arr.push(i);
             }
         }
 

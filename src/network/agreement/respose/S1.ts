@@ -13,6 +13,8 @@ class S1
 
             GlobalData.getInstance().connCount = 0;
             
+            GlobalData.getInstance().connCount = 0;
+            
             GlobalData.getInstance().player.update(obj["data"]);
 
             SceneManager.find("LoadingScene").onIn();

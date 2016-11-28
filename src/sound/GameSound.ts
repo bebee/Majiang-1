@@ -10,6 +10,11 @@ module GameSound
     export var SoundDict = {};
 
     /**
+     * 加载过的资源
+     */
+    export var loadList = {};
+
+    /**
      * 音效音量
      * @type {number}
      * @private
@@ -38,7 +43,7 @@ module GameSound
 
             if(!sound)
             {
-                GameSound.loadMusic(name);
+                if(!GameSound.loadList[name]) GameSound.loadMusic(name);
                 return;
             }
         }
@@ -91,10 +96,15 @@ module GameSound
      */
     export function loadMusic(name:string):void
     {
-        RES.getResAsync(name,function ()
+        GameSound.loadList[name] = name;
+
+        if(RES.hasRes(name))
         {
-            GameSound.PlaySound(name);
-        },this);
+            RES.getResAsync(name,function ()
+            {
+                GameSound.PlaySound(name);
+            },this);
+        }
     }
 
     /**

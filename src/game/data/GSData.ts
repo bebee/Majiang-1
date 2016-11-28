@@ -16,6 +16,7 @@ class GSData{
      2:继续进入牌桌状态
      -1:游戏洗牌状态 (需要缓存一些数据)
      -2:牌局最后分张阶段
+     -3:自己胡牌阶段
      3:游戏牌局状态
      4:每轮牌局结算状态
      5:总结算界面
@@ -316,7 +317,7 @@ class GSData{
 
         var dir = pai.dir;
 
-        if(dir == this.zhuangDir) this.isZhuangPush = true;
+        //if(dir == this.zhuangDir) this.isZhuangPush = true;
 
         var poolPais = this.getPoolPais(dir);
 

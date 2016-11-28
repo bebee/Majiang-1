@@ -5,6 +5,11 @@ module GameMusic
     export var _volume:number = 1;
 
     /**
+     * 加载过的资源
+     */
+    export var loadList = {};
+
+    /**
      * @param name  音乐文件名
      * @param loops  播放次数<= 0循环播放，>0播放该次数,默认为0
      * @param startTime 开始播放的时间 默认是0
@@ -28,7 +33,7 @@ module GameMusic
 
             if(!sound)
             {
-                GameMusic.loadMusic(name);
+                if(!GameSound.loadList[name]) GameMusic.loadMusic(name);
                 return;
             }
         }
@@ -68,10 +73,15 @@ module GameMusic
 
     export function loadMusic(name:string):void
     {
-        RES.getResAsync(name,function ()
+        GameSound.loadList[name] = name;
+
+        if(RES.hasRes(name))
         {
-            GameMusic.PlaySound(name);
-        },this);
+            RES.getResAsync(name,function ()
+            {
+                GameMusic.PlaySound(name);
+            },this);
+        }
     }
 
     export function setSoundVolume(volume:number = 0):void

@@ -50,7 +50,10 @@ class CardView extends egret.DisplayObjectContainer {
 
             return CardView.pool.shift();
         }
-        return new CardView();
+
+        var cardView = new CardView();
+        cardView.reset();
+        return cardView;
     }
 
     static returnCardView(card: CardView) {
@@ -89,9 +92,9 @@ class CardView extends egret.DisplayObjectContainer {
 
     count: number;
 
-    hotArea: egret.Shape;
+    hotArea: eui.Rect;
 
-    maskObj: eui.Rect;
+    //iconBG:eui.Rect;
 
     constructor() {
 
@@ -102,6 +105,10 @@ class CardView extends egret.DisplayObjectContainer {
         this.bg = new egret.Bitmap;
         this.addChild(this.bg);
 
+/*        this.iconBG = new eui.Rect(2,2,0x6aacc1);
+        this.iconBG.touchEnabled = false;
+        this.iconBG.alpha = .5;
+        this.addChild(this.iconBG);*/
 
         this.top = new egret.DisplayObjectContainer();
 
@@ -125,24 +132,21 @@ class CardView extends egret.DisplayObjectContainer {
         this.pos = new egret.Point;
 
         //
-        this.hotArea = new egret.Shape;
+/*        this.hotArea = new egret.Shape;
         this.hotArea.graphics.beginFill(0, 0);
         this.hotArea.graphics.drawRect(0, 0, 64, 120);
         this.addChild(this.hotArea);
         this.hotArea.anchorOffsetX = GSConfig.posRule[1][1].bgosX;
+        this.hotArea.anchorOffsetY = GSConfig.posRule[1][1].bgosY;*/
+
+        this.hotArea = new eui.Rect();
+        this.hotArea.width = 64;
+        this.hotArea.height = 120;
+        this.hotArea.alpha = 0;
+        this.hotArea.touchEnabled = false;
+        this.addChild(this.hotArea);
+        this.hotArea.anchorOffsetX = GSConfig.posRule[1][1].bgosX;
         this.hotArea.anchorOffsetY = GSConfig.posRule[1][1].bgosY;
-
-
-/*        this.maskObj = new eui.Rect();
-        this.maskObj.width = 64;
-        this.maskObj.height = 90;
-        this.maskObj.fillColor = 0;
-        this.maskObj.fillAlpha = .5;
-        this.maskObj.visible = false;
-        this.maskObj.touchEnabled = false;
-        this.addChild(this.maskObj);
-        this.maskObj.anchorOffsetX = GSConfig.posRule[1][1].bgosX;
-        this.maskObj.anchorOffsetY = GSConfig.posRule[1][1].bgosY;*/
 
         this.unactivate();
 
@@ -153,14 +157,16 @@ class CardView extends egret.DisplayObjectContainer {
         this.hotArea.visible = true;
     }
     unactivate() {
+
         this.touchEnabled = false;
         this.hotArea.visible = false;
         this.enabled = true;
     }
 
+
     set enabled(value) {
         // this.maskObj.visible = !value;
-        this.bg.alpha = value ? 1 : .8;
+        this.bg.alpha = value ? 1 : .7;
     }
 
     //重置位置
@@ -306,11 +312,13 @@ class CardView extends egret.DisplayObjectContainer {
         this.pRule = GSConfig.posRule[this.dir][this.style];
 
 
-        this.bg.anchorOffsetX = this.pRule.bgosX;
-        this.bg.anchorOffsetY = this.pRule.bgosY;
+        this.bg.anchorOffsetX =  this.pRule.bgosX;
+        this.bg.anchorOffsetY =  this.pRule.bgosY;
 
         this.bg.scaleX = this.pRule.bgScaleX;
         this.bg.scaleY = this.pRule.bgScaleY;
+
+
 
 
         this.top.anchorOffsetX = this.pRule.toposX;

@@ -138,39 +138,7 @@ class SocketHandler {
             break;
         }
 
-        if(GlobalData.getInstance().connCount > 0)
-        {
-            if(!GameLayerManager.gameLayer().messagBox) GameLayerManager.gameLayer().messagBox = new MessageDialog();
-
-            GameLayerManager.gameLayer().messagBox.showMsg(function (r)
-            {
-                if(GlobalData.getInstance().connCount < 2)
-                {
-                    this.createConn();
-
-                    var p = GlobalData.getInstance().player;
-
-                    if(p.code) SocketManager.getInstance().getGameConn().send(1, {"args":{"uid":p.uid, "code":p.code, "length":p.code.length}});
-                }
-                else
-                {
-                    location.reload();
-                }
-
-            },"您已经掉线，请点击确定重连！");
-        }
-        else
-        {
-            this.createConn();
-
-            var p = GlobalData.getInstance().player;
-
-            if(p.code) SocketManager.getInstance().getGameConn().send(1, {"args":{"uid":p.uid, "code":p.code, "length":p.code.length}});
-        }
-
-
-        GlobalData.getInstance().connCount++;
-
+        Global.reLogin();
     }
     
     onClose(){
@@ -213,8 +181,30 @@ class SocketHandler {
     
     onReceiveMessage()
     {
+        var start:string = this.socket.readUTF();
 
-        var obj:any = JSON.parse(this.socket.readUTF());
+        if(start == "start")
+        {
+            if(GlobalData.getInstance().player.code)
+            {
+                var p = GlobalData.getInstance().player;
+                SocketManager.getInstance().getGameConn().send(1, {"uid":p.uid, "code":p.code, "length":p.code.length});
+            }
+            else
+            {
+                SocketManager.getInstance().getGameConn().send(1);
+            }
+            return;
+        }
+        else if(start == "end")
+        {
+            var addres:string = GameConfig.wei_href_address;
+            if(GameConfig.roomid) addres += "?roomid=" + GameConfig.roomid;
+            Weixin.getAccessCode(GameConfig.appid, addres);
+            return;
+        }
+
+        var obj:any = JSON.parse(start);
 
         if(+obj["code"] > 0)
         {
@@ -249,12 +239,6 @@ class SocketHandler {
     send(messageID: number, obj: any = null)
     {
         
-        if(!this.socket.connected){
-            
-            this.waitSend.push({mId:messageID, obj:obj});
-            return;
-        }
-
         var request = SocketManager.getInstance().Agree["_" + messageID];
 
         if(!request)

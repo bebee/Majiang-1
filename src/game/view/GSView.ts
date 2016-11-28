@@ -284,6 +284,41 @@ class GSView extends egret.Sprite {
 
         this.hideMark();
 
+
+        this.rightTopButtonCon = new egret.DisplayObjectContainer;
+        this.rightButtonCon = new egret.DisplayObjectContainer;
+
+        this.rightTopButtonCon.x = GSConfig.width - 184;
+        this.rightTopButtonCon.y = 18;
+
+        this.rightButtonCon.x = GSConfig.width - 85;
+        this.rightButtonCon.y = 412;
+
+
+        this.addChild(this.rightTopButtonCon);
+        this.addChild(this.rightButtonCon);
+
+        var rightTopBG: egret.Bitmap = new egret.Bitmap(GameRes.getUI("game_buttons_bg"));
+
+        this.settingButton = new mui.EButton("game_button_setting_png");
+        this.quitButton = new mui.EButton("game_button_quit_png");
+        this.settingButton.x = 10;
+        this.quitButton.x = 82;
+        this.rightTopButtonCon.addChild(rightTopBG);
+        this.rightTopButtonCon.addChild(this.settingButton);
+        this.rightTopButtonCon.addChild(this.quitButton);
+
+
+        this.talkButton = new mui.EButton("game_talk_png");
+
+
+        //this.siriButton = new mui.EButton("game_siri_png");
+        this.siriButton = new mui.EButton("game_siri_png");
+        this.siriButton.y = 72;
+        this.rightButtonCon.addChild(this.talkButton);
+
+
+
         this.addChild(this.funcSelectView);
 
         this.addChild(this.frontUIContainer);
@@ -357,37 +392,7 @@ class GSView extends egret.Sprite {
         GameLayerManager.gameLayer().effectLayer.addChild(this.baoText);
 
 
-        this.rightTopButtonCon = new egret.DisplayObjectContainer;
-        this.rightButtonCon = new egret.DisplayObjectContainer;
 
-        this.rightTopButtonCon.x = GSConfig.width - 184;
-        this.rightTopButtonCon.y = 18;
-
-        this.rightButtonCon.x = GSConfig.width - 85;
-        this.rightButtonCon.y = 412;
-
-
-        this.addChild(this.rightTopButtonCon);
-        this.addChild(this.rightButtonCon);
-
-        var rightTopBG: egret.Bitmap = new egret.Bitmap(GameRes.getUI("game_buttons_bg"));
-
-        this.settingButton = new mui.EButton("game_button_setting");
-        this.quitButton = new mui.EButton("game_button_quit");
-        this.settingButton.x = 10;
-        this.quitButton.x = 82;
-        this.rightTopButtonCon.addChild(rightTopBG);
-        this.rightTopButtonCon.addChild(this.settingButton);
-        this.rightTopButtonCon.addChild(this.quitButton);
-
-
-        this.talkButton = new mui.EButton("game_talk");
-
-
-        //this.siriButton = new mui.EButton("game_siri");
-        this.siriButton = new mui.EButton("game_siri");
-        this.siriButton.y = 72;
-        this.rightButtonCon.addChild(this.talkButton);
 
 
         //牌长度

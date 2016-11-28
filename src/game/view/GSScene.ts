@@ -53,12 +53,13 @@ class GSScene extends egret.DisplayObjectContainer {
 
         this.addChild(this.bg);
         this.addChild(this.gameLogo);
-        this.addChild(this.gsView = new GSView);
-        this.addChild(this.gsResultView = new GSResultView);
 
 
 
+        this.gsView = new GSView;
         this.gsView.visible = false;
+
+        this.gsResultView = new GSResultView;
         this.gsResultView.visible = false;
 
         this.roomIDText = new egret.TextField();
@@ -121,6 +122,8 @@ class GSScene extends egret.DisplayObjectContainer {
 
         this.addChild(this.ruleText);
 
+        this.addChild(this.gsView);
+        this.addChild(this.gsResultView);
 
 
         this.addChild(this.gameFight = new egret.Bitmap(GameRes.getUI("game_fight")));
