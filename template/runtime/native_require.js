@@ -181,9 +181,8 @@ var game_file_list = [
 	"bin-debug/utils/TipsPanel.js",
 	"bin-debug/utils/UtilsClass/BitmapBlink.js",
 	"bin-debug/utils/UtilsClass/TipsUtils.js",
-	"bin-debug/view/loading/LoadingScene.js",
 	"bin-debug/WaitPanel.js",
-	"bin-debug/core/scene/LoginScene.js",
+	"bin-debug/view/loading/LoadingScene.js",
 	//----auto game_file_list end----
 ];
 
