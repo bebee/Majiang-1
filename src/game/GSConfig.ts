@@ -32,6 +32,8 @@ class Rule{
 //游戏配置
 class GSConfig{
 
+    static auto:boolean = false;
+
     static width:number = 960;
 
     static height:number = 640;
@@ -51,15 +53,15 @@ class GSConfig{
     };
     //头像目标位置
     static headTargetPos = {
-        1: {x: 53, y: 476},
+        1: {x: 53, y: 460},
         2: {x: 910, y: 273},
         3: {x: 695, y: 82},
         4: {x: 53, y: 273}
     };
     static readyIconPos={
-        1: {x: 478, y: 400},
+        1: {x: 480, y: 400},
         2: {x: 750, y: 320},
-        3: {x: 478, y: 230},
+        3: {x: 480, y: 230},
         4: {x: 228, y: 320}
     };
 
@@ -67,7 +69,7 @@ class GSConfig{
     //54，590
     //手中牌起始位置 dx,dy 明牌的间隔
     static handPos = {
-        1: {x: 38,  y: 585,dx:178,dy:0,px:60,py:0},
+        1: {x: 60,  y: 580,dx:178,dy:0,px:60,py:0},
         2: {x: 850, y: 500,dx:0,dy:-88,px:0,py:-45},
         3: {x: 625, y: 77,dx:-96,dy:0,px:-35,py:0},
         4: {x: 110, y: 124,dx:0,dy:90,px:0,py:45}
@@ -83,10 +85,10 @@ class GSConfig{
 
     //池牌位置
     static poolPos = {
-        1:{x:224,y:490},
-        2:{x:782,y:425},
-        3:{x:620,y:150},
-        4:{x:178,y:167}
+        1:{x:224,y:480},
+        2:{x:774,y:425},
+        3:{x:620,y:160},
+        4:{x:186,y:167}
     };
     //
     static catchPos = {
@@ -114,7 +116,7 @@ class GSConfig{
         1:{ 1:new Rule({bgosX:32,bgosY:40,toposX:24,toposY:20,spacH:64,spacV:79,showTop:false}),
             2:new Rule({bgosX:32,bgosY:40,toposX:24,toposY:23,spacH:56,spacV:79,showTop:true}),
             3:new Rule({bgosX:34,bgosY:44,toposX:26,toposY:40,topScaleX:0.9,topScaleY:0.9,spacH:56,spacV:70,showTop:true}),
-            4:new Rule({bgosX:18,bgosY:23,toposX:23,toposY:34,topScaleX:0.5,topScaleY:0.5,spacH:30,spacV:40,showTop:true}),
+            4:new Rule({bgosX:18,bgosY:23,toposX:23,toposY:40,topScaleX:0.48,topScaleY:0.48,spacH:30,spacV:40,showTop:true}),
             5:new Rule({bgosX:32,bgosY:40,bgScaleX:1.1,bgScaleY:1.1,toposX:24,toposY:23,spacH:56,spacV:79,showTop:true})
         },
         2:{ 1:new Rule({bgosX:19,bgosY:44,bgScaleX:-1,topRot:-90,spacH:24,spacV:24,showTop:false}),
@@ -124,8 +126,8 @@ class GSConfig{
         },
         3:{ 1:new Rule({bgosX:18,bgosY:29,topRot:-180,topScaleX:0.5,topScaleY:0.5,spacH:30,spacV:36,showTop:false}),
             2:new Rule({bgosX:18,bgosY:29,topRot:-180,topScaleX:0.5,topScaleY:0.5,spacH:30,spacV:36,showTop:false}),
-            3:new Rule({bgosX:18,bgosY:29,toposX:30,toposY:23,topRot:-180,topScaleX:0.5,topScaleY:0.5,spacH:30,spacV:34,showTop:true}),
-            4:new Rule({bgosX:18,bgosY:29,toposX:30,toposY:23,topRot:-180,topScaleX:0.5,topScaleY:0.5,spacH:30,spacV:39,showTop:true})
+            3:new Rule({bgosX:18,bgosY:29,toposX:30,toposY:20,topRot:-180,topScaleX:0.48,topScaleY:0.48,spacH:30,spacV:34,showTop:true}),
+            4:new Rule({bgosX:18,bgosY:29,toposX:30,toposY:20,topRot:-180,topScaleX:0.48,topScaleY:0.48,spacH:30,spacV:39,showTop:true})
 
         },
         4:{ 1:new Rule({bgosX:19,bgosY:44,topRot:90,spacH:24,spacV:24,showTop:false}),

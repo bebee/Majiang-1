@@ -11,6 +11,8 @@ class S1
         {
             GlobalData.getInstance().sendLogin = false;
             
+            GlobalData.getInstance().connCount = 0;
+            
             GlobalData.getInstance().player.update(obj["data"]);
 
             SceneManager.find("LoginScene").onIn();

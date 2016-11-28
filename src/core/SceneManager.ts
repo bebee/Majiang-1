@@ -32,6 +32,10 @@ module SceneManager
             {
                 GameLayerManager.gameLayer().sceneLayer.addChild(this.dict[sceneName]);
             }
+            else
+            {
+                this.dict[sceneName].update();
+            }
         }
     }
 

@@ -13,7 +13,6 @@ class LoginScene extends eui.Component
 
     _loading_group:eui.Group;
     load_jindu:eui.Label;
-    _effimg:eui.Image;
     _label_info:eui.Label;
 
     onComplete()
@@ -49,9 +48,12 @@ class LoginScene extends eui.Component
             RES.removeEventListener(RES.ResourceEvent.ITEM_LOAD_ERROR, this.onItemLoadError, this);
 
             this._label_info.text = "正在拉取用户信息···";
-            GlobalData.getInstance().sendLogin = true;
-            SocketManager.getInstance().getGameConn().send(1);
+
             Heart.getInstance();
+
+            SocketManager.getInstance().getGameConn();
+
+            GlobalData.getInstance().sendLogin = true;
         }
     }
 
@@ -90,8 +92,6 @@ class LoginScene extends eui.Component
     public onIn():void
     {
         SceneManager.open(GameMainScene, "GameMainScene");
-        
-        EffectUtils.removeRotationEffect(this._effimg);
 
         SceneManager.close("LoginScene", true);
 

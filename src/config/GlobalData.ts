@@ -14,10 +14,15 @@ class GlobalData {
     public sendLogin:boolean = false;
 
     /**
+     * 玩家重连次数
+     */
+    public connCount:number = 0;
+
+    /**
      * 版本号
      */
-    public resourceCode:string = "";//2016112301
-
+    public resourceCode:string = "";//2016112501
+    
     /**
      * type 1 条子（number  1 - 9 条）     2  筒子 （number  1 - 9 筒）     3  万字（number  1 - 9 万）    4  箭牌  ｛number   1 红中   2  发财   3白班｝
      */
@@ -42,9 +47,9 @@ class GlobalData {
     //消息提示  0正常无提示
     public msgList:any =
     {
-        1:"人已经满了",
-        2:"牌局已经开始了",
-        3:"房间不存在，请检查房间号后重新输入",
+        1:"人已经满了！",
+        2:"牌局已经开始了！",
+        3:"房间不存在或已过期！",
         4:"参数不合法",
         5:"状态不合法",
         6:"已经在房间里了",

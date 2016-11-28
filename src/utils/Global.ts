@@ -30,6 +30,52 @@ module Global
 	export var ipwarmisshow:boolean = false;
 
 	/**
+	 * 掉线处理
+	 */
+	export function reLogin():void
+	{
+		var count:number = GlobalData.getInstance().connCount;
+
+		switch (count)
+		{
+			case 0:
+				Global.sendLoad();
+				break;
+			case 1:
+				if(!GameLayerManager.gameLayer().messagBox) GameLayerManager.gameLayer().messagBox = new MessageDialog();
+				GameLayerManager.gameLayer().messagBox.showMsg(function (r)
+				{
+					Global.sendLoad();
+				},"您已经掉线，请点击确定重连！");
+				break;
+			default:
+				GlobalData.getInstance().player.code = null;
+				Global.sendLoad();
+				break;
+		}
+	}
+
+	/**
+	 * 掉线后发送重新登录消息  或者  重新拉取授权
+	 */
+	export function sendLoad()
+	{
+		var p = GlobalData.getInstance().player;
+
+		if(p.code)
+		{
+			SocketManager.getInstance().getGameConn().send(1, {"uid":p.uid, "code":p.code, "length":p.code.length});
+			GlobalData.getInstance().connCount++;
+		}
+		else
+		{
+			var addres:string = GameConfig.wei_href_address;
+			if(GameConfig.roomid) addres += "?roomid=" + GameConfig.roomid;
+			Weixin.getAccessCode(GameConfig.appid, addres);
+		}
+	}
+
+	/**
 	 * 手机震动
 	 * @param num 震动时间
      */
@@ -86,6 +132,8 @@ module Global
 			this.ipwarmGroup = new eui.Group();
 			this.ipwarmGroup.width = GameConfig.curWidth();
 			this.ipwarmGroup.height = 50;
+			this.ipwarmGroup.touchEnabled = false;
+			this.ipwarmGroup.touchChildren = false;
 		}
 
 		if (!this.ipwarmSprite)
@@ -115,7 +163,7 @@ module Global
 		this.ipwarmGroup.y = GameConfig.curHeight();
 
 		var my = this;
-		egret.Tween.get(my.ipwarmGroup, {loop:false}).to({y:GameConfig.curHeight() - my.ipwarmGroup.height + 5},1000).to({}, 2000).to({y:GameConfig.curHeight()},1000).call(function ()
+		egret.Tween.get(my.ipwarmGroup, {loop:false}).to({y:GameConfig.curHeight() - my.ipwarmGroup.height + 5},1000).to({}, 5000).to({y:GameConfig.curHeight()},1000).call(function ()
 		{
 			group.removeChild(my.ipwarmGroup);
 			my.ipwarmisshow = false;

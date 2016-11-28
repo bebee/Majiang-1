@@ -36,37 +36,20 @@ class Heart
     {
         this.second++;
 
+        this.loginTime ++;
+
+        if(this.loginTime >= 50)
+        {
+            this.loginTime = 0;
+
+            if(GlobalData.getInstance().sendLogin) Global.reLogin();
+        }
+
         if(this.second >= 10)
         {
             this.second = 0;
 
             this.testHorn ++;
-
-            if(GlobalData.getInstance().sendLogin)
-            {
-                this.loginTime ++;
-
-                if(this.loginTime > 5)
-                {
-                    if(!GameLayerManager.gameLayer().messagBox) GameLayerManager.gameLayer().messagBox = new MessageDialog();
-
-                    GameLayerManager.gameLayer().messagBox.showMsg(function (r)
-                    {
-                        GlobalData.getInstance().sendLogin = false;
-
-                        if(r)
-                        {
-                            location.reload();
-                        }
-                        else
-                        {
-                            location.reload();
-                        }
-
-                    },"当前网络状况不佳，请刷新重试！");
-                }
-            }
-
 
             if(this.testHorn >= 120)
             {

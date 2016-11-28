@@ -345,105 +345,12 @@ class GSDataProxy {
         }
 
 
-        /*
-        if (obj[1]) { //吃
-
-            this.gData.chiObj = obj[1];
-
-            this.gData.funcSelects.push({index: 1, action: 1, pai: this.gData.chiObj});
-        }
-        if (obj[2]) { //碰
-
-            this.gData.funcSelects.push({index: 2, action: 2, pai: obj[2]});
-        }
-        //各种杠
-        if (obj[22] || obj[23] || obj[24] || obj[25] || obj[26] || obj[27] || obj[28]) {
-
-            var arr = [];
-
-            if (obj[22]) {//幺九杠
-
-                var pai = obj[22];
-
-                for (var i: number = 0; i < pai.length; i += 3) {
-
-                    arr.push({action: 22, pai: [pai[i], pai[i + 1], pai[i + 2]]});
-
-                }
-
-            }
-            if (obj[23]) {//旋风杠
-
-            }
-            if (obj[24]) {//暗杠
-
-                var pai = obj[24];
-
-                for(var i:number = 0; i < pai.length;i+=4){
-
-                    arr.push({action: 24, pai: pai.slice(i,i+4)});
-                }
-
-                //arr.push({action: 24, pai: obj[24]});
-
-            }
-            if (obj[25]) {//明杠
-
-                var pai = obj[25];
-
-                for (var i: number = 0; i < pai.length; i++) {
-
-                    arr.push({action: 25, pai: pai[i]});
-
-                }
-
-            }
-            if (obj[26]) {//中发白杠
-
-                arr.push({action: 26, pai: obj[26]});
-
-            }
-            if (obj[27]) {//幺九杠 补蛋
-
-                var pai = obj[27];
-
-                for (var i: number = 0; i < pai.length; i++) {
-
-                    arr.push({action: 27, pai: [pai[i]]});
-
-                }
-
-            }
-            if (obj[28]) {//中发白  补蛋
-
-                var pai = obj[28];
-
-                for (var i: number = 0; i < pai.length; i++) {
-
-                    arr.push({action: 28, pai: [pai[i]]});
-
-                }
-
-            }
-
-            this.gData.funcSelects.push({index: 3, arr});
-
-        }
-        if (obj[4]) {//听
-
-            this.gData.funcSelects.push({index: 4, action: 4, pai: obj[4]});
-
-        }
-        if (obj[99]) {//胡
-
-            this.gData.funcSelects.push({index: 5, action: 99, pai: obj[99]});
-
-        }
-        */
 
         GSData.i.roundStartHasFunction = true;
 
         GSController.i.showFuncSelectMenu();
+
+        FashionTools.autoPass();
 
 
     }
@@ -457,7 +364,7 @@ class GSDataProxy {
 
         if(gang_end != null) this.gData.gang_end = true;
 
-        if (this.gData.turnDir != 1 && this.gData.isZhuangPush) {
+        if (this.gData.turnDir != 1 && this.gData.game_state != -1){// && this.gData.isZhuangPush) {
             //轮到他人的时候，并且庄家出完牌,进行假象牌的添加
             this.gData.pushHandPai(this.gData.turnDir, null);
 
@@ -497,6 +404,8 @@ class GSDataProxy {
         GSController.i.updateCenterInfo();
 
         GameSound.PlaySound("sound_card_hover");
+
+        FashionTools.autoPush();
 
     }
 
@@ -1050,25 +959,7 @@ class GSDataProxy {
     }
 
 
-    //检测房主是否第一轮开始
-    checkOwnStart(){
 
-        /*if(GSConfig.game_state == 1) {
-
-            if (this.gData.roomOwnDir == 1 && this.gData.cur_round == 1) {
-
-                GSController.i.scene.visibleFirstRoundButton(true);
-
-                GSController.i.scene.visibleWaitText(false);
-
-            } else {
-
-                GSController.i.scene.visibleWaitText(true);
-
-                GSController.i.scene.visibleFirstRoundButton(false);
-            }
-        }*/
-    }
 
     //同步开局牌的信息(自己牌)
     S2C_OwnCardInfo(obj:any){

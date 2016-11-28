@@ -54,6 +54,8 @@ class GSController extends egret.EventDispatcher{
 
         this.allowPushCard  = true;
 
+        this.sameCardViews = [];
+
         GSUpdate.i.start();
 
         GSStateMgr.i.init();
@@ -168,20 +170,20 @@ class GSController extends egret.EventDispatcher{
             case 4://进入每轮牌局结算界面
                 GSData.i.readyFlag = 0;
                 this.gsResultView.visible = true;
-                this.visibleTwoFuncButton(false,false);
                 this.closeGSView();
 
                 break;
             case 5://总结算界面
-                this.gsView.visible = false;
+                this.closeGSView();
                 this.gsResultView.visible = false;
-                this.visibleTwoFuncButton(false,false);
+
                 break;
         }
     }
 
     closeGSView(){
-
+        this.visibleTwoFuncButton(false,false);
+        this.hideLightSame();
         this.gsView.visible = false;
         this.hideFuncSelectMenu();
         this.gsView.clearTips();
@@ -203,7 +205,6 @@ class GSController extends egret.EventDispatcher{
 
     }
 
-
     //显示隐藏两个功能按钮(解散房间和返回微信)
     visibleTwoFuncButton(boo1:boolean,boo2:boolean){
 
@@ -219,7 +220,7 @@ class GSController extends egret.EventDispatcher{
     //刷新杠的分数
     updateGangCur(){
 
-        for(var i:number = 1; i <=4 ;i++){
+        for(var i:number = 1; i <= 4 ;i++){
 
             this.gsView.headViews[i].numText.text = "" + GSData.i.gangCurs[i];
 
@@ -310,15 +311,17 @@ class GSController extends egret.EventDispatcher{
             }
         }
     }
-
-
     exit(){
 
         GSData.i.clear();
 
         this.clear();
 
-        
+        this.closeGSView();
+
+        if(this.gsTitleView) this.gsTitleView.onClose();
+
+        this.closeResultView();
 
         GameLayerManager.gameLayer().openSceneLayer();
 
@@ -458,7 +461,7 @@ class GSController extends egret.EventDispatcher{
 
             egret.Tween.get(cardView).to({y: pos.y}, 200);
 
-            this.activateCard = null;
+            this.clearActivateCard();
 
             this.playTimeEffect(true,true);
 
@@ -473,6 +476,15 @@ class GSController extends egret.EventDispatcher{
         }
 
     }
+
+    clearActivateCard(){
+
+        this.hideLightSame();
+
+        this.activateCard = null;
+
+    }
+
     //更新剩余牌数量 和圈数
     updateCenterInfo(){
 
@@ -500,7 +512,6 @@ class GSController extends egret.EventDispatcher{
         //摊牌
         //遍历index大于-1的牌
         var hupai = GSData.i.result.hupai;
-
 
         if(hupai != 0) {
 
@@ -546,6 +557,7 @@ class GSController extends egret.EventDispatcher{
             this.createIndexPais(mjView,cur.x,cur.y,i,3,left,true,false);
 
         }
+
 
         //等待结算
         egret.setTimeout(_=>{this.intoResultView()},this,3000);
@@ -595,19 +607,7 @@ class GSController extends egret.EventDispatcher{
 
     }
 
-/*    createHandCard(dir:number,style:number,pai:any,x:number,y:number){
 
-        var cardView = CardView.create(dir,style,pai);
-
-        cardView.posView(x,y);
-
-        var mjView = this.gsView.MJViews[dir];
-
-        mjView.addHandCard(cardView);
-
-        return cardView;
-
-    }*/
 
     //初次发牌
     createAllHandPai(){
@@ -624,30 +624,11 @@ class GSController extends egret.EventDispatcher{
 
             this.createIndexPais(mjView,pos.x,pos.y,dir,style,pais,false);
 
-/*
-            for(var i:number = 0; i<13;i++) {
-
-                var o = GSConfig.getPosByIndex(dir,style,i);
-
-                var cardView = this.createHandCard(dir,style,pais[i],pos.x + o.x,pos.y + o.y);
-
-                cardView.index = i;
-
-                cardView.addClick(this.onCardClick,this);
-
-                //开始隐藏
-                cardView.visible = false;
-
-            }
-            //初始抓牌位置
-
-            o = GSConfig.getPosByIndex(dir,style,13);
-            var catchPos = GSConfig.catchPos[dir];
-            catchPos.x = pos.x + o.x + catchPos.dx;
-            catchPos.y = pos.y + o.y + catchPos.dy;*/
-
         }
     }
+
+    sameCardViews:CardView[];
+
 
 
     //移出
@@ -657,20 +638,33 @@ class GSController extends egret.EventDispatcher{
 
         egret.Tween.get(this.activateCard).to({y:this.activateCard.pos.y-25},50);
 
+        //高亮池中牌相同牌
+
+        this.showLightSame(card.pai);
+
     }
-    moveBack(){
+
+
+
+
+
+
+
+    moveBack(tween:boolean = true){
 
         if(this.activateCard) {
 
-            egret.Tween.get(this.activateCard).to({y:this.activateCard.pos.y},50);
+            if(tween) egret.Tween.get(this.activateCard).to({y:this.activateCard.pos.y},50);
 
-            this.activateCard = null;
+            this.activateCard.y = this.activateCard.pos.y;
+
+            this.clearActivateCard();
         }
     }
 
     onCardClick(e:egret.TouchEvent){
 
-        if(GSData.i.game_state == -1 || GSData.i.game_state == -2) return;
+        if(GSData.i.game_state == -1 || GSData.i.game_state == -2 || GSData.i.game_state == -3) return;
 
         var cardView:CardView = <CardView>e.currentTarget;
 
@@ -752,6 +746,7 @@ class GSController extends egret.EventDispatcher{
         //刷新手牌显示
         this.updateMJView(dir);
 
+
         this.playTimeEffect(false);
 
         //显示新出的牌
@@ -788,7 +783,7 @@ class GSController extends egret.EventDispatcher{
 
         if(GSData.i.roundStartHasFunction && GSData.i.game_state == 3) {
 
-            this.moveBack();
+            this.moveBack(false);
 
             this.gsView.funcSelectView.visible = true;
 
@@ -831,7 +826,7 @@ class GSController extends egret.EventDispatcher{
     //根据pos设置轮盘方向
     setBoomDir(pos:number){
 
-        this.gsView.centerBoom.bg.rotation = 90 * pos;
+        this.gsView.centerBoom.bg.rotation = 90 * pos - 180;
 
     }
     setArrowDir(dir:number){
@@ -852,7 +847,7 @@ class GSController extends egret.EventDispatcher{
 
         this.isAllowFuncClick = true;
 
-        this.activateCard = null;
+        this.clearActivateCard();
 
     }
 
@@ -876,7 +871,9 @@ class GSController extends egret.EventDispatcher{
      */
     updateMJView(dir:number,updatePool:boolean = false) {
 
-        if (dir == 1) this.activateCard = null;
+        if (dir == 1) {
+            this.clearActivateCard();
+        }
 
         var mjView = this.gsView.MJViews[dir];
 
@@ -1061,33 +1058,6 @@ class GSController extends egret.EventDispatcher{
 
             this.createIndexPais(mjView, sPosX, sPosY, dir, 1, handPais);
 
-            /*for (var i: number = 0; i < handPais.length; i++) {
-             var o = GSConfig.getPosByIndex(dir, 1, i);
-             var cardView: CardView = CardView.create(dir, 1, handPais[i]);
-             cardView.posView(sPosX + o.x, sPosY + o.y);
-             cardView.index = i;
-             mjView.addHandCard(cardView);
-             if (dir == 1) {
-             cardView.addClick(this.onCardClick, this);
-             cardView.activate();
-             }
-             }
-
-             //设置抓牌区位置
-
-             //符合手牌长度 错位最后一张牌
-             if(GSConfig.handLens[handPais.length]){
-             catctPos.x = cardView.pos.x + catctPos.dx;
-             catctPos.y = cardView.pos.y + catctPos.dy;
-             cardView.posView(catctPos.x,catctPos.y);
-
-             }else{
-             var o = GSConfig.getPosByIndex(dir, 1, i);
-             catctPos.x = sPosX + o.x + catctPos.dx;
-             catctPos.y = sPosY + o.y + catctPos.dy;
-             }
-             }*/
-
             if (updatePool) {
                 //池牌
                 for (var i: number = 0; i < poolPais.length; i++) {
@@ -1100,6 +1070,73 @@ class GSController extends egret.EventDispatcher{
         }
         //TODO 相关手牌提示
         //GameDispatcher.ins.dispatchEvent(EventType.Pai_Tips, true);
+    }
+
+    //播放手牌特效
+    playWinEffect(){
+
+
+        var mjView:MJView = this.gsView.MJViews[1];
+
+        for(var i:number = 0 ; i < mjView.handCon.numChildren;i++){
+
+            var card:CardView = <CardView>mjView.handCon.getChildAt(i);
+
+            if(card.index > -1){
+
+                egret.Tween.get(card).to({},card.index * 50).to({y:card.pos.y - 30},100).to({y:card.pos.y},150);
+
+            }
+
+        }
+    }
+    /*
+     显示相同牌
+     */
+    showLightSame(pai:any){
+
+        for(var i:number = 1;i<=4;i++){
+
+            var mjView:MJView = this.gsView.MJViews[i];
+
+            var handCon = mjView.handCon;
+
+            var poolCon = mjView.poolCon;
+
+            if(i > 1) {
+                for (var k: number = 0; k < handCon.numChildren; k++) {
+                    var cardView: CardView = <CardView>handCon.getChildAt(k);
+                    if (cardView.index == -1
+                        && cardView.pai
+                        && cardView.pai.number == pai.number
+                        && cardView.pai.type == pai.type) {
+                        cardView.enabled = false;
+                        this.sameCardViews.push(cardView);
+                    }
+                }
+            }
+            for(var k:number = 0;k < poolCon.numChildren;k++){
+                var cardView:CardView = <CardView>poolCon.getChildAt(k);
+                if(
+                    cardView.pai
+                    && cardView.pai.number == pai.number
+                    && cardView.pai.type == pai.type){
+                    cardView.enabled = false;
+                    this.sameCardViews.push(cardView);
+                }
+            }
+        }
+    }
+    /*
+     隐藏相同牌
+     */
+    hideLightSame(){
+
+        while(this.sameCardViews.length){
+
+            this.sameCardViews.shift().enabled = true;
+        }
+
     }
 }
 
