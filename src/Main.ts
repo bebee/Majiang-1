@@ -103,5 +103,7 @@ class Main extends eui.UILayer {
 
         GlobalData.getInstance().player = new Player();
         SceneManager.open(LoadingScene, "LoadingScene");
+
+        GameCore.init(this.stage);
     }
 }

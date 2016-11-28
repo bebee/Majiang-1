@@ -20,7 +20,7 @@ class S9 {
                 var gang_end = obj.data.data.gang_end;
 
                 GSDataProxy.i.S2C_TurnDir(pos, dui_num, gang_end);
-                GameDispatcher.ins.dispatchEvent(EventType.Trigger_Play_Tips);
+                GameDispatcher.ins.dispatchEvent(GameEvent.ChupaiEvent);
                 break;
             case 3:
                 var d = obj.data.data;
@@ -35,8 +35,8 @@ class S9 {
                 console.log("同步其他方功能牌", obj);
 
                 GSDataProxy.i.S2C_FuncResult(obj.data.data.action, obj.data.data.pai, obj.data.data.turn, obj.data.data.cur);
-                GameDispatcher.ins.dispatchEvent(EventType.Trigger_Play_Point);
-                GameDispatcher.ins.dispatchEvent(EventType.Trigger_Play_Tips);
+                GameDispatcher.ins.dispatchEvent(GameEvent.ChupaiEvent);
+                GameDispatcher.ins.dispatchEvent(GameEvent.ChupaiTipsEvent);
                 break;
             case 5: // 删除手牌
                 //pos pai
@@ -45,7 +45,7 @@ class S9 {
                 break;
             case 6:
                 var dir = GSData.i.getDir(obj.data.data.pos);
-                GameDispatcher.ins.dispatchEvent(EventType.Trigger_Play_Tips, [GSData.i.getDir(dir), obj.data.data.pai]);
+                GameDispatcher.ins.dispatchEvent(GameEvent.ChupaiEvent, [GSData.i.getDir(dir), obj.data.data.pai]);
                 break;
         }
     }

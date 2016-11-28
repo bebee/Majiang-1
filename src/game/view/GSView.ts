@@ -14,8 +14,6 @@ class GSView extends egret.Sprite {
 
     MJViews: MJView[];
 
-    mark: egret.Bitmap;
-
     //功能选择层
     funcSelectView: FuncSelectView;
 
@@ -75,182 +73,6 @@ class GSView extends egret.Sprite {
         this.siriButton.addEventListener(egret.TouchEvent.TOUCH_RELEASE_OUTSIDE, this.face.onSiriEnd, this);
         this.siriButton.addEventListener(egret.TouchEvent.TOUCH_BEGIN, this.face.onSiriBegin, this);
         this.siriButton.addEventListener(egret.TouchEvent.TOUCH_END, this.face.onSiriEnd, this);
-
-        GameDispatcher.ins.addEventListener(EventType.Trigger_Play_Point, this.onUpdatePlayPoint, this);
-        GameDispatcher.ins.addEventListener(EventType.Trigger_Play_Tips, this.onUpdatePlayTips, this);
-        GameDispatcher.ins.addEventListener(EventType.Trigger_Prompt, this.onUpdateTips, this);
-    }
-
-    onUpdatePlayPoint(arr: any[]) {
-        if (arr && arr.length == 2) {
-            this.showMark(arr[1], (arr[0] == 1 || arr[0] == 3) ? 2 : 0);
-        }
-        else {
-            this.hideMark();
-        }
-    }
-
-    onUpdatePlayTips(arr: any[]) {
-        if (arr && arr.length == 2) {
-            GameEffect.play(GameEffectType.chupai, arr[0], arr[1]);
-        }
-        else {
-            GameEffect.stop(GameEffectType.chupai);
-        }
-    }
-
-    /**
-     * 更新提示事件响应函数
-     */
-    onUpdateTips(showOrHide: boolean) {
-
-        if (!GSData.i.funcSelects) {
-            return;
-        }
-
-        this.clearTips();
-
-        if (showOrHide == false) {
-            return;
-        }
-
-        var view: MJView = this.MJViews[1];
-        var card: CardView;
-        for (var j: number = 0; j < view.handCon.numChildren; j++) {
-            card = <CardView>view.getHandCard(j);
-            if (!card || card.index < 0) {
-                continue;
-            }
-            card.touchEnabled = false;
-        }
-
-        var paiSingle: any[] = [];
-        var paiAll: any[] = [];
-
-        /**
-         *
-         * @param index (1提示单张 2提示全张)
-         * @param pai
-         * @param jin
-         */
-        function pushPai(index: number, pai: any, jin: number = -1) {
-            switch (index) {
-                case 1:
-                    if (paiSingle.indexOf(pai) == -1 && pai.number != jin) {
-                        paiSingle.push(pai);
-                    }
-                    break;
-                case 2:
-                    if (paiAll.indexOf(pai) == -1) {
-                        paiAll.push(pai);
-                    }
-                    break;
-            }
-        }
-
-        for (var i: number = 0; i < GSData.i.funcSelects.length; i++) {
-            var obj: any = GSData.i.funcSelects[i];
-
-            if (obj.index == 0 || obj.index == 5 || obj.index == 6) {
-                continue;
-            }
-
-            switch (obj.index) {
-                case 1://吃
-                    for (var j: number = 0; j < obj.group.length; j++) {
-                        for (var k: number = 0; k < obj.group[j].pai.length; k++) {
-                            pushPai(1, obj.group[j].pai[k], obj.group[j].pai[1].number);
-                        }
-                    }
-                    break;
-                case 2://碰
-                    for (var j: number = 0; j < obj.pai.length; j++) {
-                        pushPai(2, obj.pai[j]);
-                    }
-                    break;
-                case 3://杠
-                case 4://补
-                    for (var j: number = 0; j < obj.group.length; j++) {
-                        switch (obj.group[j].action) {
-                            case 27:
-                            case 28:
-                                pushPai(1, obj.group[j].pai);
-                                break;
-                            default:
-                                for (var k: number = 0; k < obj.group[j].pai.length; k++) {
-                                    var pai: any = obj.group[j].pai[k];
-                                    switch (obj.group[j].action) {
-                                        case 22:
-                                        case 26:
-                                            pushPai(1, pai);
-                                            break;
-                                        default:
-                                            pushPai(2, pai);
-                                            break;
-                                    }
-                                }
-                                break;
-                        }
-                    }
-                    break;
-            }
-        }
-
-        this.updateTips(1, paiSingle);
-        this.updateTips(2, paiAll);
-    }
-
-    /**
-     * 更新提示
-     * @param index (1提示单张 2提示全张)
-     * @param arr
-     */
-    updateTips(index: number, arr: any[]) {
-
-        var _this = this;
-
-        function checkPai(pai: any) {
-            var view: MJView = _this.MJViews[1];
-            var card: CardView;
-
-            for (var j: number = 0; j < view.handCon.numChildren; j++) {
-                card = <CardView>view.getHandCard(j);
-                if (!card || card.index < 0) {
-                    continue;
-                }
-
-                if (card.pai.type == pai.type && card.pai.number == pai.number) {
-                    card.y = card.pos.y - GSConfig.moveUpDis;
-
-                    if (index == 1) {
-                        break;
-                    }
-                }
-            }
-        }
-
-        var pai: any;
-        for (var i: number = 0; i < arr.length; i++) {
-            pai = arr[i];
-            checkPai(pai);
-        }
-    }
-
-    /**
-     * 清除提示
-     */
-    clearTips() {
-        var view: MJView = this.MJViews[1];
-        var card: CardView;
-        for (var i: number = 0; i < view.handCon.numChildren; i++) {
-            card = <CardView>view.getHandCard(i);
-            if (!card || card.index < 0) {
-                continue;
-            }
-
-            card.y = card.pos.y;
-            card.touchEnabled = true;
-        }
     }
 
     initView() {
@@ -275,14 +97,6 @@ class GSView extends egret.Sprite {
             this.addChild(mjView);
             this.MJViews[i] = mjView;
         }
-
-        this.mark = new egret.Bitmap(RES.getRes("game_mark"));
-        this.mark.anchorOffsetX = this.mark.width >> 1;
-        this.mark.anchorOffsetY = this.mark.height;
-        this.addChild(this.mark);
-
-        this.hideMark();
-
 
         this.rightTopButtonCon = new egret.DisplayObjectContainer;
         this.rightButtonCon = new egret.DisplayObjectContainer;
@@ -649,29 +463,5 @@ class GSView extends egret.Sprite {
         var icon = e.currentTarget;
 
         this.face.onHeadTouch(+icon.name);
-    }
-
-    showMark(cardView: CardView, offx: number = 0, offy: number = 0) {
-        if (this.mark) {
-            egret.Tween.removeTweens(this.mark);
-
-            // this.mark.x = cardView.x - this.mark.width / 2 + offx;
-            // this.mark.y = cardView.y - this.mark.height + offy;
-
-            this.mark.x = cardView.pos.x + offx;
-            this.mark.y = cardView.pos.y + offy;
-
-            egret.Tween.get(this.mark, {loop: true})
-                .to({y: this.mark.y - 20, scaleX: 1, scaleY: 1}, 300, egret.Ease.sineOut)
-                .to({y: this.mark.y, scaleX: 1.2, scaleY: .8}, 300, egret.Ease.sineIn);
-
-            this.mark.visible = true;
-        }
-    }
-
-    hideMark() {
-        if (this.mark) {
-            this.mark.visible = false;
-        }
     }
 }

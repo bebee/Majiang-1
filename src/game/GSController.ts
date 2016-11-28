@@ -186,14 +186,14 @@ class GSController extends egret.EventDispatcher{
         this.hideLightSame();
         this.gsView.visible = false;
         this.hideFuncSelectMenu();
-        this.gsView.clearTips();
         this.gsView.clearMJView();
         this.scene.ruleText.visible = false;
         this.scene.readyButton.visible = false;
         this.scene.waitText.visible = false;
 
-        GameDispatcher.ins.dispatchEvent(EventType.Trigger_Play_Point);
-        GameDispatcher.ins.dispatchEvent(EventType.Trigger_Play_Tips);
+        GameDispatcher.ins.dispatchEvent(GameEvent.ChupaiTipsEvent);
+        GameDispatcher.ins.dispatchEvent(GameEvent.ChupaiEvent);
+        GameDispatcher.ins.dispatchEvent(GameEvent.RaiseCardsEvent);
     }
 
 
@@ -750,9 +750,9 @@ class GSController extends egret.EventDispatcher{
         this.playTimeEffect(false);
 
         //显示新出的牌
-        GameDispatcher.ins.dispatchEvent(EventType.Trigger_Play_Tips, [dir, pai]);
+        GameDispatcher.ins.dispatchEvent(GameEvent.ChupaiEvent, [dir, pai]);
         //显示新出的牌提示点
-        GameDispatcher.ins.dispatchEvent(EventType.Trigger_Play_Point, [dir, cardView]);
+        GameDispatcher.ins.dispatchEvent(GameEvent.ChupaiTipsEvent, [dir, cardView]);
     }
 
     //显示吃牌种类选择
@@ -790,7 +790,7 @@ class GSController extends egret.EventDispatcher{
             this.gsView.funcSelectView.updateFuncView(GSData.i.funcSelects);
 
             //TODO 相关手牌提示
-            GameDispatcher.ins.dispatchEvent(EventType.Trigger_Prompt, true);
+            GameCore.setRaiseCardsByFuncMenu();
         }
     }
 
@@ -815,7 +815,7 @@ class GSController extends egret.EventDispatcher{
         GSData.i.isShowFunc = false;
 
         //TODO 相关手牌提示
-        GameDispatcher.ins.dispatchEvent(EventType.Trigger_Prompt, false);
+        GameDispatcher.ins.dispatchEvent(GameEvent.RaiseCardsEvent);
     }
 
     addCardClick(view:CardView){

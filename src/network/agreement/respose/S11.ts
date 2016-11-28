@@ -25,8 +25,8 @@ class S11 {
                 case 200:
                     //抓牌
                     GSDataProxy.i.S2C_OwnCatch(obj.data.pai[0], obj.data.dui_num, obj.data.hasOwnProperty("fen"));
-                    GameDispatcher.ins.dispatchEvent(EventType.Trigger_Play_Tips);
-                    GameDispatcher.ins.dispatchEvent(EventType.Trigger_Prompt, false);
+                    GameDispatcher.ins.dispatchEvent(GameEvent.ChupaiEvent);
+                    GameDispatcher.ins.dispatchEvent(GameEvent.RaiseCardsEvent);
                     break;
                 case 300:
                     GSDataProxy.i.S2C_Bao(obj.data);
@@ -34,8 +34,8 @@ class S11 {
                 default:
                     //同步自己的功能牌
                     GSDataProxy.i.S2C_FuncResult(obj.data.action, obj.data.pai, obj.data.turn, obj.data.cur);
-                    GameDispatcher.ins.dispatchEvent(EventType.Trigger_Play_Point);
-                    GameDispatcher.ins.dispatchEvent(EventType.Trigger_Play_Tips);
+                    GameDispatcher.ins.dispatchEvent(GameEvent.ChupaiEvent);
+                    GameDispatcher.ins.dispatchEvent(GameEvent.ChupaiTipsEvent);
                     break;
             }
         }

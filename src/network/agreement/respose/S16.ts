@@ -13,7 +13,7 @@ class S16
 
         GSDataProxy.i.S2C_FinalResult(data);
 
-        GameDispatcher.ins.dispatchEvent(EventType.Trigger_Play_Tips);
-        GameDispatcher.ins.dispatchEvent(EventType.Trigger_Play_Point);
+        GameDispatcher.ins.dispatchEvent(GameEvent.ChupaiEvent);
+        GameDispatcher.ins.dispatchEvent(GameEvent.ChupaiTipsEvent);
     }
 }
