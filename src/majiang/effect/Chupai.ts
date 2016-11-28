@@ -1,9 +1,9 @@
 /**
- * GameUtils
+ * Chupai
  * @Author Ace.c
- * @Create 2016-11-22 10:49
+ * @Create 2016-11-28 15:20
  */
-class GameUtils {
+class Chupai {
 
     private static group: eui.Group;
 
@@ -11,36 +11,11 @@ class GameUtils {
 
     private static pai: any;
 
-    static isTweening: boolean = false;
+    private static isTweening: boolean = false;
 
-    static isDisappear: boolean = false;
+    private static isDisappear: boolean = false;
 
-    public constructor() {
-    }
-
-    /**
-     * 复制一张牌
-     * @param card
-     * @returns {CardView|CardView}
-     */
-    static copyPai(card: CardView) {
-
-        var cardView = CardView.getCardView();
-        cardView.alpha = card.alpha;
-        cardView.scaleX = card.scaleX;
-        cardView.scaleY = card.scaleY;
-        cardView.x = card.x;
-        cardView.y = card.y;
-        cardView.dir = card.dir;
-        cardView.style = card.style;
-        cardView.pai = card.pai;
-        cardView.count = card.count;
-        cardView.reDraw();
-
-        return cardView;
-    }
-
-    static appear(dir: number, pai: any) {
+    static play(dir: number, pai: any) {
 
         this.dir = dir;
         this.pai = pai;
@@ -85,7 +60,7 @@ class GameUtils {
             }
 
             _this.isTweening = false;
-            _this.disappear();
+            _this.stop();
         }
 
         var card: CardView = CardView.create(1, 1, pai);
@@ -95,7 +70,7 @@ class GameUtils {
         card.y = getPos(dir).y;
         this.group.addChild(card);
 
-        var cardCopy: CardView = this.copyPai(card);
+        var cardCopy: CardView = GameCopy.copyPai(card);
         this.group.addChild(cardCopy);
 
         this.isDisappear = false;
@@ -107,7 +82,9 @@ class GameUtils {
             .call(moveComplete, cardCopy);
     }
 
-    static disappear() {
+    static stop(isDisappear?: boolean) {
+        if (isDisappear)this.isDisappear = isDisappear;
+
         if (this.isDisappear && !this.isTweening && this.group && this.group.numElements) {
             var card: CardView = <CardView>this.group.getElementAt(0);
             if (!card) {

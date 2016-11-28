@@ -102,7 +102,6 @@ class Main extends eui.UILayer {
         if (!NativeApi.getLocalData("switch")) NativeApi.setLocalData("switch", 1);
 
         GlobalData.getInstance().player = new Player();
-
         SceneManager.open(LoadingScene, "LoadingScene");
     }
 }
