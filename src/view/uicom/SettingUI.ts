@@ -1,10 +1,8 @@
-class SettingUI extends eui.Component
-{
-    public constructor()
-    {
+class SettingUI extends eui.Component {
+    public constructor() {
         super();
 
-        this.addEventListener(eui.UIEvent.COMPLETE,this.onComplete,this);
+        this.addEventListener(eui.UIEvent.COMPLETE, this.onComplete, this);
 
         this.skinName = "SettingSkin";
 
@@ -13,11 +11,10 @@ class SettingUI extends eui.Component
 
     //public _btn_music:mui.EButton;  //音乐按钮
 
-    public _btn_sound:eui.Image;  //音效按钮
+    public _btn_sound: eui.Image;  //音效按钮
 
 
-    onComplete()
-    {
+    onComplete() {
         // this._btn_music = new mui.EButton("sound_open_btn", "", 20);
         // this._btn_music.x = 470;
         // this._btn_music.y = 69;
@@ -30,8 +27,7 @@ class SettingUI extends eui.Component
         this.addChild(this._btn_sound);
     }
 
-    createChildren()
-    {
+    createChildren() {
         super.createChildren();
     }
 }

@@ -27,7 +27,7 @@ class BaseVo {
     /**
      * 更新数
      */
-    public update(data: any): void {
+    public update(data: any) {
         if (!data) return;
 
         for (var key in data) {

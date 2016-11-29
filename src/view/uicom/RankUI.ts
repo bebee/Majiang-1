@@ -1,22 +1,19 @@
-class RankUI extends eui.Component
-{
+class RankUI extends eui.Component {
     public constructor() {
         super();
 
-        this.addEventListener(eui.UIEvent.COMPLETE,this.onComplete,this);
+        this.addEventListener(eui.UIEvent.COMPLETE, this.onComplete, this);
 
         this.skinName = "RankSkin";
 
         this.touchChildren = true;
     }
 
-    onComplete()
-    {
+    onComplete() {
 
     }
 
-    createChildren()
-    {
+    createChildren() {
         super.createChildren();
     }
 }

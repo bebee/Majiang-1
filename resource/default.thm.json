@@ -23,5 +23,7 @@
     "resource/eui_skins_game/ShopItemSkin.exml",
     "resource/eui_skins_game/ShopSkin.exml"
   ],
-  "skins": {}
+  "skins": {
+    "eui.Button": "resource/eui_skins/ButtonSkin.exml"
+  }
 }

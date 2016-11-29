@@ -4,11 +4,11 @@
 	<e:Image source="lashen_15" x="25" y="117" width="174" scale9Grid="2,1,2,2" height="3"/>
 	<e:Image source="activit_jian" x="94" y="82"/>
 	<e:Image source="activit_jian" y="432" x="94" scaleY="-1"/>
-	<e:Scroller width="156" height="270" x="41" y="122">
+	<e:Scroller width="172" height="270" x="25" y="122">
 		<e:Group id="_group" width="190">
 			<e:layout>
-				<e:BasicLayout/>
-			</e:layout>
+				<e:VerticalLayout horizontalAlign="center"/>
+			</e:layout>
 		</e:Group>
 	</e:Scroller>
 	<e:Label id="_labels" x="211" y="117" width="535" height="286" size="20" fontFamily="微软雅黑" textColor="0x975F45" lineSpacing="10" bold="true"/>

@@ -1,23 +1,24 @@
 <?xml version='1.0' encoding='utf-8'?>
 <e:Skin class="mainSkin" width="960" height="640" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
-	<e:Image id="bg_img" width="960" x="0" y="0" source="game_scene"/>
-	<e:Image source="notice_bg" horizontalCenter="0" bottom="0"/>
-	<e:Group id="head_group" height="120" width="273" left="0" top="0">
-		<e:Image source="head_bg" x="4" y="0"/>
-		<e:Image id="_head" source="head_001" x="13" y="9"/>
-		<e:Image id="_head_click" x="4" y="0" source="head_kuang_bg"/>
-		<e:Label id="_name" text="阿克苏了解对方" x="98" y="15" size="20" width="163" height="30" textAlign="center" verticalAlign="middle" fontFamily="微软雅黑" bold="true" maxWidth="163" maxHeight="33"/>
-		<e:Label id="_uid" y="84" size="16" fontFamily="微软雅黑" textAlign="center" bold="true" width="102" height="33" verticalAlign="middle" x="2"/>
-		<e:Image source="money_bg" x="94" y="46" width="182" scale9Grid="19,17,19,5"/>
-		<e:Image id="_money" source="money_icon" x="95" y="41"/>
-		<e:Label id="_money_text" x="143" verticalAlign="middle" y="49" size="20" fontFamily="微软雅黑" textAlign="center" bold="true" width="99" height="33"/>
-		<e:Image id="btn_add" source="card_add" x="232" y="41"/>
+	<e:Image id="bg_img" x="0" y="0" source="game_scene" locked="true"/>
+	<e:Image source="lymj_bg" horizontalCenter="0" top="0" locked="true"/>
+	<e:Image source="lymj_text" horizontalCenter="0" locked="true"/>
+	<e:Image source="notice_bg" horizontalCenter="0" bottom="0" locked="true"/>
+	<e:Group id="head_group">
+		<e:Group>
+			<e:Image source="head_bg"/>
+			<e:Image id="_head" source="head_001" verticalCenter="0" horizontalCenter="0"/>
+			<e:Image id="_head_click" source="head_kuang_bg" verticalCenter="0" horizontalCenter="0"/>
+		</e:Group>
+		<e:Label id="_uid" size="16" fontFamily="微软雅黑" textAlign="left" bold="true" verticalAlign="top" left="100" text="ID:00000"/>
+		<e:Label id="_name" text="昵称" size="20" textAlign="left" verticalAlign="top" fontFamily="微软雅黑" bold="true" maxWidth="163" maxHeight="33" left="98" top="25"/>
+		<e:Group left="96" top="45">
+			<e:Image source="money_bg" width="182" scale9Grid="19,17,19,5" verticalCenter="0"/>
+			<e:Image id="btn_add" source="card_add" right="-6" verticalCenter="0"/>
+			<e:Label id="_money_text" verticalAlign="middle" size="20" fontFamily="微软雅黑" textAlign="center" bold="true" width="99" horizontalCenter="6.5" verticalCenter="0"/>
+			<e:Image id="_money" source="money_icon" verticalCenter="0"/>
+		</e:Group>
 	</e:Group>
-	<e:Group id="icon_group" width="311" height="112" right="10" top="0">
-		<e:layout>
-			<e:BasicLayout/>
-		</e:layout>
-	</e:Group>
-	<e:Image source="lymj_bg" horizontalCenter="0" top="0"/>
-	<e:Image source="lymj_text" horizontalCenter="0" top="-1"/>
+	<e:Group id="icon_group" width="286" height="74" y="17" x="660">
+	</e:Group>
 </e:Skin>

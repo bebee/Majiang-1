@@ -1,9 +1,7 @@
-class ShopItem extends eui.Component
-{
-    private data:any;
+class ShopItem extends eui.Component {
+    private data: any;
 
-    public constructor(some:any)
-    {
+    public constructor(some: any) {
         super();
 
         this.skinName = "ShopItemSkin";
@@ -12,26 +10,24 @@ class ShopItem extends eui.Component
 
         this.data = some;
 
-        this.addEventListener(eui.UIEvent.COMPLETE,this.onComplete,this);
+        this.addEventListener(eui.UIEvent.COMPLETE, this.onComplete, this);
     }
 
     //private _eff:eui.Image;
 
-    private _labels:eui.Label;
+    private _labels: eui.Label;
 
-    private _icon:eui.Image;
+    private _icon: eui.Image;
 
-    onComplete()
-    {
+    onComplete() {
 
     }
 
-    createChildren()
-    {
+    createChildren() {
         super.createChildren();
 
 
-        if(!this.data) return;
+        if (!this.data) return;
 
         this._icon.source = this.data["icon"];
         this._labels.text = "￥ " + this.data["rmb"];
@@ -39,13 +35,11 @@ class ShopItem extends eui.Component
         this.addEventListener(egret.TouchEvent.TOUCH_TAP, this.onClick, this);
     }
 
-    private onClick():void
-    {
-       
+    private onClick(): void {
+
     }
 
-    public PlayStopEff(p:boolean = true):void
-    {
+    public PlayStopEff(p: boolean = true): void {
         // if(p)
         // {
         //     this.addEventListener(egret.Event.ENTER_FRAME, this.onEff, this);
@@ -59,8 +53,7 @@ class ShopItem extends eui.Component
 
     }
 
-    private onEff(e:egret.Event):void
-    {
+    private onEff(e: egret.Event): void {
         //this._eff.rotation += 2;
     }
 }

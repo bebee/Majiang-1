@@ -27,8 +27,7 @@ module SceneManager {
             if (!GameLayerManager.gameLayer().sceneLayer.contains(this.dict[sceneName])) {
                 GameLayerManager.gameLayer().sceneLayer.addChild(this.dict[sceneName]);
             }
-            else
-            {
+            else {
                 this.dict[sceneName].update();
             }
         }

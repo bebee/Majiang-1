@@ -3,7 +3,7 @@
  * @undefined
  *
  */
-class Player {
+class Player extends BaseVo {
     /**
      * 当前平台
      */
@@ -59,7 +59,7 @@ class Player {
      * 玩家性别
      * @type {number}
      */
-    public sex: number = 0;
+    public sex: GameGender = 0;
 
     /**
      * 掉线率
@@ -81,18 +81,9 @@ class Player {
      */
     public playerHeadTexture: egret.Texture;
 
+    public update(data: any) {
+        super.update(data);
 
-    public constructor() {
-
-    }
-
-    public update(obj: any): void {
-        if (!obj) return;
-
-        for (var k in obj) {
-            this[k] = obj[k];
-        }
-
-        this.sex = (this.sex == 1 ? 1 : 0);
+        this.sex = this.sex == GameGender.Male ? GameGender.Male : GameGender.Female;
     }
 }

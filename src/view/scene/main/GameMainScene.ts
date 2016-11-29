@@ -65,18 +65,18 @@ class GameMainScene extends eui.Component {
         this.initIconList();
 
         this.btn_create = new mui.EButton("blue_game_btn");
-        this.btn_create.horizontalCenter = -292;
+        this.btn_create.horizontalCenter = -175;
         this.btn_create.verticalCenter = 0;
         this.addChildAt(this.btn_create, this.numChildren - 1);
 
         this.btn_join = new mui.EButton("red_game_btn");
-        this.btn_join.horizontalCenter = 0;
+        this.btn_join.horizontalCenter = 175;
         this.btn_join.verticalCenter = 0;
         this.addChildAt(this.btn_join, this.numChildren - 1);
 
         this.btn_record = new mui.EButton("yellow_game_btn");
-        this.btn_record.horizontalCenter = 292;
-        this.btn_record.verticalCenter = 0;
+        this.btn_record.top = 150;
+        this.btn_record.right = 20;
         this.addChildAt(this.btn_record, this.numChildren - 1);
 
         /**
@@ -149,7 +149,8 @@ class GameMainScene extends eui.Component {
 
             var lb: mui.EButton = new mui.EButton(some.source + "", "", 20);
             this.icon_group.addChild(lb);
-            lb.x += (+k - 1) * 95;
+            lb.x += (+k - 1) * 110;
+            lb.verticalCenter = 0;
             //if(+k != 1) lb.x += 5;
             lb.name = some["name"];
             lb.addEventListener(egret.TouchEvent.TOUCH_TAP, this.onClick, this);

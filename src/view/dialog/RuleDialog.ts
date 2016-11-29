@@ -1,19 +1,16 @@
-class RuleDialog extends BaseDialog
-{
+class RuleDialog extends BaseDialog {
 
-    private m_UI:RuleUI;
+    private m_UI: RuleUI;
 
-    private text:eui.Label;
+    private text: eui.Label;
 
-    private jsons:any;
+    private jsons: any;
 
-    public constructor()
-    {
+    public constructor() {
         super("rule_txt", 844, 558);
     }
 
-    createChildren()
-    {
+    createChildren() {
         super.createChildren();
 
         this.m_UI = new RuleUI();
@@ -29,29 +26,26 @@ class RuleDialog extends BaseDialog
         this.inits();
     }
 
-    public inits():void
-    {
+    public inits(): void {
         this.jsons = RES.getRes("rule");
-        if(!this.jsons) return;
+        if (!this.jsons) return;
 
-        var str:string = "　　" + this.jsons["title"];
+        var str: string = "　　" + this.jsons["title"];
 
         var content = this.jsons.content;
 
-        for(var k in content)
-        {
+        for (var k in content) {
             var some = content[k];
 
-            if(!some) continue;
+            if (!some) continue;
 
             str += "\n\n　　" + some["desc"];
 
             var list = some.list;
 
-            if(!list) continue;
+            if (!list) continue;
 
-            for(var l in list)
-            {
+            for (var l in list) {
                 str += "\n　　　" + list[l];
             }
         }
@@ -59,9 +53,10 @@ class RuleDialog extends BaseDialog
         this.setText(str);
     }
 
-    public setText(str:string = ""):void
-    {
+    public setText(str: string = ""): void {
         this.text = new eui.Label();
+        this.text.wordWrap = true;
+        this.text.multiline = true;
         this.text.fontFamily = GameConfig.FontFamily;
         this.text.textColor = 0xA97144;
         this.text.width = this.m_UI._scroller.width;
@@ -73,13 +68,12 @@ class RuleDialog extends BaseDialog
 
     /**
      * 添加面板方法
-     * dark        		背景是否变黑
-     * popUpWidth      	指定弹窗宽度，定位使用
+     * dark                背景是否变黑
+     * popUpWidth        指定弹窗宽度，定位使用
      * popUpHeight      指定弹窗高度，定位使用
      * effectType        0：没有动画 1:从中间轻微弹出 2：从中间猛烈弹出  3：从左向右 4：从右向左 5、从上到下 6、从下到上
      */
-    public show(): void
-    {
+    public show(): void {
         super.show(true, this.width, this.height, 1, false);
     }
 
@@ -108,11 +102,10 @@ class RuleDialog extends BaseDialog
 
     /**
      * 移除面板方法
-     * panel       		面板
+     * panel            面板
      * effectType        0：没有动画 1:从中间缩小消失 2：  3：从左向右 4：从右向左 5、从上到下 6、从下到上
      */
-    public hide(): void
-    {
+    public hide(): void {
         super.hide(1);
     }
 

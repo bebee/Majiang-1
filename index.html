@@ -46,10 +46,8 @@
 	<script egret="game" src="bin-debug/ace_html5_game/constant/GameAlign.js"></script>
 	<script egret="game" src="bin-debug/ace_html5_game/constant/GameColor.js"></script>
 	<script egret="game" src="bin-debug/ace_html5_game/constant/GameDir.js"></script>
-	<script egret="game" src="bin-debug/ace_html5_game/constant/GameDirty.js"></script>
 	<script egret="game" src="bin-debug/ace_html5_game/constant/GameGender.js"></script>
 	<script egret="game" src="bin-debug/ace_html5_game/constant/GameLanguage.js"></script>
-	<script egret="game" src="bin-debug/ace_html5_game/constant/GamePosition.js"></script>
 	<script egret="game" src="bin-debug/ace_html5_game/constant/GameQuality.js"></script>
 	<script egret="game" src="bin-debug/ace_html5_game/constant/GameTime.js"></script>
 	<script egret="game" src="bin-debug/ace_html5_game/effect/BaseEffect.js"></script>
@@ -59,7 +57,7 @@
 	<script egret="game" src="bin-debug/ace_html5_game/effect/text/TextEffect.js"></script>
 	<script egret="game" src="bin-debug/ace_html5_game/manager/HttpManager.js"></script>
 	<script egret="game" src="bin-debug/ace_html5_game/manager/TimerManager.js"></script>
-	<script egret="game" src="bin-debug/ace_html5_game/utils/DirtyUtils.js"></script>
+	<script egret="game" src="bin-debug/ace_html5_game/utils/CheckUtils.js"></script>
 	<script egret="game" src="bin-debug/ace_html5_game/utils/FactoryUtils.js"></script>
 	<script egret="game" src="bin-debug/ace_html5_game/utils/HitTestUtils.js"></script>
 	<script egret="game" src="bin-debug/ace_html5_game/utils/NumberUtils.js"></script>
@@ -76,51 +74,10 @@
 	<script egret="game" src="bin-debug/config/GameConfig.js"></script>
 	<script egret="game" src="bin-debug/config/GlobalData.js"></script>
 	<script egret="game" src="bin-debug/config/Weixin.js"></script>
-	<script egret="game" src="bin-debug/core/BaseDialog.js"></script>
-	<script egret="game" src="bin-debug/core/dialog/BindDialog.js"></script>
-	<script egret="game" src="bin-debug/core/dialog/ChatDialog.js"></script>
-	<script egret="game" src="bin-debug/core/dialog/CreateDialog.js"></script>
-	<script egret="game" src="bin-debug/core/dialog/DissolutionDialog.js"></script>
-	<script egret="game" src="bin-debug/core/dialog/JoinDialog.js"></script>
-	<script egret="game" src="bin-debug/core/dialog/JoinPasswordDialog.js"></script>
-	<script egret="game" src="bin-debug/core/dialog/MessageDialog.js"></script>
-	<script egret="game" src="bin-debug/core/dialog/RecordDialog.js"></script>
-	<script egret="game" src="bin-debug/core/dialog/RoleDialog.js"></script>
-	<script egret="game" src="bin-debug/core/dialog/RoleInfoDialog.js"></script>
-	<script egret="game" src="bin-debug/core/dialog/RuleDialog.js"></script>
-	<script egret="game" src="bin-debug/core/dialog/SettingDialog.js"></script>
-	<script egret="game" src="bin-debug/core/dialog/ShopDialog.js"></script>
-	<script egret="game" src="bin-debug/core/dialog/TipsDialog.js"></script>
-	<script egret="game" src="bin-debug/core/dialog/UserAgreement.js"></script>
-	<script egret="game" src="bin-debug/core/EffectManager.js"></script>
-	<script egret="game" src="bin-debug/core/GameLayerManager.js"></script>
-	<script egret="game" src="bin-debug/core/load/DialogLoding.js"></script>
-	<script egret="game" src="bin-debug/core/PopUpManager.js"></script>
-	<script egret="game" src="bin-debug/core/scene/GameMainScene.js"></script>
-	<script egret="game" src="bin-debug/core/SceneManager.js"></script>
-	<script egret="game" src="bin-debug/core/StackManager.js"></script>
-	<script egret="game" src="bin-debug/core/uicom/ChatListUI.js"></script>
-	<script egret="game" src="bin-debug/core/uicom/ChatPao.js"></script>
-	<script egret="game" src="bin-debug/core/uicom/ChatUI.js"></script>
-	<script egret="game" src="bin-debug/core/uicom/CreateUI.js"></script>
-	<script egret="game" src="bin-debug/core/uicom/DialogUI.js"></script>
-	<script egret="game" src="bin-debug/core/uicom/DissolutionUI.js"></script>
-	<script egret="game" src="bin-debug/core/uicom/JoinPasswordUI.js"></script>
-	<script egret="game" src="bin-debug/core/uicom/JoinUI.js"></script>
-	<script egret="game" src="bin-debug/core/uicom/MessageUI.js"></script>
-	<script egret="game" src="bin-debug/core/uicom/RankUI.js"></script>
-	<script egret="game" src="bin-debug/core/uicom/RecordItem.js"></script>
-	<script egret="game" src="bin-debug/core/uicom/RecordUI.js"></script>
-	<script egret="game" src="bin-debug/core/uicom/RecordXItem.js"></script>
-	<script egret="game" src="bin-debug/core/uicom/RoleInfoUI.js"></script>
-	<script egret="game" src="bin-debug/core/uicom/RuleUI.js"></script>
-	<script egret="game" src="bin-debug/core/uicom/SettingUI.js"></script>
-	<script egret="game" src="bin-debug/core/uicom/ShopItem.js"></script>
-	<script egret="game" src="bin-debug/core/uicom/ShopUI.js"></script>
 	<script egret="game" src="bin-debug/effect/ChupaiEffect.js"></script>
 	<script egret="game" src="bin-debug/effect/ChupaiTipsEffect.js"></script>
 	<script egret="game" src="bin-debug/effect/RaiseCardsEffect.js"></script>
-	<script egret="game" src="bin-debug/event/GameEvent.js"></script>
+	<script egret="game" src="bin-debug/event/EffectEvent.js"></script>
 	<script egret="game" src="bin-debug/game/base/BaseUpdate.js"></script>
 	<script egret="game" src="bin-debug/game/card/Card.js"></script>
 	<script egret="game" src="bin-debug/game/card/CardView.js"></script>
@@ -169,8 +126,14 @@
 	<script egret="game" src="bin-debug/game/view/PersonItem.js"></script>
 	<script egret="game" src="bin-debug/game/view/TimeEffectView.js"></script>
 	<script egret="game" src="bin-debug/Main.js"></script>
+	<script egret="game" src="bin-debug/manager/CommonManager.js"></script>
+	<script egret="game" src="bin-debug/manager/EffectManager.js"></script>
+	<script egret="game" src="bin-debug/manager/GameLayerManager.js"></script>
+	<script egret="game" src="bin-debug/manager/GameManager.js"></script>
+	<script egret="game" src="bin-debug/manager/PopUpManager.js"></script>
+	<script egret="game" src="bin-debug/manager/SceneManager.js"></script>
+	<script egret="game" src="bin-debug/manager/StackManager.js"></script>
 	<script egret="game" src="bin-debug/manager/TipsManager.js"></script>
-	<script egret="game" src="bin-debug/model/player.js"></script>
 	<script egret="game" src="bin-debug/network/agreement/GameParse.js"></script>
 	<script egret="game" src="bin-debug/network/agreement/MessageID.js"></script>
 	<script egret="game" src="bin-debug/network/agreement/request/_1.js"></script>
@@ -236,12 +199,47 @@
 	<script egret="game" src="bin-debug/utils/RegUtils.js"></script>
 	<script egret="game" src="bin-debug/utils/UtilsClass/BitmapBlink.js"></script>
 	<script egret="game" src="bin-debug/utils/UtilsClass/TipsUtils.js"></script>
+	<script egret="game" src="bin-debug/view/dialog/BaseDialog.js"></script>
+	<script egret="game" src="bin-debug/view/dialog/BindDialog.js"></script>
+	<script egret="game" src="bin-debug/view/dialog/ChatDialog.js"></script>
+	<script egret="game" src="bin-debug/view/dialog/CreateDialog.js"></script>
+	<script egret="game" src="bin-debug/view/dialog/DissolutionDialog.js"></script>
+	<script egret="game" src="bin-debug/view/dialog/JoinDialog.js"></script>
+	<script egret="game" src="bin-debug/view/dialog/JoinPasswordDialog.js"></script>
+	<script egret="game" src="bin-debug/view/dialog/MessageDialog.js"></script>
+	<script egret="game" src="bin-debug/view/dialog/RecordDialog.js"></script>
+	<script egret="game" src="bin-debug/view/dialog/RoleDialog.js"></script>
+	<script egret="game" src="bin-debug/view/dialog/RoleInfoDialog.js"></script>
+	<script egret="game" src="bin-debug/view/dialog/RuleDialog.js"></script>
+	<script egret="game" src="bin-debug/view/dialog/SettingDialog.js"></script>
+	<script egret="game" src="bin-debug/view/dialog/ShopDialog.js"></script>
+	<script egret="game" src="bin-debug/view/dialog/TipsDialog.js"></script>
+	<script egret="game" src="bin-debug/view/dialog/UserAgreement.js"></script>
+	<script egret="game" src="bin-debug/view/loading/DialogLoding.js"></script>
 	<script egret="game" src="bin-debug/view/loading/LoadingScene.js"></script>
 	<script egret="game" src="bin-debug/view/other/HornPanel.js"></script>
 	<script egret="game" src="bin-debug/view/other/TipsPanel.js"></script>
 	<script egret="game" src="bin-debug/view/other/WaitPanel.js"></script>
-	<script egret="game" src="bin-debug/manager/GameManager.js"></script>
-	<script egret="game" src="bin-debug/manager/CommonManager.js"></script>
+	<script egret="game" src="bin-debug/view/scene/main/GameMainScene.js"></script>
+	<script egret="game" src="bin-debug/view/uicom/ChatListUI.js"></script>
+	<script egret="game" src="bin-debug/view/uicom/ChatPao.js"></script>
+	<script egret="game" src="bin-debug/view/uicom/ChatUI.js"></script>
+	<script egret="game" src="bin-debug/view/uicom/CreateUI.js"></script>
+	<script egret="game" src="bin-debug/view/uicom/DialogUI.js"></script>
+	<script egret="game" src="bin-debug/view/uicom/DissolutionUI.js"></script>
+	<script egret="game" src="bin-debug/view/uicom/JoinPasswordUI.js"></script>
+	<script egret="game" src="bin-debug/view/uicom/JoinUI.js"></script>
+	<script egret="game" src="bin-debug/view/uicom/MessageUI.js"></script>
+	<script egret="game" src="bin-debug/view/uicom/RankUI.js"></script>
+	<script egret="game" src="bin-debug/view/uicom/RecordItem.js"></script>
+	<script egret="game" src="bin-debug/view/uicom/RecordUI.js"></script>
+	<script egret="game" src="bin-debug/view/uicom/RecordXItem.js"></script>
+	<script egret="game" src="bin-debug/view/uicom/RoleInfoUI.js"></script>
+	<script egret="game" src="bin-debug/view/uicom/RuleUI.js"></script>
+	<script egret="game" src="bin-debug/view/uicom/SettingUI.js"></script>
+	<script egret="game" src="bin-debug/view/uicom/ShopItem.js"></script>
+	<script egret="game" src="bin-debug/view/uicom/ShopUI.js"></script>
+	<script egret="game" src="bin-debug/vo/player.js"></script>
 	<!--game_files_end-->
 </head>
 <body>
