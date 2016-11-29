@@ -175,8 +175,6 @@ class CardView extends egret.DisplayObjectContainer {
         this.x = this.pos.x;
         this.y = this.pos.y;
     }
-
-
     addClick(func: Function, thisObj: any) {
 
         if (!this.hasEventListener(egret.TouchEvent.TOUCH_TAP)) {
@@ -184,8 +182,6 @@ class CardView extends egret.DisplayObjectContainer {
         }
 
     }
-
-
     posView(x: number, y: number) {
 
         this.pos.x = x;

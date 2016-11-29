@@ -111,7 +111,11 @@ class GSData{
 
     rules:string;
 
-    start_invite_Flag:number;
+    //听牌中
+    isTing:boolean;
+
+    //牌局准备好
+    roundReady:number;
 
     constructor(){
 
@@ -140,12 +144,15 @@ class GSData{
 
         this.rules = "";
 
-        this.start_invite_Flag = 0;
 
     }
 
     //继续回合的部分数据重置
     roundReset(){
+
+        this.roundReady = 0;
+
+        this.isTing = false;
 
         this.roundStartHasFunction = false;
 
@@ -166,8 +173,6 @@ class GSData{
         this.allPais[4] = {handPais:null,catchPai:null,funcPais:[],poolPais:[]};
 
         this.funcSelects = [];
-
-
 
     }
     //排序手牌

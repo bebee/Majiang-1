@@ -66,6 +66,8 @@ class GSDataProxy {
 
         }
 
+        SocketManager.getInstance().getGameConn().send(25,{args:{type:3}});
+
     }
 
 
@@ -1009,6 +1011,19 @@ class GSDataProxy {
             GSController.i.gsView.updateAllCount(this.gData);
 
         }
+    }
+    //牌局都准备好.可以出牌
+    S2C_RoundReadyAll() {
 
+        if(GSData.i.game_state == - 1) {
+
+            this.gData.roundReady++;
+
+            if (this.gData.roundReady == 4) {
+
+                GSController.i.roundPlay();
+
+            }
+        }
     }
 }
