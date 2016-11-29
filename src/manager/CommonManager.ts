@@ -1,19 +1,12 @@
 /**
- * GameCore
+ * CommonManager
  * @Author Ace.c
- * @Create 2016-11-28 16:01
+ * @Create 2016-11-29 11:58
  */
-class GameCore {
+class CommonManager {
 
-    static stage: egret.Stage;
 
     public constructor() {
-    }
-
-    static init(stage) {
-        this.stage = stage;
-
-        GameEvent.init();
     }
 
     /**
@@ -96,7 +89,7 @@ class GameCore {
             }
         }
 
-        GameDispatcher.ins.dispatchEvent(GameEvent.RaiseCardsEvent, {
+        Acekit.i.dispatchEvent(EffectEvent.RaiseCards, {
             singleton: paiSingle,
             all: paiAll
         });

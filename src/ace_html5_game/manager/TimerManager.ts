@@ -3,7 +3,7 @@
  * @Author Ace.c
  * @Create 2016-11-08 16:52
  */
-class TimerManager extends GameDispatcher {
+class TimerManager extends BaseDispatcher {
 
     static Second: string = "Second";
 

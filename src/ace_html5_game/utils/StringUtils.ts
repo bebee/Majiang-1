@@ -6,10 +6,10 @@
 class StringUtils {
 
     /**
-     * 获取字符长度
+     * 获取字符串的字符长度
      * @returns {number}
      */
-    public static getCharLength(text: string): number {
+    static getCharLength(text: string): number {
         var len: number = 0;
         for (var i: number = 0; i < text.length; i++) {
             if (text.charCodeAt(i) >= 0 && text.charCodeAt(i) <= 128) {
@@ -23,10 +23,10 @@ class StringUtils {
     }
 
     /**
-     * 获取时间字符串
-     * @returns {string} 00d00h00m00s
+     * 获取00d00h00m00s
+     * @returns {string}
      */
-    public static getTimeStr(sec: number): string {
+    static getTimeStr(sec: number): string {
         sec = sec < 0 ? 0 : sec;
         var d: number = Math.floor(sec / 86400);
         var h: number = Math.floor(sec % 86400 / 3600);
@@ -41,10 +41,10 @@ class StringUtils {
     }
 
     /**
-     * 获取时间字符串2
-     * @returns {string} 00:00:00
+     * 获取00:00:00
+     * @returns {string}
      */
-    public static getTimeStr2(sec: number): string {
+    static getTimeStr2(sec: number): string {
         sec = sec < 0 ? 0 : sec;
         var h: number = Math.floor(sec / 3600);
         var m: number = Math.floor(sec % 3600 / 60);
@@ -53,10 +53,10 @@ class StringUtils {
     }
 
     /**
-     * 获取年月日, 通过时间戳
-     * @returns {string} YYYY-MM-DD
+     * 获取YYYY-MM-DD, 通过时间戳
+     * @returns {string}
      */
-    public static getYTDByTimestamp(timestamp: number): string {
+    static getYTDByTimestamp(timestamp: number): string {
         timestamp = timestamp < 0 ? 0 : timestamp;
 
         var date: Date = new Date();
@@ -69,10 +69,10 @@ class StringUtils {
     }
 
     /**
-     * 获取时分秒, 通过时间戳
-     * @returns {string} 00:00:00
+     * 获取00:00:00, 通过时间戳
+     * @returns {string}
      */
-    public static getHMSByTimestamp(timestamp:number):string {
+    static getHMSByTimestamp(timestamp: number): string {
         timestamp = timestamp < 0 ? 0 : timestamp;
 
         var date: Date = new Date();
@@ -89,17 +89,17 @@ class StringUtils {
      * @param name
      * @returns {string}
      */
-    public static getUrlParams(name: string) {
+    static getUrlParams(name: string):string {
         var r = new RegExp("(\\?|#|&)" + name + "=([^&#]*)(&|#|$)");
         var m = location.href.match(r);
         return decodeURIComponent(!m ? "" : m[2]);
     }
 
     /**
-     * 获得值字符串
-     * @returns {string} 格式:1,000,000
+     * 获得1,000,000
+     * @returns {string}
      */
-    public static getValueStr(value: number): string {
+    static getValueStr(value: number): string {
         var arr: string[] = value.toString().split("");
         var str: string = "";
         var len: number = arr.length;
@@ -113,11 +113,10 @@ class StringUtils {
     }
 
     /**
-     * 获得值字符串
-     * @param value
-     * @returns {string} 格式:1.00k
+     * 获得1.00k
+     * @returns {string}
      */
-    public static getValueStr2(value: number): string {
+    static getValueStr2(value: number): string {
         var str: string = "";
         var len: number = String(Math.floor(value)).length;
 
@@ -139,45 +138,20 @@ class StringUtils {
         return str;
     }
 
-    // /**
-    //  * 替换字符串内参数
-    //  * @returns {string}
-    //  */
-    // public static replace(str: string, params:any[]): string {
-    //     // var reg: RegExp = new RegExp('\{[0-9]\}');
-    //     // return str.replace(reg, rep);
-    // }
-
     /**
-     * 替换字符串
+     * 替换
      * @returns {string}
      */
-    public static replace(str: string, rep: string): string {
-        var reg: RegExp = new RegExp('\{[0-9]\}');
-        return str.replace(reg, rep);
-    }
-
-    /**
-     * 替换非法字符
-     * @returns {string}
-     */
-    public static replaceDirtyWords(str: string): string {
-        return DirtyUtils.replace(str);
-    }
-
-    /**
-     * 检索非法字符
-     * @returns {boolean}
-     */
-    public static searchDirtyWords(str: string): boolean {
-        return DirtyUtils.search(str);
+    static replace(str: string, rep: string): string {
+        var regExp: RegExp = new RegExp('\{[0-9]\}');
+        return str.replace(regExp, rep);
     }
 
     /**
      * 删除空格
      * @returns {string}
      */
-    public static deleteSpace(str: string): string {
+    static delSpace(str: string): string {
         var arr: string[] = str.split("");
         while (arr.indexOf(" ") != -1) {
             arr.splice(arr.indexOf(" "), 1);

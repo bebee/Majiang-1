@@ -39,6 +39,33 @@
 
     <!--这个标签会被替换为项目中所有的 javascript 文件。删除 game_files 标签后，项目文件加载列表将不会变化，请谨慎操作！-->
     <!--game_files_start-->
+	<script egret="game" src="bin-debug/ace_html5_game/component/BaseDispatcher.js"></script>
+	<script egret="game" src="bin-debug/ace_html5_game/Acekit.js"></script>
+	<script egret="game" src="bin-debug/ace_html5_game/component/BaseSprite.js"></script>
+	<script egret="game" src="bin-debug/ace_html5_game/component/HashMap.js"></script>
+	<script egret="game" src="bin-debug/ace_html5_game/constant/GameAlign.js"></script>
+	<script egret="game" src="bin-debug/ace_html5_game/constant/GameColor.js"></script>
+	<script egret="game" src="bin-debug/ace_html5_game/constant/GameDir.js"></script>
+	<script egret="game" src="bin-debug/ace_html5_game/constant/GameDirty.js"></script>
+	<script egret="game" src="bin-debug/ace_html5_game/constant/GameGender.js"></script>
+	<script egret="game" src="bin-debug/ace_html5_game/constant/GameLanguage.js"></script>
+	<script egret="game" src="bin-debug/ace_html5_game/constant/GamePosition.js"></script>
+	<script egret="game" src="bin-debug/ace_html5_game/constant/GameQuality.js"></script>
+	<script egret="game" src="bin-debug/ace_html5_game/constant/GameTime.js"></script>
+	<script egret="game" src="bin-debug/ace_html5_game/effect/BaseEffect.js"></script>
+	<script egret="game" src="bin-debug/ace_html5_game/effect/display/GradientEffect.js"></script>
+	<script egret="game" src="bin-debug/ace_html5_game/effect/display/ScalingEffect.js"></script>
+	<script egret="game" src="bin-debug/ace_html5_game/effect/DisplayEffect.js"></script>
+	<script egret="game" src="bin-debug/ace_html5_game/effect/text/TextEffect.js"></script>
+	<script egret="game" src="bin-debug/ace_html5_game/manager/HttpManager.js"></script>
+	<script egret="game" src="bin-debug/ace_html5_game/manager/TimerManager.js"></script>
+	<script egret="game" src="bin-debug/ace_html5_game/utils/DirtyUtils.js"></script>
+	<script egret="game" src="bin-debug/ace_html5_game/utils/FactoryUtils.js"></script>
+	<script egret="game" src="bin-debug/ace_html5_game/utils/HitTestUtils.js"></script>
+	<script egret="game" src="bin-debug/ace_html5_game/utils/NumberUtils.js"></script>
+	<script egret="game" src="bin-debug/ace_html5_game/utils/StringUtils.js"></script>
+	<script egret="game" src="bin-debug/ace_html5_game/vo/BaseVo.js"></script>
+	<script egret="game" src="bin-debug/ace_html5_game/vo/BaseCharVo.js"></script>
 	<script egret="game" src="bin-debug/AssetAdapter.js"></script>
 	<script egret="game" src="bin-debug/component/EButton.js"></script>
 	<script egret="game" src="bin-debug/component/ECheckBox.js"></script>
@@ -90,6 +117,10 @@
 	<script egret="game" src="bin-debug/core/uicom/SettingUI.js"></script>
 	<script egret="game" src="bin-debug/core/uicom/ShopItem.js"></script>
 	<script egret="game" src="bin-debug/core/uicom/ShopUI.js"></script>
+	<script egret="game" src="bin-debug/effect/ChupaiEffect.js"></script>
+	<script egret="game" src="bin-debug/effect/ChupaiTipsEffect.js"></script>
+	<script egret="game" src="bin-debug/effect/RaiseCardsEffect.js"></script>
+	<script egret="game" src="bin-debug/event/GameEvent.js"></script>
 	<script egret="game" src="bin-debug/game/base/BaseUpdate.js"></script>
 	<script egret="game" src="bin-debug/game/card/Card.js"></script>
 	<script egret="game" src="bin-debug/game/card/CardView.js"></script>
@@ -138,15 +169,7 @@
 	<script egret="game" src="bin-debug/game/view/PersonItem.js"></script>
 	<script egret="game" src="bin-debug/game/view/TimeEffectView.js"></script>
 	<script egret="game" src="bin-debug/Main.js"></script>
-	<script egret="game" src="bin-debug/majiang/dispatcher/GameDispatcher.js"></script>
-	<script egret="game" src="bin-debug/majiang/effect/ChupaiEffect.js"></script>
-	<script egret="game" src="bin-debug/majiang/effect/ChupaiTipsEffect.js"></script>
-	<script egret="game" src="bin-debug/majiang/effect/RaiseCardsEffect.js"></script>
-	<script egret="game" src="bin-debug/majiang/event/GameEvent.js"></script>
-	<script egret="game" src="bin-debug/majiang/GameCopy.js"></script>
-	<script egret="game" src="bin-debug/majiang/GameCore.js"></script>
-	<script egret="game" src="bin-debug/majiang/GameView.js"></script>
-	<script egret="game" src="bin-debug/majiang/view/loading/LoadingScene.js"></script>
+	<script egret="game" src="bin-debug/manager/TipsManager.js"></script>
 	<script egret="game" src="bin-debug/model/player.js"></script>
 	<script egret="game" src="bin-debug/network/agreement/GameParse.js"></script>
 	<script egret="game" src="bin-debug/network/agreement/MessageID.js"></script>
@@ -209,14 +232,16 @@
 	<script egret="game" src="bin-debug/utils/EffectUtils.js"></script>
 	<script egret="game" src="bin-debug/utils/Global.js"></script>
 	<script egret="game" src="bin-debug/utils/Heart.js"></script>
-	<script egret="game" src="bin-debug/utils/HornPanel.js"></script>
 	<script egret="game" src="bin-debug/utils/NativeApi.js"></script>
 	<script egret="game" src="bin-debug/utils/RegUtils.js"></script>
-	<script egret="game" src="bin-debug/utils/TipsManager.js"></script>
-	<script egret="game" src="bin-debug/utils/TipsPanel.js"></script>
 	<script egret="game" src="bin-debug/utils/UtilsClass/BitmapBlink.js"></script>
 	<script egret="game" src="bin-debug/utils/UtilsClass/TipsUtils.js"></script>
-	<script egret="game" src="bin-debug/WaitPanel.js"></script>
+	<script egret="game" src="bin-debug/view/loading/LoadingScene.js"></script>
+	<script egret="game" src="bin-debug/view/other/HornPanel.js"></script>
+	<script egret="game" src="bin-debug/view/other/TipsPanel.js"></script>
+	<script egret="game" src="bin-debug/view/other/WaitPanel.js"></script>
+	<script egret="game" src="bin-debug/manager/GameManager.js"></script>
+	<script egret="game" src="bin-debug/manager/CommonManager.js"></script>
 	<!--game_files_end-->
 </head>
 <body>

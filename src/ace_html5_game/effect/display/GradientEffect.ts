@@ -6,12 +6,12 @@
 class GradientEffect extends BaseEffect {
 
     public fadeIn(display, delay = 1000) {
-        Tween.get(display).to({alpha: 1}, delay).call(this.complete, this);
+        egret.Tween.get(display).to({alpha: 1}, delay).call(this.complete, this);
         return this;
     }
 
     public fadeOut(display, delay = 1000) {
-        Tween.get(display).to({alpha: 0}, delay).call(this.complete, this);
+        egret.Tween.get(display).to({alpha: 0}, delay).call(this.complete, this);
         return this;
     }
 }

@@ -1,22 +1,11 @@
 /**
- * GameDispatcher
- * @Author Ace
- * @Create 2016-09-04 14:34
+ * BaseDispatcher
+ * @Author Ace.c
+ * @Create 2016-11-29 11:26
  */
-class GameDispatcher {
+class BaseDispatcher {
 
-    private static _ins:GameDispatcher;
-
-    static get ins():GameDispatcher {
-        !this._ins && (this._ins = new GameDispatcher());
-
-        return this._ins;
-    }
-
-    private callbacks: any = {};
-
-    public constructor() {
-    }
+    protected callbacks: any = {};
 
     /**
      * 注册事件
@@ -65,7 +54,7 @@ class GameDispatcher {
      * 获取回调列表
      * @returns {Function[]}
      */
-    private getCallbackList(type: any): Function[] {
+    protected getCallbackList(type: any): Function[] {
         var list: any[] = [];
         if (this.callbacks.hasOwnProperty(type)) {
             list = this.callbacks[type];
@@ -80,7 +69,7 @@ class GameDispatcher {
      * 检测回调函数是否已经存在
      * @returns {boolean}
      */
-    private checkCallbackIsExist(type: any, callback: Function, thisObj: any): boolean {
+    protected checkCallbackIsExist(type: any, callback: Function, thisObj: any): boolean {
         var isExist: boolean = false;
         var list: any[] = this.getCallbackList(type);
         var temp: any;

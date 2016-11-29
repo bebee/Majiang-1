@@ -1,4 +1,4 @@
-class HttpManager extends GameDispatcher {
+class HttpManager extends BaseDispatcher {
 
     private static _instance: HttpManager;
 

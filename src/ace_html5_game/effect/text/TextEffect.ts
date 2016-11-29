@@ -77,7 +77,7 @@ class TextEffect {
         var effectTips = new egret.TextField();
 
         effectTips.size = 24;
-        effectTips.y = Game.height / 2;
+        effectTips.y = Acekit.i.height / 2;
         if (isWarning) {
             effectTips.textColor = GameColor.Red;
         } else {
@@ -87,18 +87,18 @@ class TextEffect {
 
         effectTips.text = str;
         effectTips.strokeColor = 0x000000;
-        effectTips.x = Game.width / 2 - effectTips.width / 2;
+        effectTips.x = Acekit.i.width / 2 - effectTips.width / 2;
         effectTips.stroke = 2;
         effectTips.bold = true;
         effectTips.textAlign = egret.HorizontalAlign.CENTER;
 
-        if (!Game.contains(effectTips)) {
-            Game.addChild(effectTips);
+        if (!Acekit.i.contains(effectTips)) {
+            Acekit.i.addChild(effectTips);
         }
 
         var onComplete2: Function = function () {
-            if (Game.contains(effectTips)) {
-                Game.removeChild(effectTips);
+            if (Acekit.i.contains(effectTips)) {
+                Acekit.i.removeChild(effectTips);
                 effectTips = null;
             }
         };
@@ -122,7 +122,7 @@ class TextEffect {
         var effectTips = new egret.TextField();
 
         effectTips.size = 24;
-        effectTips.y = Game.height / 2;
+        effectTips.y = Acekit.i.height / 2;
         if (isWarning) {
             effectTips.textColor = GameColor.Red;
         } else {
@@ -135,24 +135,24 @@ class TextEffect {
         if (isFromeLeft) {
             effectTips.x = -effectTips.width;
         } else {
-            effectTips.x = Game.width;
+            effectTips.x = Acekit.i.width;
         }
         effectTips.stroke = 2;
         effectTips.bold = true;
         effectTips.textAlign = egret.HorizontalAlign.CENTER;
 
-        if (!Game.contains(effectTips)) {
-            Game.addChild(effectTips);
+        if (!Acekit.i.contains(effectTips)) {
+            Acekit.i.addChild(effectTips);
         }
 
         if (isFromeLeft) {
             egret.Tween.get(effectTips).to({
-                x: Game.width / 2 - effectTips.width / 2 - 50,
+                x: Acekit.i.width / 2 - effectTips.width / 2 - 50,
                 alpha: 1
             }, 300, egret.Ease.sineInOut);
         } else {
             egret.Tween.get(effectTips).to({
-                x: Game.width / 2 - effectTips.width / 2 + 50,
+                x: Acekit.i.width / 2 - effectTips.width / 2 + 50,
                 alpha: 1
             }, 300, egret.Ease.sineInOut);
         }
@@ -167,15 +167,15 @@ class TextEffect {
 
         egret.setTimeout(function () {
             if (isFromeLeft) {
-                egret.Tween.get(effectTips).to({x: Game.width}, 300, egret.Ease.sineIn);
+                egret.Tween.get(effectTips).to({x: Acekit.i.width}, 300, egret.Ease.sineIn);
             } else {
                 egret.Tween.get(effectTips).to({x: -effectTips.width}, 300, egret.Ease.sineIn);
             }
         }, this, 800);
 
         egret.setTimeout(function () {
-            if (Game.contains(effectTips)) {
-                Game.removeChild(effectTips);
+            if (Acekit.i.contains(effectTips)) {
+                Acekit.i.removeChild(effectTips);
                 effectTips = null;
             }
         }, this, 1100);
@@ -190,7 +190,7 @@ class TextEffect {
         var effectTips = new egret.TextField();
 
         effectTips.size = 24;
-        effectTips.y = Game.height / 2;
+        effectTips.y = Acekit.i.height / 2;
         if (isWarning) {
             effectTips.textColor = GameColor.Red;
         } else {
@@ -200,7 +200,7 @@ class TextEffect {
 
         effectTips.text = str;
         effectTips.strokeColor = 0x000000;
-        effectTips.x = Game.width / 2;
+        effectTips.x = Acekit.i.width / 2;
         effectTips.stroke = 2;
         effectTips.bold = true;
         effectTips.textAlign = egret.HorizontalAlign.CENTER;
@@ -209,13 +209,13 @@ class TextEffect {
         effectTips.scaleX = 0;
         effectTips.scaleY = 0;
 
-        if (!Game.contains(effectTips)) {
-            Game.addChild(effectTips);
+        if (!Acekit.i.contains(effectTips)) {
+            Acekit.i.addChild(effectTips);
         }
 
         var onComplete2: Function = function () {
-            if (Game.contains(effectTips)) {
-                Game.removeChild(effectTips);
+            if (Acekit.i.contains(effectTips)) {
+                Acekit.i.removeChild(effectTips);
                 effectTips = null;
             }
         };
@@ -234,7 +234,7 @@ class TextEffect {
         var effectTips = new egret.TextField();
 
         effectTips.size = 24;
-        effectTips.y = Game.height / 2;
+        effectTips.y = Acekit.i.height / 2;
         if (isWarning) {
             effectTips.textColor = GameColor.Red;
         } else {
@@ -244,7 +244,7 @@ class TextEffect {
 
         effectTips.text = str;
         effectTips.strokeColor = 0x000000;
-        effectTips.x = Game.width / 2;
+        effectTips.x = Acekit.i.width / 2;
         effectTips.stroke = 2;
         effectTips.bold = true;
         effectTips.textAlign = egret.HorizontalAlign.CENTER;
@@ -253,13 +253,13 @@ class TextEffect {
         effectTips.scaleX = 4;
         effectTips.scaleY = 4;
 
-        if (!Game.contains(effectTips)) {
-            Game.addChild(effectTips);
+        if (!Acekit.i.contains(effectTips)) {
+            Acekit.i.addChild(effectTips);
         }
 
         var onComplete2: Function = function () {
-            if (Game.contains(effectTips)) {
-                Game.removeChild(effectTips);
+            if (Acekit.i.contains(effectTips)) {
+                Acekit.i.removeChild(effectTips);
                 effectTips = null;
             }
         };

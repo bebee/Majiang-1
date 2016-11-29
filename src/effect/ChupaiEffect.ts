@@ -34,7 +34,7 @@ class ChupaiEffect {
 
         this.setCardPosition(card, dir);
 
-        var cardCopy: CardView = GameCopy.copyPai(card);
+        var cardCopy: CardView = GameManager.copyPai(card);
         this.group.addChild(cardCopy);
 
         var _this = this;
@@ -69,8 +69,8 @@ class ChupaiEffect {
 
     private static init() {
         this.group = new eui.Group();
-        this.group.width = GameCore.stage.stageWidth;
-        this.group.height = GameCore.stage.stageHeight;
+        this.group.width = Acekit.i.width;
+        this.group.height = Acekit.i.height;
         GameLayerManager.gameLayer().effectLayer.addChildAt(this.group, 0);
     }
 
@@ -82,20 +82,20 @@ class ChupaiEffect {
     private static setCardPosition(card: CardView, dir: number) {
         switch (dir) {
             case 1:
-                card.x = GameCore.stage.stageWidth / 2 - 2;
-                card.y = GameCore.stage.stageHeight - 200;
+                card.x = Acekit.i.stage.stageWidth / 2 - 2;
+                card.y = Acekit.i.stage.stageHeight - 200;
                 break;
             case 2:
-                card.x = GameCore.stage.stageWidth - 300;
-                card.y = GameCore.stage.stageHeight / 2 - 20;
+                card.x = Acekit.i.stage.stageWidth - 300;
+                card.y = Acekit.i.stage.stageHeight / 2 - 20;
                 break;
             case 3:
-                card.x = GameCore.stage.stageWidth / 2 - 2;
+                card.x = Acekit.i.stage.stageWidth / 2 - 2;
                 card.y = 180;
                 break;
             case 4:
                 card.x = 300;
-                card.y = GameCore.stage.stageHeight / 2 - 20;
+                card.y = Acekit.i.stage.stageHeight / 2 - 20;
                 break;
         }
     }
