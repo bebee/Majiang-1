@@ -45,7 +45,7 @@ class S9 {
                 break;
             case 6:
                 var dir = GSData.i.getDir(obj.data.data.pos);
-                GameDispatcher.ins.dispatchEvent(EventType.Trigger_Play_Tips, [GSData.i.getDir(dir), obj.data.data.pai]);
+                GameDispatcher.ins.dispatchEvent(EventType.Trigger_Play_Tips, [dir, obj.data.data.pai]);
                 break;
         }
     }

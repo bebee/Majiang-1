@@ -470,10 +470,10 @@ class GSController extends egret.EventDispatcher{
             this.playTimeEffect(true,false);
         }
 
-        /*if(GSData.i.game_state == -2){
+        if(GSData.i.game_state == -2){
 
             this.playTimeEffect(false,false);
-        }*/
+        }
 
     }
 
@@ -533,37 +533,14 @@ class GSController extends egret.EventDispatcher{
 
         if(hupai != 0) {
 
-            //胡牌的玩家方向
-            var huDir = GSData.i.getDir(GSData.i.result.hupaiPos);
-
-            var left = GSData.i.getResultPersonLeft(huDir);
-
             //别人点炮
             if (hupai.type == 17) {
 
-                left.push(hupai.pai);
 
                 var dianPaoDir = GSData.i.getDir(GSData.i.result.dianPaoPos);
 
                 this.removePoolCard(dianPaoDir);
 
-            }else{
-
-                var leftLen:number = left.length;
-
-                for(var k:number = 0 ;k < leftLen;k++){
-
-                    if(left[k].number == hupai.pai.number && left[k].type == hupai.pai.type)
-                    {
-                        left.splice(k,1);
-
-                        break;
-                    }
-                }
-                if(left.length != leftLen){ //如果长度变化，说明提出了胡牌
-
-                    left.push(hupai.pai);
-                }
             }
         }
 
@@ -903,15 +880,11 @@ class GSController extends egret.EventDispatcher{
 
         var funcPais = GSData.i.getFuncPais(dir);
 
-
-
         var pos = funcPais.length > 0 ? GSConfig.funcPos[dir]:GSConfig.handPos[dir];
 
         var sPosX: number = pos.x;
         var sPosY: number = pos.y;
         var mjView: MJView = this.gsView.MJViews[dir];
-
-        //var catctPos = GSConfig.catchPos[dir];
 
         var handPais = GSData.i.getHandPais(dir);
         var poolPais = GSData.i.getPoolPais(dir);

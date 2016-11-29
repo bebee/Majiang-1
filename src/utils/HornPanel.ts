@@ -41,7 +41,7 @@ class HornPanel extends eui.Component
         var my = this;
 
         my._sprite = new egret.Sprite();
-        my._sprite .width = 630;
+        my._sprite .width = 560;
         my._sprite .height = 38;
         my._sprite .x = 78;
         my.addChild(my._sprite);
@@ -49,9 +49,9 @@ class HornPanel extends eui.Component
         my._shape = new egret.Shape();
         my._shape.graphics.clear();
         my._shape.graphics.beginFill(0x0, 1);
-        my._shape.graphics.drawRect(0,0,630, 38);
+        my._shape.graphics.drawRect(0,0, 485, 38);
         my._shape.graphics.endFill();
-        my._shape.x = 78;
+        my._shape.x = 60;
         my._shape.y = 0;
         my.addChild(my._shape);
 
@@ -73,7 +73,7 @@ class HornPanel extends eui.Component
 
         my._horn.visible =false;
 
-        egret.Tween.get(my).to({width:718},300, egret.Ease.sineOut).call(function ()
+        egret.Tween.get(my).to({width:560},300, egret.Ease.sineOut).call(function ()
         {
             my._horn.visible = true;
 
@@ -141,7 +141,7 @@ class HornPanel extends eui.Component
 
             if(i == my.textList.length - 1)
             {
-                if(t.x <= (-t.textWidth + 400))
+                if(t.x <= (-t.textWidth + 200))
                 {
                     if(list.length > 0) my.playHorn(my._group,my._size, my._color);
                 }

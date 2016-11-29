@@ -684,21 +684,76 @@ class GSDataProxy {
 
         var hupai = this.gData.result.hupai;
 
+        //手牌排序
+        for (var i: number = 0; i < 4; i++) {
+
+            var left = this.gData.result.person[i].left;
+
+            this.gData.sortHandPai(left);
+
+        }
+
+
         //流局
         if (hupai == 0) {
 
             this.gData.resultType = 3;
 
+            var fen = this.gData.result.fen;
+
+            var fenLeft;
+
+            if(fen[1]){
+
+                fenLeft = GSData.i.getResultPersonLeft(GSData.i.getDir(1));
+
+                this.formatLeft(fenLeft,fen[1]);
+
+            }
+            if(fen[2]){
+
+
+                fenLeft = GSData.i.getResultPersonLeft(GSData.i.getDir(2));
+
+                this.formatLeft(fenLeft,fen[2]);
+
+            }
+            if(fen[3]){
+
+
+                fenLeft = GSData.i.getResultPersonLeft(GSData.i.getDir(3));
+
+                this.formatLeft(fenLeft,fen[3]);
+
+            }
+            if(fen[4]){
+
+
+                fenLeft = GSData.i.getResultPersonLeft(GSData.i.getDir(4));
+
+                this.formatLeft(fenLeft,fen[4]);
+
+            }
+
+
         } else {
+
             this.gData.result.hupaiPos = hupai.pos_hu;
 
             var huDir = this.gData.getDir(hupai.pos_hu);
+
+            //胡家的剩余牌
+            var hu_left = GSData.i.getResultPersonLeft(huDir);
 
             if (huDir == 1) {
                 this.gData.resultType = 1;
             } else {
                 this.gData.resultType = 2;
             }
+
+            //自胡
+            var selfHu:boolean = false;
+
             switch (hupai.type) {
                 case 17://点炮
                     this.gData.result.dianPaoPos = hupai.pos;
@@ -707,21 +762,24 @@ class GSDataProxy {
                     break;
                 case 29://天胡
                     GameSound.PlaySound("zimo_" + this.gData.getSexByPos(hupai.pos_hu));
+                    selfHu = true;
+
                     break;
                 case 13://摸宝
                     GameSound.PlaySound("bao_" + this.gData.getSexByPos(hupai.pos_hu));
+                    selfHu = true;
+
                     break;
                 case 7://自摸
                     GameSound.PlaySound("zimo_" + this.gData.getSexByPos(hupai.pos_hu));
+                    selfHu = true;
+
                     break;
             }
-            //手牌排序
-            for (var i: number = 0; i < 4; i++) {
-
-                var left = this.gData.result.person[i].left;
-
-                this.gData.sortHandPai(left);
-
+            if(selfHu){
+                this.formatLeft(hu_left,hupai.pai);
+            }else{
+                hu_left.push(hupai.pai);
             }
 
             GSController.i.playEffect(huDir, 99);
@@ -729,6 +787,28 @@ class GSDataProxy {
         GSController.i.hupaiShow();
 
     }
+    //格式下剩余牌
+    formatLeft(left,pai){
+
+        var leftLen:number = left.length;
+
+        for(var k:number = 0 ;k < leftLen;k++){
+
+            if(left[k].number == pai.number && left[k].type == pai.type)
+            {
+                left.splice(k,1);
+
+                break;
+            }
+        }
+        if(left.length != leftLen){ //如果长度变化，说明提出了胡牌
+
+            left.push(pai);
+        }
+
+
+    }
+
 
 
 
@@ -902,6 +982,10 @@ class GSDataProxy {
         Weixin.onMenuShareAppMessage(GSData.i.roomID + "");
 
         Weixin.onMenuShareTimeline(GSData.i.roomID + "");
+
+        var diss:DissolutionDialog = StackManager.findDialog(DissolutionDialog, "DissolutionDialog");
+
+        if(diss && GameLayerManager.gameLayer().panelLayer.contains(diss)) diss.refresh();
     }
     parseReback() {
 

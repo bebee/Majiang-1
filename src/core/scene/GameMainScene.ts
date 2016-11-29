@@ -159,7 +159,7 @@ class GameMainScene extends eui.Component
         {
             var some = this.iconList[k];
 
-            var lb:mui.EButton = new mui.EButton(some.source+"", "", 20);
+            var lb:mui.EButton = new mui.EButton(some.source+"", "");
             this.icon_group.addChild(lb);
             lb.x += (+k - 1) * 95;
             //if(+k != 1) lb.x += 5;

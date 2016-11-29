@@ -383,19 +383,6 @@ module Global
 		{
 			if(group.contains(Global.hornPanel)) return;
 
-			var gameScene:GameMainScene = SceneManager.find("GameMainScene");
-
-			if(!gameScene) return;
-
-			if(!GameLayerManager.gameLayer().sceneLayer.contains(gameScene) || !GameLayerManager.gameLayer().sceneLayer.visible)
-			{
-				group.top = 20;
-			}
-			else
-			{
-				group.top = 120;
-			}
-
 			Global.hornPanel.playEff(group, size, color);
 		}
 	}
