@@ -27,6 +27,11 @@ class S25
                     var serverid = voice.id;
                     Weixin.downloadVoice(serverid);
                     break;
+                case 3: //牌局开始判断
+                    //
+                    GSDataProxy.i.S2C_RoundReadyAll();
+
+                    break;
             }
         }
     }

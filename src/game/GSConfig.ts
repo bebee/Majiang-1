@@ -55,7 +55,7 @@ class GSConfig{
     static headTargetPos = {
         1: {x: 53, y: 460},
         2: {x: 910, y: 273},
-        3: {x: 695, y: 82},
+        3: {x: 695, y: 52},
         4: {x: 53, y: 273}
     };
     static readyIconPos={
@@ -69,11 +69,20 @@ class GSConfig{
     //54，590
     //手中牌起始位置 dx,dy 明牌的间隔
     static handPos = {
-        1: {x: 60,  y: 580,dx:178,dy:0,px:60,py:0},
+        1: {x: 80,  y: 580,dx:178,dy:0,px:60,py:0},
         2: {x: 850, y: 500,dx:0,dy:-88,px:0,py:-45},
-        3: {x: 625, y: 77,dx:-96,dy:0,px:-35,py:0},
+        3: {x: 625, y: 47,dx:-96,dy:0,px:-35,py:0},
         4: {x: 110, y: 124,dx:0,dy:90,px:0,py:45}
     };
+    //功能牌起点位置
+    static funcPos = {
+        1: {x: 60,  y: 580,dx:178,dy:0,px:60,py:0},
+        2: {x: 850, y: 500,dx:0,dy:-88,px:0,py:-45},
+        3: {x: 625, y: 47,dx:-96,dy:0,px:-35,py:0},
+        4: {x: 110, y: 124,dx:0,dy:90,px:0,py:45}
+    };
+
+
 
     //动态手牌位
     static dymnicHandPos = {1:{x:0,y:0},
@@ -87,12 +96,12 @@ class GSConfig{
     static poolPos = {
         1:{x:224,y:480},
         2:{x:774,y:425},
-        3:{x:620,y:160},
+        3:{x:620,y:130},
         4:{x:186,y:167}
     };
     //
     static catchPos = {
-        1: {x: 0, y: 0,dx:15,dy:0},
+        1: {x: 0, y: 0,dx:10,dy:0},
         2: {x: 0, y: 0,dx:0,dy:-15},
         3: {x: 0, y: 0,dx:-5,dy:0},
         4: {x: 0, y: 0,dx:0,dy:15}

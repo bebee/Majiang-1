@@ -194,6 +194,7 @@ class GSController extends egret.EventDispatcher{
         GameDispatcher.ins.dispatchEvent(GameEvent.ChupaiTipsEvent);
         GameDispatcher.ins.dispatchEvent(GameEvent.ChupaiEvent);
         GameDispatcher.ins.dispatchEvent(GameEvent.RaiseCardsEvent);
+        this.playTimeEffect(false,false);
     }
 
 
@@ -470,10 +471,10 @@ class GSController extends egret.EventDispatcher{
             this.playTimeEffect(true,false);
         }
 
-        if(GSData.i.game_state == -2){
+        /*if(GSData.i.game_state == -2){
 
             this.playTimeEffect(false,false);
-        }
+        }*/
 
     }
 
@@ -493,6 +494,24 @@ class GSController extends egret.EventDispatcher{
         this.gsView.centerBoom.updateRoundCount(GSData.i.cur_round,GSData.i.max_round);
 
     }
+
+    roundPlay(){//牌局开始
+
+        GSData.i.game_state = 3;
+
+        GSData.i.pushStartHandPai();
+
+        GSController.i.isAllowFuncClick = true;
+
+        GSController.i.catchCard(GSData.i.zhuangDir);
+
+        GSController.i.scene.playFight();
+
+        GSController.i.showFuncSelectMenu();
+
+    }
+
+
 
     //播放换宝
     playBao(){
@@ -531,7 +550,9 @@ class GSController extends egret.EventDispatcher{
 
             }else{
 
-                for(var k:number = 0 ;k < left.length;k++){
+                var leftLen:number = left.length;
+
+                for(var k:number = 0 ;k < leftLen;k++){
 
                     if(left[k].number == hupai.pai.number && left[k].type == hupai.pai.type)
                     {
@@ -540,7 +561,10 @@ class GSController extends egret.EventDispatcher{
                         break;
                     }
                 }
-                left.push(hupai.pai);
+                if(left.length != leftLen){ //如果长度变化，说明提出了胡牌
+
+                    left.push(hupai.pai);
+                }
             }
         }
 
@@ -557,7 +581,6 @@ class GSController extends egret.EventDispatcher{
             this.createIndexPais(mjView,cur.x,cur.y,i,3,left,true,false);
 
         }
-
 
         //等待结算
         egret.setTimeout(_=>{this.intoResultView()},this,3000);
@@ -879,16 +902,21 @@ class GSController extends egret.EventDispatcher{
 
         mjView.removeAllHandCard();
 
-        var pos = GSConfig.handPos[dir];
+        var funcPais = GSData.i.getFuncPais(dir);
+
+
+
+        var pos = funcPais.length > 0 ? GSConfig.funcPos[dir]:GSConfig.handPos[dir];
+
         var sPosX: number = pos.x;
         var sPosY: number = pos.y;
         var mjView: MJView = this.gsView.MJViews[dir];
 
-        var catctPos = GSConfig.catchPos[dir];
+        //var catctPos = GSConfig.catchPos[dir];
 
         var handPais = GSData.i.getHandPais(dir);
         var poolPais = GSData.i.getPoolPais(dir);
-        var funcPais = GSData.i.getFuncPais(dir);
+
 
         //解析功能牌型
         if (funcPais.length > 0) {
@@ -1103,18 +1131,18 @@ class GSController extends egret.EventDispatcher{
 
             var poolCon = mjView.poolCon;
 
-            if(i > 1) {
-                for (var k: number = 0; k < handCon.numChildren; k++) {
-                    var cardView: CardView = <CardView>handCon.getChildAt(k);
-                    if (cardView.index == -1
-                        && cardView.pai
-                        && cardView.pai.number == pai.number
-                        && cardView.pai.type == pai.type) {
-                        cardView.enabled = false;
-                        this.sameCardViews.push(cardView);
-                    }
+
+            for (var k: number = 0; k < handCon.numChildren; k++) {
+                var cardView: CardView = <CardView>handCon.getChildAt(k);
+                if (cardView.index == -1
+                    && cardView.pai
+                    && cardView.pai.number == pai.number
+                    && cardView.pai.type == pai.type) {
+                    cardView.enabled = false;
+                    this.sameCardViews.push(cardView);
                 }
             }
+
             for(var k:number = 0;k < poolCon.numChildren;k++){
                 var cardView:CardView = <CardView>poolCon.getChildAt(k);
                 if(

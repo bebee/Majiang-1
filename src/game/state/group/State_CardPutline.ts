@@ -107,17 +107,8 @@ class State_CardPutline extends BaseState{
 
             this.exit();
 
-            GSData.i.game_state = 3;
+            SocketManager.getInstance().getGameConn().send(25,{args:{type:3}});
 
-            GSData.i.pushStartHandPai();
-
-            GSController.i.isAllowFuncClick = true;
-
-            GSController.i.catchCard(GSData.i.zhuangDir);
-
-            GSController.i.scene.playFight();
-
-            GSController.i.showFuncSelectMenu();
         }
 
     }
