@@ -69,7 +69,7 @@ class GSScene extends egret.DisplayObjectContainer {
         this.addChild(this.roomIDText);
 
 
-        this.inviteButton = GameRes.createCenterButton(222 >> 1, 74 >> 1, GSConfig.width >> 1, GSConfig.height >> 1, "game_invite_button", "邀请好友");
+        this.inviteButton = GameRes.createCenterButton(222 >> 1, 74 >> 1, GSConfig.width >> 1, GSConfig.height >> 1, "game_invite_button", "邀请好友", 30, 0, -5);
         this.addChild(this.inviteButton);
 
 

@@ -30,7 +30,7 @@ class DissolutionUI extends eui.Component
 
     onComplete()
     {
-        this.btn_true = new mui.EButton("btn_green","同  意", 24);
+        this.btn_true = new mui.EButton("btn_green","同  意");
 
         this.btn_true.x = 404;
 
@@ -39,7 +39,7 @@ class DissolutionUI extends eui.Component
         this.addChild(this.btn_true);
 
 
-        this.btn_false = new mui.EButton("btn_red","拒  绝", 24);
+        this.btn_false = new mui.EButton("btn_red","拒  绝");
 
         this.btn_false.x = 110;
 

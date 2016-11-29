@@ -18,12 +18,12 @@ class MessageUI extends eui.Component
 
     onComplete()
     {
-        this.btn_t = new mui.EButton("btn_green", "确  定", 24);
+        this.btn_t = new mui.EButton("btn_green", "确  定");
         this.btn_t.x = 391;
         this.btn_t.y = 320;
         this.addChild(this.btn_t);
 
-        this.btn_f = new mui.EButton("btn_red", "取  消", 24);
+        this.btn_f = new mui.EButton("btn_red", "取  消");
         this.btn_f.x = 115;
         this.btn_f.y = 320;
         this.addChild(this.btn_f);

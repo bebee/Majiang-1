@@ -22,7 +22,7 @@ module mui
          * @param tc       文字颜色
          * @param sd       文字描边规格{q:1, c:0x0} 即为强度为1，颜色为黑的描边
          */
-        public constructor(imgName: string, descStr:string = "", fontSize: number = 20, tc:number = 0xffffff, sd:any = null)
+        public constructor(imgName: string, descStr:string = "", fontSize: number = 24, tc:number = 0xffffff, sd:any = null)
         {
             super();
 
@@ -55,6 +55,10 @@ module mui
                     this.textField.stroke = sd["q"];
                     this.textField.strokeColor = sd["c"];
                 }
+
+                this.textField.stroke = 1;
+                this.textField.strokeColor = 0x000000;
+
                 this.textField.text = descStr;
                 this.textField.horizontalCenter = 0;
                 this.textField.verticalCenter = 0;

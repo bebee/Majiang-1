@@ -45,7 +45,7 @@ class S9 {
                 break;
             case 6:
                 var dir = GSData.i.getDir(obj.data.data.pos);
-                Acekit.i.dispatchEvent(EffectEvent.Chupai, [GSData.i.getDir(dir), obj.data.data.pai]);
+                Acekit.i.dispatchEvent(EffectEvent.Chupai, [dir, obj.data.data.pai]);
                 break;
         }
     }

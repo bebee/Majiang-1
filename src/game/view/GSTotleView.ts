@@ -113,14 +113,13 @@ class GSTotleView extends eui.Component
         this.btn_close.right = 20;
         this.btn_close.addEventListener(egret.TouchEvent.TOUCH_TAP, this.onClose, this);
 
-        this.btn_fen = new mui.EButton("game_invite_button", "分享总成绩");
+        this.btn_fen = new mui.EButton("game_invite_button", "分享总成绩", 26);
         this.addChild(this.btn_fen);
+        this.btn_fen.textImg.scaleX = this.btn_fen.textImg.scaleY = 1.2;
         this.btn_fen.horizontalCenter = 0;
-        this.btn_fen.bottom = 10;
+        this.btn_fen.bottom = 5;
         this.btn_fen.addEventListener(egret.TouchEvent.TOUCH_TAP, this.onFen, this);
         this.btn_fen.textField.verticalCenter = -5;
-        this.btn_fen.scaleX = 1.2;
-        this.btn_fen.scaleY = 1.2;
 
         this.endTime = new eui.Label();
         this.addChild(this.endTime);

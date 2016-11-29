@@ -68,6 +68,7 @@ class GameLayerManager extends eui.UILayer
 
         this.hornGroup = new eui.Group();
         this.hornGroup.horizontalCenter = 0;
+        this.hornGroup.top = 150;
         this.hornGroup.width = 718;
         this.hornGroup.height = 38;
 
@@ -94,10 +95,6 @@ class GameLayerManager extends eui.UILayer
         this.setLayerVisible(true, "mainLayer");
 
         GameMusic.PlaySound("music_game");
-
-        var group:eui.Group = GameLayerManager.gameLayer().hornGroup;
-
-        if(group && group.contains(Global.hornPanel)) group.top = 20;
     }
 
     /**
@@ -109,11 +106,6 @@ class GameLayerManager extends eui.UILayer
         this.setLayerVisible(false, "mainLayer");
 
         GameMusic.PlaySound("music_scene");
-
-        var group:eui.Group = GameLayerManager.gameLayer().hornGroup;
-
-        if(group && group.contains(Global.hornPanel)) group.top = 120;
-
 
         Weixin.onMenuShareAppMessage();
 
