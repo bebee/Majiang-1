@@ -342,6 +342,8 @@ class GSDataProxy {
         }
         if (obj[99]) {//胡
 
+            //this.gData.funcSelects.push({index: 5, action: 4, pai: obj[4]});
+
             this.gData.funcSelects.push({index: 6, action: 99, pai: obj[99]});
 
         }

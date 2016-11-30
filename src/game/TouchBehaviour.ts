@@ -68,6 +68,14 @@ class TouchBehaviour implements IGameTapEvent{
                 break;
             case 5://听
 
+                console.log("听牌处理");
+
+                GSController.i.hideFuncSelectMenu();
+
+                //GSData.i.isShowFunc = true;
+
+                GSController.i.doTing();
+
                 break;
 
             case 6://胡牌

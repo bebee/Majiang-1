@@ -205,7 +205,7 @@ class FuncSelectView extends egret.DisplayObjectContainer {
     //更新功能显示
     updateFuncView(funcSelects: any[]) {
 
-        for (var i: number = 0; i < GSConfig.funcSelects.length; i++) {
+        for (var i: number = 0; i < GSConfig.funcSelectRes.length; i++) {
 
             var icon = <egret.Bitmap> this.selectCon.getChildAt(i);
 

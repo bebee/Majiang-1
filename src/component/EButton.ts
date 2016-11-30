@@ -57,7 +57,6 @@ module mui {
                 this.textField.text = descStr;
                 this.textField.horizontalCenter = 0;
                 this.textField.verticalCenter = 0;
-
                 this.addChild(this.textField);
             }
 

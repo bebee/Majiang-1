@@ -430,7 +430,7 @@ class GSView extends egret.Sprite {
             this.funcEffect.texture = null
         }, this);*/
 
-        var texture = GameRes.getUI(GSConfig.funcSelects[GSConfig.actionPVP[action]].res);
+        var texture = GameRes.getUI(GSConfig.funcSelectRes[GSConfig.actionPVP[action]]);
         this.funcEffect.x = GSConfig.funcPlayPos[dir].x;
         this.funcEffect.y = GSConfig.funcPlayPos[dir].y;
 
