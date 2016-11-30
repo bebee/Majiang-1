@@ -24,6 +24,5 @@
     "resource/eui_skins_game/ShopSkin.exml"
   ],
   "skins": {
-    "eui.Button": "resource/eui_skins/ButtonSkin.exml"
   }
 }
