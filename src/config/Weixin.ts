@@ -101,7 +101,7 @@ class Weixin {
     /**
      * 点击分享
      */
-    static onClickShare(arr:Array<any>)
+    static onClickShare(arr:Array<any>, showBg:boolean = true)
     {
         var str:string = "";
 
@@ -134,7 +134,7 @@ class Weixin {
             }
         }
 
-        Global.showShare(true);
+        Global.showShare(showBg);
 
         function success()
         {
@@ -145,8 +145,6 @@ class Weixin {
         {
             Global.showShare();
         }
-
-        console.log(str);
 
         var body:BodyMenuShareAppMessage = new BodyMenuShareAppMessage();
         body.title = "" + title;

@@ -24,7 +24,10 @@ class TipsDialog extends BaseDialog
 
         this.m_UI.btn_f.visible = this.m_UI.btn_t.visible = false;
 
-        this.m_UI._labs.text = "投诉建议举报   lyqp01【官方微信号】";
+        this.m_UI._labs.text =
+        "代理加盟咨询   lyqp01 【微信】　　 \n" +
+        "房卡问题咨询   CCTV1V5【公众号】\n" +
+        "投诉建议举报   CCTV1V5【公众号】";
 
         //"房卡问题咨询   CCTV1V5【微信公众号】\n" + "代理加盟咨询   CCTV1V5【微信公众号】";
     }

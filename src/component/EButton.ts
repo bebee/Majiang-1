@@ -62,11 +62,11 @@ module mui
                 this.textField.text = descStr;
                 this.textField.horizontalCenter = 0;
                 this.textField.verticalCenter = 0;
-
                 this.addChild(this.textField);
             }
 
             this.touchEnabled = true;
+            this.touchChildren = false;
 
             this.addEventListener(egret.TouchEvent.TOUCH_END,this.onTouch, this);
             this.addEventListener(egret.TouchEvent.TOUCH_MOVE, this.onTouch, this);

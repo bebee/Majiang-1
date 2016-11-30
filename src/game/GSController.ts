@@ -562,7 +562,7 @@ class GSController extends egret.EventDispatcher{
         egret.setTimeout(_=>{this.intoResultView()},this,3000);
     }
     //创建立牌 返回抓牌区
-    createIndexPais(mjView:MJView,sx:number,sy:number,dir:number,style:number,pais:any,visible:boolean = true,activate:boolean = true){
+    createIndexPais(mjView:MJView,sx:number,sy:number,dir:number,style:number,pais:any,visible:boolean = true,activate:boolean = true,lensCheck:boolean = true){
 
         for(var i:number = 0 ; i < pais.length;i++){
 
@@ -584,8 +584,7 @@ class GSController extends egret.EventDispatcher{
         }
         var catchPos = GSConfig.catchPos[dir];
         //如果出牌长度范围
-        if(GSConfig.handLens[pais.length]){
-
+        if(lensCheck && GSConfig.handLens[pais.length]){
             catchPos.x = cardView.pos.x + catchPos.dx;
             catchPos.y = cardView.pos.y + catchPos.dy;
             cardView.posView(catchPos.x,catchPos.y);
@@ -868,7 +867,7 @@ class GSController extends egret.EventDispatcher{
         更新牌面
         updatePool 是否更新池牌
      */
-    updateMJView(dir:number,updatePool:boolean = false) {
+    updateMJView(dir:number,updatePool:boolean = false,lensCheck:boolean = true) {
 
         if (dir == 1) {
             this.clearActivateCard();
@@ -1056,7 +1055,7 @@ class GSController extends egret.EventDispatcher{
         //解析手牌
         if (handPais.length > 0) {
 
-            this.createIndexPais(mjView, sPosX, sPosY, dir, 1, handPais);
+            this.createIndexPais(mjView, sPosX, sPosY, dir, 1, handPais,true,true,lensCheck);
 
             if (updatePool) {
                 //池牌
@@ -1137,6 +1136,38 @@ class GSController extends egret.EventDispatcher{
             this.sameCardViews.shift().enabled = true;
         }
 
+    }
+
+    //处理听牌
+    doTing() {
+
+        var pai =[{type:1,number:4},{type:4,number:1}];
+
+        var index = 0;
+
+        var handCon= this.gsView.MJViews[1].handCon;
+
+        for(var i:number = 0 ; i < handCon.numChildren;i++){
+
+            var card = <CardView>handCon.getChildAt(i);
+
+            if(card.index > -1){
+
+                for(var j:number = 0 ; j <pai.length;j++){
+
+                    var p = pai[j] ;
+
+                    if(p.number == card.pai.number && p.type == card.pai.type){
+
+
+
+                        index ++ ;
+                    }
+
+                }
+
+            }
+        }
     }
 }
 

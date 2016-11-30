@@ -159,6 +159,8 @@ class GSTotleView extends eui.Component
 
         if(!obj) return;
 
+
+
         this._group.removeChildren();
 
 
@@ -247,6 +249,8 @@ class GSTotleView extends eui.Component
         var times:string = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate() +" " +
             date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
         this.endTime.text = "" + times;
+
+        Weixin.onClickShare(this.fenList, false);
     }
 
     getMaxNum(arr:any, fen:number)
