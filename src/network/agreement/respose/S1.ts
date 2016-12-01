@@ -21,25 +21,28 @@ class S1
 
             NativeApi.setLocalData("getAccessCode", 0);
 
-            var ver:string = GlobalData.getInstance().player.version;
-
-            if(!ver) return;
-
-            var arr:Array<any> = ver.split('.');
-
-            var cver:string = GlobalData.getInstance().resourceCode;
-
-            var carr:Array<any> = cver.split('.');
-
-            if(arr[0] != carr[0] || arr[1] != carr[1])
+            if(!GameConfig.users)
             {
-                if(!GameLayerManager.gameLayer().messagBox) GameLayerManager.gameLayer().messagBox = new MessageDialog();
-                GameLayerManager.gameLayer().messagBox.showMsg(function (r)
+                var ver:string = GlobalData.getInstance().player.version;
+
+                if(!ver) return;
+
+                var arr:Array<any> = ver.split('.');
+
+                var cver:string = GlobalData.getInstance().resourceCode;
+
+                var carr:Array<any> = cver.split('.');
+
+                if(arr[0] != carr[0] || arr[1] != carr[1])
                 {
-                    var h:string = GameConfig.wei_href_address;
-                    if(GameConfig.roomid) h += "?roomid=" + GameConfig.roomid;
-                    location.href = h;
-                },"当前游戏版本过低，请点击确定刷新游戏！");
+                    if(!GameLayerManager.gameLayer().messagBox) GameLayerManager.gameLayer().messagBox = new MessageDialog();
+                    GameLayerManager.gameLayer().messagBox.showMsg(function (r)
+                    {
+                        var h:string = GameConfig.wei_href_address;
+                        if(GameConfig.roomid) h += "?roomid=" + GameConfig.roomid;
+                        location.href = h;
+                    },"当前游戏版本过低，请点击确定刷新游戏！");
+                }
             }
         }
     }
