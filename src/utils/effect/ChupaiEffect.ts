@@ -34,7 +34,7 @@ class ChupaiEffect {
 
         this.setCardPosition(card, dir);
 
-        var cardCopy: CardView = GameManager.copyPai(card);
+        var cardCopy: CardView = CardView.copy(card);
         this.group.addChild(cardCopy);
 
         var _this = this;

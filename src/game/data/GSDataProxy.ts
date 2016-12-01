@@ -11,9 +11,9 @@ class GSDataProxy {
         return GSDataProxy._i || (GSDataProxy._i = new GSDataProxy);
     }
 
-    gData:GSData;
+    gData: GSData;
 
-    constructor(){
+    constructor() {
         this.gData = GSData.i;
     }
 
@@ -66,11 +66,9 @@ class GSDataProxy {
 
         }
 
-        SocketManager.getInstance().getGameConn().send(25,{args:{type:3}});
+        SocketManager.getInstance().getGameConn().send(25, {args: {type: 3}});
 
     }
-
-
 
 
     //解析离线数据
@@ -187,7 +185,7 @@ class GSDataProxy {
             } else {//自己的牌
 
                 //判断长度
-                if(GSConfig.handLens[shou.length]){
+                if (GSConfig.handLens[shou.length]) {
 
                     var startPai = shou.pop();
 
@@ -195,7 +193,7 @@ class GSDataProxy {
 
                     shou.push(startPai);
 
-                }else{
+                } else {
 
                     this.gData.sortHandPai(shou);
 
@@ -251,7 +249,7 @@ class GSDataProxy {
 
             var group = [];
 
-            if(obj[22]) {//幺九杠
+            if (obj[22]) {//幺九杠
 
                 var pais = obj[22];
 
@@ -268,9 +266,9 @@ class GSDataProxy {
 
                 var pais = obj[24];
 
-                for(var i:number = 0; i < pais.length;i+=4){
+                for (var i: number = 0; i < pais.length; i += 4) {
 
-                    group.push({action: 24, pai: pais.slice(i,i+4)});
+                    group.push({action: 24, pai: pais.slice(i, i + 4)});
                 }
             }
 
@@ -301,14 +299,13 @@ class GSDataProxy {
 
                 var pais = obj[27];
 
-                var add : any = {};
+                var add: any = {};
 
                 for (var i: number = 0; i < pais.length; i++) {
 
-                    var flag : number = pais[i].type << 8 |pais[i].number;
+                    var flag: number = pais[i].type << 8 | pais[i].number;
 
-                    if(!add[flag])
-                    {
+                    if (!add[flag]) {
                         group.push({action: 27, pai: pais[i]});
                         add[flag] = true;
                     }
@@ -317,16 +314,15 @@ class GSDataProxy {
 
             if (obj[28]) {//中发白  补蛋
 
-                var add : any = {};
+                var add: any = {};
 
                 var pais = obj[28];
 
                 for (var i: number = 0; i < pais.length; i++) {
 
-                    var flag : number = pais[i].type << 8 |pais[i].number;
+                    var flag: number = pais[i].type << 8 | pais[i].number;
 
-                    if(!add[flag])
-                    {
+                    if (!add[flag]) {
                         group.push({action: 28, pai: pais[i]});
                         add[flag] = true;
                     }
@@ -349,7 +345,6 @@ class GSDataProxy {
         }
 
 
-
         GSData.i.roundStartHasFunction = true;
 
         GSController.i.showFuncSelectMenu();
@@ -360,15 +355,15 @@ class GSDataProxy {
     }
 
     //gang_end 是否开局杠结束
-    S2C_TurnDir(pos: number, dui_num: number,gang_end:any = null) {
+    S2C_TurnDir(pos: number, dui_num: number, gang_end: any = null) {
 
         this.gData.turnDir = this.gData.getDir(pos);
 
         this.gData.leftCount = dui_num;
 
-        if(gang_end != null) this.gData.gang_end = true;
+        if (gang_end != null) this.gData.gang_end = true;
 
-        if (this.gData.turnDir != 1 && this.gData.game_state != -1){// && this.gData.isZhuangPush) {
+        if (this.gData.turnDir != 1 && this.gData.game_state != GameState.shuffle) {// && this.gData.isZhuangPush) {
             //轮到他人的时候，并且庄家出完牌,进行假象牌的添加
             this.gData.pushHandPai(this.gData.turnDir, null);
 
@@ -397,11 +392,11 @@ class GSDataProxy {
 
         this.gData.turnDir = (fen ? 0 : 1);
 
-        if (fen){
+        if (fen) {
 
             console.log("尾局分张");
 
-            GSData.i.game_state = -2;
+            GSData.i.game_state = GameState.fen;
         }
         GSController.i.catchCard(1);
 
@@ -423,11 +418,11 @@ class GSDataProxy {
 
         GSController.i.playBao();
 
-        
+
     }
 
     //更新结果 cur是当前分数
-    S2C_FuncResult(action, pai, pos,cur = null) {
+    S2C_FuncResult(action, pai, pos, cur = null) {
 
         this.gData.isShowFunc = false;
 
@@ -636,11 +631,11 @@ class GSDataProxy {
         GSController.i.updateMJView(dir);
         GSController.i.playEffect(dir, action);
 
-        if(dir == 1){
+        if (dir == 1) {
 
-            GSController.i.playTimeEffect(true,true);
-        }else{
-            GSController.i.playTimeEffect(true,false);
+            GSController.i.playTimeEffect(true, true);
+        } else {
+            GSController.i.playTimeEffect(true, false);
 
         }
 
@@ -665,22 +660,24 @@ class GSDataProxy {
         GSController.i.pushPoolCard(this.gData.currPoolPai.dir, this.gData.currPoolPai);
 
     }
-    S2C_FinalResult(result:any) {
+
+    S2C_FinalResult(result: any) {
 
         this.gData.result = result;
 
-        if(this.gData.game_state == -2){//分张 延时
+        if (this.gData.game_state == GameState.fen) {//分张 延时
 
-            egret.setTimeout(this.delay_Final,this,1200);
+            egret.setTimeout(this.delay_Final, this, 1200);
 
-        }else{
+        } else {
 
             this.delay_Final();
         }
     }
-    delay_Final(){
 
-        this.gData.game_state = 4;
+    delay_Final() {
+
+        this.gData.game_state = GameState.gameover;
 
         this.gData.roundStarted = true;
 
@@ -705,35 +702,35 @@ class GSDataProxy {
 
             var fenLeft;
 
-            if(fen[1]){
+            if (fen[1]) {
 
                 fenLeft = GSData.i.getResultPersonLeft(GSData.i.getDir(1));
 
-                this.formatLeft(fenLeft,fen[1]);
+                this.formatLeft(fenLeft, fen[1]);
 
             }
-            if(fen[2]){
+            if (fen[2]) {
 
 
                 fenLeft = GSData.i.getResultPersonLeft(GSData.i.getDir(2));
 
-                this.formatLeft(fenLeft,fen[2]);
+                this.formatLeft(fenLeft, fen[2]);
 
             }
-            if(fen[3]){
+            if (fen[3]) {
 
 
                 fenLeft = GSData.i.getResultPersonLeft(GSData.i.getDir(3));
 
-                this.formatLeft(fenLeft,fen[3]);
+                this.formatLeft(fenLeft, fen[3]);
 
             }
-            if(fen[4]){
+            if (fen[4]) {
 
 
                 fenLeft = GSData.i.getResultPersonLeft(GSData.i.getDir(4));
 
-                this.formatLeft(fenLeft,fen[4]);
+                this.formatLeft(fenLeft, fen[4]);
 
             }
 
@@ -754,7 +751,7 @@ class GSDataProxy {
             }
 
             //自胡
-            var selfHu:boolean = false;
+            var selfHu: boolean = false;
 
             switch (hupai.type) {
                 case 17://点炮
@@ -778,9 +775,9 @@ class GSDataProxy {
 
                     break;
             }
-            if(selfHu){
-                this.formatLeft(hu_left,hupai.pai);
-            }else{
+            if (selfHu) {
+                this.formatLeft(hu_left, hupai.pai);
+            } else {
                 hu_left.push(hupai.pai);
             }
 
@@ -789,21 +786,21 @@ class GSDataProxy {
         GSController.i.hupaiShow();
 
     }
+
     //格式下剩余牌
-    formatLeft(left,pai){
+    formatLeft(left, pai) {
 
-        var leftLen:number = left.length;
+        var leftLen: number = left.length;
 
-        for(var k:number = 0 ;k < leftLen;k++){
+        for (var k: number = 0; k < leftLen; k++) {
 
-            if(left[k].number == pai.number && left[k].type == pai.type)
-            {
-                left.splice(k,1);
+            if (left[k].number == pai.number && left[k].type == pai.type) {
+                left.splice(k, 1);
 
                 break;
             }
         }
-        if(left.length != leftLen){ //如果长度变化，说明提出了胡牌
+        if (left.length != leftLen) { //如果长度变化，说明提出了胡牌
 
             left.push(pai);
         }
@@ -812,12 +809,10 @@ class GSDataProxy {
     }
 
 
-
-
     //同步继续游戏
-    S2C_ContinueGame(obj:any){
+    S2C_ContinueGame(obj: any) {
 
-        var dir : number = this.gData.getDir(obj.pos);
+        var dir: number = this.gData.getDir(obj.pos);
 
 
         this.gData.readyFlag |= 1 << dir;
@@ -826,15 +821,16 @@ class GSDataProxy {
 
         GSController.i.visibleReadyIcon();
 
-        if(dir == 1) {
+        if (dir == 1) {
 
             GSController.i.showStateView();
         }
     }
-    //同步房间玩家信息,判断方位
-    S2C_RoomPlayers(rules:number[],infos:any[]){
 
-        if(this.gData.rules == "") {
+    //同步房间玩家信息,判断方位
+    S2C_RoomPlayers(rules: number[], infos: any[]) {
+
+        if (this.gData.rules == "") {
 
             for (var i: number = 0; i < rules.length; i++) {
 
@@ -842,16 +838,14 @@ class GSDataProxy {
 
             }
         }
-        for(var i:number = 0; i < infos.length;i++){
+        for (var i: number = 0; i < infos.length; i++) {
 
             //根据pos设置数组中位置
 
-            var roomPlayer:RoomPlayer = new RoomPlayer(infos[i]);
+            var roomPlayer: RoomPlayer = new RoomPlayer(infos[i]);
 
-            if(+roomPlayer.uid != +GlobalData.getInstance().player.uid)
-            {
-                switch (roomPlayer.status)
-                {
+            if (+roomPlayer.uid != +GlobalData.getInstance().player.uid) {
+                switch (roomPlayer.status) {
                     case "leave":
                         EffectUtils.showTips(roomPlayer.nick + " 离开了房间！", 4);
                         GameSound.PlaySound("sound_other_player_leave");
@@ -862,12 +856,10 @@ class GSDataProxy {
                         break;
                     case "online":
                         GameSound.PlaySound("sound_other_player_enter");
-                        if(GSData.i.roomPlayerMap[roomPlayer.uid])
-                        {
+                        if (GSData.i.roomPlayerMap[roomPlayer.uid]) {
                             EffectUtils.showTips(roomPlayer.nick + " 回来了！", 4);
                         }
-                        else
-                        {
+                        else {
                             EffectUtils.showTips(roomPlayer.nick + " 加入了游戏！", 4);
                         }
                         break;
@@ -877,7 +869,7 @@ class GSDataProxy {
             this.gData.roomPlayerMap[roomPlayer.uid] = roomPlayer;
 
             //判断玩家自己,进游戏界面初始化
-            if(roomPlayer.uid == GlobalData.getInstance().player.uid){
+            if (roomPlayer.uid == GlobalData.getInstance().player.uid) {
 
                 this.gData.ownPos = roomPlayer.pos;
 
@@ -912,25 +904,25 @@ class GSDataProxy {
 
         var leave_uid = null;
 
-        for(var id in this.gData.roomPlayerMap) {
+        for (var id in this.gData.roomPlayerMap) {
 
             var player: RoomPlayer = this.gData.roomPlayerMap[id];
 
-            var playerDir:number = this.gData.getDir(player.pos);
+            var playerDir: number = this.gData.getDir(player.pos);
 
 
-            switch(player.status){
+            switch (player.status) {
                 case "leave":
                     this.gData.roomPlayers[player.pos] = null;
 
                     leave_uid = id;
 
                     //首轮开始
-                    if(this.gData.roundStarted == false){
+                    if (this.gData.roundStarted == false) {
 
-                        if((this.gData.readyFlag >> playerDir & 1) == 1){
+                        if ((this.gData.readyFlag >> playerDir & 1) == 1) {
 
-                            this.gData.readyFlag ^= 1<< playerDir;
+                            this.gData.readyFlag ^= 1 << playerDir;
 
                         }
 
@@ -940,7 +932,7 @@ class GSDataProxy {
                     break;
                 case "offline":
                 case "online":
-                    if(this.gData.roundStarted == false) {
+                    if (this.gData.roundStarted == false) {
 
                         this.gData.readyFlag |= 1 << playerDir;
 
@@ -963,14 +955,14 @@ class GSDataProxy {
         this.gData.roomOwnFlag = 1 << this.gData.roomOwnDir;
 
 
-        if(this.gData.firstInRoom){
+        if (this.gData.firstInRoom) {
 
             this.gData.firstInRoom = false;
             //每次进房间启动游戏主界面
             GSController.i.startView();
         }
 
-        if(this.gData.rebackData) {
+        if (this.gData.rebackData) {
 
             //至后解析
             this.parseReback();
@@ -985,23 +977,24 @@ class GSDataProxy {
 
         Weixin.onMenuShareTimeline(GSData.i.roomID + "");
 
-        var diss:DissolutionDialog = StackManager.findDialog(DissolutionDialog, "DissolutionDialog");
+        var diss: DissolutionDialog = StackManager.findDialog(DissolutionDialog, "DissolutionDialog");
 
-        if(diss && GameLayerManager.gameLayer().panelLayer.contains(diss)) diss.refresh();
+        if (diss && GameLayerManager.gameLayer().panelLayer.contains(diss)) diss.refresh();
     }
+
     parseReback() {
 
         switch (this.gData.rebackStatus) {
 
             case 1:
 
-                this.gData.game_state = 1;
+                this.gData.game_state = GameState.start;
 
                 break;
 
             case 3:
 
-                this.gData.game_state = 3;
+                this.gData.game_state = GameState.gamestart;
                 //解析重连牌局
                 this.parseRebackPai();
 
@@ -1012,7 +1005,7 @@ class GSDataProxy {
                 break;
             case 2://重连继续牌桌
 
-                this.gData.game_state = 2;
+                this.gData.game_state = GameState.reconnect;
 
 
                 var gContinue: any = this.gData.rebackData.continue;
@@ -1047,14 +1040,12 @@ class GSDataProxy {
     }
 
 
-
-
     //同步开局牌的信息(自己牌)
-    S2C_OwnCardInfo(obj:any){
+    S2C_OwnCardInfo(obj: any) {
 
-        var paiLen:number = obj.data.pai.length;
+        var paiLen: number = obj.data.pai.length;
 
-        console.log("开局,牌长度:",obj.data.pai.length);
+        console.log("开局,牌长度:", obj.data.pai.length);
 
         this.gData.baoPai = obj.data.bao;
 
@@ -1065,13 +1056,12 @@ class GSDataProxy {
         this.gData.allPais[3].handPais = new Array(13);
         this.gData.allPais[4].handPais = new Array(13);
 
-        if(paiLen >= 13){
+        if (paiLen >= 13) {
 
             //进入开局
             this.gData.allPais[1].handPais = obj.data.pai;
 
-            if(obj.data.pai.length == 14)
-            {
+            if (obj.data.pai.length == 14) {
                 this.gData.allPais[1].catchPai = this.gData.allPais[1].handPais.shift();
             }
 
@@ -1084,13 +1074,13 @@ class GSDataProxy {
             this.gData.leftCount = obj.data.dui_num;
 
 
-            for(var k in obj.data.cur){
+            for (var k in obj.data.cur) {
 
-                var pos = + k;
+                var pos = +k;
                 GSData.i.gangCurs[GSData.i.getDir(pos)] = obj.data.cur[k];
 
             }
-            GSData.i.game_state = 3;
+            GSData.i.game_state = GameState.gamestart;
 
             GSController.i.startGame();
 
@@ -1098,10 +1088,11 @@ class GSDataProxy {
 
         }
     }
+
     //牌局都准备好.可以出牌
     S2C_RoundReadyAll() {
 
-        if(GSData.i.game_state == - 1) {
+        if (GSData.i.game_state == GameState.shuffle) {
 
             this.gData.roundReady++;
 

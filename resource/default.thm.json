@@ -14,6 +14,7 @@
     "resource/eui_skins_game/loading/LoadingSceneSkin.exml",
     "resource/eui_skins_game/mainSkin.exml",
     "resource/eui_skins_game/MessageSkin.exml",
+    "resource/eui_skins_game/other/ChangeThreeAnimationSkin.exml",
     "resource/eui_skins_game/RecordItemSkin.exml",
     "resource/eui_skins_game/RecordSkin.exml",
     "resource/eui_skins_game/RecordXItemSkin.exml",
@@ -23,6 +24,5 @@
     "resource/eui_skins_game/ShopItemSkin.exml",
     "resource/eui_skins_game/ShopSkin.exml"
   ],
-  "skins": {
-  }
+  "skins": {}
 }

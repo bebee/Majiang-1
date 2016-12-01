@@ -6,6 +6,18 @@
 class EffectEvent {
 
     /**
+     * 换三张选择
+     * @type {string}
+     */
+    static ChangeThreeSelect: string = "ChangeThreeSelect";
+
+    /**
+     * 换三张
+     * @type {string}
+     */
+    static ChangeThree: string = "ChangeThree";
+
+    /**
      * 出牌
      * @type {string}
      */

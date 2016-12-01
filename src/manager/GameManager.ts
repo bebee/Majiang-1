@@ -7,13 +7,27 @@ class GameManager {
 
 
     public constructor() {
+        // Acekit.i.dispatchEvent(EffectEvent.ChangeThree, ChangeThreeType.other);
+        // Acekit.i.dispatchEvent(EffectEvent.Chupai, [dir, pai]);
+        // Acekit.i.dispatchEvent(EffectEvent.ChupaiTips, [dir, CardView]);
+        // Acekit.i.dispatchEvent(EffectEvent.RaiseCards, RaiseCardsType.changeThree);
     }
 
     static init(stage) {
         Acekit.i.init(stage);
+        Acekit.i.addEventListener(EffectEvent.ChangeThree, this.onChangeThree, this);
         Acekit.i.addEventListener(EffectEvent.Chupai, this.onChupai, this);
         Acekit.i.addEventListener(EffectEvent.ChupaiTips, this.onChupaiTips, this);
         Acekit.i.addEventListener(EffectEvent.RaiseCards, this.onRaiseCards, this);
+    }
+
+    private static onChangeThree(type: ChangeThreeType) {
+        if (type != undefined) {
+            ChangeThreeEffect.play(type);
+        }
+        else {
+            ChangeThreeEffect.stop();
+        }
     }
 
     private static onChupai(arr: any[]) {
@@ -26,7 +40,6 @@ class GameManager {
     }
 
     private static onChupaiTips(arr: any[]) {
-        console.log(arr);
         if (arr && arr.length == 2) {
             ChupaiTipsEffect.play(arr[1], (arr[0] == 1 || arr[0] == 3) ? 2 : 0);
         }
@@ -35,34 +48,12 @@ class GameManager {
         }
     }
 
-    private static onRaiseCards(data: any) {
-        if (data) {
-            RaiseCardsEffect.play(data.singleton, data.all, data.touch);
+    private static onRaiseCards(type: RaiseCardsType) {
+        if (type != undefined) {
+            RaiseCardsEffect.play(type);
         }
         else {
-            RaiseCardsEffect.stop(true);
+            RaiseCardsEffect.stop();
         }
-    }
-
-    /**
-     * 复制一张牌
-     * @param card
-     * @returns {CardView|CardView}
-     */
-    static copyPai(card: CardView) {
-
-        var cardView = CardView.getCardView();
-        cardView.alpha = card.alpha;
-        cardView.scaleX = card.scaleX;
-        cardView.scaleY = card.scaleY;
-        cardView.x = card.x;
-        cardView.y = card.y;
-        cardView.dir = card.dir;
-        cardView.style = card.style;
-        cardView.pai = card.pai;
-        cardView.count = card.count;
-        cardView.reDraw();
-
-        return cardView;
     }
 }

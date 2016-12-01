@@ -1,16 +1,16 @@
 /**
  * Created by Administrator on 2016/11/1.
  */
-class MJView extends egret.DisplayObjectContainer{
+class MJView extends egret.DisplayObjectContainer {
 
-    dir : number;
+    dir: number;
 
-    handCon:egret.DisplayObjectContainer;
-    poolCon:egret.DisplayObjectContainer;
+    handCon: egret.DisplayObjectContainer;
+    poolCon: egret.DisplayObjectContainer;
     //最后的添加的池牌
-    lastPoolCard:CardView;
+    lastPoolCard: CardView;
 
-    constructor(dir:number){
+    constructor(dir: number) {
 
         super();
 
@@ -20,7 +20,7 @@ class MJView extends egret.DisplayObjectContainer{
 
     }
 
-    initView(){
+    initView() {
 
         this.handCon = new egret.DisplayObjectContainer;
 
@@ -32,45 +32,46 @@ class MJView extends egret.DisplayObjectContainer{
     }
 
 
-    getHandCard(index:number):CardView{
+    getHandCard(index: number): CardView {
 
-        for(var i:number = 0; i< this.handCon.numChildren;i++){
+        for (var i: number = 0; i < this.handCon.numChildren; i++) {
 
-            var card:CardView = <CardView> this.handCon.getChildAt(i);
+            var card: CardView = <CardView> this.handCon.getChildAt(i);
 
-            if(card.index == index) return card;
+            if (card.index == index) return card;
 
         }
 
     }
 
     //根据方位
-    addHandCard(c:CardView){
+    addHandCard(c: CardView) {
 
-        (this.dir == 2) && this.handCon.addChildAt(c,0) || this.handCon.addChild(c);
+        (this.dir == 2) && this.handCon.addChildAt(c, 0) || this.handCon.addChild(c);
 
     }
 
-    addPoolCard(c:CardView){
+    addPoolCard(c: CardView) {
 
         this.lastPoolCard = c;
 
-        (this.dir == 1 || this.dir == 2) && this.poolCon.addChildAt(c,0) || this.poolCon.addChild(c);
+        (this.dir == 1 || this.dir == 2) && this.poolCon.addChildAt(c, 0) || this.poolCon.addChild(c);
 
     }
+
     //移除最后加载的牌
-    removePoolCard(){
+    removePoolCard() {
 
         this.poolCon.removeChild(this.lastPoolCard);
 
     }
 
     //移除所有手牌
-    removeAllHandCard(){
+    removeAllHandCard() {
 
-        while(this.handCon.numChildren){
+        while (this.handCon.numChildren) {
 
-            var cardView :CardView = <CardView> this.handCon.removeChildAt(0);
+            var cardView: CardView = <CardView> this.handCon.removeChildAt(0);
 
             CardView.returnCardView(cardView);
 
@@ -78,24 +79,25 @@ class MJView extends egret.DisplayObjectContainer{
 
     }
 
-    removeAllPoolCard(){
+    removeAllPoolCard() {
 
-        while(this.poolCon.numChildren){
+        while (this.poolCon.numChildren) {
 
-            var cardView :CardView = <CardView> this.poolCon.removeChildAt(0);
+            var cardView: CardView = <CardView> this.poolCon.removeChildAt(0);
 
             CardView.returnCardView(cardView);
 
         }
     }
+
     //移除立牌
-    removeIndexPai(){
+    removeIndexPai() {
 
-        for(var i:number = this.handCon.numChildren - 1 ; i >=0 ;i--){
+        for (var i: number = this.handCon.numChildren - 1; i >= 0; i--) {
 
             var cardView: CardView = <CardView> this.handCon.getChildAt(i);
 
-            if(cardView.index > -1){
+            if (cardView.index > -1) {
 
                 this.handCon.removeChild(cardView);
 
@@ -106,13 +108,11 @@ class MJView extends egret.DisplayObjectContainer{
         }
     }
 
-    clear(){
+    clear() {
 
         this.lastPoolCard = null;
         this.removeAllHandCard();
         this.removeAllPoolCard();
 
     }
-
-
 }

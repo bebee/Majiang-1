@@ -3,11 +3,15 @@
  */
 class CardView extends egret.DisplayObjectContainer {
 
-
     static pool: CardView[] = [];
 
-    /*  dir 方位 1 2 3 4 自己开始逆时针
-     style 样式 1正面 2背面 3躺
+    /**
+     * 创建一张牌
+     * @param dir 方位 1 2 3 4 自己开始逆时针
+     * @param style 样式 1正面 2背面 3躺
+     * @param pai
+     * @param count
+     * @returns {CardView|CardView}
      */
     static create(dir: number, style: number, pai: any = null, count = 1) {
 
@@ -20,6 +24,26 @@ class CardView extends egret.DisplayObjectContainer {
 
         return cardView;
 
+    }
+
+    /**
+     * 复制一张牌
+     * @param card
+     * @returns {CardView|CardView}
+     */
+    static copy(card: CardView) {
+        var cardView = CardView.getCardView();
+        cardView.alpha = card.alpha;
+        cardView.scaleX = card.scaleX;
+        cardView.scaleY = card.scaleY;
+        cardView.x = card.x;
+        cardView.y = card.y;
+        cardView.dir = card.dir;
+        cardView.style = card.style;
+        cardView.pai = card.pai;
+        cardView.count = card.count;
+        cardView.reDraw();
+        return cardView;
     }
 
     static createThreeGroup(dir: number, style: number, pais: any[] = null) {
@@ -105,10 +129,10 @@ class CardView extends egret.DisplayObjectContainer {
         this.bg = new egret.Bitmap;
         this.addChild(this.bg);
 
-/*        this.iconBG = new eui.Rect(2,2,0x6aacc1);
-        this.iconBG.touchEnabled = false;
-        this.iconBG.alpha = .5;
-        this.addChild(this.iconBG);*/
+        /*        this.iconBG = new eui.Rect(2,2,0x6aacc1);
+         this.iconBG.touchEnabled = false;
+         this.iconBG.alpha = .5;
+         this.addChild(this.iconBG);*/
 
         this.top = new egret.DisplayObjectContainer();
 
@@ -132,12 +156,12 @@ class CardView extends egret.DisplayObjectContainer {
         this.pos = new egret.Point;
 
         //
-/*        this.hotArea = new egret.Shape;
-        this.hotArea.graphics.beginFill(0, 0);
-        this.hotArea.graphics.drawRect(0, 0, 64, 120);
-        this.addChild(this.hotArea);
-        this.hotArea.anchorOffsetX = GSConfig.posRule[1][1].bgosX;
-        this.hotArea.anchorOffsetY = GSConfig.posRule[1][1].bgosY;*/
+        /*        this.hotArea = new egret.Shape;
+         this.hotArea.graphics.beginFill(0, 0);
+         this.hotArea.graphics.drawRect(0, 0, 64, 120);
+         this.addChild(this.hotArea);
+         this.hotArea.anchorOffsetX = GSConfig.posRule[1][1].bgosX;
+         this.hotArea.anchorOffsetY = GSConfig.posRule[1][1].bgosY;*/
 
         this.hotArea = new eui.Rect();
         this.hotArea.width = 64;
@@ -156,34 +180,44 @@ class CardView extends egret.DisplayObjectContainer {
         this.touchEnabled = true;
         this.hotArea.visible = true;
     }
-    unactivate() {
 
+    unactivate() {
         this.touchEnabled = false;
         this.hotArea.visible = false;
         this.enabled = true;
     }
 
-
     set enabled(value) {
-        // this.maskObj.visible = !value;
         this.bg.alpha = value ? 1 : .7;
+    }
+
+    //移出
+    moveUp(tween: boolean = true) {
+        if (tween)egret.Tween.get(this).to({y: this.pos.y - GSConfig.moveUpDis}, 200);
+        else this.y = this.pos.y - GSConfig.moveUpDis;
+    }
+
+    //移回
+    moveDown(tween: boolean = true) {
+        if (tween)egret.Tween.get(this).to({y: this.pos.y}, 200);
+        else this.y = this.pos.y;
     }
 
     //重置位置
     resetPos() {
-
         this.x = this.pos.x;
         this.y = this.pos.y;
     }
-    addClick(func: Function, thisObj: any) {
 
+    //添加点击
+    addClick(func: Function, thisObj: any) {
         if (!this.hasEventListener(egret.TouchEvent.TOUCH_TAP)) {
             this.addEventListener(egret.TouchEvent.TOUCH_TAP, func, thisObj);
         }
-
     }
-    posView(x: number, y: number) {
 
+    //设置坐标
+    posView(x: number, y: number) {
         this.pos.x = x;
         this.pos.y = y;
 
@@ -191,39 +225,30 @@ class CardView extends egret.DisplayObjectContainer {
         this.y = y;
     }
 
-
     //改变样式
     changeStyle(style: number, draw: boolean = true) {
-
         this.style = style;
-
         this.count = 1;
-
         draw && this.reDraw();
     }
 
+    //改变数据
     changePai(pai: any, draw: boolean = true) {
-
         this.pai = pai;
-
         this.count = 1;
-
         draw && this.reDraw();
-
     }
 
     showD() {
-
         this.d = new egret.Shape;
         this.d.graphics.beginFill(0xff0000);
         this.d.graphics.drawRect(0, 0, 10, 10);
         this.addChild(this.d);
-
     }
 
-
+    //重置
     reset() {
-        this.posView(0,0);
+        this.posView(0, 0);
         this.count = 1;
         this.index = -1;
         this.scaleX = this.scaleY = 1;
@@ -232,8 +257,8 @@ class CardView extends egret.DisplayObjectContainer {
         egret.Tween.removeTweens(this);
     }
 
+    //重绘
     reDraw() {
-
         //var _style  = (this.style == 4 ? 3 : this.style);
 
         //var _dir = (this.dir == 4 ? 2 : this.dir);
@@ -282,40 +307,28 @@ class CardView extends egret.DisplayObjectContainer {
         }
 
         if (this.style == 2 || this.style == 5) {
-
             this.icon.texture = null;
             this.countText.text = "";
-
         } else {
-
             if (this.pai != null) {
-
                 var up_res = "Z_" + (this.pai.type * 10 + this.pai.number);
-
                 this.icon.texture = GameRes.getCard(up_res);
 
             } else {
                 this.countText.text = "";
-
                 this.icon.texture = null;
             }
-
         }
-
 
         ////////////////////////////////////////
 
         this.pRule = GSConfig.posRule[this.dir][this.style];
 
-
-        this.bg.anchorOffsetX =  this.pRule.bgosX;
-        this.bg.anchorOffsetY =  this.pRule.bgosY;
+        this.bg.anchorOffsetX = this.pRule.bgosX;
+        this.bg.anchorOffsetY = this.pRule.bgosY;
 
         this.bg.scaleX = this.pRule.bgScaleX;
         this.bg.scaleY = this.pRule.bgScaleY;
-
-
-
 
         this.top.anchorOffsetX = this.pRule.toposX;
         this.top.anchorOffsetY = this.pRule.toposY;
@@ -324,6 +337,5 @@ class CardView extends egret.DisplayObjectContainer {
 
         this.top.scaleX = this.pRule.topScaleX;
         this.top.scaleY = this.pRule.topScaleY;
-
     }
 }

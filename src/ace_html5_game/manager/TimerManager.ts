@@ -5,16 +5,13 @@
  */
 class TimerManager extends BaseDispatcher {
 
-    static Second: string = "Second";
+    private static _i: TimerManager;
 
-    static _instance: TimerManager;
-
-    static getInstance(): TimerManager {
-        if (!this._instance) {
-            this._instance = new TimerManager();
-        }
-        return this._instance;
+    static get i(): TimerManager {
+        return this._i || (this._i = new TimerManager());
     }
+
+    static Second: string = "Second";
 
     private timer: egret.Timer;
 
