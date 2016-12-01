@@ -26,6 +26,10 @@ class TouchBehaviour implements IGameTapEvent {
 
                 GSController.i.hideFuncSelectMenu();
 
+                /*GSData.i.isTing = false;
+
+                 GSController.i.enablesHandPais();*/
+
                 break;
 
             case 1://吃
@@ -197,7 +201,7 @@ class TouchBehaviour implements IGameTapEvent {
     //解散房间
     onJiesanTap(): void {
 
-        if (GSData.i.game_state == GameState.reconnect || GSData.i.game_state == GameState.gamestart) {
+        if (GSData.i.game_state == GameState.reconnect || GSData.i.game_state == GameState.gamestart || GSData.i.game_state == GameState.ting) {
             GameLayerManager.gameLayer().messagBox.showMsg(function (r) {
                 if (r) {
                     SocketManager.getInstance().getGameConn().send(14, {"args": {"answer": 1}});//发起解散房子
@@ -257,6 +261,5 @@ class TouchBehaviour implements IGameTapEvent {
             d.show();
             d.refreshRole(player);
         }
-
     }
 }

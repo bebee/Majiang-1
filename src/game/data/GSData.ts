@@ -6,7 +6,17 @@ class GSData {
     static get i() {
         return GSData._i || (GSData._i = new GSData);
     }
-
+    /*
+     1:首轮进入牌桌状态
+     2:继续进入牌桌状态
+     -1:游戏洗牌状态 (需要缓存一些数据)
+     -2:牌局最后分张阶段
+     -3:自己胡牌阶段
+     -4:听牌阶段
+     3:游戏牌局状态
+     4:每轮牌局结算状态
+     5:总结算界面
+     */
     //当前游戏状态
     game_state: GameState = GameState.start;
     //房间内玩家

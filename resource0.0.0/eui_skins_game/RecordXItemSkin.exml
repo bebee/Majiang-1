@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='utf-8'?>
+<e:Skin class="RecordXItemSkin" width="778" height="102" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+	<e:Image source="record_img1" verticalCenter="0.5" x="12" y="10"/>
+	<e:Image scale9Grid="14,15,39,39" width="665" verticalCenter="0.5" source="record_img2" x="98" y="10"/>
+	<e:Label id="_rank" textColor="0xFFFFFF" fontFamily="微软雅黑" textAlign="center" width="66" verticalCenter="0.5" height="45" verticalAlign="middle" x="13" y="10" size="16" bold="true"/>
+	<e:Label id="_time" lineSpacing="5" y="28" textColor="0xFFFFFF" height="46" fontFamily="微软雅黑" textAlign="center" width="173" x="96" size="14" verticalAlign="middle" bold="true"/>
+	<e:Label id="_name" textColor="0xFFFFFF" fontFamily="微软雅黑" bold="true" size="14" x="282" y="24" textAlign="left" width="348" height="54" verticalAlign="middle" lineSpacing="5"/>
+	<e:Image source="img_line" width="756" bottom="0" x="13" y="10"/>
+</e:Skin>

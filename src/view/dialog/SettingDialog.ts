@@ -51,6 +51,32 @@ class SettingDialog extends BaseDialog
         this.slider_sound.addEventListener(egret.Event.CHANGE, this.setSound, this);
 
         this.m_UI._btn_sound.addEventListener(egret.TouchEvent.TOUCH_TAP, this.onOff, this);
+
+        this.m_UI._btn_pai.addEventListener(egret.TouchEvent.TOUCH_TAP, this.onPai, this);
+    }
+
+    private onPai():void
+    {
+        var _pai:number = +NativeApi.getLocalData("pai");
+
+        if(_pai == 1)
+        {
+            NativeApi.setLocalData("pai", 0);
+
+            GlobalData.getInstance().cardType = 0;
+
+            FashionTools.setViewType(0);
+        }
+        else
+        {
+            NativeApi.setLocalData("pai", 1);
+
+            GlobalData.getInstance().cardType = 1;
+
+            FashionTools.setViewType(1);
+        }
+
+        this.m_UI._btn_pai.source = "card_"+GlobalData.getInstance().cardType+"_btn";
     }
 
     private onOff():void
@@ -182,6 +208,10 @@ class SettingDialog extends BaseDialog
         this.slider_sound.value = (_sound_volume * 100);
         this.slider_sound.validateNow();
         this.slider_sound.changeShap();
+
+        this.m_UI._ver.text = "当前版本号：" + GlobalData.getInstance().resourceCode + "\n最新版本号：" + GlobalData.getInstance().player.version;
+
+        this.m_UI._btn_pai.source = "card_"+GlobalData.getInstance().cardType+"_btn";
     }
 
     /**

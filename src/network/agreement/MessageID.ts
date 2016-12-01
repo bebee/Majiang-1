@@ -78,4 +78,7 @@ module MessageID
 
     export var _25:number = 25;  //广播消息
     export var S25:number = 25;  //广播消息
+
+    export var _26:number = 26;  //版本号比对
+    export var S26:number = 26;  //版本号比对
 }

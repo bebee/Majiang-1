@@ -99,7 +99,12 @@ class Main extends eui.UILayer {
         if (!NativeApi.getLocalData("sound_volume")) NativeApi.setLocalData("sound_volume", 1);
         else GameSound._volume = +NativeApi.getLocalData("sound_volume");
 
-        if (!NativeApi.getLocalData("switch")) NativeApi.setLocalData("switch", 1);
+        if (!NativeApi.getLocalData("pai")) {
+            NativeApi.setLocalData("pai", 1);
+        }
+        else {
+            GlobalData.getInstance().cardType = +NativeApi.getLocalData("pai");
+        }
 
         GlobalData.getInstance().player = new Player();
         SceneManager.open(LoadingScene, "LoadingScene");

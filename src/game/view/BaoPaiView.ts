@@ -35,7 +35,7 @@ class BaoPaiView extends egret.DisplayObjectContainer{
         this.cardView = CardView.create(1,3,null);
 
         this.cardView.posView(0,-12);
-        this.cardView.scaleX = this.cardView.scaleY = .75;
+
         this.addChild(this.cardView);
 
     }
@@ -50,6 +50,7 @@ class BaoPaiView extends egret.DisplayObjectContainer{
         }
 
         this.cardView.changePai(pai);
+        this.cardView.scaleX = this.cardView.scaleY = .75;
     }
 
 

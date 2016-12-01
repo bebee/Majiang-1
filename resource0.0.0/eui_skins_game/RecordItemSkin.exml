@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='utf-8'?>
+<e:Skin class="RecordItemSkin" width="778" height="102" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+	<e:Image source="record_img1" x="12" verticalCenter="0"/>
+	<e:Image x="97" scale9Grid="14,15,39,39" width="180" source="record_img2" verticalCenter="0"/>
+	<e:Image scale9Grid="14,15,39,39" width="459" x="304" source="record_img2" verticalCenter="0.5"/>
+	<e:Label id="_rank" text="2" x="19" width="54" height="45" textAlign="center" verticalAlign="middle" fontFamily="微软雅黑" textColor="0xFFFFFF" verticalCenter="0"/>
+	<e:Label id="_code" x="102" width="169" height="46" size="18" fontFamily="微软雅黑" lineSpacing="5" textColor="0xFFFFFF" textAlign="center" verticalAlign="middle" y="28"/>
+	<e:Label id="_name" height="46" fontFamily="微软雅黑" width="335" size="14" x="315" lineSpacing="5" textColor="0xFFFFFF" textAlign="left" verticalAlign="middle" y="28"/>
+	<e:Label id="_time" x="417" y="78" height="23" fontFamily="微软雅黑" lineSpacing="5" textAlign="right" width="344" size="14" verticalAlign="middle" textColor="0xBD874A" bold="true"/>
+	<e:Image source="img_line" x="13" width="756" bottom="0"/>
+</e:Skin>

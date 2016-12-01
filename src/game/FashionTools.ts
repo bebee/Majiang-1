@@ -36,4 +36,19 @@ class FashionTools{
 
         }*/
     }
+
+    /*显示类型 标准/精致
+     * */
+    static setViewType(type:number){
+        if(type == 1) {
+            GSConfig.posRulePlus[1] = GSConfig.posRule[1];
+            GSConfig.handPosPlus[1] = GSConfig.handPos[1];
+        }else{
+            GSConfig.posRulePlus[1] = GSConfig.posRule[5];
+            GSConfig.handPosPlus[1] = GSConfig.handPos[5];
+        }
+
+        GSController.i.updateHandViewSize();
+
+    }
 }

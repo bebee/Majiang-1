@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='utf-8'?>
+<e:Skin class="JoinSkin" width="732" height="484" xmlns:e="http://ns.egret.com/eui" xmlns:ns1="*" xmlns:w="http://ns.egret.com/wing">
+	<e:Group id="_group" height="66" width="421" y="101" x="156">
+		<e:layout>
+			<e:HorizontalLayout gap="20" horizontalAlign="center" verticalAlign="middle"/>
+		</e:layout>
+	</e:Group>
+	<e:Rect height="4" width="405" y="153" fillColor="0x0B941D" x="164"/>
+	<e:Image id="_img0" source="clickeff_of_btn" y="365" x="285"/>
+	<e:Image id="_img1" x="121" y="179" source="clickeff_of_btn"/>
+	<e:Image id="_img2" source="clickeff_of_btn" y="179" x="285"/>
+	<e:Image id="_img3" source="clickeff_of_btn" y="179" x="450"/>
+	<e:Image id="_img4" source="clickeff_of_btn" y="241" x="121"/>
+	<e:Image id="_img5" source="clickeff_of_btn" y="241" x="285"/>
+	<e:Image id="_img6" source="clickeff_of_btn" y="241" x="450"/>
+	<e:Image id="_img7" source="clickeff_of_btn" y="303" x="121"/>
+	<e:Image id="_img8" source="clickeff_of_btn" y="303" x="285"/>
+	<e:Image id="_img9" source="clickeff_of_btn" y="303" x="450"/>
+	<e:Image id="_img10" source="clickeff_of_btn" y="365" x="121"/>
+	<e:Image id="_img11" source="clickeff_of_btn" y="365" x="450"/>
+	<e:Label id="_t0" y="369" verticalAlign="middle" text="0" fontFamily="微软雅黑" textAlign="center" bold="true" width="152" height="54" x="291"/>
+	<e:Label id="_t1" y="182" verticalAlign="middle" text="1" fontFamily="微软雅黑" textAlign="center" bold="true" width="152" height="54" x="126"/>
+	<e:Label id="_t2" text="2" x="291" y="182" width="152" height="54" textAlign="center" verticalAlign="middle" bold="true" fontFamily="微软雅黑"/>
+	<e:Label id="_t3" y="182" verticalAlign="middle" text="3" fontFamily="微软雅黑" textAlign="center" bold="true" width="152" height="54" x="453"/>
+	<e:Label id="_t4" y="244" verticalAlign="middle" text="4" fontFamily="微软雅黑" textAlign="center" bold="true" width="152" height="54" x="126"/>
+	<e:Label id="_t5" y="244" verticalAlign="middle" text="5" fontFamily="微软雅黑" textAlign="center" bold="true" width="152" height="54" x="291"/>
+	<e:Label id="_t6" y="244" verticalAlign="middle" text="6" fontFamily="微软雅黑" textAlign="center" bold="true" width="152" height="54" x="453"/>
+	<e:Label id="_t7" y="306" verticalAlign="middle" text="7" fontFamily="微软雅黑" textAlign="center" bold="true" width="152" height="54" x="126"/>
+	<e:Label id="_t8" y="306" verticalAlign="middle" text="8" fontFamily="微软雅黑" textAlign="center" bold="true" width="152" height="54" x="291"/>
+	<e:Label id="_t9" y="306" verticalAlign="middle" text="9" fontFamily="微软雅黑" textAlign="center" bold="true" width="152" height="54" x="453"/>
+	<e:Label id="_t10" y="369" verticalAlign="middle" text="删除" fontFamily="微软雅黑" textAlign="center" bold="true" width="152" height="54" x="126"/>
+	<e:Label id="_t11" y="369" verticalAlign="middle" text="确定" fontFamily="微软雅黑" textAlign="center" bold="true" width="152" height="54" x="454"/>
+</e:Skin>

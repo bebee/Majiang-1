@@ -243,7 +243,7 @@ class GSView extends egret.Sprite {
 
         for (var i: number = 1; i <= 4; i++) {
 
-            var pos = GSConfig.handPos[i];
+            var pos = GSConfig.handPosPlus[i];
 
             this.draw.graphics.moveTo(pos.x, 0);
 
