@@ -530,44 +530,35 @@ class GSController extends egret.EventDispatcher {
     }
 
     onCardClick(e: egret.TouchEvent) {
+        var cardView: CardView = <CardView>e.currentTarget;
+        if (!cardView)return;
 
         if (GSData.i.game_state == GameState.shuffle || GSData.i.game_state == GameState.fen || GSData.i.game_state == GameState.win) return;
 
-        var cardView: CardView = <CardView>e.currentTarget;
-
-        if (this.activateCard != cardView) {
-
-            this.moveBack();
-
-            this.moveTo(cardView);
-
-        } else {
-
-            if (GSData.i.turnDir == 1 && GSConfig.handLens[GSData.i.getHandPais(1).length] && this.allowPushCard) {
-
-                //进入打牌
-
-                var pai = this.activateCard.pai;
-
-                SocketManager.getInstance().getGameConn().send(4, {"args": pai});
-
-                this.allowPushCard = false;
-
-                this.startPushTimeInterval();
-
-                console.log("发送自己的打牌信息", pai);
-
-            } else if (!GSData.i.gang_end && GSData.i.zhuangDir == 1) {//开局轮杠中
-
-                EffectUtils.showTips("等待其他玩家杠牌，请稍后...", 5);
-
-            }
-            // else {
-            //     this.moveBack();
-            // }
+        switch (GSData.i.game_state) {
+            case GameState.changeThree:
+                this.activateCard == cardView ? this.moveBack() : this.moveTo(cardView);
+                break;
+            case GameState.missing:
+                this.activateCard == cardView ? this.moveBack() : this.moveTo(cardView);
+                break;
+            case GameState.gamestart:
+                if (this.activateCard != cardView) {
+                    this.moveBack();
+                    this.moveTo(cardView);
+                } else {
+                    if (GSData.i.turnDir == 1 && GSConfig.handLens[GSData.i.getHandPais(1).length] && this.allowPushCard) {//进入打牌
+                        var pai = this.activateCard.pai;
+                        this.allowPushCard = false;
+                        this.startPushTimeInterval();
+                        SocketManager.getInstance().getGameConn().send(4, {"args": pai});
+                        console.log("发送自己的打牌信息", pai);
+                    } else if (!GSData.i.gang_end && GSData.i.zhuangDir == 1) {//开局轮杠中
+                        EffectUtils.showTips("等待其他玩家杠牌，请稍后...", 5);
+                    }
+                }
+                break;
         }
-
-        // cardView.y == cardView.pos.y - GSConfig.moveUpDis && cardView.moveDown();
     }
 
     //出牌计时器,判断出牌间隔时间再次出牌(防止服务器无响应)
@@ -613,7 +604,6 @@ class GSController extends egret.EventDispatcher {
 
         //刷新手牌显示
         this.updateMJView(dir);
-
 
         this.playTimeEffect(false);
 

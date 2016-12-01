@@ -8,6 +8,7 @@ class GameManager {
 
     public constructor() {
         // Acekit.i.dispatchEvent(EffectEvent.ChangeThree, ChangeThreeType.other);
+        // Acekit.i.dispatchEvent(EffectEvent.Missing);
         // Acekit.i.dispatchEvent(EffectEvent.Chupai, [dir, pai]);
         // Acekit.i.dispatchEvent(EffectEvent.ChupaiTips, [dir, CardView]);
         // Acekit.i.dispatchEvent(EffectEvent.RaiseCards, RaiseCardsType.changeThree);
@@ -16,6 +17,7 @@ class GameManager {
     static init(stage) {
         Acekit.i.init(stage);
         Acekit.i.addEventListener(EffectEvent.ChangeThree, this.onChangeThree, this);
+        Acekit.i.addEventListener(EffectEvent.Missing, this.onMissing, this);
         Acekit.i.addEventListener(EffectEvent.Chupai, this.onChupai, this);
         Acekit.i.addEventListener(EffectEvent.ChupaiTips, this.onChupaiTips, this);
         Acekit.i.addEventListener(EffectEvent.RaiseCards, this.onRaiseCards, this);
@@ -28,6 +30,10 @@ class GameManager {
         else {
             ChangeThreeEffect.stop();
         }
+    }
+
+    private static onMissing() {
+        MissingEffect.play();
     }
 
     private static onChupai(arr: any[]) {

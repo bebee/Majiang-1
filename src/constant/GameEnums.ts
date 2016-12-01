@@ -8,7 +8,7 @@
  * 开始-断线重连-洗牌-换牌-牌局开始-分张-自己胡牌-牌局结束-结束
  */
 enum GameState {
-    start = 1, reconnect, shuffle, change, gamestart, fen, win, gameover, over
+    start = 1, reconnect, shuffle, changeThree, missing, gamestart, fen, win, gameover, over
 }
 
 /**

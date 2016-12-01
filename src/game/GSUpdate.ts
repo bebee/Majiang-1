@@ -3,39 +3,40 @@
  */
 
 //刷新器
-class GSUpdate{
+class GSUpdate {
 
-    static i : GSUpdate = new GSUpdate;
+    static i: GSUpdate = new GSUpdate;
 
-    lastTime:number;
+    lastTime: number;
 
-    updates : IUpdate[];
+    updates: IUpdate[];
 
     //启动
-    start(){
+    start() {
 
         this.updates = [];
 
-        egret.sys['$ticker'].$startTick(this.callBack,this);
+        egret.sys['$ticker'].$startTick(this.callBack, this);
 
         this.lastTime = egret.getTimer();
 
     }
-    callBack(timeStamp: number){
 
-        var advanceTime : number = timeStamp - this.lastTime;
+    callBack(timeStamp: number) {
 
-        for(var i:number = 0; i < this.updates.length ; i ++){
+        var advanceTime: number = timeStamp - this.lastTime;
 
-            var update : IUpdate = this.updates[i];
+        for (var i: number = 0; i < this.updates.length; i++) {
 
-            if(update.stop) continue;
+            var update: IUpdate = this.updates[i];
 
-            update.update(advanceTime,timeStamp);
+            if (update.stop) continue;
 
-            if(update.autoRemove && update.completed){
+            update.update(advanceTime, timeStamp);
 
-                this.updates.splice(i--,1);
+            if (update.autoRemove && update.completed) {
+
+                this.updates.splice(i--, 1);
 
             }
 
@@ -47,17 +48,16 @@ class GSUpdate{
 
     }
 
-    addUpdate(update:IUpdate){
+    addUpdate(update: IUpdate) {
 
-        if(this.updates.indexOf(update) == -1)
+        if (this.updates.indexOf(update) == -1)
 
-        this.updates.push(update);
+            this.updates.push(update);
 
     }
 
-    removeUpdate(update:IUpdate){
+    removeUpdate(update: IUpdate) {
 
-        this.updates.splice(this.updates.indexOf(update),1);
+        this.updates.splice(this.updates.indexOf(update), 1);
     }
-
 }

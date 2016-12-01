@@ -18,12 +18,10 @@ class ChangeThreeSelect extends BaseSprite {
     public childrenCreated() {
         super.childrenCreated();
 
-        this.horizontalCenter = 0;
-        this.bottom = 280;
+        this.anchorOffsetX = this.width >> 1;
+        this.anchorOffsetY = this.height >> 1;
 
         this.btn_confirm.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickHandler, this);
-
-        this.show();
     }
 
     private timeHandler() {
@@ -41,6 +39,8 @@ class ChangeThreeSelect extends BaseSprite {
     private clickHandler(e: egret.TouchEvent) {
         switch (e.currentTarget) {
             case this.btn_confirm:
+                this.hide();
+
                 break;
         }
     }
@@ -48,6 +48,8 @@ class ChangeThreeSelect extends BaseSprite {
     public show() {
         super.show();
 
+        this.x = Acekit.i.width >> 1;
+        this.y = Acekit.i.height - 220;
         Acekit.i.addChild(this);
 
         this.time = GameConst.ChangeThreeTime;
@@ -55,7 +57,7 @@ class ChangeThreeSelect extends BaseSprite {
         TimerManager.i.addEventListener(TimerManager.Second, this.timeHandler, this);
     }
 
-    private hide() {
+    public hide() {
         super.hide();
 
         Acekit.i.removeChild(this);
