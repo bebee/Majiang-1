@@ -5,6 +5,8 @@ class S26
 {
     public parseData(obj:any)
     {
+        if(GameConfig.users) return;
+
         var data = obj.data;
 
         var type = data.type;
