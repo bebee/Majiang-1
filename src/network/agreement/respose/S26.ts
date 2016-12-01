@@ -1,23 +1,17 @@
 /**
- * 登陆返回
+ * 版本号广播
  */
-class S1
+class S26
 {
     public parseData(obj:any)
     {
-        if(!obj) return;
+        var data = obj.data;
 
-        if(obj["data"])
+        var type = data.type;
+
+        if(+type == 1)
         {
-            GlobalData.getInstance().sendLogin = false;
-            
-            GlobalData.getInstance().connCount = 0;
-            
-            GlobalData.getInstance().player.update(obj["data"]);
-
-            SceneManager.find("LoginScene").onIn();
-
-            NativeApi.setLocalData("getAccessCode", 0);
+            GlobalData.getInstance().player.version = data.data;
 
             var ver:string = GlobalData.getInstance().player.version;
 
@@ -37,7 +31,7 @@ class S1
                     var h:string = GameConfig.wei_href_address;
                     if(GameConfig.roomid) h += "?roomid=" + GameConfig.roomid;
                     location.href = h;
-                },"当前游戏版本过低，请点击确定刷新游戏！");
+                },"当前游戏版本过低，请刷新游戏！");
             }
         }
     }

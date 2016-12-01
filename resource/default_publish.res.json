@@ -353,6 +353,14 @@
 		{
 			"compress":false,
 			"key":"card_9"
+		},
+		{
+			"compress":false,
+			"key":"card_0_btn"
+		},
+		{
+			"compress":false,
+			"key":"card_1_btn"
 		}],
 		"sort":0
 	}],

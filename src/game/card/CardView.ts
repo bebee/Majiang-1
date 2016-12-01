@@ -145,8 +145,8 @@ class CardView extends egret.DisplayObjectContainer {
         this.hotArea.alpha = 0;
         this.hotArea.touchEnabled = false;
         this.addChild(this.hotArea);
-        this.hotArea.anchorOffsetX = GSConfig.posRule[1][1].bgosX;
-        this.hotArea.anchorOffsetY = GSConfig.posRule[1][1].bgosY;
+        this.hotArea.anchorOffsetX = GSConfig.posRulePlus[1][1].bgosX;
+        this.hotArea.anchorOffsetY = GSConfig.posRulePlus[1][1].bgosY;
 
         this.unactivate();
 
@@ -191,6 +191,11 @@ class CardView extends egret.DisplayObjectContainer {
         this.y = y;
     }
 
+    changeScale(scale:number){
+
+        this.scaleX = this.scaleY = scale;
+
+    }
 
     //改变样式
     changeStyle(style: number, draw: boolean = true) {
@@ -305,7 +310,7 @@ class CardView extends egret.DisplayObjectContainer {
 
         ////////////////////////////////////////
 
-        this.pRule = GSConfig.posRule[this.dir][this.style];
+        this.pRule = GSConfig.posRulePlus[this.dir][this.style];
 
 
         this.bg.anchorOffsetX =  this.pRule.bgosX;
@@ -315,8 +320,6 @@ class CardView extends egret.DisplayObjectContainer {
         this.bg.scaleY = this.pRule.bgScaleY;
 
 
-
-
         this.top.anchorOffsetX = this.pRule.toposX;
         this.top.anchorOffsetY = this.pRule.toposY;
 
@@ -324,6 +327,8 @@ class CardView extends egret.DisplayObjectContainer {
 
         this.top.scaleX = this.pRule.topScaleX;
         this.top.scaleY = this.pRule.topScaleY;
+
+        this.changeScale(this.pRule.scale);
 
     }
 }

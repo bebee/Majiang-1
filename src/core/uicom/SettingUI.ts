@@ -11,23 +11,26 @@ class SettingUI extends eui.Component
         this.touchChildren = true;
     }
 
-    //public _btn_music:mui.EButton;  //音乐按钮
-
     public _btn_sound:eui.Image;  //音效按钮
+    public _btn_pai:eui.Image;   //手牌按钮
+
+    public _ver:eui.Label;
 
 
     onComplete()
     {
-        // this._btn_music = new mui.EButton("sound_open_btn", "", 20);
-        // this._btn_music.x = 470;
-        // this._btn_music.y = 69;
-        // this.addChild(this._btn_music);
-
         this._btn_sound = new eui.Image();
         this._btn_sound.source = "sound_open_btn";
         this._btn_sound.x = 500;
-        this._btn_sound.y = 136;//139;
+        this._btn_sound.y = 100;
         this.addChild(this._btn_sound);
+
+
+        this._btn_pai = new eui.Image();
+        this._btn_pai.source = "sound_open_btn";
+        this._btn_pai.x = 500;
+        this._btn_pai.y = 170;
+        this.addChild(this._btn_pai);
     }
 
     createChildren()

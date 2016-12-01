@@ -1,7 +1,7 @@
 /**
   * 游戏配置文件
   * by dily
-  * (c) copyright 2014 - 2035
+  * (c) copyright 2016 - 2035
   * All Rights Reserved. 
   * 存放游戏的配置数据
   * 比如：游戏界面尺寸、分享随机百分比、获取系统数据
@@ -22,7 +22,7 @@ module GameConfig {
 
     //中心服务器地址 注意：这两个更换测试服 一定要改
     export var address_center:any = {ip:"dbmj01.h5sd.com", port:10416};   //dbmj01.h5sd.com   42.62.73.45
-    export var wei_href_address:string = "http://mj.h5sd.com/test/index.html";
+    export var wei_href_address:string = "http://mj.h5sd.com/wdmj/index.html";
 
     export var appid:string = "wxb6349744356b5312";
 

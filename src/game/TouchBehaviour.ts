@@ -26,6 +26,10 @@ class TouchBehaviour implements IGameTapEvent{
 
                 GSController.i.hideFuncSelectMenu();
 
+                /*GSData.i.isTing = false;
+
+                GSController.i.enablesHandPais();*/
+
                 break;
 
             case 1://吃
@@ -199,7 +203,7 @@ class TouchBehaviour implements IGameTapEvent{
     onJiesanTap(): void
     {
 
-        if(GSData.i.game_state == 2 || GSData.i.game_state == 3)
+        if(GSData.i.game_state == 2 || GSData.i.game_state == 3 || GSData.i.game_state == -4)
         {
             GameLayerManager.gameLayer().messagBox.showMsg(function (r)
             {

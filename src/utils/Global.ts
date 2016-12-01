@@ -69,9 +69,35 @@ module Global
 		}
 		else
 		{
-			var addres:string = GameConfig.wei_href_address;
-			if(GameConfig.roomid) addres += "?roomid=" + GameConfig.roomid;
-			Weixin.getAccessCode(GameConfig.appid, addres);
+			var count:number;
+
+			if(NativeApi.getLocalData("getAccessCode"))
+			{
+				count = +NativeApi.getLocalData("getAccessCode");
+			}
+			else
+			{
+				count = 0;
+			}
+
+			if(count < 2)
+			{
+				var addres:string = GameConfig.wei_href_address;
+				if(GameConfig.roomid) addres += "?roomid=" + GameConfig.roomid;
+				Weixin.getAccessCode(GameConfig.appid, addres);
+
+				count++;
+
+				NativeApi.setLocalData("getAccessCode", count);
+			}
+			else
+			{
+				if(!GameLayerManager.gameLayer().messagBox) GameLayerManager.gameLayer().messagBox = new MessageDialog();
+				GameLayerManager.gameLayer().messagBox.showMsg(function (r)
+				{
+
+				},"登录发生错误，请联系管理员！\n\n(请检查是否在其他设备登录)");
+			}
 		}
 	}
 

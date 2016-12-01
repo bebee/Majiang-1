@@ -14,6 +14,11 @@ class GlobalData {
     public sendLogin:boolean = false;
 
     /**
+     * 牌型
+     */
+    public cardType:number = 1;
+
+    /**
      * 玩家重连次数
      */
     public connCount:number = 0;
@@ -21,7 +26,7 @@ class GlobalData {
     /**
      * 版本号
      */
-    public resourceCode:string = "";//2016112501
+    public resourceCode:string = "";
     
     /**
      * type 1 条子（number  1 - 9 条）     2  筒子 （number  1 - 9 筒）     3  万字（number  1 - 9 万）    4  箭牌  ｛number   1 红中   2  发财   3白班｝
@@ -33,9 +38,7 @@ class GlobalData {
      */
     public gamewarmList:Array<string> =
     [
-        "游戏问题请咨询个人微信：lyqp01 ，请文明娱乐，禁止赌博。",
-        "每当您邀请一个新人进入房间并完成两圈以上牌局，您都将获得4张房卡，邀请的新人越多，获得的房卡也会越多！",
-        "当您第一次完成至少两圈牌局后，系统会赠送您2张房卡。"
+        "代理咨询请联系官方微信：lyqp01 文明娱乐，禁止赌博。"
     ];
 
     /**

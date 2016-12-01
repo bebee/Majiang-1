@@ -422,8 +422,6 @@ class GSDataProxy {
         this.gData.leftCount = obj.dui_num;
 
         GSController.i.playBao();
-
-        
     }
 
     //更新结果 cur是当前分数

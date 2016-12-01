@@ -16,6 +16,11 @@ class Player
     public code:string;
 
     /**
+     * 版本号
+     */
+    public version:string;
+
+    /**
      * 玩家的平台开放编号
      */
     public openid:string;
