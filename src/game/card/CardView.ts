@@ -144,6 +144,8 @@ class CardView extends egret.DisplayObjectContainer {
         this.top.addChild(this.icon);
         this.top.addChild(this.countText);
 
+        // this.countText.width = 40;
+        // this.countText.height = 20;
         this.countText.bold = true;
         this.countText.background = true;
         this.countText.backgroundColor = 0;

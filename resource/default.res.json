@@ -645,6 +645,7 @@
 		},
 		{
 			"name":"game_show_kuang",
+			"scale9grid":"11,11,10,9",
 			"type":"image",
 			"url":"assets/game/room/scene/game_show_kuang.png"
 		},

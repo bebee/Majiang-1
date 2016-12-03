@@ -435,12 +435,12 @@ class GSController extends egret.EventDispatcher {
     hupaiShow() {
         //摊牌
         //遍历index大于-1的牌
-        var win = GSData.i.result.win;
+        var hupai = GSData.i.result.hupai;
 
-        if (win != 0) {
+        if (hupai != 0) {
 
             //别人点炮
-            if (win.type == 17) {
+            if (hupai.type == 17) {
 
 
                 var dianPaoDir = GSData.i.getDir(GSData.i.result.dianPaoPos);
@@ -624,9 +624,9 @@ class GSController extends egret.EventDispatcher {
 
         cardView.x = o.sx;
         cardView.y = o.sy;
-        cardView.scaleX = cardView.scaleY = 1.5;
+        // cardView.scaleX = cardView.scaleY = 1.5;
 
-        egret.Tween.get(cardView).to({x: o.x, y: o.y, scaleX: 1, scaleY: 1}, 400, egret.Ease.backIn);
+        egret.Tween.get(cardView).to({x: o.x, y: o.y, scaleX: 1, scaleY: 1}, 400);
 
         mjview.addPoolCard(cardView);
 

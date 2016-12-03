@@ -104,10 +104,10 @@ class GSConfig {
 
     //池牌位置
     static poolPos = {
-        1: {x: 355, y: 480},
-        2: {x: 774, y: 425},
-        3: {x: 625, y: 130},
-        4: {x: 186, y: 200}
+        1: {x: 280, y: 480},
+        2: {x: 800, y: 480},
+        3: {x: 680, y: 140},
+        4: {x: 160, y: 140}
     };
     //
     static catchPos = {
@@ -419,31 +419,33 @@ class GSConfig {
 
         var ox = (index % GSConfig.poolReturnCount) * rule.spacH;
         var oy = (index / GSConfig.poolReturnCount ^ 0) * rule.spacV;
+        // var os = (index / GSConfig.poolReturnCount ^ 0) * 15;
+        var os = 0;
 
         var o: any = {};
 
         switch (dir) {
             case 1:
-                o.x = pos.x + ox;
+                o.x = pos.x + ox + os;
                 o.y = pos.y - oy;
                 o.sx = o.x + 20;
                 o.sy = o.y;
                 break;
             case 2:
                 o.x = pos.x - oy;
-                o.y = pos.y - ox;
+                o.y = pos.y - ox - os;
                 o.sx = o.x;
                 o.sy = o.y - 20;
                 break;
             case 3:
-                o.x = pos.x - ox;
+                o.x = pos.x - ox - os;
                 o.y = pos.y + oy;
                 o.sx = o.x - 20;
                 o.sy = o.y;
                 break;
             case 4:
                 o.x = pos.x + oy;
-                o.y = pos.y + ox;
+                o.y = pos.y + ox + os;
                 o.sx = o.x;
                 o.sy = o.y + 20;
                 break;

@@ -1,12 +1,14 @@
 /**
  * Created by Administrator on 2016/11/1.
  */
-class MJView extends egret.DisplayObjectContainer {
+// class MJView extends egret.DisplayObjectContainer {
+class MJView extends eui.Component {
 
     dir: number;
 
     handCon: egret.DisplayObjectContainer;
     poolCon: egret.DisplayObjectContainer;
+    huview: HuView;
     //最后的添加的池牌
     lastPoolCard: CardView;
 
@@ -23,12 +25,26 @@ class MJView extends egret.DisplayObjectContainer {
     initView() {
 
         this.handCon = new egret.DisplayObjectContainer;
-
-        this.poolCon = new egret.DisplayObjectContainer;
-
         this.addChild(this.handCon);
 
+        this.poolCon = new egret.DisplayObjectContainer;
         this.addChild(this.poolCon);
+
+        this.huview = new HuView(this.dir);
+        this.addChild(this.huview);
+
+        // for (var i: number = 0; i < 4; i++) {
+        //     this.huview.addCardView({type: 1, number: 1});
+        // }
+        //
+        // var _this = this;
+        // egret.setInterval(function () {
+        //     _this.huview.addCardView({type: 1, number: 1});
+        // }, this, 3000);
+    }
+
+    pushHu(pai: any) {
+        this.huview.addCardView(pai);
     }
 
 
@@ -61,32 +77,21 @@ class MJView extends egret.DisplayObjectContainer {
 
     //移除最后加载的牌
     removePoolCard() {
-
         this.poolCon.removeChild(this.lastPoolCard);
-
     }
 
     //移除所有手牌
     removeAllHandCard() {
-
         while (this.handCon.numChildren) {
-
             var cardView: CardView = <CardView> this.handCon.removeChildAt(0);
-
             CardView.returnCardView(cardView);
-
         }
-
     }
 
     removeAllPoolCard() {
-
         while (this.poolCon.numChildren) {
-
             var cardView: CardView = <CardView> this.poolCon.removeChildAt(0);
-
             CardView.returnCardView(cardView);
-
         }
     }
 
@@ -104,12 +109,10 @@ class MJView extends egret.DisplayObjectContainer {
                 CardView.returnCardView(cardView);
 
             }
-
         }
     }
 
     clear() {
-
         this.lastPoolCard = null;
         this.removeAllHandCard();
         this.removeAllPoolCard();
