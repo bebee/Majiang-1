@@ -76,7 +76,7 @@ class RaiseCardsEffect {
      * 获取卡牌组, 通过换三张
      */
     private static getCardsByChangeThree(): any[] {
-        var handCards: any[] = GSData.i.getHandPais(1);
+        var handCards: any[] = PublicVal.i.getHandPais(1);
 
         //获取手牌中某种类型牌的长度
         function getLength(type): number {
@@ -130,7 +130,7 @@ class RaiseCardsEffect {
         }
 
         var cards: any[] = [];
-        var handCards: any[] = GSData.i.getHandPais(1);
+        var handCards: any[] = PublicVal.i.getHandPais(1);
         var selectCards: any[] = GSData.i.funcSelects;
 
         /**

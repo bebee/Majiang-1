@@ -108,6 +108,8 @@ class Main extends eui.UILayer {
 
         SceneManager.open(LoadingScene, "LoadingScene");
 
+        GameManager.init(this.stage);
+
         if(!NativeApi.getLocalData("music_volume"))
         {
             NativeApi.setLocalData("music_volume", 0.2);
