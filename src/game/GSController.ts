@@ -112,6 +112,7 @@ class GSController extends egret.EventDispatcher {
                 this.gsView.readyStateHeadReset();
 
                 this.updateGangCur();
+                this.updateJiesanButtonText();
                 break;
             case GameState.reconnect://继续牌桌界面
 
@@ -137,6 +138,7 @@ class GSController extends egret.EventDispatcher {
                 this.gsView.readyStateHeadReset();
 
                 this.updateGangCur();
+                this.updateJiesanButtonText();
                 break;
             case GameState.gamestart://进入牌局界面
             case -4:
@@ -199,6 +201,9 @@ class GSController extends egret.EventDispatcher {
         }
     }
 
+
+
+
     closeGSView(){
         this.visibleTwoFuncButton(false);
         this.hideLightSame();
@@ -220,6 +225,20 @@ class GSController extends egret.EventDispatcher {
         this.gsResultView.clear();
         this.gsResultView.visible = false;
     }
+
+    //刷新解散按钮的文字
+    updateJiesanButtonText(){
+
+        if(PublicVal.i.ownPos == 1){
+
+            this.scene.jiesanButton.getChildAt(0)["textField"].text = "解散房间";
+
+        }else{
+            this.scene.jiesanButton.getChildAt(0)["textField"].text = "离开房间";
+        }
+    }
+
+
 
     //显示隐藏两个功能按钮(解散房间和返回微信)
     visibleTwoFuncButton(boo1:boolean){
@@ -275,7 +294,7 @@ class GSController extends egret.EventDispatcher {
                 }
             }
 
-            if (GSData.i.ownPos == 1) {//房主
+            if(PublicVal.i.ownPos == 1) {//房主
                 if (hasLeave) { //有空位
                     this.scene.inviteButton.visible = true;
                     this.scene.waitText.visible = false;
@@ -320,7 +339,9 @@ class GSController extends egret.EventDispatcher {
         //this.gsView.updateBaoPai(PublicVal.i.bao);
 
         //this.gsResultView.updateBaoPai(PublicVal.i.bao);
-        this.setBoomDir(GSData.i.ownPos);
+
+        this.setBoomDir(PublicVal.i.ownPos);
+
         this.setArrowDir(GSData.i.turnDir);
         this.updateCenterInfo();
         this.updateRebackPais();
@@ -337,7 +358,7 @@ class GSController extends egret.EventDispatcher {
 
         this.updateBaoView();
 
-        this.setBoomDir(GSData.i.ownPos);
+        this.setBoomDir(PublicVal.i.ownPos);
 
         //设置庄家抓牌位光标
         this.setArrowDir(GSData.i.zhuangDir);
@@ -363,7 +384,7 @@ class GSController extends egret.EventDispatcher {
                 var killIcon = this.gsView.getHeadView(i).headIcon.killIcon;
                 readyIcon.visible = (GSData.i.readyFlag >> i & 1) == 1;
 
-                if (PublicVal.state == GameState.start && i > 1 && GSData.i.ownPos == 1) {
+                if (PublicVal.state == GameState.start && i > 1 && PublicVal.i.ownPos == 1) {
 
                     killIcon.visible = readyIcon.visible;
                 } else {

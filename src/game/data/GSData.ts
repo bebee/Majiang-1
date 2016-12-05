@@ -24,7 +24,7 @@ class GSData{
     roomPass:number = 0;
 
     //玩家自己的pos
-    ownPos:number;
+    //ownPos:number;
 
     //leftCount:number;
 

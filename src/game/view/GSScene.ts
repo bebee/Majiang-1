@@ -66,9 +66,10 @@ class GSScene extends egret.DisplayObjectContainer {
         this.gsResultView.visible = false;
 
         this.roomIDText = new egret.TextField();
+        this.roomIDText.bold = true;
         this.roomIDText.x = 15;
         this.roomIDText.y = 20;
-        this.roomIDText.size = 18;
+        this.roomIDText.size = 20;
         this.addChild(this.roomIDText);
 
 
