@@ -8,17 +8,20 @@ class Replayer implements IUpdate{
 
     constructor(){
 
-        GSUpdate.i.addUpdate(this);
+        this.clear();
 
-        this.stop = true;
+        GSUpdate.i.addUpdate(this);
 
     }
 
     static get i(){
+
         return Replayer._i || (Replayer._i = new Replayer);
+
     }
 
     static replaySpeed:number = 800;
+    static startDelay:number = 1000;
 
     actions:any ;
 
@@ -29,11 +32,30 @@ class Replayer implements IUpdate{
 
     dirMap:any;
 
-    ownPos:number;
+    //ownPos:number;
 
     data:any;
 
+    //缓存牌
+    cachePaiArr:any;
+
+    //步骤
+    index:number;
+
+    //是否暂停
+    isPause:boolean;
+
+    //是否回退
+    isFB:boolean;
+
+
     clear(){
+
+        this.isPause = false;
+
+        this.isFB = false;
+
+        this.index = 0;
 
         this.passTime = 0;
 
@@ -42,7 +64,50 @@ class Replayer implements IUpdate{
         this.actions = [];
 
         egret.clearTimeout(this.interval);
+
+        //关闭控制菜单
     }
+    /*
+        回放
+     */
+    Replay(){
+        this.clear();
+        PublicVal.i.clear();
+        this.parseData(this.data);
+    }
+    /*
+        暂停
+     */
+    Pause(){
+
+        this.isPause = true;
+        this.stop = true;
+    }
+    /*
+        播放
+     */
+    Play() {
+
+        this.stop = false;
+    }
+    /*
+     快进
+     */
+    FF(){
+        this.passTime = Replayer.replaySpeed;
+    }
+    /*
+        回退
+     */
+    FB(){
+        PublicVal.i.clear();
+        this.isFB = true;
+        this.actions = [];
+        this.parseData(this.data);
+        this.prevIndex(3);
+        this.isFB = false;
+    }
+
 
     /*
      [?Record_Action_Static,Static],
@@ -72,30 +137,11 @@ class Replayer implements IUpdate{
      get_shou_origin(4)
      ]
      */
-    replay(){
-
-        this.parseData(this.data);
-
-    }
-
-    pause(){
-
-        this.stop = true;
-
-    }
-    play() {
-
-        this.stop = false;
-    }
-
-
     parseData(data:any){
 
         if(data == null) return;
 
         this.data = data;
-
-        this.clear();
 
         this.parsePersons(GlobalData.getInstance().personList);
 
@@ -103,17 +149,18 @@ class Replayer implements IUpdate{
 
         PublicVal.i.roomOwnFlag = 1 << this.returnDir(1);
 
-
         for(var i:number = 0 ; i <data.length;i++) {
             var arr = data[i];
             var action: number = arr[0];
             this["__action_" + action](arr,i);
         }
+        this.show();
     }
     __action_1(arr:any,index:number){
-        var fourObj = arr[1];
-        for(var k:number= 0;k < fourObj.length;k++){
-            var obj = fourObj[k];
+        this.cachePaiArr = arr;
+        var all = arr[1];
+        for(var k:number= 0;k < all.length;k++){
+            var obj = all[k];
             //1万 2条 3桶 4中发白
             var pais = FashionTools.formatPai(1,obj[1]).
             concat(FashionTools.formatPai(2,obj[2])).
@@ -123,9 +170,6 @@ class Replayer implements IUpdate{
 
             PublicVal.i.allPais[this.returnDir(k + 1)].handPais = pais;
         }
-
-        this.show();
-
     }
     __action_2(arr:any,index:number){
         this.actions.push({action:2,pai:{type:arr[1],number:arr[2]},pos:arr[3]});
@@ -180,19 +224,46 @@ class Replayer implements IUpdate{
 
         GSController.i.nullAllHead();
         GSController.i.setArrowDir(0);
-        GSController.i.setBoomDir(this.ownPos);
+        GSController.i.setBoomDir(PublicVal.i.ownPos);
         GSController.i.scene.updateRoomID(PublicVal.i.roomid);
         GSController.i.scene.updateRule(PublicVal.i.rules);
         GSController.i.visibleRoomOwn();
         GSController.i.visibleZhuang();
         GSController.i.updateBaoView();
         GSController.i.updateReplayRoom(PublicVal.i.dirPerson);
-        this.updateMJViews();
 
-        this.interval = egret.setTimeout(_=>{this.play();
-                                            this.passTime = 0;},
-                                        this,1000);
+        this.__play();
+
     }
+
+    __play(){
+
+        this.initMJViews();
+
+        if(!this.isFB) {
+
+            this.interval = egret.setTimeout(_=> {
+                    this.Play();
+                    this.passTime = 0;
+                },
+                this, 1000);
+        }
+    }
+
+    /*
+     初始化麻将
+     */
+    initMJViews(){
+
+        for(var i:number = 1; i <=4 ; i ++){
+            FashionTools.sortPai(PublicVal.i.getHandPais(i));
+            GSController.i.updateMJView(i);
+            GSController.i.updatePoolPaiView(i);
+        }
+    }
+
+
+
     //解析玩家
     parsePersons(list:any){
 
@@ -221,7 +292,7 @@ class Replayer implements IUpdate{
                 this.dirMap[c] = 3;
                 this.dirMap[d] = 4;
 
-                this.ownPos = a;
+                PublicVal.i.ownPos = a;
 
             }
 
@@ -240,14 +311,6 @@ class Replayer implements IUpdate{
 
     }
 
-
-
-    //播放
-/*    next(){
-
-        this.stop = false;
-
-    }*/
 
     play_action_2(action:any){
 
@@ -472,13 +535,14 @@ class Replayer implements IUpdate{
 
         if(this.passTime >= Replayer.replaySpeed){
 
-            if(this.actions.length){
+            if(this.index < this.actions.length)
+            {
 
-                var action = this.actions.shift();
-
-                this["play_action_"+action.action](action);
+                this.goIndex(this.index);
 
                 this.passTime = 0;
+
+                this.index ++;
 
             }else{
 
@@ -490,13 +554,30 @@ class Replayer implements IUpdate{
         }
     }
 
-    updateMJViews(){
+    goIndex(index:number){
 
-        for(var i:number = 1; i <=4 ; i ++){
-            FashionTools.sortPai(PublicVal.i.getHandPais(i));
-            GSController.i.updateMJView(i);
-        }
+        var action = this.actions[index];
+
+        this["play_action_"+action.action](action);
+
     }
+
+    /*
+        退到某步
+     */
+    prevIndex(index:number){
+
+        var i:number = 0;
+
+        while( i <= index){
+            this.goIndex(i);
+            i++;
+        }
+        this.index = i;
+        this.passTime = 0;
+    }
+
+
 
     completed:boolean;
     //自动移除

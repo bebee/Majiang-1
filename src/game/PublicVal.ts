@@ -18,7 +18,6 @@ class PublicVal{
     static state:number;
 
 
-
     static i:PublicVal = new PublicVal;
     ////////////////////////////////////
     //庄家
@@ -44,6 +43,8 @@ class PublicVal{
     allPais : any  = [];
 
     roomid:number;
+
+    ownPos:number;
 
     dirPerson:any;
 

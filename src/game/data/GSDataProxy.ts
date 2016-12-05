@@ -475,10 +475,17 @@ class GSDataProxy {
                 GameSound.PlaySound("sound_down");
                 break;
             case 22://幺九杠
-                //number 判断是幺杠 还是九杠
-                //funcPais.push({sort:2,action:action,number:pai[0].number,pai:pai,ever:[1,1,1]});
 
-                GameSound.PlaySound("gang_" + this.gData.getSexByPos(pos));
+
+                //number 判断是幺杠 还是九杠
+                if(pai[0].number == 1){//
+
+
+                }else{
+
+                    //GameSound.PlaySound("gang_" + this.gData.getSexByPos(pos));
+
+                }
 
                 this.gData.addFuncPai(3, dir, action, pai, pai[0].number, true);
 
@@ -866,14 +873,14 @@ class GSDataProxy {
             //判断玩家自己,进游戏界面初始化
             if(roomPlayer.uid == GlobalData.getInstance().player.uid){
 
-                this.gData.ownPos = roomPlayer.pos;
+                PublicVal.i.ownPos = roomPlayer.pos;
 
                 //互相映射
 
-                var a = this.gData.ownPos;
-                var b = 1 + (this.gData.ownPos + 0) % 4;
-                var c = 1 + (this.gData.ownPos + 1) % 4;
-                var d = 1 + (this.gData.ownPos + 2) % 4;
+                var a = PublicVal.i.ownPos;
+                var b = 1 + (PublicVal.i.ownPos + 0) % 4;
+                var c = 1 + (PublicVal.i.ownPos + 1) % 4;
+                var d = 1 + (PublicVal.i.ownPos + 2) % 4;
 
                 this.gData.dir2Pos[1] = a;
                 this.gData.dir2Pos[2] = b;
