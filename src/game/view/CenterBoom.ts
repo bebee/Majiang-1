@@ -118,6 +118,11 @@ class CenterBoom extends egret.DisplayObjectContainer{
     //设置箭头方向
     setArrowDir(dir:number){
 
+        if(dir == 0) {
+            this.visibleArrow(false);
+            return;
+        }
+
         this.visibleArrow(true);
 
         switch(dir){

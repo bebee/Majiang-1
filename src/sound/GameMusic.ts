@@ -79,14 +79,13 @@ module GameMusic
         {
             RES.getResAsync(name,function ()
             {
-                GameMusic.PlaySound(name);
+               GameMusic.PlaySound(name)
             },this);
         }
     }
 
     export function setSoundVolume(volume:number = 0):void
     {
-
         GameMusic._volume = volume;
 
         var SoundDict = GameMusic.SoundDict;

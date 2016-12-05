@@ -13,7 +13,7 @@ class _1
                     "channel":"test",
                     "openid":"" + GameConfig.users,
                     "openkey":"123456788",
-                    "nick":"测试员",
+                    "nick":"" + GameConfig.users,
                     "pic":"" + GlobalData.getInstance().player.pic,
                     "sex":"0"
                 };

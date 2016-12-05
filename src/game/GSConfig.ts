@@ -70,15 +70,40 @@ class GSConfig{
 
     //54，590
     //手中牌起始位置 dx,dy 明牌的间隔
-    static handPos = {
-        1: {x: 80,  y: 580,dx:178,dy:0,px:60,py:0},
+    static gameHandPos = {
+        1: {x: 60,  y: 580,dx:178,dy:0,px:60,py:0},
         2: {x: 850, y: 495,dx:0,dy:-88,px:0,py:-45},
         3: {x: 625, y: 47,dx:-96,dy:0,px:-35,py:0},
         4: {x: 110, y: 124,dx:0,dy:90,px:0,py:45},
         5: {x: 140,  y: 580,dx:178,dy:0,px:60,py:0}
     };
+    /*
+        重放手牌的起点位置
+     */
+    static replayHandPos = {
+
+        1: {x: 60,  y: 580,dx:178,dy:0,px:60,py:0},
+        2: {x: 850, y: 495,dx:0,dy:-88,px:0,py:-45},
+        3: {x: 625, y: 47,dx:-96,dy:0,px:-35,py:0},
+        4: {x: 110, y: 124,dx:0,dy:90,px:0,py:45}
+
+    };
+
+    /*
+        游戏状态手牌的样式
+     */
+    static gameHandStyles = {1:1,2:1,3:1,4:1};
+    /*
+        回放的手牌样式
+     */
+    static replayHandStyles = {1:3,2:3,3:3,4:3};
+
+    //手牌样式加强
+    static handStylesPlus : any;
+
     //手牌起始位置加强
-    static handPosPlus = {1:GSConfig.handPos[1],2:GSConfig.handPos[2],3:GSConfig.handPos[3],4:GSConfig.handPos[4]};
+    static handPosPlus : any = {1:null,2:null,3:null,4:null};
+        //= {1:GSConfig.handPos[1],2:GSConfig.handPos[2],3:GSConfig.handPos[3],4:GSConfig.handPos[4]};
 
     //功能牌起点位置
     static funcPos = {
@@ -87,8 +112,6 @@ class GSConfig{
         3: {x: 625, y: 47,dx:-96,dy:0,px:-35,py:0},
         4: {x: 110, y: 124,dx:0,dy:90,px:0,py:45}
     };
-
-
 
     //动态手牌位
     static dymnicHandPos = {1:{x:0,y:0},
@@ -145,8 +168,8 @@ class GSConfig{
         },
         4:{ 1:new Rule({bgosX:19,bgosY:44,topRot:90,spacH:23,spacV:24,showTop:false}),
             2:new Rule({bgosX:23,bgosY:18,topRot:90,spacH:23,spacV:24,showTop:false}),
-            3:new Rule({bgosX:23,bgosY:18,toposX:32,toposY:38,topRot:90,topScaleX:0.4,topScaleY:0.4,spacH:25,spacV:24,showTop:true}),
-            4:new Rule({bgosX:23,bgosY:18,toposX:32,toposY:38,topRot:90,topScaleX:0.4,topScaleY:0.4,spacH:25,spacV:40,showTop:true})
+            3:new Rule({bgosX:23,bgosY:18,toposX:33,toposY:38,topRot:90,topScaleX:0.4,topScaleY:0.4,spacH:25,spacV:24,showTop:true}),
+            4:new Rule({bgosX:23,bgosY:18,toposX:33,toposY:38,topRot:90,topScaleX:0.4,topScaleY:0.4,spacH:25,spacV:40,showTop:true})
         },
         5:{ 1:new Rule({bgosX:32,bgosY:40,toposX:24,toposY:20,spacH:64*0.92,spacV:79,scale:0.92,showTop:false}),
             2:new Rule({bgosX:32,bgosY:40,toposX:24,toposY:23,spacH:56,spacV:79,showTop:true}),
@@ -312,9 +335,59 @@ class GSConfig{
                         29:"天胡",
                         30:"夹五",
                         99:"胡"
-                        }
+                        };
+        /*
+        暗杠牌的顶牌类型
+         */
+    static gameAnGangStyle = {1:3,2:2,3:2,4:2};
+    static replayAnGangStyle = {1:3,2:3,3:3,4:3};
 
+    static anGangStylePlus :any;
 
+    //手牌激活
+    static handCardActivate:boolean;
+
+    //桌布素材
+    static normal_table_bg_res:string = "game_bg";
+    static soft_table_bg_res:string = "game_bg";
+
+    static normal_card_bg_style:string = "N_";
+    static soft_card_bg_style:string = "M_";
+
+    static table_bg_res:string = GSConfig.normal_table_bg_res;
+
+    static card_bg_style:string = GSConfig.normal_card_bg_style;
+
+    /*
+        正常游戏状态的配置初始化
+    */
+    static gameConfigInit(){
+
+        GSConfig.handStylesPlus = GSConfig.gameHandStyles;
+        GSConfig.anGangStylePlus = GSConfig.gameAnGangStyle;
+
+        for(var i:number = 1; i <= 4 ;i++){
+
+            GSConfig.handPosPlus[i] = GSConfig.gameHandPos[i];
+            GSConfig.dymnicHandPos[i].x = GSConfig.handPosPlus[i].x;
+            GSConfig.dymnicHandPos[i].y = GSConfig.handPosPlus[i].y;
+        }
+
+        GSConfig.handCardActivate = true;
+    }
+    /*
+     回放状态的配置初始化
+     */
+    static replayConfigInit(){
+        GSConfig.handStylesPlus = GSConfig.replayHandStyles;
+        GSConfig.anGangStylePlus = GSConfig.replayAnGangStyle;
+        for(var i:number = 1; i <= 4 ;i++){
+
+            GSConfig.handPosPlus[i] = GSConfig.replayHandPos[i];
+
+        }
+        GSConfig.handCardActivate = false;
+    }
 
 }
 

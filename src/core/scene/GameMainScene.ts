@@ -13,7 +13,6 @@ class GameMainScene extends eui.Component
         1:{source:"shop_icon", click:"", name:"shop"},
         2:{source:"set_icon", click:"", name:"set"},
         3:{source:"rule_icon", click:"", name:"rule"}
-
     };
 
     private btn_create:mui.EButton;
@@ -21,6 +20,8 @@ class GameMainScene extends eui.Component
     private btn_join:mui.EButton;
 
     private btn_record:mui.EButton;
+
+    private btn_shiming:mui.EButton;
 
     private btn_add:eui.Image;
 
@@ -34,19 +35,20 @@ class GameMainScene extends eui.Component
 
         this.touchChildren = true;
 
-
         var sss:any = {"role":"user","mod":"mod_auths","fun":"auth_signature","args":{}};
 
         var arr:Array<string> = ["closeWindow","hideMenuItems","onMenuShareAppMessage","onMenuShareTimeline","startRecord", "stopRecord", "onVoiceRecordEnd", "playVoice", "pauseVoice", "stopVoice", "onVoicePlayEnd", "uploadVoice", "downloadVoice"];
 
         HttpHandler.sendMsgCallBack("http://" + GameConfig.http_address.ip + ":" + GameConfig.http_address.port, "action=" + JSON.stringify(sss), function (obj)
         {
-            var some = JSON.parse(obj.message);
+            if(obj.message != "error")
+            {
+                var some = JSON.parse(obj.message);
 
-            GameConfig.pushData(some);
+                GameConfig.pushData(some);
 
-            Weixin.config(GameConfig.appid, Number(GameConfig.timestamp), GameConfig.noncestr, GameConfig.signature, arr);
-
+                Weixin.config(GameConfig.appid, Number(GameConfig.timestamp), GameConfig.noncestr, GameConfig.signature, arr);
+            }
         }, egret.URLRequestMethod.POST, this);
     }
 
@@ -69,19 +71,24 @@ class GameMainScene extends eui.Component
         this.initIconList();
 
         this.btn_create = new mui.EButton("blue_game_btn");
-        this.btn_create.horizontalCenter = -292;
-        this.btn_create.verticalCenter = 0;
+        this.btn_create.horizontalCenter = -180;
+        this.btn_create.verticalCenter = 30;
         this.addChildAt(this.btn_create, this.numChildren - 1);
 
         this.btn_join = new mui.EButton("red_game_btn");
-        this.btn_join.horizontalCenter = 0;
-        this.btn_join.verticalCenter = 0;
+        this.btn_join.horizontalCenter = 180;
+        this.btn_join.verticalCenter = 30;
         this.addChildAt(this.btn_join, this.numChildren - 1);
 
         this.btn_record = new mui.EButton("yellow_game_btn");
-        this.btn_record.horizontalCenter = 292;
-        this.btn_record.verticalCenter = 0;
+        this.btn_record.horizontalCenter = 407;
+        this.btn_record.verticalCenter = -134;
         this.addChildAt(this.btn_record, this.numChildren - 1);
+
+        this.btn_shiming = new mui.EButton("btn_shiming");
+        this.btn_shiming.horizontalCenter = -407;
+        this.btn_shiming.verticalCenter = -134;
+        this.addChildAt(this.btn_shiming, this.numChildren - 1);
 
         /**
          * 打开加入游戏
@@ -141,6 +148,14 @@ class GameMainScene extends eui.Component
         },this);
 
         /**
+         * 打开实名认证
+         */
+        this.btn_shiming.addEventListener(egret.TouchEvent.TOUCH_TAP, function ()
+        {
+            StackManager.open(IDCardDialog, "IDCardDialog");
+        }, this);
+
+        /**
          * 添加金钱说明
          */
         //TipsManager.addTips(this._money,"再点也不会变多 <(￣︶￣)>！", 1);
@@ -161,8 +176,7 @@ class GameMainScene extends eui.Component
 
             var lb:mui.EButton = new mui.EButton(some.source+"", "");
             this.icon_group.addChild(lb);
-            lb.x += (+k - 1) * 95;
-            //if(+k != 1) lb.x += 5;
+            lb.x += +k * 80;   //80  95
             lb.name = some["name"];
             lb.addEventListener(egret.TouchEvent.TOUCH_TAP, this.onClick, this);
         }

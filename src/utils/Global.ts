@@ -96,7 +96,7 @@ module Global
 				GameLayerManager.gameLayer().messagBox.showMsg(function (r)
 				{
 
-				},"登录发生错误，请联系管理员！\n\n(请检查是否在其他设备登录)");
+				},"登录失败，请退出游戏重试！\n\n(请检查是否在其他设备登录)");
 			}
 		}
 	}
@@ -197,6 +197,71 @@ module Global
 	}
 
 	/**
+	 * 聊天表情
+	 * @param some
+	 */
+	export function showExpression(some:any):void
+	{
+		var my = this;
+
+		var chatid:number = +some.id;
+
+		var uid = some.uid;
+
+		var chat_pao:ChatExpression = new ChatExpression();
+
+		var layer = GameLayerManager.gameLayer().mainLayer;
+
+		layer.addChild(chat_pao);
+
+
+		var player = GSData.i.roomPlayerMap[uid];
+		var head = GSConfig.headTargetPos[player.dir];
+
+		var _x:number = head.x;
+		var _y:number = head.y;
+
+		switch (+player.dir)
+		{
+			case 1:
+				_y -= 75;
+				_x -= 0;
+				break;
+			case 2:
+				_x -= 160;
+				_y -= 75;
+				break;
+			case 3:
+				_y -= 75;
+				_x -= 160;
+				break;
+			case 4:
+				_y -= 75;
+				_x -= 0;
+				break;
+		}
+
+		chat_pao.x = _x;
+		chat_pao.y = _y;
+
+		chat_pao.plays(chatid);
+
+		function hideThis()
+		{
+			if(chat_pao && layer.contains(chat_pao))
+			{
+				chat_pao.stop();
+
+				layer.removeChild(chat_pao);
+
+				chat_pao = null;
+			}
+		}
+
+		egret.setTimeout(hideThis, my, 3000);
+	}
+
+	/**
 	 * 显示聊天气泡
 	 * @param some
      */
@@ -218,7 +283,16 @@ module Global
 
 		layer.addChild(chat_pao);
 
-		chat_pao._txt.text = chatlist[chatid].text;
+		for(var idk in chatlist)
+		{
+			var idkdata = chatlist[idk];
+
+			if(+idkdata.id == +chatid)
+			{
+				chat_pao._txt.text = idkdata.text;
+				break;
+			}
+		}
 
 		var player = GSData.i.roomPlayerMap[uid];
 		var head = GSConfig.headTargetPos[player.dir];
@@ -240,7 +314,7 @@ module Global
 				break;
 			case 3:
 				chat_pao._biao.x= 301;
-				_y -= 70;
+				_y -= 50;
 				_x -= 366;
 				break;
 			case 4:

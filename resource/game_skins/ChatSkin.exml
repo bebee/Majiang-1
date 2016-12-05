@@ -1,10 +1,17 @@
 <?xml version='1.0' encoding='utf-8'?>
 <e:Skin class="ChatSkin" width="670" height="388" xmlns:e="http://ns.egret.com/eui" xmlns:ns1="*" xmlns:w="http://ns.egret.com/wing">
-	<e:Image source="panel_1" y="41" width="586" height="288" scale9Grid="19,19,25,17" x="42"/>
-	<e:Scroller width="586" height="288" x="41" y="41">
+	<e:Image source="panel_1" y="41" width="586" height="292" scale9Grid="19,19,25,17" x="42"/>
+	<e:Scroller width="586" height="291" x="41" y="41">
 		<e:Group id="_group">
 			<e:layout>
 				<e:VerticalLayout horizontalAlign="center"/>
+			</e:layout>
+		</e:Group>
+	</e:Scroller>
+	<e:Scroller width="509" y="41" height="291" x="41">
+		<e:Group id="_group_b" visible="false">
+			<e:layout>
+				<e:TileLayout horizontalAlign="left" verticalAlign="top" horizontalGap="24" verticalGap="0"/>
 			</e:layout>
 		</e:Group>
 	</e:Scroller>

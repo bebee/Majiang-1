@@ -38,6 +38,8 @@ class BaoPaiView extends egret.DisplayObjectContainer{
 
         this.addChild(this.cardView);
 
+        this.cardView.scaleX = this.cardView.scaleY = .75;
+
     }
     updatePai(pai:any){
 

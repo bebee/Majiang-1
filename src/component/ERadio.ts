@@ -65,12 +65,12 @@ module mui
             }
 
 
-            var dialog:CreateDialog = StackManager.findDialog(CreateDialog, "CreateDialog");
-
-            if(dialog && GameLayerManager.gameLayer().panelLayer.contains(dialog))
-            {
-                dialog.refreshText();
-            }
+            // var dialog:CreateDialog = StackManager.findDialog(CreateDialog, "CreateDialog");
+            //
+            // if(dialog && GameLayerManager.gameLayer().panelLayer.contains(dialog))
+            // {
+            //     dialog.refreshText();
+            // }
         }
 
         public setSelectIndex(index:number = 0):void

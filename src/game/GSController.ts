@@ -70,9 +70,9 @@ class GSController extends egret.EventDispatcher{
     //启动游戏主界面
     startView(){
 
-        FashionTools.setViewType(GlobalData.getInstance().cardType);
-
         GameLayerManager.gameLayer().openMainLayer();
+
+        this.scene.updateTableBG();
 
         this.showStateView();
         //this.gsView.visible = true;
@@ -87,17 +87,15 @@ class GSController extends egret.EventDispatcher{
         GSStateMgr.i.setState(GSState.State_CardPutline);
         */
     }
-
-
     //显示状态内容
     showStateView(){
 
-        switch(GSData.i.game_state){
+        switch(PublicVal.state){
 
             case 1://首次加入牌桌界面
 
-                this.visibleTwoFuncButton(true,true);
-                this.visibleFourFuncButton(false);
+                this.visibleTwoFuncButton(true);
+                this.visibleFourFuncButton(false,false);
                 this.visibleReadyIcon();
                 this.visibleRoomOwn();
                 this.visibleZhuang();
@@ -124,8 +122,8 @@ class GSController extends egret.EventDispatcher{
 
                 this.gsResultView.visible = false;
 
-                this.visibleTwoFuncButton(true,false);
-                this.visibleFourFuncButton(false);
+                this.visibleTwoFuncButton(true);
+                this.visibleFourFuncButton(false,false);
                 this.visibleReadyIcon();
                 this.visibleRoomOwn();
                 this.visibleZhuang();
@@ -157,9 +155,10 @@ class GSController extends egret.EventDispatcher{
                 this.scene.startButton.visible = false;
                 this.scene.inviteButton.visible = false;
                 this.scene.ruleText.visible = true;
+                this.scene.readyButton.visible = false;
 
-                this.visibleTwoFuncButton(false,false);
-                this.visibleFourFuncButton(true);
+                this.visibleTwoFuncButton(false);
+                this.visibleFourFuncButton(true,true);
 
                 this.gsView.hideReadyIcons();
                 this.visibleZhuang();
@@ -171,7 +170,6 @@ class GSController extends egret.EventDispatcher{
 
                 this.updateGangCur();
 
-                this.scene.readyButton.visible = false;
 
                 break;
             case 4://进入每轮牌局结算界面
@@ -185,11 +183,35 @@ class GSController extends egret.EventDispatcher{
                 this.gsResultView.visible = false;
 
                 break;
+            case 6://回放界面
+                this.gsView.visible = true;
+
+                this.scene.waitText.visible = false;
+                this.scene.startButton.visible = false;
+                this.scene.inviteButton.visible = false;
+                this.scene.ruleText.visible = true;
+                this.scene.readyButton.visible = false;
+
+                this.visibleTwoFuncButton(false);
+                this.visibleFourFuncButton(true,false);
+
+                this.gsView.hideReadyIcons();
+                this.visibleZhuang();
+
+                this.gsView.centerBoom.visible = true;
+                this.gsView.baoPaiView.visible = true;
+
+                this.gsView.playStateHeadReset();
+
+                this.updateCenterInfo();
+
+                this.visibleRoomOwn();
+                break;
         }
     }
 
     closeGSView(){
-        this.visibleTwoFuncButton(false,false);
+        this.visibleTwoFuncButton(false);
         this.hideLightSame();
         this.gsView.visible = false;
         this.hideFuncSelectMenu();
@@ -207,21 +229,21 @@ class GSController extends egret.EventDispatcher{
     closeResultView(){
 
         this.gsResultView.clear();
-
         this.gsResultView.visible = false;
 
     }
 
     //显示隐藏两个功能按钮(解散房间和返回微信)
-    visibleTwoFuncButton(boo1:boolean,boo2:boolean){
+    visibleTwoFuncButton(boo1:boolean){
 
         this.scene.weixinButton .visible = boo1;
         this.scene.jiesanButton .visible = boo1;  //bool2
 
     }
     //显示隐藏两个功能按钮(设置/解散/语音)
-    visibleFourFuncButton(boo:boolean) {
-        this.gsView.rightButtonCon.visible = this.gsView.rightTopButtonCon.visible = boo;
+    visibleFourFuncButton(boo1:boolean,boo2:boolean) {
+        this.gsView.rightTopButtonCon.visible = boo1;
+        this.gsView.rightButtonCon.visible = boo2;
     }
 
     //刷新杠的分数
@@ -230,7 +252,6 @@ class GSController extends egret.EventDispatcher{
         for(var i:number = 1; i <= 4 ;i++){
 
             this.gsView.headViews[i].numText.text = "" + GSData.i.gangCurs[i];
-
         }
     }
 
@@ -239,7 +260,7 @@ class GSController extends egret.EventDispatcher{
     updateRoom() {
 
         this.scene.updateRoomID(GSData.i.roomID);
-        this.scene.updateRule(GSData.i.rules);
+        this.scene.updateRule(PublicVal.i.rules);
         this.gsView.updateRoom();
         this.visibleReadyIcon();
 
@@ -251,7 +272,7 @@ class GSController extends egret.EventDispatcher{
     //开始按钮的显示和隐藏
     visibleStartButton(){
 
-        if(GSData.i.game_state == 1) {
+        if(PublicVal.state == 1) {
 
             var hasLeave:boolean = false;
 
@@ -341,9 +362,11 @@ class GSController extends egret.EventDispatcher{
 
         this.showStateView();
 
-        this.gsView.updateBaoPai(GSData.i.baoPai);
+        this.updateBaoView();
 
-        this.gsResultView.updateBaoPai(GSData.i.baoPai);
+        //this.gsView.updateBaoPai(PublicVal.i.bao);
+
+        //this.gsResultView.updateBaoPai(PublicVal.i.bao);
 
         this.setBoomDir(GSData.i.ownPos);
 
@@ -363,8 +386,10 @@ class GSController extends egret.EventDispatcher{
 
         this.showStateView();
 
-        this.gsView.updateBaoPai(GSData.i.baoPai);
-        this.gsResultView.updateBaoPai(GSData.i.baoPai);
+        //this.gsView.updateBaoPai(PublicVal.i.bao);
+        //this.gsResultView.updateBaoPai(PublicVal.i.bao);
+
+        this.updateBaoView();
 
         this.setBoomDir(GSData.i.ownPos);
 
@@ -375,7 +400,7 @@ class GSController extends egret.EventDispatcher{
 
         //进入开场效果
 
-        GSData.i.game_state = -1;
+        PublicVal.state = -1;
 
         GSStateMgr.i.setState(GSState.State_HeadToTarget);
 
@@ -387,7 +412,7 @@ class GSController extends egret.EventDispatcher{
     //显示隐藏某个方位准备图标和踢人图标
     visibleReadyIcon() {
 
-        if(GSData.i.game_state == 1 || GSData.i.game_state == 2) {
+        if(PublicVal.state == 1 || PublicVal.state == 2) {
 
             for (var i: number = 1; i <= 4; i++) {
 
@@ -397,7 +422,7 @@ class GSController extends egret.EventDispatcher{
 
                 readyIcon.visible = (GSData.i.readyFlag >> i & 1) == 1;
 
-                if (GSData.i.game_state == 1 && i > 1 && GSData.i.ownPos == 1) {
+                if (PublicVal.state == 1 && i > 1 && GSData.i.ownPos == 1) {
 
                     killIcon.visible = readyIcon.visible;
                 }else{
@@ -414,7 +439,7 @@ class GSController extends egret.EventDispatcher{
 
         for(var i:number = 1;i<= GSConfig.playerCount;i++){
 
-            this.gsView.getHeadView(i).visibleZhuang((GSData.i.zhuangFlag >> i & 1) == 1);
+            this.gsView.getHeadView(i).visibleZhuang((PublicVal.i.zhuangFlag >> i & 1) == 1);
 
         }
     }
@@ -423,7 +448,7 @@ class GSController extends egret.EventDispatcher{
 
         for(var i:number = 1;i<= GSConfig.playerCount;i++){
 
-            this.gsView.getHeadView(i).visibleRoomOwn((GSData.i.roomOwnFlag >> i & 1) == 1);
+            this.gsView.getHeadView(i).visibleRoomOwn((PublicVal.i.roomOwnFlag >> i & 1) == 1);
 
         }
     }
@@ -450,7 +475,7 @@ class GSController extends egret.EventDispatcher{
 
         var cardView = CardView.create(dir, 1, catchPai);
 
-        cardView.index = GSData.i.getHandPais(dir).length - 1;
+        cardView.index = PublicVal.i.getHandPais(dir).length - 1;
 
         cardView.posView(pos.x, pos.y);
 
@@ -472,7 +497,7 @@ class GSController extends egret.EventDispatcher{
 
             this.playTimeEffect(true,true);
 
-            if(GSData.i.game_state == -4){//听牌状态
+            if(PublicVal.state == -4){//听牌状态
                 //延时打尾牌
                 this.delayPushInterval = egret.setTimeout(this.delayPushPai,this,500);
             }
@@ -482,7 +507,7 @@ class GSController extends egret.EventDispatcher{
             this.playTimeEffect(true,false);
         }
 
-        if(GSData.i.game_state == -2){
+        if(PublicVal.state == -2){
 
             this.playTimeEffect(false,false);
         }
@@ -512,15 +537,15 @@ class GSController extends egret.EventDispatcher{
     //更新剩余牌数量 和圈数
     updateCenterInfo(){
 
-        this.gsView.centerBoom.updateLeftCount(GSData.i.leftCount);
+        this.gsView.centerBoom.updateLeftCount(PublicVal.i.dui_num);
 
-        this.gsView.centerBoom.updateRoundCount(GSData.i.cur_round,GSData.i.max_round);
+        this.gsView.centerBoom.updateRoundCount(PublicVal.i.cur_round,PublicVal.i.max_round);
 
     }
 
     roundPlay(){//牌局开始
 
-        GSData.i.game_state = 3;
+        PublicVal.state = 3;
 
         GSData.i.pushStartHandPai();
 
@@ -535,13 +560,18 @@ class GSController extends egret.EventDispatcher{
     }
 
 
+    updateBaoView(){
+
+        this.gsView.updateBaoPai(PublicVal.i.bao);
+        this.gsResultView.updateBaoPai(PublicVal.i.bao);
+    }
 
     //播放换宝
     playBao(){
 
         this.gsView.playBaoEffect();
-        this.gsView.updateBaoPai(GSData.i.baoPai);
-        this.gsResultView.updateBaoPai(GSData.i.baoPai);
+
+        this.updateBaoView();
 
         this.updateCenterInfo();
 
@@ -600,7 +630,7 @@ class GSController extends egret.EventDispatcher{
 
             mjView.addHandCard(cardView);
 
-            if (dir == 1 && activate) {
+            if (dir == 1 && activate && GSConfig.handCardActivate) {
                 cardView.addClick(this.onCardClick, this);
                 cardView.activate();
             }
@@ -638,7 +668,7 @@ class GSController extends egret.EventDispatcher{
 
         for(var dir:number = 1; dir <= 4 ;dir++){
 
-            var pais = GSData.i.getHandPais(dir);
+            var pais = PublicVal.i.getHandPais(dir);
 
             var pos = GSConfig.handPosPlus[dir];
 
@@ -687,7 +717,7 @@ class GSController extends egret.EventDispatcher{
 
     onCardClick(e:egret.TouchEvent){
 
-        if(GSData.i.game_state == -1 || GSData.i.game_state == -2 || GSData.i.game_state == -3 || GSData.i.game_state == -4) return;
+        if(PublicVal.state == -1 || PublicVal.state == -2 || PublicVal.state == -3 || PublicVal.state == -4) return;
 
         var cardView:CardView = <CardView>e.currentTarget;
 
@@ -699,7 +729,7 @@ class GSController extends egret.EventDispatcher{
 
         }else{
 
-            if(GSData.i.turnDir == 1 && GSConfig.handLens[GSData.i.getHandPais(1).length] && this.allowPushCard){
+            if(GSData.i.turnDir == 1 && GSConfig.handLens[PublicVal.i.getHandPais(1).length] && this.allowPushCard){
 
                 //进入打牌
 
@@ -713,7 +743,7 @@ class GSController extends egret.EventDispatcher{
 
                 console.log("发送自己的打牌信息",pai);
 
-                if(GSData.i.isTing) GSData.i.game_state = -4;
+                if(GSData.i.isTing) PublicVal.state = -4;
 
 
             }else if(!GSData.i.gang_end && GSData.i.zhuangDir == 1) {//开局轮杠中
@@ -750,7 +780,6 @@ class GSController extends egret.EventDispatcher{
 
     //添加池中牌显示
     pushPoolCard(dir:number,pai:any) {
-
 
 
         var mjview = GSController.i.gsView.MJViews[dir];
@@ -807,7 +836,7 @@ class GSController extends egret.EventDispatcher{
     //显示吃碰杠功能菜单
     showFuncSelectMenu(tip:boolean = true) {
 
-        if(GSData.i.roundStartHasFunction && GSData.i.game_state == 3) {
+        if(GSData.i.roundStartHasFunction && PublicVal.state == 3) {
 
             this.moveBack(false);
 
@@ -863,12 +892,12 @@ class GSController extends egret.EventDispatcher{
 
     clear(){
 
-        for(var i:number = 1;i <= 4;i++){
+/*        for(var i:number = 1;i <= 4;i++){
 
             GSConfig.dymnicHandPos[i].x = GSConfig.handPosPlus[i].x;
             GSConfig.dymnicHandPos[i].y = GSConfig.handPosPlus[i].y;
 
-        }
+        }*/
         this.allowPushCard = true;
 
         this.isAllowFuncClick = true;
@@ -907,17 +936,18 @@ class GSController extends egret.EventDispatcher{
 
         mjView.removeAllHandCard();
 
-        var funcPais = GSData.i.getFuncPais(dir);
+        var funcPais = PublicVal.i.getFuncPais(dir);
+        var handPais = PublicVal.i.getHandPais(dir);
+
+        var mjView: MJView = this.gsView.MJViews[dir];
+        var handStyle : number = GSConfig.handStylesPlus[dir];
 
         var pos = funcPais.length > 0 ? GSConfig.funcPos[dir]:GSConfig.handPosPlus[dir];
 
+        //var pos = GSConfig.handPosPlus[dir];
+
         var sPosX: number = pos.x;
         var sPosY: number = pos.y;
-        var mjView: MJView = this.gsView.MJViews[dir];
-
-        var handPais = GSData.i.getHandPais(dir);
-        var poolPais = GSData.i.getPoolPais(dir);
-
 
         //解析功能牌型
         if (funcPais.length > 0) {
@@ -984,6 +1014,8 @@ class GSController extends egret.EventDispatcher{
 
                         var style: number;
 
+                        var anGangStyle = GSConfig.anGangStylePlus[dir];
+
                         for (var j: number = 0; j < pais.length; j++) {
 
                             var jpai = pais[j];
@@ -993,7 +1025,7 @@ class GSController extends egret.EventDispatcher{
                                 var gy: number = 0;
 
                                 if (k == 3) {
-                                    (dir == 1) && (style = 3) || (style = 2);
+                                    style = anGangStyle;
                                     gx = g.x;
                                     gy = g.y;
                                 } else {
@@ -1085,20 +1117,35 @@ class GSController extends egret.EventDispatcher{
         //解析手牌
         if (handPais.length > 0) {
 
-            this.createIndexPais(mjView, sPosX, sPosY, dir, 1, handPais,true,true,lensCheck);
+            this.createIndexPais(mjView, sPosX, sPosY, dir, handStyle, handPais,true,true,lensCheck);
 
             if (updatePool) {
                 //池牌
+               /* mjView.removeAllPoolCard();
+
                 for (var i: number = 0; i < poolPais.length; i++) {
                     var cardView: CardView = CardView.create(dir, 4, poolPais[i]);
                     var o = GSConfig.getPoolPos(dir, i);
                     cardView.posView(o.x, o.y);
                     mjView.addPoolCard(cardView);
-                }
+                }*/
+               this.updatePoolPaiView(dir);
             }
         }
         //TODO 相关手牌提示
         //GameDispatcher.ins.dispatchEvent(EventType.Pai_Tips, true);
+    }
+    updatePoolPaiView(dir:number){
+
+        var poolPais = PublicVal.i.getPoolPais(dir);
+        var mjView = this.gsView.MJViews[dir];
+        mjView.removeAllPoolCard();
+        for (var i: number = 0; i < poolPais.length; i++) {
+            var cardView: CardView = CardView.create(dir, 4, poolPais[i]);
+            var o = GSConfig.getPoolPos(dir, i);
+            cardView.posView(o.x, o.y);
+            mjView.addPoolCard(cardView);
+        }
     }
 
     //播放手牌特效
@@ -1231,13 +1278,15 @@ class GSController extends egret.EventDispatcher{
     //刷新手牌大小
     updateHandViewSize(){
 
-        if(GSData.i.game_state == 3) {
+        if(PublicVal.state == 3) {
 
             var mjView = this.gsView.MJViews[1];
 
-            if(GSData.i.getFuncPais(1).length == 0){//无功能牌
+            var pos = GSConfig.dymnicHandPos[1];
 
-                GSConfig.dymnicHandPos[1] = GSConfig.handPosPlus[1];
+            if(PublicVal.i.getFuncPais(1).length == 0){//无功能牌
+
+                pos = GSConfig.handPosPlus[1];
             }
 
             var scale = GSConfig.posRulePlus[1][1].scale;
@@ -1253,13 +1302,13 @@ class GSController extends egret.EventDispatcher{
                     card.changeScale(scale);
 
                     //card.posView(GSConfig.dymnicHandPos[1].x + o.x, card.y);
-                    card.pos.x = GSConfig.dymnicHandPos[1].x + o.x;
+                    card.pos.x = pos.x + o.x;
 
                     card.x = card.pos.x;
                 }
             }
 
-            var pais = GSData.i.getHandPais(1);
+            var pais = PublicVal.i.getHandPais(1);
 
             var catchPos = GSConfig.catchPos[1];
             //如果出牌长度范围
@@ -1270,11 +1319,74 @@ class GSController extends egret.EventDispatcher{
 
             }else{
                 o = GSConfig.getPosByIndex(1,1,card.index + 1);
-                catchPos.x = GSConfig.dymnicHandPos[1].x + o.x + catchPos.dx;
-                catchPos.y = GSConfig.dymnicHandPos[1].y + o.y + catchPos.dy;
+                catchPos.x = pos.x + o.x + catchPos.dx;
+                catchPos.y = pos.y + o.y + catchPos.dy;
             }
 
         }
+    }
+    //更新游戏风格
+    updateGameStyle(){
+
+
+        if(PublicVal.state == 3 || PublicVal.state == 6) {
+
+            this.scene.updateTableBG();
+
+            this.gsView.baoPaiView.cardView.changeBGStyle();
+            this.gsResultView.baoPaiView.cardView.changeBGStyle();
+
+            for(var i:number = 1;i <=4;i ++){
+
+                var mjView = this.gsView.MJViews[i];
+
+                for(var j:number = 0 ;j < mjView.handCon.numChildren;j++){
+
+                    var cardView = <CardView>mjView.handCon.getChildAt(j);
+                    cardView.changeBGStyle();
+                }
+                for(var j:number = 0 ;j < mjView.poolCon.numChildren;j++){
+
+                    var cardView = <CardView>mjView.poolCon.getChildAt(j);
+                    cardView.changeBGStyle();
+                }
+            }
+        }
+    }
+
+
+
+
+    nullAllHead(){
+
+        for(var i:number = 1 ; i <= 4 ;i++){
+
+            this.gsView.headViews[i].nullPlayer();
+        }
+    }
+    //更新replay房间信息
+    updateReplayRoom(dirPersons:any) {
+
+        for (var i: number = 1; i <= 4; i++) {
+
+            var headView = this.gsView.headViews[i];
+
+            var person: any = dirPersons[i];
+
+            headView.nameText.visible = true;
+
+            headView.idText.visible = true;
+
+            headView.nameText.text = person.nick;
+
+            headView.idText.text = person.uid;
+
+            headView.numText.visible = false;
+
+            headView.headIcon.setHeadPic(person.pic);
+
+        }
+
     }
 }
 

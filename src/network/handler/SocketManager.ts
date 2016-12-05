@@ -36,7 +36,14 @@ class SocketManager {
         {
             if(GameConfig.users)
             {
-                this.game_conn = new SocketHandler(GameConfig.address_test["ip"], GameConfig.address_test["port"], 2);
+                if(GameConfig.ip && GameConfig.port)
+                {
+                    this.game_conn = new SocketHandler(GameConfig.ip, GameConfig.port, 2);
+                }
+                else
+                {
+                    this.game_conn = new SocketHandler(GameConfig.address_test["ip"], GameConfig.address_test["port"], 2);
+                }
             }
             else
             {

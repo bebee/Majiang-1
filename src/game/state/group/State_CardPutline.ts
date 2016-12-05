@@ -85,7 +85,10 @@ class State_CardPutline extends BaseState{
 
         if(this.level == 3){
 
-            GSData.i.sortHandPai();
+
+            var handPais = PublicVal.i.getHandPais(1);
+
+            FashionTools.sortPai(handPais);
 
             for (var i:number = 0; i < 13; i++) {
 
@@ -93,7 +96,7 @@ class State_CardPutline extends BaseState{
 
                 cardView.changeStyle(1,false);
 
-                cardView.changePai(GSData.i.getHandPais(1)[i]);
+                cardView.changePai(handPais[i]);
 
                 cardView.activate();
 

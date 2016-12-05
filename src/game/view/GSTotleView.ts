@@ -84,7 +84,7 @@ class GSTotleView extends eui.Component
         this.ruleLabel.top = 80;
         this.ruleLabel.bold = true;
         this.ruleLabel.size = 20;
-        this.ruleLabel.text = "" + GSData.i.rules;
+        this.ruleLabel.text = "" + PublicVal.i.rules;
 
         this._group = new eui.Group();
         this._group.right = this._group.left = this._group.bottom = this._group.top = 0;

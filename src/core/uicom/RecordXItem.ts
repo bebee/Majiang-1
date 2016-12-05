@@ -79,8 +79,7 @@ class RecordXItem extends eui.Component
 
     private onClick():void
     {
-        EffectUtils.showTips("即将开放", 5);
-        //SocketManager.getInstance().getGameConn().send(21, {"args":{"id":this.obj[1]}});
+        SocketManager.getInstance().getGameConn().send(21, {"args":{"id":this.obj[1]}});
     }
 
     createChildren()

@@ -32,6 +32,9 @@ class S25
                     GSDataProxy.i.S2C_RoundReadyAll();
 
                     break;
+                case 4:  //聊天表情
+                    Global.showExpression(some.expression);
+                    break;
             }
         }
     }

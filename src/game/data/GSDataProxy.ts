@@ -24,17 +24,17 @@ class GSDataProxy {
 
         this.gData.roomID = obj.roomid;
 
-        this.gData.baoPai = obj.bao;
+        PublicVal.i.bao = obj.bao;
 
         this.gData.turnPos = obj.turn;
 
         this.gData.zhuangPos = obj.zhuang;
 
-        this.gData.leftCount = obj.dui_num;
+        PublicVal.i.dui_num = obj.dui_num;
 
-        this.gData.cur_round = obj.cur_round;
+        PublicVal.i.cur_round = obj.cur_round;
 
-        this.gData.max_round = obj.max_round;
+        PublicVal.i.max_round = obj.max_round;
 
 
         //步骤大于4，表示过了开局杠牌时间
@@ -80,7 +80,7 @@ class GSDataProxy {
 
         this.gData.zhuangDir = this.gData.getDir(this.gData.zhuangPos);
 
-        this.gData.zhuangFlag = 1 << this.gData.zhuangDir;
+        PublicVal.i.zhuangFlag = 1 << this.gData.zhuangDir;
 
         var persons = this.gData.rebackData.person;
 
@@ -104,7 +104,7 @@ class GSDataProxy {
 
             if (Object.keys(men).length > 0) {//解析功能牌
 
-                var funcPais = this.gData.getFuncPais(dir);
+                var funcPais = PublicVal.i.getFuncPais(dir);
 
                 if (men[1]) {
 
@@ -191,13 +191,13 @@ class GSDataProxy {
 
                     var startPai = shou.pop();
 
-                    this.gData.sortHandPai(shou);
+                    FashionTools.sortPai(shou);
 
                     shou.push(startPai);
 
                 }else{
 
-                    this.gData.sortHandPai(shou);
+                    FashionTools.sortPai(shou);
 
                 }
 
@@ -364,11 +364,11 @@ class GSDataProxy {
 
         this.gData.turnDir = this.gData.getDir(pos);
 
-        this.gData.leftCount = dui_num;
+        PublicVal.i.dui_num = dui_num;
 
         if(gang_end != null) this.gData.gang_end = true;
 
-        if (this.gData.turnDir != 1 && this.gData.game_state != -1){// && this.gData.isZhuangPush) {
+        if (this.gData.turnDir != 1 && PublicVal.state != -1){// && this.gData.isZhuangPush) {
             //轮到他人的时候，并且庄家出完牌,进行假象牌的添加
             this.gData.pushHandPai(this.gData.turnDir, null);
 
@@ -393,7 +393,7 @@ class GSDataProxy {
 
         this.gData.pushHandPai(1, pai);
 
-        this.gData.leftCount = dui_num;
+        PublicVal.i.dui_num = dui_num;
 
         this.gData.turnDir = (fen ? 0 : 1);
 
@@ -401,7 +401,7 @@ class GSDataProxy {
 
             console.log("尾局分张");
 
-            GSData.i.game_state = -2;
+            PublicVal.state = -2;
         }
         GSController.i.catchCard(1);
 
@@ -417,9 +417,11 @@ class GSDataProxy {
 
         console.log("换宝!");
 
-        this.gData.baoPai = obj.bao;
+        //this.gData.baoPai = obj.bao;
 
-        this.gData.leftCount = obj.dui_num;
+        PublicVal.i.bao = obj.bao;
+
+        PublicVal.i.dui_num = obj.dui_num;
 
         GSController.i.playBao();
     }
@@ -476,15 +478,7 @@ class GSDataProxy {
                 //number 判断是幺杠 还是九杠
                 //funcPais.push({sort:2,action:action,number:pai[0].number,pai:pai,ever:[1,1,1]});
 
-                if (pai[0].number == 1) {
-
-                    GameSound.PlaySound("yaogang_" + this.gData.getSexByPos(pos));
-
-                } else {
-                    GameSound.PlaySound("jiugang_" + this.gData.getSexByPos(pos));
-
-                }
-
+                GameSound.PlaySound("gang_" + this.gData.getSexByPos(pos));
 
                 this.gData.addFuncPai(3, dir, action, pai, pai[0].number, true);
 
@@ -526,7 +520,7 @@ class GSDataProxy {
 
                 this.gData.addFuncPai(2, dir, action, pai);
                 //有碰就删除掉
-                var removeLen = this.gData.removePengFunc(dir, tmpPai) ? 1 : 3;
+                var removeLen = PublicVal.i.removePengFunc(dir, tmpPai) ? 1 : 3;
 
                 if (dir == 1) {
                     if (removeLen == 1) {
@@ -559,11 +553,11 @@ class GSDataProxy {
                 break;
             case 27://幺九杠 补蛋
 
-                GameSound.PlaySound("bugang_" + this.gData.getSexByPos(pos));
+                GameSound.PlaySound("gang_" + this.gData.getSexByPos(pos));
 
                 pai.length -= 3;
 
-                var everPai = this.gData.getPai(dir, 22, pai[0].number);
+                var everPai = PublicVal.i.getPai(dir, 22, pai[0].number);
 
                 var everSrc = [1, 1, 1];
 
@@ -584,11 +578,11 @@ class GSDataProxy {
                 break;
             case 28://中发白  补蛋
 
-                GameSound.PlaySound("bugang_" + this.gData.getSexByPos(pos));
+                GameSound.PlaySound("gang_" + this.gData.getSexByPos(pos));
 
                 pai.length -= 3;
 
-                var everPai = this.gData.getPai(dir, 26);
+                var everPai = PublicVal.i.getPai(dir, 26);
 
                 var everSrc = [1, 1, 1];
 
@@ -625,9 +619,8 @@ class GSDataProxy {
 
         //删除池子牌显示
         if (poolPai && poolPai.pos > 0) {
-
             var poolPaiDir = GSData.i.getDir(poolPai.pos);
-            this.gData.popPoolPai(poolPaiDir);
+            PublicVal.i.popPoolPai(poolPaiDir);
             GSController.i.removePoolCard(poolPaiDir);
         }
         GSController.i.setArrowDir(dir);
@@ -652,22 +645,24 @@ class GSDataProxy {
         GameSound.PlaySound("sound_throw");
 
         this.gData.currPoolPai = obj.data;
-        this.gData.currPoolPai.dir = this.gData.getDir(obj.data.pos);
+        //this.gData.currPoolPai.dir = this.gData.getDir(obj.data.pos);
+        var dir = this.gData.getDir(obj.data.pos);
+        this.gData.currPoolPai.dir = dir;
         //添加池牌数据
-        this.gData.pushPoolPai(this.gData.currPoolPai);
+        PublicVal.i.pushPoolPai(dir,this.gData.currPoolPai);
         //清除手牌数据
-        this.gData.removeHandPai(this.gData.currPoolPai.dir, this.gData.currPoolPai);
+        this.gData.removeHandPai(dir, this.gData.currPoolPai);
 
-        console.log("出牌人的方位:", this.gData.currPoolPai.dir);
+        console.log("出牌人的方位:", dir);
         //触发出牌显示
-        GSController.i.pushPoolCard(this.gData.currPoolPai.dir, this.gData.currPoolPai);
+        GSController.i.pushPoolCard(dir, this.gData.currPoolPai);
 
     }
     S2C_FinalResult(result:any) {
 
         this.gData.result = result;
 
-        if(this.gData.game_state == -2){//分张 延时
+        if(PublicVal.state == -2){//分张 延时
 
             egret.setTimeout(this.delay_Final,this,1200);
 
@@ -678,7 +673,7 @@ class GSDataProxy {
     }
     delay_Final(){
 
-        this.gData.game_state = 4;
+        PublicVal.state = 4;
 
         this.gData.roundStarted = true;
 
@@ -689,7 +684,7 @@ class GSDataProxy {
 
             var left = this.gData.result.person[i].left;
 
-            this.gData.sortHandPai(left);
+            FashionTools.sortPai(left);
 
         }
 
@@ -809,9 +804,6 @@ class GSDataProxy {
 
     }
 
-
-
-
     //同步继续游戏
     S2C_ContinueGame(obj:any){
 
@@ -832,13 +824,10 @@ class GSDataProxy {
     //同步房间玩家信息,判断方位
     S2C_RoomPlayers(rules:number[],infos:any[]){
 
-        if(this.gData.rules == "") {
+        if(PublicVal.i.rules == "") {
 
-            for (var i: number = 0; i < rules.length; i++) {
+            PublicVal.i.rules = FashionTools.formatRules(rules);
 
-                this.gData.rules += GameConfig.rules[rules[i]] + " ";
-
-            }
         }
         for(var i:number = 0; i < infos.length;i++){
 
@@ -958,14 +947,17 @@ class GSDataProxy {
 
         this.gData.roomOwnDir = this.gData.getDir(1);
 
-        this.gData.roomOwnFlag = 1 << this.gData.roomOwnDir;
-
+        PublicVal.i.roomOwnFlag = 1 << this.gData.roomOwnDir;
 
         if(this.gData.firstInRoom){
 
             this.gData.firstInRoom = false;
             //每次进房间启动游戏主界面
             GSController.i.startView();
+            GSConfig.gameConfigInit();
+            //设置牌面尺寸
+            FashionTools.setViewType(GlobalData.getInstance().cardType);
+            FashionTools.setGameStyle(GlobalData.getInstance().cardStyle);
         }
 
         if(this.gData.rebackData) {
@@ -993,13 +985,13 @@ class GSDataProxy {
 
             case 1:
 
-                this.gData.game_state = 1;
+                PublicVal.state = 1;
 
                 break;
 
             case 3:
 
-                this.gData.game_state = 3;
+                PublicVal.state = 3;
                 //解析重连牌局
                 this.parseRebackPai();
 
@@ -1010,7 +1002,7 @@ class GSDataProxy {
                 break;
             case 2://重连继续牌桌
 
-                this.gData.game_state = 2;
+                PublicVal.state = 2;
 
 
                 var gContinue: any = this.gData.rebackData.continue;
@@ -1054,33 +1046,34 @@ class GSDataProxy {
 
         console.log("开局,牌长度:",obj.data.pai.length);
 
-        this.gData.baoPai = obj.data.bao;
+        PublicVal.i.bao = obj.data.bao;
 
-        this.gData.cur_round = obj.data.cur_round;
-        this.gData.max_round = obj.data.max_round;
+        PublicVal.i.cur_round = obj.data.cur_round;
+        PublicVal.i.max_round = obj.data.max_round;
 
-        this.gData.allPais[2].handPais = new Array(13);
-        this.gData.allPais[3].handPais = new Array(13);
-        this.gData.allPais[4].handPais = new Array(13);
+        PublicVal.i.allPais[2].handPais = new Array(13);
+        PublicVal.i.allPais[3].handPais = new Array(13);
+        PublicVal.i.allPais[4].handPais = new Array(13);
 
         if(paiLen >= 13){
 
             //进入开局
-            this.gData.allPais[1].handPais = obj.data.pai;
+            PublicVal.i.allPais[1].handPais = obj.data.pai;
 
             if(obj.data.pai.length == 14)
             {
-                this.gData.allPais[1].catchPai = this.gData.allPais[1].handPais.shift();
+                PublicVal.i.allPais[1].catchPai = PublicVal.i.allPais[1].handPais.shift();
             }
 
             this.gData.zhuangPos = obj.data.zhuang;
 
             this.gData.zhuangDir = this.gData.getDir(obj.data.zhuang);
 
-            this.gData.zhuangFlag = 1 << this.gData.zhuangDir;
+            PublicVal.i.zhuangFlag = 1 << this.gData.zhuangDir;
 
-            this.gData.leftCount = obj.data.dui_num;
+            PublicVal.i.dui_num = obj.data.dui_num;
 
+            //this.gData.leftCount = obj.data.dui_num;
 
             for(var k in obj.data.cur){
 
@@ -1088,18 +1081,16 @@ class GSDataProxy {
                 GSData.i.gangCurs[GSData.i.getDir(pos)] = obj.data.cur[k];
 
             }
-            GSData.i.game_state = 3;
+            PublicVal.state = 3;
 
             GSController.i.startGame();
-
-            GSController.i.gsView.updateAllCount(this.gData);
 
         }
     }
     //牌局都准备好.可以出牌
     S2C_RoundReadyAll() {
 
-        if(GSData.i.game_state == - 1) {
+        if(PublicVal.state == - 1) {
 
             this.gData.roundReady++;
 
@@ -1110,4 +1101,5 @@ class GSDataProxy {
             }
         }
     }
+
 }

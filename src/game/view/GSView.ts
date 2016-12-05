@@ -410,16 +410,7 @@ class GSView extends egret.Sprite {
 
     }
 
-    countTexts: egret.TextField[];
-    //更新牌长度显示
-    updateAllCount(obj: any) {
-        /*for(var i = 0 ; i < 4; i ++){
-         var t =  this.countTexts[i];
-         t.textColor = 0xFF0000;
-         t.size = 30;
-         t.text = ""+obj.getHandPais(i+1).length;
-         }*/
-    }
+
 
 
     drawLine() {
@@ -446,6 +437,8 @@ class GSView extends egret.Sprite {
         this.frontUIContainer.addChild(this.draw);
 
     }
+
+
 
     //更新房间信息
     updateRoom() {
@@ -481,10 +474,6 @@ class GSView extends egret.Sprite {
 
                 //this.visibleReadyIcon(this.readyIcons[i],true);
 
-            }
-
-            if(i > 1) {
-                //this.visibleKillIcon(headView.headIcon.killIcon, true);
             }
 
             headView.nameText.text = player.nick;
@@ -608,14 +597,6 @@ class GSView extends egret.Sprite {
 
     //播放功能特效
     playFuncEffect(dir: number, action: number) {
-/*        this.funcEffect.texture = GameRes.getUI(GSConfig.funcSelects[GSConfig.actionPVP[action]].res);
-        this.funcEffect.x = GSConfig.funcPlayPos[dir].x;
-        this.funcEffect.y = GSConfig.funcPlayPos[dir].y;
-        this.funcEffect.scaleX = 2;
-        this.funcEffect.scaleY = 2;
-        egret.Tween.get(this.funcEffect).to({scaleX: 1, scaleY: 1}, 200).to({}, 500).call(_=> {
-            this.funcEffect.texture = null
-        }, this);*/
 
         var texture = GameRes.getUI(GSConfig.funcSelectRes[GSConfig.actionPVP[action]]);
         this.funcEffect.x = GSConfig.funcPlayPos[dir].x;
@@ -623,7 +604,6 @@ class GSView extends egret.Sprite {
 
         this.funcEffect.play(texture);
 
-        
     }
 
     //播放换宝特效

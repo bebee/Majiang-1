@@ -108,10 +108,20 @@ class Main extends eui.UILayer {
 
         SceneManager.open(LoginScene, "LoginScene");
 
-        if(!NativeApi.getLocalData("music_volume")) NativeApi.setLocalData("music_volume", 1);
+        if(!NativeApi.getLocalData("music_volume"))
+        {
+            NativeApi.setLocalData("music_volume", 0.2);
+
+            GameMusic._volume = 0.2;
+        }
         else GameMusic._volume = +NativeApi.getLocalData("music_volume");
 
-        if(!NativeApi.getLocalData("sound_volume")) NativeApi.setLocalData("sound_volume", 1);
+        if(!NativeApi.getLocalData("sound_volume"))
+        {
+            NativeApi.setLocalData("sound_volume", 0.5);
+
+            GameSound._volume = 0.5;
+        }
         else GameSound._volume = +NativeApi.getLocalData("sound_volume");
 
         if(!NativeApi.getLocalData("pai"))
@@ -123,7 +133,15 @@ class Main extends eui.UILayer {
             GlobalData.getInstance().cardType = +NativeApi.getLocalData("pai");
         }
 
-        if(!NativeApi.getLocalData("switch")) NativeApi.setLocalData("switch", 1);
+        if(!NativeApi.getLocalData("style"))
+        {
+            NativeApi.setLocalData("style", 1);
+        }
+        else
+        {
+            GlobalData.getInstance().cardStyle = +NativeApi.getLocalData("style");
+        }
 
+        if(!NativeApi.getLocalData("switch")) NativeApi.setLocalData("switch", 1);
     }
 }

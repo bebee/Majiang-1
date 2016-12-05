@@ -1,7 +1,7 @@
 {
 	"groups":[
 	{
-		"keys":"shop_icon,blue_game_btn,head_001,head_bg,head_kuang_bg,horn_bg,horn_icon,money_bg,money_icon,notice_bg,red_game_btn,rule_icon,set_icon,dialog_bg,close_btn,lymj_bg,lymj_text,yellow_game_btn,panel_1,dialog_head_img,btn_blue,img_line,btn_green,btn_red,gameui_json,game_bg,card,JS_share_button_png,JS_continue_button_png,game_button_quit_png,game_button_setting_png,game_siri_png,game_talk_png,btn_cheng,lashen_15,card_add,voice_icon,rule,logo,game_weixin_button,game_jiesan_button,game_invite_button,game_start_button,share_img,setting_huawen,create_btn_img,create_kspj,create_password_bg,create_qd,room_btn,select_center,select_left,create_xz0,create_xz1,check_off_btn,check_on_btn,create_btn,start_btn,clickeff_btn,joingame_txt,record_img1,record_img2,record_txt,radio_btn,setting_progressbar_bg,setting_progressbar1,setting_txt,sound_close_btn,sound_open_btn,shop_txt,shop_dialog_head_img,setting_line,rule_img,select_right,clickeff_of_btn,joinpassword_txt,random_img,bind_img,msg_title,diss_cuo,diss_dui,diss_title,activit_jian,rule_txt,card_0,card_1,card_2,card_3,card_4,card_5,card_6,card_7,card_8,card_9,card_1_btn,card_0_btn",
+		"keys":"shop_icon,blue_game_btn,head_001,head_bg,head_kuang_bg,horn_bg,horn_icon,money_bg,money_icon,notice_bg,red_game_btn,rule_icon,set_icon,dialog_bg,close_btn,lymj_bg,lymj_text,yellow_game_btn,panel_1,dialog_head_img,btn_blue,img_line,btn_green,btn_red,gameui_json,game_bg,card,JS_share_button_png,JS_continue_button_png,game_button_quit_png,game_button_setting_png,game_siri_png,game_talk_png,btn_cheng,lashen_15,card_add,voice_icon,rule,logo,game_weixin_button,game_jiesan_button,game_invite_button,game_start_button,share_img,setting_huawen,create_btn_img,create_kspj,create_password_bg,create_qd,room_btn,select_center,select_left,create_xz0,create_xz1,check_off_btn,check_on_btn,create_btn,start_btn,clickeff_btn,joingame_txt,record_img1,record_img2,record_txt,radio_btn,setting_progressbar_bg,setting_progressbar1,setting_txt,sound_close_btn,sound_open_btn,shop_txt,shop_dialog_head_img,setting_line,rule_img,select_right,clickeff_of_btn,joinpassword_txt,random_img,bind_img,msg_title,diss_cuo,diss_dui,diss_title,activit_jian,rule_txt,card_0,card_1,card_2,card_3,card_4,card_5,card_6,card_7,card_8,card_9,card_1_btn,card_0_btn,chat_btn_bl,chat_btn_ca,chat_btn_cl,chat_btn_ba,btn_shiming,idcard_title,card_jd_btn,card_sh_btn",
 		"name":"preload"
 	},
 	{
@@ -9,12 +9,16 @@
 		"name":"login"
 	},
 	{
-		"keys":"chat_1_4,chat_1_5,chat_1_6,chat_1_7,chat_1_8,chat_1_9,chat_1_10,chat_1_11,chat_0_0,chat_0_1,chat_0_2,chat_0_3,chat_0_4,chat_0_5,chat_0_6,chat_0_7,chat_0_8,chat_0_9,chat_0_10,chat_0_11,chat_1_0,chat_1_1,chat_1_2,chat_1_3,sound_other_player_leave,sound_ready,sound_throw,sound_win,sound_down,sound_duijukaishi,sound_huang,sound_lost,sound_other_player_enter,1_8_0,1_9_0,2_1_0,2_2_0,2_3_0,2_4_0,2_5_0,2_6_0,2_7_0,2_8_0,2_9_0,3_1_0,3_2_0,3_3_0,3_4_0,3_5_0,3_6_0,3_7_0,3_8_0,3_9_0,4_1_0,4_2_0,4_3_0,bao_0,bugang_0,cha_0,chi_0,dianpao_0,gang_0,jiugang_0,xuanfenggang_0,yaogang_0,zimo_0,1_1_0,1_2_0,1_3_0,1_4_0,1_5_0,1_6_0,1_7_0,1_7_1,1_8_1,1_9_1,2_1_1,2_2_1,2_3_1,2_4_1,2_5_1,2_6_1,2_7_1,2_8_1,2_9_1,3_1_1,3_2_1,3_3_1,3_4_1,3_5_1,3_6_1,3_7_1,3_8_1,3_9_1,4_1_1,4_2_1,4_3_1,bao_1,bugang_1,cha_1,chi_1,dianpao_1,gang_1,jiugang_1,xuanfenggang_1,yaogang_1,zimo_1,1_1_1,1_2_1,1_3_1,1_4_1,1_5_1,1_6_1,sound_card_hover",
+		"keys":"chat_1_4,chat_1_5,chat_1_6,chat_1_7,chat_1_8,chat_1_9,chat_1_10,chat_1_11,chat_0_0,chat_0_1,chat_0_2,chat_0_3,chat_0_4,chat_0_5,chat_0_6,chat_0_7,chat_0_8,chat_0_9,chat_0_10,chat_0_11,chat_1_0,chat_1_1,chat_1_2,chat_1_3,sound_other_player_leave,sound_ready,sound_throw,sound_win,sound_down,sound_duijukaishi,sound_huang,sound_lost,sound_other_player_enter,1_8_0,1_9_0,2_1_0,2_2_0,2_3_0,2_4_0,2_5_0,2_6_0,2_7_0,2_8_0,2_9_0,3_1_0,3_2_0,3_3_0,3_4_0,3_5_0,3_6_0,3_7_0,3_8_0,3_9_0,4_1_0,4_2_0,4_3_0,bao_0,cha_0,chi_0,dianpao_0,gang_0,xuanfenggang_0,zimo_0,1_1_0,1_2_0,1_3_0,1_4_0,1_5_0,1_6_0,1_7_0,1_7_1,1_8_1,1_9_1,2_1_1,2_2_1,2_3_1,2_4_1,2_5_1,2_6_1,2_7_1,2_8_1,2_9_1,3_1_1,3_2_1,3_3_1,3_4_1,3_5_1,3_6_1,3_7_1,3_8_1,3_9_1,4_1_1,4_2_1,4_3_1,bao_1,cha_1,chi_1,dianpao_1,gang_1,xuanfenggang_1,zimo_1,1_1_1,1_2_1,1_3_1,1_4_1,1_5_1,1_6_1,sound_card_hover,chat_0_12,chat_0_13,chat_0_14,chat_0_15,chat_1_12,chat_1_13,chat_1_14,chat_1_15",
 		"name":"sound"
 	},
 	{
-		"keys":"music_game,music_scene",
+		"keys":"music_scene",
 		"name":"music"
+	},
+	{
+		"keys":"expression19.1,expression19.2,expression20.1,expression20.2,expression1.1,expression1.2,expression2.1,expression2.2,expression3.1,expression3.2,expression4.1,expression4.2,expression5.1,expression5.2,expression6.1,expression6.2,expression7.1,expression7.2,expression8.1,expression8.2,expression9.1,expression9.2,expression10.1,expression10.2,expression11.1,expression11.2,expression12.1,expression12.2,expression13.1,expression13.2,expression14.1,expression14.2,expression15.1,expression15.2,expression16.1,expression16.2,expression17.1,expression17.2,expression18.1,expression18.2",
+		"name":"expression"
 	}],
 	"resources":[
 	{
@@ -184,7 +188,7 @@
 	},
 	{
 		"name":"card",
-		"subkeys":"M_11,M_12,M_13,M_21,M_22,M_23,M_31,M_32,M_33,Z_11,Z_12,Z_13,Z_14,Z_15,Z_16,Z_17,Z_18,Z_19,Z_21,Z_22,Z_23,Z_24,Z_25,Z_26,Z_27,Z_28,Z_29,Z_31,Z_32,Z_33,Z_34,Z_35,Z_36,Z_37,Z_38,Z_39,Z_41,Z_42,Z_43",
+		"subkeys":"M_11,M_12,M_13,M_21,M_22,M_23,M_31,M_32,M_33,N_11,N_12,N_13,N_21,N_22,N_23,N_31,N_32,N_33,Z_11,Z_12,Z_13,Z_14,Z_15,Z_16,Z_17,Z_18,Z_19,Z_21,Z_22,Z_23,Z_24,Z_25,Z_26,Z_27,Z_28,Z_29,Z_31,Z_32,Z_33,Z_34,Z_35,Z_36,Z_37,Z_38,Z_39,Z_41,Z_42,Z_43",
 		"type":"sheet",
 		"url":"assets/card/card.json"
 	},
@@ -373,11 +377,6 @@
 		"name":"JS_continue_button_png",
 		"type":"image",
 		"url":"assets/card/result/JS_continue_button.png"
-	},
-	{
-		"name":"music_game",
-		"type":"sound",
-		"url":"assets/music/music_game.mp3"
 	},
 	{
 		"name":"music_scene",
@@ -670,11 +669,6 @@
 		"url":"assets/sound/play/0/bao_0.mp3"
 	},
 	{
-		"name":"bugang_0",
-		"type":"sound",
-		"url":"assets/sound/play/0/bugang_0.mp3"
-	},
-	{
 		"name":"cha_0",
 		"type":"sound",
 		"url":"assets/sound/play/0/cha_0.mp3"
@@ -695,19 +689,9 @@
 		"url":"assets/sound/play/0/gang_0.mp3"
 	},
 	{
-		"name":"jiugang_0",
-		"type":"sound",
-		"url":"assets/sound/play/0/jiugang_0.mp3"
-	},
-	{
 		"name":"xuanfenggang_0",
 		"type":"sound",
 		"url":"assets/sound/play/0/xuanfenggang_0.mp3"
-	},
-	{
-		"name":"yaogang_0",
-		"type":"sound",
-		"url":"assets/sound/play/0/yaogang_0.mp3"
 	},
 	{
 		"name":"zimo_0",
@@ -875,11 +859,6 @@
 		"url":"assets/sound/play/1/bao_1.mp3"
 	},
 	{
-		"name":"bugang_1",
-		"type":"sound",
-		"url":"assets/sound/play/1/bugang_1.mp3"
-	},
-	{
 		"name":"cha_1",
 		"type":"sound",
 		"url":"assets/sound/play/1/cha_1.mp3"
@@ -900,19 +879,9 @@
 		"url":"assets/sound/play/1/gang_1.mp3"
 	},
 	{
-		"name":"jiugang_1",
-		"type":"sound",
-		"url":"assets/sound/play/1/jiugang_1.mp3"
-	},
-	{
 		"name":"xuanfenggang_1",
 		"type":"sound",
 		"url":"assets/sound/play/1/xuanfenggang_1.mp3"
-	},
-	{
-		"name":"yaogang_1",
-		"type":"sound",
-		"url":"assets/sound/play/1/yaogang_1.mp3"
 	},
 	{
 		"name":"zimo_1",
@@ -1088,5 +1057,285 @@
 		"name":"card_0_btn",
 		"type":"image",
 		"url":"assets/SettingDialog/card_0_btn.png"
+	},
+	{
+		"name":"chat_btn_bl",
+		"type":"image",
+		"url":"assets/main/chat_btn_bl.png"
+	},
+	{
+		"name":"chat_btn_ca",
+		"type":"image",
+		"url":"assets/main/chat_btn_ca.png"
+	},
+	{
+		"name":"chat_btn_cl",
+		"type":"image",
+		"url":"assets/main/chat_btn_cl.png"
+	},
+	{
+		"name":"chat_btn_ba",
+		"type":"image",
+		"url":"assets/main/chat_btn_ba.png"
+	},
+	{
+		"name":"expression19.1",
+		"type":"image",
+		"url":"assets/expression/expression19.1.png"
+	},
+	{
+		"name":"expression19.2",
+		"type":"image",
+		"url":"assets/expression/expression19.2.png"
+	},
+	{
+		"name":"expression20.1",
+		"type":"image",
+		"url":"assets/expression/expression20.1.png"
+	},
+	{
+		"name":"expression20.2",
+		"type":"image",
+		"url":"assets/expression/expression20.2.png"
+	},
+	{
+		"name":"expression1.1",
+		"type":"image",
+		"url":"assets/expression/expression1.1.png"
+	},
+	{
+		"name":"expression1.2",
+		"type":"image",
+		"url":"assets/expression/expression1.2.png"
+	},
+	{
+		"name":"expression2.1",
+		"type":"image",
+		"url":"assets/expression/expression2.1.png"
+	},
+	{
+		"name":"expression2.2",
+		"type":"image",
+		"url":"assets/expression/expression2.2.png"
+	},
+	{
+		"name":"expression3.1",
+		"type":"image",
+		"url":"assets/expression/expression3.1.png"
+	},
+	{
+		"name":"expression3.2",
+		"type":"image",
+		"url":"assets/expression/expression3.2.png"
+	},
+	{
+		"name":"expression4.1",
+		"type":"image",
+		"url":"assets/expression/expression4.1.png"
+	},
+	{
+		"name":"expression4.2",
+		"type":"image",
+		"url":"assets/expression/expression4.2.png"
+	},
+	{
+		"name":"expression5.1",
+		"type":"image",
+		"url":"assets/expression/expression5.1.png"
+	},
+	{
+		"name":"expression5.2",
+		"type":"image",
+		"url":"assets/expression/expression5.2.png"
+	},
+	{
+		"name":"expression6.1",
+		"type":"image",
+		"url":"assets/expression/expression6.1.png"
+	},
+	{
+		"name":"expression6.2",
+		"type":"image",
+		"url":"assets/expression/expression6.2.png"
+	},
+	{
+		"name":"expression7.1",
+		"type":"image",
+		"url":"assets/expression/expression7.1.png"
+	},
+	{
+		"name":"expression7.2",
+		"type":"image",
+		"url":"assets/expression/expression7.2.png"
+	},
+	{
+		"name":"expression8.1",
+		"type":"image",
+		"url":"assets/expression/expression8.1.png"
+	},
+	{
+		"name":"expression8.2",
+		"type":"image",
+		"url":"assets/expression/expression8.2.png"
+	},
+	{
+		"name":"expression9.1",
+		"type":"image",
+		"url":"assets/expression/expression9.1.png"
+	},
+	{
+		"name":"expression9.2",
+		"type":"image",
+		"url":"assets/expression/expression9.2.png"
+	},
+	{
+		"name":"expression10.1",
+		"type":"image",
+		"url":"assets/expression/expression10.1.png"
+	},
+	{
+		"name":"expression10.2",
+		"type":"image",
+		"url":"assets/expression/expression10.2.png"
+	},
+	{
+		"name":"expression11.1",
+		"type":"image",
+		"url":"assets/expression/expression11.1.png"
+	},
+	{
+		"name":"expression11.2",
+		"type":"image",
+		"url":"assets/expression/expression11.2.png"
+	},
+	{
+		"name":"expression12.1",
+		"type":"image",
+		"url":"assets/expression/expression12.1.png"
+	},
+	{
+		"name":"expression12.2",
+		"type":"image",
+		"url":"assets/expression/expression12.2.png"
+	},
+	{
+		"name":"expression13.1",
+		"type":"image",
+		"url":"assets/expression/expression13.1.png"
+	},
+	{
+		"name":"expression13.2",
+		"type":"image",
+		"url":"assets/expression/expression13.2.png"
+	},
+	{
+		"name":"expression14.1",
+		"type":"image",
+		"url":"assets/expression/expression14.1.png"
+	},
+	{
+		"name":"expression14.2",
+		"type":"image",
+		"url":"assets/expression/expression14.2.png"
+	},
+	{
+		"name":"expression15.1",
+		"type":"image",
+		"url":"assets/expression/expression15.1.png"
+	},
+	{
+		"name":"expression15.2",
+		"type":"image",
+		"url":"assets/expression/expression15.2.png"
+	},
+	{
+		"name":"expression16.1",
+		"type":"image",
+		"url":"assets/expression/expression16.1.png"
+	},
+	{
+		"name":"expression16.2",
+		"type":"image",
+		"url":"assets/expression/expression16.2.png"
+	},
+	{
+		"name":"expression17.1",
+		"type":"image",
+		"url":"assets/expression/expression17.1.png"
+	},
+	{
+		"name":"expression17.2",
+		"type":"image",
+		"url":"assets/expression/expression17.2.png"
+	},
+	{
+		"name":"expression18.1",
+		"type":"image",
+		"url":"assets/expression/expression18.1.png"
+	},
+	{
+		"name":"expression18.2",
+		"type":"image",
+		"url":"assets/expression/expression18.2.png"
+	},
+	{
+		"name":"chat_0_12",
+		"type":"sound",
+		"url":"assets/sound/chat/chat_0_12.mp3"
+	},
+	{
+		"name":"chat_0_13",
+		"type":"sound",
+		"url":"assets/sound/chat/chat_0_13.mp3"
+	},
+	{
+		"name":"chat_0_14",
+		"type":"sound",
+		"url":"assets/sound/chat/chat_0_14.mp3"
+	},
+	{
+		"name":"chat_0_15",
+		"type":"sound",
+		"url":"assets/sound/chat/chat_0_15.mp3"
+	},
+	{
+		"name":"chat_1_12",
+		"type":"sound",
+		"url":"assets/sound/chat/chat_1_12.mp3"
+	},
+	{
+		"name":"chat_1_13",
+		"type":"sound",
+		"url":"assets/sound/chat/chat_1_13.mp3"
+	},
+	{
+		"name":"chat_1_14",
+		"type":"sound",
+		"url":"assets/sound/chat/chat_1_14.mp3"
+	},
+	{
+		"name":"chat_1_15",
+		"type":"sound",
+		"url":"assets/sound/chat/chat_1_15.mp3"
+	},
+	{
+		"name":"btn_shiming",
+		"type":"image",
+		"url":"assets/main/btn_shiming.png"
+	},
+	{
+		"name":"idcard_title",
+		"type":"image",
+		"url":"assets/main/idcard_title.png"
+	},
+	{
+		"name":"card_jd_btn",
+		"type":"image",
+		"url":"assets/SettingDialog/card_jd_btn.png"
+	},
+	{
+		"name":"card_sh_btn",
+		"type":"image",
+		"url":"assets/SettingDialog/card_sh_btn.png"
 	}]
 }

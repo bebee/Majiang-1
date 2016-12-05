@@ -78,12 +78,15 @@ class DissolutionDialog extends BaseDialog
             this.m_UI.btn_false.visible = false;
             this.m_UI.btn_true.visible = false;
             this.m_UI._desc.visible = true;
+            this.m_dialog.btn_close.visible = true;
         }
         else
         {
             this.m_UI.btn_false.visible = true;
             this.m_UI.btn_true.visible = true;
             this.m_UI._desc.visible = false;
+
+            this.m_dialog.btn_close.visible = false;
         }
 
         var index:number = 1;

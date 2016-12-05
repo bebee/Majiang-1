@@ -191,6 +191,17 @@ class CardView extends egret.DisplayObjectContainer {
         this.y = y;
     }
 
+    //改变背景图
+    changeBGStyle(){
+
+        var bgStyle : string = GSConfig.card_bg_style;
+
+        var bg_res = bgStyle + this.resType;
+
+        this.bg.texture = GameRes.getCard(bg_res);
+    }
+
+
     changeScale(scale:number){
 
         this.scaleX = this.scaleY = scale;
@@ -237,6 +248,8 @@ class CardView extends egret.DisplayObjectContainer {
         egret.Tween.removeTweens(this);
     }
 
+    resType:number;
+
     reDraw() {
 
         //var _style  = (this.style == 4 ? 3 : this.style);
@@ -276,9 +289,9 @@ class CardView extends egret.DisplayObjectContainer {
                 break;
         }
 
-        var bg_res = "M_" + type;
+        this.resType = type;
 
-        this.bg.texture = GameRes.getCard(bg_res);
+        this.changeBGStyle();
 
         if (this.count > 1) {
             this.countText.text = "x" + this.count;

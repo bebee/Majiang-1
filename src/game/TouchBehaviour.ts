@@ -141,7 +141,7 @@ class TouchBehaviour implements IGameTapEvent{
         if(GSController.i.jiesuanData) {
 
             //清理回合数据
-            GSData.i.game_state = 5;
+            PublicVal.state = 5;
 
             GSController.i.showStateView();
 
@@ -168,8 +168,11 @@ class TouchBehaviour implements IGameTapEvent{
         this.onJiesanTap();
     }
 
-    onTalkTap() {
-
+    /**
+     * 打开聊天
+     */
+    onTalkTap()
+    {
         StackManager.open(ChatDialog, "ChatDialog");
     }
 
@@ -203,7 +206,7 @@ class TouchBehaviour implements IGameTapEvent{
     onJiesanTap(): void
     {
 
-        if(GSData.i.game_state == 2 || GSData.i.game_state == 3 || GSData.i.game_state == -4)
+        if(PublicVal.state == 2 || PublicVal.state == 3 || PublicVal.state == -4)
         {
             GameLayerManager.gameLayer().messagBox.showMsg(function (r)
             {
@@ -214,6 +217,17 @@ class TouchBehaviour implements IGameTapEvent{
                     dialog.isClick = true;
                 }
             }, "您确定发起解散房间吗？\n（当所有在线玩家同意解散之后房间将解散）");
+        }else if(PublicVal.state == 6){
+
+            GameLayerManager.gameLayer().messagBox.showMsg(function (r)
+            {
+                if(r)
+                {
+                    GSController.i.exit();
+                    Replayer.i.clear();
+                }
+            }, "您确定要退出回放吗？");
+
         }
         else
         {
@@ -258,8 +272,17 @@ class TouchBehaviour implements IGameTapEvent{
 
     onHeadTouch(dir: number): void{
 
-        var player = GSData.i.getRoomPlayerByDir(dir);
+        var player = null;
 
+        if(PublicVal.state == 6){
+
+            return;
+
+        }else {
+
+            player = GSData.i.getRoomPlayerByDir(dir);
+
+        }
         if(!player) return;
 
         var d:RoleInfoDialog = StackManager.findDialog(RoleInfoDialog, "RoleInfoDialog");

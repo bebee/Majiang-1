@@ -9,12 +9,10 @@ class GSUpdate{
 
     lastTime:number;
 
-    updates : IUpdate[];
+    updates : IUpdate[] = [];
 
     //启动
     start(){
-
-        this.updates = [];
 
         egret.sys['$ticker'].$startTick(this.callBack,this);
 

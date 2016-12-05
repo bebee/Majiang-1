@@ -17,7 +17,6 @@ class S13
         {
             GSController.i.closeResultView();
             GSController.i.closeGSView();
-            GSController.i.visibleTwoFuncButton(false, false);
             GSController.i.showTitleView(GSController.i.jiesuanData);
             dialog.clear();
         }

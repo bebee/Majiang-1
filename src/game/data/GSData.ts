@@ -11,18 +11,8 @@ class GSData{
 
         return GSData._i || (GSData._i = new GSData);
     }
-    /*
-     1:首轮进入牌桌状态
-     2:继续进入牌桌状态
-     -1:游戏洗牌状态 (需要缓存一些数据)
-     -2:牌局最后分张阶段
-     -3:自己胡牌阶段
-     -4:听牌阶段
-     3:游戏牌局状态
-     4:每轮牌局结算状态
-     5:总结算界面
-     */
-    game_state : number = 1;
+
+    //game_state : number = 1;
 
     roomPlayers:RoomPlayer[];
 
@@ -36,7 +26,7 @@ class GSData{
     //玩家自己的pos
     ownPos:number;
 
-    leftCount:number;
+    //leftCount:number;
 
     dir2Pos:any = {};
 
@@ -57,7 +47,7 @@ class GSData{
     chiObj:any;//属于funcSelects里的
 
     //四方向牌
-    allPais = {};
+    //allPais = {};
 
     //当前池牌
     currPoolPai:any;
@@ -65,11 +55,11 @@ class GSData{
     //结算对象 存个data
     result  ;
 
-    baoPai:any;
+    //baoPai:any;
 
-    zhuangFlag:number = 0;
+    //zhuangFlag:number = 0;
 
-    roomOwnFlag:number = 0;
+    //roomOwnFlag:number = 0;
 
     readyFlag:number = 0;
 
@@ -81,9 +71,9 @@ class GSData{
     turnPos:number;
 
     //当前局数
-    cur_round:number;
+    //cur_round:number;
     //总局数
-    max_round:number;
+    //max_round:number;
 
     //重连后上来的四方牌局
 
@@ -110,7 +100,7 @@ class GSData{
     //杠的分数
     gangCurs:number[];
 
-    rules:string;
+    //rules:string;
 
     //听牌中
     isTing:boolean;
@@ -129,11 +119,11 @@ class GSData{
 
         this.roundReset();
 
-        this.game_state = 1;
+        PublicVal.state = 1;
 
         this.firstInRoom = false;
 
-        this.cur_round = 1;
+        PublicVal.i.cur_round = 1;
 
         this.roomPlayerMap = {};
 
@@ -143,12 +133,14 @@ class GSData{
 
         this.gangCurs = [0,0,0,0,0];
 
-        this.rules = "";
+        //this.rules = "";
 
     }
 
     //继续回合的部分数据重置
     roundReset(){
+
+        PublicVal.i.clear();
 
         this.roundReady = 0;
 
@@ -156,29 +148,28 @@ class GSData{
 
         this.roundStartHasFunction = false;
 
-        this.game_state = 2;
+        PublicVal.state = 2;
 
         this.gang_end = false;
         this.isZhuangPush = false;
 
         this.turnDir = 0;
         this.isShowFunc = false;
-        this.zhuangFlag = 0;
 
         this.fen = false;
 
-        this.allPais[1] = {handPais:null,catchPai:null,funcPais:[],poolPais:[]};
+        /*this.allPais[1] = {handPais:null,catchPai:null,funcPais:[],poolPais:[]};
         this.allPais[2] = {handPais:null,catchPai:null,funcPais:[],poolPais:[]};
         this.allPais[3] = {handPais:null,catchPai:null,funcPais:[],poolPais:[]};
-        this.allPais[4] = {handPais:null,catchPai:null,funcPais:[],poolPais:[]};
+        this.allPais[4] = {handPais:null,catchPai:null,funcPais:[],poolPais:[]};*/
 
         this.funcSelects = [];
 
     }
     //排序手牌
-    sortHandPai(pais:any = null){
+/*    sortHandPai(pais:any = null){
 
-        if(pais == null) pais = this.allPais[1].handPais;
+        if(pais == null) pais = PublicVal.i.allPais[1].handPais;
 
         pais.sort((a,b)=>{
             var _a = a.type * 10 + a.number;
@@ -187,61 +178,48 @@ class GSData{
             if(_a == _b) return 0;
             if(_a<_b) return -1;
         });
-    }
+    }*/
 
     setHandPais(dir,pais){
-        this.allPais[dir].handPais = pais;
+        PublicVal.i.allPais[dir].handPais = pais;
     }
 
 
-    //获取手牌牌
-    getHandPais(dir:number){
-
-        return this.allPais[dir].handPais;
-    }
 
     //添加功能牌
     pushFuncPais(dir,obj){
 
-        var funcPais = this.getFuncPais(dir);
+        var funcPais = PublicVal.i.getFuncPais(dir);
 
         funcPais.push(obj);
 
     }
-    //获取功能牌
-    getFuncPais(dir:number){
 
-        return this.allPais[dir].funcPais;
-    }
     //设置池牌
     setPoolPais(dir,pais){
 
-        this.allPais[dir].poolPais = pais;
+        PublicVal.i.allPais[dir].poolPais = pais;
     }
 
-    //获取池牌
-    getPoolPais(dir:number){
 
-        return this.allPais[dir].poolPais;
-    }
     //获取抓牌
     getCatchPai(dir:number){
-        return this.allPais[dir].catchPai;
+        return PublicVal.i.allPais[dir].catchPai;
     }
     //赋值抓牌
     setCatchPai(dir,pai){
-        this.allPais[dir].catchPai = pai;
+        PublicVal.i.allPais[dir].catchPai = pai;
     }
 
     //删除其他人的手牌
     removeOtherHandPai(dir:number,count:number){
-        var handPais = this.getHandPais(dir);
+        var handPais = PublicVal.i.getHandPais(dir);
         handPais.length -= count;
     }
     //手牌移除
     removeHandPai(dir:number,pai:any = null){
 
-        var handPais = this.getHandPais(dir);
+        var handPais = PublicVal.i.getHandPais(dir);
 
         if(dir == 1) {
 
@@ -254,15 +232,13 @@ class GSData{
 
                     handPais.splice(i, 1);
                     //重新排序
-                    this.sortHandPai();
+                    FashionTools.sortPai(handPais);
                     break;
                 }
             }
         }else{
             handPais.length --;
         }
-        GSController.i.gsView.updateAllCount(this);
-
     }
 
 
@@ -274,7 +250,7 @@ class GSData{
             console.log("删除自己多张手牌:",pais[i].type,pais[i].number);
         }
 
-        var handPais = this.getHandPais(1);
+        var handPais = PublicVal.i.getHandPais(1);
 
         while(pais.length){
 
@@ -293,8 +269,8 @@ class GSData{
             }
 
         }
-        this.sortHandPai();
-        GSController.i.gsView.updateAllCount(this);
+        //this.sortHandPai();
+        FashionTools.sortPai(handPais);
     }
 
     //添加开局手牌(假象)
@@ -306,38 +282,17 @@ class GSData{
 
         this.pushHandPai(dir,catchPai);
 
-        GSController.i.gsView.updateAllCount(this);
-
     }
 
     //手牌添加
     pushHandPai(dir:number,pai:any){
-        var handPais = this.getHandPais(dir);
+        var handPais = PublicVal.i.getHandPais(dir);
         handPais.push(pai);
-        GSController.i.gsView.updateAllCount(this);
-    }
-
-    //池牌添加
-    pushPoolPai(pai:any){
-
-        var dir = pai.dir;
-
-        //if(dir == this.zhuangDir) this.isZhuangPush = true;
-
-        var poolPais = this.getPoolPais(dir);
-
-        pai.poolIndex = poolPais.length;
-
-        poolPais.push(pai);
 
     }
-    //池牌取出
-    popPoolPai(dir){
 
-        var poolPais = this.getPoolPais(dir);
 
-        poolPais.length --;
-    }
+
 
 
     getSexByPos(pos:number){
@@ -347,43 +302,13 @@ class GSData{
     }
 
 
-    //删除已经碰的功能牌
-    removePengFunc(dir:number,pai:any):boolean{
 
-        var funcPais = this.getFuncPais(dir);
-
-        for(var i:number = 0; i < funcPais.length;i++){
-
-            var obj = funcPais[i];
-
-            if(obj.action == 2){
-
-                var pengObjs = obj.pais;
-
-                for(var k:number = 0 ;k < pengObjs.length;k++){
-
-                    var kObj = pengObjs[k];
-
-                    if(kObj.pai[0].type == pai.type && kObj.pai[0].number == pai.number)
-                    {
-                        pengObjs.splice(k,1);
-
-                        return true;
-                    }
-                }
-
-            }
-
-        }
-        return false;
-
-    }
 
 
     //往功能牌型里添加牌 排序 方位 功能 牌
     addFuncPai(sort:number,dir:number,action:number,pai:any[],number:number = 0,ever : any = null ) {
 
-        var funcPais = this.getFuncPais(dir);
+        var funcPais = PublicVal.i.getFuncPais(dir);
 
         if (ever != null) ever = [1, 1, 1];
 
@@ -407,38 +332,7 @@ class GSData{
         funcPais.push({sort: sort, action: action, pais: [addPaiObj]});
     }
 
-    //获取含有ever的对象
-    getPai(dir:number,action:number,number:number = 0){
 
-        var funcPais = this.getFuncPais(dir);
-
-        for(var i:number = 0 ; i<funcPais.length;i++) {
-
-            var funcPai = funcPais[i];
-
-            if(funcPai.action == action){
-
-                for(var j:number = 0 ; j <funcPai.pais.length;j++){
-
-                    var obj = funcPai.pais[j];
-                    //幺九杠
-                    if(number > 0){
-
-                        if(number == obj.number){
-
-                            return obj;
-                        }
-                    }else{
-
-                        return obj;
-                    }
-
-                }
-
-            }
-        }
-        return null;
-    }
 
 
 
