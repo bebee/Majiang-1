@@ -141,7 +141,7 @@ class HornPanel extends eui.Component
 
             if(i == my.textList.length - 1)
             {
-                if(t.x <= (-t.textWidth + 200))
+                if(t.x <= (-t.textWidth + 100))
                 {
                     if(list.length > 0) my.playHorn(my._group,my._size, my._color);
                 }

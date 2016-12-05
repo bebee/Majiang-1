@@ -193,7 +193,16 @@ class Weixin {
                 var p = GSData.i.roomPlayers[1];
                 name = p.nick;
 
-                body.desc = "房　主：" + name + " 房间号：" + strroomid + " " + GSData.i.rules;
+                body.desc = "房　主：" + name + " 房间号：" + strroomid;
+
+                if(GlobalData.getInstance().roomRound > 0)
+                {
+                    body.desc += "【" + GlobalData.getInstance().roomRound + "圈】" + PublicVal.i.rules;
+                }
+                else
+                {
+                    body.desc += " " + PublicVal.i.rules;
+                }
 
                 body.title = "跟我一起开房的点此链接！";
 

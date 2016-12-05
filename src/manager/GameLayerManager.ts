@@ -94,7 +94,7 @@ class GameLayerManager extends eui.UILayer
         this.setLayerVisible(false, "sceneLayer");
         this.setLayerVisible(true, "mainLayer");
 
-        GameMusic.PlaySound("music_game");
+        
     }
 
     /**
@@ -104,8 +104,6 @@ class GameLayerManager extends eui.UILayer
     {
         this.setLayerVisible(true, "sceneLayer");
         this.setLayerVisible(false, "mainLayer");
-
-        GameMusic.PlaySound("music_scene");
 
         Weixin.onMenuShareAppMessage();
 

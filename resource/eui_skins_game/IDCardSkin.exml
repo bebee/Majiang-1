@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='utf-8'?>
+<e:Skin class="IDCardSkin" width="666" height="382" xmlns:e="http://ns.egret.com/eui" xmlns:ns1="*" xmlns:w="http://ns.egret.com/wing">
+	<e:Label text="姓名：" x="115" y="136" width="80" height="33" textColor="0x7A5008" fontFamily="微软雅黑" size="20" textAlign="right" verticalAlign="middle" bold="true"/>
+	<e:Label verticalAlign="middle" y="206" height="33" text="身份证号：" fontFamily="微软雅黑" textAlign="right" width="119" size="20" x="76" textColor="0x7A5008" bold="true"/>
+	<e:EditableText id="_name" width="324" height="39" x="201" y="134" textColor="0xEEE6E0" fontFamily="微软雅黑" verticalAlign="middle" size="20" bold="true"/>
+	<e:EditableText id="_user" width="325" y="204" height="39" x="200" textColor="0xEEE6E0" fontFamily="微软雅黑" verticalAlign="middle" size="20" bold="true"/>
+	<e:Image source="idcard_title" y="28" horizontalCenter="0"/>
+	<e:Image source="setting_huawen" y="43" x="436"/>
+	<e:Image source="setting_huawen" y="43" x="229" scaleX="-1"/>
+</e:Skin>

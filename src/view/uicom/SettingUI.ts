@@ -12,7 +12,7 @@ class SettingUI extends eui.Component
     }
 
     public _btn_sound:eui.Image;  //音效按钮
-    public _btn_pai:eui.Image;   //手牌按钮
+    public _btn_pai:eui.Image;   //手牌按钮zz
 
     public _ver:eui.Label;
 

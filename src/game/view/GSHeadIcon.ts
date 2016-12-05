@@ -144,14 +144,6 @@ class GSHeadIcon extends egret.DisplayObjectContainer{
 
     }
 
-    /*zoom(){
-        this.scaleX = this.scaleY = .8;
-    }
-
-    resize(){
-        this.scaleX = this.scaleY = 1;
-    }*/
-
     reset(){
 
         this.offlineImg.visible = false;

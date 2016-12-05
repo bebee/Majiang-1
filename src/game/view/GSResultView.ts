@@ -113,33 +113,15 @@ class GSResultView extends egret.DisplayObjectContainer{
 
             personItem.headIcon.setHeadPic(person.pic);
 
-            personItem.headIcon.visibleRoomOwn((GSData.i.roomOwnFlag >> dir & 1) == 1);
+            personItem.headIcon.visibleRoomOwn((PublicVal.i.roomOwnFlag >> dir & 1) == 1);
 
             personItem.headIcon.visibleZhuang(GSData.i.result.zhuang == person_pos);
 
             if(GSData.i.result.hupaiPos == person_pos){
 
                 personItem.updateHuLogo(1);
-/*
-
-                if(!GSData.i.result.dianPaoPos){
-
-                    for(var k:number = 0 ;k < person.left.length;k++){
-
-                        if(person.left[k].number == pai.number && person.left[k].type == pai.type)
-                        {
-                            person.left.splice(k,1);
-
-                            break;
-                        }
-                    }
-                    person.left.push(pai);
-                }
-*/
 
                 personItem.updatePai(person);
-
-                //personItem.addHuPai(pai);
 
             }else if(GSData.i.result.dianPaoPos == person_pos){
 

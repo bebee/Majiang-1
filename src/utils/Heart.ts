@@ -47,8 +47,12 @@ class Heart {
             if (this.testHorn >= 120) {
                 this.testHorn = 0;
 
-                var num: number = Math.floor(Math.random() * GlobalData.getInstance().gamewarmList.length);
-                GlobalData.getInstance().hornList.push(GlobalData.getInstance().gamewarmList[num]);
+                var index:number = GlobalData.getInstance().gamewarmIndex;
+                GlobalData.getInstance().hornList.push(GlobalData.getInstance().gamewarmList[index]);
+
+                GlobalData.getInstance().gamewarmIndex++;
+
+                if(GlobalData.getInstance().gamewarmIndex > GlobalData.getInstance().gamewarmList.length) GlobalData.getInstance().gamewarmIndex = 0;
             }
 
             if (GlobalData.getInstance().hornList.length > 0) Global.showHorn(20, 0x40f8ff);

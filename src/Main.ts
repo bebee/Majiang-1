@@ -1,36 +1,52 @@
 class Main extends eui.UILayer {
 
-    public constructor() {
+    /**
+     * 构造函数解析URL
+     */
+    public constructor()
+    {
         super();
 
         var user;
-        var code;
+
         var roomid;
 
-        if (window.hasOwnProperty("location")) {
+        var code;
+
+        if(window.hasOwnProperty("location"))
+        {
             var search = location.search;
-            if (search != "") {
+
+            if(search != "")
+            {
                 var rulv = new egret.URLVariables(search);
+
                 GameConfig.pushData(rulv.variables);
 
                 user = rulv.variables["users"];
-                code = rulv.variables["code"];
+
                 roomid = rulv.variables["roomid"];
+
+                code = rulv.variables["code"];
             }
         }
 
-        if (code) {
+        if(code)
+        {
             var codes = NativeApi.getLocalData("codes");
-            if (codes && codes == code)  code = null;
+            if(codes && codes == code)  code = null;
         }
 
-        if (!user && !code) {
-            var addres: string = GameConfig.wei_href_address;
-            if (roomid) addres += "?roomid=" + roomid;
+        if(!user && !code)
+        {
+            var addres:string = GameConfig.wei_href_address;
+            if(roomid) addres += "?roomid=" + roomid;
             Weixin.getAccessCode(GameConfig.appid, addres);
         }
 
-        HttpHandler.sendMsgCallBack("http://" + GameConfig.address_center.ip + ":" + GameConfig.address_center.port + "/", "action=serverlist", function (obj) {
+
+        HttpHandler.sendMsgCallBack("http://"+GameConfig.address_center.ip+":"+GameConfig.address_center.port+"/", "action=serverlist", function (obj)
+        {
             var addrr = obj.addrr;
             var auth_port = obj.auth_port;
             var port = obj.port;
@@ -41,74 +57,91 @@ class Main extends eui.UILayer {
             GameConfig.address_game.ip = addrr;
             GameConfig.address_game.port = port;
         }, egret.URLRequestMethod.POST, this);
-    }
 
-    protected createChildren(): void {
+    }
+    /**
+     * 加载进度界面
+     * loading process interface
+     */
+    protected createChildren(): void
+    {
         super.createChildren();
 
-        GameParse.Initialization();
+        //inject the custom material parser
+        //注入自定义的素材解析器
+        var assetAdapter = new AssetAdapter();
+        this.stage.registerImplementation("eui.IAssetAdapter",assetAdapter);
+        this.stage.registerImplementation("eui.IThemeAdapter",new ThemeAdapter());
+        //Config loading process interface
+
+        //游戏自定义容器添加到舞台上
         this.addChild(GameLayerManager.gameLayer());
 
-        this.stage.registerImplementation("eui.IAssetAdapter", new AssetAdapter());
-        this.stage.registerImplementation("eui.IThemeAdapter", new ThemeAdapter());
-
+        // initialize the Resource loading library
+        //初始化Resource资源加载库
         RES.addEventListener(RES.ResourceEvent.CONFIG_COMPLETE, this.onConfigComplete, this);
-        RES.loadConfig("resource/default.res.json", "resource/");
+        RES.loadConfig("resource"+GlobalData.getInstance().resourceCode+"/default.res.json", "resource"+GlobalData.getInstance().resourceCode+"/");
+
+        GameParse.Initialization();
     }
 
-    private onConfigComplete(): void {
+    /**
+     * 配置文件加载完成,开始预加载皮肤主题资源和preload资源组。
+     * Loading of configuration file is complete, start to pre-load the theme configuration file and the preload resource group
+     */
+    private onConfigComplete(event:RES.ResourceEvent):void {
         RES.removeEventListener(RES.ResourceEvent.CONFIG_COMPLETE, this.onConfigComplete, this);
-
-        var theme = new eui.Theme("resource/default.thm.json", this.stage);
+        // load skin theme configuration file, you can manually modify the file. And replace the default skin.
+        //加载皮肤主题配置文件,可以手动修改这个文件。替换默认皮肤。
+        var theme = new eui.Theme("resource"+GlobalData.getInstance().resourceCode+"/default.thm.json", this.stage);
         theme.addEventListener(eui.UIEvent.COMPLETE, this.onThemeLoadComplete, this);
-
-        RES.addEventListener(RES.ResourceEvent.GROUP_COMPLETE, this.onResourceLoadComplete, this);
-        RES.loadGroup("loading");
     }
-
-    private isThemeLoadEnd: boolean = false;
-
-    private onThemeLoadComplete(): void {
-        this.isThemeLoadEnd = true;
-        // this.createScene();
-        this.startCreateScene();
-    }
-
-    private isResourceLoadEnd: boolean = false;
-
-    private onResourceLoadComplete(): void {
-        RES.removeEventListener(RES.ResourceEvent.GROUP_COMPLETE, this.onResourceLoadComplete, this);
-
-        this.isResourceLoadEnd = true;
-        this.createScene();
-    }
-
-    private createScene() {
-        if (this.isThemeLoadEnd && this.isResourceLoadEnd) {
-            this.startCreateScene();
-        }
-    }
-
-    private startCreateScene(): void {
-
+    /**
+     * 主题文件加载完成,开始预加载
+     * Loading of theme configuration file is complete, start to pre-load the 
+     */
+    private onThemeLoadComplete(): void
+    {
         NativeApi.setLocalData("codes", GameConfig.code);
 
-        if (!NativeApi.getLocalData("music_volume")) NativeApi.setLocalData("music_volume", 1);
+        GlobalData.getInstance().player = new Player();
+
+        SceneManager.open(LoadingScene, "LoadingScene");
+
+        if(!NativeApi.getLocalData("music_volume"))
+        {
+            NativeApi.setLocalData("music_volume", 0.2);
+
+            GameMusic._volume = 0.2;
+        }
         else GameMusic._volume = +NativeApi.getLocalData("music_volume");
 
-        if (!NativeApi.getLocalData("sound_volume")) NativeApi.setLocalData("sound_volume", 1);
+        if(!NativeApi.getLocalData("sound_volume"))
+        {
+            NativeApi.setLocalData("sound_volume", 0.5);
+
+            GameSound._volume = 0.5;
+        }
         else GameSound._volume = +NativeApi.getLocalData("sound_volume");
 
-        if (!NativeApi.getLocalData("pai")) {
+        if(!NativeApi.getLocalData("pai"))
+        {
             NativeApi.setLocalData("pai", 1);
         }
-        else {
+        else
+        {
             GlobalData.getInstance().cardType = +NativeApi.getLocalData("pai");
         }
 
-        GlobalData.getInstance().player = new Player();
-        SceneManager.open(LoadingScene, "LoadingScene");
+        if(!NativeApi.getLocalData("style"))
+        {
+            NativeApi.setLocalData("style", 1);
+        }
+        else
+        {
+            GlobalData.getInstance().cardStyle = +NativeApi.getLocalData("style");
+        }
 
-        GameManager.init(this.stage);
+        if(!NativeApi.getLocalData("switch")) NativeApi.setLocalData("switch", 1);
     }
 }

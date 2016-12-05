@@ -70,6 +70,8 @@ class CreateDialog extends BaseDialog
             }
 
             this.checkBoxSize[i]["item"] = ck;
+
+            ck.addEventListener(egret.TouchEvent.TOUCH_TAP, this.onRadio, this);
         }
 
         this.m_UI._center_btn.addEventListener(egret.TouchEvent.TOUCH_TAP, this.onSize, this);
@@ -83,6 +85,11 @@ class CreateDialog extends BaseDialog
         this.m_UI._riado.touchEnabled = false;
         //this.m_UI._riado.addEventListener(egret.TouchEvent.TOUCH_BEGIN, this.mouseDown, this);
         //this.m_UI._riado.addEventListener(egret.TouchEvent.TOUCH_END, this.mouseUp, this);
+    }
+
+    private onRadio():void
+    {
+        this.refreshText();
     }
 
     private _touchStatus:boolean = false;              //当前触摸状态，按下时，值为true
@@ -169,7 +176,7 @@ class CreateDialog extends BaseDialog
         }
     }
 
-    public refreshText():void
+    private refreshText():void
     {
         for(var i = 1; i <= 8; i++)
         {
@@ -239,9 +246,12 @@ class CreateDialog extends BaseDialog
 
             if(ck.selectIndex == 1)
             {
-                if(i != 3) arr.push(i);
+                //if(i != 3)
+                    arr.push(i);
             }
         }
+
+        GlobalData.getInstance().roomRound = +this.roudList[this.selectIndex];
 
         SocketManager.getInstance().getGameConn().send(2, {"args":{"type":1,"round":this.roudList[this.selectIndex], "rules":arr, "pass":"0"}});  //创建房间
     }

@@ -2,10 +2,11 @@ class ShopDialog extends BaseDialog {
 
     private m_UI: ShopUI;
 
-    private activit: any = {
-        1: {"title": "新手福利", "content": "　　公测期间，凡首次登陆游戏的玩家，均可获得12张房卡福利，便于体验游戏。"},
-        2: {"title": "邀请福利", "content": "　　公测期间，凡邀请任何一位新人体验游戏（至少两圈）并完成牌局，其对应的邀请人可获得4张房卡，被邀请人可获得2张房卡。"},
-        3: {"title": "关注福利", "content": "　　公测期间，关注微信公众号：老友棋牌（微信号：CCTV1V5）进入公众号回复“关注奖励”，即可获得4张房卡。"},
+    private activit:any =
+    {
+        1:{"title":"新手福利", "content":"　　公测期间，凡首次登陆游戏的玩家，均可获得4张房卡福利，便于体验游戏。"},
+        2:{"title":"邀请福利", "content":"　　公测期间，凡邀请任何一位新人体验游戏（至少两圈）并完成牌局，其对应的邀请人可获得2张房卡。"},
+        3:{"title":"关注福利", "content":"　　公测期间，关注微信公众号：老友棋牌（微信号：CCTV1V5）进入公众号回复“关注奖励”，即可获得4张房卡。"}
     };
 
     public selectIndex: number = 1;

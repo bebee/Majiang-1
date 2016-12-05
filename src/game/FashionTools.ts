@@ -42,13 +42,79 @@ class FashionTools{
     static setViewType(type:number){
         if(type == 1) {
             GSConfig.posRulePlus[1] = GSConfig.posRule[1];
-            GSConfig.handPosPlus[1] = GSConfig.handPos[1];
+            GSConfig.handPosPlus[1] = GSConfig.gameHandPos[1];
         }else{
             GSConfig.posRulePlus[1] = GSConfig.posRule[5];
-            GSConfig.handPosPlus[1] = GSConfig.handPos[5];
+            GSConfig.handPosPlus[1] = GSConfig.gameHandPos[5];
         }
-
         GSController.i.updateHandViewSize();
+    }
+
+    /*
+        设置游戏牌风格
+     */
+    static setGameStyle(type:number){
+        if(type == 1) {
+            GSConfig.card_bg_style = GSConfig.soft_card_bg_style;
+            GSConfig.table_bg_res = GSConfig.soft_table_bg_res;
+        }else{
+            GSConfig.card_bg_style = GSConfig.normal_card_bg_style;
+            GSConfig.table_bg_res = GSConfig.normal_table_bg_res;
+        }
+        GSController.i.updateGameStyle();
+    }
+
+
+
+
+
+
+
+    /*
+        格式化规则文字
+     */
+    static formatRules(rules:number[]){
+
+        var ruleStr : string = "";
+
+        for (var i: number = 0; i < rules.length; i++) {
+
+            ruleStr += GameConfig.rules[rules[i]] + " ";
+
+        }
+        return ruleStr;
 
     }
+    /*
+        格式化牌型
+     */
+    static formatPai(type:number,paiNums:number[]){
+
+        var arr = [];
+
+        if(paiNums){
+
+            for(var i:number = 0 ; i < paiNums.length;i++){
+
+                arr.push({type:type,number:paiNums[i]});
+            }
+
+        }
+
+        return arr;
+    }
+
+    //排序手牌
+    static sortPai(pais:any = null){
+
+        //if(pais == null) pais = PublicVal.i.allPais[1].handPais;
+        pais.sort((a,b)=>{
+            var _a = a.type * 10 + a.number;
+            var _b = b.type * 10 + b.number;
+            if(_a > _b) return 1;
+            if(_a == _b) return 0;
+            if(_a<_b) return -1;
+        });
+    }
+
 }

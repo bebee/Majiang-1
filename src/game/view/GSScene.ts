@@ -42,8 +42,11 @@ class GSScene extends egret.DisplayObjectContainer {
     }
 
     initView() {
+
         this.bg = new egret.Bitmap;
-        this.bg.texture = RES.getRes("game_bg");
+
+        this.bg.texture = RES.getRes(GSConfig.table_bg_res);
+
         this.bg.width = GameConfig.curWidth();
         this.bg.height = GameConfig.curHeight();
 
@@ -144,6 +147,14 @@ class GSScene extends egret.DisplayObjectContainer {
         egret.Tween.get(this.startButton,{loop:true}).to({alpha:.5},600).to({alpha:1},600);
 
     }
+
+    //更新背景颜色
+    updateTableBG(){
+
+        this.bg.texture = RES.getRes(GSConfig.table_bg_res);
+
+    }
+
 
     playFight() {
 

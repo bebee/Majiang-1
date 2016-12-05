@@ -21,8 +21,8 @@ module GameConfig {
     export var address_test:any = {ip:"192.168.2.251", port:10415};
 
     //中心服务器地址 注意：这两个更换测试服 一定要改
-    export var address_center:any = {ip:"dbmj01.h5sd.com", port:10416};   //dbmj01.h5sd.com   42.62.73.45
-    export var wei_href_address:string = "http://mj.h5sd.com/wdmj/index.html";
+    export var address_center:any = {ip:"42.62.73.45", port:10416};   //dbmj01.h5sd.com   42.62.73.45
+    export var wei_href_address:string = "http://mj.h5sd.com/bcmj/index.html";
 
     export var appid:string = "wxb6349744356b5312";
 
@@ -36,6 +36,8 @@ module GameConfig {
      * 测试用的帐号
      */
     export var users;
+    export var ip;
+    export var port;
 
     /**
      * 微信接口用的参数

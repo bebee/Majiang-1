@@ -5,12 +5,16 @@ class SettingDialog extends BaseDialog
 
     public constructor()
     {
-        super("setting_txt", 670, 380);
+        super("setting_txt", 670, 420);
     }
 
     public slider_music:mui.EHSlider;
 
     public slider_sound:mui.EHSlider;
+
+    private _radio_sh:mui.ERadio;
+
+    private _radio_jd:mui.ERadio;
 
     createChildren()
     {
@@ -53,6 +57,49 @@ class SettingDialog extends BaseDialog
         this.m_UI._btn_sound.addEventListener(egret.TouchEvent.TOUCH_TAP, this.onOff, this);
 
         this.m_UI._btn_pai.addEventListener(egret.TouchEvent.TOUCH_TAP, this.onPai, this);
+
+        this._radio_jd = new mui.ERadio();
+        this._radio_sh = new mui.ERadio();
+
+        this._radio_sh.x = 300;
+        this._radio_sh.y = 274;
+
+        this._radio_jd.x = 450;
+        this._radio_jd.y = 274;
+
+        this.m_UI.addChild(this._radio_jd);
+        this.m_UI.addChild(this._radio_sh);
+
+        this._radio_jd.addEventListener(egret.TouchEvent.TOUCH_TAP, this.onChange, this);
+
+        this._radio_sh.addEventListener(egret.TouchEvent.TOUCH_TAP, this.onChange, this);
+    }
+
+    private onChange(e:egret.TouchEvent):void
+    {
+        switch (e.currentTarget)
+        {
+            case this._radio_jd:
+                NativeApi.setLocalData("style", 0);
+
+                GlobalData.getInstance().cardStyle = 0;
+
+                FashionTools.setGameStyle(0);
+
+                this._radio_jd.setSelectIndex(1);
+                this._radio_sh.setSelectIndex(0);
+                break;
+            case this._radio_sh:
+                NativeApi.setLocalData("style", 1);
+
+                GlobalData.getInstance().cardStyle = 1;
+
+                FashionTools.setGameStyle(1);
+
+                this._radio_jd.setSelectIndex(0);
+                this._radio_sh.setSelectIndex(1);
+                break;
+        }
     }
 
     private onPai():void
@@ -106,15 +153,7 @@ class SettingDialog extends BaseDialog
 
             this.m_UI._btn_sound.source = "sound_open_btn";
 
-            if(!GameLayerManager.gameLayer().sceneLayer.visible)
-            {
-                GameMusic.PlaySound("music_game");
-            }
-            else
-            {
-                GameMusic.PlaySound("music_scene");
-            }
-
+            GameMusic.PlaySound("music_scene");
 
             this.slider_music.touchEnabled = true;
             this.slider_music.touchChildren = true;
@@ -209,9 +248,26 @@ class SettingDialog extends BaseDialog
         this.slider_sound.validateNow();
         this.slider_sound.changeShap();
 
-        this.m_UI._ver.text = "当前版本号：" + GlobalData.getInstance().resourceCode + "\n最新版本号：" + GlobalData.getInstance().player.version;
+        this.m_UI._ver.text = "当前版本号：" + GlobalData.getInstance().resourceCode + "    最新版本号：" + GlobalData.getInstance().player.version;
 
         this.m_UI._btn_pai.source = "card_"+GlobalData.getInstance().cardType+"_btn";
+
+
+        if(NativeApi.getLocalData("style"))
+        {
+            var style:number = +NativeApi.getLocalData("style");
+
+            if(style == 1)
+            {
+                this._radio_sh.setSelectIndex(1);
+                this._radio_jd.setSelectIndex(0);
+            }
+            else
+            {
+                this._radio_sh.setSelectIndex(0);
+                this._radio_jd.setSelectIndex(1);
+            }
+        }
     }
 
     /**

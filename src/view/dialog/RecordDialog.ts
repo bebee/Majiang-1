@@ -148,6 +148,11 @@ class RecordDialog extends BaseDialog
         super.hide(1);
     }
 
+    public close():void
+    {
+        super.hide(1);
+    }
+
 
     /**
      * 面板关闭后需要销毁的对象
