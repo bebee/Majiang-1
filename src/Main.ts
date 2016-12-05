@@ -102,13 +102,13 @@ class Main extends eui.UILayer {
      */
     private onThemeLoadComplete(): void
     {
+        gameCore.init(this.stage);
+        
         NativeApi.setLocalData("codes", GameConfig.code);
 
         GlobalData.getInstance().player = new Player();
 
         SceneManager.open(LoadingScene, "LoadingScene");
-
-        GameManager.init(this.stage);
 
         if(!NativeApi.getLocalData("music_volume"))
         {
@@ -145,5 +145,6 @@ class Main extends eui.UILayer {
         }
 
         if(!NativeApi.getLocalData("switch")) NativeApi.setLocalData("switch", 1);
+
     }
 }

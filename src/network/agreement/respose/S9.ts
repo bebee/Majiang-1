@@ -18,7 +18,7 @@ class S9 {
                 var gang_end = obj.data.data.gang_end;
 
                 GSDataProxy.i.S2C_TurnDir(pos, dui_num, gang_end);
-                Acekit.i.dispatchEvent(EffectEvent.Chupai);
+                gameCore.gameManager.dispatchEvent(EffectEvent.Chupai);
                 break;
             case 3://触发中断
                 console.log("显示功能菜单:", obj.data.data);
@@ -31,8 +31,8 @@ class S9 {
                 console.log("同步其他方功能牌", obj);
 
                 GSDataProxy.i.S2C_FuncResult(obj.data.data.action, obj.data.data.pai, obj.data.data.turn, obj.data.data.cur);
-                Acekit.i.dispatchEvent(EffectEvent.Chupai);
-                Acekit.i.dispatchEvent(EffectEvent.ChupaiTips);
+                gameCore.gameManager.dispatchEvent(EffectEvent.Chupai);
+                gameCore.gameManager.dispatchEvent(EffectEvent.ChupaiTips);
                 break;
             case 5: //补杠被劫
                 console.log("删除手牌", obj);
@@ -40,17 +40,17 @@ class S9 {
                 GSDataProxy.i.S2C_DeletePai(obj.data.data.pos, obj.data.data.pai);
                 break;
             case 6://补杠提示
-                Acekit.i.dispatchEvent(EffectEvent.Chupai, [GSData.i.getDir(obj.data.data.pos), obj.data.data.pai]);
+                gameCore.gameManager.dispatchEvent(EffectEvent.Chupai, [GSData.i.getDir(obj.data.data.pos), obj.data.data.pai]);
                 break;
             case 7://换三张
                 PublicVal.state = GameState.changeThree;
 
-                Acekit.i.dispatchEvent(EffectEvent.RaiseCards, RaiseCardsType.changeThree);
+                gameCore.gameManager.dispatchEvent(EffectEvent.RaiseCards, RaiseCardsType.changeThree);
                 break;
             case 8://订缺
                 PublicVal.state = GameState.missing;
 
-                Acekit.i.dispatchEvent(EffectEvent.Missing);
+                gameCore.gameManager.dispatchEvent(EffectEvent.Missing);
                 break;
             case 9://有人提交了换三张
                 PublicVal.state = GameState.changeThree;

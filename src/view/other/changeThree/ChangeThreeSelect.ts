@@ -48,9 +48,9 @@ class ChangeThreeSelect extends BaseSprite {
     public show() {
         super.show();
 
-        this.x = Acekit.i.width >> 1;
-        this.y = Acekit.i.height - 220;
-        Acekit.i.addChild(this);
+        this.x = acekit.width >> 1;
+        this.y = acekit.height - 220;
+        acekit.addChild(this);
 
         this.time = GameConst.ChangeThreeTime;
         this.lab_time.text = "" + this.time;
@@ -60,7 +60,7 @@ class ChangeThreeSelect extends BaseSprite {
     public hide() {
         super.hide();
 
-        Acekit.i.removeChild(this);
+        acekit.removeChild(this);
 
         TimerManager.i.delEventListener(TimerManager.Second, this.timeHandler, this);
     }

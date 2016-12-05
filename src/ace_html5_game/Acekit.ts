@@ -3,43 +3,31 @@
  * @Author Ace.c
  * @Create 2016-11-29 11:25
  */
-class Acekit extends BaseDispatcher {
+class acekit {
 
-    private static _i: Acekit;
+    static stage: egret.Stage;
 
-    static get i(): Acekit {
-        !this._i && (this._i = new Acekit());
-
-        return this._i;
-    }
-
-    public constructor() {
-        super();
-    }
-
-    public stage: egret.Stage;
-
-    public init(stage) {
+    static init(stage) {
         this.stage = stage;
     }
 
-    public get width() {
+    static get width() {
         return this.stage ? this.stage.stageWidth : 0;
     }
 
-    public get height() {
+    static get height() {
         return this.stage ? this.stage.stageHeight : 0;
     }
 
-    public contains(display): boolean {
+    static contains(display): boolean {
         return this.stage && this.stage.contains(display);
     }
 
-    public addChild(display) {
+    static addChild(display) {
         this.stage && this.stage.addChild(display);
     }
 
-    public removeChild(display) {
+    static removeChild(display) {
         this.contains(display) && this.stage.removeChild(display);
     }
 }

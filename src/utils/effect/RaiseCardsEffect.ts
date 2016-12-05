@@ -21,7 +21,7 @@ class RaiseCardsEffect {
                 touchEnabled = false;
                 break;
             case RaiseCardsType.changeThree:
-                cards = this.getCardsByChangeThree();
+                cards = gameCore.changeThreeVo.getQuickCards();
                 touchEnabled = true;
                 break;
         }
@@ -70,55 +70,6 @@ class RaiseCardsEffect {
                 return;
             }
         }
-    }
-
-    /**
-     * 获取卡牌组, 通过换三张
-     */
-    private static getCardsByChangeThree(): any[] {
-        var handCards: any[] = PublicVal.i.getHandPais(1);
-
-        //获取手牌中某种类型牌的长度
-        function getLength(type): number {
-            var length: number = 0;
-            var card: any;
-            for (var i: number = 0; i < handCards.length; i++) {
-                card = handCards[i];
-                if (card && card.type == type) {
-                    length++;
-                }
-            }
-            return length;
-        }
-
-        function getCards(selectType: CardType): any[] {
-            var cards: any[] = [];
-            var card: any;
-            for (var i: number = 0; i < handCards.length; i++) {
-                card = handCards[i];
-                if (card && card.type == selectType) {
-                    cards.push(card);
-
-                    if (cards.length == 3) {
-                        break;
-                    }
-                }
-            }
-            return cards;
-        }
-
-        var list: any[][] = [[CardType.wan, getLength(CardType.wan)], [CardType.tiao, getLength(CardType.tiao)], [CardType.tong, getLength(CardType.tong)]];
-        var length: number;
-        var type: CardType;
-        for (var i: number = 0; i < list.length; i++) {
-            length = list[i][1];
-            if (length >= 3) {
-                type = list[i][0];
-                break;
-            }
-        }
-
-        return getCards(type);
     }
 
     /**

@@ -13,7 +13,7 @@ class S16
 
         GSDataProxy.i.S2C_FinalResult(data);
 
-        Acekit.i.dispatchEvent(EffectEvent.Chupai);
-        Acekit.i.dispatchEvent(EffectEvent.ChupaiTips);
+        gameCore.gameManager.dispatchEvent(EffectEvent.Chupai);
+        gameCore.gameManager.dispatchEvent(EffectEvent.ChupaiTips);
     }
 }

@@ -69,8 +69,8 @@ class ChupaiEffect {
 
     private static init() {
         this.group = new eui.Group();
-        this.group.width = Acekit.i.width;
-        this.group.height = Acekit.i.height;
+        this.group.width = acekit.width;
+        this.group.height = acekit.height;
         GameLayerManager.gameLayer().effectLayer.addChildAt(this.group, 0);
     }
 
@@ -82,20 +82,20 @@ class ChupaiEffect {
     private static setCardPosition(card: CardView, dir: number) {
         switch (dir) {
             case 1:
-                card.x = Acekit.i.stage.stageWidth / 2 - 2;
-                card.y = Acekit.i.stage.stageHeight - 200;
+                card.x = acekit.stage.stageWidth / 2 - 2;
+                card.y = acekit.stage.stageHeight - 200;
                 break;
             case 2:
-                card.x = Acekit.i.stage.stageWidth - 300;
-                card.y = Acekit.i.stage.stageHeight / 2 - 20;
+                card.x = acekit.stage.stageWidth - 300;
+                card.y = acekit.stage.stageHeight / 2 - 20;
                 break;
             case 3:
-                card.x = Acekit.i.stage.stageWidth / 2 - 2;
+                card.x = acekit.stage.stageWidth / 2 - 2;
                 card.y = 180;
                 break;
             case 4:
                 card.x = 300;
-                card.y = Acekit.i.stage.stageHeight / 2 - 20;
+                card.y = acekit.stage.stageHeight / 2 - 20;
                 break;
         }
     }

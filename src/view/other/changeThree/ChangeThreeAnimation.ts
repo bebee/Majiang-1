@@ -86,10 +86,10 @@ class ChangeThreeAnimation extends BaseSprite {
     public show() {
         super.show();
 
-        this.x = Acekit.i.width >> 1;
-        this.y = Acekit.i.height >> 1;
+        this.x = acekit.width >> 1;
+        this.y = acekit.height >> 1;
 
-        Acekit.i.addChild(this);
+        acekit.addChild(this);
     }
 
     public hide() {
@@ -97,7 +97,7 @@ class ChangeThreeAnimation extends BaseSprite {
 
         this.clean();
 
-        Acekit.i.removeChild(this);
+        acekit.removeChild(this);
     }
 
     public clean() {

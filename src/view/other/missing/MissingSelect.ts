@@ -46,14 +46,14 @@ class MissingSelect extends BaseSprite {
     public show() {
         super.show();
 
-        this.x = Acekit.i.width >> 1;
-        this.y = Acekit.i.height - 220;
-        Acekit.i.addChild(this);
+        this.x = acekit.width >> 1;
+        this.y = acekit.height - 220;
+        acekit.addChild(this);
     }
 
     public hide() {
         super.hide();
 
-        Acekit.i.removeChild(this);
+        acekit.removeChild(this);
     }
 }

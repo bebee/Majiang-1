@@ -214,9 +214,9 @@ class GSController extends egret.EventDispatcher {
         this.scene.readyButton.visible = false;
         this.scene.waitText.visible = false;
 
-        Acekit.i.dispatchEvent(EffectEvent.ChupaiTips);
-        Acekit.i.dispatchEvent(EffectEvent.Chupai);
-        Acekit.i.dispatchEvent(EffectEvent.RaiseCards);
+        gameCore.gameManager.dispatchEvent(EffectEvent.ChupaiTips);
+        gameCore.gameManager.dispatchEvent(EffectEvent.Chupai);
+        gameCore.gameManager.dispatchEvent(EffectEvent.RaiseCards);
         this.playTimeEffect(false, false);
     }
 
@@ -273,7 +273,7 @@ class GSController extends egret.EventDispatcher {
     //开始按钮的显示和隐藏
     visibleStartButton(){
 
-        if(PublicVal.state == 1) {
+        if(PublicVal.state == GameState.start) {
 
             var hasLeave:boolean = false;
 
@@ -641,27 +641,32 @@ class GSController extends egret.EventDispatcher {
 
         switch (PublicVal.state) {
             case GameState.changeThree:
-                this.activateCard == cardView ? this.moveBack() : this.moveTo(cardView);
+                if (gameCore.changeThreeVo.hasCard(cardView.pai)) {
+                    this.moveBack();
+                    gameCore.changeThreeVo.delCard(cardView.pai);
+                }
+                else if (gameCore.changeThreeVo.addCard(cardView.pai)) {
+                    this.moveTo(cardView);
+                }
                 break;
             case GameState.missing:
-                this.activateCard == cardView ? this.moveBack() : this.moveTo(cardView);
                 break;
             case GameState.gamestart:
-                if (this.activateCard != cardView) {
-                    this.moveBack();
-                    this.moveTo(cardView);
-                } else {
+                if (this.activateCard == cardView) {
                     if (GSData.i.turnDir == 1 && GSConfig.handLens[PublicVal.i.getHandPais(1).length] && this.allowPushCard) {//进入打牌
                         var pai = this.activateCard.pai;
                         this.allowPushCard = false;
                         this.startPushTimeInterval();
                         SocketManager.getInstance().getGameConn().send(4, {"args": pai});
                         console.log("发送自己的打牌信息", pai);
-                        if(GSData.i.isTing) PublicVal.state = GameState.ting;
+                        if (GSData.i.isTing) PublicVal.state = GameState.ting;
 
                     } else if (!GSData.i.gang_end && GSData.i.zhuangDir == 1) {//开局轮杠中
                         EffectUtils.showTips("等待其他玩家杠牌，请稍后...", 5);
                     }
+                } else {
+                    this.moveBack();
+                    this.moveTo(cardView);
                 }
                 break;
         }
@@ -713,9 +718,9 @@ class GSController extends egret.EventDispatcher {
         this.playTimeEffect(false);
 
         //显示新出的牌
-        Acekit.i.dispatchEvent(EffectEvent.Chupai, [dir, pai]);
+        gameCore.gameManager.dispatchEvent(EffectEvent.Chupai, [dir, pai]);
         //显示新出的牌提示点
-        Acekit.i.dispatchEvent(EffectEvent.ChupaiTips, [dir, cardView]);
+        gameCore.gameManager.dispatchEvent(EffectEvent.ChupaiTips, [dir, cardView]);
     }
 
     //显示吃牌种类选择
@@ -756,7 +761,7 @@ class GSController extends egret.EventDispatcher {
             this.gsView.funcSelectView.updateFuncView(GSData.i.funcSelects);
 
             //TODO 相关手牌提示
-            if(tip) Acekit.i.dispatchEvent(EffectEvent.RaiseCards, RaiseCardsType.funcmenu);
+            if(tip) gameCore.gameManager.dispatchEvent(EffectEvent.RaiseCards, RaiseCardsType.funcmenu);
         }
     }
 
@@ -780,7 +785,7 @@ class GSController extends egret.EventDispatcher {
         GSData.i.isShowFunc = false;
 
         //TODO 相关手牌提示
-        Acekit.i.dispatchEvent(EffectEvent.RaiseCards);
+        gameCore.gameManager.dispatchEvent(EffectEvent.RaiseCards);
     }
 
     addCardClick(view: CardView) {
@@ -1237,7 +1242,7 @@ class GSController extends egret.EventDispatcher {
     updateGameStyle(){
 
 
-        if(PublicVal.state == 3 || PublicVal.state == 6) {
+        if(PublicVal.state == GameState.gamestart || PublicVal.state == 6) {
 
             this.scene.updateTableBG();
 

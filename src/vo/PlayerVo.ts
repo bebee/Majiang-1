@@ -3,7 +3,7 @@
  * @undefined
  *
  */
-class Player extends BaseVo {
+class Player extends BaseDataVo {
     /**
      * 当前平台
      */
