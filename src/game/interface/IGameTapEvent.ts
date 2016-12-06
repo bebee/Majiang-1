@@ -28,4 +28,10 @@ interface IGameTapEvent{
     onInvite():void;
     onHeadTouch(dir: number): void;
 
+
+    onReplayPlayTap():void;
+    onReplayPauseTap():void;
+    onReplayFFTap():void;
+    onReplayFBTap():void;
+
 }

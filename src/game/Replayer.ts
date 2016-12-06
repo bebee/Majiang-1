@@ -39,23 +39,31 @@ class Replayer implements IUpdate{
     //缓存牌
     cachePaiArr:any;
 
+
+    //当前步骤
+    lastIndex:number;
+
     //步骤
     index:number;
 
     //是否暂停
-    isPause:boolean;
+    //isPause:boolean;
 
     //是否回退
     isFB:boolean;
 
 
+    exitInterval:number;
+
     clear(){
 
-        this.isPause = false;
+        //this.isPause = false;
 
         this.isFB = false;
 
         this.index = 0;
+
+        this.lastIndex = 0;
 
         this.passTime = 0;
 
@@ -65,22 +73,41 @@ class Replayer implements IUpdate{
 
         egret.clearTimeout(this.interval);
 
+        egret.clearTimeout(this.exitInterval);
+
         //关闭控制菜单
+        GSController.i.gsView.replayControllView.visible = false;
+
+        GSController.i.gsView.replayControllView.play();
     }
+    exit(){
+
+        console.log("exit");
+
+        GSController.i.exit();
+
+        this.clear();
+
+        GameLayerManager.gameLayer().messagBox.hide();
+
+        StackManager.open(RecordDialog, "RecordDialog");
+
+    }
+
     /*
         回放
      */
-    Replay(){
+    /*Replay(){
         this.clear();
         PublicVal.i.clear();
         this.parseData(this.data);
-    }
+    }*/
     /*
         暂停
      */
     Pause(){
 
-        this.isPause = true;
+        //this.isPause = true;
         this.stop = true;
     }
     /*
@@ -91,23 +118,54 @@ class Replayer implements IUpdate{
         this.stop = false;
     }
     /*
-     快进
+        快进
      */
     FF(){
+
         this.passTime = Replayer.replaySpeed;
     }
     /*
         回退
      */
     FB(){
+
+        this.clearExitInterval();
+
         PublicVal.i.clear();
         this.isFB = true;
         this.actions = [];
         this.parseData(this.data);
-        this.prevIndex(3);
+
+        this.lastIndex -- ;
+        this.prevIndex(this.lastIndex);
+        this.index = this.lastIndex + 1;
+        if(this.lastIndex == -1) {
+            this.lastIndex = 0;
+        }
         this.isFB = false;
+        this.passTime = 0;
+
     }
 
+    /*
+     退到某步
+     */
+    prevIndex(index:number){
+
+        if(index < 0 ) return;
+
+        //console.log("--------回退开始");
+
+        var i:number = 0;
+
+        while( i <= index){
+            this.goIndex(i);
+            i++;
+        }
+
+        //console.log("--------回退结束");
+        this.passTime = 0;
+    }
 
     /*
      [?Record_Action_Static,Static],
@@ -116,12 +174,14 @@ class Replayer implements IUpdate{
      [?Record_Action_Play,Type,Number,Turn],
      [?Record_Action_Notice,Turn,Pos,Interrupts],
      [?Record_Action_Deal,POS,Action,RtnPai]
+
      -1).初始化手牌
      -2).%打牌
      -3).%抓牌
      -4).%通知功能菜单
      -5).%处理功能菜单点击
      -6).%当局静态数据
+     -7).%换宝
      Static6 =
      [
      data([rules]),
@@ -156,6 +216,14 @@ class Replayer implements IUpdate{
         }
         this.show();
     }
+
+    __action_7(arr:any,index:number){
+
+        this.actions.push({index:index,action: 7, pai:arr[1]});
+
+    }
+
+
     __action_1(arr:any,index:number){
         this.cachePaiArr = arr;
         var all = arr[1];
@@ -221,6 +289,8 @@ class Replayer implements IUpdate{
         GSController.i.startView();
         GSConfig.replayConfigInit();
 
+
+        GSController.i.gsView.replayControllView.visible = true;
 
         GSController.i.nullAllHead();
         GSController.i.setArrowDir(0);
@@ -314,7 +384,7 @@ class Replayer implements IUpdate{
 
     play_action_2(action:any){
 
-        console.log("打牌",action);
+        //console.log("打牌",action);
 
         var pos = action.pos;
         var pai = action.pai;
@@ -334,7 +404,7 @@ class Replayer implements IUpdate{
     }
     play_action_3(action:any){
 
-        console.log("抓牌",action);
+        //console.log("抓牌",action);
 
         var pos = action.pos;
         var pai = action.pai;
@@ -348,11 +418,30 @@ class Replayer implements IUpdate{
 
         GSController.i.updateCenterInfo();
 
-
     }
+    //换宝
+    play_action_7(action:any){
+
+        PublicVal.i.bao = action.pai;
+
+        PublicVal.i.dui_num --;
+
+        GSController.i.updateBaoView();
+
+        GSController.i.updateCenterInfo();
+
+        if(!this.isFB){
+
+            GSController.i.gsView.playBaoEffect();
+        }
+    }
+
+
+
+
     play_action_5(action:any){
 
-        console.log("功能牌",action);
+        //console.log("功能牌",action);
 
         var funcID = action.funcID;
         var pos = action.pos;
@@ -381,7 +470,7 @@ class Replayer implements IUpdate{
 
                 GSController.i.updatePoolPaiView(fromDir);
 
-                GSController.i.playEffect(dir,funcID);
+                this.playFuncEffect(dir,funcID);
                 break;
 
             case 2:
@@ -396,7 +485,7 @@ class Replayer implements IUpdate{
                 GSController.i.updateMJView(dir);
                 GSController.i.updatePoolPaiView(fromDir);
 
-                GSController.i.playEffect(dir,funcID);
+                this.playFuncEffect(dir,funcID);
 
 
                 break;
@@ -409,7 +498,7 @@ class Replayer implements IUpdate{
                 FashionTools.sortPai(PublicVal.i.getHandPais(dir));
                 GSController.i.updateMJView(dir);
 
-                GSController.i.playEffect(dir,funcID);
+                this.playFuncEffect(dir,funcID);
 
                 break;
             case 24://暗杠
@@ -423,7 +512,7 @@ class Replayer implements IUpdate{
                 FashionTools.sortPai(PublicVal.i.getHandPais(dir));
                 GSController.i.updateMJView(dir);
 
-                GSController.i.playEffect(dir,funcID);
+                this.playFuncEffect(dir,funcID);
                 break;
             case 25://明杠
 
@@ -447,7 +536,7 @@ class Replayer implements IUpdate{
                 GSController.i.updateMJView(dir);
                 GSController.i.updatePoolPaiView(fromDir);
 
-                GSController.i.playEffect(dir,funcID);
+                this.playFuncEffect(dir,funcID);
 
                 break;
             case 26://中发白杠
@@ -460,53 +549,57 @@ class Replayer implements IUpdate{
                 FashionTools.sortPai(PublicVal.i.getHandPais(dir));
                 GSController.i.updateMJView(dir);
 
-                GSController.i.playEffect(dir,funcID);
+                this.playFuncEffect(dir,funcID);
 
                 break;
 
             case 27://幺九杠 补蛋
 
-                pais.length -= 3;
+                //pais.length -= 3;
 
-                var everPai = PublicVal.i.getPai(dir, 22, pais[0].number);
+                var sPais = pais.slice(0,-3);
+
+                var everPai = PublicVal.i.getPai(dir, 22, sPais[0].number);
 
                 var everSrc = [1, 1, 1];
 
-                for (var i: number = 0; i < pais.length; i++) {
+                for (var i: number = 0; i < sPais.length; i++) {
 
-                    everSrc[pais[i].type - 1]++;
+                    everSrc[sPais[i].type - 1]++;
 
                 }
                 everPai.ever = everSrc;
 
-                PublicVal.i.removeHandPai(dir,pais[0]);
+                PublicVal.i.removeHandPai(dir,sPais[0]);
 
 
                 FashionTools.sortPai(PublicVal.i.getHandPais(dir));
                 GSController.i.updateMJView(dir);
 
-                GSController.i.playEffect(dir,funcID);
+                this.playFuncEffect(dir,funcID);
 
                 break;
             case 28://中发白 补蛋
 
-                pais.length -= 3;
+                //pais.length -= 3;
+
+                var sPais = pais.slice(0,-3);
 
                 var everPai = PublicVal.i.getPai(dir, 26);
 
                 var everSrc = [1, 1, 1];
 
-                for (var i: number = 0; i < pais.length; i++) {
-                    everSrc[pais[i].number - 1]++;
+                for (var i: number = 0; i < sPais.length; i++) {
+                    everSrc[sPais[i].number - 1]++;
                 }
                 everPai.ever = everSrc;
 
-                PublicVal.i.removeHandPai(dir,pais[0]);
+                PublicVal.i.removeHandPai(dir,sPais[0]);
 
                 FashionTools.sortPai(PublicVal.i.getHandPais(dir));
                 GSController.i.updateMJView(dir);
 
-                GSController.i.playEffect(dir,funcID);
+                this.playFuncEffect(dir,funcID);
 
                 break;
 
@@ -519,13 +612,21 @@ class Replayer implements IUpdate{
                     GSController.i.updateMJView(dir);
                     GSController.i.updatePoolPaiView(fromDir);
                 }else{
-                    console.log("自摸胡牌!");
+                    //console.log("自摸胡牌!");
                 }
-                GSController.i.playEffect(dir,funcID);
+                this.playFuncEffect(dir,funcID);
 
                 break;
         }
 
+
+    }
+
+    playFuncEffect(dir:number,funcID:number){
+
+        if(! this.isFB) {
+            GSController.i.playEffect(dir, funcID);
+        }
 
     }
 
@@ -549,10 +650,24 @@ class Replayer implements IUpdate{
                 console.log("-----回放结束!-----");
 
                 this.stop = true;
+                //同步下控制按钮
+                GSController.i.gsView.replayControllView.pause();
+
+                this.clearExitInterval();
+
+                this.exitInterval = egret.setTimeout(this.exit,this,3000);
             }
 
         }
     }
+
+    clearExitInterval(){
+
+        if(this.exitInterval){
+            egret.clearTimeout(this.exitInterval);
+        }
+    }
+
 
     goIndex(index:number){
 
@@ -560,22 +675,11 @@ class Replayer implements IUpdate{
 
         this["play_action_"+action.action](action);
 
+        this.lastIndex = index;
+
     }
 
-    /*
-        退到某步
-     */
-    prevIndex(index:number){
 
-        var i:number = 0;
-
-        while( i <= index){
-            this.goIndex(i);
-            i++;
-        }
-        this.index = i;
-        this.passTime = 0;
-    }
 
 
 

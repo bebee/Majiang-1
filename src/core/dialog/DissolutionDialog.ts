@@ -73,6 +73,8 @@ class DissolutionDialog extends BaseDialog
     {
         if(!this.plist) return;
 
+        var my = this;
+
         if(this.isClick)
         {
             this.m_UI.btn_false.visible = false;
@@ -150,26 +152,34 @@ class DissolutionDialog extends BaseDialog
             }
         }
 
-        if(num >= 4)
+        if(isan)
         {
-            var my = this;
-
             egret.setTimeout(function ()
             {
                 my.clear();
 
-                if(isan)
-                {
-                    EffectUtils.showTips("因有玩家拒绝解散，房间未能解散", 5);
+                EffectUtils.showTips("因有玩家拒绝解散，房间未能解散", 5);
 
-                    Heart.getInstance().dissolutionTime = 0;
-                }
-                else
-                {
-                    EffectUtils.showTips("房间解散成功", 5);
-                }
+                Heart.getInstance().dissolutionTime = 0;
 
             },this, 1000);
+        }
+        else
+        {
+            if(num >= 4)
+            {
+
+
+                egret.setTimeout(function ()
+                {
+                    my.clear();
+
+                    EffectUtils.showTips("房间解散成功", 5);
+
+                    Heart.getInstance().dissolutionTime = 0;
+
+                },this, 1000);
+            }
         }
     }
 

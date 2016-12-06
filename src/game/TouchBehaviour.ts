@@ -4,6 +4,7 @@
 class TouchBehaviour implements IGameTapEvent{
 
 
+
     static _i  : TouchBehaviour;
 
     static get i(){
@@ -223,8 +224,7 @@ class TouchBehaviour implements IGameTapEvent{
             {
                 if(r)
                 {
-                    GSController.i.exit();
-                    Replayer.i.clear();
+                    Replayer.i.exit();
                 }
             }, "您确定要退出回放吗？");
 
@@ -234,7 +234,7 @@ class TouchBehaviour implements IGameTapEvent{
             var info : string;
 
             if(GSData.i.roomOwnDir == 1) {
-                info = "您确定要解散房间吗？";
+                info = "您未开始一局游戏，解散房间不扣房卡，是否解散？";
 
             }else{
                 info = "您确定要离开房间吗？";
@@ -292,6 +292,41 @@ class TouchBehaviour implements IGameTapEvent{
             d.refreshRole(player);
         }
 
+    }
+
+
+    onReplayPlayTap(): void {
+
+        Replayer.i.stop = false;
+
+        GSController.i.gsView.replayControllView.play();
+
+    }
+
+    onReplayPauseTap(): void {
+
+        Replayer.i.stop = true;
+
+        GSController.i.gsView.replayControllView.pause();
+
+    }
+
+    onReplayFFTap(): void {
+
+        Replayer.i.FF();
+
+        Replayer.i.stop = false;
+
+        GSController.i.gsView.replayControllView.play();
+    }
+
+    onReplayFBTap(): void {
+
+        Replayer.i.FB();
+
+        Replayer.i.stop = false;
+
+        GSController.i.gsView.replayControllView.play();
     }
 
 }

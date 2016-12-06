@@ -42,12 +42,9 @@ class CreateUI extends eui.Component
 
     onComplete()
     {
-        this.btn_start = new mui.EButton("start_btn");
+        this.btn_start = new mui.EButton("game_create", "开始牌局");
         this.btn_start.x = 284;
         this.btn_start.y = 390;
-        this.btn_start.textImg.source = "create_kspj";
-        this.btn_start.textImg.horizontalCenter = 35;
-        this.btn_start.textImg.verticalCenter = -7;
         this.addChild(this.btn_start);
 
 

@@ -49,9 +49,18 @@ class RecordXItem extends eui.Component
         {
             var pos:number = this.obj[i];
 
-            var slot:number = i - 2;
+            var p;
 
-            var p = pcl[slot];
+            for(var j = 0; j < pcl.length; j++)
+            {
+                var jp = pcl[j];
+
+                if(+jp.pos == (i- 1))
+                {
+                    p = jp;
+                    break;
+                }
+            }
 
             var nick = p.nick;
 

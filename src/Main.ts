@@ -110,9 +110,9 @@ class Main extends eui.UILayer {
 
         if(!NativeApi.getLocalData("music_volume"))
         {
-            NativeApi.setLocalData("music_volume", 0.2);
+            NativeApi.setLocalData("music_volume", 0.3);
 
-            GameMusic._volume = 0.2;
+            GameMusic._volume = 0.3;
         }
         else GameMusic._volume = +NativeApi.getLocalData("music_volume");
 

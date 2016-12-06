@@ -69,10 +69,13 @@ class CenterBoom extends egret.DisplayObjectContainer{
         this.leftView.addChild(this.leftCountText);
 
         this.roundCountText = new egret.TextField();
-        this.roundCountText.x = 2;
+        this.roundCountText.x = 24;
         this.roundCountText.y = 3;
+        this.roundCountText.width = 50;
         this.roundCountText.text = "00/00";
         this.roundCountText.size = 18;
+        this.roundCountText.textAlign = "center";
+        this.roundCountText.anchorOffsetX = 50 >> 1;
         this.rightView.addChild(this.roundCountText);
 
         this.addChild(this.leftView);

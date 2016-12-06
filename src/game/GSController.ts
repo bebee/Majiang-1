@@ -47,6 +47,7 @@ class GSController extends egret.EventDispatcher{
 
         this.gsView.bindInterface(TouchBehaviour.i);
         this.gsView.funcSelectView.bindInterface(TouchBehaviour.i);
+        this.gsView.replayControllView.bindInterface(TouchBehaviour.i);
         this.scene.bindInterface(TouchBehaviour.i);
         this.gsResultView.bindInterface(TouchBehaviour.i);
 
@@ -242,16 +243,24 @@ class GSController extends egret.EventDispatcher{
     //刷新解散按钮的文字
     updateJiesanButtonText(){
 
-        if(PublicVal.i.ownPos == 1){
+        if(PublicVal.state == 1)
+        {
+            if(PublicVal.i.ownPos == 1)
+            {
+                this.scene.jiesanButton.getChildAt(0)["textField"].text = "解散房间";
 
-            this.scene.jiesanButton.getChildAt(0)["textField"].text = "解散房间";
-
-        }else{
-            this.scene.jiesanButton.getChildAt(0)["textField"].text = "离开房间";
+            }
+            else
+            {
+                this.scene.jiesanButton.getChildAt(0)["textField"].text = "离开房间";
+            }
         }
+        else
+        {
+            this.scene.jiesanButton.getChildAt(0)["textField"].text = "解散房间";
+        }
+
     }
-
-
 
     //显示隐藏两个功能按钮(解散房间和返回微信)
     visibleTwoFuncButton(boo1:boolean){
@@ -405,8 +414,6 @@ class GSController extends egret.EventDispatcher{
 
         this.showStateView();
 
-        //this.gsView.updateBaoPai(PublicVal.i.bao);
-        //this.gsResultView.updateBaoPai(PublicVal.i.bao);
 
         this.updateBaoView();
 
@@ -416,6 +423,11 @@ class GSController extends egret.EventDispatcher{
         this.setArrowDir(GSData.i.zhuangDir);
 
         this.updateCenterInfo();
+
+        if(GSData.i.isLianZhuang){
+
+            EffectUtils.showTips("恭喜庄家连庄！", 1);
+        }
 
         //进入开场效果
 

@@ -33,7 +33,7 @@ class GSData{
     pos2Dir:any = {};
 
     //庄的pos
-    zhuangPos:number;
+    zhuangPos:number = -1;
     //庄的dir
     zhuangDir:number;
 
@@ -108,6 +108,10 @@ class GSData{
     //牌局准备好
     roundReady:number;
 
+    lastZhuangPos:number;
+    //是否连庄
+    isLianZhuang:boolean;
+
     constructor(){
 
         this.clear();
@@ -132,6 +136,8 @@ class GSData{
         this.readyFlag = 0;
 
         this.gangCurs = [0,0,0,0,0];
+
+        this.lastZhuangPos = 0;
 
         //this.rules = "";
 
