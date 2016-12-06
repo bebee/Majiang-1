@@ -5,6 +5,6 @@
  */
 class GameConst {
 
-    static ChangeThreeTime: number = 10;
-
+    //换三张的限制时间(单位:秒)
+    static ChangeThreeTime: number = 60;
 }

@@ -1,65 +1,116 @@
-class CreateUI extends eui.Component
-{
-    public constructor()
-    {
+class CreateUI extends eui.Component {
+
+    private btn_xueliu: mui.EButton;
+    private btn_xuezhan: mui.EButton;
+
+    private scroller: eui.Scroller;
+    private viewGroup: eui.Group;
+
+    private btn_selectAll: mui.EButton;
+    private btn_start: mui.EButton;
+
+    private xueliuView: CreateXueliuView;
+
+    private selectAll: boolean;
+
+    private ruleVo: GameRuleVo;
+
+    public constructor() {
         super();
-
-        this.addEventListener(eui.UIEvent.COMPLETE,this.onComplete,this);
-
         this.skinName = "CreateSkin";
-
-        this.touchChildren = true;
     }
 
-    public btn_start:mui.EButton;
+    childrenCreated() {
+        super.childrenCreated();
 
-    public btn_fanxuan:mui.EButton;
+        this.btn_selectAll = new mui.EButton("create_btn_img");
+        this.btn_selectAll.textImg.source = "create_xz1";
+        this.btn_selectAll.x = 550;
+        this.btn_selectAll.y = 278;
+        this.btn_selectAll.visible = false;
+        this.addChild(this.btn_selectAll);
 
-    public _lef_btn:eui.Image;
+        this.ruleVo = game.ruleVo;
 
-    public _right_btn:eui.Image;
+        this.xueliuView = new CreateXueliuView();
 
-    public _center_btn:eui.Image;
+        this.init();
 
-    public _riado:eui.Image;
+        this.btn_xueliu.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickHandler, this);
+        this.btn_xuezhan.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickHandler, this);
 
-    public _edit:eui.Label;
-
-    public btn_suiji:eui.Image;
-
-    public _tq1:eui.Label;
-    public _tq2:eui.Label;
-    public _tq3:eui.Label;
-
-    public _tg1:eui.Label;
-    public _tg2:eui.Label;
-    public _tg3:eui.Label;
-    public _tg4:eui.Label;
-    public _tg5:eui.Label;
-    public _tg6:eui.Label;
-    public _tg7:eui.Label;
-    public _tg8:eui.Label;
-
-    onComplete()
-    {
-        this.btn_start = new mui.EButton("game_create", "开始牌局");
-        this.btn_start.x = 284;
-        this.btn_start.y = 390;
-        this.addChild(this.btn_start);
-
-
-        this.btn_fanxuan = new mui.EButton("create_btn_img");
-        this.btn_fanxuan.x = 550;
-        this.btn_fanxuan.y = 278;
-        this.addChild(this.btn_fanxuan);
-        this.btn_fanxuan.textImg.source = "create_xz1";
-
-        this._tq1.textColor = 0xff2f19;
-
+        this.btn_selectAll.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickHandler, this);
+        this.btn_start.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickHandler, this);
     }
 
-    createChildren()
-    {
-        super.createChildren();
+    private clickHandler(e: egret.TouchEvent) {
+        switch (e.currentTarget) {
+            case this.btn_xueliu:
+                this.ruleVo.law = GameLaws.xueliuchenghe;
+                break;
+            case this.btn_xuezhan:
+                this.ruleVo.law = GameLaws.xuezhandaodi;
+                break;
+            case this.btn_selectAll:
+                this.selectAll = !this.selectAll;
+                break;
+            case this.btn_start:
+                this.startGame();
+                break;
+        }
+
+        this.updateView();
+    }
+
+    private init() {
+        this.selectAll = false;
+        this.btn_selectAll.textImg.source = "create_xz" + (this.selectAll ? 1 : 0);
+
+        this.scroller.viewport.scrollV = 0;
+        this.scroller.validateNow();
+
+        this.updateView();
+    }
+
+    private updateView() {
+
+        this.viewGroup.removeChildren();
+
+        switch (this.ruleVo.law) {
+            case GameLaws.xueliuchenghe:
+            case GameLaws.xuezhandaodi:
+                this.viewGroup.addChild(this.xueliuView);
+                this.xueliuView.update();
+                break;
+            case GameLaws.sanren_2:
+                break;
+            case GameLaws.sanren_3:
+                break;
+            case GameLaws.siren_2:
+                break;
+        }
+    }
+
+    private startGame(): void {
+        GlobalData.getInstance().roomRound = this.ruleVo.ju;
+
+        console.log(this.ruleVo.ju, this.ruleVo.rules);
+        // return;
+        //创建房间
+        SocketManager.getInstance().getGameConn().send(2, {
+            "args": {
+                "type": 100,
+                "round": this.ruleVo.ju,
+                "rules": this.ruleVo.rules,
+                "pass": "0"
+            }
+        });
+    }
+
+    show() {
+        this.init();
+    }
+
+    hide() {
     }
 }

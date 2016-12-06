@@ -256,7 +256,14 @@ class GSView extends egret.Sprite {
 
     }
 
-
+    updateState() {
+        for (var i: number = 1; i <= this.MJViews.length; i++) {
+            var mjView = this.MJViews[i];
+            if (mjView) {
+                mjView.updateState();
+            }
+        }
+    }
 
     //更新房间信息
     updateRoom() {

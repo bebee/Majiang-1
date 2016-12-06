@@ -1,27 +1,20 @@
 /**
- * 升牌类型
- */
-enum RaiseCardsType {
-    funcmenu, changeThree
-}
-
-/**
  * 升牌特效
  * @Author Ace.c
  * @Create 2016-11-28 16:25
  */
-class RaiseCardsEffect {
+class CardRaiseEffect {
 
-    static play(type: RaiseCardsType) {
+    static play(type: CardRaiseMode) {
         var cards: any[];
         var touchEnabled: boolean;
         switch (type) {
-            case RaiseCardsType.funcmenu:
+            case CardRaiseMode.funcmenu:
                 cards = this.getCardsByFuncmenu();
                 touchEnabled = false;
                 break;
-            case RaiseCardsType.changeThree:
-                cards = gameCore.changeThreeVo.getQuickCards();
+            case CardRaiseMode.changeThree:
+                cards = game.changeThreeVo.getQuickCards();
                 touchEnabled = true;
                 break;
         }

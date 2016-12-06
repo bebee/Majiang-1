@@ -1,11 +1,15 @@
 {
   "autoGenerateExmlsList": true,
   "exmls": [
+    "resource/eui_skins/ButtonSkin.exml",
+    "resource/eui_skins/CheckBoxSkin.exml",
     "resource/eui_skins/EHSliderSkin.exml",
+    "resource/eui_skins/RadioButtonSkin.exml",
     "resource/eui_skins_game/ChatListSkin.exml",
     "resource/eui_skins_game/ChatPaoSkin.exml",
     "resource/eui_skins_game/ChatSkin.exml",
-    "resource/eui_skins_game/CreateSkin.exml",
+    "resource/eui_skins_game/create/CreateSkin.exml",
+    "resource/eui_skins_game/create/CreateXueliuViewSkin.exml",
     "resource/eui_skins_game/DialogSkin.exml",
     "resource/eui_skins_game/DissolutionSkin.exml",
     "resource/eui_skins_game/HornSkin.exml",
@@ -28,5 +32,9 @@
     "resource/eui_skins_game/ShopItemSkin.exml",
     "resource/eui_skins_game/ShopSkin.exml"
   ],
-  "skins": {}
+  "skins": {
+    "eui.Button": "resource/eui_skins/ButtonSkin.exml",
+    "eui.CheckBox": "resource/eui_skins/CheckBoxSkin.exml",
+    "eui.RadioButton": "resource/eui_skins/RadioButtonSkin.exml"
+  }
 }

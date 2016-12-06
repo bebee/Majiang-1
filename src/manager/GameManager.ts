@@ -12,15 +12,13 @@ class GameManager extends BaseDispatcher {
         return this._i;
     }
 
-    eventManager: GameEventManager;
-    dataManager: GameDataManager;
+    gameEventManager: GameEffectManager;
 
     public constructor() {
         super();
     }
 
     init() {
-        this.eventManager = new GameEventManager();
-        this.dataManager = new GameDataManager();
+        this.gameEventManager = new GameEffectManager();
     }
 }

@@ -31,17 +31,17 @@ class ChangeThreeSelect extends BaseSprite {
             this.time--;
             this.lab_time.text = "" + this.time;
         }
-        else {
-            this.hide();
-        }
     }
 
     private clickHandler(e: egret.TouchEvent) {
         switch (e.currentTarget) {
             case this.btn_confirm:
+                if (game.changeThreeVo.cards.length < 3) {
+                    return;
+                }
+
                 this.hide();
-                console.log("发送换三张");
-                console.log(gameCore.changeThreeVo.cards);
+                console.log(game.changeThreeVo.cards);
                 break;
         }
     }

@@ -123,7 +123,7 @@ class GSData{
 
         this.roundReset();
 
-        PublicVal.state = GameState.start;
+        PublicVal.state = StateType.start;
 
         this.firstInRoom = false;
 
@@ -154,7 +154,7 @@ class GSData{
 
         this.roundStartHasFunction = false;
 
-        PublicVal.state = GameState.reconnect;
+        PublicVal.state = StateType.reconnect;
 
         this.gang_end = false;
         this.isZhuangPush = false;

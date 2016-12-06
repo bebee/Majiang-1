@@ -115,7 +115,7 @@ class GSController extends egret.EventDispatcher {
                 this.updateGangCur();
                 this.updateJiesanButtonText();
                 break;
-            case GameState.reconnect://继续牌桌界面
+            case StateType.reconnect://继续牌桌界面
 
                 this.gsResultView.visible = false;
 
@@ -141,7 +141,7 @@ class GSController extends egret.EventDispatcher {
                 this.updateGangCur();
                 this.updateJiesanButtonText();
                 break;
-            case GameState.gamestart://进入牌局界面
+            case StateType.gamestart://进入牌局界面
             case -4:
                 //进入牌局界面
                 this.gsView.visible = true;
@@ -166,12 +166,12 @@ class GSController extends egret.EventDispatcher {
 
 
                 break;
-            case GameState.gameover://进入每轮牌局结算界面
+            case StateType.gameover://进入每轮牌局结算界面
                 GSData.i.readyFlag = 0;
                 this.gsResultView.visible = true;
                 this.closeGSView();
                 break;
-            case GameState.over://总结算界面
+            case StateType.over://总结算界面
                 this.closeGSView();
                 this.gsResultView.visible = false;
                 break;
@@ -215,9 +215,9 @@ class GSController extends egret.EventDispatcher {
         this.scene.readyButton.visible = false;
         this.scene.waitText.visible = false;
 
-        gameCore.gameManager.dispatchEvent(EffectEvent.ChupaiTips);
-        gameCore.gameManager.dispatchEvent(EffectEvent.Chupai);
-        gameCore.gameManager.dispatchEvent(EffectEvent.RaiseCards);
+        game.manager.dispatchEvent(GameEvent.CardThrowTips);
+        game.manager.dispatchEvent(GameEvent.CardThrow);
+        game.manager.dispatchEvent(GameEvent.CardRaise);
         this.playTimeEffect(false, false);
     }
 
@@ -282,7 +282,7 @@ class GSController extends egret.EventDispatcher {
     //开始按钮的显示和隐藏
     visibleStartButton(){
 
-        if(PublicVal.state == GameState.start) {
+        if(PublicVal.state == StateType.start) {
 
             var hasLeave:boolean = false;
 
@@ -378,7 +378,7 @@ class GSController extends egret.EventDispatcher {
         }
 
         //进入开场效果
-        PublicVal.state = GameState.shuffle;
+        PublicVal.state = StateType.shuffle;
 
         GSStateMgr.i.setState(GSState.State_HeadToTarget);
 
@@ -389,13 +389,13 @@ class GSController extends egret.EventDispatcher {
     //显示隐藏某个方位准备图标和踢人图标
     visibleReadyIcon() {
 
-        if(PublicVal.state == GameState.start || PublicVal.state == GameState.reconnect) {
+        if(PublicVal.state == StateType.start || PublicVal.state == StateType.reconnect) {
             for (var i: number = 1; i <= 4; i++) {
                 var readyIcon = this.gsView.readyIcons[i];
                 var killIcon = this.gsView.getHeadView(i).headIcon.killIcon;
                 readyIcon.visible = (GSData.i.readyFlag >> i & 1) == 1;
 
-                if (PublicVal.state == GameState.start && i > 1 && PublicVal.i.ownPos == 1) {
+                if (PublicVal.state == StateType.start && i > 1 && PublicVal.i.ownPos == 1) {
 
                     killIcon.visible = readyIcon.visible;
                 } else {
@@ -454,7 +454,7 @@ class GSController extends egret.EventDispatcher {
 
             this.playTimeEffect(true,true);
 
-            if(PublicVal.state == GameState.ting){//听牌状态
+            if(PublicVal.state == StateType.ting){//听牌状态
                 //延时打尾牌
                 this.delayPushInterval = egret.setTimeout(this.delayPushPai,this,500);
             }
@@ -463,7 +463,7 @@ class GSController extends egret.EventDispatcher {
             this.playTimeEffect(true,false);
         }
 
-        if(PublicVal.state == GameState.fen){
+        if(PublicVal.state == StateType.fen){
 
             this.playTimeEffect(false,false);
         }
@@ -497,7 +497,7 @@ class GSController extends egret.EventDispatcher {
 
     roundPlay(){//牌局开始
 
-        PublicVal.state = GameState.gamestart;
+        PublicVal.state = StateType.gamestart;
 
         GSData.i.pushStartHandPai();
         GSController.i.isAllowFuncClick = true;
@@ -648,21 +648,21 @@ class GSController extends egret.EventDispatcher {
         var cardView: CardView = <CardView>e.currentTarget;
         if (!cardView)return;
 
-        if (PublicVal.state == GameState.shuffle || PublicVal.state == GameState.fen || PublicVal.state == GameState.win || PublicVal.state == GameState.ting) return;
+        if (PublicVal.state == StateType.shuffle || PublicVal.state == StateType.fen || PublicVal.state == StateType.win || PublicVal.state == StateType.ting) return;
 
         switch (PublicVal.state) {
-            case GameState.changeThree:
-                if (gameCore.changeThreeVo.hasCard(cardView.pai)) {
+            case StateType.changeThree:
+                if (game.changeThreeVo.hasCard(cardView.pai)) {
                     cardView.moveDown(true);
-                    gameCore.changeThreeVo.delCard(cardView.pai);
+                    game.changeThreeVo.delCard(cardView.pai);
                 }
-                else if (gameCore.changeThreeVo.addCard(cardView.pai)) {
+                else if (game.changeThreeVo.addCard(cardView.pai)) {
                     cardView.moveUp(true);
                 }
                 break;
-            case GameState.missing:
+            case StateType.missing:
                 break;
-            case GameState.gamestart:
+            case StateType.gamestart:
                 if (this.activateCard == cardView) {
                     if (GSData.i.turnDir == 1 && GSConfig.handLens[PublicVal.i.getHandPais(1).length] && this.allowPushCard) {//进入打牌
                         var pai = this.activateCard.pai;
@@ -670,7 +670,7 @@ class GSController extends egret.EventDispatcher {
                         this.startPushTimeInterval();
                         SocketManager.getInstance().getGameConn().send(4, {"args": pai});
                         console.log("发送自己的打牌信息", pai);
-                        if (GSData.i.isTing) PublicVal.state = GameState.ting;
+                        if (GSData.i.isTing) PublicVal.state = StateType.ting;
 
                     } else if (!GSData.i.gang_end && GSData.i.zhuangDir == 1) {//开局轮杠中
                         EffectUtils.showTips("等待其他玩家杠牌，请稍后...", 5);
@@ -729,9 +729,9 @@ class GSController extends egret.EventDispatcher {
         this.playTimeEffect(false);
 
         //显示新出的牌
-        gameCore.gameManager.dispatchEvent(EffectEvent.Chupai, [dir, pai]);
+        game.manager.dispatchEvent(GameEvent.CardThrow, [dir, pai]);
         //显示新出的牌提示点
-        gameCore.gameManager.dispatchEvent(EffectEvent.ChupaiTips, [dir, cardView]);
+        game.manager.dispatchEvent(GameEvent.CardThrowTips, [dir, cardView]);
     }
 
     //显示吃牌种类选择
@@ -763,7 +763,7 @@ class GSController extends egret.EventDispatcher {
     //显示吃碰杠功能菜单
     showFuncSelectMenu(tip:boolean = true) {
 
-        if(GSData.i.roundStartHasFunction && PublicVal.state == GameState.gamestart) {
+        if(GSData.i.roundStartHasFunction && PublicVal.state == StateType.gamestart) {
 
             this.moveBack(false);
 
@@ -772,7 +772,7 @@ class GSController extends egret.EventDispatcher {
             this.gsView.funcSelectView.updateFuncView(GSData.i.funcSelects);
 
             //TODO 相关手牌提示
-            if(tip) gameCore.gameManager.dispatchEvent(EffectEvent.RaiseCards, RaiseCardsType.funcmenu);
+            if(tip) game.manager.dispatchEvent(GameEvent.CardRaise, CardRaiseMode.funcmenu);
         }
     }
 
@@ -796,7 +796,7 @@ class GSController extends egret.EventDispatcher {
         GSData.i.isShowFunc = false;
 
         //TODO 相关手牌提示
-        gameCore.gameManager.dispatchEvent(EffectEvent.RaiseCards);
+        game.manager.dispatchEvent(GameEvent.CardRaise);
     }
 
     addCardClick(view: CardView) {
@@ -1202,7 +1202,7 @@ class GSController extends egret.EventDispatcher {
     //刷新手牌大小
     updateHandViewSize(){
 
-        if(PublicVal.state == GameState.gamestart) {
+        if(PublicVal.state == StateType.gamestart) {
 
             var mjView = this.gsView.MJViews[1];
 
@@ -1253,7 +1253,7 @@ class GSController extends egret.EventDispatcher {
     updateGameStyle(){
 
 
-        if(PublicVal.state == GameState.gamestart || PublicVal.state == 6) {
+        if(PublicVal.state == StateType.gamestart || PublicVal.state == 6) {
 
             this.scene.updateTableBG();
 

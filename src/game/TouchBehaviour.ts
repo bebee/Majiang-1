@@ -141,7 +141,7 @@ class TouchBehaviour implements IGameTapEvent {
         if (GSController.i.jiesuanData) {
 
             //清理回合数据
-            PublicVal.state = GameState.over;
+            PublicVal.state = StateType.over;
 
             GSController.i.showStateView();
 
@@ -205,7 +205,7 @@ class TouchBehaviour implements IGameTapEvent {
     onJiesanTap(): void
     {
 
-        if(PublicVal.state == GameState.reconnect || PublicVal.state == GameState.gamestart || PublicVal.state == GameState.ting)
+        if(PublicVal.state == StateType.reconnect || PublicVal.state == StateType.gamestart || PublicVal.state == StateType.ting)
         {
             GameLayerManager.gameLayer().messagBox.showMsg(function (r)
             {

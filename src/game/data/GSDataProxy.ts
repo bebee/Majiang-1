@@ -365,7 +365,7 @@ class GSDataProxy {
 
         if (gang_end != null) this.gData.gang_end = true;
 
-        if (this.gData.turnDir != 1 && PublicVal.state != GameState.shuffle) {// && this.gData.isZhuangPush) {
+        if (this.gData.turnDir != 1 && PublicVal.state != StateType.shuffle) {// && this.gData.isZhuangPush) {
             //轮到他人的时候，并且庄家出完牌,进行假象牌的添加
             this.gData.pushHandPai(this.gData.turnDir, null);
 
@@ -398,7 +398,7 @@ class GSDataProxy {
 
             console.log("尾局分张");
 
-            PublicVal.state = GameState.fen;
+            PublicVal.state = StateType.fen;
         }
         GSController.i.catchCard(1);
 
@@ -667,7 +667,7 @@ class GSDataProxy {
 
         this.gData.result = result;
 
-        if (PublicVal.state == GameState.fen) {//分张 延时
+        if (PublicVal.state == StateType.fen) {//分张 延时
 
             egret.setTimeout(this.delay_Final, this, 1200);
 
@@ -679,7 +679,7 @@ class GSDataProxy {
 
     delay_Final() {
 
-        PublicVal.state = GameState.gameover;
+        PublicVal.state = StateType.gameover;
 
         this.gData.roundStarted = true;
 
@@ -989,13 +989,13 @@ class GSDataProxy {
 
             case 1:
 
-                PublicVal.state = GameState.start;
+                PublicVal.state = StateType.start;
 
                 break;
 
             case 3:
 
-                PublicVal.state = GameState.gamestart;
+                PublicVal.state = StateType.gamestart;
                 //解析重连牌局
                 this.parseRebackPai();
 
@@ -1006,7 +1006,7 @@ class GSDataProxy {
                 break;
             case 2://重连继续牌桌
 
-                PublicVal.state = GameState.reconnect;
+                PublicVal.state = StateType.reconnect;
 
                 var gContinue: any = this.gData.rebackData.continue;
 
@@ -1093,7 +1093,7 @@ class GSDataProxy {
                 GSData.i.gangCurs[GSData.i.getDir(pos)] = obj.data.cur[k];
 
             }
-            PublicVal.state = GameState.gamestart;
+            PublicVal.state = StateType.gamestart;
 
             GSController.i.startGame();
 
@@ -1103,7 +1103,7 @@ class GSDataProxy {
     //牌局都准备好.可以出牌
     S2C_RoundReadyAll() {
 
-        if(PublicVal.state == GameState.shuffle) {
+        if(PublicVal.state == StateType.shuffle) {
 
             this.gData.roundReady++;
 

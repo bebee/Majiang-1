@@ -76,7 +76,7 @@
 	<script egret="game" src="bin-debug/config/ThemeAdapter.js"></script>
 	<script egret="game" src="bin-debug/config/Weixin.js"></script>
 	<script egret="game" src="bin-debug/constant/GameConst.js"></script>
-	<script egret="game" src="bin-debug/constant/GameEnums.js"></script>
+	<script egret="game" src="bin-debug/constant/GameType.js"></script>
 	<script egret="game" src="bin-debug/core/BaseDialog.js"></script>
 	<script egret="game" src="bin-debug/core/dialog/BindDialog.js"></script>
 	<script egret="game" src="bin-debug/core/dialog/ChatDialog.js"></script>
@@ -119,7 +119,7 @@
 	<script egret="game" src="bin-debug/core/uicom/SettingUI.js"></script>
 	<script egret="game" src="bin-debug/core/uicom/ShopItem.js"></script>
 	<script egret="game" src="bin-debug/core/uicom/ShopUI.js"></script>
-	<script egret="game" src="bin-debug/event/EffectEvent.js"></script>
+	<script egret="game" src="bin-debug/event/GameEvent.js"></script>
 	<script egret="game" src="bin-debug/game/base/BaseUpdate.js"></script>
 	<script egret="game" src="bin-debug/game/card/Card.js"></script>
 	<script egret="game" src="bin-debug/game/card/CardView.js"></script>
@@ -171,13 +171,10 @@
 	<script egret="game" src="bin-debug/game/view/ReplayControllView.js"></script>
 	<script egret="game" src="bin-debug/game/view/TimeEffectView.js"></script>
 	<script egret="game" src="bin-debug/manager/GameManager.js"></script>
-	<script egret="game" src="bin-debug/vo/BaseDataVo.js"></script>
-	<script egret="game" src="bin-debug/vo/ChangeThreeVo.js"></script>
 	<script egret="game" src="bin-debug/GameCore.js"></script>
 	<script egret="game" src="bin-debug/Main.js"></script>
 	<script egret="game" src="bin-debug/manager/BaseManager.js"></script>
-	<script egret="game" src="bin-debug/manager/GameDataManager.js"></script>
-	<script egret="game" src="bin-debug/manager/GameEventManager.js"></script>
+	<script egret="game" src="bin-debug/manager/GameEffectManager.js"></script>
 	<script egret="game" src="bin-debug/network/agreement/GameParse.js"></script>
 	<script egret="game" src="bin-debug/network/agreement/MessageID.js"></script>
 	<script egret="game" src="bin-debug/network/agreement/request/_1.js"></script>
@@ -237,11 +234,10 @@
 	<script egret="game" src="bin-debug/sound/GameMusic.js"></script>
 	<script egret="game" src="bin-debug/sound/GameSound.js"></script>
 	<script egret="game" src="bin-debug/Test.js"></script>
-	<script egret="game" src="bin-debug/utils/effect/ChangeThreeEffect.js"></script>
+	<script egret="game" src="bin-debug/utils/effect/CardRaiseEffect.js"></script>
 	<script egret="game" src="bin-debug/utils/effect/ChupaiEffect.js"></script>
 	<script egret="game" src="bin-debug/utils/effect/ChupaiTipsEffect.js"></script>
 	<script egret="game" src="bin-debug/utils/effect/MissingEffect.js"></script>
-	<script egret="game" src="bin-debug/utils/effect/RaiseCardsEffect.js"></script>
 	<script egret="game" src="bin-debug/utils/EffectUtils.js"></script>
 	<script egret="game" src="bin-debug/utils/Global.js"></script>
 	<script egret="game" src="bin-debug/utils/Heart.js"></script>
@@ -254,13 +250,16 @@
 	<script egret="game" src="bin-debug/view/loading/LoadingScene.js"></script>
 	<script egret="game" src="bin-debug/view/other/changeThree/ChangeThreeAnimation.js"></script>
 	<script egret="game" src="bin-debug/view/other/changeThree/ChangeThreeSelect.js"></script>
+	<script egret="game" src="bin-debug/view/other/create/CreateXueliuView.js"></script>
 	<script egret="game" src="bin-debug/view/other/HornPanel.js"></script>
 	<script egret="game" src="bin-debug/view/other/hu/HuView.js"></script>
 	<script egret="game" src="bin-debug/view/other/missing/MissingSelect.js"></script>
 	<script egret="game" src="bin-debug/view/other/TipsPanel.js"></script>
 	<script egret="game" src="bin-debug/view/other/WaitPanel.js"></script>
 	<script egret="game" src="bin-debug/view/scene/main/GameMainScene.js"></script>
-	<script egret="game" src="bin-debug/vo/GameEventVo.js"></script>
+	<script egret="game" src="bin-debug/vo/BaseDataVo.js"></script>
+	<script egret="game" src="bin-debug/vo/ChangeThreeVo.js"></script>
+	<script egret="game" src="bin-debug/vo/GameRuleVo.js"></script>
 	<script egret="game" src="bin-debug/vo/PlayerVo.js"></script>
 	<!--game_files_end-->
 </head>

@@ -18,7 +18,7 @@ module GameConfig {
     export var address_game:any = {ip:"dbmj01.h5sd.com", port:10415};
 
     //测试游戏服务器地址
-    export var address_test:any = {ip:"192.168.2.251", port:10415};
+    export var address_test:any = {ip:"192.168.2.22", port:10415};
 
     //中心服务器地址 注意：这两个更换测试服 一定要改
     export var address_center:any = {ip:"42.62.73.45", port:10416};   //dbmj01.h5sd.com   42.62.73.45

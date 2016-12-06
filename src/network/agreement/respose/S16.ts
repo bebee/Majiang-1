@@ -13,7 +13,7 @@ class S16
 
         GSDataProxy.i.S2C_FinalResult(data);
 
-        gameCore.gameManager.dispatchEvent(EffectEvent.Chupai);
-        gameCore.gameManager.dispatchEvent(EffectEvent.ChupaiTips);
+        game.manager.dispatchEvent(GameEvent.CardThrow);
+        game.manager.dispatchEvent(GameEvent.CardThrowTips);
     }
 }

@@ -9,6 +9,7 @@ class MJView extends eui.Component {
     handCon: egret.DisplayObjectContainer;
     poolCon: egret.DisplayObjectContainer;
     huview: HuView;
+    stateImg: egret.Bitmap;
     //最后的添加的池牌
     lastPoolCard: CardView;
 
@@ -33,20 +34,58 @@ class MJView extends eui.Component {
         this.huview = new HuView(this.dir);
         this.addChild(this.huview);
 
-        // for (var i: number = 0; i < 4; i++) {
-        //     this.huview.addCardView({type: 1, number: 1});
-        // }
-        //
         // var _this = this;
         // egret.setInterval(function () {
         //     _this.huview.addCardView({type: 1, number: 1});
         // }, this, 3000);
+
+
+        this.stateImg = new egret.Bitmap();
+        this.addChild(this.stateImg);
+
+        this.updateState();
     }
 
     pushHu(pai: any) {
         this.huview.addCardView(pai);
     }
 
+    updateState() {
+
+        if (this.dir == DirType.bottom) {
+            this.stateImg.visible = false;
+            return;
+        }
+
+        this.stateImg.visible = true;
+
+        switch (PublicVal.state) {
+            case StateType.changeThree:
+                this.stateImg.texture = RES.getRes("img_txt_xuanpaizhong");
+                break;
+            case StateType.missing:
+                this.stateImg.texture = RES.getRes("img_txt_dingquezhong");
+                break;
+            default:
+                this.stateImg.visible = false;
+                break;
+        }
+
+        switch (this.dir) {
+            case DirType.top:
+                this.stateImg.x = (game.stage.stageWidth - this.stateImg.width ) / 2;
+                this.stateImg.y = 100;
+                break;
+            case DirType.left:
+                this.stateImg.x = 160;
+                this.stateImg.y = (game.stage.stageHeight - this.stateImg.height ) / 2;
+                break;
+            case DirType.right:
+                this.stateImg.x = game.stage.stageWidth - 160 - this.stateImg.width;
+                this.stateImg.y = (game.stage.stageHeight - this.stateImg.height ) / 2;
+                break;
+        }
+    }
 
     getHandCard(index: number): CardView {
 

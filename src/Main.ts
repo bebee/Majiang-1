@@ -45,18 +45,24 @@ class Main extends eui.UILayer {
         }
 
 
-        HttpHandler.sendMsgCallBack("http://"+GameConfig.address_center.ip+":"+GameConfig.address_center.port+"/", "action=serverlist", function (obj)
-        {
-            var addrr = obj.addrr;
-            var auth_port = obj.auth_port;
-            var port = obj.port;
+        // HttpHandler.sendMsgCallBack("http://"+GameConfig.address_center.ip+":"+GameConfig.address_center.port+"/", "action=serverlist", function (obj)
+        // {
+        //     var addrr = obj.addrr;
+        //     var auth_port = obj.auth_port;
+        //     var port = obj.port;
+        //
+        //     GameConfig.http_address.ip = addrr;
+        //     GameConfig.http_address.port = auth_port;
+        //
+        //     GameConfig.address_game.ip = addrr;
+        //     GameConfig.address_game.port = port;
+        // }, egret.URLRequestMethod.POST, this);
 
-            GameConfig.http_address.ip = addrr;
-            GameConfig.http_address.port = auth_port;
+        // GameConfig.http_address.ip = addrr;
+        // GameConfig.http_address.port = auth_port;
 
-            GameConfig.address_game.ip = addrr;
-            GameConfig.address_game.port = port;
-        }, egret.URLRequestMethod.POST, this);
+        GameConfig.address_game.ip = GameConfig.address_test.ip;
+        GameConfig.address_game.port = GameConfig.address_test.port;
 
     }
     /**
@@ -102,7 +108,7 @@ class Main extends eui.UILayer {
      */
     private onThemeLoadComplete(): void
     {
-        gameCore.init(this.stage);
+        game.init(this.stage);
         
         NativeApi.setLocalData("codes", GameConfig.code);
 
