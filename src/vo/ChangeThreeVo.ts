@@ -28,6 +28,9 @@ class ChangeThreeVo extends BaseDataVo {
     }
 
     hasCard(card: any) {
+        console.log("==================");
+        console.log(this.cards, card);
+        console.log(this.cards.indexOf(card));
         return this.cards.indexOf(card) != -1;
     }
 

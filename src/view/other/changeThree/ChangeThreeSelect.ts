@@ -40,7 +40,8 @@ class ChangeThreeSelect extends BaseSprite {
         switch (e.currentTarget) {
             case this.btn_confirm:
                 this.hide();
-
+                console.log("发送换三张");
+                console.log(gameCore.changeThreeVo.cards);
                 break;
         }
     }

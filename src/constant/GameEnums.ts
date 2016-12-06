@@ -18,3 +18,13 @@ enum GameState {
 enum CardType {
     wan, tiao, tong, zi
 }
+
+/**
+ * 游戏时间类型
+ */
+enum GameEventType {
+    changeThree, changeThreeComplete,
+    missing,
+    chupai, chupaiTips,
+    shoupai
+}

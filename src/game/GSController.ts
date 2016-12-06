@@ -642,11 +642,11 @@ class GSController extends egret.EventDispatcher {
         switch (PublicVal.state) {
             case GameState.changeThree:
                 if (gameCore.changeThreeVo.hasCard(cardView.pai)) {
-                    this.moveBack();
+                    cardView.moveDown(true);
                     gameCore.changeThreeVo.delCard(cardView.pai);
                 }
                 else if (gameCore.changeThreeVo.addCard(cardView.pai)) {
-                    this.moveTo(cardView);
+                    cardView.moveUp(true);
                 }
                 break;
             case GameState.missing:
