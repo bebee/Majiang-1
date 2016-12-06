@@ -77,7 +77,7 @@ class GSScene extends egret.DisplayObjectContainer {
         this.addChild(this.inviteButton);
 
 
-        this.startButton = GameRes.createCenterButton(133 >> 1, 58 >> 1, 630, 480, "game_start_button", "开始");
+        this.startButton = GameRes.createCenterButton(133 >> 1, 58 >> 1, 630, 480, "game_start_button", "开  始");
         this.addChild(this.startButton);
 
         this.weixinButton = GameRes.createCenterButton(176 >> 1, 66 >> 1, 830, 130, "game_jiesan_button", "返回微信");

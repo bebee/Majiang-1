@@ -30,6 +30,8 @@ class GSDataProxy {
 
         this.gData.zhuangPos = obj.zhuang;
 
+        this.gData.lastZhuangPos = obj.zhuang;;
+
         PublicVal.i.dui_num = obj.dui_num;
 
         PublicVal.i.cur_round = obj.cur_round;
@@ -474,11 +476,11 @@ class GSDataProxy {
 
                 //number 判断是幺杠 还是九杠
                 if(pai[0].number == 1){//
-
+                    GameSound.PlaySound("yaogang_" + this.gData.getSexByPos(pos));
 
                 }else{
 
-                    //GameSound.PlaySound("gang_" + this.gData.getSexByPos(pos));
+                    GameSound.PlaySound("jiugang_" + this.gData.getSexByPos(pos));
 
                 }
 
@@ -555,7 +557,7 @@ class GSDataProxy {
                 break;
             case 27://幺九杠 补蛋
 
-                GameSound.PlaySound("gang_" + this.gData.getSexByPos(pos));
+                GameSound.PlaySound("bugang_" + this.gData.getSexByPos(pos));
 
                 pai.length -= 3;
 
@@ -580,7 +582,7 @@ class GSDataProxy {
                 break;
             case 28://中发白  补蛋
 
-                GameSound.PlaySound("gang_" + this.gData.getSexByPos(pos));
+                GameSound.PlaySound("bugang_" + this.gData.getSexByPos(pos));
 
                 pai.length -= 3;
 
@@ -1065,6 +1067,17 @@ class GSDataProxy {
             }
 
             this.gData.zhuangPos = obj.data.zhuang;
+
+            //判断连庄
+            if(obj.data.zhuang == this.gData.lastZhuangPos){
+
+                this.gData.isLianZhuang = true;
+            }else{
+
+                this.gData.lastZhuangPos = obj.data.zhuang;
+
+                this.gData.isLianZhuang = false;
+            }
 
             this.gData.zhuangDir = this.gData.getDir(obj.data.zhuang);
 

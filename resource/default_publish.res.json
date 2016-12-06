@@ -12,10 +12,6 @@
 		},
 		{
 			"compress":false,
-			"key":"create_kspj"
-		},
-		{
-			"compress":false,
 			"key":"create_password_bg"
 		},
 		{
@@ -137,10 +133,6 @@
 		{
 			"compress":false,
 			"key":"create_btn"
-		},
-		{
-			"compress":false,
-			"key":"start_btn"
 		},
 		{
 			"compress":false,
@@ -304,10 +296,6 @@
 		},
 		{
 			"compress":false,
-			"key":"game_start_button"
-		},
-		{
-			"compress":false,
 			"key":"share_img"
 		},
 		{
@@ -389,6 +377,18 @@
 		{
 			"compress":false,
 			"key":"idcard_title"
+		},
+		{
+			"compress":false,
+			"key":"card_jd_btn"
+		},
+		{
+			"compress":false,
+			"key":"card_sh_btn"
+		},
+		{
+			"compress":false,
+			"key":"game_create"
 		}],
 		"sort":0
 	}],
@@ -575,5 +575,21 @@
 	{
 		"compress":false,
 		"key":"expression18.2"
+	},
+	{
+		"compress":false,
+		"key":"RP_xin3"
+	},
+	{
+		"compress":false,
+		"key":"RP_xin4"
+	},
+	{
+		"compress":false,
+		"key":"RP_xin5"
+	},
+	{
+		"compress":false,
+		"key":"RP_xin2"
 	}]
 }

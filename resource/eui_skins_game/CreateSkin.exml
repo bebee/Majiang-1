@@ -3,7 +3,7 @@
 	<e:Image source="panel_1" width="688" height="383" scale9Grid="20,20,23,15" y="95" horizontalCenter="0" locked="true"/>
 	<e:Label verticalAlign="middle" y="113" height="35" text="房间模式:" fontFamily="微软雅黑" textAlign="right" width="128" size="24" x="63" textColor="0xA07A4B" touchEnabled="false"/>
 	<e:Label y="186" textColor="0xA07A4B" height="35" text="玩法选择:" fontFamily="微软雅黑" textAlign="right" width="128" size="24" touchEnabled="false" verticalAlign="middle" x="63"/>
-	<e:Label id="_tq1" verticalAlign="middle" y="148" height="28" text="8局（2圈）房卡x4" fontFamily="微软雅黑" textAlign="center" width="174" size="16" x="130" textColor="0xA07A4B" touchEnabled="false" bold="true"/>
+	<e:Label id="_tq1" verticalAlign="middle" y="148" height="28" text="2圈（房卡x4）" fontFamily="微软雅黑" textAlign="center" width="174" size="16" x="130" textColor="0xA07A4B" touchEnabled="false" bold="true"/>
 	<e:Label id="_tg1" y="191" textColor="0xA07A4B" height="28" text="夹五" fontFamily="微软雅黑" textAlign="left" width="100" size="18" touchEnabled="false" verticalAlign="middle" x="213"/>
 	<e:Label id="_tg4" y="238" textColor="0xA07A4B" size="18" text="鸡胡鸡飘" fontFamily="微软雅黑" textAlign="left" width="100" height="28" touchEnabled="false" verticalAlign="middle" x="213"/>
 	<e:Label id="_tg7" y="285" textColor="0xA07A4B" height="28" text="背靠背" fontFamily="微软雅黑" textAlign="left" width="100" size="18" touchEnabled="false" verticalAlign="middle" x="213"/>
@@ -13,8 +13,8 @@
 	<e:Label id="_tg8" y="191" textColor="0xA07A4B" size="18" text="责任制" fontFamily="微软雅黑" textAlign="left" width="100" height="28" touchEnabled="false" verticalAlign="middle" x="553"/>
 	<e:Label id="_tg3" y="191" textColor="0xA07A4B" height="28" text="扣听" fontFamily="微软雅黑" textAlign="left" width="100" size="18" touchEnabled="false" verticalAlign="middle" x="553" visible="false"/>
 	<e:Label id="_tg6" y="238" textColor="0xA07A4B" size="18" text="手把一" fontFamily="微软雅黑" textAlign="left" width="100" height="28" touchEnabled="false" verticalAlign="middle" x="553"/>
-	<e:Label id="_tq2" y="148" textColor="0xA07A4B" height="28" text="16局（4圈）房卡x6" fontFamily="微软雅黑" textAlign="center" width="162" size="16" verticalAlign="middle" x="341" touchEnabled="false" bold="true"/>
-	<e:Label id="_tq3" y="148" textColor="0xA07A4B" size="16" text="32局（8圈）房卡x12" fontFamily="微软雅黑" textAlign="center" width="167" height="28" verticalAlign="middle" x="543" touchEnabled="false" bold="true"/>
+	<e:Label id="_tq2" y="148" textColor="0xA07A4B" height="28" text="4圈（房卡x6）" fontFamily="微软雅黑" textAlign="center" width="162" size="16" verticalAlign="middle" x="341" touchEnabled="false" bold="true"/>
+	<e:Label id="_tq3" y="148" textColor="0xA07A4B" size="16" text="8圈（房卡x12）" fontFamily="微软雅黑" textAlign="center" width="167" height="28" verticalAlign="middle" x="543" touchEnabled="false" bold="true"/>
 	<e:Image id="_center_btn" source="select_center" y="113" x="327"/>
 	<e:Image id="_lef_btn" source="select_left" x="197" y="113"/>
 	<e:Image id="_right_btn" source="select_right" x="509" y="113"/>

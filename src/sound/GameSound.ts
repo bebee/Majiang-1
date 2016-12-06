@@ -54,6 +54,7 @@ module GameSound
         }
 
         channel = sound.play(startTime,loops);
+
         channel.volume = GameSound._volume;
 
         SoundDict[name] = {"s":sound,"c":channel};
@@ -121,7 +122,10 @@ module GameSound
         {
             var channel:egret.SoundChannel = SoundDict[name]["c"];
 
-            if(channel && channel.position > 0) channel.volume = volume;
+            if(channel && channel.position > 0)
+            {
+                channel.volume = volume;
+            }
         }
     }
 }

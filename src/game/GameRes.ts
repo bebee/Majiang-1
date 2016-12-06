@@ -32,10 +32,20 @@ class GameRes{
         var button:mui.EButton = new mui.EButton(res,text,textSize);
         button.x = x;
         button.y = y;
-        button.textField.horizontalCenter = tx;
-        button.textField.verticalCenter = ty;
+        if(text!="") {
+            button.textField.horizontalCenter = tx;
+            button.textField.verticalCenter = ty;
+        }
         con.addChild(button);
         return con;
+    }
+
+    static createCenterBitmap(res:string){
+
+        var bitmap : egret.Bitmap = new egret.Bitmap(GameRes.getUI(res));
+        bitmap.anchorOffsetX = bitmap.width >> 1;
+        bitmap.anchorOffsetY = bitmap.height >> 1;
+        return bitmap;
     }
 
 }

@@ -59,9 +59,7 @@ class RecordItem extends eui.Component
             var p = persons[i];
 
             var nick = p.nick;
-            var pic = p.pic;
             var pos:number = +p.pos;
-            var uid = p.uid;
             var fen:number = +total[pos - 1];
 
             if(i == 2) str += "\n" + nick;

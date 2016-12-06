@@ -59,6 +59,9 @@ class GSView extends egret.Sprite {
     //麦克按钮
     siriButton: mui.EButton;
 
+
+    replayControllView : ReplayControllView;
+
     bindInterface(face: IGameTapEvent) {
 
         this.face = face;
@@ -205,9 +208,11 @@ class GSView extends egret.Sprite {
         GameLayerManager.gameLayer().effectLayer.addChild(this.baoText);
 
 
-
-
-
+        this.replayControllView = new ReplayControllView;
+        this.replayControllView.x = (GSConfig.width - this.replayControllView.width) >> 1;
+        this.replayControllView.y = 365;
+        this.addChild(this.replayControllView);
+        this.replayControllView.visible = false;
         //牌长度
 /*        this.countTexts = [];
 

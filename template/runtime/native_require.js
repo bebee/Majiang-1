@@ -140,6 +140,7 @@ var game_file_list = [
 	"bin-debug/game/view/GSView.js",
 	"bin-debug/game/view/MJView.js",
 	"bin-debug/game/view/PersonItem.js",
+	"bin-debug/game/view/ReplayControllView.js",
 	"bin-debug/game/view/TimeEffectView.js",
 	"bin-debug/manager/GameManager.js",
 	"bin-debug/vo/BaseDataVo.js",
@@ -231,6 +232,7 @@ var game_file_list = [
 	"bin-debug/view/other/TipsPanel.js",
 	"bin-debug/view/other/WaitPanel.js",
 	"bin-debug/view/scene/main/GameMainScene.js",
+	"bin-debug/vo/GameEventVo.js",
 	"bin-debug/vo/PlayerVo.js",
 	//----auto game_file_list end----
 ];
