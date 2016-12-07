@@ -6,6 +6,12 @@
 class GameEvent {
 
     /**
+     * 清除所有
+     * @type {string}
+     */
+    static CleanAll: string = "CleanAll";
+
+    /**
      * 换三张
      * @type {string}
      */
@@ -27,7 +33,7 @@ class GameEvent {
      * 订缺
      * @type {string}
      */
-    static CardMissComfirm:string = "CardMissComfirm";
+    static CardMissComfirm: string = "CardMissComfirm";
 
     /**
      * 麻将抬起

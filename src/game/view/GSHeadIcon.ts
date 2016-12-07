@@ -1,39 +1,39 @@
 /**
  * Created by Administrator on 2016/11/12.
  */
-class GSHeadIcon extends egret.DisplayObjectContainer{
+class GSHeadIcon extends egret.DisplayObjectContainer {
 
-    constructor(){
+    constructor() {
         super();
         this.initView();
     }
-    headIcon:egret.DisplayObjectContainer;
 
-    nullImg:egret.Bitmap;
+    headIcon: egret.DisplayObjectContainer;
 
-    headImg:eui.Image;
+    nullImg: egret.Bitmap;
 
-    offlineImg:egret.Bitmap;
+    headImg: eui.Image;
 
-    headIconMask:egret.Shape;
+    offlineImg: egret.Bitmap;
 
-    head_kuang:egret.Bitmap;
+    headIconMask: egret.Shape;
+
+    head_kuang: egret.Bitmap;
 
     //房主
-    roomOwn_kuang:egret.Bitmap;
+    roomOwn_kuang: egret.Bitmap;
     //庄家
-    zhuangIcon:egret.Bitmap;
+    zhuangIcon: egret.Bitmap;
+    //缺门
+    queIcon: eui.Image;
 
-    killIcon:egret.Bitmap;
+    killIcon: egret.Bitmap;
 
+    pic: string;
 
+    iconTexture: egret.Texture;
 
-
-    pic:string;
-
-    iconTexture:egret.Texture;
-
-    initView(){
+    initView() {
         this.headIcon = new egret.DisplayObjectContainer;
 
         this.nullImg = new egret.Bitmap(GameRes.getUI('game_head_null'));
@@ -48,7 +48,7 @@ class GSHeadIcon extends egret.DisplayObjectContainer{
         this.headImg.scaleX = this.headImg.scaleY = .78;
 
         this.offlineImg = new egret.Bitmap(GameRes.getUI("game_head_lixian"));
-        this.offlineImg.anchorOffsetX = (this.offlineImg.width >> 1)+1;
+        this.offlineImg.anchorOffsetX = (this.offlineImg.width >> 1) + 1;
         this.offlineImg.anchorOffsetY = this.offlineImg.height >> 1;
 
         this.headIcon.addChild(this.nullImg);
@@ -57,14 +57,14 @@ class GSHeadIcon extends egret.DisplayObjectContainer{
 
         this.headIconMask = new egret.Shape;
         this.headIconMask.graphics.beginFill(0);
-        this.headIconMask.graphics.drawRoundRect(0,0,72,72,30,30);
+        this.headIconMask.graphics.drawRoundRect(0, 0, 72, 72, 30, 30);
         this.headIconMask.anchorOffsetX = this.headIconMask.anchorOffsetY = 36;
 
         this.headIcon.mask = this.headIconMask;
 
         this.head_kuang = new egret.Bitmap(RES.getRes("head_kuang_bg"));
         this.head_kuang.anchorOffsetX = (this.head_kuang.width >> 1) + 1.5;
-        this.head_kuang.anchorOffsetY = (this.head_kuang.height >> 1)+0.5;
+        this.head_kuang.anchorOffsetY = (this.head_kuang.height >> 1) + 0.5;
 
         this.roomOwn_kuang = new egret.Bitmap(GameRes.getUI('game_head_room'));
         this.roomOwn_kuang.anchorOffsetX = (this.roomOwn_kuang.width >> 1) - 3.5;
@@ -76,10 +76,13 @@ class GSHeadIcon extends egret.DisplayObjectContainer{
         this.zhuangIcon.x = -40;
         this.zhuangIcon.y = -40;
 
+        this.queIcon = new eui.Image();
+        this.queIcon.width = 40;
+        this.queIcon.height = 40;
+        this.queIcon.x = 10;
+        this.queIcon.y = -this.queIcon.height-10;
 
         this.killIcon = new egret.Bitmap(GameRes.getUI("JS_close"));
-
-
         this.killIcon.anchorOffsetX = this.killIcon.width >> 1;
         this.killIcon.anchorOffsetY = this.killIcon.height >> 1;
         this.killIcon.scaleX = this.killIcon.scaleY = .9;
@@ -87,68 +90,82 @@ class GSHeadIcon extends egret.DisplayObjectContainer{
         this.killIcon.y = -38;
 
 
-
         this.addChild(this.headIcon);
         this.addChild(this.headIconMask);
         this.addChild(this.head_kuang);
         this.addChild(this.roomOwn_kuang);
         this.addChild(this.zhuangIcon);
+        this.addChild(this.queIcon);
         this.addChild(this.killIcon);
 
         this.nullIcon();
 
         this.killIcon.visible = false;
-
     }
-    nullIcon(){
+
+    nullIcon() {
         this.offlineImg.visible = false;
         this.zhuangIcon.visible = false;
         this.roomOwn_kuang.visible = false;
         this.iconTexture = null;
         this.pic = "";
         this.headImg.source = "";
+        this.queIcon.source = "";
         this.killIcon.visible = false;
     }
 
-    setHeadPic(pic:string){
+    setHeadPic(pic: string) {
 
-        if(this.pic != pic){
+        if (this.pic != pic) {
 
             this.pic = pic;
 
             this.setHeadImg(null);
 
-            RES.getResByUrl(this.pic,(t)=>{
-
-                if(t){
+            RES.getResByUrl(this.pic, (t)=> {
+                if (t) {
                     this.iconTexture = t;
                     this.setHeadImg(t);
                 }
-            },this,RES.ResourceItem.TYPE_IMAGE);
+            }, this, RES.ResourceItem.TYPE_IMAGE);
 
-        }else{
+        } else {
             this.setHeadImg(this.iconTexture);
         }
     }
-    setHeadImg(source: string | egret.Texture){
 
+    setHeadImg(source: string | egret.Texture) {
         this.headImg.source = source;
     }
 
-    visibleRoomOwn(boo:boolean){
+    setQueImg(type: CardType) {
+        switch (type) {
+            case CardType.wan:
+                this.queIcon.source = "img_dq_1";
+                break;
+            case CardType.tiao:
+                this.queIcon.source = "img_dq_2";
+                break;
+            case CardType.tong:
+                this.queIcon.source = "img_dq_3";
+                break;
+            default:
+                this.queIcon.source = "";
+                break;
+        }
+    }
+
+    visibleRoomOwn(boo: boolean) {
         this.roomOwn_kuang.visible = boo;
-
     }
-    visibleZhuang(boo:boolean){
+
+    visibleZhuang(boo: boolean) {
         this.zhuangIcon.visible = boo;
-
     }
 
-    reset(){
-
+    reset() {
         this.offlineImg.visible = false;
+        this.queIcon.source = "";
         //this.resize();
-
     }
-
 }

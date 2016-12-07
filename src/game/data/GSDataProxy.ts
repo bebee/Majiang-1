@@ -30,7 +30,9 @@ class GSDataProxy {
 
         this.gData.zhuangPos = obj.zhuang;
 
-        this.gData.lastZhuangPos = obj.zhuang;;
+        this.gData.lastZhuangPos = obj.zhuang;
+
+        this.gData.backTing = obj.ting;
 
         PublicVal.i.dui_num = obj.dui_num;
 
@@ -38,6 +40,19 @@ class GSDataProxy {
 
         PublicVal.i.max_round = obj.max_round;
 
+        switch (this.gData.rebackData.ex_status) {
+            case 0://初始化
+                break;
+            case 1://换三张
+                game.status = GameStatus.changeThree;
+                break;
+            case 2://订缺
+                game.status = GameStatus.missing;
+                break;
+            case 3://游戏开始
+                game.status = GameStatus.gamestart;
+                break;
+        }
 
         //步骤大于4，表示过了开局杠牌时间
         if (obj.step > 4) {
@@ -46,30 +61,22 @@ class GSDataProxy {
         }
 
         switch (obj.status) {
-
             case "wait_for_join":
                 this.gData.rebackStatus = 1;
                 break;
-
             case "wait_for_play":
             case "wait_for_deal":
             case "wait_for_resume":
             case "wait_for_dismiss":
             case "wait_for_wake":
-
                 this.gData.rebackStatus = 3;
-
                 break;
             case "wait_for_continue":
-
                 this.gData.rebackStatus = 2;
-
                 this.gData.roundStarted = true;
-
         }
 
         SocketManager.getInstance().getGameConn().send(25, {args: {type: 3}});
-
     }
 
 
@@ -87,18 +94,26 @@ class GSDataProxy {
         for (var i: number = 0; i < persons.length; i++) {
 
             var person = persons[i];
-
             var pos = person.pos;
-
             var dir = this.gData.getDir(pos);
-
             var men = person.men;
-
             var shou = person.shou;
-
             var wai = person.wai;
-
             var cur = person.cur;
+
+            //确定缺门
+            if (dir == 1) {
+                if (game.status == GameStatus.gamestart) {
+                    game.que = person.que;
+                }
+                else {
+                    game.statusComplete = person.process == 1;
+                }
+            }
+
+            if (game.status == GameStatus.gamestart) {
+                game.allQue[dir] = person.que;
+            }
 
             GSData.i.gangCurs[dir] = cur;
 
@@ -107,110 +122,67 @@ class GSDataProxy {
                 var funcPais = PublicVal.i.getFuncPais(dir);
 
                 if (men[1]) {
-
                     for (var k: number = 0; k < men[1].length; k++) {
-
                         this.gData.addFuncPai(4, dir, 1, men[1][k]);
-
                     }
-
-
                 }
                 if (men[2]) {
-
                     for (var k: number = 0; k < men[2].length; k++) {
-
                         this.gData.addFuncPai(5, dir, 2, men[2][k]);
-
                     }
-                    //this.addFuncPai(5,dir,2,men[2]);
                 }
                 if (men[22]) {//幺九杠
-
                     for (var k1 = 0; k1 < men[22].length; k1++) {
-
                         var menK1 = men[22][k1];
                         var num = menK1[0].number;
                         var pais = menK1.slice(-3);
                         menK1.length -= 3;
-
                         var ever = [1, 1, 1];
-
                         for (var k: number = 0; k < menK1.length; k++) {
-
                             ever[menK1[k].type - 1]++;
                         }
                         funcPais.push({sort: 3, action: 22, pais: [{pai: pais, number: num, ever: ever}]});
-
                     }
-
                 }
                 if (men[24]) {//暗杠
-
                     for (var k: number = 0; k < men[24].length; k++) {
-
                         this.gData.addFuncPai(1, dir, 24, men[24][k]);
-
                     }
                 }
                 if (men[25]) {//明杠
-
                     for (var k: number = 0; k < men[25].length; k++) {
-
                         this.gData.addFuncPai(2, dir, 25, men[25][k]);
-
                     }
                 }
                 if (men[26]) {//中发白杠
-
                     var pais = men[26].slice(-3);
-
                     men[26].length -= 3;
-
                     var ever = [1, 1, 1];
-
                     for (var k: number = 0; k < men[26].length; k++) {
-
                         ever[men[26][k].number - 1]++;
                     }
-
                     funcPais.push({sort: 0, action: 26, pais: [{pai: pais, number: 0, ever: ever}]});
-
                 }
-
             }
 
             if (shou > 0) {//其他人的牌
-
                 this.gData.setHandPais(dir, new Array(shou));
-
-            } else {//自己的牌
-
+            }
+            else {//自己的牌
                 //判断长度
                 if (GSConfig.handLens[shou.length]) {
-
                     var startPai = shou.pop();
-
                     FashionTools.sortPai(shou);
-
                     shou.push(startPai);
-
                 } else {
-
                     FashionTools.sortPai(shou);
-
                 }
-
                 this.gData.setHandPais(1, shou);
-
             }
 
             if (wai.length > 0) {//池牌
-
                 wai.reverse();
-
                 this.gData.setPoolPais(dir, wai);
-
             }
         }
     }
@@ -222,7 +194,9 @@ class GSDataProxy {
         GSController.i.updateMJView(dir);
     }
 
-    //更新功能菜单，吃蹦杠
+    /*
+        更新功能菜单，吃蹦杠
+     */
     S2C_Function(obj: any) {
 
         //不能操作出牌
@@ -333,9 +307,9 @@ class GSDataProxy {
             this.gData.funcSelects.push({index: 4, group: group});
         }
 
-        if (obj[4]) {//听
+        if (obj[4]) {//听 group 数组对象[{play,hu[]},...];
 
-            this.gData.funcSelects.push({index: 5, action: 4, pai: obj[4]});
+            this.gData.funcSelects.push({index: 5, action: 4, group: obj[4]});
 
         }
         if (obj[99]) {//胡
@@ -345,7 +319,6 @@ class GSDataProxy {
             this.gData.funcSelects.push({index: 6, action: 99, pai: obj[99]});
 
         }
-
 
         GSData.i.roundStartHasFunction = true;
 
@@ -378,7 +351,7 @@ class GSDataProxy {
 
         GSController.i.updateCenterInfo();
 
-
+        GSController.i.gsView.updateRoom();
     }
 
     //更新自己抓牌
@@ -679,7 +652,13 @@ class GSDataProxy {
 
     delay_Final() {
 
+        if(PublicVal.state == StateType.ting){
+
+            GSData.i.tingEndShow = true;
+
+        }
         PublicVal.state = StateType.gameover;
+
 
         this.gData.roundStarted = true;
 
@@ -693,8 +672,6 @@ class GSDataProxy {
             FashionTools.sortPai(left);
 
         }
-
-
         //流局
         if (hupai == 0) {
 
@@ -831,7 +808,7 @@ class GSDataProxy {
     //同步房间玩家信息,判断方位
     S2C_RoomPlayers(rules: number[], infos: any[]) {
 
-        if(PublicVal.i.rules == "") {
+        if (PublicVal.i.rules == "") {
 
             PublicVal.i.rules = FashionTools.formatRules(rules);
 
@@ -961,15 +938,18 @@ class GSDataProxy {
             //设置牌面尺寸
             FashionTools.setViewType(GlobalData.getInstance().cardType);
             FashionTools.setGameStyle(GlobalData.getInstance().cardStyle);
-        }
 
-        if (this.gData.rebackData) {
 
-            //至后解析
-            this.parseReback();
+            if (this.gData.rebackData) {
+                //至后解析
+                this.parseReback();
 
-            this.gData.rebackData = null;
-
+                this.gData.rebackData = null;
+            }
+            else {
+                game.status = null;
+                game.manager.dispatchEvent(GameEvent.CleanAll);
+            }
         }
 
         GSController.i.updateRoom();

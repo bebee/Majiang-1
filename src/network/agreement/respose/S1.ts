@@ -17,7 +17,10 @@ class S1
             
             GlobalData.getInstance().player.update(obj["data"]);
 
-            SceneManager.find("LoadingScene").onIn();
+            if(SceneManager.find("LoadingScene"))
+            {
+                SceneManager.find("LoadingScene").onIn();
+            }
 
             NativeApi.setLocalData("getAccessCode", 0);
 
@@ -38,9 +41,13 @@ class S1
                     if(!GameLayerManager.gameLayer().messagBox) GameLayerManager.gameLayer().messagBox = new MessageDialog();
                     GameLayerManager.gameLayer().messagBox.showMsg(function (r)
                     {
-                        var h:string = GameConfig.wei_href_address;
-                        if(GameConfig.roomid) h += "?roomid=" + GameConfig.roomid;
-                        location.href = h;
+                        if(r)
+                        {
+                            var h:string = GameConfig.wei_href_address;
+                            if(GameConfig.roomid) h += "?roomid=" + GameConfig.roomid;
+                            location.href = h;
+                        }
+
                     },"当前游戏版本过低，请点击确定刷新游戏！");
                 }
             }

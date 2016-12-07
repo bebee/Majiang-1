@@ -2,15 +2,15 @@
  * Created by Administrator on 2016/10/29.
  */
 //头像显示
-class GSHeadView extends egret.Sprite{
+class GSHeadView extends egret.Sprite {
 
-    //dirName:string;
+    dir:DirType;
 
-    //dir 2:下家 3:对家 4:上家
-
-    constructor(dir:number){
+    constructor(dir: number) {
 
         super();
+
+        this.dir = dir;
 
         this.initView();
     }
@@ -18,27 +18,27 @@ class GSHeadView extends egret.Sprite{
     /**
      * 姓名
      */
-    nameText:egret.TextField;
+    nameText: egret.TextField;
 
     /**
      * ID
      */
-    idText:egret.TextField;
+    idText: egret.TextField;
 
     /**
      * 分数
      */
-    numText:egret.TextField;
+    numText: egret.TextField;
 
     /**
      * 头像
      */
-    headIcon:GSHeadIcon;
+    headIcon: GSHeadIcon;
 
 
     //img:eui.Image;
 
-    initView(){
+    initView() {
 
         this.headIcon = new GSHeadIcon;
 
@@ -79,32 +79,27 @@ class GSHeadView extends egret.Sprite{
 
         this.waitView();
     }
-    //设置庄
-    visibleZhuang(bool:boolean){
 
-        this.headIcon.visibleZhuang(bool);
-
-    }
     //设置房主
-    visibleRoomOwn(bool:boolean){
-
+    visibleRoomOwn(bool: boolean) {
         this.headIcon.visibleRoomOwn(bool);
-
     }
 
-    nullPlayer(){
+    //设置庄
+    visibleZhuang(bool: boolean) {
+        this.headIcon.visibleZhuang(bool);
+    }
 
+    nullPlayer() {
         this.nameText.text = this.idText.text = "";
 
         this.headIcon.nullIcon();
-
     }
 
-    player:RoomPlayer;
+    player: RoomPlayer;
 
     //等待的显示
-    waitView(){
-
+    waitView() {
         this.nameText.x = 0;
         this.nameText.y = 45;
 
@@ -115,11 +110,7 @@ class GSHeadView extends egret.Sprite{
         this.numText.y = 45;
     }
 
-
-    reset(){
-
+    reset() {
         this.headIcon.reset();
-
     }
-
 }

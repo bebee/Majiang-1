@@ -81,4 +81,7 @@ module MessageID
 
     export var _26:number = 26;  //版本号比对
     export var S26:number = 26;  //版本号比对
+
+    export var _27:number = 27;  //实名认证
+    export var S27:number = 27;
 }

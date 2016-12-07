@@ -28,9 +28,6 @@ class ChangeThreeVo extends BaseDataVo {
     }
 
     hasCard(card: any) {
-        console.log("==================");
-        console.log(this.cards, card);
-        console.log(this.cards.indexOf(card));
         return this.cards.indexOf(card) != -1;
     }
 
@@ -67,6 +64,17 @@ class ChangeThreeVo extends BaseDataVo {
      */
     getQuickCards(): any[] {
         var list: any[][] = [[CardType.wan, this.getTypeLength(CardType.wan)], [CardType.tiao, this.getTypeLength(CardType.tiao)], [CardType.tong, this.getTypeLength(CardType.tong)]];
+        list.sort(function (a, b) {
+            if (a[1] < b[1]) {
+                return -1;
+            }
+            else if (a[1] > b[1]) {
+                return 1;
+            }
+            else {
+                return 0;
+            }
+        });
         var length: number;
         var type: CardType;
         for (var i: number = 0; i < list.length; i++) {
@@ -89,7 +97,7 @@ class ChangeThreeVo extends BaseDataVo {
      * @param type
      * @returns {number}
      */
-    private getTypeCards(type: CardType) {
+    getTypeCards(type: CardType) {
         var handCards: any[] = PublicVal.i.getHandPais(1);
         var cards: any[] = [];
         var card: any;
@@ -111,7 +119,7 @@ class ChangeThreeVo extends BaseDataVo {
      * @param type
      * @returns {number}
      */
-    private getTypeLength(type: CardType) {
+    getTypeLength(type: CardType) {
         var handCards: any[] = PublicVal.i.getHandPais(1);
         var length: number = 0;
         var card: any;

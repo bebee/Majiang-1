@@ -1,7 +1,9 @@
 /**
  * Created by Administrator on 2016/12/2.
  */
-class PublicVal{
+class PublicVal {
+
+    static i: PublicVal = new PublicVal;
 
     /*
      1:首轮进入牌桌状态
@@ -15,96 +17,85 @@ class PublicVal{
      5:总结算界面
      6:回放
      */
-    static state:number;
-
-
-    static i:PublicVal = new PublicVal;
+    static state: number;
     ////////////////////////////////////
     //庄家
-    zhuangFlag:number;
+    zhuangFlag: number;
     //房主
-    roomOwnFlag:number;
+    roomOwnFlag: number;
     //规则
-    rules:string;
+    rules: string;
     //剩余牌数
-    dui_num:number;
+    dui_num: number;
     //当前局数
-    cur_round:number;
+    cur_round: number;
     //总局数
-    max_round:number;
+    max_round: number;
     //宝牌
-    bao:any;
+    bao: any;
     //庄家pos
-    zhuang:number;
+    zhuang: number;
 
-    dir2Pos:any = {};
-    pos2Dir:any = {};
+    dir2Pos: any = {};
+    pos2Dir: any = {};
 
-    allPais : any  = [];
+    allPais: any = [];
 
-    roomid:number;
+    roomid: number;
 
-    ownPos:number;
+    ownPos: number;
 
-    dirPerson:any;
+    dirPerson: any;
 
-    constructor(){
+    constructor() {
 
         this.clear();
     }
 
-    clear(){
+    clear() {
 
         this.bao = null;
         this.zhuangFlag = 0;
         this.rules = "";
-        this.allPais[1] = {handPais:null,catchPai:null,funcPais:[],poolPais:[]};
-        this.allPais[2] = {handPais:null,catchPai:null,funcPais:[],poolPais:[]};
-        this.allPais[3] = {handPais:null,catchPai:null,funcPais:[],poolPais:[]};
-        this.allPais[4] = {handPais:null,catchPai:null,funcPais:[],poolPais:[]};
+        this.allPais[1] = {handPais: null, catchPai: null, funcPais: [], poolPais: []};
+        this.allPais[2] = {handPais: null, catchPai: null, funcPais: [], poolPais: []};
+        this.allPais[3] = {handPais: null, catchPai: null, funcPais: [], poolPais: []};
+        this.allPais[4] = {handPais: null, catchPai: null, funcPais: [], poolPais: []};
     }
 
     //获取手牌牌
-    getHandPais(dir:number){
+    getHandPais(dir: number) {
         return this.allPais[dir].handPais;
     }
+
     //获取功能牌
-    getFuncPais(dir:number){
+    getFuncPais(dir: number) {
         return this.allPais[dir].funcPais;
     }
-    //获取池牌
-    getPoolPais(dir:number){
 
+    //获取池牌
+    getPoolPais(dir: number) {
         return this.allPais[dir].poolPais;
     }
 
-    addHandPai(dir:number,pai:any){
-
+    addHandPai(dir: number, pai: any) {
         var pais = this.getHandPais(dir);
-
         pais.push(pai);
-
     }
 
-
-    removeHandPai(dir:number,pai:any){
-
+    removeHandPai(dir: number, pai: any) {
         var pais = this.getHandPais(dir);
-
-        for(var i:number = 0 ; i<pais.length;i++){
-
+        for (var i: number = 0; i < pais.length; i++) {
             var p = pais[i];
-
-            if(p.type == pai.type && p.number == pai.number){
-
-                pais.splice(i,1);
-
+            if (p.type == pai.type && p.number == pai.number) {
+                pais.splice(i, 1);
                 break;
             }
         }
     }
+
     //往功能牌型里添加牌 排序 方位 功能 牌
-    addFuncPai(sort:number,dir:number,action:number,pai:any[],number:number = 0,ever : any = null ) {
+    addFuncPai(sort: number, dir: number, action: number, pai: any[], number: number = 0, ever: any = null) {
 
         var funcPais = PublicVal.i.getFuncPais(dir);
 
@@ -130,8 +121,9 @@ class PublicVal{
         }
         funcPais.push({sort: sort, action: action, pais: [addPaiObj]});
     }
+
     //池牌添加
-    pushPoolPai(dir:number,pai:any){
+    pushPoolPai(dir: number, pai: any) {
 
         var poolPais = PublicVal.i.getPoolPais(dir);
 
@@ -142,36 +134,33 @@ class PublicVal{
     }
 
     //池牌取出
-    popPoolPai(dir:number){
+    popPoolPai(dir: number) {
 
         var poolPais = PublicVal.i.getPoolPais(dir);
 
-        poolPais.length --;
+        poolPais.length--;
     }
 
 
-
-
     //删除已经碰的功能牌
-    removePengFunc(dir:number,pai:any):boolean{
+    removePengFunc(dir: number, pai: any): boolean {
 
         var funcPais = PublicVal.i.getFuncPais(dir);
 
-        for(var i:number = 0; i < funcPais.length;i++){
+        for (var i: number = 0; i < funcPais.length; i++) {
 
             var obj = funcPais[i];
 
-            if(obj.action == 2){
+            if (obj.action == 2) {
 
                 var pengObjs = obj.pais;
 
-                for(var k:number = 0 ;k < pengObjs.length;k++){
+                for (var k: number = 0; k < pengObjs.length; k++) {
 
                     var kObj = pengObjs[k];
 
-                    if(kObj.pai[0].type == pai.type && kObj.pai[0].number == pai.number)
-                    {
-                        pengObjs.splice(k,1);
+                    if (kObj.pai[0].type == pai.type && kObj.pai[0].number == pai.number) {
+                        pengObjs.splice(k, 1);
 
                         return true;
                     }
@@ -185,27 +174,27 @@ class PublicVal{
     }
 
     //获取含有ever的对象
-    getPai(dir:number,action:number,number:number = 0){
+    getPai(dir: number, action: number, number: number = 0) {
 
         var funcPais = PublicVal.i.getFuncPais(dir);
 
-        for(var i:number = 0 ; i<funcPais.length;i++) {
+        for (var i: number = 0; i < funcPais.length; i++) {
 
             var funcPai = funcPais[i];
 
-            if(funcPai.action == action){
+            if (funcPai.action == action) {
 
-                for(var j:number = 0 ; j <funcPai.pais.length;j++){
+                for (var j: number = 0; j < funcPai.pais.length; j++) {
 
                     var obj = funcPai.pais[j];
                     //幺九杠
-                    if(number > 0){
+                    if (number > 0) {
 
-                        if(number == obj.number){
+                        if (number == obj.number) {
 
                             return obj;
                         }
-                    }else{
+                    } else {
 
                         return obj;
                     }
@@ -216,5 +205,4 @@ class PublicVal{
         }
         return null;
     }
-
 }

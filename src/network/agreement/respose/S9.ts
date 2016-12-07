@@ -17,6 +17,9 @@ class S9 {
                 var dui_num: number = obj.data.data.dui_num;
                 var gang_end = obj.data.data.gang_end;
 
+                game.status = GameStatus.gamestart;
+                game.statusComplete = true;
+
                 GSDataProxy.i.S2C_TurnDir(pos, dui_num, gang_end);
                 game.manager.dispatchEvent(GameEvent.CardThrow);
                 break;
@@ -30,9 +33,9 @@ class S9 {
             case 4://别人触发中断
                 console.log("同步其他方功能牌", obj);
 
-                GSDataProxy.i.S2C_FuncResult(obj.data.data.action, obj.data.data.pai, obj.data.data.turn, obj.data.data.cur);
                 game.manager.dispatchEvent(GameEvent.CardThrow);
                 game.manager.dispatchEvent(GameEvent.CardThrowTips);
+                GSDataProxy.i.S2C_FuncResult(obj.data.data.action, obj.data.data.pai, obj.data.data.turn, obj.data.data.cur);
                 break;
             case 5: //补杠被劫
                 console.log("删除手牌", obj);
@@ -43,19 +46,26 @@ class S9 {
                 game.manager.dispatchEvent(GameEvent.CardThrow, [GSData.i.getDir(obj.data.data.pos), obj.data.data.pai]);
                 break;
             case 7://换三张
-                PublicVal.state = StateType.changeThree;
-
-                game.manager.dispatchEvent(GameEvent.ChangeThree);
+                game.status = GameStatus.changeThree;
                 break;
             case 8://订缺
-                PublicVal.state = StateType.missing;
-
+                game.status = GameStatus.missing;
+                game.statusComplete = false;
                 game.manager.dispatchEvent(GameEvent.CardMissComfirm);
                 break;
-            case 9://有人提交了换三张
-                PublicVal.state = StateType.changeThree;
+            case 9://同步换三张
+                var dir: number = GSDataProxy.i.gData.getDir(obj.data.data);
+                for (var i: number = 0; i < 3; i++) {
+                    GSDataProxy.i.gData.removeHandPai(dir);
+                }
+                GSController.i.updateMJView(dir, false, false);
+                break;
+            case 10://同步订缺
+                for (var key in obj.data.data) {
+                    game.allQue[GSDataProxy.i.gData.getDir(Number(key))] = obj.data.data[key];
+                }
 
-                game.manager.dispatchEvent(GameEvent.ChangeThreeSys);
+                GSController.i.gsView.updateRoom();
                 break;
         }
     }

@@ -104,12 +104,10 @@ class CreateUI extends eui.Component {
     private startGame(): void {
         GlobalData.getInstance().roomRound = this.ruleVo.ju;
 
-        console.log(this.ruleVo.ju, this.ruleVo.rules);
-        // return;
         //创建房间
         SocketManager.getInstance().getGameConn().send(2, {
             "args": {
-                "type": 100,
+                "type": game.gameType,
                 "round": this.ruleVo.ju,
                 "rules": this.ruleVo.rules,
                 "pass": "0"

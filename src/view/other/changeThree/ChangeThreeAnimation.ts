@@ -54,7 +54,7 @@ class ChangeThreeAnimation extends BaseSprite {
                 this.skinState = "anti_clockwise";
                 this.lab_description.text = "本局逆时针换牌";
 
-                egret.Tween.get(this.img_change_1, {loop: true}).to({rotation: -110}, 1000).wait(500).call(function () {
+                egret.Tween.get(this.img_change_1, {loop: true}).to({rotation: -100}, 800).wait(500).call(function () {
                     _this.hide();
                 });
                 break;
@@ -62,7 +62,7 @@ class ChangeThreeAnimation extends BaseSprite {
                 this.skinState = "clockwise";
                 this.lab_description.text = "本局顺时针换牌";
 
-                egret.Tween.get(this.img_change_1, {loop: true}).to({rotation: 110}, 1000).wait(500).call(function () {
+                egret.Tween.get(this.img_change_1, {loop: true}).to({rotation: 100}, 800).wait(500).call(function () {
                     _this.hide();
                 });
                 break;
@@ -89,7 +89,7 @@ class ChangeThreeAnimation extends BaseSprite {
         this.x = acekit.width >> 1;
         this.y = acekit.height >> 1;
 
-        acekit.addChild(this);
+        GSController.i.gsView.frontUIContainer.addChild(this);
     }
 
     public hide() {
@@ -97,7 +97,9 @@ class ChangeThreeAnimation extends BaseSprite {
 
         this.clean();
 
-        acekit.removeChild(this);
+        if (GSController.i.gsView.frontUIContainer.contains(this)) {
+            GSController.i.gsView.frontUIContainer.removeChild(this);
+        }
     }
 
     public clean() {

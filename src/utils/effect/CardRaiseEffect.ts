@@ -19,9 +19,6 @@ class CardRaiseEffect {
                 break;
         }
 
-        console.log("===================================");
-        console.log(cards);
-
         if (cards && cards.length) {
             this.stop(touchEnabled);
 

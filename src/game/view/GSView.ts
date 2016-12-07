@@ -256,15 +256,6 @@ class GSView extends egret.Sprite {
 
     }
 
-    updateState() {
-        for (var i: number = 1; i <= this.MJViews.length; i++) {
-            var mjView = this.MJViews[i];
-            if (mjView) {
-                mjView.updateState();
-            }
-        }
-    }
-
     //更新房间信息
     updateRoom() {
 
@@ -276,7 +267,7 @@ class GSView extends egret.Sprite {
 
             headView.player = player;
 
-            if(player == null){
+            if (player == null) {
 
                 headView.nullPlayer();
 
@@ -287,13 +278,13 @@ class GSView extends egret.Sprite {
                 continue;
             }
 
-            if(player.status == "offline"){
+            if (player.status == "offline") {
 
                 headView.headIcon.offlineImg.visible = true;
 
                 //this.visibleReadyIcon(this.readyIcons[i],false);
 
-            }else{
+            } else {
 
                 headView.headIcon.offlineImg.visible = false;
 
@@ -307,8 +298,24 @@ class GSView extends egret.Sprite {
 
             headView.headIcon.setHeadPic(player.pic);
 
+            headView.headIcon.setQueImg(game.allQue[headView.dir]);
         }
 
+        this.updateState();
+    }
+
+    updateState() {
+        for (var i: number = 1; i <= this.MJViews.length; i++) {
+            var mjView = this.MJViews[i];
+            if (mjView) {
+                mjView.updateState();
+            }
+        }
+    }
+
+    setQueState(boo:boolean) {
+        var mjView = this.MJViews[1];
+        mjView.setQueState(boo);
     }
 
 /*    visibleReadyIcon(icon,boo){

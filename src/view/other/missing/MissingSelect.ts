@@ -28,19 +28,38 @@ class MissingSelect extends BaseSprite {
         this.btn_wan.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickHandler, this);
         this.btn_tiao.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickHandler, this);
         this.btn_tong.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickHandler, this);
+
+        TimerManager.i.addEventListener(TimerManager.Second, this.timeHandler, this);
+    }
+
+    private timeHandler() {
+        if (!this.initComplete)return;
+
     }
 
     private clickHandler(e: egret.TouchEvent) {
         this.hide();
 
+        var type: number;
+
         switch (e.currentTarget) {
             case this.btn_wan:
+                type = 1;
                 break;
             case this.btn_tiao:
+                type = 2;
                 break;
             case this.btn_tong:
+                type = 3;
                 break;
         }
+
+        SocketManager.getInstance().getGameConn().send(15, {
+            "args": {
+                "action": 9999,
+                "pai": type
+            }
+        });
     }
 
     public show() {
@@ -48,12 +67,14 @@ class MissingSelect extends BaseSprite {
 
         this.x = acekit.width >> 1;
         this.y = acekit.height - 220;
-        acekit.addChild(this);
+        GSController.i.gsView.frontUIContainer.addChild(this);
     }
 
     public hide() {
         super.hide();
 
-        acekit.removeChild(this);
+        if (GSController.i.gsView.frontUIContainer.contains(this)) {
+            GSController.i.gsView.frontUIContainer.removeChild(this);
+        }
     }
 }

@@ -26,6 +26,15 @@ class TouchBehaviour implements IGameTapEvent {
 
                 GSController.i.hideFuncSelectMenu();
 
+                if(GSData.i.readyTing){
+
+                    GSData.i.readyTing = false;
+
+                    GSController.i.cancleTingView();
+
+                    GSController.i.activateCard = null;
+                }
+
                 /*GSData.i.isTing = false;
 
                  GSController.i.enablesHandPais();*/
@@ -231,8 +240,9 @@ class TouchBehaviour implements IGameTapEvent {
             var info: string;
 
             if(GSData.i.roomOwnDir == 1) {
-                info = "您未开始一局游戏，解散房间不扣房卡，是否解散？";
-            } else {
+                info = "您未开始一局游戏，解散房间不扣房卡，\n是否解散？";
+
+            }else{
                 info = "您确定要离开房间吗？";
             }
 

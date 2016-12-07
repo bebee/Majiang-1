@@ -8,6 +8,8 @@ class GameEffectManager extends BaseManager {
     private changeThreeSelect: ChangeThreeSelect;
     private changeThreeAnimation: ChangeThreeAnimation;
 
+    private missingSelect: MissingSelect;
+
     public constructor() {
         super();
     }
@@ -19,6 +21,9 @@ class GameEffectManager extends BaseManager {
         this.changeThreeSelect = new ChangeThreeSelect();
         this.changeThreeAnimation = new ChangeThreeAnimation();
 
+        this.missingSelect = new MissingSelect();
+
+        this.gameManager.addEventListener(GameEvent.CleanAll, this.onCleanAll, this);
         this.gameManager.addEventListener(GameEvent.ChangeThree, this.onChangeThree, this);
         this.gameManager.addEventListener(GameEvent.ChangeThreeSys, this.onChangeThreeSys, this);
         this.gameManager.addEventListener(GameEvent.ChangeThreeComplete, this.onChangeThreeComplete, this);
@@ -29,11 +34,20 @@ class GameEffectManager extends BaseManager {
 
     }
 
-    private onChangeThree() {
-        this.changeThreeSelect.show();
-        this.onCardRaise(CardRaiseMode.changeThree);
+    private onCleanAll() {
+        this.changeThreeSelect.hide();
+        this.changeThreeAnimation.hide();
+
+        this.missingSelect.hide();
 
         GSController.i.gsView.updateState();
+    }
+
+    private onChangeThree() {
+        GSController.i.gsView.updateState();
+
+        this.changeThreeSelect.show();
+        this.onCardRaise(CardRaiseMode.changeThree);
     }
 
     private onChangeThreeSys(dir: number) {
@@ -54,7 +68,7 @@ class GameEffectManager extends BaseManager {
     }
 
     private onCardMissComfirm() {
-        MissingEffect.play();
+        this.missingSelect.show();
     }
 
     private onCardThrow(arr: any[]) {

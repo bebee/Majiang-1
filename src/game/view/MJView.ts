@@ -51,7 +51,6 @@ class MJView extends eui.Component {
     }
 
     updateState() {
-
         if (this.dir == DirType.bottom) {
             this.stateImg.visible = false;
             return;
@@ -59,11 +58,11 @@ class MJView extends eui.Component {
 
         this.stateImg.visible = true;
 
-        switch (PublicVal.state) {
-            case StateType.changeThree:
+        switch (game.status) {
+            case GameStatus.changeThree:
                 this.stateImg.texture = RES.getRes("img_txt_xuanpaizhong");
                 break;
-            case StateType.missing:
+            case GameStatus.missing:
                 this.stateImg.texture = RES.getRes("img_txt_dingquezhong");
                 break;
             default:
@@ -84,6 +83,23 @@ class MJView extends eui.Component {
                 this.stateImg.x = game.stage.stageWidth - 160 - this.stateImg.width;
                 this.stateImg.y = (game.stage.stageHeight - this.stateImg.height ) / 2;
                 break;
+        }
+    }
+
+    setQueState(boo:boolean) {
+        if (game.status == GameStatus.gamestart) {
+            if (!boo && game.changeThreeVo.getTypeLength(game.allQue[this.dir]) == 0) {
+                return;
+            }
+
+            for (var i: number = 0; i < this.handCon.numChildren; i++) {
+                var card: CardView = <CardView> this.handCon.getChildAt(i);
+                if (card && card.pai && card.index < 0)continue;
+                if (card.pai.type != game.allQue[this.dir]) {
+                    boo ? card.activate() : card.unactivate();
+                    card.enabled = boo;
+                }
+            }
         }
     }
 

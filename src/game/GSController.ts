@@ -28,9 +28,9 @@ class GSController extends egret.EventDispatcher {
     jiesuanData: any;
 
     //延时出牌计时器
-    delayPushInterval:number;
+    delayPushInterval: number;
 
-    constructor(){
+    constructor() {
         super();
         this.init();
     }
@@ -86,15 +86,15 @@ class GSController extends egret.EventDispatcher {
          GSStateMgr.i.setState(GSState.State_CardPutline);
          */
     }
-    //显示状态内容
-    showStateView(){
 
-        switch(PublicVal.state){
+    //显示状态内容
+    showStateView() {
+
+        switch (PublicVal.state) {
 
             case 1://首次加入牌桌界面
-
                 this.visibleTwoFuncButton(true);
-                this.visibleFourFuncButton(false,false);
+                this.visibleFourFuncButton(false, false);
                 this.visibleReadyIcon();
                 this.visibleRoomOwn();
                 this.visibleZhuang();
@@ -120,7 +120,7 @@ class GSController extends egret.EventDispatcher {
                 this.gsResultView.visible = false;
 
                 this.visibleTwoFuncButton(true);
-                this.visibleFourFuncButton(false,false);
+                this.visibleFourFuncButton(false, false);
                 this.visibleReadyIcon();
                 this.visibleRoomOwn();
                 this.visibleZhuang();
@@ -152,7 +152,7 @@ class GSController extends egret.EventDispatcher {
                 this.scene.readyButton.visible = false;
 
                 this.visibleTwoFuncButton(false);
-                this.visibleFourFuncButton(true,true);
+                this.visibleFourFuncButton(true, true);
 
                 this.gsView.hideReadyIcons();
                 this.visibleZhuang();
@@ -185,7 +185,7 @@ class GSController extends egret.EventDispatcher {
                 this.scene.readyButton.visible = false;
 
                 this.visibleTwoFuncButton(false);
-                this.visibleFourFuncButton(true,false);
+                this.visibleFourFuncButton(true, false);
 
                 this.gsView.hideReadyIcons();
                 this.visibleZhuang();
@@ -203,9 +203,7 @@ class GSController extends egret.EventDispatcher {
     }
 
 
-
-
-    closeGSView(){
+    closeGSView() {
         this.visibleTwoFuncButton(false);
         this.hideLightSame();
         this.gsView.visible = false;
@@ -228,37 +226,33 @@ class GSController extends egret.EventDispatcher {
     }
 
     //刷新解散按钮的文字
-    updateJiesanButtonText(){
+    updateJiesanButtonText() {
 
-        if(PublicVal.state == 1)
-        {
-            if(PublicVal.i.ownPos == 1)
-            {
+        if (PublicVal.state == 1) {
+            if (PublicVal.i.ownPos == 1) {
                 this.scene.jiesanButton.getChildAt(0)["textField"].text = "解散房间";
 
             }
-            else
-            {
+            else {
                 this.scene.jiesanButton.getChildAt(0)["textField"].text = "离开房间";
             }
         }
-        else
-        {
+        else {
             this.scene.jiesanButton.getChildAt(0)["textField"].text = "解散房间";
         }
 
     }
 
     //显示隐藏两个功能按钮(解散房间和返回微信)
-    visibleTwoFuncButton(boo1:boolean){
+    visibleTwoFuncButton(boo1: boolean) {
 
-        this.scene.weixinButton .visible = boo1;
-        this.scene.jiesanButton .visible = boo1;  //bool2
+        this.scene.weixinButton.visible = boo1;
+        this.scene.jiesanButton.visible = boo1;  //bool2
 
     }
 
     //显示隐藏两个功能按钮(设置/解散/语音)
-    visibleFourFuncButton(boo1:boolean,boo2:boolean) {
+    visibleFourFuncButton(boo1: boolean, boo2: boolean) {
         this.gsView.rightTopButtonCon.visible = boo1;
         this.gsView.rightButtonCon.visible = boo2;
     }
@@ -280,14 +274,13 @@ class GSController extends egret.EventDispatcher {
     }
 
     //开始按钮的显示和隐藏
-    visibleStartButton(){
+    visibleStartButton() {
 
-        if(PublicVal.state == StateType.start) {
+        if (PublicVal.state == StateType.start) {
 
-            var hasLeave:boolean = false;
+            var hasLeave: boolean = false;
 
-            var allOnline:boolean = true;
-
+            var allOnline: boolean = true;
 
 
             for (var i: number = 1; i <= 4; i++) {
@@ -303,7 +296,7 @@ class GSController extends egret.EventDispatcher {
                 }
             }
 
-            if(PublicVal.i.ownPos == 1) {//房主
+            if (PublicVal.i.ownPos == 1) {//房主
                 if (hasLeave) { //有空位
                     this.scene.inviteButton.visible = true;
                     this.scene.waitText.visible = false;
@@ -342,7 +335,6 @@ class GSController extends egret.EventDispatcher {
     rebackGame() {
         this.clear();
         this.showStateView();
-
         this.updateBaoView();
 
         //this.gsView.updateBaoPai(PublicVal.i.bao);
@@ -350,11 +342,24 @@ class GSController extends egret.EventDispatcher {
         //this.gsResultView.updateBaoPai(PublicVal.i.bao);
 
         this.setBoomDir(PublicVal.i.ownPos);
-
         this.setArrowDir(GSData.i.turnDir);
         this.updateCenterInfo();
         this.updateRebackPais();
         this.showFuncSelectMenu();
+
+        if (game.status == GameStatus.changeThree && !game.statusComplete) {
+            game.manager.dispatchEvent(GameEvent.ChangeThree);
+        }
+
+        if (game.status == GameStatus.missing && !game.statusComplete) {
+            game.manager.dispatchEvent(GameEvent.CardMissComfirm);
+        }
+
+        if (GSData.i.backTing) {
+            //听牌状态
+            this.tingingView();
+            PublicVal.state = -4;
+        }
     }
 
     //开始游戏
@@ -372,7 +377,7 @@ class GSController extends egret.EventDispatcher {
 
         this.updateCenterInfo();
 
-        if(GSData.i.isLianZhuang){
+        if (GSData.i.isLianZhuang) {
 
             EffectUtils.showTips("恭喜庄家连庄！", 1);
         }
@@ -389,7 +394,7 @@ class GSController extends egret.EventDispatcher {
     //显示隐藏某个方位准备图标和踢人图标
     visibleReadyIcon() {
 
-        if(PublicVal.state == StateType.start || PublicVal.state == StateType.reconnect) {
+        if (PublicVal.state == StateType.start || PublicVal.state == StateType.reconnect) {
             for (var i: number = 1; i <= 4; i++) {
                 var readyIcon = this.gsView.readyIcons[i];
                 var killIcon = this.gsView.getHeadView(i).headIcon.killIcon;
@@ -406,9 +411,9 @@ class GSController extends egret.EventDispatcher {
     }
 
     //更新庄家
-    visibleZhuang(){
+    visibleZhuang() {
 
-        for(var i:number = 1;i<= GSConfig.playerCount;i++){
+        for (var i: number = 1; i <= GSConfig.playerCount; i++) {
 
             this.gsView.getHeadView(i).visibleZhuang((PublicVal.i.zhuangFlag >> i & 1) == 1);
 
@@ -444,6 +449,7 @@ class GSController extends egret.EventDispatcher {
         cardView.posView(pos.x, pos.y);
         mjView.addHandCard(cardView);
         this.setArrowDir(dir);
+
         if (dir == 1) {
             //设置按键事件 抓牌动画
             cardView.activate();
@@ -452,31 +458,33 @@ class GSController extends egret.EventDispatcher {
             egret.Tween.get(cardView).to({y: pos.y}, 200);
             this.clearActivateCard();
 
-            this.playTimeEffect(true,true);
+            this.playTimeEffect(true, true);
 
-            if(PublicVal.state == StateType.ting){//听牌状态
+            if (PublicVal.state == StateType.ting) {//听牌状态
+
+                cardView.unactivate();
                 //延时打尾牌
-                this.delayPushInterval = egret.setTimeout(this.delayPushPai,this,500);
+                this.delayPushInterval = egret.setTimeout(this.delayPushPai, this, 800);
             }
 
-        }else{
-            this.playTimeEffect(true,false);
+        } else {
+            this.playTimeEffect(true, false);
         }
 
-        if(PublicVal.state == StateType.fen){
-
-            this.playTimeEffect(false,false);
+        if (PublicVal.state == StateType.fen) {
+            this.playTimeEffect(false, false);
         }
     }
+
     //延时打牌
-    delayPushPai(){
+    delayPushPai() {
 
         var catchPai = GSData.i.getCatchPai(1);
 
-        SocketManager.getInstance().getGameConn().send(4, {"args":catchPai});
+        SocketManager.getInstance().getGameConn().send(4, {"args": catchPai});
     }
 
-    clearDelayPushInterval(){
+    clearDelayPushInterval() {
         egret.clearTimeout(this.delayPushInterval);
         this.delayPushInterval = 0;
     }
@@ -487,16 +495,16 @@ class GSController extends egret.EventDispatcher {
     }
 
     //更新剩余牌数量 和圈数
-    updateCenterInfo(){
+    updateCenterInfo() {
 
         this.gsView.centerBoom.updateLeftCount(PublicVal.i.dui_num);
 
-        this.gsView.centerBoom.updateRoundCount(PublicVal.i.cur_round,PublicVal.i.max_round);
+        this.gsView.centerBoom.updateRoundCount(PublicVal.i.cur_round, PublicVal.i.max_round);
 
     }
 
-    roundPlay(){//牌局开始
-
+    //牌局开始
+    roundPlay() {
         PublicVal.state = StateType.gamestart;
 
         GSData.i.pushStartHandPai();
@@ -504,9 +512,13 @@ class GSController extends egret.EventDispatcher {
         GSController.i.catchCard(GSData.i.zhuangDir);
         GSController.i.scene.playFight();
         GSController.i.showFuncSelectMenu();
+
+        if (game.status == GameStatus.changeThree && !game.statusComplete) {
+            game.manager.dispatchEvent(GameEvent.ChangeThree);
+        }
     }
 
-    updateBaoView(){
+    updateBaoView() {
 
         this.gsView.updateBaoPai(PublicVal.i.bao);
         this.gsResultView.updateBaoPai(PublicVal.i.bao);
@@ -554,6 +566,10 @@ class GSController extends egret.EventDispatcher {
 
         }
 
+        if (GSData.i.tingEndShow) {
+
+            this.tingingView(true);
+        }
         //等待结算
         egret.setTimeout(_=> {
             this.intoResultView()
@@ -597,6 +613,7 @@ class GSController extends egret.EventDispatcher {
 
     //进入结算界面
     intoResultView() {
+
 
         this.showStateView();
 
@@ -650,8 +667,8 @@ class GSController extends egret.EventDispatcher {
 
         if (PublicVal.state == StateType.shuffle || PublicVal.state == StateType.fen || PublicVal.state == StateType.win || PublicVal.state == StateType.ting) return;
 
-        switch (PublicVal.state) {
-            case StateType.changeThree:
+        switch (game.status) {
+            case GameStatus.changeThree:
                 if (game.changeThreeVo.hasCard(cardView.pai)) {
                     cardView.moveDown(true);
                     game.changeThreeVo.delCard(cardView.pai);
@@ -660,18 +677,39 @@ class GSController extends egret.EventDispatcher {
                     cardView.moveUp(true);
                 }
                 break;
-            case StateType.missing:
+            case GameStatus.missing:
                 break;
-            case StateType.gamestart:
+            case GameStatus.gamestart:
                 if (this.activateCard == cardView) {
                     if (GSData.i.turnDir == 1 && GSConfig.handLens[PublicVal.i.getHandPais(1).length] && this.allowPushCard) {//进入打牌
-                        var pai = this.activateCard.pai;
-                        this.allowPushCard = false;
-                        this.startPushTimeInterval();
-                        SocketManager.getInstance().getGameConn().send(4, {"args": pai});
-                        console.log("发送自己的打牌信息", pai);
-                        if (GSData.i.isTing) PublicVal.state = StateType.ting;
+                        //进入打牌
 
+                        var pai = this.activateCard.pai;
+
+
+                        if (GSData.i.readyTing) {
+
+                            //发送听牌
+                            SocketManager.getInstance().getGameConn().send(15, {"args": {"action": 4, "pai": [pai]}});
+
+                            PublicVal.state = -4;
+
+                            GSData.i.readyTing = false;
+
+                            this.hideFuncSelectMenu();
+
+                        } else {
+
+                            SocketManager.getInstance().getGameConn().send(4, {"args": pai});
+
+                            this.gsView.setQueState(true);
+
+                            console.log("发送自己的打牌信息", pai);
+                        }
+
+                        this.allowPushCard = false;
+
+                        this.startPushTimeInterval();
                     } else if (!GSData.i.gang_end && GSData.i.zhuangDir == 1) {//开局轮杠中
                         EffectUtils.showTips("等待其他玩家杠牌，请稍后...", 5);
                     }
@@ -723,8 +761,13 @@ class GSController extends egret.EventDispatcher {
 
         mjview.addPoolCard(cardView);
 
-        //刷新手牌显示
+
         this.updateMJView(dir);
+        //听牌状态
+        if (PublicVal.state == -4) {
+
+            this.tingingView();
+        }
 
         this.playTimeEffect(false);
 
@@ -761,9 +804,9 @@ class GSController extends egret.EventDispatcher {
     }
 
     //显示吃碰杠功能菜单
-    showFuncSelectMenu(tip:boolean = true) {
+    showFuncSelectMenu(tip: boolean = true) {
 
-        if(GSData.i.roundStartHasFunction && PublicVal.state == StateType.gamestart) {
+        if (GSData.i.roundStartHasFunction && PublicVal.state == StateType.gamestart) {
 
             this.moveBack(false);
 
@@ -772,7 +815,7 @@ class GSController extends egret.EventDispatcher {
             this.gsView.funcSelectView.updateFuncView(GSData.i.funcSelects);
 
             //TODO 相关手牌提示
-            if(tip) game.manager.dispatchEvent(GameEvent.CardRaise, CardRaiseMode.funcmenu);
+            if (tip) game.manager.dispatchEvent(GameEvent.CardRaise, CardRaiseMode.funcmenu);
         }
     }
 
@@ -819,11 +862,11 @@ class GSController extends egret.EventDispatcher {
 
     clear() {
 
-/*        for(var i:number = 1;i <= 4;i++){
-            GSConfig.dymnicHandPos[i].x = GSConfig.handPosPlus[i].x;
-            GSConfig.dymnicHandPos[i].y = GSConfig.handPosPlus[i].y;
+        /*        for(var i:number = 1;i <= 4;i++){
+         GSConfig.dymnicHandPos[i].x = GSConfig.handPosPlus[i].x;
+         GSConfig.dymnicHandPos[i].y = GSConfig.handPosPlus[i].y;
 
-        }*/
+         }*/
         this.allowPushCard = true;
 
         this.isAllowFuncClick = true;
@@ -849,9 +892,9 @@ class GSController extends egret.EventDispatcher {
     }
 
     /*
-        更新牌面
-        updatePool 是否更新池牌
-        lensCheck 长度检测是否提出最后一张牌
+     更新牌面
+     updatePool 是否更新池牌
+     lensCheck 长度检测是否提出最后一张牌
      */
     updateMJView(dir: number, updatePool: boolean = false, lensCheck: boolean = true) {
 
@@ -867,9 +910,9 @@ class GSController extends egret.EventDispatcher {
         var handPais = PublicVal.i.getHandPais(dir);
 
         var mjView: MJView = this.gsView.MJViews[dir];
-        var handStyle : number = GSConfig.handStylesPlus[dir];
+        var handStyle: number = GSConfig.handStylesPlus[dir];
 
-        var pos = funcPais.length > 0 ? GSConfig.funcPos[dir]:GSConfig.handPosPlus[dir];
+        var pos = funcPais.length > 0 ? GSConfig.funcPos[dir] : GSConfig.handPosPlus[dir];
 
         //var pos = GSConfig.handPosPlus[dir];
 
@@ -1044,23 +1087,24 @@ class GSController extends egret.EventDispatcher {
         //解析手牌
         if (handPais.length > 0) {
 
-            this.createIndexPais(mjView, sPosX, sPosY, dir, handStyle, handPais,true,true,lensCheck);
+            this.createIndexPais(mjView, sPosX, sPosY, dir, handStyle, handPais, true, true, lensCheck);
 
             if (updatePool) {
                 //池牌
-               /* mjView.removeAllPoolCard();
+                /* mjView.removeAllPoolCard();
 
-                for (var i: number = 0; i < poolPais.length; i++) {
-                    var cardView: CardView = CardView.create(dir, 4, poolPais[i]);
-                    var o = GSConfig.getPoolPos(dir, i);
-                    cardView.posView(o.x, o.y);
-                    mjView.addPoolCard(cardView);
-                }*/
-               this.updatePoolPaiView(dir);
+                 for (var i: number = 0; i < poolPais.length; i++) {
+                 var cardView: CardView = CardView.create(dir, 4, poolPais[i]);
+                 var o = GSConfig.getPoolPos(dir, i);
+                 cardView.posView(o.x, o.y);
+                 mjView.addPoolCard(cardView);
+                 }*/
+                this.updatePoolPaiView(dir);
             }
         }
     }
-    updatePoolPaiView(dir:number){
+
+    updatePoolPaiView(dir: number) {
 
         var poolPais = PublicVal.i.getPoolPais(dir);
         var mjView = this.gsView.MJViews[dir];
@@ -1142,55 +1186,58 @@ class GSController extends egret.EventDispatcher {
 
     }
 
-    enablesHandPais(){
 
-        var handCon= this.gsView.MJViews[1].handCon;
-        for(var i:number = 0 ; i < handCon.numChildren;i++) {
-            var card = <CardView>handCon.getChildAt(i);
-
-            if(card.index > - 1) {
-
-                card.enabled = true;
-                card.touchEnabled = true;
-            }
-        }
-    }
     //处理听牌
     doTing() {
 
-        GSData.i.isTing = true;
+        GSData.i.readyTing = true;
 
+        var funcSelect = GSData.i.getFuncSelectByIndex(5);
+
+        var group = funcSelect.group;
+
+        var playPais = [];
+
+        for (var i = 0; i < group.length; i++) {
+
+            var obj = group[i];
+
+            playPais.push(obj.play);
+        }
         GSData.i.funcSelects = [{index: 0, action: 0, pai: null}];
 
         GSData.i.roundStartHasFunction = true;
 
         this.showFuncSelectMenu(false);
 
-        var pai =[{type:1,number:4},{type:4,number:1}];
+        this.readyTingView(playPais);
+
+    }
+
+    //准备听牌的牌面
+    readyTingView(pais: any[]) {
 
         var handCon = this.gsView.MJViews[1].handCon;
 
         for (var i: number = 0; i < handCon.numChildren; i++) {
 
-            //if(pai.length == 0) break;
-
             var card = <CardView>handCon.getChildAt(i);
 
-            if(card.index > -1){
+            if (card.index > -1) {
 
                 card.enabled = false;
                 card.touchEnabled = false;
 
-                for(var j:number = 0 ; j <pai.length;j++){
+                for (var j: number = 0; j < pais.length; j++) {
 
-                    var p = pai[j];
+                    var p = pais[j];
 
-                    if(p.number == card.pai.number && p.type == card.pai.type){
+                    if (p.number == card.pai.number && p.type == card.pai.type) {
 
                         card.enabled = true;
                         card.touchEnabled = true;
 
-                        pai.splice(j,1);
+                        pais.splice(j, 1);
 
                         break;
                     }
@@ -1199,27 +1246,64 @@ class GSController extends egret.EventDispatcher {
         }
     }
 
-    //刷新手牌大小
-    updateHandViewSize(){
+    //取消听牌的牌面
+    cancleTingView() {
 
-        if(PublicVal.state == StateType.gamestart) {
+        var handCon = this.gsView.MJViews[1].handCon;
+
+        for (var i: number = 0; i < handCon.numChildren; i++) {
+
+            var card = <CardView>handCon.getChildAt(i);
+
+            if (card.index > -1) {
+
+                card.enabled = true;
+
+                card.touchEnabled = true;
+            }
+        }
+    }
+
+    //听牌中的牌面设置
+    tingingView(boo: boolean = false) {
+
+        var handCon = this.gsView.MJViews[1].handCon;
+
+        for (var i: number = 0; i < handCon.numChildren; i++) {
+
+            var card = <CardView>handCon.getChildAt(i);
+
+            if (card.index > -1) {
+
+                card.touchEnabled = false;
+                card.enabled = boo;
+            }
+        }
+
+    }
+
+
+    //刷新手牌大小
+    updateHandViewSize() {
+
+        if (PublicVal.state == StateType.gamestart) {
 
             var mjView = this.gsView.MJViews[1];
 
             var pos = GSConfig.dymnicHandPos[1];
 
-            if(PublicVal.i.getFuncPais(1).length == 0){//无功能牌
+            if (PublicVal.i.getFuncPais(1).length == 0) {//无功能牌
 
                 pos = GSConfig.handPosPlus[1];
             }
 
             var scale = GSConfig.posRulePlus[1][1].scale;
 
-            for(var i:number= 0 ;i <mjView.handCon.numChildren;i++ ){
+            for (var i: number = 0; i < mjView.handCon.numChildren; i++) {
 
                 var card = <CardView>mjView.handCon.getChildAt(i);
 
-                if(card.index > - 1) {
+                if (card.index > -1) {
 
                     var o = GSConfig.getPosByIndex(1, 1, card.index);
 
@@ -1236,40 +1320,41 @@ class GSController extends egret.EventDispatcher {
 
             var catchPos = GSConfig.catchPos[1];
             //如果出牌长度范围
-            if(GSConfig.handLens[pais.length]){
+            if (GSConfig.handLens[pais.length]) {
                 catchPos.x = card.pos.x + catchPos.dx;
                 catchPos.y = card.pos.y + catchPos.dy;
-                card.posView(catchPos.x,card.y);
+                card.posView(catchPos.x, card.y);
 
-            }else{
-                o = GSConfig.getPosByIndex(1,1,card.index + 1);
+            } else {
+                o = GSConfig.getPosByIndex(1, 1, card.index + 1);
                 catchPos.x = pos.x + o.x + catchPos.dx;
                 catchPos.y = pos.y + o.y + catchPos.dy;
             }
 
         }
     }
+
     //更新游戏风格
-    updateGameStyle(){
+    updateGameStyle() {
 
 
-        if(PublicVal.state == StateType.gamestart || PublicVal.state == 6) {
+        if (PublicVal.state == StateType.gamestart || PublicVal.state == 6) {
 
             this.scene.updateTableBG();
 
             this.gsView.baoPaiView.cardView.changeBGStyle();
             this.gsResultView.baoPaiView.cardView.changeBGStyle();
 
-            for(var i:number = 1;i <=4;i ++){
+            for (var i: number = 1; i <= 4; i++) {
 
                 var mjView = this.gsView.MJViews[i];
 
-                for(var j:number = 0 ;j < mjView.handCon.numChildren;j++){
+                for (var j: number = 0; j < mjView.handCon.numChildren; j++) {
 
                     var cardView = <CardView>mjView.handCon.getChildAt(j);
                     cardView.changeBGStyle();
                 }
-                for(var j:number = 0 ;j < mjView.poolCon.numChildren;j++){
+                for (var j: number = 0; j < mjView.poolCon.numChildren; j++) {
 
                     var cardView = <CardView>mjView.poolCon.getChildAt(j);
                     cardView.changeBGStyle();
@@ -1279,17 +1364,16 @@ class GSController extends egret.EventDispatcher {
     }
 
 
+    nullAllHead() {
 
-
-    nullAllHead(){
-
-        for(var i:number = 1 ; i <= 4 ;i++){
+        for (var i: number = 1; i <= 4; i++) {
 
             this.gsView.headViews[i].nullPlayer();
         }
     }
+
     //更新replay房间信息
-    updateReplayRoom(dirPersons:any) {
+    updateReplayRoom(dirPersons: any) {
 
         for (var i: number = 1; i <= 4; i++) {
 
@@ -1313,4 +1397,3 @@ class GSController extends egret.EventDispatcher {
 
     }
 }
-

@@ -17,7 +17,7 @@ module GameMusic
      */
     export function PlaySound(name:string, loops:number = 0, startTime:number = 0)
     {
-        var _switch:number = +NativeApi.getLocalData("switch");
+        var _switch:number = +NativeApi.getLocalData("music");
         if(_switch == 0) return;
         
         var SoundDict = GameMusic.SoundDict;

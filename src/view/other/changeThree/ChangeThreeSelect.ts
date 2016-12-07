@@ -40,10 +40,32 @@ class ChangeThreeSelect extends BaseSprite {
                     return;
                 }
 
+                game.statusComplete = true;
+
                 this.hide();
-                console.log(game.changeThreeVo.cards);
+                this.removeChangeThree();
+
+                SocketManager.getInstance().getGameConn().send(15, {
+                    "args": {
+                        "action": 35,
+                        "pai": game.changeThreeVo.cards
+                    }
+                });
+
                 break;
         }
+    }
+
+    private removeChangeThree() {
+        var pai: any;
+        for (var i: number = 0; i < game.changeThreeVo.cards.length; i++) {
+            pai = game.changeThreeVo.cards[i];
+            PublicVal.i.removeHandPai(1, pai);
+        }
+
+        FashionTools.sortPai(PublicVal.i.getHandPais(1));
+
+        GSController.i.updateMJView(1, false, false);
     }
 
     public show() {
@@ -51,7 +73,7 @@ class ChangeThreeSelect extends BaseSprite {
 
         this.x = acekit.width >> 1;
         this.y = acekit.height - 220;
-        acekit.addChild(this);
+        GSController.i.gsView.frontUIContainer.addChild(this);
 
         this.time = GameConst.ChangeThreeTime;
         this.lab_time.text = "" + this.time;
@@ -61,7 +83,9 @@ class ChangeThreeSelect extends BaseSprite {
     public hide() {
         super.hide();
 
-        acekit.removeChild(this);
+        if (GSController.i.gsView.frontUIContainer.contains(this)) {
+            GSController.i.gsView.frontUIContainer.removeChild(this);
+        }
 
         TimerManager.i.delEventListener(TimerManager.Second, this.timeHandler, this);
     }

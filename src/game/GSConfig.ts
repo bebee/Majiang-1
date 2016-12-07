@@ -317,53 +317,40 @@ class GSConfig {
         }
     };
     //规则加强
-    static posRulePlus: any = {
-        1: GSConfig.posRule[1],
-        2: GSConfig.posRule[2],
-        3: GSConfig.posRule[3],
-        4: GSConfig.posRule[4]
-    };
+    static posRulePlus:any = {1:GSConfig.posRule[1],2:GSConfig.posRule[2],3:GSConfig.posRule[3],4:GSConfig.posRule[4]};
 
-    static testPais: any[] = [{type: 3, number: 1},
-        {type: 3, number: 2},
-        {type: 3, number: 9},
-        {type: 3, number: 9},
+    static testPais : any[] = [ {type:3,number:1},
+                                {type:3,number:2},
+                                {type:3,number:9},
+                                {type:3,number:9},
 
-        {type: 1, number: 1},
-        {type: 1, number: 1},
-        {type: 1, number: 9},
-        {type: 1, number: 2},
+                                {type:1,number:1},
+                                {type:1,number:1},
+                                {type:1,number:9},
+                                {type:1,number:2},
 
-        {type: 2, number: 1},
-        {type: 2, number: 1},
-        {type: 2, number: 9},
-        {type: 2, number: 9},
+                                {type:2,number:1},
+                                {type:2,number:1},
+                                {type:2,number:9},
+                                {type:2,number:9},
 
-        {type: 4, number: 2},
-        {type: 4, number: 2}
-    ];
-    /*    static funcSelects =  [ {key:0,res:"F_guo"},
-     {key:1,res:"F_chi"},
-     {key:2,res:"F_peng"},
-     {key:3,res:"F_gang"},
-     {key:4,res:"F_ting"},
-     {key:5,res:"F_hu"}
-     ];*/
+                                {type:4,number:2},
+                                {type:4,number:2}
+                                ];
 
-    static funcSelectRes = ["F_guo", "F_chi", "F_peng", "F_gang", "F_budan", "F_ting", "F_hu"];
 
-    static actionPVP = {
-        1: 1,
-        2: 2,
-        22: 3,
-        24: 3,
-        25: 3,
-        26: 3,
-        27: 4,
-        28: 4,
-        4: 5,
-        99: 6
-    };
+    static funcSelectRes = ["F_guo","F_chi","F_peng","F_gang","F_budan","F_ting","F_hu"];
+
+    static actionPVP = {    1:1,
+                            2:2,
+                            22:3,
+                            24:3,
+                            25:3,
+                            26:3,
+                            27:4,
+                            28:4,
+                            4 :5,
+                            99:6    };
     //获取方位位置
     static getPosByIndex(dir: number, style: number, index: number) {
 

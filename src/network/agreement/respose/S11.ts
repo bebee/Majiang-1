@@ -13,24 +13,43 @@ class S11 {
 
             switch (action) {
 
-                case 100:
-                    //初始牌
+                case 100://初始牌手牌
                     GSDataProxy.i.S2C_OwnCardInfo(obj);
                     break;
-                case 200:
-                    //抓牌
-                    GSDataProxy.i.S2C_OwnCatch(obj.data.pai[0], obj.data.dui_num, obj.data.hasOwnProperty("fen"));
+                case 200://抓牌
                     game.manager.dispatchEvent(GameEvent.CardThrow);
                     game.manager.dispatchEvent(GameEvent.CardRaise);
+                    GSDataProxy.i.S2C_OwnCatch(obj.data.pai[0], obj.data.dui_num, obj.data.hasOwnProperty("fen"));
+                    GSController.i.gsView.setQueState(false);
                     break;
-                case 300:
+                case 300://换宝牌
                     GSDataProxy.i.S2C_Bao(obj.data);
                     break;
-                default:
-                    //同步自己的功能牌
-                    GSDataProxy.i.S2C_FuncResult(obj.data.action, obj.data.pai, obj.data.turn, obj.data.cur);
+                case 301://换三张
+                    var pais: any = obj.data.pai;
+                    for (var i: number = 0; i < pais.length; i++) {
+                        PublicVal.i.addHandPai(1, pais[i]);
+                        PublicVal.i.addHandPai(2, null);
+                        PublicVal.i.addHandPai(3, null);
+                        PublicVal.i.addHandPai(4, null);
+                    }
+
+                    FashionTools.sortPai(PublicVal.i.getHandPais(1));
+
+                    GSController.i.updateMJView(1);
+                    GSController.i.updateMJView(2);
+                    GSController.i.updateMJView(3);
+                    GSController.i.updateMJView(4);
+
+                    game.manager.dispatchEvent(GameEvent.ChangeThreeComplete, obj.data.huan_type);
+                    break;
+                case 302://订缺
+                    break;
+                default://同步自己的功能牌
                     game.manager.dispatchEvent(GameEvent.CardThrow);
                     game.manager.dispatchEvent(GameEvent.CardThrowTips);
+                    GSDataProxy.i.S2C_FuncResult(obj.data.action, obj.data.pai, obj.data.turn, obj.data.cur);
+                    GSController.i.gsView.setQueState(false);
                     break;
             }
         }

@@ -5,16 +5,12 @@ class SettingDialog extends BaseDialog
 
     public constructor()
     {
-        super("setting_txt", 670, 420);
+        super("setting_txt", 700, 400);
     }
 
     public slider_music:mui.EHSlider;
 
     public slider_sound:mui.EHSlider;
-
-    private _radio_sh:mui.ERadio;
-
-    private _radio_jd:mui.ERadio;
 
     createChildren()
     {
@@ -34,7 +30,7 @@ class SettingDialog extends BaseDialog
 
         this.slider_music.y = 100;
 
-        this.slider_music.width = 320;
+        this.slider_music.width = 250;
 
         this.m_dialog._title_img.visible = false;
 
@@ -48,7 +44,7 @@ class SettingDialog extends BaseDialog
 
         this.slider_sound.y = 170;
 
-        this.slider_sound.width = 320;
+        this.slider_sound.width = 250;
 
         this.m_UI.addChild(this.slider_sound);
 
@@ -56,49 +52,38 @@ class SettingDialog extends BaseDialog
 
         this.m_UI._btn_sound.addEventListener(egret.TouchEvent.TOUCH_TAP, this.onOff, this);
 
+        this.m_UI._btn_music.addEventListener(egret.TouchEvent.TOUCH_TAP, this.onOpen, this);
+
         this.m_UI._btn_pai.addEventListener(egret.TouchEvent.TOUCH_TAP, this.onPai, this);
 
-        this._radio_jd = new mui.ERadio();
-        this._radio_sh = new mui.ERadio();
+        this.m_UI._btn_color.addEventListener(egret.TouchEvent.TOUCH_TAP, this.onChange, this);
 
-        this._radio_sh.x = 300;
-        this._radio_sh.y = 274;
-
-        this._radio_jd.x = 450;
-        this._radio_jd.y = 274;
-
-        this.m_UI.addChild(this._radio_jd);
-        this.m_UI.addChild(this._radio_sh);
-
-        this._radio_jd.addEventListener(egret.TouchEvent.TOUCH_TAP, this.onChange, this);
-
-        this._radio_sh.addEventListener(egret.TouchEvent.TOUCH_TAP, this.onChange, this);
+        
     }
 
-    private onChange(e:egret.TouchEvent):void
+    private onChange( ):void
     {
-        switch (e.currentTarget)
+        var style:number = +NativeApi.getLocalData("style");
+
+        if(style == 0)
         {
-            case this._radio_jd:
-                NativeApi.setLocalData("style", 0);
+            NativeApi.setLocalData("style", 1);
 
-                GlobalData.getInstance().cardStyle = 0;
+            GlobalData.getInstance().cardStyle = 1;
 
-                FashionTools.setGameStyle(0);
+            FashionTools.setGameStyle(1);
 
-                this._radio_jd.setSelectIndex(1);
-                this._radio_sh.setSelectIndex(0);
-                break;
-            case this._radio_sh:
-                NativeApi.setLocalData("style", 1);
+            this.m_UI._btn_color.source = "card_style_green";
+        }
+        else
+        {
+            NativeApi.setLocalData("style", 0);
 
-                GlobalData.getInstance().cardStyle = 1;
+            GlobalData.getInstance().cardStyle = 0;
 
-                FashionTools.setGameStyle(1);
+            FashionTools.setGameStyle(0);
 
-                this._radio_jd.setSelectIndex(0);
-                this._radio_sh.setSelectIndex(1);
-                break;
+            this.m_UI._btn_color.source = "card_style_blue";
         }
     }
 
@@ -126,6 +111,33 @@ class SettingDialog extends BaseDialog
         this.m_UI._btn_pai.source = "card_"+GlobalData.getInstance().cardType+"_btn";
     }
 
+    private onOpen():void
+    {
+        var _switch:number = +NativeApi.getLocalData("music");
+
+        if(_switch == 1)
+        {
+            NativeApi.setLocalData("music", 0);
+
+            this.m_UI._btn_music.textImg.source = "sound_close_btn";
+
+            GameMusic.CloseAllSound();
+
+            this.slider_music.touchEnabled = false;
+            this.slider_music.touchChildren = false;
+            this.slider_music.filters = Global.getColorFlilter();
+        }
+        else
+        {
+            NativeApi.setLocalData("music", 1);
+            this.m_UI._btn_music.textImg.source = "sound_open_btn";
+            GameMusic.PlaySound("music_scene");
+            this.slider_music.touchEnabled = true;
+            this.slider_music.touchChildren = true;
+            this.slider_music.filters = [];
+        }
+    }
+
     private onOff():void
     {
         var _switch:number = +NativeApi.getLocalData("switch");
@@ -134,14 +146,9 @@ class SettingDialog extends BaseDialog
         {
             NativeApi.setLocalData("switch", 0);
 
-            this.m_UI._btn_sound.source = "sound_close_btn";
+            this.m_UI._btn_sound.textImg.source = "sound_close_btn";
 
-            GameMusic.CloseAllSound();
             GameSound.CloseAllSound();
-
-            this.slider_music.touchEnabled = false;
-            this.slider_music.touchChildren = false;
-            this.slider_music.filters = Global.getColorFlilter();
 
             this.slider_sound.touchEnabled = false;
             this.slider_sound.touchChildren = false;
@@ -151,13 +158,7 @@ class SettingDialog extends BaseDialog
         {
             NativeApi.setLocalData("switch", 1);
 
-            this.m_UI._btn_sound.source = "sound_open_btn";
-
-            GameMusic.PlaySound("music_scene");
-
-            this.slider_music.touchEnabled = true;
-            this.slider_music.touchChildren = true;
-            this.slider_music.filters = [];
+            this.m_UI._btn_sound.textImg.source = "sound_open_btn";
 
             this.slider_sound.touchEnabled = true;
             this.slider_sound.touchChildren = true;
@@ -211,15 +212,30 @@ class SettingDialog extends BaseDialog
     {
         super.show(true, this.width, this.height, 1, false);
 
-        var _switch:number = +NativeApi.getLocalData("switch");
+        var _music:number = +NativeApi.getLocalData("music");
 
-        if(_switch == 0)
+        if(_music == 0)
         {
-            this.m_UI._btn_sound.source = "sound_close_btn";
+            this.m_UI._btn_music.textImg.source = "sound_close_btn";
 
             this.slider_music.touchEnabled = false;
             this.slider_music.touchChildren = false;
             this.slider_music.filters = Global.getColorFlilter();
+        }
+        else
+        {
+            this.m_UI._btn_music.textImg.source = "sound_open_btn";
+
+            this.slider_music.touchEnabled = true;
+            this.slider_music.touchChildren = true;
+            this.slider_music.filters = [];
+        }
+
+        var _switch:number = +NativeApi.getLocalData("switch");
+
+        if(_switch == 0)
+        {
+            this.m_UI._btn_sound.textImg.source = "sound_close_btn";
 
             this.slider_sound.touchEnabled = false;
             this.slider_sound.touchChildren = false;
@@ -227,11 +243,7 @@ class SettingDialog extends BaseDialog
         }
         else
         {
-            this.m_UI._btn_sound.source = "sound_open_btn";
-
-            this.slider_music.touchEnabled = true;
-            this.slider_music.touchChildren = true;
-            this.slider_music.filters = [];
+            this.m_UI._btn_sound.textImg.source = "sound_open_btn";
 
             this.slider_sound.touchEnabled = true;
             this.slider_sound.touchChildren = true;
@@ -259,13 +271,11 @@ class SettingDialog extends BaseDialog
 
             if(style == 1)
             {
-                this._radio_sh.setSelectIndex(1);
-                this._radio_jd.setSelectIndex(0);
+                this.m_UI._btn_color.source = "card_style_green";
             }
             else
             {
-                this._radio_sh.setSelectIndex(0);
-                this._radio_jd.setSelectIndex(1);
+                this.m_UI._btn_color.source = "card_style_blue";
             }
         }
     }

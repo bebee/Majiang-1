@@ -27,6 +27,8 @@ class DissolutionDialog extends BaseDialog
 
         this.m_UI.btn_false.addEventListener(egret.TouchEvent.TOUCH_TAP, this.onQuxiao, this);
 
+        this.m_UI.time_text.text = "玩家离线5分钟后将视为同意解散";
+
     }
 
     public clear():void
@@ -62,11 +64,6 @@ class DissolutionDialog extends BaseDialog
         SocketManager.getInstance().getGameConn().send(14, {"args":{"answer":1}});  //发起解散房子
 
         this.isClick = true;
-    }
-
-    public onTimes(t:number)
-    {
-        this.m_UI.time_text.text = "若无人拒绝，房间将在 " + Global.getStringBySeconds(t * 1000) + " 后解散";
     }
 
     public refresh():void
@@ -160,8 +157,6 @@ class DissolutionDialog extends BaseDialog
 
                 EffectUtils.showTips("因有玩家拒绝解散，房间未能解散", 5);
 
-                Heart.getInstance().dissolutionTime = 0;
-
             },this, 1000);
         }
         else
@@ -175,8 +170,6 @@ class DissolutionDialog extends BaseDialog
                     my.clear();
 
                     EffectUtils.showTips("房间解散成功", 5);
-
-                    Heart.getInstance().dissolutionTime = 0;
 
                 },this, 1000);
             }

@@ -1,9 +1,23 @@
 /**
- * 游戏状态
+ * 游戏类型
+ */
+enum GameType {
+    baicheng, sichuan = 100
+}
+
+/**
+ * 状态
  * 开始-断线重连-洗牌-换牌-牌局开始-分张-自己胡牌-牌局结束-结束
  */
 enum StateType {
-    start = 1, reconnect, shuffle, changeThree, missing, gamestart, ting, fen, win, gameover, over
+    start = 1, reconnect, shuffle, gamestart, ting, fen, win, gameover, over
+}
+
+/**
+ * 游戏状态
+ */
+enum GameStatus {
+    changeThree, missing, gamestart
 }
 
 /**
@@ -18,15 +32,15 @@ enum DirType {
  * 1万 2条 3筒 4中发白
  */
 enum CardType {
-    wan, tiao, tong, zi
+    wan=1, tiao, tong, zi
 }
 
 /**
  * 换三张类型
  */
 enum ChangeThreeType {
+    clockwise = 1,
     anti_clockwise,
-    clockwise,
     other
 }
 
