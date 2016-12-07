@@ -76,9 +76,19 @@ class CreateUI extends eui.Component {
 
         this.viewGroup.removeChildren();
 
+        var arr: any[] = [this.btn_xueliu, this.btn_xuezhan];
+        for (var i: number = 0; i < arr.length; i++) {
+            arr[i].enabled = true;
+        }
+
         switch (this.ruleVo.law) {
             case GameLaws.xueliuchenghe:
+                this.btn_xueliu.enabled = false;
+                this.viewGroup.addChild(this.xueliuView);
+                this.xueliuView.update();
+                break;
             case GameLaws.xuezhandaodi:
+                this.btn_xuezhan.enabled = false;
                 this.viewGroup.addChild(this.xueliuView);
                 this.xueliuView.update();
                 break;
