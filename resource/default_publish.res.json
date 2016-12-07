@@ -380,15 +380,31 @@
 		},
 		{
 			"compress":false,
-			"key":"card_jd_btn"
-		},
-		{
-			"compress":false,
-			"key":"card_sh_btn"
-		},
-		{
-			"compress":false,
 			"key":"game_create"
+		},
+		{
+			"compress":false,
+			"key":"RP_xin3"
+		},
+		{
+			"compress":false,
+			"key":"RP_xin4"
+		},
+		{
+			"compress":false,
+			"key":"RP_xin5"
+		},
+		{
+			"compress":false,
+			"key":"RP_xin2"
+		},
+		{
+			"compress":false,
+			"key":"card_style_blue"
+		},
+		{
+			"compress":false,
+			"key":"card_style_green"
 		}],
 		"sort":0
 	}],
@@ -575,21 +591,5 @@
 	{
 		"compress":false,
 		"key":"expression18.2"
-	},
-	{
-		"compress":false,
-		"key":"RP_xin3"
-	},
-	{
-		"compress":false,
-		"key":"RP_xin4"
-	},
-	{
-		"compress":false,
-		"key":"RP_xin5"
-	},
-	{
-		"compress":false,
-		"key":"RP_xin2"
 	}]
 }

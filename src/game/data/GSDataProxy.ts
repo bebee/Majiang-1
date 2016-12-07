@@ -30,13 +30,17 @@ class GSDataProxy {
 
         this.gData.zhuangPos = obj.zhuang;
 
-        this.gData.lastZhuangPos = obj.zhuang;;
+        this.gData.lastZhuangPos = obj.zhuang;
+
+        this.gData.backTing = obj.ting;
 
         PublicVal.i.dui_num = obj.dui_num;
 
         PublicVal.i.cur_round = obj.cur_round;
 
         PublicVal.i.max_round = obj.max_round;
+
+
 
 
         //步骤大于4，表示过了开局杠牌时间
@@ -224,7 +228,9 @@ class GSDataProxy {
         GSController.i.updateMJView(dir);
     }
 
-    //更新功能菜单，吃蹦杠
+    /*
+        更新功能菜单，吃蹦杠
+     */
     S2C_Function(obj: any) {
 
         //不能操作出牌
@@ -337,9 +343,9 @@ class GSDataProxy {
             this.gData.funcSelects.push({index: 4, group: group});
         }
 
-        if (obj[4]) {//听
+        if (obj[4]) {//听 group 数组对象[{play,hu[]},...];
 
-            this.gData.funcSelects.push({index: 5, action: 4, pai: obj[4]});
+            this.gData.funcSelects.push({index: 5, action: 4, group: obj[4]});
 
         }
         if (obj[99]) {//胡
@@ -349,8 +355,6 @@ class GSDataProxy {
             this.gData.funcSelects.push({index: 6, action: 99, pai: obj[99]});
 
         }
-
-
 
         GSData.i.roundStartHasFunction = true;
 
@@ -682,6 +686,12 @@ class GSDataProxy {
     }
     delay_Final(){
 
+        if(PublicVal.state == -4){
+
+            GSData.i.tingEndShow = true;
+
+        }
+
         PublicVal.state = 4;
 
         this.gData.roundStarted = true;
@@ -696,8 +706,6 @@ class GSDataProxy {
             FashionTools.sortPai(left);
 
         }
-
-
         //流局
         if (hupai == 0) {
 

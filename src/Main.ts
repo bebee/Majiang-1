@@ -110,7 +110,7 @@ class Main extends eui.UILayer {
 
         if(!NativeApi.getLocalData("music_volume"))
         {
-            NativeApi.setLocalData("music_volume", 0.3);
+            NativeApi.setLocalData("music_volume", 0.2);
 
             GameMusic._volume = 0.3;
         }
@@ -143,5 +143,7 @@ class Main extends eui.UILayer {
         }
 
         if(!NativeApi.getLocalData("switch")) NativeApi.setLocalData("switch", 1);
+
+        if(!NativeApi.getLocalData("music")) NativeApi.setLocalData("music", 1);
     }
 }

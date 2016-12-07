@@ -82,8 +82,6 @@ class Replayer implements IUpdate{
     }
     exit(){
 
-        console.log("exit");
-
         GSController.i.exit();
 
         this.clear();
@@ -265,6 +263,9 @@ class Replayer implements IUpdate{
                 break;
             case 25://明杠
                 this.actions.push({index:index,action: 5, funcID:funcID, pais:arr[3], pos:pos ,from: arr[3][0].pos});
+                break;
+            case 4://听牌
+                this.actions.push({index:index,action: 5, funcID:funcID,pos:pos});
                 break;
             case 99://胡牌
                 this.actions.push({index:index,action: 5, funcID:funcID, pai:arr[3], pos:pos ,from: arr[3].pos});
@@ -598,6 +599,11 @@ class Replayer implements IUpdate{
 
                 FashionTools.sortPai(PublicVal.i.getHandPais(dir));
                 GSController.i.updateMJView(dir);
+
+                this.playFuncEffect(dir,funcID);
+
+                break;
+            case 4://听
 
                 this.playFuncEffect(dir,funcID);
 

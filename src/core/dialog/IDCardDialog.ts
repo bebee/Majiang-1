@@ -58,9 +58,7 @@ class IDCardDialog extends BaseDialog
             return EffectUtils.showTips("身份证号长度不正确!");
         }
 
-        EffectUtils.showTips("身份信息认证成功!");
-
-        this.hide();
+        SocketManager.getInstance().getGameConn().send(27, {"args":{"name":this.m_UI._name.text, "id_no":this.m_UI._user.text}});
     }
 
     private onClickName():void

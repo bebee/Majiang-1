@@ -21,7 +21,7 @@ class GameMainScene extends eui.Component
 
     private btn_record:mui.EButton;
 
-    private btn_shiming:mui.EButton;
+    public btn_shiming:mui.EButton;
 
     private btn_add:eui.Image;
 
@@ -88,6 +88,7 @@ class GameMainScene extends eui.Component
         this.btn_shiming = new mui.EButton("btn_shiming");
         this.btn_shiming.horizontalCenter = -407;
         this.btn_shiming.verticalCenter = -134;
+        this.btn_shiming.visible = false;
         this.addChildAt(this.btn_shiming, this.numChildren - 1);
 
         /**
@@ -252,6 +253,15 @@ class GameMainScene extends eui.Component
         this._name.text = "" + player.nick;
 
         this._uid.text = "ID：" + player.uid;
+
+        if(player.name && player.id_no)
+        {
+            this.btn_shiming.visible = false;
+        }
+        else
+        {
+            this.btn_shiming.visible = true;
+        }
 
 
         RES.getResByUrl(GlobalData.getInstance().player.pic, function(t:egret.Texture)

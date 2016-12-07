@@ -199,13 +199,7 @@ class GSConfig{
                                 {type:4,number:2},
                                 {type:4,number:2}
                                 ];
-/*    static funcSelects =  [ {key:0,res:"F_guo"},
-                            {key:1,res:"F_chi"},
-                            {key:2,res:"F_peng"},
-                            {key:3,res:"F_gang"},
-                            {key:4,res:"F_ting"},
-                            {key:5,res:"F_hu"}
-                            ];*/
+
 
     static funcSelectRes = ["F_guo","F_chi","F_peng","F_gang","F_budan","F_ting","F_hu"];
 

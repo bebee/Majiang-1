@@ -43,14 +43,13 @@ class TipsPanel extends eui.Component
         this.descTF.text = this.descStr;
 
         //九宫格
-       var rect:egret.Rectangle = new egret.Rectangle(13,13,25,6);
-       this.bg.scale9Grid =rect;
+        var rect:egret.Rectangle = new egret.Rectangle(13,13,25,6);
+        this.bg.scale9Grid =rect;
 
-       this.bg.width = this.descTF.width + 10;
-       this.bg.height = this.descTF.height + 10;
+        this.bg.width = this.descTF.width + 10;
+        this.bg.height = this.descTF.height + 10;
 
-       this.descTF.y = this.bg.height/2 - this.descTF.height/2 + 2;
-
+        this.descTF.y = this.bg.height/2 - this.descTF.height/2 + 2;
     }
 
     // 获取高度

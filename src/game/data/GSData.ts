@@ -7,6 +7,7 @@ class GSData{
 
     static _i : GSData;
 
+
     static get i(){
 
         return GSData._i || (GSData._i = new GSData);
@@ -102,8 +103,8 @@ class GSData{
 
     //rules:string;
 
-    //听牌中
-    isTing:boolean;
+    //准备听牌
+    readyTing:boolean;
 
     //牌局准备好
     roundReady:number;
@@ -111,6 +112,12 @@ class GSData{
     lastZhuangPos:number;
     //是否连庄
     isLianZhuang:boolean;
+
+    //断线重连后是否听牌
+    backTing:number;
+
+    //听牌结束后摊牌亮牌
+    tingEndShow:boolean;
 
     constructor(){
 
@@ -150,7 +157,6 @@ class GSData{
 
         this.roundReady = 0;
 
-        this.isTing = false;
 
         this.roundStartHasFunction = false;
 
@@ -170,6 +176,13 @@ class GSData{
         this.allPais[4] = {handPais:null,catchPai:null,funcPais:[],poolPais:[]};*/
 
         this.funcSelects = [];
+
+
+        this.readyTing = false;
+
+        this.backTing = 0;
+
+        this.tingEndShow = false;
 
     }
     //排序手牌

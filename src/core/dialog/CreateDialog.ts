@@ -270,8 +270,17 @@ class CreateDialog extends BaseDialog
         for(var i = 1; i <= 8; i++)
         {
             var ck:mui.ERadio = this.checkBoxSize[i]["item"];
-            if(i <= 3) ck.setSelectIndex(0);
-            else ck.setSelectIndex(1);
+            var lab:eui.Label = this.m_UI["_tg"+i];
+            if(i <= 3)
+            {
+                ck.setSelectIndex(0);
+                lab.textColor = 0xA07A4B;
+            }
+            else
+            {
+                ck.setSelectIndex(1);
+                lab.textColor = 0xff2f19;
+            }
         }
 
         this.m_UI.btn_fanxuan.textImg.source = "create_xz" + this.checkIndex;

@@ -24,6 +24,7 @@ class LoginScene extends eui.Component
     {
         super.createChildren();
 
+        GameLayerManager.gameLayer().messagBox = new MessageDialog();
 
         RES.addEventListener(RES.ResourceEvent.GROUP_COMPLETE, this.onResourceLoadComplete, this);
         RES.addEventListener(RES.ResourceEvent.GROUP_LOAD_ERROR, this.onResourceLoadError, this);
@@ -95,7 +96,7 @@ class LoginScene extends eui.Component
 
         SceneManager.close("LoginScene", true);
 
-        GameLayerManager.gameLayer().messagBox = new MessageDialog();
+
     }
 
     public update():void

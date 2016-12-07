@@ -38,11 +38,11 @@ class IDCardUI extends eui.Component
         this.rect1.graphics.clear();
         this.rect2.graphics.clear();
 
-        this.rect1.graphics.beginFill(0x7A5008, 1);
+        this.rect1.graphics.beginFill(0xC7A27D, 1);
         this.rect1.graphics.drawRoundRect(194, 134, 332, 40, 20, 20);
         this.rect1.graphics.endFill();
 
-        this.rect2.graphics.beginFill(0x7A5008, 1);
+        this.rect2.graphics.beginFill(0xC7A27D, 1);
         this.rect2.graphics.drawRoundRect(194, 204, 332, 40, 20, 20);
         this.rect2.graphics.endFill();
 

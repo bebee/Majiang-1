@@ -405,6 +405,15 @@ class GSController extends egret.EventDispatcher{
         this.updateRebackPais();
 
         this.showFuncSelectMenu();
+
+        if(GSData.i.backTing){
+
+            //听牌状态
+            this.tingingView();
+
+            PublicVal.state = -4;
+
+        }
     }
 
     //开始游戏
@@ -529,8 +538,10 @@ class GSController extends egret.EventDispatcher{
             this.playTimeEffect(true,true);
 
             if(PublicVal.state == -4){//听牌状态
+
+                cardView.unactivate();
                 //延时打尾牌
-                this.delayPushInterval = egret.setTimeout(this.delayPushPai,this,500);
+                this.delayPushInterval = egret.setTimeout(this.delayPushPai,this,800);
             }
 
         }else{
@@ -643,6 +654,10 @@ class GSController extends egret.EventDispatcher{
 
         }
 
+        if(GSData.i.tingEndShow){
+
+            this.tingingView(true);
+        }
         //等待结算
         egret.setTimeout(_=>{this.intoResultView()},this,3000);
     }
@@ -683,6 +698,7 @@ class GSController extends egret.EventDispatcher{
 
     //进入结算界面
     intoResultView(){
+
 
         this.showStateView();
 
@@ -729,10 +745,6 @@ class GSController extends egret.EventDispatcher{
 
 
 
-
-
-
-
     moveBack(tween:boolean = true){
 
         if(this.activateCard) {
@@ -766,15 +778,28 @@ class GSController extends egret.EventDispatcher{
 
                 var pai = this.activateCard.pai;
 
-                SocketManager.getInstance().getGameConn().send(4, {"args":pai});
+
+                if(GSData.i.readyTing) {
+
+                    //发送听牌
+                    SocketManager.getInstance().getGameConn().send(15, {"args":{"action":4, "pai":[pai]}});
+
+                    PublicVal.state = -4;
+
+                    GSData.i.readyTing = false;
+
+                    this.hideFuncSelectMenu();
+
+                }else {
+
+                    SocketManager.getInstance().getGameConn().send(4, {"args": pai});
+
+                    console.log("发送自己的打牌信息",pai);
+                }
 
                 this.allowPushCard = false;
 
                 this.startPushTimeInterval();
-
-                console.log("发送自己的打牌信息",pai);
-
-                if(GSData.i.isTing) PublicVal.state = -4;
 
 
             }else if(!GSData.i.gang_end && GSData.i.zhuangDir == 1) {//开局轮杠中
@@ -829,9 +854,13 @@ class GSController extends egret.EventDispatcher{
 
         mjview.addPoolCard(cardView);
 
-        //刷新手牌显示
-        this.updateMJView(dir);
 
+        this.updateMJView(dir);
+        //听牌状态
+        if(PublicVal.state == -4 ) {
+
+            this.tingingView();
+        }
 
         this.playTimeEffect(false);
 
@@ -902,6 +931,7 @@ class GSController extends egret.EventDispatcher{
 
         //TODO 相关手牌提示
         GameDispatcher.ins.dispatchEvent(EventType.Trigger_Prompt, false);
+
     }
 
     addCardClick(view:CardView){
@@ -1246,65 +1276,101 @@ class GSController extends egret.EventDispatcher{
 
     }
 
-    enablesHandPais(){
 
-        var handCon= this.gsView.MJViews[1].handCon;
-        for(var i:number = 0 ; i < handCon.numChildren;i++) {
-            var card = <CardView>handCon.getChildAt(i);
-
-            if(card.index > - 1) {
-
-                card.enabled = true;
-                card.touchEnabled = true;
-            }
-        }
-    }
     //处理听牌
     doTing() {
 
-        GSData.i.isTing = true;
+        GSData.i.readyTing = true;
 
+        var funcSelect = GSData.i.getFuncSelectByIndex(5);
+
+        var group = funcSelect.group;
+
+        var playPais = [];
+
+        for(var i = 0 ; i < group.length;i++){
+
+            var obj = group[i];
+
+            playPais.push(obj.play);
+        }
         GSData.i.funcSelects = [{index: 0, action: 0, pai: null}];
 
         GSData.i.roundStartHasFunction = true;
 
         this.showFuncSelectMenu(false);
 
-        var pai =[{type:1,number:4},{type:4,number:1}];
+        this.readyTingView(playPais);
+
+    }
+    //准备听牌的牌面
+    readyTingView(pais:any[]){
 
         var handCon= this.gsView.MJViews[1].handCon;
 
         for(var i:number = 0 ; i < handCon.numChildren;i++){
 
-            //if(pai.length == 0) break;
-
             var card = <CardView>handCon.getChildAt(i);
-
 
             if(card.index > -1){
 
                 card.enabled = false;
                 card.touchEnabled = false;
 
-                for(var j:number = 0 ; j <pai.length;j++){
+                for(var j:number = 0 ; j <pais.length;j++){
 
-                    var p = pai[j] ;
+                    var p = pais[j] ;
 
                     if(p.number == card.pai.number && p.type == card.pai.type){
 
                         card.enabled = true;
                         card.touchEnabled = true;
 
-                        pai.splice(j,1);
+                        pais.splice(j,1);
 
                         break;
-
                     }
-
                 }
             }
         }
     }
+
+    //取消听牌的牌面
+    cancleTingView(){
+
+        var handCon = this.gsView.MJViews[1].handCon;
+
+        for(var i:number = 0 ; i < handCon.numChildren;i++) {
+
+            var card = <CardView>handCon.getChildAt(i);
+
+            if (card.index > -1) {
+
+                card.enabled = true;
+
+                card.touchEnabled = true;
+            }
+        }
+    }
+    //听牌中的牌面设置
+    tingingView(boo:boolean = false){
+
+        var handCon = this.gsView.MJViews[1].handCon;
+
+        for(var i:number = 0 ; i < handCon.numChildren;i++) {
+
+            var card = <CardView>handCon.getChildAt(i);
+
+            if (card.index > -1) {
+
+                card.touchEnabled = false;
+                card.enabled = boo;
+            }
+        }
+
+    }
+
+
 
     //刷新手牌大小
     updateHandViewSize(){

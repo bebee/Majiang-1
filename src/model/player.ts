@@ -55,6 +55,15 @@ class Player
      */
     public zong:number;
 
+    /**
+     * 实名
+     */
+    public name:string;
+
+    /**
+     * 身份证
+     */
+    public id_no:string;
 
     /**
      * 绑定的上线玩家

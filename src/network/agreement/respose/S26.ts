@@ -30,9 +30,12 @@ class S26
                 if(!GameLayerManager.gameLayer().messagBox) GameLayerManager.gameLayer().messagBox = new MessageDialog();
                 GameLayerManager.gameLayer().messagBox.showMsg(function (r)
                 {
-                    var h:string = GameConfig.wei_href_address;
-                    if(GameConfig.roomid) h += "?roomid=" + GameConfig.roomid;
-                    location.href = h;
+                    if(r)
+                    {
+                        var h:string = GameConfig.wei_href_address;
+                        if(GameConfig.roomid) h += "?roomid=" + GameConfig.roomid;
+                        location.href = h;
+                    }
                 },"当前游戏版本过低，请刷新游戏！");
             }
         }

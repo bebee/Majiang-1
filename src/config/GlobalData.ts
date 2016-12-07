@@ -7,7 +7,7 @@ class GlobalData {
     /**
      * 版本号
      */
-    public resourceCode:string = "";
+    public resourceCode:string = "";  //0.2.0
 
     /**
      * 玩家信息
@@ -59,8 +59,7 @@ class GlobalData {
      */
     public gamewarmList:Array<string> =
     [
-        "代理咨询请联系微信：lyqp01 文明娱乐，禁止赌博。",
-        "亲爱的麻友们，【新手福利】【邀请福利】将于12月5日（周一）进行更新，新手奖励减少为4张，邀请奖励减少为2张！同时也期待这几天能让更多的麻友融入到这个大家庭！"
+        "代理咨询请联系微信：lyqp01；关注微信公众号【老友棋牌】，领取房卡奖励；文明娱乐，禁止赌博。",
     ];
 
     /**
@@ -90,7 +89,8 @@ class GlobalData {
         11:"未定义的code",
         12:"未定义的code",
         13:"您的房卡不够",
-        14:"记录已过期"
+        14:"记录已过期",
+        17:"您已经投过票了"
     };
 
     static instance: GlobalData;

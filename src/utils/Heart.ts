@@ -10,8 +10,6 @@ class Heart
 
     private loginTime:number = 0;
 
-    public dissolutionTime:number = 0;
-
     private static instance:Heart = null;
 
     public constructor()
@@ -64,19 +62,6 @@ class Heart
             }
 
             if(GlobalData.getInstance().hornList.length > 0) Global.showHorn(20, 0x40f8ff);
-
-
-            if(this.dissolutionTime > 0)
-            {
-                this.dissolutionTime --;
-
-                var diss:DissolutionDialog = StackManager.findDialog(DissolutionDialog, "DissolutionDialog");
-
-                if(diss && GameLayerManager.gameLayer().panelLayer.contains(diss))
-                {
-                    diss.onTimes(this.dissolutionTime);
-                }
-            }
         }
     }
 }

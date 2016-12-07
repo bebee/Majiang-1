@@ -31,7 +31,7 @@ class FuncSelectView extends egret.DisplayObjectContainer {
 
         this.icons = [];
 
-        var count: number = 7;
+        var count: number = GSConfig.funcSelectRes.length;
 
         for (var i: number = 0; i < count; i++) {
 

@@ -94,7 +94,12 @@ module mui
                     var tox:number = my.x + my.width * 0.025;
                     var toy:number = my.y + my.height * 0.025;
 
-                    egret.Tween.get(my).to({ scaleX:0.95, scaleY:0.95, x:tox, y:toy }, 50, egret.Ease.sineIn);
+                    my.scaleX = 0.95;
+                    my.scaleY = 0.95;
+
+                    my.x = tox;
+
+                    my.y = toy;
                     break;
                 case "touchEnd":
                     this.removeStage();
@@ -114,9 +119,10 @@ module mui
 
             if(!e || e.target != this)
             {
-                egret.Tween.get(this).to({ scaleX: 1, scaleY: 1, x: this.startX, y: this.startY}, 50);
-
-                //if(this.thisobj) this.thisobj["" + this.fun]();
+                this.scaleX = 1;
+                this.scaleY = 1;
+                this.x = this.startX;
+                this.y = this.startY;
             }
         }
 

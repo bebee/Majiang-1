@@ -114,7 +114,7 @@ class MessageDialog extends BaseDialog
     {
         super.hide(1);
 
-        this.cb(false);
+        if(this.cb) this.cb(false);
     }
 
 
