@@ -107,7 +107,7 @@ class GSController extends egret.EventDispatcher{
                 this.gsResultView.visible = false;
 
                 this.scene.waitText.visible = true;
-                this.scene.waitText.text = "等待其他玩家，请稍后...";
+                this.scene.waitText.text = "等待其他玩家，请稍候...";
                 this.scene.startButton.visible = false;
                 this.scene.inviteButton.visible = false;
                 this.scene.ruleText.visible = true;
@@ -138,7 +138,7 @@ class GSController extends egret.EventDispatcher{
 
 
                 this.scene.waitText.visible = true;
-                this.scene.waitText.text = "等待其他玩家，请稍后...";
+                this.scene.waitText.text = "等待其他玩家，请稍候...";
                 this.scene.startButton.visible = false;
                 this.scene.inviteButton.visible = false;
                 this.scene.ruleText.visible = true;
@@ -339,7 +339,7 @@ class GSController extends egret.EventDispatcher{
                 } else {
                     this.scene.inviteButton.visible = false;
                     this.scene.waitText.visible = true;
-                    this.scene.waitText.text = "等待其他玩家，请稍后...";
+                    this.scene.waitText.text = "等待其他玩家，请稍候...";
 
                 }
 
@@ -357,11 +357,11 @@ class GSController extends egret.EventDispatcher{
 
                 if (allOnline) {//都准备好
 
-                    this.scene.waitText.text = "等待房主开始游戏，请稍后...";
+                    this.scene.waitText.text = "等待房主开始游戏，请稍候...";
 
                 }else{
 
-                    this.scene.waitText.text = "等待其他玩家，请稍后...";
+                    this.scene.waitText.text = "等待其他玩家，请稍候...";
 
                 }
             }
@@ -404,7 +404,14 @@ class GSController extends egret.EventDispatcher{
 
         this.updateRebackPais();
 
-        this.showFuncSelectMenu();
+        //this.showFuncSelectMenu();
+
+        //缓存的显示刷新
+        while(GSData.i.rebackViewFuncs.length){
+
+            GSData.i.rebackViewFuncs.shift().call(this);
+
+        }
 
         if(GSData.i.backTing){
 
@@ -413,6 +420,12 @@ class GSController extends egret.EventDispatcher{
 
             PublicVal.state = -4;
 
+            if(GSConfig.handLens[PublicVal.i.getHandPais(1).length]){
+
+                //自动出牌
+                this.delayAutoPushPai();
+
+            }
         }
     }
 
@@ -539,9 +552,7 @@ class GSController extends egret.EventDispatcher{
 
             if(PublicVal.state == -4){//听牌状态
 
-                cardView.unactivate();
-                //延时打尾牌
-                this.delayPushInterval = egret.setTimeout(this.delayPushPai,this,800);
+                this.delayAutoPushPai();
             }
 
         }else{
@@ -555,12 +566,17 @@ class GSController extends egret.EventDispatcher{
         }
 
     }
-    //延时打牌
-    delayPushPai(){
+    //延时自动打牌
+    delayAutoPushPai(){
 
-        var catchPai = GSData.i.getCatchPai(1);
+        this.delayPushInterval = egret.setTimeout(_=>{
 
-        SocketManager.getInstance().getGameConn().send(4, {"args":catchPai});
+            var catchPai = GSData.i.getCatchPai(1);
+
+            SocketManager.getInstance().getGameConn().send(4, {"args":catchPai});
+
+        },this,800);
+
     }
 
     clearDelayPushInterval(){
@@ -804,7 +820,7 @@ class GSController extends egret.EventDispatcher{
 
             }else if(!GSData.i.gang_end && GSData.i.zhuangDir == 1) {//开局轮杠中
 
-                EffectUtils.showTips("等待其他玩家杠牌，请稍后...", 5);
+                EffectUtils.showTips("等待其他玩家杠牌，请稍候...", 5);
 
             }
             /*else{
@@ -896,7 +912,7 @@ class GSController extends egret.EventDispatcher{
     //显示吃碰杠功能菜单
     showFuncSelectMenu(tip:boolean = true) {
 
-        if(GSData.i.roundStartHasFunction && PublicVal.state == 3) {
+        if(PublicVal.state == 3 && GSData.i.funcSelects.length > 0) {
 
             this.moveBack(false);
 
@@ -921,7 +937,7 @@ class GSController extends egret.EventDispatcher{
 
     hideFuncSelectMenu(){
 
-        GSData.i.roundStartHasFunction = false;
+        //GSData.i.roundStartHasFunction = false;
 
         this.gsView.funcSelectView.visible = false;
 
@@ -1296,7 +1312,7 @@ class GSController extends egret.EventDispatcher{
         }
         GSData.i.funcSelects = [{index: 0, action: 0, pai: null}];
 
-        GSData.i.roundStartHasFunction = true;
+        //GSData.i.roundStartHasFunction = true;
 
         this.showFuncSelectMenu(false);
 
@@ -1364,6 +1380,7 @@ class GSController extends egret.EventDispatcher{
             if (card.index > -1) {
 
                 card.touchEnabled = false;
+
                 card.enabled = boo;
             }
         }

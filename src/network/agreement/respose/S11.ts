@@ -24,9 +24,9 @@ class S11 {
                     break;
                 case 200:
                     //抓牌
-                    GSDataProxy.i.S2C_OwnCatch(obj.data.pai[0], obj.data.dui_num, obj.data.hasOwnProperty("fen"));
                     GameDispatcher.ins.dispatchEvent(EventType.Trigger_Play_Tips);
                     GameDispatcher.ins.dispatchEvent(EventType.Trigger_Prompt, false);
+                    GSDataProxy.i.S2C_OwnCatch(obj.data.pai[0], obj.data.dui_num, obj.data.hasOwnProperty("fen"));
                     break;
                 case 300:
                     GSDataProxy.i.S2C_Bao(obj.data);

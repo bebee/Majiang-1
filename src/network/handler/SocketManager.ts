@@ -115,7 +115,10 @@ class SocketHandler {
     }
     
     onConnect(){
-        this.socket.connect(this.ip, this.port);
+        //this.socket.connect(this.ip, this.port);
+
+        this.socket.connectByUrl("wss://"+this.ip+":"+this.port);
+
         this.status = 1;
         console.log("请求链接！" + this.type);
     }

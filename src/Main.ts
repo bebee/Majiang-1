@@ -45,7 +45,7 @@ class Main extends eui.UILayer {
         }
 
 
-        HttpHandler.sendMsgCallBack("http://"+GameConfig.address_center.ip+":"+GameConfig.address_center.port+"/", "action=serverlist", function (obj)
+        HttpHandler.sendMsgCallBack("https://"+GameConfig.address_center.ip+":"+GameConfig.address_center.port+"/", "action=serverlist", function (obj)
         {
             var addrr = obj.addrr;
             var auth_port = obj.auth_port;

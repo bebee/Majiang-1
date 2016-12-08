@@ -9,7 +9,7 @@ class CreateDialog extends BaseDialog
         5:{x:467, y:231},
         6:{x:627, y:231},
         7:{x:307, y:278},
-        8:{x:627, y:187}
+        8:{x:467, y:278}
     };
 
     private _xy:any = {
@@ -55,7 +55,7 @@ class CreateDialog extends BaseDialog
             ck.name = "" + i;
             ck.x = this.checkBoxSize[i]["x"];
             ck.y = this.checkBoxSize[i]["y"];
-            if(i == 3) ck.visible = false;
+            //if(i == 3) ck.visible = false;
             var lab:eui.Label = this.m_UI["_tg" + i];
 
             if(i <= 3)

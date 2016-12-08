@@ -65,11 +65,6 @@ class FashionTools{
     }
 
 
-
-
-
-
-
     /*
         格式化规则文字
      */

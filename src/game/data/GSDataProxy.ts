@@ -201,6 +201,8 @@ class GSDataProxy {
 
                     shou.push(startPai);
 
+                    this.gData.setCatchPai(1, startPai);
+
                 }else{
 
                     FashionTools.sortPai(shou);
@@ -224,7 +226,11 @@ class GSDataProxy {
     //删除手牌
     S2C_DeletePai(pos: number, pai: any) {
         var dir = this.gData.getDir(pos);
-        this.gData.removeHandPai(dir, pai);
+        //this.gData.removeHandPai(dir, pai);
+        PublicVal.i.removeHandPai(dir,pai);
+
+        if(dir == 1) FashionTools.sortPai(PublicVal.i.getHandPais(dir));
+
         GSController.i.updateMJView(dir);
     }
 
@@ -356,9 +362,19 @@ class GSDataProxy {
 
         }
 
-        GSData.i.roundStartHasFunction = true;
+        //断线重连上来的情况
+        if(this.gData.rebackData){
 
-        GSController.i.showFuncSelectMenu();
+            this.gData.rebackViewFuncs.push(GSController.i.showFuncSelectMenu);
+        }else{
+
+            GSController.i.showFuncSelectMenu();
+        }
+
+
+        //GSData.i.roundStartHasFunction = true;
+
+        //GSController.i.showFuncSelectMenu();
 
         FashionTools.autoPass();
 
@@ -434,7 +450,6 @@ class GSDataProxy {
 
     //更新结果 cur是当前分数
     S2C_FuncResult(action, pai, pos,cur = null) {
-
         this.gData.isShowFunc = false;
 
         var dir = this.gData.getDir(pos);
@@ -664,7 +679,14 @@ class GSDataProxy {
         //添加池牌数据
         PublicVal.i.pushPoolPai(dir,this.gData.currPoolPai);
         //清除手牌数据
-        this.gData.removeHandPai(dir, this.gData.currPoolPai);
+        if(dir == 1){
+
+            PublicVal.i.removeHandPai(dir, this.gData.currPoolPai);
+
+        }else{
+
+            PublicVal.i.removeHandPai(dir, null);
+        }
 
         console.log("出牌人的方位:", dir);
         //触发出牌显示
@@ -841,7 +863,10 @@ class GSDataProxy {
     //同步房间玩家信息,判断方位
     S2C_RoomPlayers(rules:number[],infos:any[]){
 
-        if(PublicVal.i.rules == "") {
+
+        if(rules) {
+            //听牌局
+            if(rules.indexOf(3) > - 1) GSData.i.hasTingRule = true;
 
             PublicVal.i.rules = FashionTools.formatRules(rules);
 

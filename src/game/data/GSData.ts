@@ -83,6 +83,10 @@ class GSData{
     //重连上来的状态
     rebackStatus:number = 0;
 
+    //重连的开始功能缓存执行显示
+    rebackViewFuncs:any[] = [];
+
+
     //庄家是否出过牌
     isZhuangPush:boolean;
 
@@ -96,7 +100,7 @@ class GSData{
     firstInRoom:boolean;
 
     //开局是否有功能菜单
-    roundStartHasFunction:boolean;
+    //roundStartHasFunction:boolean;
 
     //杠的分数
     gangCurs:number[];
@@ -118,6 +122,9 @@ class GSData{
 
     //听牌结束后摊牌亮牌
     tingEndShow:boolean;
+
+    //是否听牌局
+    hasTingRule:boolean;
 
     constructor(){
 
@@ -146,7 +153,7 @@ class GSData{
 
         this.lastZhuangPos = 0;
 
-        //this.rules = "";
+        this.hasTingRule = false;
 
     }
 
@@ -157,8 +164,6 @@ class GSData{
 
         this.roundReady = 0;
 
-
-        this.roundStartHasFunction = false;
 
         PublicVal.state = 2;
 
@@ -236,7 +241,7 @@ class GSData{
         handPais.length -= count;
     }
     //手牌移除
-    removeHandPai(dir:number,pai:any = null){
+    /*removeHandPai(dir:number,pai:any = null){
 
         var handPais = PublicVal.i.getHandPais(dir);
 
@@ -258,7 +263,7 @@ class GSData{
         }else{
             handPais.length --;
         }
-    }
+    }*/
 
 
     //删除自己多张手牌
@@ -309,9 +314,6 @@ class GSData{
         handPais.push(pai);
 
     }
-
-
-
 
 
     getSexByPos(pos:number){
