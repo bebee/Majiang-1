@@ -12,7 +12,7 @@ class QueView extends BaseSprite {
     public constructor() {
         super();
 
-        this.skinName = "MissingSelectSkin";
+        this.skinName = "QueViewSkin";
     }
 
     public childrenCreated() {
@@ -53,6 +53,8 @@ class QueView extends BaseSprite {
                 type = 3;
                 break;
         }
+
+        game.isQueBoo = false;
 
         SocketManager.getInstance().getGameConn().send(15, {
             "args": {

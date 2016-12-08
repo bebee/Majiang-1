@@ -18,12 +18,6 @@ class GameEvent {
     static ChangeThree: string = "ChangeThree";
 
     /**
-     * 换三张同步
-     * @type {string}
-     */
-    static ChangeThreeSys: string = "ChangeThreeSys";
-
-    /**
      * 换三张完成
      * @type {string}
      */
@@ -33,7 +27,7 @@ class GameEvent {
      * 订缺
      * @type {string}
      */
-    static CardMissComfirm: string = "CardMissComfirm";
+    static Que: string = "Que";
 
     /**
      * 麻将抬起
@@ -54,22 +48,34 @@ class GameEvent {
     static CardThrowTips: string = "CardThrowTips";
 
     /**
-     * 刮风
+     * 提示分数
      * @type {string}
      */
-    static Windy: string = "Windy";
+    static ScoreTips: string = "ScoreTips";
 
     /**
      * 下雨
      * @type {string}
      */
-    static Raining: string = "Raining";
+    static Xiayu: string = "Xiayu";
+
+    /**
+     * 刮风
+     * @type {string}
+     */
+    static Guafeng: string = "Guafeng";
 
     /**
      * 呼叫转移
      * @type {string}
      */
     static Hujiaozhuanyi: string = "Hujiaozhuanyi";
+
+    /**
+     * 一炮多响
+     * @type {string}
+     */
+    static Yipaoduoxiang: string = "Yipaoduoxiang";
 
     /**
      * 杠上开花

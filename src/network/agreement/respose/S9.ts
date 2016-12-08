@@ -51,6 +51,8 @@ class S9 {
             case 8://订缺
                 game.status = GameStatus.missing;
                 game.statusComplete = false;
+                game.isQueBoo = true;
+                game.manager.dispatchEvent(GameEvent.Que);
                 break;
             case 9://同步换三张
                 var dir: number = GSDataProxy.i.gData.getDir(obj.data.data);

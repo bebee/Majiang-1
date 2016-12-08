@@ -1,9 +1,9 @@
 /**
- * HuView
+ * HupaiquView
  * @Author Ace.c
  * @Create 2016-12-01 14:33
  */
-class HuView extends egret.DisplayObjectContainer {
+class HupaiquView extends egret.DisplayObjectContainer {
 
     private cardRules: any = {
         1: {1: {x: 15, y: 20}, 2: {x: 45, y: 20}, 3: {x: 15, y: 60}, 4: {x: 45, y: 60}},
@@ -44,7 +44,7 @@ class HuView extends egret.DisplayObjectContainer {
     public addCardView(pai:any) {
         if (!pai)return;
 
-        var card: CardView = CardView.create(this.dir, 4, {type: 1, number: 1})
+        var card: CardView = CardView.create(this.dir, 4, pai);
 
         switch (this.dir) {
             case 1:

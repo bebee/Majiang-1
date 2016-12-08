@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<e:Skin class="ChangeThreeSelectSkin" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" height="120">
+<e:Skin class="ChangeThreeViewSkin" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" height="120">
 	<e:Image source="img_bg" top="0" bottom="0" left="0" right="0"/>
 	<e:Group horizontalCenter="0" top="15" locked="true">
 		<e:Label text="选择3张" fontFamily="微软雅黑" size="22"/>

@@ -1,17 +1,18 @@
 /**
- * HujiaozhuanyiView
+ * YipaoduoxiangView
  * @Author Ace.c
  * @Create 2016-12-08 15:15
  */
-class HujiaozhuanyiView extends BaseSprite {
+class YipaoduoxiangView extends BaseSprite {
 
     private icon0: eui.Image;
     private icon1: eui.Image;
+    private icon2: eui.Image;
 
     public constructor() {
         super();
 
-        this.skinName = "HujiaozhuanyiViewSkin";
+        this.skinName = "YipaoduoxiangViewSkin";
     }
 
     public childrenCreated() {
@@ -22,6 +23,9 @@ class HujiaozhuanyiView extends BaseSprite {
 
         this.icon1.anchorOffsetX = this.icon1.width >> 1;
         this.icon1.anchorOffsetY = this.icon1.height >> 1;
+
+        this.icon2.anchorOffsetX = this.icon2.width >> 1;
+        this.icon2.anchorOffsetY = this.icon2.height >> 1;
 
         this.clean();
     }
@@ -56,15 +60,13 @@ class HujiaozhuanyiView extends BaseSprite {
                 break;
         }
 
-        target.alpha = 0;
+        target.scaleX = target.scaleY = 0.5;
         target.visible = true;
 
-        var tarX: number = target.x;
-        target.x -= 200;
-
         egret.Tween.get(target)
-            .to({x: target.x + 210, alpha: 1}, 150)
-            .to({x: tarX, alpha: 1}, 100)
+            .to({scaleX: 1.3, scaleY: 1.3}, 150)
+            .to({scaleX: 0.9, scaleY: 0.9}, 100)
+            .to({scaleX: 1.0, scaleY: 1.0}, 100)
             .wait(1000)
             .call(this.hide, this);
     }
@@ -91,8 +93,12 @@ class HujiaozhuanyiView extends BaseSprite {
         this.icon0.visible = false;
         egret.Tween.removeTweens(this.icon0);
         this.icon1.alpha = 1;
-        this.icon1.scaleX = this.icon1.scaleY = 1;
+        this.icon1.scaleX = this.icon0.scaleY = 1;
         this.icon1.visible = false;
         egret.Tween.removeTweens(this.icon1);
+        this.icon2.alpha = 1;
+        this.icon2.scaleX = this.icon2.scaleY = 1;
+        this.icon2.visible = false;
+        egret.Tween.removeTweens(this.icon2);
     }
 }

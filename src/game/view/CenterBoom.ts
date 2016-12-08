@@ -55,7 +55,7 @@ class CenterBoom extends egret.DisplayObjectContainer{
         right_bg.texture = GameRes.getUI("bg_001");
         right_bg.width *= 2;
         var right_text = new egret.TextField();
-        right_text.text = "圈";
+        right_text.text = "局";
         right_text.size = 22;
         right_text.x = 50;
         this.rightView.addChild(right_bg);

@@ -4,7 +4,7 @@
 //头像显示
 class GSHeadView extends egret.Sprite {
 
-    dir:DirType;
+    dir: DirType;
 
     constructor(dir: number) {
 
@@ -80,6 +80,15 @@ class GSHeadView extends egret.Sprite {
         this.waitView();
     }
 
+    setScore(score: number, showAnimation: boolean = false) {
+        // if (showAnimation) {
+        //     var diff: number = score - Number(this.numText.text);
+        //     game.manager.dispatchEvent(GameEvent.ScoreTips, [this.dir, score])
+        // }
+
+        this.numText.text = "" + score;
+    }
+
     //设置房主
     visibleRoomOwn(bool: boolean) {
         this.headIcon.visibleRoomOwn(bool);
@@ -92,7 +101,6 @@ class GSHeadView extends egret.Sprite {
 
     nullPlayer() {
         this.nameText.text = this.idText.text = "";
-
         this.headIcon.nullIcon();
     }
 

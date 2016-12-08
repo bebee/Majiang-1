@@ -237,7 +237,10 @@ class GSData{
     //删除其他人的手牌
     removeOtherHandPai(dir:number,count:number){
         var handPais = PublicVal.i.getHandPais(dir);
+        console.log("---------------------------------");
+        console.log(handPais.length);
         handPais.length -= count;
+        console.log(handPais.length);
     }
     //手牌移除
     /*removeHandPai(dir:number,pai:any = null){

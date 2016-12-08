@@ -258,9 +258,9 @@ class GSController extends egret.EventDispatcher {
     }
 
     //刷新杠的分数
-    updateGangCur() {
+    updateGangCur(showAnimation:boolean = false) {
         for (var i: number = 1; i <= 4; i++) {
-            this.gsView.headViews[i].numText.text = "" + GSData.i.gangCurs[i];
+            this.gsView.headViews[i].setScore(GSData.i.gangCurs[i], showAnimation);
         }
     }
 
@@ -365,7 +365,8 @@ class GSController extends egret.EventDispatcher {
 
 
         if (game.status == GameStatus.missing && !game.statusComplete) {
-            game.manager.dispatchEvent(GameEvent.CardMissComfirm);
+            game.isQueBoo = true;
+            game.manager.dispatchEvent(GameEvent.Que);
         }
 
         if (GSData.i.backTing) {
@@ -481,7 +482,10 @@ class GSController extends egret.EventDispatcher {
             this.playTimeEffect(true, true);
 
             if (PublicVal.state == StateType.ting) {//听牌状态
+                this.delayAutoPushPai();
+            }
 
+            if (game.isHuBoo) {//胡牌状态
                 this.delayAutoPushPai();
             }
 
@@ -899,7 +903,7 @@ class GSController extends egret.EventDispatcher {
 
     playEffect(dir: number, action: number) {
 
-        this.gsView.playFuncEffect(dir, action);
+        // this.gsView.playFuncEffect(dir, action);
 
     }
 

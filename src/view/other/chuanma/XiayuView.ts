@@ -1,16 +1,16 @@
 /**
- * WindyView
+ * XiayuView
  * @Author Ace.c
- * @Create 2016-12-08 15:15
+ * @Create 2016-12-08 15:16
  */
-class WindyView extends BaseSprite {
+class XiayuView extends BaseSprite {
 
     private icon: eui.Image;
 
     public constructor() {
         super();
 
-        this.skinName = "WindyViewSkin";
+        this.skinName = "XiayuViewSkin";
     }
 
     public childrenCreated() {

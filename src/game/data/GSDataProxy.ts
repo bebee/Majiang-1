@@ -101,6 +101,18 @@ class GSDataProxy {
             var wai = person.wai;
             var cur = person.cur;
 
+            var hu = person.hu;
+            if (hu && hu.length) {
+                var mjview: MJView = GSController.i.gsView.MJViews[dir];
+                for (var j: number = 0; j < hu.length; j++) {
+                    mjview.pushHu(hu[j]);
+                }
+
+                if (dir == 1) {
+                    game.isHuBoo = true;
+                }
+            }
+
             //确定缺门
             if (dir == 1) {
                 if (game.status == GameStatus.gamestart) {
@@ -177,7 +189,7 @@ class GSDataProxy {
 
                     this.gData.setCatchPai(1, startPai);
 
-                }else{
+                } else {
 
                     FashionTools.sortPai(shou);
                 }
@@ -370,7 +382,8 @@ class GSDataProxy {
         GSController.i.updateCenterInfo();
 
         GSController.i.gsView.updateRoom();
-        if(this.gData.turnDir == 1){
+
+        if (this.gData.turnDir == 1) {
             GSController.i.gsView.setQueState(false);
         }
     }
@@ -469,10 +482,10 @@ class GSDataProxy {
 
 
                 //number 判断是幺杠 还是九杠
-                if(pai[0].number == 1){//
+                if (pai[0].number == 1) {//
                     GameSound.PlaySound("yaogang_" + this.gData.getSexByPos(pos));
 
-                }else{
+                } else {
 
                     GameSound.PlaySound("jiugang_" + this.gData.getSexByPos(pos));
 
@@ -507,7 +520,7 @@ class GSDataProxy {
                 }
                 GameSound.PlaySound("sound_down");
 
-                game.manager.dispatchEvent(GameEvent.Raining, dir);//下雨特效
+                game.manager.dispatchEvent(GameEvent.Xiayu, dir);//下雨特效
                 break;
             case 25://明杠
                 /* 分两种
@@ -535,7 +548,7 @@ class GSDataProxy {
                 if (removeLen == 3) poolPai = tmpPai;
                 GameSound.PlaySound("sound_down");
 
-                game.manager.dispatchEvent(GameEvent.Windy, dir);//刮风特效
+                game.manager.dispatchEvent(GameEvent.Guafeng, dir);//刮风特效
                 break;
             case 26://中发白杠
 
@@ -601,6 +614,20 @@ class GSDataProxy {
                 }
                 GameSound.PlaySound("sound_down");
                 break;
+            case 99://胡牌
+                var mjview: MJView = GSController.i.gsView.MJViews[dir];
+                mjview.pushHu(pai);
+
+                if (dir == 1) {
+                    game.isHuBoo = true;
+                    //删除手牌数据 3
+                    if (this.gData.getDir(pai.pos) == 1) {
+                        this.gData.removeOwnHandPais([pai]);
+                    }
+                } else {
+                    this.gData.removeOtherHandPai(dir, 1);
+                }
+                break;
             default:
                 console.log("未解析的功能菜单", action);
                 break;
@@ -615,7 +642,7 @@ class GSDataProxy {
                 this.gData.gangCurs[this.gData.getDir(pos)] = cur[k];
             }
 
-            GSController.i.updateGangCur();
+            GSController.i.updateGangCur(true);
 
         }
 

@@ -16,6 +16,12 @@ class game {
     static ruleVo: GameRuleVo;
     //换三张
     static changeThreeVo: ChangeThreeVo;
+    //是否正在换牌中
+    static isChangeThreeBoo: boolean = false;
+    //是否正在订缺中
+    static isQueBoo: boolean = false;
+    //是否正在胡牌中
+    static isHuBoo: boolean = false;
 
     //当前状态
     static status: GameStatus = GameStatus.gamestart;
@@ -46,6 +52,7 @@ class game {
         this.statusComplete = false;
         this.allQue = {};
         this.que = CardType.unknow;
+        this.isHuBoo = false;
         game.manager.dispatchEvent(GameEvent.CleanAll);
     }
 

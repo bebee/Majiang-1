@@ -8,10 +8,11 @@ class GameEffectManager extends BaseManager {
     private changeThreeView: ChangeThreeView;
     private changeThreeAnimation: ChangeThreeAnimation;
     private queView: QueView;
-    private rainingView: RainingView;
-    private windyView: WindyView;
+    private xiayuView: XiayuView;
+    private guafengView: GuafengView;
     private gangshangkaihuaView: GangshangkaihuaView;
     private hujiaozhuanyiView: HujiaozhuanyiView;
+    private yipaoduoxiangView: YipaoduoxiangView;
 
     public constructor() {
         super();
@@ -24,23 +25,24 @@ class GameEffectManager extends BaseManager {
         this.changeThreeView = new ChangeThreeView();
         this.changeThreeAnimation = new ChangeThreeAnimation();
         this.queView = new QueView();
-        this.rainingView = new RainingView();
-        this.windyView = new WindyView();
+        this.xiayuView = new XiayuView();
+        this.guafengView = new GuafengView();
         this.hujiaozhuanyiView = new HujiaozhuanyiView();
         this.gangshangkaihuaView = new GangshangkaihuaView();
+        this.yipaoduoxiangView = new YipaoduoxiangView();
 
         this.gameManager.addEventListener(GameEvent.CleanAll, this.onCleanAll, this);
         this.gameManager.addEventListener(GameEvent.ChangeThree, this.onChangeThree, this);
-        this.gameManager.addEventListener(GameEvent.ChangeThreeSys, this.onChangeThreeSys, this);
         this.gameManager.addEventListener(GameEvent.ChangeThreeComplete, this.onChangeThreeComplete, this);
-        this.gameManager.addEventListener(GameEvent.CardMissComfirm, this.onCardMissComfirm, this);
+        this.gameManager.addEventListener(GameEvent.Que, this.onQue, this);
         this.gameManager.addEventListener(GameEvent.CardRaise, this.onCardRaise, this);
         this.gameManager.addEventListener(GameEvent.CardThrow, this.onCardThrow, this);
         this.gameManager.addEventListener(GameEvent.CardThrowTips, this.onCardThrowTips, this);
-        this.gameManager.addEventListener(GameEvent.Windy, this.onWindy, this);
-        this.gameManager.addEventListener(GameEvent.Raining, this.onRaining, this);
+        this.gameManager.addEventListener(GameEvent.Xiayu, this.onRaining, this);
+        this.gameManager.addEventListener(GameEvent.Guafeng, this.onWindy, this);
         this.gameManager.addEventListener(GameEvent.Hujiaozhuanyi, this.onHujiaozhuanyi, this);
         this.gameManager.addEventListener(GameEvent.Gangshangkaihua, this.onGangshangkaihua, this);
+        this.gameManager.addEventListener(GameEvent.Yipaoduoxiang, this.onYipaoduoxiang, this);
 
     }
 
@@ -48,16 +50,20 @@ class GameEffectManager extends BaseManager {
         this.gangshangkaihuaView.play(dir);
     }
 
-    private onHujiaozhuanyi(dir: DirType, dir_0: DirType) {
-        this.hujiaozhuanyiView.play(dir, dir_0);
+    private onYipaoduoxiang(dirs: DirType[]) {
+        this.yipaoduoxiangView.play(dirs);
+    }
+
+    private onHujiaozhuanyi(dirs: DirType[]) {
+        this.hujiaozhuanyiView.play(dirs);
     }
 
     private onRaining(dir: DirType) {
-        this.rainingView.play(dir);
+        this.xiayuView.play(dir);
     }
 
     private onWindy(dir: DirType) {
-        this.windyView.play(dir);
+        this.guafengView.play(dir);
     }
 
     private onCleanAll() {
@@ -76,9 +82,6 @@ class GameEffectManager extends BaseManager {
         this.onCardRaise(CardRaiseMode.changeThree);
     }
 
-    private onChangeThreeSys(dir: number) {
-    }
-
     private onChangeThreeComplete(type: ChangeThreeType) {
         this.changeThreeAnimation.setType(type);
         this.changeThreeAnimation.show();
@@ -93,8 +96,10 @@ class GameEffectManager extends BaseManager {
         }
     }
 
-    private onCardMissComfirm() {
-        this.queView.show();
+    private onQue() {
+        if (game.isChangeThreeBoo == false && game.isQueBoo) {
+            this.queView.show();
+        }
     }
 
     private onCardThrow(arr: any[]) {

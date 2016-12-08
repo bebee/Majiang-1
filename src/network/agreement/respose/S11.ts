@@ -26,6 +26,7 @@ class S11 {
                     GSDataProxy.i.S2C_Bao(obj.data);
                     break;
                 case 301://换三张
+                    game.isChangeThreeBoo = true;
                     game.manager.dispatchEvent(GameEvent.ChangeThreeComplete, obj.data.huan_type);
 
                     var pais: any = obj.data.pai;

@@ -8,7 +8,7 @@ class MJView extends eui.Component {
 
     handCon: egret.DisplayObjectContainer;
     poolCon: egret.DisplayObjectContainer;
-    huview: HuView;
+    huview: HupaiquView;
     stateImg: egret.Bitmap;
     //最后的添加的池牌
     lastPoolCard: CardView;
@@ -31,7 +31,7 @@ class MJView extends eui.Component {
         this.poolCon = new egret.DisplayObjectContainer;
         this.addChild(this.poolCon);
 
-        this.huview = new HuView(this.dir);
+        this.huview = new HupaiquView(this.dir);
         this.addChild(this.huview);
 
         // var _this = this;
@@ -171,6 +171,6 @@ class MJView extends eui.Component {
         this.lastPoolCard = null;
         this.removeAllHandCard();
         this.removeAllPoolCard();
-
+        this.huview.clean()
     }
 }

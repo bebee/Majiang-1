@@ -1,16 +1,16 @@
 /**
- * RainingView
+ * GuafengView
  * @Author Ace.c
- * @Create 2016-12-08 15:16
+ * @Create 2016-12-08 15:15
  */
-class RainingView extends BaseSprite {
+class GuafengView extends BaseSprite {
 
     private icon: eui.Image;
 
     public constructor() {
         super();
 
-        this.skinName = "RainingViewSkin";
+        this.skinName = "GuafengViewSkin";
     }
 
     public childrenCreated() {

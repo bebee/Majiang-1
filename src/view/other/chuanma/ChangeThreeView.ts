@@ -12,7 +12,7 @@ class ChangeThreeView extends BaseSprite {
 
     public constructor() {
         super();
-        this.skinName = "ChangeThreeSelectSkin";
+        this.skinName = "ChangeThreeViewSkin";
     }
 
     public childrenCreated() {

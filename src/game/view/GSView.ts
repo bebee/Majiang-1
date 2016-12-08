@@ -389,6 +389,7 @@ class GSView extends egret.Sprite {
             headView.idText.visible = true;
 
             headView.numText.visible = false;
+            headView.reset();
         }
     }
 
