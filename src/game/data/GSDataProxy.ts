@@ -174,7 +174,11 @@ class GSDataProxy {
                     var startPai = shou.pop();
                     FashionTools.sortPai(shou);
                     shou.push(startPai);
-                } else {
+
+                    this.gData.setCatchPai(1, startPai);
+
+                }else{
+
                     FashionTools.sortPai(shou);
                 }
                 this.gData.setHandPais(1, shou);
@@ -190,7 +194,11 @@ class GSDataProxy {
     //删除手牌
     S2C_DeletePai(pos: number, pai: any) {
         var dir = this.gData.getDir(pos);
-        this.gData.removeHandPai(dir, pai);
+        //this.gData.removeHandPai(dir, pai);
+        PublicVal.i.removeHandPai(dir,pai);
+
+        if(dir == 1) FashionTools.sortPai(PublicVal.i.getHandPais(dir));
+
         GSController.i.updateMJView(dir);
     }
 
@@ -320,9 +328,19 @@ class GSDataProxy {
 
         }
 
-        GSData.i.roundStartHasFunction = true;
+        //断线重连上来的情况
+        if(this.gData.rebackData){
 
-        GSController.i.showFuncSelectMenu();
+            this.gData.rebackViewFuncs.push(GSController.i.showFuncSelectMenu);
+        }else{
+
+            GSController.i.showFuncSelectMenu();
+        }
+
+
+        //GSData.i.roundStartHasFunction = true;
+
+        //GSController.i.showFuncSelectMenu();
 
         FashionTools.autoPass();
 
@@ -488,6 +506,8 @@ class GSDataProxy {
                     this.gData.removeOtherHandPai(dir, 4);
                 }
                 GameSound.PlaySound("sound_down");
+
+                game.manager.dispatchEvent(GameEvent.Raining, dir);//下雨特效
                 break;
             case 25://明杠
                 /* 分两种
@@ -514,6 +534,8 @@ class GSDataProxy {
                 }
                 if (removeLen == 3) poolPai = tmpPai;
                 GameSound.PlaySound("sound_down");
+
+                game.manager.dispatchEvent(GameEvent.Windy, dir);//刮风特效
                 break;
             case 26://中发白杠
 
@@ -631,7 +653,14 @@ class GSDataProxy {
         //添加池牌数据
         PublicVal.i.pushPoolPai(dir,this.gData.currPoolPai);
         //清除手牌数据
-        this.gData.removeHandPai(dir, this.gData.currPoolPai);
+        if(dir == 1){
+
+            PublicVal.i.removeHandPai(dir, this.gData.currPoolPai);
+
+        }else{
+
+            PublicVal.i.removeHandPai(dir, null);
+        }
 
         console.log("出牌人的方位:", dir);
         //触发出牌显示
@@ -811,7 +840,10 @@ class GSDataProxy {
     //同步房间玩家信息,判断方位
     S2C_RoomPlayers(rules: number[], infos: any[]) {
 
-        if (PublicVal.i.rules == "") {
+
+        if(rules) {
+            //听牌局
+            if(rules.indexOf(3) > - 1) GSData.i.hasTingRule = true;
 
             PublicVal.i.rules = FashionTools.formatRules(rules);
 

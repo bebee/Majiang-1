@@ -5,10 +5,13 @@
  */
 class GameEffectManager extends BaseManager {
 
-    private changeThreeSelect: ChangeThreeSelect;
+    private changeThreeView: ChangeThreeView;
     private changeThreeAnimation: ChangeThreeAnimation;
-
-    private missingSelect: MissingSelect;
+    private queView: QueView;
+    private rainingView: RainingView;
+    private windyView: WindyView;
+    private gangshangkaihuaView: GangshangkaihuaView;
+    private hujiaozhuanyiView: HujiaozhuanyiView;
 
     public constructor() {
         super();
@@ -18,10 +21,13 @@ class GameEffectManager extends BaseManager {
     init() {
         super.init();
 
-        this.changeThreeSelect = new ChangeThreeSelect();
+        this.changeThreeView = new ChangeThreeView();
         this.changeThreeAnimation = new ChangeThreeAnimation();
-
-        this.missingSelect = new MissingSelect();
+        this.queView = new QueView();
+        this.rainingView = new RainingView();
+        this.windyView = new WindyView();
+        this.hujiaozhuanyiView = new HujiaozhuanyiView();
+        this.gangshangkaihuaView = new GangshangkaihuaView();
 
         this.gameManager.addEventListener(GameEvent.CleanAll, this.onCleanAll, this);
         this.gameManager.addEventListener(GameEvent.ChangeThree, this.onChangeThree, this);
@@ -31,14 +37,34 @@ class GameEffectManager extends BaseManager {
         this.gameManager.addEventListener(GameEvent.CardRaise, this.onCardRaise, this);
         this.gameManager.addEventListener(GameEvent.CardThrow, this.onCardThrow, this);
         this.gameManager.addEventListener(GameEvent.CardThrowTips, this.onCardThrowTips, this);
+        this.gameManager.addEventListener(GameEvent.Windy, this.onWindy, this);
+        this.gameManager.addEventListener(GameEvent.Raining, this.onRaining, this);
+        this.gameManager.addEventListener(GameEvent.Hujiaozhuanyi, this.onHujiaozhuanyi, this);
+        this.gameManager.addEventListener(GameEvent.Gangshangkaihua, this.onGangshangkaihua, this);
 
     }
 
+    private onGangshangkaihua(dir: DirType) {
+        this.gangshangkaihuaView.play(dir);
+    }
+
+    private onHujiaozhuanyi(dir: DirType, dir_0: DirType) {
+        this.hujiaozhuanyiView.play(dir, dir_0);
+    }
+
+    private onRaining(dir: DirType) {
+        this.rainingView.play(dir);
+    }
+
+    private onWindy(dir: DirType) {
+        this.windyView.play(dir);
+    }
+
     private onCleanAll() {
-        this.changeThreeSelect.hide();
+        this.changeThreeView.hide();
         this.changeThreeAnimation.hide();
 
-        this.missingSelect.hide();
+        this.queView.hide();
 
         GSController.i.gsView.updateState();
     }
@@ -46,7 +72,7 @@ class GameEffectManager extends BaseManager {
     private onChangeThree() {
         GSController.i.gsView.updateState();
 
-        this.changeThreeSelect.show();
+        this.changeThreeView.show();
         this.onCardRaise(CardRaiseMode.changeThree);
     }
 
@@ -68,7 +94,7 @@ class GameEffectManager extends BaseManager {
     }
 
     private onCardMissComfirm() {
-        this.missingSelect.show();
+        this.queView.show();
     }
 
     private onCardThrow(arr: any[]) {

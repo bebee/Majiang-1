@@ -9,7 +9,7 @@
 			"name":"login"
 		},
 		{
-			"keys":"sound_open_btn,sound_close_btn,setting_txt,setting_progressbar_bg,setting_progressbar1,setting_line,setting_huawen,radio_btn,rule_txt,rule_img,num_bgimg,joinpassword_txt,joingame_txt,clickeff_of_btn,clickeff_btn,start_btn,select_right,select_left,select_center,room_btn,random_img,create_xz1,create_xz0,create_qd,create_password_bg,create_kspj,create_btn_img,create_btn,check_on_btn,check_off_btn,ting_icon2,ting_icon1,sptWin,sptFangPao,match_pic_pop,match_pic_jian,img_pjjs,game_zhuang,game_weixin_button,game_talk,game_start_button,game_siri,game_show_kuang,game_ready,game_mark,game_logo,game_jiesan_button,game_invite_button,game_hl_time,game_head_room,game_head_null,game_head_lixian,game_head_dirBG,game_hanbao_BG,game_gang_bg,game_fight,game_buttons_bg,game_button_setting,game_button_quit,game_bg_time,game_baopai,game_bao_bg,card_jiangli2,card_jiangli1,card_cha,bg_002,bg_001,JS_win_bg,JS_win,JS_share_button,JS_lose_bg,JS_lose,JS_liuju,JS_hulogo,JS_fangpao,JS_dot,JS_continue_button,JS_close,Z_43,Z_42,Z_41,Z_39,Z_38,Z_37,Z_36,Z_35,Z_34,Z_33,Z_32,Z_31,Z_29,Z_28,Z_27,Z_26,Z_25,Z_24,Z_23,Z_22,Z_21,Z_19,Z_18,Z_17,Z_16,Z_15,Z_14,Z_13,Z_12,Z_11,M_33,M_32,M_31,M_23,M_22,M_21,M_13,M_12,M_11,F_ting,F_peng,F_hu,F_guo,F_gang,F_chi,F_cheng,F_budan,diss_title,diss_dui,diss_cuo,record_txt,record_img2,record_img1,yellow_game_btn,voice_icon,shop_icon,shop_dialog_head_img,share_img,set_icon,rule_icon,red_game_btn,panel_1,notice_bg,msg_title,money_icon,money_bg,lymj_text,lymj_bg,lashen_15,img_line,horn_icon,horn_bg,head_kuang_bg,head_bg,head_001,dialog_head_img,dialog_bg,close_btn,card_add,btn_red,btn_green,btn_cheng,btn_blue,blue_game_btn,game_bg,bind_img,shop_txt,activit_jian,rule,agreement,card_0,card_1,card_2,card_3,card_4,card_5,card_6,card_7,card_8,card_9,time_0,time_1,time_10,time_11,time_12,time_13,time_14,time_15,time_16,time_2,time_3,time_4,time_5,time_6,time_7,time_8,time_9,img_bg,img_change_1,img_change_2_l,img_change_2_r,img_dq_1,img_dq_2,img_dq_3,img_txt_dingquezhong,img_txt_huanpaizhong,img_txt_queding,img_txt_tonghuase,img_txt_xuanpaizhong,card_0_btn,card_1_btn,btn_shiming,chat_btn_ba,chat_btn_bl,chat_btn_ca,chat_btn_cl,idcard_title,N_11,N_12,N_13,N_21,N_22,N_23,N_31,N_32,N_33,card_jd_btn,card_sh_btn,expression1.1,expression1.2,expression10.1,expression10.2,expression11.1,expression11.2,expression12.1,expression12.2,expression13.1,expression13.2,expression14.1,expression14.2,expression15.1,expression15.2,expression16.1,expression16.2,expression17.1,expression17.2,expression18.1,expression18.2,expression19.1,expression19.2,expression2.1,expression2.2,expression20.1,expression20.2,expression3.1,expression3.2,expression4.1,expression4.2,expression5.1,expression5.2,expression6.1,expression6.2,expression7.1,expression7.2,expression8.1,expression8.2,expression9.1,expression9.2,RP_xin1,RP_xin2,RP_xin3,RP_xin4,RP_xin5,MJNUM_01,game_create,card_style_blue,card_style_green",
+			"keys":"sound_open_btn,sound_close_btn,setting_txt,setting_progressbar_bg,setting_progressbar1,setting_line,setting_huawen,radio_btn,rule_txt,rule_img,num_bgimg,joinpassword_txt,joingame_txt,clickeff_of_btn,clickeff_btn,start_btn,select_right,select_left,select_center,room_btn,random_img,create_xz1,create_xz0,create_qd,create_password_bg,create_kspj,create_btn_img,create_btn,check_on_btn,check_off_btn,ting_icon2,ting_icon1,sptWin,sptFangPao,match_pic_pop,match_pic_jian,img_pjjs,game_zhuang,game_weixin_button,game_talk,game_start_button,game_siri,game_show_kuang,game_ready,game_mark,game_logo,game_jiesan_button,game_invite_button,game_hl_time,game_head_room,game_head_null,game_head_lixian,game_head_dirBG,game_hanbao_BG,game_gang_bg,game_fight,game_buttons_bg,game_button_setting,game_button_quit,game_bg_time,game_baopai,game_bao_bg,card_jiangli2,card_jiangli1,card_cha,bg_002,bg_001,JS_win_bg,JS_win,JS_share_button,JS_lose_bg,JS_lose,JS_liuju,JS_hulogo,JS_fangpao,JS_dot,JS_continue_button,JS_close,Z_43,Z_42,Z_41,Z_39,Z_38,Z_37,Z_36,Z_35,Z_34,Z_33,Z_32,Z_31,Z_29,Z_28,Z_27,Z_26,Z_25,Z_24,Z_23,Z_22,Z_21,Z_19,Z_18,Z_17,Z_16,Z_15,Z_14,Z_13,Z_12,Z_11,M_33,M_32,M_31,M_23,M_22,M_21,M_13,M_12,M_11,F_ting,F_peng,F_hu,F_guo,F_gang,F_chi,F_cheng,F_budan,diss_title,diss_dui,diss_cuo,record_txt,record_img2,record_img1,yellow_game_btn,voice_icon,shop_icon,shop_dialog_head_img,share_img,set_icon,rule_icon,red_game_btn,panel_1,notice_bg,msg_title,money_icon,money_bg,lymj_text,lymj_bg,lashen_15,img_line,horn_icon,horn_bg,head_kuang_bg,head_bg,head_001,dialog_head_img,dialog_bg,close_btn,card_add,btn_red,btn_green,btn_cheng,btn_blue,blue_game_btn,game_bg,bind_img,shop_txt,activit_jian,rule,agreement,card_0,card_1,card_2,card_3,card_4,card_5,card_6,card_7,card_8,card_9,time_0,time_1,time_10,time_11,time_12,time_13,time_14,time_15,time_16,time_2,time_3,time_4,time_5,time_6,time_7,time_8,time_9,img_bg,img_change_1,img_change_2_l,img_change_2_r,img_dq_1,img_dq_2,img_dq_3,img_txt_dingquezhong,img_txt_huanpaizhong,img_txt_queding,img_txt_tonghuase,img_txt_xuanpaizhong,card_0_btn,card_1_btn,btn_shiming,chat_btn_ba,chat_btn_bl,chat_btn_ca,chat_btn_cl,idcard_title,N_11,N_12,N_13,N_21,N_22,N_23,N_31,N_32,N_33,card_jd_btn,card_sh_btn,expression1.1,expression1.2,expression10.1,expression10.2,expression11.1,expression11.2,expression12.1,expression12.2,expression13.1,expression13.2,expression14.1,expression14.2,expression15.1,expression15.2,expression16.1,expression16.2,expression17.1,expression17.2,expression18.1,expression18.2,expression19.1,expression19.2,expression2.1,expression2.2,expression20.1,expression20.2,expression3.1,expression3.2,expression4.1,expression4.2,expression5.1,expression5.2,expression6.1,expression6.2,expression7.1,expression7.2,expression8.1,expression8.2,expression9.1,expression9.2,RP_xin1,RP_xin2,RP_xin3,RP_xin4,RP_xin5,MJNUM_01,game_create,card_style_blue,card_style_green,room_xiayu,room_gangshangkaihua,room_guafeng,room_hujiaozhuanyi_0,room_hujiaozhuanyi_1",
 			"name":"game"
 		},
 		{
@@ -2133,6 +2133,31 @@
 			"name":"MJNUM_01",
 			"type":"font",
 			"url":"assets/text/MJNUM_01.fnt"
+		},
+		{
+			"name":"room_xiayu",
+			"type":"image",
+			"url":"assets/game/room/room_xiayu.png"
+		},
+		{
+			"name":"room_gangshangkaihua",
+			"type":"image",
+			"url":"assets/game/room/room_gangshangkaihua.png"
+		},
+		{
+			"name":"room_guafeng",
+			"type":"image",
+			"url":"assets/game/room/room_guafeng.png"
+		},
+		{
+			"name":"room_hujiaozhuanyi_0",
+			"type":"image",
+			"url":"assets/game/room/room_hujiaozhuanyi_0.png"
+		},
+		{
+			"name":"room_hujiaozhuanyi_1",
+			"type":"image",
+			"url":"assets/game/room/room_hujiaozhuanyi_1.png"
 		}
 	]
 }

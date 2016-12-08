@@ -152,6 +152,8 @@ class TouchBehaviour implements IGameTapEvent {
             //清理回合数据
             PublicVal.state = StateType.over;
 
+            game.prestart();
+
             GSController.i.showStateView();
 
             GSController.i.showTitleView(GSController.i.jiesuanData);

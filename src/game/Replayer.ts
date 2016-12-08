@@ -396,7 +396,6 @@ class Replayer implements IUpdate{
 
         PublicVal.i.pushPoolPai(dir,pai);
 
-        FashionTools.sortPai(PublicVal.i.getHandPais(dir));
 
         GSController.i.updateMJView(dir);
 
@@ -411,7 +410,7 @@ class Replayer implements IUpdate{
         var pai = action.pai;
         var dir = this.returnDir(pos);
 
-        PublicVal.i.addHandPai(dir,pai);
+        PublicVal.i.addHandPai(dir,pai,false);
 
         GSController.i.updateMJView(dir);
 
@@ -459,13 +458,12 @@ class Replayer implements IUpdate{
 
             case 1:
 
-                PublicVal.i.removeHandPai(dir,pais[0]);
+                PublicVal.i.removeHandPai(dir,pais[0],false);
                 PublicVal.i.removeHandPai(dir,pais[2]);
                 PublicVal.i.popPoolPai(fromDir);
 
                 PublicVal.i.addFuncPai(5, dir, funcID, pais);
 
-                FashionTools.sortPai(PublicVal.i.getHandPais(dir));
 
                 GSController.i.updateMJView(dir);
 
@@ -475,13 +473,11 @@ class Replayer implements IUpdate{
                 break;
 
             case 2:
-                PublicVal.i.removeHandPai(dir,pais[0]);
+                PublicVal.i.removeHandPai(dir,pais[0],false);
                 PublicVal.i.removeHandPai(dir,pais[2]);
                 PublicVal.i.popPoolPai(fromDir);
 
                 PublicVal.i.addFuncPai(4, dir, funcID, pais);
-
-                FashionTools.sortPai(PublicVal.i.getHandPais(dir));
 
                 GSController.i.updateMJView(dir);
                 GSController.i.updatePoolPaiView(fromDir);
@@ -491,26 +487,23 @@ class Replayer implements IUpdate{
 
                 break;
             case 22:
-                PublicVal.i.removeHandPai(dir,pais[0]);
-                PublicVal.i.removeHandPai(dir,pais[1]);
+                PublicVal.i.removeHandPai(dir,pais[0],false);
+                PublicVal.i.removeHandPai(dir,pais[1],false);
                 PublicVal.i.removeHandPai(dir,pais[2]);
                 PublicVal.i.addFuncPai(3, dir, funcID, pais, pais[0].number, true);
 
-                FashionTools.sortPai(PublicVal.i.getHandPais(dir));
                 GSController.i.updateMJView(dir);
 
                 this.playFuncEffect(dir,funcID);
 
                 break;
             case 24://暗杠
-                PublicVal.i.removeHandPai(dir,pais[0]);
-                PublicVal.i.removeHandPai(dir,pais[1]);
-                PublicVal.i.removeHandPai(dir,pais[2]);
+                PublicVal.i.removeHandPai(dir,pais[0],false);
+                PublicVal.i.removeHandPai(dir,pais[1],false);
+                PublicVal.i.removeHandPai(dir,pais[2],false);
                 PublicVal.i.removeHandPai(dir,pais[3]);
                 PublicVal.i.addFuncPai(1, dir, funcID, pais);
 
-
-                FashionTools.sortPai(PublicVal.i.getHandPais(dir));
                 GSController.i.updateMJView(dir);
 
                 this.playFuncEffect(dir,funcID);
@@ -526,14 +519,13 @@ class Replayer implements IUpdate{
                 }else{
 
                     PublicVal.i.popPoolPai(fromDir);
-                    PublicVal.i.removeHandPai(dir,pai0);
-                    PublicVal.i.removeHandPai(dir,pai0);
+                    PublicVal.i.removeHandPai(dir,pai0,false);
+                    PublicVal.i.removeHandPai(dir,pai0,false);
                     PublicVal.i.removeHandPai(dir,pai0);
 
                 }
                 PublicVal.i.addFuncPai(2, dir, funcID, pais);
 
-                FashionTools.sortPai(PublicVal.i.getHandPais(dir));
                 GSController.i.updateMJView(dir);
                 GSController.i.updatePoolPaiView(fromDir);
 
@@ -542,12 +534,11 @@ class Replayer implements IUpdate{
                 break;
             case 26://中发白杠
 
-                PublicVal.i.removeHandPai(dir,pais[0]);
-                PublicVal.i.removeHandPai(dir,pais[1]);
+                PublicVal.i.removeHandPai(dir,pais[0],false);
+                PublicVal.i.removeHandPai(dir,pais[1],false);
                 PublicVal.i.removeHandPai(dir,pais[2]);
                 PublicVal.i.addFuncPai(0, dir, funcID, pais, 0, true);
 
-                FashionTools.sortPai(PublicVal.i.getHandPais(dir));
                 GSController.i.updateMJView(dir);
 
                 this.playFuncEffect(dir,funcID);
@@ -573,8 +564,6 @@ class Replayer implements IUpdate{
 
                 PublicVal.i.removeHandPai(dir,sPais[0]);
 
-
-                FashionTools.sortPai(PublicVal.i.getHandPais(dir));
                 GSController.i.updateMJView(dir);
 
                 this.playFuncEffect(dir,funcID);
@@ -597,7 +586,6 @@ class Replayer implements IUpdate{
 
                 PublicVal.i.removeHandPai(dir,sPais[0]);
 
-                FashionTools.sortPai(PublicVal.i.getHandPais(dir));
                 GSController.i.updateMJView(dir);
 
                 this.playFuncEffect(dir,funcID);
@@ -611,7 +599,7 @@ class Replayer implements IUpdate{
 
             case 99:
                 if(from){//点炮
-                    PublicVal.i.addHandPai(dir,pai);
+                    PublicVal.i.addHandPai(dir,pai,false);
 
                     PublicVal.i.popPoolPai(fromDir);
 

@@ -55,7 +55,7 @@ class S9 {
             case 9://同步换三张
                 var dir: number = GSDataProxy.i.gData.getDir(obj.data.data);
                 for (var i: number = 0; i < 3; i++) {
-                    GSDataProxy.i.gData.removeHandPai(dir);
+                    PublicVal.i.removeHandPai(dir);
                 }
                 GSController.i.updateMJView(dir, false, false);
                 break;

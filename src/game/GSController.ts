@@ -92,7 +92,7 @@ class GSController extends egret.EventDispatcher {
 
         switch (PublicVal.state) {
 
-            case 1://首次加入牌桌界面
+            case StateType.start://首次加入牌桌界面
 
                 this.visibleTwoFuncButton(true);
                 this.visibleFourFuncButton(false, false);
@@ -106,7 +106,7 @@ class GSController extends egret.EventDispatcher {
                 this.gsResultView.visible = false;
 
                 this.scene.waitText.visible = true;
-                this.scene.waitText.text = "等待其他玩家，请稍后...";
+                this.scene.waitText.text = "等待其他玩家，请稍候...";
                 this.scene.startButton.visible = false;
                 this.scene.inviteButton.visible = false;
                 this.scene.ruleText.visible = true;
@@ -132,7 +132,7 @@ class GSController extends egret.EventDispatcher {
                 this.gsResultView.visible = false;
 
                 this.scene.waitText.visible = true;
-                this.scene.waitText.text = "等待其他玩家，请稍后...";
+                this.scene.waitText.text = "等待其他玩家，请稍候...";
                 this.scene.startButton.visible = false;
                 this.scene.inviteButton.visible = false;
                 this.scene.ruleText.visible = true;
@@ -142,7 +142,7 @@ class GSController extends egret.EventDispatcher {
                 this.updateJiesanButtonText();
                 break;
             case StateType.gamestart://进入牌局界面
-            case -4:
+            case StateType.ting:
                 //进入牌局界面
                 this.gsView.visible = true;
                 this.scene.waitText.visible = false;
@@ -303,7 +303,7 @@ class GSController extends egret.EventDispatcher {
                 } else {
                     this.scene.inviteButton.visible = false;
                     this.scene.waitText.visible = true;
-                    this.scene.waitText.text = "等待其他玩家，请稍后...";
+                    this.scene.waitText.text = "等待其他玩家，请稍候...";
                 }
 
                 if (allOnline) {//都准备好
@@ -314,9 +314,13 @@ class GSController extends egret.EventDispatcher {
                 }
             } else {//不是房主
                 if (allOnline) {//都准备好
-                    this.scene.waitText.text = "等待房主开始游戏，请稍后...";
-                } else {
-                    this.scene.waitText.text = "等待其他玩家，请稍后...";
+
+                    this.scene.waitText.text = "等待房主开始游戏，请稍候...";
+
+                }else{
+
+                    this.scene.waitText.text = "等待其他玩家，请稍候...";
+
                 }
             }
         }
@@ -345,7 +349,15 @@ class GSController extends egret.EventDispatcher {
         this.setArrowDir(GSData.i.turnDir);
         this.updateCenterInfo();
         this.updateRebackPais();
-        this.showFuncSelectMenu();
+
+        //this.showFuncSelectMenu();
+
+        //缓存的显示刷新
+        while(GSData.i.rebackViewFuncs.length){
+
+            GSData.i.rebackViewFuncs.shift().call(this);
+
+        }
 
         if (game.status == GameStatus.changeThree && !game.statusComplete) {
             game.manager.dispatchEvent(GameEvent.ChangeThree);
@@ -360,6 +372,13 @@ class GSController extends egret.EventDispatcher {
             //听牌状态
             this.tingingView();
             PublicVal.state = -4;
+
+            if(GSConfig.handLens[PublicVal.i.getHandPais(1).length]){
+
+                //自动出牌
+                this.delayAutoPushPai();
+
+            }
         }
     }
 
@@ -463,9 +482,7 @@ class GSController extends egret.EventDispatcher {
 
             if (PublicVal.state == StateType.ting) {//听牌状态
 
-                cardView.unactivate();
-                //延时打尾牌
-                this.delayPushInterval = egret.setTimeout(this.delayPushPai, this, 800);
+                this.delayAutoPushPai();
             }
 
         } else {
@@ -476,13 +493,17 @@ class GSController extends egret.EventDispatcher {
             this.playTimeEffect(false, false);
         }
     }
+    //延时自动打牌
+    delayAutoPushPai(){
 
-    //延时打牌
-    delayPushPai() {
+        this.delayPushInterval = egret.setTimeout(_=>{
 
-        var catchPai = GSData.i.getCatchPai(1);
+            var catchPai = GSData.i.getCatchPai(1);
 
-        SocketManager.getInstance().getGameConn().send(4, {"args": catchPai});
+            SocketManager.getInstance().getGameConn().send(4, {"args":catchPai});
+
+        },this,800);
+
     }
 
     clearDelayPushInterval() {
@@ -806,7 +827,7 @@ class GSController extends egret.EventDispatcher {
     //显示吃碰杠功能菜单
     showFuncSelectMenu(tip: boolean = true) {
 
-        if (GSData.i.roundStartHasFunction && PublicVal.state == StateType.gamestart) {
+        if(PublicVal.state == StateType.gamestart && GSData.i.funcSelects.length > 0) {
 
             this.moveBack(false);
 
@@ -830,7 +851,7 @@ class GSController extends egret.EventDispatcher {
 
     hideFuncSelectMenu() {
 
-        GSData.i.roundStartHasFunction = false;
+        //GSData.i.roundStartHasFunction = false;
 
         this.gsView.funcSelectView.visible = false;
 
@@ -1206,7 +1227,7 @@ class GSController extends egret.EventDispatcher {
         }
         GSData.i.funcSelects = [{index: 0, action: 0, pai: null}];
 
-        GSData.i.roundStartHasFunction = true;
+        //GSData.i.roundStartHasFunction = true;
 
         this.showFuncSelectMenu(false);
 
@@ -1276,6 +1297,7 @@ class GSController extends egret.EventDispatcher {
             if (card.index > -1) {
 
                 card.touchEnabled = false;
+
                 card.enabled = boo;
             }
         }

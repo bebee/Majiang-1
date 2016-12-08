@@ -1,9 +1,9 @@
 /**
- * MissingSelect
+ * QueView
  * @Author Ace.c
  * @Create 2016-12-01 13:45
  */
-class MissingSelect extends BaseSprite {
+class QueView extends BaseSprite {
 
     private btn_wan: eui.Button;
     private btn_tiao: eui.Button;

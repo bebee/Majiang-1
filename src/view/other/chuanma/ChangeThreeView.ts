@@ -1,9 +1,9 @@
 /**
- * ChangeThreeSelect
+ * ChangeThreeView
  * @Author Ace.c
  * @Create 2016-12-01 11:28
  */
-class ChangeThreeSelect extends BaseSprite {
+class ChangeThreeView extends BaseSprite {
 
     private btn_confirm: eui.Button;
     private lab_time: eui.BitmapLabel;

@@ -48,7 +48,6 @@ class PublicVal {
     dirPerson: any;
 
     constructor() {
-
         this.clear();
     }
 
@@ -56,7 +55,7 @@ class PublicVal {
 
         this.bao = null;
         this.zhuangFlag = 0;
-        this.rules = "";
+        //this.rules = "";
         this.allPais[1] = {handPais: null, catchPai: null, funcPais: [], poolPais: []};
         this.allPais[2] = {handPais: null, catchPai: null, funcPais: [], poolPais: []};
         this.allPais[3] = {handPais: null, catchPai: null, funcPais: [], poolPais: []};
@@ -78,20 +77,36 @@ class PublicVal {
         return this.allPais[dir].poolPais;
     }
 
-    addHandPai(dir: number, pai: any) {
+    addHandPai(dir: number, pai: any, sort: boolean = false) {
         var pais = this.getHandPais(dir);
         pais.push(pai);
+
+        if (sort) FashionTools.sortPai(pais);
     }
 
-    removeHandPai(dir: number, pai: any) {
+
+    removeHandPai(dir: number, pai: any = null, sort: boolean = true) {
+
         var pais = this.getHandPais(dir);
+
+        if (pai == null || pai == undefined) {
+
+            pais.length--;
+
+            return;
+        }
+
         for (var i: number = 0; i < pais.length; i++) {
+
             var p = pais[i];
             if (p.type == pai.type && p.number == pai.number) {
                 pais.splice(i, 1);
                 break;
             }
         }
+
+        if (sort) FashionTools.sortPai(pais);
+
     }
 
     //往功能牌型里添加牌 排序 方位 功能 牌

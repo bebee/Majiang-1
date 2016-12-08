@@ -12,6 +12,7 @@ class GameManager extends BaseDispatcher {
         return this._i;
     }
 
+    timerManager: TimerManager;
     gameEventManager: GameEffectManager;
 
     public constructor() {
@@ -19,6 +20,7 @@ class GameManager extends BaseDispatcher {
     }
 
     init() {
+        this.timerManager = TimerManager.i;
         this.gameEventManager = new GameEffectManager();
     }
 }

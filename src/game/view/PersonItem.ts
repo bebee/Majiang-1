@@ -150,10 +150,18 @@ class PersonItem extends egret.DisplayObjectContainer {
             hu_info += GSConfig.huTypeMap[type] + " "
 
         }
+
+        var ting:string = "";
+
+        if(GSData.i.hasTingRule){
+
+            ting = (obj.ting == 1 ?"听牌 ":"未听牌 ");
+        }
+
         this.texts[1].text = obj.uid;
         this.texts[2].text = obj.nick;
         //this.texts[2].text = (obj.ting == 0 ? "未听牌 " : "听牌 ") + hu_info;
-        this.texts[3].text = hu_info;
+        this.texts[3].text = ting + hu_info;
         this.texts[4].text = "合计: "+(obj.fan ? obj.fan : 0)+"番";
         this.texts[5].text = "胡: "+obj.cur;
         this.texts[6].text = "杠: "+obj.gang;

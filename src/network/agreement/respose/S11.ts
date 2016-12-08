@@ -26,6 +26,8 @@ class S11 {
                     GSDataProxy.i.S2C_Bao(obj.data);
                     break;
                 case 301://换三张
+                    game.manager.dispatchEvent(GameEvent.ChangeThreeComplete, obj.data.huan_type);
+
                     var pais: any = obj.data.pai;
                     for (var i: number = 0; i < pais.length; i++) {
                         PublicVal.i.addHandPai(1, pais[i]);
@@ -35,8 +37,6 @@ class S11 {
                     }
 
                     FashionTools.sortPai(PublicVal.i.getHandPais(1));
-
-                    game.manager.dispatchEvent(GameEvent.ChangeThreeComplete, obj.data.huan_type);
                     break;
                 case 302://订缺
                     break;

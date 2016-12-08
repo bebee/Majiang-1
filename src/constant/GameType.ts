@@ -10,7 +10,7 @@ enum GameType {
  * 开始-断线重连-洗牌-换牌-牌局开始-分张-自己胡牌-牌局结束-结束
  */
 enum StateType {
-    start = 1, reconnect, shuffle, gamestart, ting, fen, win, gameover, over
+    start = 1, reconnect, shuffle, gamestart, ting, fen, win, gameover, over, replay
 }
 
 /**

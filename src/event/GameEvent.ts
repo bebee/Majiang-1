@@ -52,4 +52,28 @@ class GameEvent {
      * @type {string}
      */
     static CardThrowTips: string = "CardThrowTips";
+
+    /**
+     * 刮风
+     * @type {string}
+     */
+    static Windy: string = "Windy";
+
+    /**
+     * 下雨
+     * @type {string}
+     */
+    static Raining: string = "Raining";
+
+    /**
+     * 呼叫转移
+     * @type {string}
+     */
+    static Hujiaozhuanyi: string = "Hujiaozhuanyi";
+
+    /**
+     * 杠上开花
+     * @type {string}
+     */
+    static Gangshangkaihua: string = "Gangshangkaihua";
 }
