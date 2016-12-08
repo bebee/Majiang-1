@@ -73,17 +73,17 @@ class FashionTools{
     /*
         格式化规则文字
      */
-    static formatRules(rules:number[]){
+    static formatRules(rules:number[]) {
 
-        var ruleStr : string = "";
+        var ruleStr: string = "";
 
         for (var i: number = 0; i < rules.length; i++) {
 
-            ruleStr += GameConfig.rules[rules[i]] + " ";
-
+            if (GameConfig.rules[rules[i]]) {
+                ruleStr += GameConfig.rules[rules[i]] + " ";
+            }
         }
         return ruleStr;
-
     }
     /*
         格式化牌型

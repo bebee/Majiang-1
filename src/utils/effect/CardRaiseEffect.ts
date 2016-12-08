@@ -14,7 +14,7 @@ class CardRaiseEffect {
                 touchEnabled = false;
                 break;
             case CardRaiseMode.changeThree:
-                cards = game.changeThreeVo.getQuickCards();
+                cards = game.changeThreeVo.getRecommend();
                 touchEnabled = true;
                 break;
         }

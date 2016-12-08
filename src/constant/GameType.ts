@@ -2,7 +2,7 @@
  * 游戏类型
  */
 enum GameType {
-    baicheng, sichuan = 100
+    baicheng = 1, sichuan = 100
 }
 
 /**
@@ -17,7 +17,7 @@ enum StateType {
  * 游戏状态
  */
 enum GameStatus {
-    changeThree, missing, gamestart
+    unknow, changeThree, missing, gamestart
 }
 
 /**
@@ -32,7 +32,7 @@ enum DirType {
  * 1万 2条 3筒 4中发白
  */
 enum CardType {
-    wan=1, tiao, tong, zi
+    unknow, wan = 1, tiao, tong, zi
 }
 
 /**

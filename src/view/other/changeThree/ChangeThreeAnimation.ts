@@ -56,6 +56,8 @@ class ChangeThreeAnimation extends BaseSprite {
 
                 egret.Tween.get(this.img_change_1, {loop: true}).to({rotation: -100}, 800).wait(500).call(function () {
                     _this.hide();
+
+                    _this.tweenComplete();
                 });
                 break;
             case ChangeThreeType.clockwise:
@@ -64,6 +66,8 @@ class ChangeThreeAnimation extends BaseSprite {
 
                 egret.Tween.get(this.img_change_1, {loop: true}).to({rotation: 100}, 800).wait(500).call(function () {
                     _this.hide();
+
+                    _this.tweenComplete();
                 });
                 break;
             case ChangeThreeType.other:
@@ -76,11 +80,21 @@ class ChangeThreeAnimation extends BaseSprite {
 
                 egret.Tween.get(this.img_change_2r, {loop: true}).to({y: this.img_change_2r.y - 50}, 500).call(function () {
                     _this.img_change_2r.y = 128;
+
+                    _this.tweenComplete();
                 });
 
                 egret.setTimeout(this.hide, this, 1500);
                 break;
         }
+    }
+
+    tweenComplete() {
+        GSController.i.updateMJView(1);
+        GSController.i.updateMJView(2);
+        GSController.i.updateMJView(3);
+        GSController.i.updateMJView(4);
+        game.manager.dispatchEvent(GameEvent.CardMissComfirm);
     }
 
     public show() {

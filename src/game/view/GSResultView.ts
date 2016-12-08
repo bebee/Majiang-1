@@ -84,7 +84,7 @@ class GSResultView extends egret.DisplayObjectContainer{
         this.baoPaiView = new BaoPaiView;
         this.baoPaiView.x = 910;
         this.baoPaiView.y = 167;
-        this.addChild(this.baoPaiView);
+        // this.addChild(this.baoPaiView);
     }
 
     updateBaoPai(pai:any){

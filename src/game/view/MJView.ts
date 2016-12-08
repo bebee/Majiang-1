@@ -88,7 +88,7 @@ class MJView extends eui.Component {
 
     setQueState(boo:boolean) {
         if (game.status == GameStatus.gamestart) {
-            if (!boo && game.changeThreeVo.getTypeLength(game.allQue[this.dir]) == 0) {
+            if (!boo && game.getCtLength(game.allQue[this.dir]) == 0) {
                 return;
             }
 

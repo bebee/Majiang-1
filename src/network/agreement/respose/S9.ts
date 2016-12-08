@@ -20,8 +20,8 @@ class S9 {
                 game.status = GameStatus.gamestart;
                 game.statusComplete = true;
 
-                GSDataProxy.i.S2C_TurnDir(pos, dui_num, gang_end);
                 game.manager.dispatchEvent(GameEvent.CardThrow);
+                GSDataProxy.i.S2C_TurnDir(pos, dui_num, gang_end);
                 break;
             case 3://触发中断
                 console.log("显示功能菜单:", obj.data.data);
@@ -51,7 +51,6 @@ class S9 {
             case 8://订缺
                 game.status = GameStatus.missing;
                 game.statusComplete = false;
-                game.manager.dispatchEvent(GameEvent.CardMissComfirm);
                 break;
             case 9://同步换三张
                 var dir: number = GSDataProxy.i.gData.getDir(obj.data.data);

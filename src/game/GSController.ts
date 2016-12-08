@@ -93,6 +93,7 @@ class GSController extends egret.EventDispatcher {
         switch (PublicVal.state) {
 
             case 1://首次加入牌桌界面
+
                 this.visibleTwoFuncButton(true);
                 this.visibleFourFuncButton(false, false);
                 this.visibleReadyIcon();
@@ -129,7 +130,6 @@ class GSController extends egret.EventDispatcher {
                 this.gsView.baoPaiView.visible = false;
                 this.gsView.centerBoom.visible = false;
                 this.gsResultView.visible = false;
-
 
                 this.scene.waitText.visible = true;
                 this.scene.waitText.text = "等待其他玩家，请稍后...";
@@ -350,6 +350,7 @@ class GSController extends egret.EventDispatcher {
         if (game.status == GameStatus.changeThree && !game.statusComplete) {
             game.manager.dispatchEvent(GameEvent.ChangeThree);
         }
+
 
         if (game.status == GameStatus.missing && !game.statusComplete) {
             game.manager.dispatchEvent(GameEvent.CardMissComfirm);
@@ -618,7 +619,6 @@ class GSController extends egret.EventDispatcher {
         this.showStateView();
 
         this.gsResultView.update();
-
     }
 
 

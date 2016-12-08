@@ -352,6 +352,9 @@ class GSDataProxy {
         GSController.i.updateCenterInfo();
 
         GSController.i.gsView.updateRoom();
+        if(this.gData.turnDir == 1){
+            GSController.i.gsView.setQueState(false);
+        }
     }
 
     //更新自己抓牌
@@ -947,8 +950,7 @@ class GSDataProxy {
                 this.gData.rebackData = null;
             }
             else {
-                game.status = null;
-                game.manager.dispatchEvent(GameEvent.CleanAll);
+                game.prestart();
             }
         }
 

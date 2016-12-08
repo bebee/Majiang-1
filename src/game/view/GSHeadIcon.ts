@@ -138,7 +138,7 @@ class GSHeadIcon extends egret.DisplayObjectContainer {
         this.headImg.source = source;
     }
 
-    setQueImg(type: CardType) {
+    setQueImg(type: CardType = CardType.unknow) {
         switch (type) {
             case CardType.wan:
                 this.queIcon.source = "img_dq_1";

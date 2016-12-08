@@ -184,7 +184,7 @@ class GSView extends egret.Sprite {
         this.baoPaiView = new BaoPaiView;
         this.baoPaiView.x = 56;
         this.baoPaiView.y = 95;
-        this.addChild(this.baoPaiView);
+        // this.addChild(this.baoPaiView);
 
         //////////////////////////////////////////////
         this.funcEffect = new FuncEffectView;

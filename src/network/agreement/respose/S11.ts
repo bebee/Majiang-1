@@ -36,11 +36,6 @@ class S11 {
 
                     FashionTools.sortPai(PublicVal.i.getHandPais(1));
 
-                    GSController.i.updateMJView(1);
-                    GSController.i.updateMJView(2);
-                    GSController.i.updateMJView(3);
-                    GSController.i.updateMJView(4);
-
                     game.manager.dispatchEvent(GameEvent.ChangeThreeComplete, obj.data.huan_type);
                     break;
                 case 302://订缺
