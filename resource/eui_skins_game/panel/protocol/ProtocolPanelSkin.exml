@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='utf-8'?>
+<e:Skin class="ProtocolPanelSkin" width="860" height="540" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*">
+	<e:Image source="setting_huawen" x="517" y="46"/>
+	<e:Image y="46" x="332" scaleX="-1" source="setting_huawen"/>
+	<e:Group bottom="20" right="15" height="430" left="15">
+		<e:Image source="panel_1" left="0" bottom="0" top="0" scale9Grid="20,20,23,15" right="0" x="10" y="10" locked="true"/>
+		<e:Scroller id="scroller" left="10" right="10" top="10" bottom="10">
+			<e:Group id="group">
+				<e:Label left="0" textColor="0xA97144" size="20" fontFamily="微软雅黑" right="0" multiline="true" lineSpacing="10" wordWrap="true" id="lab_description" x="10" y="10"/>
+			</e:Group>
+		</e:Scroller>
+	</e:Group>
+</e:Skin>

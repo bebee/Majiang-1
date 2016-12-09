@@ -80,12 +80,11 @@ class GSHeadView extends egret.Sprite {
         this.waitView();
     }
 
-    setScore(score: number, showAnimation: boolean = false) {
-        // if (showAnimation) {
-        //     var diff: number = score - Number(this.numText.text);
-        //     game.manager.dispatchEvent(GameEvent.ScoreTips, [this.dir, score])
-        // }
+    getScore() {
+        return Number(this.numText.text);
+    }
 
+    setScore(score: number) {
         this.numText.text = "" + score;
     }
 

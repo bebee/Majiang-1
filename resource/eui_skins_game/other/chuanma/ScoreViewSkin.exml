@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<e:Skin class="ScoreViewSkin" width="960" height="640" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+	<e:BitmapLabel id="lab_dir_1" x="6" y="5" font="font_num_score_plus" text="+100"/>
+	<e:BitmapLabel id="lab_dir_2" y="46" text="+100" font="font_num_score_plus" x="10"/>
+	<e:BitmapLabel x="10" y="102" text="+100" font="font_num_score_plus" id="lab_dir_3"/>
+	<e:BitmapLabel id="lab_dir_4" x="4" y="158" text="+100" font="font_num_score_plus"/>
+</e:Skin>

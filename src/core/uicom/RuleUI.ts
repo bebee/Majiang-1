@@ -1,4 +1,10 @@
 class RuleUI extends eui.Component {
+
+    private btn_xueliu: eui.Button;
+    private btn_xuezhan: eui.Button;
+    scroller: eui.Scroller;
+    group: eui.Group;
+
     public constructor() {
         super();
 
@@ -8,10 +14,6 @@ class RuleUI extends eui.Component {
 
         this.touchChildren = true;
     }
-
-    public _group: eui.Group;
-
-    public _scroller: eui.Scroller;
 
     onComplete() {
 

@@ -54,7 +54,7 @@ enum CardRaiseMode {
 /**
  * 游戏玩法
  */
-enum GameLaws {
+enum GamePlayType {
     xuezhandaodi = 17, xueliuchenghe, sanren_2 = 20, sanren_3, siren_2
 }
 

@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='utf-8'?>
+<e:Skin class="RulePanelSkin" width="860" height="540" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*">
+	<e:Image source="setting_huawen" x="517" y="46"/>
+	<e:Image y="46" x="332" scaleX="-1" source="setting_huawen"/>
+	<e:Group x="3" top="80" y="10">
+		<e:Image source="activit_jian" y="92" x="104"/>
+		<e:Image source="lashen_15" y="127" scale9Grid="2,1,2,2" width="166" height="3" x="35"/>
+		<e:Scroller y="132" height="346" x="35">
+			<e:Group>
+				<e:Button id="btn_xueliu" x="923" y="511" label="血流成河" enabled="false"/>
+				<e:Button id="btn_xuezhan" y="521" label="血战到底" x="933"/>
+				<e:layout>
+					<e:VerticalLayout horizontalAlign="left"/>
+				</e:layout>
+			</e:Group>
+		</e:Scroller>
+		<e:Image source="activit_jian" y="442" scaleY="-1" x="104"/>
+		<e:layout>
+			<e:VerticalLayout horizontalAlign="center"/>
+		</e:layout>
+	</e:Group>
+	<e:Group width="682" bottom="20" right="15" height="430">
+		<e:Image source="panel_1" left="0" bottom="0" top="0" scale9Grid="20,20,23,15" right="0" x="10" y="10" locked="true"/>
+		<e:Scroller id="scroller" left="10" right="10" top="10" bottom="10">
+			<e:Group id="group">
+				<e:Label id="lab_description" left="0" right="0" fontFamily="微软雅黑" size="20" wordWrap="true" multiline="true" lineSpacing="10" textColor="0xA97144"/>
+			</e:Group>
+		</e:Scroller>
+	</e:Group>
+</e:Skin>

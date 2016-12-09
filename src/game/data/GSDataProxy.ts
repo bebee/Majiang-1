@@ -638,8 +638,7 @@ class GSDataProxy {
                 this.gData.gangCurs[this.gData.getDir(pos)] = cur[k];
             }
 
-            GSController.i.updateGangCur(true);
-
+            GSController.i.updateGangCur((action == 24 || action == 25 || action == 99) ? true : false);
         }
 
         //删除池子牌显示
@@ -707,7 +706,7 @@ class GSDataProxy {
 
     delay_Final() {
 
-        if(PublicVal.state == StateType.ting){
+        if (PublicVal.state == StateType.ting) {
 
             GSData.i.tingEndShow = true;
 
@@ -818,7 +817,6 @@ class GSDataProxy {
             GSController.i.playEffect(huDir, 99);
         }
         GSController.i.hupaiShow();
-
     }
 
     //格式下剩余牌

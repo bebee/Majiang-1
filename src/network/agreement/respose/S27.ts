@@ -9,7 +9,7 @@ class S27
 
         EffectUtils.showTips("身份信息认证成功!");
         StackManager.closeDialog("IDCardDialog");
-        var gm:GameMainScene = SceneManager.find("GameMainScene");
+        var gm:MainScene = SceneManager.find("MainScene");
         if(gm) gm.btn_shiming.visible = false;
         GlobalData.getInstance().player.update(obj.data);
     }

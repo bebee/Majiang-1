@@ -20,7 +20,7 @@
 		</e:Button>
 		<e:Group verticalCenter="0" horizontalCenter="0" touchChildren="false" touchEnabled="false">
 			<e:Image source="img_txt_queding"/>
-			<e:BitmapLabel id="lab_time" font="MJNUM_01" text="0" horizontalCenter="24" verticalCenter="0"/>
+			<e:BitmapLabel id="lab_time" font="font_num_timer" text="0" horizontalCenter="24" verticalCenter="0"/>
 		</e:Group>
 	</e:Group>
 </e:Skin>

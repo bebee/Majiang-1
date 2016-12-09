@@ -6,7 +6,7 @@ import rules = GameConfig.rules;
  */
 class GameRuleVo extends BaseVo {
 
-    law: GameLaws = GameLaws.xueliuchenghe;
+    law: GamePlayType = GamePlayType.xueliuchenghe;
     ju: number = 4;
     rate: GameRate = GameRate.rate_2;
     rules: any[];

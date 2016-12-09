@@ -449,7 +449,7 @@ module Global {
 		if (group) {
 			if (group.contains(Global.hornPanel)) return;
 
-			var gameScene: GameMainScene = SceneManager.find("GameMainScene");
+			var gameScene: MainScene = SceneManager.find("MainScene");
 
 			if (!gameScene) return;
 

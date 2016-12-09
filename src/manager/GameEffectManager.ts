@@ -13,6 +13,7 @@ class GameEffectManager extends BaseManager {
     private gangshangkaihuaView: GangshangkaihuaView;
     private hujiaozhuanyiView: HujiaozhuanyiView;
     private yipaoduoxiangView: YipaoduoxiangView;
+    private scoreView: ScoreView;
 
     public constructor() {
         super();
@@ -30,6 +31,7 @@ class GameEffectManager extends BaseManager {
         this.hujiaozhuanyiView = new HujiaozhuanyiView();
         this.gangshangkaihuaView = new GangshangkaihuaView();
         this.yipaoduoxiangView = new YipaoduoxiangView();
+        this.scoreView = new ScoreView();
 
         this.gameManager.addEventListener(GameEvent.CleanAll, this.onCleanAll, this);
         this.gameManager.addEventListener(GameEvent.ChangeThree, this.onChangeThree, this);
@@ -43,7 +45,12 @@ class GameEffectManager extends BaseManager {
         this.gameManager.addEventListener(GameEvent.Hujiaozhuanyi, this.onHujiaozhuanyi, this);
         this.gameManager.addEventListener(GameEvent.Gangshangkaihua, this.onGangshangkaihua, this);
         this.gameManager.addEventListener(GameEvent.Yipaoduoxiang, this.onYipaoduoxiang, this);
+        this.gameManager.addEventListener(GameEvent.ScoreTips, this.onScoreTips, this);
 
+    }
+
+    private onScoreTips(scores: any) {
+        this.scoreView.play(scores);
     }
 
     private onGangshangkaihua(dir: DirType) {

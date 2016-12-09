@@ -259,8 +259,25 @@ class GSController extends egret.EventDispatcher {
 
     //刷新杠的分数
     updateGangCur(showAnimation: boolean = false) {
+        var scores: any = {};
+        var score: number = 0;
+        var head: GSHeadView;
         for (var i: number = 1; i <= 4; i++) {
-            this.gsView.headViews[i].setScore(GSData.i.gangCurs[i], showAnimation);
+            head = this.gsView.headViews[i];
+            score = GSData.i.gangCurs[i];
+
+            if (showAnimation) {
+                var diff: number = score - head.getScore();
+                scores[i] = diff;
+            }
+
+            head.setScore(score);
+        }
+
+        console.log(showAnimation, scores);
+
+        if (showAnimation) {
+            game.manager.dispatchEvent(GameEvent.ScoreTips, scores);
         }
     }
 
@@ -639,7 +656,6 @@ class GSController extends egret.EventDispatcher {
 
     //进入结算界面
     intoResultView() {
-
 
         this.showStateView();
 

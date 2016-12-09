@@ -3,25 +3,36 @@
   */
 class BaseDialog extends eui.Component {
 
+    public m_dialog: DialogUI;
+
     public init: Boolean = false;//是否初始化
     public showing: Boolean = false;//是否已经显示
     public w: number = 0;
     public h: number = 0;
-    public m_dialog: DialogUI;
 
     public constructor(title: string = "shop_txt", ui_w: number = 0, ui_h: number = 0) {
         super();
         this.w = GameConfig.curWidth();
         this.h = GameConfig.curHeight();
-
         this.m_dialog = new DialogUI();
         this.m_dialog.verticalCenter = 0;
         this.m_dialog.horizontalCenter = 0;
-        this.m_dialog.btn_close.addEventListener(egret.TouchEvent.TOUCH_TAP, this.hide, this);
         this.m_dialog._title.source = title;
         if (ui_w > 0) this.m_dialog.width = ui_w;
         if (ui_h > 0) this.m_dialog.height = ui_h;
+
         this.addChild(this.m_dialog);
+    }
+
+    createChildren() {
+        super.createChildren();
+
+        this.addChildAt(this.m_dialog, 0);
+
+        var _this = this;
+        this.m_dialog.btn_close.addEventListener(egret.TouchEvent.TOUCH_TAP, function () {
+            _this.hide();
+        }, this);
     }
 
     /**
