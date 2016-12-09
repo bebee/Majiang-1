@@ -17,6 +17,7 @@ class S11 {
                     GSDataProxy.i.S2C_OwnCardInfo(obj);
                     break;
                 case 200://抓牌
+                    console.log("同步己方抓牌", obj.data.pai[0]);
                     game.manager.dispatchEvent(GameEvent.CardThrow);
                     game.manager.dispatchEvent(GameEvent.CardRaise);
                     GSDataProxy.i.S2C_OwnCatch(obj.data.pai[0], obj.data.dui_num, obj.data.hasOwnProperty("fen"));

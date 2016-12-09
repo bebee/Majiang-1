@@ -56,6 +56,18 @@ class game {
         game.manager.dispatchEvent(GameEvent.CleanAll);
     }
 
+    static cleanTable() {
+
+    }
+
+    static cleanRound() {
+
+    }
+
+    static cleanGame() {
+
+    }
+
 
     /**
      * 获取最短的牌类型

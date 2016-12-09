@@ -88,6 +88,16 @@ class MJView extends eui.Component {
 
     setQueState(boo:boolean) {
         if (game.status == GameStatus.gamestart) {
+            if (game.isHuBoo) {
+                for (var i: number = 0; i < this.handCon.numChildren; i++) {
+                    var card: CardView = <CardView> this.handCon.getChildAt(i);
+                    if (card && card.pai && card.index < 0)continue;
+                    boo ? card.activate() : card.unactivate();
+                    card.enabled = boo;
+                }
+                return;
+            }
+
             if (!boo && game.getCtLength(game.allQue[this.dir]) == 0) {
                 return;
             }

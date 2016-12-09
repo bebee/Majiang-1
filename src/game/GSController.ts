@@ -258,7 +258,7 @@ class GSController extends egret.EventDispatcher {
     }
 
     //刷新杠的分数
-    updateGangCur(showAnimation:boolean = false) {
+    updateGangCur(showAnimation: boolean = false) {
         for (var i: number = 1; i <= 4; i++) {
             this.gsView.headViews[i].setScore(GSData.i.gangCurs[i], showAnimation);
         }
@@ -317,7 +317,7 @@ class GSController extends egret.EventDispatcher {
 
                     this.scene.waitText.text = "等待房主开始游戏，请稍候...";
 
-                }else{
+                } else {
 
                     this.scene.waitText.text = "等待其他玩家，请稍候...";
 
@@ -353,7 +353,7 @@ class GSController extends egret.EventDispatcher {
         //this.showFuncSelectMenu();
 
         //缓存的显示刷新
-        while(GSData.i.rebackViewFuncs.length){
+        while (GSData.i.rebackViewFuncs.length) {
 
             GSData.i.rebackViewFuncs.shift().call(this);
 
@@ -374,7 +374,7 @@ class GSController extends egret.EventDispatcher {
             this.tingingView();
             PublicVal.state = -4;
 
-            if(GSConfig.handLens[PublicVal.i.getHandPais(1).length]){
+            if (GSConfig.handLens[PublicVal.i.getHandPais(1).length]) {
 
                 //自动出牌
                 this.delayAutoPushPai();
@@ -458,7 +458,6 @@ class GSController extends egret.EventDispatcher {
         }
     }
 
-
     //抓牌
     catchCard(dir: number) {
         var mjView = this.gsView.MJViews[dir];
@@ -497,16 +496,17 @@ class GSController extends egret.EventDispatcher {
             this.playTimeEffect(false, false);
         }
     }
-    //延时自动打牌
-    delayAutoPushPai(){
 
-        this.delayPushInterval = egret.setTimeout(_=>{
+    //延时自动打牌
+    delayAutoPushPai() {
+
+        this.delayPushInterval = egret.setTimeout(_=> {
 
             var catchPai = GSData.i.getCatchPai(1);
 
-            SocketManager.getInstance().getGameConn().send(4, {"args":catchPai});
+            SocketManager.getInstance().getGameConn().send(4, {"args": catchPai});
 
-        },this,800);
+        }, this, 800);
 
     }
 
@@ -831,7 +831,7 @@ class GSController extends egret.EventDispatcher {
     //显示吃碰杠功能菜单
     showFuncSelectMenu(tip: boolean = true) {
 
-        if(PublicVal.state == StateType.gamestart && GSData.i.funcSelects.length > 0) {
+        if (PublicVal.state == StateType.gamestart && GSData.i.funcSelects.length > 0) {
 
             this.moveBack(false);
 
@@ -1420,6 +1420,5 @@ class GSController extends egret.EventDispatcher {
             headView.headIcon.setHeadPic(person.pic);
 
         }
-
     }
 }

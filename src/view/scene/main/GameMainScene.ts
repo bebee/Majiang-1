@@ -29,7 +29,7 @@ class GameMainScene extends eui.Component {
 
         this.addEventListener(eui.UIEvent.COMPLETE, this.onComplete, this);
 
-        this.skinName = "mainSkin";
+        this.skinName = "MainSceneSkin";
 
         this.touchChildren = true;
 

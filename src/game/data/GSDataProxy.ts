@@ -391,8 +391,6 @@ class GSDataProxy {
     //更新自己抓牌
     S2C_OwnCatch(pai: any, dui_num: number, fen: boolean = false) {
 
-        console.log("同步己方抓牌", pai);
-
         this.gData.setCatchPai(1, pai);
 
         this.gData.pushHandPai(1, pai);
@@ -402,11 +400,10 @@ class GSDataProxy {
         this.gData.turnDir = (fen ? 0 : 1);
 
         if (fen) {
-
             console.log("尾局分张");
-
             PublicVal.state = StateType.fen;
         }
+
         GSController.i.catchCard(1);
 
         GSController.i.updateCenterInfo();
@@ -414,7 +411,6 @@ class GSDataProxy {
         GameSound.PlaySound("sound_card_hover");
 
         FashionTools.autoPush();
-
     }
 
     S2C_Bao(obj: any) {
