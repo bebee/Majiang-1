@@ -1,0 +1,4 @@
+<?xml version='1.0' encoding='utf-8'?>
+<e:Skin class="BgViewSkin" width="155" height="99" xmlns:e="http://ns.egret.com/eui">
+	<e:Image source="loadingeff_bg" left="0" bottom="0" top="0" right="0" scale9Grid="27,25,22,16" y="20" x="20"/>
+</e:Skin>

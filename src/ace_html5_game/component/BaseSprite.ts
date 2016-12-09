@@ -5,32 +5,33 @@
  */
 class BaseSprite extends eui.Component {
 
-    public id:any;
-    public data: any;
-    public initComplete: boolean = false;
+    id: any;
+    data: any;
+    initComplete: boolean = false;
 
-    public constructor() {
+    constructor() {
         super();
     }
 
-    public childrenCreated(): void {
+    childrenCreated(): void {
         super.childrenCreated();
 
         this.initComplete = true;
     }
 
-    public show(): void {
+    show(): void {
         this.visible = true;
     }
 
-    public hide(): void {
+    hide(): void {
         this.visible = false;
     }
 
     /**
      * 设置皮肤状态
+     * @param value
      */
-    public set skinState(value: string) {
+    set skinState(value: string) {
         this.currentState = value;
         this.invalidateState();
     }

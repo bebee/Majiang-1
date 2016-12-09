@@ -217,7 +217,7 @@ var game_file_list = [
 	"bin-debug/utils/RegUtils.js",
 	"bin-debug/utils/UtilsClass/BitmapBlink.js",
 	"bin-debug/utils/UtilsClass/TipsUtils.js",
-	"bin-debug/view/GameSprite.js",
+	"bin-debug/view/BaseGameSprite.js",
 	"bin-debug/view/other/chuanma/ChangeThreeAnimation.js",
 	"bin-debug/view/other/chuanma/ChangeThreeView.js",
 	"bin-debug/view/other/chuanma/GangshangkaihuaView.js",
