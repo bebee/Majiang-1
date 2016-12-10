@@ -25,7 +25,7 @@ class BgView extends BaseGameSprite {
 
     protected closeCall() {
         if (this.callback) {
-            this.thisobj ? this.callback.call(this) : this.callback();
+            this.thisobj ? this.callback.call(this.thisobj) : this.callback();
         }
     }
 }

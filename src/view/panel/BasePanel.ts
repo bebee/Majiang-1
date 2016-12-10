@@ -21,9 +21,7 @@ class BasePanel extends BaseGameSprite {
     show(): void {
         super.show();
 
-        if (!this.manager.layerPanel.contains(this)) {
-            this.manager.layerPanel.addChild(this);
-        }
+        this.manager.layerPanel.addChild(this);
     }
 
     hide(): void {

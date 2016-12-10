@@ -1,5 +1,5 @@
 
-class RuleDialog extends BaseDialog {
+class RuleDialog extends BasePanel {
 
     private btn_xueliu: eui.Button;
     private btn_xuezhan: eui.Button;
@@ -12,7 +12,8 @@ class RuleDialog extends BaseDialog {
     private type: GamePlayType;
 
     public constructor() {
-        super("rule_txt", 880, 570);
+        // super("rule_txt", 880, 570);
+        super();
 
         this.skinName = "RulePanelSkin";
     }
@@ -23,7 +24,7 @@ class RuleDialog extends BaseDialog {
         this.horizontalCenter = 0;
         this.verticalCenter = 0;
 
-        this.m_dialog._title_img.visible = false;
+        // this.m_dialog._title_img.visible = false;
 
         this.type = GamePlayType.xueliuchenghe;
 
