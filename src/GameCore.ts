@@ -29,8 +29,6 @@ class game {
     static statusComplete: boolean = false;
     //全部玩家的缺门记录
     static allQue: any = {};
-    //确定的缺门
-    static que: CardType = CardType.unknow;
 
     static init(stage) {
 
@@ -51,7 +49,6 @@ class game {
         this.status = GameStatus.unknow;
         this.statusComplete = false;
         this.allQue = {};
-        this.que = CardType.unknow;
         this.isHuBoo = false;
         game.manager.dispatchEvent(GameEvent.CleanAll);
     }
@@ -115,10 +112,12 @@ class game {
         var handCards: any[] = PublicVal.i.getHandPais(1);
         var length: number = 0;
         var card: any;
-        for (var i: number = 0; i < handCards.length; i++) {
-            card = handCards[i];
-            if (card && card.type == type) {
-                length++;
+        if (handCards) {
+            for (var i: number = 0; i < handCards.length; i++) {
+                card = handCards[i];
+                if (card && card.type == type) {
+                    length++;
+                }
             }
         }
         return length;
@@ -134,14 +133,17 @@ class game {
         var handCards: any[] = PublicVal.i.getHandPais(1);
         var cards: any[] = [];
         var card: any;
-        for (var i: number = 0; i < handCards.length; i++) {
-            card = handCards[i];
-            if (card && card.type == type) {
-                cards.push(card);
-            }
 
-            if (length != -1 && cards.length == length) {
-                break;
+        if (handCards) {
+            for (var i: number = 0; i < handCards.length; i++) {
+                card = handCards[i];
+                if (card && card.type == type) {
+                    cards.push(card);
+                }
+
+                if (length != -1 && cards.length == length) {
+                    break;
+                }
             }
         }
         return cards;

@@ -175,17 +175,14 @@ class CardView extends egret.DisplayObjectContainer {
         this.hotArea.anchorOffsetY = GSConfig.posRulePlus[1][1].bgosY;
 
         this.unactivate();
-
     }
 
     activate() {
-        this.touchEnabled = true;
-        this.hotArea.visible = true;
+        this.touchEnabled = this.hotArea.visible = true;
     }
 
     unactivate() {
-        this.touchEnabled = false;
-        this.hotArea.visible = false;
+        this.touchEnabled = this.hotArea.visible = false;
         this.enabled = true;
     }
 
