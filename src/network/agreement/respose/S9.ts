@@ -35,7 +35,7 @@ class S9 {
 
                 game.manager.dispatchEvent(GameEvent.CardThrow);
                 game.manager.dispatchEvent(GameEvent.CardThrowTips);
-                GSDataProxy.i.S2C_FuncResult(obj.data.data.action, obj.data.data.pai, obj.data.data.turn, obj.data.data.cur);
+                GSDataProxy.i.S2C_FuncResult(obj.data.data);
                 break;
             case 5: //补杠被劫
                 console.log("删除手牌", obj);

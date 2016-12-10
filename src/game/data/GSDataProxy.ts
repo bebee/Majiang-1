@@ -433,12 +433,14 @@ class GSDataProxy {
     }
 
     //更新结果 cur是当前分数
-    S2C_FuncResult(action, pai, pos, cur = null) {
-
-        this.gData.isShowFunc = false;
-
+    S2C_FuncResult(data:any) {
+        var action = data.action;
+        var pai = data.pai;
+        var pos = data.turn;
+        var cur = data.cur;
         var dir = this.gData.getDir(pos);
 
+        this.gData.isShowFunc = false;
         this.gData.turnDir = dir;
 
         var poolPai: any = null;
@@ -620,6 +622,19 @@ class GSDataProxy {
                 var mjview: MJView = GSController.i.gsView.MJViews[dir];
                 mjview.pushHu(pai);
 
+                var hu_type: any = data.ex_hu_type;
+                if (hu_type) {
+                    if (hu_type == 19) {//杠上开花
+                        game.manager.dispatchEvent(GameEvent.Gangshangkaihua, dir);
+                    }
+                    else if (hu_type[0] = 40) {//一炮多响
+                        game.manager.dispatchEvent(GameEvent.Yipaoduoxiang, hu_type[1]);
+                    }
+                    else if (hu_type[0] = 41) {//呼叫转移
+                        game.manager.dispatchEvent(GameEvent.Hujiaozhuanyi, [dir, hu_type[1]]);
+                    }
+                }
+
                 if (dir == 1) {
                     game.isHuBoo = true;
                     //删除手牌数据 3
@@ -636,12 +651,8 @@ class GSDataProxy {
         }
 
         if (cur != null) {
-
             for (var k in cur) {
-
-                var pos: any = +k;
-
-                this.gData.gangCurs[this.gData.getDir(pos)] = cur[k];
+                this.gData.gangCurs[this.gData.getDir(Number(k))] = cur[k];
             }
 
             GSController.i.updateGangCur((action == 24 || action == 25 || action == 99) ? true : false);
@@ -650,21 +661,20 @@ class GSDataProxy {
         //删除池子牌显示
         if (poolPai && poolPai.pos > 0) {
             var poolPaiDir = GSData.i.getDir(poolPai.pos);
+
             PublicVal.i.popPoolPai(poolPaiDir);
             GSController.i.removePoolCard(poolPaiDir);
         }
+
         GSController.i.setArrowDir(dir);
         GSController.i.updateMJView(dir);
         GSController.i.playEffect(dir, action);
 
         if (dir == 1) {
-
             GSController.i.playTimeEffect(true, true);
         } else {
             GSController.i.playTimeEffect(true, false);
-
         }
-
     }
 
     //S2C 更新打入池中的牌子
