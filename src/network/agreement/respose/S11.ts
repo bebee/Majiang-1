@@ -21,7 +21,7 @@ class S11 {
                     game.manager.dispatchEvent(GameEvent.CardThrow);
                     game.manager.dispatchEvent(GameEvent.CardRaise);
                     GSDataProxy.i.S2C_OwnCatch(obj.data.pai[0], obj.data.dui_num, obj.data.hasOwnProperty("fen"));
-                    GSController.i.gsView.setQueState(false);
+                    GSController.i.gsView.resetAllChildrenTouch();
                     break;
                 case 300://换宝牌
                     GSDataProxy.i.S2C_Bao(obj.data);
@@ -46,7 +46,7 @@ class S11 {
                     game.manager.dispatchEvent(GameEvent.CardThrow);
                     game.manager.dispatchEvent(GameEvent.CardThrowTips);
                     GSDataProxy.i.S2C_FuncResult(obj.data);
-                    GSController.i.gsView.setQueState(false);
+                    GSController.i.gsView.resetAllChildrenTouch();
                     break;
             }
         }

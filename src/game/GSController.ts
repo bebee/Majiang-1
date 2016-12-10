@@ -398,6 +398,9 @@ class GSController extends egret.EventDispatcher {
 
             }
         }
+
+
+        GSController.i.gsView.resetAllChildrenTouch();
     }
 
     //开始游戏
@@ -739,7 +742,7 @@ class GSController extends egret.EventDispatcher {
 
                             SocketManager.getInstance().getGameConn().send(4, {"args": pai});
 
-                            this.gsView.setQueState(true);
+                            this.gsView.resetAllChildrenTouch();
 
                             console.log("发送自己的打牌信息", pai);
                         }

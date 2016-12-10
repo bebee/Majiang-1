@@ -20,7 +20,7 @@ class CardRaiseEffect {
         }
 
         if (cards && cards.length) {
-            this.stop(touchEnabled);
+            this.stop();
 
             for (var i: number = 0; i < cards.length; i++) {
                 this.raise(cards[i]);
@@ -31,18 +31,9 @@ class CardRaiseEffect {
         }
     }
 
-    static stop(touchEnabled: boolean = true) {
+    static stop() {
         var view: MJView = GSController.i.gsView.MJViews[1];
-        var card: CardView;
-        for (var i: number = 0; i < view.handCon.numChildren; i++) {
-            card = <CardView>view.handCon.getChildAt(i);
-            if (!card || card.index < 0) {
-                continue;
-            }
-
-            card.touchEnabled = touchEnabled;
-            card.moveDown(false);
-        }
+        view.resetAllChildrenTouch()
     }
 
     static raise(pai: any) {

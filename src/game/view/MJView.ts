@@ -86,33 +86,6 @@ class MJView extends eui.Component {
         }
     }
 
-    setQueState(boo:boolean) {
-        if (game.status == GameStatus.gamestart) {
-            if (game.isHuBoo) {
-                for (var i: number = 0; i < this.handCon.numChildren; i++) {
-                    var card: CardView = <CardView> this.handCon.getChildAt(i);
-                    if (card && card.pai && card.index < 0)continue;
-                    card.unactivate();
-                    card.enabled = false;
-                }
-                return;
-            }
-
-            if (!boo && game.getCtLength(game.allQue[this.dir]) == 0) {
-                return;
-            }
-
-            for (var i: number = 0; i < this.handCon.numChildren; i++) {
-                var card: CardView = <CardView> this.handCon.getChildAt(i);
-                if (card && card.pai && card.index < 0)continue;
-                if (card.pai.type != game.allQue[this.dir]) {
-                    boo ? card.activate() : card.unactivate();
-                    card.enabled = boo;
-                }
-            }
-        }
-    }
-
     getHandCard(index: number): CardView {
 
         for (var i: number = 0; i < this.handCon.numChildren; i++) {
@@ -182,5 +155,30 @@ class MJView extends eui.Component {
         this.removeAllHandCard();
         this.removeAllPoolCard();
         this.huview.clean()
+    }
+
+    //重置所有子对象
+    resetAllChildrenTouch() {
+        var card: CardView;
+        for (var i: number = 0; i < this.handCon.numChildren; i++) {
+            card = <CardView>this.handCon.getChildAt(i);
+            if (!card || card.index < 0) {
+                continue;
+            }
+
+            if (PublicVal.state == StateType.shuffle || PublicVal.state == StateType.ting
+                || game.isHuBoo
+                || (game.getCtLength(game.allQue[this.dir]) != 0 && game.allQue[this.dir] != card.pai.type)
+            ) {
+                card.unactivate();
+                card.enabled = false;
+            }
+            else {
+                card.activate();
+                card.enabled = true;
+            }
+
+            card.moveDown(false);
+        }
     }
 }

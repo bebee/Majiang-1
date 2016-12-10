@@ -37,7 +37,6 @@ class GSView extends egret.Sprite {
     funcEffect: FuncEffectView;
 
 
-
     baoEffect: egret.Bitmap;
 
     baoText: egret.TextField;
@@ -60,7 +59,7 @@ class GSView extends egret.Sprite {
     siriButton: mui.EButton;
 
 
-    replayControllView : ReplayControllView;
+    replayControllView: ReplayControllView;
 
     bindInterface(face: IGameTapEvent) {
 
@@ -95,7 +94,7 @@ class GSView extends egret.Sprite {
         this.addChild(this.backUIContainer);
 
         this.MJViews = [];
-        for(var i:number = 1; i <= 4; i++){
+        for (var i: number = 1; i <= 4; i++) {
             var mjView = new MJView(i);
             this.addChild(mjView);
             this.MJViews[i] = mjView;
@@ -132,7 +131,6 @@ class GSView extends egret.Sprite {
         this.siriButton = new mui.EButton("game_siri");
         this.siriButton.y = 72;
         this.rightButtonCon.addChild(this.talkButton);
-
 
 
         this.addChild(this.funcSelectView);
@@ -214,21 +212,19 @@ class GSView extends egret.Sprite {
         this.addChild(this.replayControllView);
         this.replayControllView.visible = false;
         //牌长度
-/*        this.countTexts = [];
+        /*        this.countTexts = [];
 
-        for (var i = 0; i < 4; i++) {
+         for (var i = 0; i < 4; i++) {
 
-            var t = new egret.TextField();
-            t.size = 18;
-            t.x = GSConfig.funcPlayPos[i + 1].x;
-            t.y = GSConfig.funcPlayPos[i + 1].y;
-            this.countTexts.push(t);
-            this.addChild(t);
-        }*/
+         var t = new egret.TextField();
+         t.size = 18;
+         t.x = GSConfig.funcPlayPos[i + 1].x;
+         t.y = GSConfig.funcPlayPos[i + 1].y;
+         this.countTexts.push(t);
+         this.addChild(t);
+         }*/
 
     }
-
-
 
 
     drawLine() {
@@ -313,24 +309,19 @@ class GSView extends egret.Sprite {
         }
     }
 
-    setQueState(boo:boolean) {
-        var mjView = this.MJViews[1];
-        mjView.setQueState(boo);
-    }
+    /*    visibleReadyIcon(icon,boo){
 
-/*    visibleReadyIcon(icon,boo){
+     if(GSData.i.game_state == 1 || GSData.i.game_state == 2) {
+     icon.visible = boo;
+     }
+     }
+     visibleKillIcon(icon,boo){
 
-        if(GSData.i.game_state == 1 || GSData.i.game_state == 2) {
-            icon.visible = boo;
-        }
-    }
-    visibleKillIcon(icon,boo){
+     if(GSData.i.game_state == 1 && GSData.i.ownPos == 1){
 
-        if(GSData.i.game_state == 1 && GSData.i.ownPos == 1){
-
-            icon.visible = boo;
-        }
-    }*/
+     icon.visible = boo;
+     }
+     }*/
 
     //获取头像
     getHeadView(dir: number): GSHeadView {
@@ -463,5 +454,10 @@ class GSView extends egret.Sprite {
         var icon = e.currentTarget;
 
         this.face.onHeadTouch(+icon.name);
+    }
+
+    resetAllChildrenTouch() {
+        var mjview: MJView = this.MJViews[1];
+        mjview.resetAllChildrenTouch();
     }
 }

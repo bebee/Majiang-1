@@ -119,12 +119,9 @@ class GSDataProxy {
                 }
             }
 
-            //确定缺门
+            //判断自己的状态进度
             if (dir == 1) {
-                if (game.status == GameStatus.gamestart) {
-                    game.que = person.que;
-                }
-                else {
+                if (game.status != GameStatus.gamestart) {
                     game.statusComplete = person.process == 1;
                 }
             }
@@ -389,9 +386,7 @@ class GSDataProxy {
 
         GSController.i.gsView.updateRoom();
 
-        if (this.gData.turnDir == 1) {
-            GSController.i.gsView.setQueState(false);
-        }
+        GSController.i.gsView.resetAllChildrenTouch();
     }
 
     //更新自己抓牌
@@ -622,16 +617,24 @@ class GSDataProxy {
                 var mjview: MJView = GSController.i.gsView.MJViews[dir];
                 mjview.pushHu(pai);
 
-                var hu_type: any = data.ex_hu_type;
-                if (hu_type) {
-                    if (hu_type == 19) {//杠上开花
-                        game.manager.dispatchEvent(GameEvent.Gangshangkaihua, dir);
-                    }
-                    else if (hu_type[0] = 40) {//一炮多响
-                        game.manager.dispatchEvent(GameEvent.Yipaoduoxiang, hu_type[1]);
-                    }
-                    else if (hu_type[0] = 41) {//呼叫转移
-                        game.manager.dispatchEvent(GameEvent.Hujiaozhuanyi, [dir, hu_type[1]]);
+                var hu_types: any[] = data.ex_hu_type;
+                if (hu_types && hu_types.length) {
+                    for (var i: number = 0; i < hu_types.length; i++) {
+                        var val: any = hu_types[i];
+                        if (val == 19) {//杠上开花
+                            game.manager.dispatchEvent(GameEvent.Gangshangkaihua, dir);
+                        }
+                        else if (val[0] = 41) {//呼叫转移
+                            game.manager.dispatchEvent(GameEvent.Hujiaozhuanyi, [dir, this.gData.getDir(val[1])]);
+                        }
+                        else if (val[0] = 40) {//一炮多响
+                            var posArr: any = val[1];
+                            var dirArr: any = [];
+                            for (var j: number = 0; j < posArr.length; j++) {
+                                dirArr.push(this.gData.getDir(posArr[j]));
+                            }
+                            game.manager.dispatchEvent(GameEvent.Yipaoduoxiang, dirArr);
+                        }
                     }
                 }
 
@@ -723,12 +726,10 @@ class GSDataProxy {
     delay_Final() {
 
         if (PublicVal.state == StateType.ting) {
-
             GSData.i.tingEndShow = true;
-
         }
-        PublicVal.state = StateType.gameover;
 
+        PublicVal.state = StateType.gameover;
 
         this.gData.roundStarted = true;
 
