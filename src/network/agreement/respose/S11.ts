@@ -45,7 +45,7 @@ class S11 {
                 default://同步自己的功能牌
                     game.manager.dispatchEvent(GameEvent.CardThrow);
                     game.manager.dispatchEvent(GameEvent.CardThrowTips);
-                    GSDataProxy.i.S2C_FuncResult(obj.data.action, obj.data.pai, obj.data.turn, obj.data.cur);
+                    GSDataProxy.i.S2C_FuncResult(obj.data);
                     GSController.i.gsView.setQueState(false);
                     break;
             }
