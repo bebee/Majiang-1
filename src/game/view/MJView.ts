@@ -92,8 +92,8 @@ class MJView extends eui.Component {
                 for (var i: number = 0; i < this.handCon.numChildren; i++) {
                     var card: CardView = <CardView> this.handCon.getChildAt(i);
                     if (card && card.pai && card.index < 0)continue;
-                    boo ? card.activate() : card.unactivate();
-                    card.enabled = boo;
+                    card.unactivate();
+                    card.enabled = false;
                 }
                 return;
             }

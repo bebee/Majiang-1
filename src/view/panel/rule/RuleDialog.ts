@@ -1,3 +1,4 @@
+
 class RuleDialog extends BaseDialog {
 
     private btn_xueliu: eui.Button;

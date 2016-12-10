@@ -35,6 +35,10 @@ class TouchBehaviour implements IGameTapEvent {
                     GSController.i.activateCard = null;
                 }
 
+                if (game.isHuBoo) {//胡牌状态
+                    GSController.i.delayAutoPushPai();
+                }
+
                 /*GSData.i.isTing = false;
 
                  GSController.i.enablesHandPais();*/

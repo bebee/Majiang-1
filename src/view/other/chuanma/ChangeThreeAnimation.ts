@@ -80,11 +80,14 @@ class ChangeThreeAnimation extends BaseSprite {
 
                 egret.Tween.get(this.img_change_2r, {loop: true}).to({y: this.img_change_2r.y - 50}, 500).call(function () {
                     _this.img_change_2r.y = 128;
-
-                    _this.tweenComplete();
                 });
 
-                egret.setTimeout(this.hide, this, 1500);
+                egret.setTimeout(function () {
+
+                    _this.tweenComplete();
+                    _this.hide();
+
+                }, this, 1500);
                 break;
         }
     }
