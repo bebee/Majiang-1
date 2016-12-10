@@ -3,12 +3,9 @@
  * @Author Ace.c
  * @Create 2016-12-09 17:40
  */
-class CloseBgView extends BaseGameSprite {
+class CloseBgView extends BgView {
 
     close: eui.Button;
-
-    private callback: Function;
-    private thisobj: any;
 
     constructor() {
         super();
@@ -23,13 +20,6 @@ class CloseBgView extends BaseGameSprite {
     }
 
     private closeHandler() {
-        if (this.callback) {
-            this.thisobj ? this.callback.call(this) : this.callback();
-        }
-    }
-
-    addCallback(callback: Function, thisobj?: any) {
-        this.callback = callback;
-        this.thisobj = thisobj;
+        this.closeCall();
     }
 }

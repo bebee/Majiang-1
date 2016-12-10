@@ -3,8 +3,19 @@
  */
 class BasePanel extends BaseGameSprite {
 
+    private bgView: BgView;
+
     constructor() {
         super();
+    }
+
+    childrenCreated() {
+        super.childrenCreated();
+
+        this.bgView = <BgView|CloseBgView>this.getChildAt(0);
+        if (this.bgView) {
+            this.bgView.addCallback(this.hide, this);
+        }
     }
 
     show(): void {

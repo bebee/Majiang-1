@@ -1,6 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
 <e:Skin class="RulePanelSkin" width="880" height="570" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*">
-	<ns1:BgPanel left="0" right="0" top="0" bottom="0" skinName="BgPanelSkin"/>
 	<e:Image source="loadingeff_bg" left="0" scale9Grid="27,25,22,16" top="0" bottom="0" right="0" x="10" y="10"/>
 	<e:Image source="dialog_head_img" horizontalCenter="0.5" y="-6" locked="true" visible="false"/>
 	<e:Image source="rule_txt" horizontalCenter="0" y="12" locked="true"/>

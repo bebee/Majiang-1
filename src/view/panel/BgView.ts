@@ -5,6 +5,8 @@
  */
 class BgView extends BaseGameSprite {
 
+    protected callback: Function;
+    protected thisobj: any;
 
     constructor() {
         super();
@@ -14,5 +16,16 @@ class BgView extends BaseGameSprite {
 
     childrenCreated() {
         super.childrenCreated();
+    }
+
+    addCallback(callback: Function, thisobj?: any) {
+        this.callback = callback;
+        this.thisobj = thisobj;
+    }
+
+    protected closeCall() {
+        if (this.callback) {
+            this.thisobj ? this.callback.call(this) : this.callback();
+        }
     }
 }
