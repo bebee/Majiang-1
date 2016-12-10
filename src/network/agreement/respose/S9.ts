@@ -47,6 +47,7 @@ class S9 {
                 break;
             case 7://换三张
                 game.status = GameStatus.changeThree;
+                game.statusComplete = false;
                 break;
             case 8://订缺
                 game.status = GameStatus.missing;

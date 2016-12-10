@@ -405,7 +405,6 @@ class GSController extends egret.EventDispatcher {
         this.clear();
         this.showStateView();
 
-
         this.updateBaoView();
 
         this.setBoomDir(PublicVal.i.ownPos);
@@ -416,7 +415,6 @@ class GSController extends egret.EventDispatcher {
         this.updateCenterInfo();
 
         if (GSData.i.isLianZhuang) {
-
             EffectUtils.showTips("恭喜庄家连庄！", 1);
         }
 
@@ -586,8 +584,6 @@ class GSController extends egret.EventDispatcher {
 
             //别人点炮
             if (hupai.type == 17) {
-
-
                 var dianPaoDir = GSData.i.getDir(GSData.i.result.dianPaoPos);
 
                 this.removePoolCard(dianPaoDir);
@@ -1127,7 +1123,6 @@ class GSController extends egret.EventDispatcher {
 
         //解析手牌
         if (handPais.length > 0) {
-
             this.createIndexPais(mjView, sPosX, sPosY, dir, handStyle, handPais, true, true, lensCheck);
 
             if (updatePool) {

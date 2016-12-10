@@ -90,6 +90,7 @@ class GSDataProxy {
         PublicVal.i.zhuangFlag = 1 << this.gData.zhuangDir;
 
         var persons = this.gData.rebackData.person;
+        var lastPai = this.gData.rebackData.draw;
 
         for (var i: number = 0; i < persons.length; i++) {
 
@@ -110,6 +111,11 @@ class GSDataProxy {
 
                 if (dir == 1) {
                     game.isHuBoo = true;
+
+                    if (lastPai) {
+                        PublicVal.i.allPais[1].catchPai = lastPai;
+                        GSController.i.delayAutoPushPai();
+                    }
                 }
             }
 
@@ -768,7 +774,11 @@ class GSDataProxy {
             }
 
 
-        } else {
+        }
+        else if (hupai == 1) {
+
+        }
+        else {
 
             this.gData.result.hupaiPos = hupai.pos_hu;
 
@@ -1078,6 +1088,8 @@ class GSDataProxy {
     //同步开局牌的信息(自己牌)
     S2C_OwnCardInfo(obj: any) {
 
+        game.prestart();
+
         var paiLen: number = obj.data.pai.length;
 
         console.log("开局,牌长度:", obj.data.pai.length);
@@ -1091,23 +1103,22 @@ class GSDataProxy {
         PublicVal.i.allPais[3].handPais = new Array(13);
         PublicVal.i.allPais[4].handPais = new Array(13);
 
-        if (paiLen >= 13) {
+        if (paiLen > 0) {
 
             //进入开局
             PublicVal.i.allPais[1].handPais = obj.data.pai;
 
-            if(obj.data.pai.length == 14)
-            {
+            if (GSConfig.handLens[obj.data.pai.length]) {
                 PublicVal.i.allPais[1].catchPai = PublicVal.i.allPais[1].handPais.shift();
             }
 
             this.gData.zhuangPos = obj.data.zhuang;
 
             //判断连庄
-            if(obj.data.zhuang == this.gData.lastZhuangPos){
+            if (obj.data.zhuang == this.gData.lastZhuangPos) {
 
                 this.gData.isLianZhuang = true;
-            }else{
+            } else {
 
                 this.gData.lastZhuangPos = obj.data.zhuang;
 
@@ -1123,15 +1134,18 @@ class GSDataProxy {
             //this.gData.leftCount = obj.data.dui_num;
 
             for (var k in obj.data.cur) {
-
                 var pos = +k;
                 GSData.i.gangCurs[GSData.i.getDir(pos)] = obj.data.cur[k];
 
             }
+
             PublicVal.state = StateType.gamestart;
 
             GSController.i.startGame();
 
+            if (game.status == GameStatus.changeThree && !game.statusComplete) {
+                game.manager.dispatchEvent(GameEvent.ChangeThree);
+            }
         }
     }
 
@@ -1149,5 +1163,4 @@ class GSDataProxy {
             }
         }
     }
-
 }

@@ -3,34 +3,34 @@
  */
 class PersonItem extends egret.DisplayObjectContainer {
     headIcon: GSHeadIcon;
-    pos:number;
+    pos: number;
 
     //牌开始的位置
-    so = {x:150,y:46};
+    so = {x: 150, y: 46};
     //胡字位置
-    huPos = {x:838,y:40};
+    huPos = {x: 838, y: 40};
 
     dis = 105;
 
-    hupaiDis:number = 44;
+    hupaiDis: number = 44;
     //文本的偏移位置
     o = {
-        1: {ox: 127,oy:0, w: 130},
-        2: {ox: 200,oy:0, w: 130},
-        3: {ox: 451,oy:0, w: 130},
-        4: {ox: 652,oy:0, w: 130},
-        5:{ox:703,oy:30,w:130},
-        6:{ox:703,oy:50,w:130}
+        1: {ox: 127, oy: 0, w: 130},
+        2: {ox: 200, oy: 0, w: 130},
+        3: {ox: 451, oy: 0, w: 130},
+        4: {ox: 652, oy: 0, w: 130},
+        5: {ox: 703, oy: 30, w: 130},
+        6: {ox: 703, oy: 50, w: 130}
     };
     texts: egret.TextField[];
 
-    currPos:egret.Point;
+    currPos: egret.Point;
 
-    cardViews:CardView[];
+    cardViews: CardView[];
 
-    hulogo:FuncEffectView;
+    hulogo: FuncEffectView;
 
-    diaoPaoLogo:egret.Bitmap;
+    diaoPaoLogo: egret.Bitmap;
 
 
     constructor() {
@@ -40,20 +40,20 @@ class PersonItem extends egret.DisplayObjectContainer {
         this.initView();
     }
 
-    init(){
+    init() {
 
-        this.currPos = new egret.Point(this.so.x,this.so.y);
+        this.currPos = new egret.Point(this.so.x, this.so.y);
 
     }
 
-    clear(){
+    clear() {
 
         this.currPos.x = this.so.x;
         this.currPos.y = this.so.y;
 
-        while(this.cardViews.length){
+        while (this.cardViews.length) {
 
-            var cardView:CardView = <CardView>this.cardViews.shift();
+            var cardView: CardView = <CardView>this.cardViews.shift();
 
             this.removeChild(cardView);
 
@@ -61,6 +61,7 @@ class PersonItem extends egret.DisplayObjectContainer {
         }
 
     }
+
     initView() {
 
         this.headIcon = new GSHeadIcon;
@@ -89,7 +90,7 @@ class PersonItem extends egret.DisplayObjectContainer {
         this.hulogo.y = this.huPos.y;
         this.addChild(this.hulogo);
 
-        this.diaoPaoLogo = new egret.Bitmap( GameRes.getUI("JS_fangpao"));
+        this.diaoPaoLogo = new egret.Bitmap(GameRes.getUI("JS_fangpao"));
 
         this.diaoPaoLogo.anchorOffsetX = this.diaoPaoLogo.width >> 1;
         this.diaoPaoLogo.anchorOffsetY = this.diaoPaoLogo.height >> 1;
@@ -102,48 +103,41 @@ class PersonItem extends egret.DisplayObjectContainer {
 
 
     //0:空 1:胡牌 2:点炮
-    updateHuLogo(type:number){
+    updateHuLogo(type: number) {
 
-        switch(type){
+        switch (type) {
 
             case 0:
-
                 this.diaoPaoLogo.visible = false;
                 this.hulogo.reset();
-
                 break;
             case 1:
-
                 this.diaoPaoLogo.visible = false;
                 this.hulogo.reset();
-                this.hulogo.play(GameRes.getUI("JS_hulogo"),false);
+                this.hulogo.play(GameRes.getUI("JS_hulogo"), false);
                 //this.hulogo.texture = GameRes.getUI("JS_hulogo");
                 //this.hulogo.anchorOffsetX = this.hulogo.width >> 1;
                 //this.hulogo.anchorOffsetY = this.hulogo.height >> 1;
-
                 break;
             case 2:
                 this.hulogo.reset();
                 this.diaoPaoLogo.visible = true;
 
-/*              this.hulogo.texture = GameRes.getUI("JS_fangpao");
-                this.hulogo.anchorOffsetX = this.hulogo.width >> 1;
-                this.hulogo.anchorOffsetY = this.hulogo.height >> 1;*/
+                /*this.hulogo.texture = GameRes.getUI("JS_fangpao");
+                 this.hulogo.anchorOffsetX = this.hulogo.width >> 1;
+                 this.hulogo.anchorOffsetY = this.hulogo.height >> 1;*/
                 break;
-
         }
-
-
     }
 
 
-    updatePai(obj:any){
+    updatePai(obj: any) {
 
         var hu_type = obj.hu_type;
 
-        var hu_info:string = "";
+        var hu_info: string = "";
 
-        for(var k:number = 0;k < hu_type.length;k++){
+        for (var k: number = 0; k < hu_type.length; k++) {
 
             var type = hu_type[k];
 
@@ -151,95 +145,96 @@ class PersonItem extends egret.DisplayObjectContainer {
 
         }
 
-        var ting:string = "";
+        var ting: string = "";
 
-        if(GSData.i.hasTingRule){
+        if (GSData.i.hasTingRule) {
 
-            ting = (obj.ting == 1 ?"听牌 ":"未听牌 ");
+            ting = (obj.ting == 1 ? "听牌 " : "未听牌 ");
         }
 
         this.texts[1].text = obj.uid;
         this.texts[2].text = obj.nick;
         //this.texts[2].text = (obj.ting == 0 ? "未听牌 " : "听牌 ") + hu_info;
         this.texts[3].text = ting + hu_info;
-        this.texts[4].text = "合计: "+(obj.fan ? obj.fan : 0)+"番";
-        this.texts[5].text = "胡: "+obj.cur;
-        this.texts[6].text = "杠: "+obj.gang;
+        this.texts[4].text = "合计: " + (obj.fan ? obj.fan : 0) + "番";
+        this.texts[5].text = "胡: " + obj.cur;
+        this.texts[6].text = "杠: " + obj.gang;
 
         //判断牌型 可以排序
-        this.switchPai(1,obj[1]);
-        this.switchPai(2,obj[2]);
-        this.switchPai(22,obj[22]);
-        this.switchPai(24,obj[24]);
-        this.switchPai(25,obj[25]);
-        this.switchPai(26,obj[26]);
+        this.switchPai(1, obj[1]);
+        this.switchPai(2, obj[2]);
+        this.switchPai(22, obj[22]);
+        this.switchPai(24, obj[24]);
+        this.switchPai(25, obj[25]);
+        this.switchPai(26, obj[26]);
         this.showLeft(obj.left);
     }
 
-    hupaiPos:egret.Point = new egret.Point;
+    hupaiPos: egret.Point = new egret.Point;
 
     //显示手牌
-    showLeft(pais:any[]){
+    showLeft(pais: any[]) {
 
-        for(var i:number = 0;i<pais.length;i++){
+        for (var i: number = 0; i < pais.length; i++) {
 
             var pai = pais[i];
 
-            var cardView:CardView = CardView.create(1,4,pai);
+            var cardView: CardView = CardView.create(1, 4, pai);
 
-            var o = GSConfig.getPosByIndex(1,4,i);
+            var o = GSConfig.getPosByIndex(1, 4, i);
 
-            cardView.posView(this.currPos.x + o.x,this.currPos.y);
+            cardView.posView(this.currPos.x + o.x, this.currPos.y);
 
             this.addChild(cardView);
 
             this.cardViews.push(cardView);
         }
         //判断手牌长度进行间隔错位
-        if(GSConfig.handLens[pais.length]){
+        if (GSConfig.handLens[pais.length]) {
 
 
-            cardView.posView(cardView.pos.x + 10,this.currPos.y);
+            cardView.posView(cardView.pos.x + 10, this.currPos.y);
         }
 
         /*this.hupaiPos.x = cardView.pos.x + this.hupaiDis;
-        this.hupaiPos.y = this.currPos.y;*/
+         this.hupaiPos.y = this.currPos.y;*/
     }
+
     //添加胡牌 1:点炮 2:自摸
-    addHuPai(pai:any){
+    addHuPai(pai: any) {
 
-        var cardView:CardView = CardView.create(1,4,pai);
+        var cardView: CardView = CardView.create(1, 4, pai);
 
-        cardView.posView(this.hupaiPos.x,this.hupaiPos.y);
+        cardView.posView(this.hupaiPos.x, this.hupaiPos.y);
 
         this.addChild(cardView);
 
         this.cardViews.push(cardView);
 
     }
-    switchPai(action:number,group:any[])
-    {
-        if(!group) return;
+
+    switchPai(action: number, group: any[]) {
+        if (!group) return;
 
 
-        switch(action){
+        switch (action) {
 
             case 1://吃
             case 2://碰
 
-                for(var i:number = 0 ; i < group.length;i++){
+                for (var i: number = 0; i < group.length; i++) {
 
                     var pais = group[i];
 
-                    for(var j:number = 0 ; j <pais.length;j++){
+                    for (var j: number = 0; j < pais.length; j++) {
 
                         var pai = pais[j];
 
-                        var cardView = CardView.create(1,4,pai);
+                        var cardView = CardView.create(1, 4, pai);
 
-                        var o = GSConfig.getPosByIndex(1,4,j);
+                        var o = GSConfig.getPosByIndex(1, 4, j);
 
-                        cardView.posView(this.currPos.x + o.x,this.currPos.y);
+                        cardView.posView(this.currPos.x + o.x, this.currPos.y);
 
                         this.addChild(cardView);
 
@@ -252,7 +247,7 @@ class PersonItem extends egret.DisplayObjectContainer {
                 break;
             case 22://幺九杠
 
-                for(var i:number = 0 ; i < group.length;i++){
+                for (var i: number = 0; i < group.length; i++) {
 
                     var pais = group[i].slice(-3);
 
@@ -260,23 +255,23 @@ class PersonItem extends egret.DisplayObjectContainer {
 
                     var oggPais = group[i];
 
-                    var ever = [1,1,1];
+                    var ever = [1, 1, 1];
                     //补蛋
-                    for(var oi:number = 0;oi<oggPais.length;oi++ ){
+                    for (var oi: number = 0; oi < oggPais.length; oi++) {
 
-                        ever[oggPais[oi].type - 1] ++;
+                        ever[oggPais[oi].type - 1]++;
 
                     }
                     //最后三张是牌型
-                    for(var j:number = 0 ; j <pais.length;j++){
+                    for (var j: number = 0; j < pais.length; j++) {
 
                         var pai = pais[j];
 
-                        var cardView = CardView.create(1,4,pai,ever[j]);
+                        var cardView = CardView.create(1, 4, pai, ever[j]);
 
-                        var o = GSConfig.getPosByIndex(1,4,j);
+                        var o = GSConfig.getPosByIndex(1, 4, j);
 
-                        cardView.posView(this.currPos.x + o.x,this.currPos.y);
+                        cardView.posView(this.currPos.x + o.x, this.currPos.y);
                         this.addChild(cardView);
                         this.cardViews.push(cardView);
                     }
@@ -287,7 +282,7 @@ class PersonItem extends egret.DisplayObjectContainer {
                 break;
             case 24://暗杠
 
-                for(var i:number = 0 ; i < group.length;i++) {
+                for (var i: number = 0; i < group.length; i++) {
 
                     var pais = group[i];
 
@@ -320,7 +315,7 @@ class PersonItem extends egret.DisplayObjectContainer {
                 }
                 break;
             case 25://明杠
-                for(var i:number = 0 ; i < group.length;i++) {
+                for (var i: number = 0; i < group.length; i++) {
 
                     var pais = group[i];
 
@@ -354,27 +349,27 @@ class PersonItem extends egret.DisplayObjectContainer {
                 break;
             case 26://中发白杠
 
-                var pais:any = group.slice(-3);
+                var pais: any = group.slice(-3);
 
                 group.length -= 3;
 
-                var ever = [1,1,1];
+                var ever = [1, 1, 1];
 
-                for(var i:number = 0;i<group.length;i++){
+                for (var i: number = 0; i < group.length; i++) {
 
-                    ever[group[i].number - 1] ++;
+                    ever[group[i].number - 1]++;
 
                 }
                 //最后三张是牌型
-                for(var i:number = 0 ; i <pais.length;i++){
+                for (var i: number = 0; i < pais.length; i++) {
 
                     var pai = pais[i];
 
-                    var cardView = CardView.create(1,4,pai,ever[i]);
+                    var cardView = CardView.create(1, 4, pai, ever[i]);
 
-                    var o = GSConfig.getPosByIndex(1,4,i);
+                    var o = GSConfig.getPosByIndex(1, 4, i);
 
-                    cardView.posView(this.currPos.x + o.x,this.currPos.y);
+                    cardView.posView(this.currPos.x + o.x, this.currPos.y);
 
                     this.addChild(cardView);
 

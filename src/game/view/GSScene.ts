@@ -116,14 +116,15 @@ class GSScene extends egret.DisplayObjectContainer {
         this.ruleText.fontFamily = "微软雅黑";
         this.ruleText.textColor = 0xc4e6a2;
         this.ruleText.size = 16;
-        this.ruleText.width = 360;
+        this.ruleText.width = 500;
+        this.ruleText.height = 60;
         this.ruleText.multiline = true;
         this.ruleText.wordWrap = true;
-        this.ruleText.anchorOffsetX = this.ruleText.width >> 1;
         this.ruleText.anchorOffsetY = 30;
         this.ruleText.textAlign = egret.HorizontalAlign.CENTER;
+        this.ruleText.verticalAlign = egret.VerticalAlign.MIDDLE;
         this.ruleText.x = GSConfig.width >> 1;
-        this.ruleText.y = 270;
+        this.ruleText.y = 285;
 
         this.addChild(this.ruleText);
 
@@ -181,6 +182,7 @@ class GSScene extends egret.DisplayObjectContainer {
     //刷新规则
     updateRule(str: string) {
         this.ruleText.text = str;
+        this.ruleText.anchorOffsetX = this.ruleText.width >> 1;
     }
 
     bindInterface(face: IGameTapEvent) {
