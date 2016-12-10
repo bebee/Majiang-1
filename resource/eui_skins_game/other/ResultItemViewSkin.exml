@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='utf-8'?>
+<e:Skin class="ResultItemViewSkin" width="960" height="100" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+	<e:Group top="0" bottom="0" left="0" right="780">
+		<e:Group id="headGroup" x="693" y="332"/>
+		<e:Label id="lab_nick" fontFamily="微软雅黑" size="20" bottom="1" horizontalCenter="-390" text="昵称" width="180" textAlign="center"/>
+		<e:layout>
+			<e:VerticalLayout gap="0" horizontalAlign="center"/>
+		</e:layout>
+	</e:Group>
+	<e:Group left="180" right="180" top="0" bottom="0">
+		<e:Label id="lab_description" x="150" y="3" fontFamily="微软雅黑" size="18" height="41" width="570"/>
+		<e:Group id="paiGroup" height="56" width="570" x="150" bottom="0"/>
+		<e:layout>
+			<e:VerticalLayout gap="0"/>
+		</e:layout>
+	</e:Group>
+	<e:Group width="200" top="0" bottom="0" right="0">
+		<e:Label id="lab_fan" fontFamily="微软雅黑" size="26"/>
+		<e:Label id="lab_hu" size="20" fontFamily="微软雅黑" x="10" y="10"/>
+		<e:Label id="lab_gang" y="20" size="20" fontFamily="微软雅黑" x="20"/>
+		<e:layout>
+			<e:VerticalLayout gap="10"/>
+		</e:layout>
+	</e:Group>
+</e:Skin>

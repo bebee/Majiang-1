@@ -185,6 +185,8 @@ class SocketHandler {
     onReceiveMessage() {
         var start: string = this.socket.readUTF();
 
+        console.log("==================", start);
+
         if (start == "start") {
             if (GlobalData.getInstance().player.code) {
                 var p = GlobalData.getInstance().player;

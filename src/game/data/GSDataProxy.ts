@@ -345,10 +345,8 @@ class GSDataProxy {
 
         //断线重连上来的情况
         if(this.gData.rebackData){
-
             this.gData.rebackViewFuncs.push(GSController.i.showFuncSelectMenu);
         }else{
-
             GSController.i.showFuncSelectMenu();
         }
 
@@ -624,10 +622,10 @@ class GSDataProxy {
                         if (val == 19) {//杠上开花
                             game.manager.dispatchEvent(GameEvent.Gangshangkaihua, dir);
                         }
-                        else if (val[0] = 41) {//呼叫转移
+                        else if (val[0] == 41) {//呼叫转移
                             game.manager.dispatchEvent(GameEvent.Hujiaozhuanyi, [dir, this.gData.getDir(val[1])]);
                         }
-                        else if (val[0] = 40) {//一炮多响
+                        else if (val[0] == 40) {//一炮多响
                             var posArr: any = val[1];
                             var dirArr: any = [];
                             for (var j: number = 0; j < posArr.length; j++) {
@@ -764,7 +762,13 @@ class GSDataProxy {
             }
         }
         else if (hupai == 1) {
-
+            var person: any;
+            for (var i: number = 0; i < GSData.i.result.person.length; i++) {
+                person = GSData.i.result.person[i];
+                if (this.gData.getDir(person.pos) == 1 && game.gameType == GameType.sichuan) {
+                    this.gData.resultType = person.hu_type.length ? 1 : 2;
+                }
+            }
         }
         else {
             this.gData.result.hupaiPos = hupai.pos_hu;

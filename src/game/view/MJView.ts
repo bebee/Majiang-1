@@ -178,6 +178,11 @@ class MJView extends eui.Component {
                 card.enabled = true;
             }
 
+            if (GSData.i.isShowFunc) {
+                card.unactivate();
+                continue;
+            }
+
             card.moveDown(false);
         }
     }
