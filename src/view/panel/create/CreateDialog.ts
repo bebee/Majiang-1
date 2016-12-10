@@ -1,4 +1,4 @@
-class CreateDialog extends BaseDialog {
+class CreateDialog extends BasePanel {
 
     private btn_xueliu: mui.EButton;
     private btn_xuezhan: mui.EButton;
@@ -16,13 +16,15 @@ class CreateDialog extends BaseDialog {
     private ruleVo: GameRuleVo;
 
     public constructor() {
-        super("create_btn", 880, 570);
+        super();
 
         this.skinName = "CreatePanelSkin";
     }
 
     createChildren() {
         super.createChildren();
+
+        this.title.source = "create_btn";
 
         this.horizontalCenter = 0;
         this.verticalCenter = 0;
@@ -117,11 +119,5 @@ class CreateDialog extends BaseDialog {
                 "pass": "0"
             }
         });
-    }
-
-    public show(): void {
-        super.show(true, this.width, this.height, 1, false);
-
-        this.initPanel();
     }
 }

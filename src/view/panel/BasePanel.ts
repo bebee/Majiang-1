@@ -3,10 +3,14 @@
  */
 class BasePanel extends BaseGameSprite {
 
-    private bgView: BgView;
+    protected bgView: BgView;
+
+    protected title: eui.Image;
 
     constructor() {
         super();
+
+        this.title = new eui.Image();
     }
 
     childrenCreated() {
@@ -15,6 +19,7 @@ class BasePanel extends BaseGameSprite {
         this.bgView = <BgView|CloseBgView>this.getChildAt(0);
         if (this.bgView) {
             this.bgView.addCallback(this.hide, this);
+            this.title = this.bgView.title;
         }
     }
 

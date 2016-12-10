@@ -8,10 +8,14 @@ class BgView extends BaseGameSprite {
     protected callback: Function;
     protected thisobj: any;
 
+    title: eui.Image;
+
     constructor() {
         super();
 
         this.skinName = "BgViewSkin";
+
+        this.title = new eui.Image();
     }
 
     childrenCreated() {

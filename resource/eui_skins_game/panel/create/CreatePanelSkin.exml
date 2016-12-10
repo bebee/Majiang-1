@@ -1,6 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
-<e:Skin class="CreatePanelSkin" width="860" height="540" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:mui="mui.*" xmlns:ns1="*">
-	<e:Group x="3" top="56">
+<e:Skin class="CreatePanelSkin" width="880" height="570" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:mui="mui.*" xmlns:ns1="*">
+	<ns1:CloseBgTitleView left="0" right="0" top="0" bottom="0" skinName="CloseBgTitleViewSkin"/>
+	<e:Group left="13" bottom="30" top="110">
 		<e:Image source="activit_jian" y="92" x="104"/>
 		<e:Image source="lashen_15" y="127" scale9Grid="2,1,2,2" width="166" height="3" x="35"/>
 		<e:Scroller y="132" height="346" x="35">
@@ -17,7 +18,7 @@
 			<e:VerticalLayout horizontalAlign="center"/>
 		</e:layout>
 	</e:Group>
-	<e:Group right="15" bottom="20" width="682" height="450">
+	<e:Group right="24" bottom="31" width="682" height="450">
 		<e:Image source="panel_1" left="0" right="0" top="0" bottom="0" scale9Grid="20,20,23,15"/>
 		<e:Scroller id="scroller" left="10" right="10" top="10" bottom="140">
 			<e:Group id="viewGroup"/>

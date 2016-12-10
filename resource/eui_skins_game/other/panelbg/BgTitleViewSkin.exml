@@ -1,0 +1,6 @@
+<?xml version='1.0' encoding='utf-8'?>
+<e:Skin class="BgTitleViewSkin" width="500" height="100" xmlns:e="http://ns.egret.com/eui">
+	<e:Image source="loadingeff_bg" left="0" bottom="0" top="0" right="0" scale9Grid="27,25,22,16" y="20" x="20"/>
+	<e:Image source="dialog_head_img" y="-6" horizontalCenter="0.5"/>
+	<e:Image y="12" id="title" horizontalCenter="0"/>
+</e:Skin>
