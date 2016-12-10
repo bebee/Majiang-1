@@ -582,36 +582,26 @@ class GSController extends egret.EventDispatcher {
         //摊牌
         //遍历index大于-1的牌
         var hupai = GSData.i.result.hupai;
-
         if (hupai != 0) {
-
             //别人点炮
             if (hupai.type == 17) {
                 var dianPaoDir = GSData.i.getDir(GSData.i.result.dianPaoPos);
-
                 this.removePoolCard(dianPaoDir);
-
             }
         }
 
         for (var i: number = 1; i <= 4; i++) {
-
             var mjView = this.gsView.MJViews[i];
-
             mjView.removeIndexPai();
-
             var left = GSData.i.getResultPersonLeft(i);
-
             var cur = GSConfig.dymnicHandPos[i];
-
             this.createIndexPais(mjView, cur.x, cur.y, i, 3, left, true, false);
-
         }
 
         if (GSData.i.tingEndShow) {
-
             this.tingingView(true);
         }
+
         //等待结算
         egret.setTimeout(_=> {
             this.intoResultView()
@@ -622,30 +612,24 @@ class GSController extends egret.EventDispatcher {
     createIndexPais(mjView: MJView, sx: number, sy: number, dir: number, style: number, pais: any, visible: boolean = true, activate: boolean = true, lensCheck: boolean = true) {
 
         for (var i: number = 0; i < pais.length; i++) {
-
             var cardView: CardView = CardView.create(dir, style, pais[i]);
             cardView.index = i;
             var o = GSConfig.getPosByIndex(dir, style, i);
-
             cardView.posView(sx + o.x, sy + o.y);
-
             cardView.visible = visible;
-
             mjView.addHandCard(cardView);
-
             if (dir == 1 && activate && GSConfig.handCardActivate) {
                 cardView.addClick(this.onCardClick, this);
                 cardView.activate();
             }
-
         }
+
         var catchPos = GSConfig.catchPos[dir];
         //如果出牌长度范围
         if (lensCheck && GSConfig.handLens[pais.length]) {
             catchPos.x = cardView.pos.x + catchPos.dx;
             catchPos.y = cardView.pos.y + catchPos.dy;
             cardView.posView(catchPos.x, catchPos.y);
-
         } else {
             o = GSConfig.getPosByIndex(dir, style, i);
             catchPos.x = sx + o.x + catchPos.dx;
@@ -655,12 +639,9 @@ class GSController extends egret.EventDispatcher {
 
     //进入结算界面
     intoResultView() {
-
         this.showStateView();
-
         this.gsResultView.update();
     }
-
 
     //初次发牌
     createAllHandPai() {

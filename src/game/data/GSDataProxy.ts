@@ -737,76 +737,47 @@ class GSDataProxy {
 
         //手牌排序
         for (var i: number = 0; i < 4; i++) {
-
             var left = this.gData.result.person[i].left;
-
             FashionTools.sortPai(left);
-
         }
+
         //流局
         if (hupai == 0) {
-
             this.gData.resultType = 3;
-
             var fen = this.gData.result.fen;
-
             var fenLeft;
-
             if (fen[1]) {
-
                 fenLeft = GSData.i.getResultPersonLeft(GSData.i.getDir(1));
-
                 this.formatLeft(fenLeft, fen[1]);
-
             }
             if (fen[2]) {
-
-
                 fenLeft = GSData.i.getResultPersonLeft(GSData.i.getDir(2));
-
                 this.formatLeft(fenLeft, fen[2]);
-
             }
             if (fen[3]) {
-
-
                 fenLeft = GSData.i.getResultPersonLeft(GSData.i.getDir(3));
-
                 this.formatLeft(fenLeft, fen[3]);
-
             }
             if (fen[4]) {
-
-
                 fenLeft = GSData.i.getResultPersonLeft(GSData.i.getDir(4));
-
                 this.formatLeft(fenLeft, fen[4]);
-
             }
-
-
         }
         else if (hupai == 1) {
 
         }
         else {
-
             this.gData.result.hupaiPos = hupai.pos_hu;
-
             var huDir = this.gData.getDir(hupai.pos_hu);
-
             //胡家的剩余牌
             var hu_left = GSData.i.getResultPersonLeft(huDir);
-
             if (huDir == 1) {
                 this.gData.resultType = 1;
             } else {
                 this.gData.resultType = 2;
             }
-
             //自胡
             var selfHu: boolean = false;
-
             switch (hupai.type) {
                 case 17://点炮
                     this.gData.result.dianPaoPos = hupai.pos;
@@ -816,17 +787,14 @@ class GSDataProxy {
                 case 29://天胡
                     GameSound.PlaySound("zimo_" + this.gData.getSexByPos(hupai.pos_hu));
                     selfHu = true;
-
                     break;
                 case 13://摸宝
                     GameSound.PlaySound("bao_" + this.gData.getSexByPos(hupai.pos_hu));
                     selfHu = true;
-
                     break;
                 case 7://自摸
                     GameSound.PlaySound("zimo_" + this.gData.getSexByPos(hupai.pos_hu));
                     selfHu = true;
-
                     break;
             }
             if (selfHu) {
