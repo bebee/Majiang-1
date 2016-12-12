@@ -1,6 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<e:Skin class="SettingSkin" width="700" height="400" xmlns:e="http://ns.egret.com/eui" xmlns:mui="mui.*" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*">
-	<ns1:CloseBgView left="0" right="0" top="0" bottom="0" skinName="CloseBgViewSkin"/>
+<e:Skin class="SettingSkin" width="700" height="400" xmlns:e="http://ns.egret.com/eui" xmlns:mui="mui.*" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*">
 	<e:Image source="setting_huawen" y="33" x="415"/>
 	<e:Image source="setting_huawen" y="33" x="288" scaleX="-1"/>
 	<e:Image source="setting_line" x="415" y="94" height="150"/>
@@ -8,5 +7,11 @@
 	<e:Label y="185" textColor="0xA97144" verticalAlign="middle" text="音效" fontFamily="微软雅黑" textAlign="center" width="59" height="26" size="24" x="28"/>
 	<e:Label y="115" textColor="0xA97144" verticalAlign="middle" text="手牌尺寸" fontFamily="微软雅黑" textAlign="center" width="112" height="26" size="24" x="418"/>
 	<e:Label verticalAlign="middle" y="185" textColor="0xA97144" height="26" text="手牌颜色" fontFamily="微软雅黑" textAlign="center" width="112" size="24" x="418"/>
-	<e:Label id="_ver" y="279" width="654" height="43" size="20" textAlign="center" verticalAlign="middle" fontFamily="微软雅黑" textColor="0xA97144" lineSpacing="10" horizontalCenter="0"/>
+	<e:Label id="lab_version" y="279" width="654" height="43" size="20" textAlign="center" verticalAlign="middle" fontFamily="微软雅黑" textColor="0xA97144" lineSpacing="10" horizontalCenter="0"/>
+	<e:HSlider x="96" y="101" skinName="skins.HSliderSkin" width="213"/>
+	<e:HSlider skinName="skins.HSliderSkin" y="164" x="94" width="216"/>
+	<e:CheckBox label="复选框" x="338" y="109" skinName="skins.CheckBox_SoundSkin"/>
+	<e:CheckBox skinName="skins.CheckBox_SoundSkin" y="165" label="复选框" x="338"/>
+	<e:CheckBox label="复选框" x="526" y="168" skinName="skins.CheckBox_PaiColorSkin"/>
+	<e:CheckBox skinName="skins.CheckBox_PaiSkin" y="98" label="复选框" x="530"/>
 </e:Skin>

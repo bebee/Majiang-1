@@ -3,9 +3,11 @@
   "exmls": [
     "resource/eui_skins/ButtonSkin.exml",
     "resource/eui_skins/CheckBoxSkin.exml",
-    "resource/eui_skins/CheckBox_ChangeSkin.exml",
+    "resource/eui_skins/CheckBox_PaiColorSkin.exml",
+    "resource/eui_skins/CheckBox_PaiSkin.exml",
     "resource/eui_skins/CheckBox_SoundSkin.exml",
     "resource/eui_skins/EHSliderSkin.exml",
+    "resource/eui_skins/HSliderSkin.exml",
     "resource/eui_skins/RadioButtonSkin.exml",
     "resource/eui_skins_game/ChatListSkin.exml",
     "resource/eui_skins_game/ChatPaoSkin.exml",
@@ -16,6 +18,7 @@
     "resource/eui_skins_game/JoinPasswordSkin.exml",
     "resource/eui_skins_game/JoinSkin.exml",
     "resource/eui_skins_game/MessageSkin.exml",
+    "resource/eui_skins_game/other/BgViewSkin.exml",
     "resource/eui_skins_game/other/chuanma/ChangeThreeAnimationSkin.exml",
     "resource/eui_skins_game/other/chuanma/ChangeThreeViewSkin.exml",
     "resource/eui_skins_game/other/chuanma/GangshangkaihuaViewSkin.exml",
@@ -26,10 +29,6 @@
     "resource/eui_skins_game/other/chuanma/XiayuViewSkin.exml",
     "resource/eui_skins_game/other/chuanma/YipaoduoxiangViewSkin.exml",
     "resource/eui_skins_game/other/HornSkin.exml",
-    "resource/eui_skins_game/other/panelbg/BgTitleViewSkin.exml",
-    "resource/eui_skins_game/other/panelbg/BgViewSkin.exml",
-    "resource/eui_skins_game/other/panelbg/CloseBgTitleViewSkin.exml",
-    "resource/eui_skins_game/other/panelbg/CloseBgViewSkin.exml",
     "resource/eui_skins_game/other/ResultItemViewSkin.exml",
     "resource/eui_skins_game/panel/create/CreatePanelSkin.exml",
     "resource/eui_skins_game/panel/create/CreateXueliuViewSkin.exml",
@@ -48,6 +47,7 @@
   "skins": {
     "eui.Button": "resource/eui_skins/ButtonSkin.exml",
     "eui.CheckBox": "resource/eui_skins/CheckBoxSkin.exml",
+    "eui.HSlider": "resource/eui_skins/HSliderSkin.exml",
     "eui.RadioButton": "resource/eui_skins/RadioButtonSkin.exml"
   }
 }

@@ -279,46 +279,4 @@ class SettingDialog extends BaseDialog
             }
         }
     }
-
-    /**
-     * 面板弹出之前处理
-     */
-    public beforShow(): void {
-        super.beforShow();
-    }
-
-    /**
-     * 初始化面板ui
-     */
-    public initUI(): void {
-        super.initUI();
-    }
-
-
-    /**
-     * 初始化面板数据
-     */
-    public initData(): void {
-        super.initData();
-    }
-
-
-    /**
-     * 移除面板方法
-     * panel       		面板
-     * effectType        0：没有动画 1:从中间缩小消失 2：  3：从左向右 4：从右向左 5、从上到下 6、从下到上
-     */
-    public hide(): void
-    {
-        super.hide(1);
-    }
-
-
-    /**
-     * 面板关闭后需要销毁的对象
-     */
-    public destroy(): void
-    {
-        super.destroy();
-    }
 }

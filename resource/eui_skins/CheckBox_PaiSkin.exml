@@ -5,9 +5,9 @@
             <e:HorizontalLayout verticalAlign="middle"/>
         </e:layout>
         <e:Image fillMode="scale" alpha="1" alpha.disabled="0.5" alpha.down="0.7"
-                 source="card_style_green"
-                 source.downAndSelected="card_style_blue"
-                 source.disabledAndSelected="card_style_blue" 
-                 source.upAndSelected="card_style_blue"/>
+                
+                 source.downAndSelected="card_0_btn"
+                 source.disabledAndSelected="card_0_btn" 
+                 source.upAndSelected="card_0_btn" source="card_1_btn"/>
     </e:Group>
 </e:Skin>

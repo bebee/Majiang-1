@@ -1,4 +1,3 @@
-
 class RuleDialog extends BasePanel {
 
     private btn_xueliu: eui.Button;
@@ -12,19 +11,18 @@ class RuleDialog extends BasePanel {
     private type: GamePlayType;
 
     public constructor() {
-        // super("rule_txt", 880, 570);
         super();
 
         this.skinName = "RulePanelSkin";
     }
 
-    createChildren() {
-        super.createChildren();
+    childrenCreated() {
+        super.childrenCreated();
+
+        this.setTitle("rule_txt");
 
         this.horizontalCenter = 0;
         this.verticalCenter = 0;
-
-        // this.m_dialog._title_img.visible = false;
 
         this.type = GamePlayType.xueliuchenghe;
 

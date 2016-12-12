@@ -21,10 +21,10 @@ class CreateDialog extends BasePanel {
         this.skinName = "CreatePanelSkin";
     }
 
-    createChildren() {
-        super.createChildren();
+    childrenCreated() {
+        super.childrenCreated();
 
-        this.title.source = "create_btn";
+        this.setTitle("create_btn");
 
         this.horizontalCenter = 0;
         this.verticalCenter = 0;
