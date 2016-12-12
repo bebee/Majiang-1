@@ -118,21 +118,12 @@ class GSResultView extends egret.DisplayObjectContainer{
             personItem.headIcon.visibleZhuang(GSData.i.result.zhuang == person_pos);
 
             if (GSData.i.result.hupaiPos == person_pos) {
-
-                personItem.updateHuLogo(1);
-
-                personItem.updatePai(person);
+                personItem.update(person);
 
             } else if (GSData.i.result.dianPaoPos == person_pos) {
-
-                personItem.updatePai(person);
-
-                personItem.updateHuLogo(2);
+                personItem.update(person);
             } else {
-
-                personItem.updatePai(person);
-
-                personItem.updateHuLogo(0);
+                personItem.update(person);
             }
         }
     }

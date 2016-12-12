@@ -246,7 +246,7 @@ class SocketHandler {
         else {
             if (obj && messageID != 1) obj["sequence"] = messageID;
 
-            console.log("<<Send>>---------:  ", obj);
+            console.log("<<Send>>---------:  ", messageID, obj);
 
             this.socket.writeUTF(request.writeData(obj));
         }
