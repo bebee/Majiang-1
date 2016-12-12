@@ -36,7 +36,7 @@ class GSController extends egret.EventDispatcher {
     }
 
     initView() {
-        var main = GameLayerManager.gameLayer().mainLayer;
+        var main = LayerManager.gameLayer().mainLayer;
         main.addChild(this.scene = new GSScene);
 
         this.gsView = this.scene.gsView;
@@ -69,7 +69,7 @@ class GSController extends egret.EventDispatcher {
     //启动游戏主界面
     startView() {
 
-        GameLayerManager.gameLayer().openMainLayer();
+        LayerManager.gameLayer().openMainLayer();
 
         this.scene.updateTableBG();
 
@@ -349,7 +349,7 @@ class GSController extends egret.EventDispatcher {
         this.closeGSView();
         if (this.gsTitleView) this.gsTitleView.onClose();
         this.closeResultView();
-        GameLayerManager.gameLayer().openSceneLayer();
+        LayerManager.gameLayer().openSceneLayer();
     }
 
     //返回游戏

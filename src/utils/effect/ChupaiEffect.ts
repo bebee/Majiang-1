@@ -71,7 +71,7 @@ class ChupaiEffect {
         this.group = new eui.Group();
         this.group.width = acekit.width;
         this.group.height = acekit.height;
-        GameLayerManager.gameLayer().effectLayer.addChildAt(this.group, 0);
+        LayerManager.gameLayer().effectLayer.addChildAt(this.group, 0);
     }
 
     /**

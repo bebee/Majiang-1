@@ -59,6 +59,6 @@ class LoadingScene extends eui.Component {
     public onIn(): void {
         SceneManager.close("LoadingScene", true);
         SceneManager.open(MainScene, "MainScene");
-        GameLayerManager.gameLayer().messagBox = new MessageDialog();
+        LayerManager.gameLayer().messagBox = new MessageDialog();
     }
 }

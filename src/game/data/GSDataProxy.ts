@@ -1008,7 +1008,7 @@ class GSDataProxy {
 
         var diss: DissolutionDialog = StackManager.findDialog(DissolutionDialog, "DissolutionDialog");
 
-        if (diss && GameLayerManager.gameLayer().panelLayer.contains(diss)) diss.refresh();
+        if (diss && LayerManager.gameLayer().panelLayer.contains(diss)) diss.refresh();
     }
 
     parseReback() {

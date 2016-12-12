@@ -33,16 +33,16 @@ module TipsUtils
 
         effectTips.touchEnabled = false;
 
-        if(!GameLayerManager.gameLayer().loadLayer.contains(effectTips))
+        if(!LayerManager.gameLayer().loadLayer.contains(effectTips))
         {
-            GameLayerManager.gameLayer().loadLayer.addChild( effectTips );
+            LayerManager.gameLayer().loadLayer.addChild( effectTips );
         }        
 
         var onComplete2:Function = function()
         {
-            if(GameLayerManager.gameLayer().loadLayer.contains(effectTips))
+            if(LayerManager.gameLayer().loadLayer.contains(effectTips))
             {
-                GameLayerManager.gameLayer().loadLayer.removeChild( effectTips );
+                LayerManager.gameLayer().loadLayer.removeChild( effectTips );
                 effectTips = null;
             }
         };
@@ -99,9 +99,9 @@ module TipsUtils
 
         effectTips.touchEnabled = false;
 
-        if(!GameLayerManager.gameLayer().loadLayer.contains(effectTips))
+        if(!LayerManager.gameLayer().loadLayer.contains(effectTips))
         {
-            GameLayerManager.gameLayer().loadLayer.addChild( effectTips );
+            LayerManager.gameLayer().loadLayer.addChild( effectTips );
         }        
 
         if(isFromeLeft)
@@ -139,9 +139,9 @@ module TipsUtils
 
         egret.setTimeout(function ()
         {
-            if(GameLayerManager.gameLayer().loadLayer.contains(effectTips))
+            if(LayerManager.gameLayer().loadLayer.contains(effectTips))
             {
-                GameLayerManager.gameLayer().loadLayer.removeChild( effectTips );
+                LayerManager.gameLayer().loadLayer.removeChild( effectTips );
                 effectTips = null;
             }
         }, this, 1100);     
@@ -175,9 +175,9 @@ module TipsUtils
         effectTips.fontFamily = GameConfig.FontFamily;
         effectTips.touchEnabled = false;
 
-        if(!GameLayerManager.gameLayer().loadLayer.contains(effectTips))
+        if(!LayerManager.gameLayer().loadLayer.contains(effectTips))
         {
-            GameLayerManager.gameLayer().loadLayer.addChild( effectTips );
+            LayerManager.gameLayer().loadLayer.addChild( effectTips );
         }        
 
         effectTips.anchorOffsetX = effectTips.width/2;
@@ -187,9 +187,9 @@ module TipsUtils
         
         var onComplete2:Function = function()
         {
-            if(GameLayerManager.gameLayer().loadLayer.contains(effectTips))
+            if(LayerManager.gameLayer().loadLayer.contains(effectTips))
             {
-                GameLayerManager.gameLayer().loadLayer.removeChild( effectTips );
+                LayerManager.gameLayer().loadLayer.removeChild( effectTips );
                 effectTips = null;
             }
         };
@@ -229,9 +229,9 @@ module TipsUtils
         effectTips.fontFamily = GameConfig.FontFamily;
         effectTips.touchEnabled = false;
 
-        if(!GameLayerManager.gameLayer().loadLayer.contains(effectTips))
+        if(!LayerManager.gameLayer().loadLayer.contains(effectTips))
         {
-            GameLayerManager.gameLayer().loadLayer.addChild( effectTips );
+            LayerManager.gameLayer().loadLayer.addChild( effectTips );
         }        
 
         effectTips.anchorOffsetX = effectTips.width / 2;
@@ -241,9 +241,9 @@ module TipsUtils
         
         var onComplete2:Function = function()
         {
-            if(GameLayerManager.gameLayer().loadLayer.contains(effectTips))
+            if(LayerManager.gameLayer().loadLayer.contains(effectTips))
             {
-                GameLayerManager.gameLayer().loadLayer.removeChild( effectTips );
+                LayerManager.gameLayer().loadLayer.removeChild( effectTips );
                 effectTips = null;
             }
         };

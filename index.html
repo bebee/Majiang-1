@@ -64,7 +64,6 @@
 	<script egret="game" src="bin-debug/ace_html5_game/utils/StringUtils.js"></script>
 	<script egret="game" src="bin-debug/ace_html5_game/vo/BaseVo.js"></script>
 	<script egret="game" src="bin-debug/ace_html5_game/vo/BaseCharVo.js"></script>
-	<script egret="game" src="bin-debug/AssetAdapter.js"></script>
 	<script egret="game" src="bin-debug/component/EButton.js"></script>
 	<script egret="game" src="bin-debug/component/ECheckBox.js"></script>
 	<script egret="game" src="bin-debug/component/EHSlider.js"></script>
@@ -73,10 +72,9 @@
 	<script egret="game" src="bin-debug/component/ETextField.js"></script>
 	<script egret="game" src="bin-debug/config/GameCof.js"></script>
 	<script egret="game" src="bin-debug/config/GameConfig.js"></script>
+	<script egret="game" src="bin-debug/config/GameConst.js"></script>
+	<script egret="game" src="bin-debug/config/GameType.js"></script>
 	<script egret="game" src="bin-debug/config/GlobalData.js"></script>
-	<script egret="game" src="bin-debug/config/Weixin.js"></script>
-	<script egret="game" src="bin-debug/constant/GameConst.js"></script>
-	<script egret="game" src="bin-debug/constant/GameType.js"></script>
 	<script egret="game" src="bin-debug/core/BaseDialog.js"></script>
 	<script egret="game" src="bin-debug/core/dialog/BindDialog.js"></script>
 	<script egret="game" src="bin-debug/core/dialog/ChatDialog.js"></script>
@@ -91,11 +89,6 @@
 	<script egret="game" src="bin-debug/core/dialog/SettingDialog.js"></script>
 	<script egret="game" src="bin-debug/core/dialog/ShopDialog.js"></script>
 	<script egret="game" src="bin-debug/core/dialog/TipsDialog.js"></script>
-	<script egret="game" src="bin-debug/core/EffectManager.js"></script>
-	<script egret="game" src="bin-debug/core/GameLayerManager.js"></script>
-	<script egret="game" src="bin-debug/core/PopUpManager.js"></script>
-	<script egret="game" src="bin-debug/core/SceneManager.js"></script>
-	<script egret="game" src="bin-debug/core/StackManager.js"></script>
 	<script egret="game" src="bin-debug/core/uicom/ChatExpression.js"></script>
 	<script egret="game" src="bin-debug/core/uicom/ChatListUI.js"></script>
 	<script egret="game" src="bin-debug/core/uicom/ChatPao.js"></script>
@@ -164,15 +157,19 @@
 	<script egret="game" src="bin-debug/game/view/GSTotleView.js"></script>
 	<script egret="game" src="bin-debug/game/view/GSView.js"></script>
 	<script egret="game" src="bin-debug/game/view/MJView.js"></script>
-	<script egret="game" src="bin-debug/view/GameSprite.js"></script>
+	<script egret="game" src="bin-debug/view/BaseGameSprite.js"></script>
 	<script egret="game" src="bin-debug/game/view/PersonItem.js"></script>
 	<script egret="game" src="bin-debug/game/view/ReplayControllView.js"></script>
 	<script egret="game" src="bin-debug/game/view/TimeEffectView.js"></script>
 	<script egret="game" src="bin-debug/manager/GameManager.js"></script>
-	<script egret="game" src="bin-debug/GameCore.js"></script>
+	<script egret="game" src="bin-debug/Game.js"></script>
 	<script egret="game" src="bin-debug/Main.js"></script>
 	<script egret="game" src="bin-debug/manager/BaseManager.js"></script>
+	<script egret="game" src="bin-debug/manager/EffectManager.js"></script>
 	<script egret="game" src="bin-debug/manager/GameEffectManager.js"></script>
+	<script egret="game" src="bin-debug/manager/LayerManager.js"></script>
+	<script egret="game" src="bin-debug/manager/SceneManager.js"></script>
+	<script egret="game" src="bin-debug/manager/StackManager.js"></script>
 	<script egret="game" src="bin-debug/manager/TipsManager.js"></script>
 	<script egret="game" src="bin-debug/network/agreement/GameParse.js"></script>
 	<script egret="game" src="bin-debug/network/agreement/MessageID.js"></script>
@@ -232,10 +229,8 @@
 	<script egret="game" src="bin-debug/network/agreement/respose/S9.js"></script>
 	<script egret="game" src="bin-debug/network/handler/HttpHandler.js"></script>
 	<script egret="game" src="bin-debug/network/handler/SocketManager.js"></script>
-	<script egret="game" src="bin-debug/sound/GameMusic.js"></script>
-	<script egret="game" src="bin-debug/sound/GameSound.js"></script>
-	<script egret="game" src="bin-debug/Test.js"></script>
-	<script egret="game" src="bin-debug/ThemeAdapter.js"></script>
+	<script egret="game" src="bin-debug/test/Test.js"></script>
+	<script egret="game" src="bin-debug/utils/AssetAdapter.js"></script>
 	<script egret="game" src="bin-debug/utils/effect/CardRaiseEffect.js"></script>
 	<script egret="game" src="bin-debug/utils/effect/ChupaiEffect.js"></script>
 	<script egret="game" src="bin-debug/utils/effect/ChupaiTipsEffect.js"></script>
@@ -243,9 +238,14 @@
 	<script egret="game" src="bin-debug/utils/Global.js"></script>
 	<script egret="game" src="bin-debug/utils/Heart.js"></script>
 	<script egret="game" src="bin-debug/utils/NativeApi.js"></script>
+	<script egret="game" src="bin-debug/utils/PopUpUtils.js"></script>
 	<script egret="game" src="bin-debug/utils/RegUtils.js"></script>
+	<script egret="game" src="bin-debug/utils/sound/GameMusic.js"></script>
+	<script egret="game" src="bin-debug/utils/sound/GameSound.js"></script>
+	<script egret="game" src="bin-debug/utils/ThemeAdapter.js"></script>
 	<script egret="game" src="bin-debug/utils/UtilsClass/BitmapBlink.js"></script>
 	<script egret="game" src="bin-debug/utils/UtilsClass/TipsUtils.js"></script>
+	<script egret="game" src="bin-debug/utils/Weixin.js"></script>
 	<script egret="game" src="bin-debug/view/other/chuanma/ChangeThreeAnimation.js"></script>
 	<script egret="game" src="bin-debug/view/other/chuanma/ChangeThreeView.js"></script>
 	<script egret="game" src="bin-debug/view/other/chuanma/GangshangkaihuaView.js"></script>

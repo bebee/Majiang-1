@@ -20,7 +20,7 @@ class S14
                 dialog.plist[k] = vote[k];
             }
 
-            if(GameLayerManager.gameLayer().panelLayer.contains(dialog))
+            if(LayerManager.gameLayer().panelLayer.contains(dialog))
             {
                 dialog.refresh();
             }

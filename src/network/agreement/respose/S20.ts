@@ -7,7 +7,7 @@ class S20
     {
         var dialog:RecordDialog = StackManager.findDialog(RecordDialog, "RecordDialog");
 
-        if(dialog && GameLayerManager.gameLayer().panelLayer.contains(dialog))
+        if(dialog && LayerManager.gameLayer().panelLayer.contains(dialog))
         {
             dialog.xobj = obj.data;
 

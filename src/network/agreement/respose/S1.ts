@@ -38,8 +38,8 @@ class S1
 
                 if(arr[0] != carr[0] || arr[1] != carr[1])
                 {
-                    if(!GameLayerManager.gameLayer().messagBox) GameLayerManager.gameLayer().messagBox = new MessageDialog();
-                    GameLayerManager.gameLayer().messagBox.showMsg(function (r)
+                    if(!LayerManager.gameLayer().messagBox) LayerManager.gameLayer().messagBox = new MessageDialog();
+                    LayerManager.gameLayer().messagBox.showMsg(function (r)
                     {
                         if(r)
                         {

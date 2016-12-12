@@ -1,7 +1,7 @@
 /**
  * Created by Administrator on 2016/11/8.
  */
-class PersonItem extends GameSprite {
+class PersonItem extends BaseGameSprite {
 
     //胡字位置
     huPos = {x: 838, y: 40};

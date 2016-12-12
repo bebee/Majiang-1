@@ -222,7 +222,7 @@ class TouchBehaviour implements IGameTapEvent {
 
         if(PublicVal.state == StateType.reconnect || PublicVal.state == StateType.gamestart || PublicVal.state == StateType.ting)
         {
-            GameLayerManager.gameLayer().messagBox.showMsg(function (r)
+            LayerManager.gameLayer().messagBox.showMsg(function (r)
             {
                 if(r)
                 {
@@ -233,7 +233,7 @@ class TouchBehaviour implements IGameTapEvent {
             }, "您确定发起解散房间吗？\n（当所有在线玩家同意解散之后房间将解散）");
         }else if(PublicVal.state == 6){
 
-            GameLayerManager.gameLayer().messagBox.showMsg(function (r)
+            LayerManager.gameLayer().messagBox.showMsg(function (r)
             {
                 if(r)
                 {
@@ -252,7 +252,7 @@ class TouchBehaviour implements IGameTapEvent {
                 info = "您确定要离开房间吗？";
             }
 
-            GameLayerManager.gameLayer().messagBox.showMsg(function (r) {
+            LayerManager.gameLayer().messagBox.showMsg(function (r) {
                 if (r) {
                     SocketManager.getInstance().getGameConn().send(12, {});   //离开房子
                 }

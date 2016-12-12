@@ -3,7 +3,7 @@
  * @Author Ace.c
  * @Create 2016-12-09 14:31
  */
-class ScoreView extends GameSprite {
+class ScoreView extends BaseGameSprite {
 
     private lab_dir_1: eui.BitmapLabel;
     private lab_dir_2: eui.BitmapLabel;
