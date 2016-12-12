@@ -229,6 +229,7 @@ var game_file_list = [
 	"bin-debug/view/other/chuanma/XiayuView.js",
 	"bin-debug/view/other/chuanma/YipaoduoxiangView.js",
 	"bin-debug/view/other/HornPanel.js",
+	"bin-debug/view/other/ResultItemView.js",
 	"bin-debug/view/other/TipsPanel.js",
 	"bin-debug/view/other/WaitPanel.js",
 	"bin-debug/view/panel/create/CreateDialog.js",
