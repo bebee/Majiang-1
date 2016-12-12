@@ -93,7 +93,7 @@ class GSResultView extends egret.DisplayObjectContainer{
     }
 
 
-    update(){
+    update() {
 
         this.showLogo(GSData.i.resultType);
 
@@ -101,15 +101,15 @@ class GSResultView extends egret.DisplayObjectContainer{
 
         var pai = GSData.i.result.hupai.pai;
 
-        for(var i:number = 0;i < persons.length;i++){
+        for (var i: number = 0; i < persons.length; i++) {
 
             var person = persons[i];
 
-            var personItem:PersonItem = this.personItems[i];
+            var personItem: PersonItem = this.personItems[i];
 
             var person_pos = person.pos;
 
-            var dir:number = GSData.i.getDir(person_pos);
+            var dir: number = GSData.i.getDir(person_pos);
 
             personItem.headIcon.setHeadPic(person.pic);
 
@@ -117,22 +117,13 @@ class GSResultView extends egret.DisplayObjectContainer{
 
             personItem.headIcon.visibleZhuang(GSData.i.result.zhuang == person_pos);
 
-            if(GSData.i.result.hupaiPos == person_pos){
+            if (GSData.i.result.hupaiPos == person_pos) {
+                personItem.update(person);
 
-                personItem.updateHuLogo(1);
-
-                personItem.updatePai(person);
-
-            }else if(GSData.i.result.dianPaoPos == person_pos){
-
-                personItem.updatePai(person);
-
-                personItem.updateHuLogo(2);
-            }else{
-
-                personItem.updatePai(person);
-
-                personItem.updateHuLogo(0);
+            } else if (GSData.i.result.dianPaoPos == person_pos) {
+                personItem.update(person);
+            } else {
+                personItem.update(person);
             }
         }
     }

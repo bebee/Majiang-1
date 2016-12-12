@@ -376,6 +376,8 @@ class GSController extends egret.EventDispatcher {
 
         }
 
+        GSController.i.gsView.resetAllChildrenTouch();
+
         if (game.status == GameStatus.changeThree && !game.statusComplete) {
             game.manager.dispatchEvent(GameEvent.ChangeThree);
         }
@@ -398,9 +400,6 @@ class GSController extends egret.EventDispatcher {
 
             }
         }
-
-
-        GSController.i.gsView.resetAllChildrenTouch();
     }
 
     //开始游戏

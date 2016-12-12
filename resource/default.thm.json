@@ -30,6 +30,7 @@
     "resource/eui_skins_game/other/panelbg/BgViewSkin.exml",
     "resource/eui_skins_game/other/panelbg/CloseBgTitleViewSkin.exml",
     "resource/eui_skins_game/other/panelbg/CloseBgViewSkin.exml",
+    "resource/eui_skins_game/other/ResultItemViewSkin.exml",
     "resource/eui_skins_game/panel/create/CreatePanelSkin.exml",
     "resource/eui_skins_game/panel/create/CreateXueliuViewSkin.exml",
     "resource/eui_skins_game/panel/protocol/ProtocolPanelSkin.exml",
