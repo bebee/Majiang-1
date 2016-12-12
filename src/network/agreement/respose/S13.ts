@@ -13,7 +13,7 @@ class S13
 
         var dialog:DissolutionDialog = StackManager.findDialog(DissolutionDialog, "DissolutionDialog");
 
-        if(dialog && GameLayerManager.gameLayer().panelLayer.contains(dialog))
+        if(dialog && LayerManager.gameLayer().panelLayer.contains(dialog))
         {
             GSController.i.closeResultView();
             GSController.i.closeGSView();

@@ -40,6 +40,23 @@ class game {
 
         game.ruleVo = new GameRuleVo();
         game.changeThreeVo = new ChangeThreeVo();
+
+        if (!NativeApi.getLocalData("switch")) NativeApi.setLocalData("switch", 1);
+        if (!NativeApi.getLocalData("music")) NativeApi.setLocalData("music", 1);
+        if (!NativeApi.getLocalData("music_volume")) NativeApi.setLocalData("music_volume", 0.2);
+        if (!NativeApi.getLocalData("sound_volume")) NativeApi.setLocalData("sound_volume", 0.5);
+        if (!NativeApi.getLocalData("pai")) NativeApi.setLocalData("pai", 1);
+        if (!NativeApi.getLocalData("style")) NativeApi.setLocalData("style", 1);
+
+        GameMusic._volume = +NativeApi.getLocalData("music_volume");
+        GameSound._volume = +NativeApi.getLocalData("sound_volume");
+
+        GlobalData.getInstance().cardType = +NativeApi.getLocalData("pai");
+        GlobalData.getInstance().cardStyle = +NativeApi.getLocalData("style");
+
+        GameParse.Initialization();
+
+        stage.addChild(LayerManager.gameLayer());
     }
 
     /**
@@ -52,19 +69,6 @@ class game {
         this.isHuBoo = false;
         game.manager.dispatchEvent(GameEvent.CleanAll);
     }
-
-    static cleanTable() {
-
-    }
-
-    static cleanRound() {
-
-    }
-
-    static cleanGame() {
-
-    }
-
 
     /**
      * 获取最短的牌类型

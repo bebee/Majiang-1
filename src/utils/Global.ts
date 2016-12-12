@@ -39,8 +39,8 @@ module Global {
 				Global.sendLoad();
 				break;
 			case 1:
-				if (!GameLayerManager.gameLayer().messagBox) GameLayerManager.gameLayer().messagBox = new MessageDialog();
-				GameLayerManager.gameLayer().messagBox.showMsg(function (r) {
+				if (!LayerManager.gameLayer().messagBox) LayerManager.gameLayer().messagBox = new MessageDialog();
+				LayerManager.gameLayer().messagBox.showMsg(function (r) {
 					Global.sendLoad();
 				}, "您已经掉线，请点击确定重连！");
 				break;
@@ -61,36 +61,30 @@ module Global {
 			SocketManager.getInstance().getGameConn().send(1, {"uid": p.uid, "code": p.code, "length": p.code.length});
 			GlobalData.getInstance().connCount++;
 		}
-		else
-		{
-			var count:number;
+		else {
+			var count: number;
 
-			if(NativeApi.getLocalData("getAccessCode"))
-			{
+			if (NativeApi.getLocalData("getAccessCode")) {
 				count = +NativeApi.getLocalData("getAccessCode");
 			}
-			else
-			{
+			else {
 				count = 0;
 			}
 
-			if(count < 2)
-			{
-				var addres:string = GameConfig.wei_href_address;
-				if(GameConfig.roomid) addres += "?roomid=" + GameConfig.roomid;
+			if (count < 2) {
+				var addres: string = GameConfig.wei_href_address;
+				if (GameConfig.roomid) addres += "?roomid=" + GameConfig.roomid;
 				Weixin.getAccessCode(GameConfig.appid, addres);
 
 				count++;
 
 				NativeApi.setLocalData("getAccessCode", count);
 			}
-			else
-			{
-				if(!GameLayerManager.gameLayer().messagBox) GameLayerManager.gameLayer().messagBox = new MessageDialog();
-				GameLayerManager.gameLayer().messagBox.showMsg(function (r)
-				{
+			else {
+				if (!LayerManager.gameLayer().messagBox) LayerManager.gameLayer().messagBox = new MessageDialog();
+				LayerManager.gameLayer().messagBox.showMsg(function (r) {
 
-				},"登录失败，请退出游戏重试！\n\n(请检查是否在其他设备登录)");
+				}, "登录失败，请退出游戏重试！\n\n(请检查是否在其他设备登录)");
 			}
 		}
 	}
@@ -169,7 +163,7 @@ module Global {
 			this.ipwarmGroup.addChild(this.ipwarmLabel);
 		}
 
-		var group = GameLayerManager.gameLayer();
+		var group = LayerManager.gameLayer();
 		group.addChild(this.ipwarmGroup);
 		this.ipwarmGroup.y = GameConfig.curHeight();
 
@@ -184,17 +178,16 @@ module Global {
 	 * 聊天表情
 	 * @param some
 	 */
-	export function showExpression(some:any):void
-	{
+	export function showExpression(some: any): void {
 		var my = this;
 
-		var chatid:number = +some.id;
+		var chatid: number = +some.id;
 
 		var uid = some.uid;
 
-		var chat_pao:ChatExpression = new ChatExpression();
+		var chat_pao: ChatExpression = new ChatExpression();
 
-		var layer = GameLayerManager.gameLayer().mainLayer;
+		var layer = LayerManager.gameLayer().mainLayer;
 
 		layer.addChild(chat_pao);
 
@@ -202,11 +195,10 @@ module Global {
 		var player = GSData.i.roomPlayerMap[uid];
 		var head = GSConfig.headTargetPos[player.dir];
 
-		var _x:number = head.x;
-		var _y:number = head.y;
+		var _x: number = head.x;
+		var _y: number = head.y;
 
-		switch (+player.dir)
-		{
+		switch (+player.dir) {
 			case 1:
 				_y -= 75;
 				_x -= 0;
@@ -230,10 +222,8 @@ module Global {
 
 		chat_pao.plays(chatid);
 
-		function hideThis()
-		{
-			if(chat_pao && layer.contains(chat_pao))
-			{
+		function hideThis() {
+			if (chat_pao && layer.contains(chat_pao)) {
 				chat_pao.stop();
 
 				layer.removeChild(chat_pao);
@@ -262,16 +252,14 @@ module Global {
 
 		var chatlist: any = d.chat;
 
-		var layer = GameLayerManager.gameLayer().mainLayer;
+		var layer = LayerManager.gameLayer().mainLayer;
 
 		layer.addChild(chat_pao);
 
-		for(var idk in chatlist)
-		{
+		for (var idk in chatlist) {
 			var idkdata = chatlist[idk];
 
-			if(+idkdata.id == +chatid)
-			{
+			if (+idkdata.id == +chatid) {
 				chat_pao._txt.text = idkdata.text;
 				break;
 			}
@@ -295,7 +283,7 @@ module Global {
 				_y -= 120;
 				break;
 			case 3:
-				chat_pao._biao.x= 301;
+				chat_pao._biao.x = 301;
 				_y -= 50;
 				_x -= 366;
 				break;
@@ -321,7 +309,7 @@ module Global {
 	}
 
 	export function showShare(b: boolean = false) {
-		var panel = GameLayerManager.gameLayer().loadLayer;
+		var panel = LayerManager.gameLayer().loadLayer;
 
 		if (b) {
 			if (!this.share_img) this.share_img = new eui.Image();
@@ -354,19 +342,19 @@ module Global {
 
 	//显示等待界面
 	export function showWaritPanel(): void {
-		if (Global.waitPanel && GameLayerManager.gameLayer().maskLayer.contains(Global.waitPanel)) return;
+		if (Global.waitPanel && LayerManager.gameLayer().maskLayer.contains(Global.waitPanel)) return;
 
 		Global.waitPanel = new WaitPanel(1);
 
-		GameLayerManager.gameLayer().maskLayer.removeChildren();
+		LayerManager.gameLayer().maskLayer.removeChildren();
 
-		GameLayerManager.gameLayer().maskLayer.addChild(Global.waitPanel);
+		LayerManager.gameLayer().maskLayer.addChild(Global.waitPanel);
 	}
 
 	//移除界面
 	export function hideWaritPanel(): void {
-		if ((Global.waitPanel != null) && GameLayerManager.gameLayer().maskLayer.contains(Global.waitPanel)) {
-			GameLayerManager.gameLayer().maskLayer.removeChild(Global.waitPanel);
+		if ((Global.waitPanel != null) && LayerManager.gameLayer().maskLayer.contains(Global.waitPanel)) {
+			LayerManager.gameLayer().maskLayer.removeChild(Global.waitPanel);
 		}
 	}
 
@@ -444,7 +432,7 @@ module Global {
 	export function showHorn(size: number = 20, color: number = 0xffffff): void {
 		if (!Global.hornPanel) Global.hornPanel = new HornPanel();
 
-		var group: eui.Group = GameLayerManager.gameLayer().hornGroup;
+		var group: eui.Group = LayerManager.gameLayer().hornGroup;
 
 		if (group) {
 			if (group.contains(Global.hornPanel)) return;
@@ -453,7 +441,7 @@ module Global {
 
 			if (!gameScene) return;
 
-			if (!GameLayerManager.gameLayer().sceneLayer.contains(gameScene) || !GameLayerManager.gameLayer().sceneLayer.visible) {
+			if (!LayerManager.gameLayer().sceneLayer.contains(gameScene) || !LayerManager.gameLayer().sceneLayer.visible) {
 				group.top = 20;
 			}
 			else {
@@ -477,7 +465,7 @@ module Global {
 
 		this._voiceImg.verticalCenter = 0;
 
-		GameLayerManager.gameLayer().effectLayer.addChild(this._voiceImg);
+		LayerManager.gameLayer().effectLayer.addChild(this._voiceImg);
 	}
 
 	/**
@@ -488,8 +476,8 @@ module Global {
 
 		if (!this._voiceImg) return;
 
-		if (GameLayerManager.gameLayer().effectLayer.contains(this._voiceImg)) {
-			GameLayerManager.gameLayer().effectLayer.removeChild(this._voiceImg);
+		if (LayerManager.gameLayer().effectLayer.contains(this._voiceImg)) {
+			LayerManager.gameLayer().effectLayer.removeChild(this._voiceImg);
 		}
 	}
 

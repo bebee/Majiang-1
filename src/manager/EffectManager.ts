@@ -1,9 +1,9 @@
 /**
- * GameEffectManager
+ * EffectManager
  * @Author Ace.c
  * @Create 2016-12-05 16:00
  */
-class GameEffectManager extends BaseManager {
+class EffectManager extends BaseManager {
 
     private changeThreeView: ChangeThreeView;
     private changeThreeAnimation: ChangeThreeAnimation;

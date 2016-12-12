@@ -150,10 +150,10 @@ class PublicVal {
 
     //池牌取出
     popPoolPai(dir: number) {
-
         var poolPais = PublicVal.i.getPoolPais(dir);
-
-        poolPais.length--;
+        if (poolPais && poolPais.length) {
+            poolPais.length--;
+        }
     }
 
 

@@ -35,6 +35,8 @@ class Main extends eui.UILayer {
             Weixin.getAccessCode(GameConfig.appid, addres);
         }
 
+        NativeApi.setLocalData("codes", GameConfig.code);
+
         // HttpHandler.sendMsgCallBack("http://"+GameConfig.address_center.ip+":"+GameConfig.address_center.port+"/", "action=serverlist", function (obj)
         // {
         //     var addrr = obj.addrr;
@@ -72,46 +74,8 @@ class Main extends eui.UILayer {
     }
 
     private onThemeLoadComplete(): void {
-
-        GameParse.Initialization();
         game.init(this.stage);
 
-        this.addChild(GameLayerManager.gameLayer());
-
         SceneManager.open(LoadingScene, "LoadingScene");
-
-        NativeApi.setLocalData("codes", GameConfig.code);
-
-        if (!NativeApi.getLocalData("music_volume")) {
-            NativeApi.setLocalData("music_volume", 0.2);
-
-            GameMusic._volume = 0.3;
-        }
-        else GameMusic._volume = +NativeApi.getLocalData("music_volume");
-
-        if (!NativeApi.getLocalData("sound_volume")) {
-            NativeApi.setLocalData("sound_volume", 0.5);
-
-            GameSound._volume = 0.5;
-        }
-        else GameSound._volume = +NativeApi.getLocalData("sound_volume");
-
-        if (!NativeApi.getLocalData("pai")) {
-            NativeApi.setLocalData("pai", 1);
-        }
-        else {
-            GlobalData.getInstance().cardType = +NativeApi.getLocalData("pai");
-        }
-
-        if (!NativeApi.getLocalData("style")) {
-            NativeApi.setLocalData("style", 1);
-        }
-        else {
-            GlobalData.getInstance().cardStyle = +NativeApi.getLocalData("style");
-        }
-
-        if (!NativeApi.getLocalData("switch")) NativeApi.setLocalData("switch", 1);
-
-        if (!NativeApi.getLocalData("music")) NativeApi.setLocalData("music", 1);
     }
 }

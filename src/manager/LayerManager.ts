@@ -3,41 +3,32 @@
 * EgerPro显示对象层级
 * Main-GameScene（sceneLayer、mainLayer、popLayer、effectLayer、maskLayer、loadLayer）
 */
-class GameLayerManager extends eui.UILayer {
+class LayerManager extends eui.UILayer {
+
+    private static _i: LayerManager;
+
+    //游戏容器管理器单例
+    static gameLayer(): LayerManager {
+        return this._i || (this._i = new LayerManager());
+    }
 
     // 主界面
     public sceneLayer: eui.UILayer = new eui.UILayer();
-
     // 麻将
     public mainLayer: eui.UILayer = new eui.UILayer();
-
     // 特效层 如 闪烁、飘字之类的  (目前是放喇叭  鼠标事件是没有的)
     public effectLayer: eui.UILayer = new eui.UILayer();
-
     // 弹窗
     public panelLayer: eui.UILayer = new eui.UILayer();
-
     // 通讯遮罩层 和服务器通讯UI
     public maskLayer: eui.UILayer = new eui.UILayer();
-
     // 加载遮罩层 场景切换的时候加载资源UI
     public loadLayer: eui.UILayer = new eui.UILayer();
 
     public messagBox: MessageDialog;
 
-    /**
-     * 装喇叭的容器
-     */
+    //装喇叭的容器
     public hornGroup: eui.Group;
-
-    private static _instance: GameLayerManager;
-
-    //游戏容器管理器单例
-    public static gameLayer(): GameLayerManager {
-        if (!this._instance)
-            this._instance = new GameLayerManager();
-        return this._instance;
-    }
 
     //构造方法
     public constructor() {
@@ -88,8 +79,6 @@ class GameLayerManager extends eui.UILayer {
     public openMainLayer(): void {
         this.setLayerVisible(false, "sceneLayer");
         this.setLayerVisible(true, "mainLayer");
-
-
     }
 
     /**

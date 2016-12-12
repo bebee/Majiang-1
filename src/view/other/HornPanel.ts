@@ -2,54 +2,50 @@
  * 公告条
  */
 
-class HornPanel extends eui.Component
-{
-    private textList:Array<any> = [];
+class HornPanel extends eui.Component {
+    private textList: Array<any> = [];
 
-    private _shape:egret.Shape;
+    private _shape: egret.Shape;
 
-    private _sprite:egret.Sprite;
+    private _sprite: egret.Sprite;
 
-    private _group:eui.Group;
+    private _group: eui.Group;
 
-    private _size:number;
+    private _size: number;
 
-    private _color:number;
+    private _color: number;
 
-    public constructor()
-    {
+    public constructor() {
         super();
 
-        this.addEventListener(eui.UIEvent.COMPLETE,this.onComplete,this);
+        this.addEventListener(eui.UIEvent.COMPLETE, this.onComplete, this);
 
         this.skinName = "HornSkin";
 
         this.touchChildren = true;
     }
 
-    _horn:eui.Image;
+    _horn: eui.Image;
 
-    onComplete()
-    {
+    onComplete() {
 
     }
 
-    createChildren()
-    {
+    createChildren() {
         super.createChildren();
 
         var my = this;
 
         my._sprite = new egret.Sprite();
-        my._sprite .width = 560;
-        my._sprite .height = 38;
-        my._sprite .x = 78;
+        my._sprite.width = 560;
+        my._sprite.height = 38;
+        my._sprite.x = 78;
         my.addChild(my._sprite);
 
         my._shape = new egret.Shape();
         my._shape.graphics.clear();
         my._shape.graphics.beginFill(0x0, 1);
-        my._shape.graphics.drawRect(0,0, 485, 38);
+        my._shape.graphics.drawRect(0, 0, 485, 38);
         my._shape.graphics.endFill();
         my._shape.x = 60;
         my._shape.y = 0;
@@ -60,8 +56,7 @@ class HornPanel extends eui.Component
 
     }
 
-    public playEff(group:eui.Group, size:number, color:number):void
-    {
+    public playEff(group: eui.Group, size: number, color: number): void {
         var my = this;
 
         group.addChild(my);
@@ -71,10 +66,9 @@ class HornPanel extends eui.Component
 
         my.width = 0;
 
-        my._horn.visible =false;
+        my._horn.visible = false;
 
-        egret.Tween.get(my).to({width:560},300, egret.Ease.sineOut).call(function ()
-        {
+        egret.Tween.get(my).to({width: 560}, 300, egret.Ease.sineOut).call(function () {
             my._horn.visible = true;
 
             my.playHorn(group, size, color);
@@ -89,13 +83,12 @@ class HornPanel extends eui.Component
 
     }
 
-    public playHorn(group:eui.Group, size:number, color:number):void
-    {
+    public playHorn(group: eui.Group, size: number, color: number): void {
         var my = this;
 
         var list = GlobalData.getInstance().hornList;
-        var str:string = list.shift();
-        var text:eui.Label = new eui.Label();
+        var str: string = list.shift();
+        var text: eui.Label = new eui.Label();
         text.text = str;
         text.textAlign = "center";
         text.verticalAlign = "middle";
@@ -110,22 +103,19 @@ class HornPanel extends eui.Component
         my.textList.push(text);
     }
 
-    private onFrame(e:egret.Event):void
-    {
+    private onFrame(e: egret.Event): void {
         var my = this;
 
-        if (my.textList.length <= 0)
-        {
+        if (my.textList.length <= 0) {
             my.endPlay(my._group);
             return;
         }
 
         var list = GlobalData.getInstance().hornList;
 
-        var t0:eui.Label = my.textList[0];
+        var t0: eui.Label = my.textList[0];
 
-        if(t0.x <= -t0.textWidth)
-        {
+        if (t0.x <= -t0.textWidth) {
             my._sprite.removeChild(t0);
 
             my.textList.shift();
@@ -133,34 +123,28 @@ class HornPanel extends eui.Component
             t0 = null;
         }
 
-        for (var i = 0; i < my.textList.length; i++)
-        {
-            var t:eui.Label = my.textList[i];
+        for (var i = 0; i < my.textList.length; i++) {
+            var t: eui.Label = my.textList[i];
 
             t.x -= 2;
 
-            if(i == my.textList.length - 1)
-            {
-                if(t.x <= (-t.textWidth + 100))
-                {
-                    if(list.length > 0) my.playHorn(my._group,my._size, my._color);
+            if (i == my.textList.length - 1) {
+                if (t.x <= (-t.textWidth + 100)) {
+                    if (list.length > 0) my.playHorn(my._group, my._size, my._color);
                 }
             }
         }
     }
 
-    public endPlay(group:eui.Group):void
-    {
+    public endPlay(group: eui.Group): void {
         var my = this;
 
         my._horn.visible = false;
 
         my.removeEventListener(egret.Event.ENTER_FRAME, my.onFrame, my);
 
-        egret.Tween.get(my).to({width:0},300, egret.Ease.sineOut).call(function ()
-        {
-            if(group.contains(my))
-            {
+        egret.Tween.get(my).to({width: 0}, 300, egret.Ease.sineOut).call(function () {
+            if (group.contains(my)) {
                 group.removeChild(my);
             }
         }, my);

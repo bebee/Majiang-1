@@ -25,8 +25,8 @@ class DialogLoding extends egret.Sprite {
     }
 
     public show(): void {
-        if (!GameLayerManager.gameLayer().loadLayer.contains(this)) {
-            GameLayerManager.gameLayer().loadLayer.addChild(this);
+        if (!LayerManager.gameLayer().loadLayer.contains(this)) {
+            LayerManager.gameLayer().loadLayer.addChild(this);
         }
 
         this.addChild(this.label);
@@ -38,8 +38,8 @@ class DialogLoding extends egret.Sprite {
     }
 
     public clearLoad(): void {
-        if (GameLayerManager.gameLayer().loadLayer.contains(this)) {
-            GameLayerManager.gameLayer().loadLayer.removeChild(this);
+        if (LayerManager.gameLayer().loadLayer.contains(this)) {
+            LayerManager.gameLayer().loadLayer.removeChild(this);
         }
 
         this.removeChildren();

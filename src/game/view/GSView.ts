@@ -202,8 +202,8 @@ class GSView extends egret.Sprite {
         this.baoText.x = this.baoEffect.x;
         this.baoText.y = this.baoEffect.y;
         this.baoEffect.visible = this.baoText.visible = false;
-        GameLayerManager.gameLayer().effectLayer.addChild(this.baoEffect);
-        GameLayerManager.gameLayer().effectLayer.addChild(this.baoText);
+        LayerManager.gameLayer().effectLayer.addChild(this.baoEffect);
+        LayerManager.gameLayer().effectLayer.addChild(this.baoText);
 
 
         this.replayControllView = new ReplayControllView;

@@ -151,7 +151,7 @@ class GSTotleView extends eui.Component
 
     public show(obj:any):void
     {
-        var p = GameLayerManager.gameLayer().mainLayer;
+        var p = LayerManager.gameLayer().mainLayer;
 
         this.top = this.right = this.bottom = this.left = 0;
 

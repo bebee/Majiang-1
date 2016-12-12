@@ -2,67 +2,74 @@
  * Created by Administrator on 2016/11/8.
  */
 //结算界面
-class GSResultView extends egret.DisplayObjectContainer{
-    po = [144,244,340,440];
-    bg:egret.Shape;
-    shareButton:mui.EButton;
-    continueButton:mui.EButton;
-    face : IGameTapEvent;
+class GSResultView extends egret.DisplayObjectContainer {
+    po = [130, 240, 350, 460];
+    bg: egret.Shape;
+    shareButton: mui.EButton;
+    continueButton: mui.EButton;
+    face: IGameTapEvent;
 
     //胜利失败的logo容器
-    logoCon:egret.DisplayObjectContainer;
+    logoCon: egret.DisplayObjectContainer;
 
-    winTop:egret.Bitmap;
-    winBG:egret.Bitmap;
-    loseTop:egret.Bitmap;
-    loseBG:egret.Bitmap;
-    liujuTop:egret.Bitmap;
+    winTop: egret.Bitmap;
+    winBG: egret.Bitmap;
+    loseTop: egret.Bitmap;
+    loseBG: egret.Bitmap;
+    liujuTop: egret.Bitmap;
 
-    drawShape:egret.Shape;
+    drawShape: egret.Shape;
 
-    personItems : PersonItem[];
+    personItems: PersonItem[];
 
-    baoPaiView:BaoPaiView;
+    baoPaiView: BaoPaiView;
 
-    constructor(){
+    constructor() {
         super();
         this.initView();
     }
+
     //绑定回调接口
-    bindInterface(face:IGameTapEvent){
+    bindInterface(face: IGameTapEvent) {
 
         this.face = face;
 
     }
-    initView(){
+
+    initView() {
         this.bg = new egret.Shape;
-        this.bg.graphics.beginFill(0,.3);
-        this.bg.graphics.drawRect(0,0,GSConfig.width,450);
-        this.bg.y = (GSConfig.height - 450) >> 1;
+        this.bg.graphics.beginFill(0, .3);
+        this.bg.graphics.drawRect(0, 0, GSConfig.width, 450);
+        // this.bg.y = (GSConfig.height - 450) >> 1;
+        this.bg.y = this.po[0] - 10;
         this.addChild(this.bg);
         //230.327,425
-        this.createLine(230);
-        this.createLine(327);
-        this.createLine(425);
+        this.createLine(this.po[0] + 105);
+        this.createLine(this.po[1] + 105);
+        this.createLine(this.po[2] + 105);
 
-        this.createLogCon(GSConfig.width >>1,76);
+        this.createLogCon(GSConfig.width >> 1, 76);
 
 
-        this.shareButton = new mui.EButton("JS_share_button","分　享");
+        this.shareButton = new mui.EButton("JS_share_button", "分　享");
         this.shareButton.x = 220;
-        this.shareButton.y = 550;
+        this.shareButton.y = 580;
         this.shareButton.textField.verticalCenter = -8;
 
-        this.continueButton = new mui.EButton("JS_continue_button","继续游戏");
+        this.continueButton = new mui.EButton("JS_continue_button", "继续游戏");
         this.continueButton.x = 585;
-        this.continueButton.y = 550;
+        this.continueButton.y = 580;
         this.continueButton.textField.verticalCenter = -8;
 
         this.addChild(this.shareButton);
         this.addChild(this.continueButton);
 
-        this.shareButton.addEventListener(egret.TouchEvent.TOUCH_TAP,_=>{this.face.onShareGame();},this);
-        this.continueButton.addEventListener(egret.TouchEvent.TOUCH_TAP,_=>{this.face.onContinue();},this);
+        this.shareButton.addEventListener(egret.TouchEvent.TOUCH_TAP, _=> {
+            this.face.onShareGame();
+        }, this);
+        this.continueButton.addEventListener(egret.TouchEvent.TOUCH_TAP, _=> {
+            this.face.onContinue();
+        }, this);
 
         //this.showLogo(1);
 
@@ -70,7 +77,7 @@ class GSResultView extends egret.DisplayObjectContainer{
 
         this.personItems = [];
 
-        for(var i:number= 0;i<4;i++){
+        for (var i: number = 0; i < 4; i++) {
 
             var personItem = new PersonItem();
 
@@ -87,7 +94,7 @@ class GSResultView extends egret.DisplayObjectContainer{
         // this.addChild(this.baoPaiView);
     }
 
-    updateBaoPai(pai:any){
+    updateBaoPai(pai: any) {
 
         this.baoPaiView.updatePai(pai);
     }
@@ -129,7 +136,7 @@ class GSResultView extends egret.DisplayObjectContainer{
     }
 
 
-    createLogCon(x:number,y:number){
+    createLogCon(x: number, y: number) {
 
         this.logoCon = new egret.DisplayObjectContainer();
         this.logoCon.x = x;
@@ -145,10 +152,10 @@ class GSResultView extends egret.DisplayObjectContainer{
         this.winTop.anchorOffsetY = 40;
 
         this.winBG.anchorOffsetX = 216;
-        this.winBG.anchorOffsetY =220;
+        this.winBG.anchorOffsetY = 220;
 
-        this.loseTop.anchorOffsetX =142;
-        this.loseTop.anchorOffsetY =60;
+        this.loseTop.anchorOffsetX = 142;
+        this.loseTop.anchorOffsetY = 60;
 
         this.loseBG.anchorOffsetX = 215;
         this.loseBG.anchorOffsetY = 224;
@@ -166,15 +173,15 @@ class GSResultView extends egret.DisplayObjectContainer{
 
     }
 
-    drawLine(obj:any){
-        this.drawShape.graphics.lineStyle(2,0xFF0000);
-        this.drawShape.graphics.drawRect(obj.x,obj.y,obj.width,obj.height);
+    drawLine(obj: any) {
+        this.drawShape.graphics.lineStyle(2, 0xFF0000);
+        this.drawShape.graphics.drawRect(obj.x, obj.y, obj.width, obj.height);
     }
 
 
-    createLine(y:number){
+    createLine(y: number) {
 
-        var line:egret.Bitmap =new  egret.Bitmap;
+        var line: egret.Bitmap = new egret.Bitmap;
         line.texture = GameRes.getUI("JS_dot");
         line.width = GSConfig.width;
         line.y = y;
@@ -182,9 +189,9 @@ class GSResultView extends egret.DisplayObjectContainer{
 
     }
 
-    showLogo(type:number){
+    showLogo(type: number) {
 
-        switch(type){
+        switch (type) {
             case 1://胜利
                 this.winTop.visible = true;
                 this.winBG.visible = true;
@@ -211,11 +218,12 @@ class GSResultView extends egret.DisplayObjectContainer{
                 break;
         }
     }
-    clear(){
 
-        for(var i:number = 0;i<this.personItems.length;i++){
+    clear() {
 
-            var personItem:PersonItem = this.personItems[i];
+        for (var i: number = 0; i < this.personItems.length; i++) {
+
+            var personItem: PersonItem = this.personItems[i];
 
             personItem.clear();
         }

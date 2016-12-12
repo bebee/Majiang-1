@@ -10,7 +10,7 @@ class S12
 
         if(+obj["code"] <= 0)
         {
-            //GameLayerManager.gameLayer().openSceneLayer();
+            //LayerManager.gameLayer().openSceneLayer();
             GSController.i.exit();
         }
     }

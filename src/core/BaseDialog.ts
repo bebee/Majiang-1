@@ -47,7 +47,7 @@ class BaseDialog extends eui.Component {
         this.beforShow();
         this.initUI();
         this.initData();
-        PopUpManager.addPopUp(this, dark, popUpWidth, popUpHeight, effectType, isAlert);
+        PopUpUtils.addPopUp(this, dark, popUpWidth, popUpHeight, effectType, isAlert);
     }
 
 
@@ -80,7 +80,7 @@ class BaseDialog extends eui.Component {
      * effectType        0：没有动画 1:从中间缩小消失 2：  3：从左向右 4：从右向左 5、从上到下 6、从下到上
      */
     public hide(effectType: number = 1): void {
-        PopUpManager.removePopUp(this, effectType);
+        PopUpUtils.removePopUp(this, effectType);
         this.destroy();
     }
 

@@ -12,7 +12,7 @@ class GameManager extends BaseDispatcher {
     }
 
     timerManager: TimerManager;
-    gameEventManager: GameEffectManager;
+    effectManager: EffectManager;
 
     constructor() {
         super();
@@ -20,7 +20,7 @@ class GameManager extends BaseDispatcher {
 
     init() {
         this.timerManager = TimerManager.i;
-        this.gameEventManager = new GameEffectManager();
+        this.effectManager = new EffectManager();
     }
 
     get layerScene() {

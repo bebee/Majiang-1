@@ -1,7 +1,7 @@
 /**
 * 面板弹出管理类
 */
-module PopUpManager {
+module PopUpUtils {
 
 	export var darkSprite: egret.Sprite;
 
@@ -15,7 +15,7 @@ module PopUpManager {
 	 */
 	export function addPopUp(panel, dark: boolean = false, popUpWidth: number = 0, popUpHeight: number = 0, effectType: number = 0, isAlert: boolean = false): void {
 		//判断是否包含panel
-		if (GameLayerManager.gameLayer().panelLayer.contains(panel)) {
+		if (LayerManager.gameLayer().panelLayer.contains(panel)) {
 			return;
 		}
 		panel.scaleX = 1;
@@ -25,26 +25,26 @@ module PopUpManager {
 		panel.alpha = 1;
 
 		if (dark) {
-			if (!PopUpManager.darkSprite) {
-				PopUpManager.darkSprite = new egret.Sprite();
-				PopUpManager.darkSprite.graphics.clear();
-				PopUpManager.darkSprite.graphics.beginFill(0x000000, 0.6);
-				PopUpManager.darkSprite.graphics.drawRect(0, 0, GameConfig.curWidth(), GameConfig.curHeight());
-				PopUpManager.darkSprite.graphics.endFill();
-				PopUpManager.darkSprite.width = GameConfig.curWidth();
-				PopUpManager.darkSprite.height = GameConfig.curHeight();
+			if (!PopUpUtils.darkSprite) {
+				PopUpUtils.darkSprite = new egret.Sprite();
+				PopUpUtils.darkSprite.graphics.clear();
+				PopUpUtils.darkSprite.graphics.beginFill(0x000000, 0.6);
+				PopUpUtils.darkSprite.graphics.drawRect(0, 0, GameConfig.curWidth(), GameConfig.curHeight());
+				PopUpUtils.darkSprite.graphics.endFill();
+				PopUpUtils.darkSprite.width = GameConfig.curWidth();
+				PopUpUtils.darkSprite.height = GameConfig.curHeight();
 			}
 
-			if (!GameLayerManager.gameLayer().maskLayer.contains(PopUpManager.darkSprite)) {
-				GameLayerManager.gameLayer().maskLayer.addChild(PopUpManager.darkSprite);
+			if (!LayerManager.gameLayer().maskLayer.contains(PopUpUtils.darkSprite)) {
+				LayerManager.gameLayer().maskLayer.addChild(PopUpUtils.darkSprite);
 			}
 
-			PopUpManager.darkSprite.touchEnabled = true;
-			PopUpManager.darkSprite.visible = true;
+			PopUpUtils.darkSprite.touchEnabled = true;
+			PopUpUtils.darkSprite.visible = true;
 
 		}
 
-		GameLayerManager.gameLayer().panelLayer.addChild(panel);
+		LayerManager.gameLayer().panelLayer.addChild(panel);
 		GameConfig.curPanel = panel;
 
 		if (popUpWidth != 0) {
@@ -144,21 +144,22 @@ module PopUpManager {
 	 */
 	export function removePopUp(panel, effectType: number = 0): void {
 		var my = this;
+
 		function close() {
 			//判断是否包含panel
-			if (GameLayerManager.gameLayer().panelLayer.contains(panel)) {
-				GameLayerManager.gameLayer().panelLayer.removeChild(panel);
+			if (LayerManager.gameLayer().panelLayer.contains(panel)) {
+				LayerManager.gameLayer().panelLayer.removeChild(panel);
 			}
 
 			var onComplete: Function = function () {
-				if (GameLayerManager.gameLayer().maskLayer.contains(PopUpManager.darkSprite)) {
-					GameLayerManager.gameLayer().maskLayer.removeChild(PopUpManager.darkSprite);
-					PopUpManager.darkSprite.alpha = 1;
+				if (LayerManager.gameLayer().maskLayer.contains(PopUpUtils.darkSprite)) {
+					LayerManager.gameLayer().maskLayer.removeChild(PopUpUtils.darkSprite);
+					PopUpUtils.darkSprite.alpha = 1;
 				}
 			};
 
-			if (GameLayerManager.gameLayer().panelLayer.numChildren <= 0 && PopUpManager.darkSprite) {
-				egret.Tween.get(PopUpManager.darkSprite).to({alpha: 0}, 100).call(onComplete, my);
+			if (LayerManager.gameLayer().panelLayer.numChildren <= 0 && PopUpUtils.darkSprite) {
+				egret.Tween.get(PopUpUtils.darkSprite).to({alpha: 0}, 100).call(onComplete, my);
 			}
 		}
 
