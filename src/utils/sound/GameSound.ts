@@ -1,8 +1,7 @@
 /**
  * 游戏音效播放管理
  */
-module GameSound
-{
+module GameSound {
     /**
      * 音效对象池
      * @type {{}}
@@ -19,7 +18,7 @@ module GameSound
      * @type {number}
      * @private
      */
-    export var _volume:number = 1;
+    export var _volume: number = 1;
 
     /**
      * @param name  音乐文件名
@@ -27,52 +26,46 @@ module GameSound
      * @param startTime 开始播放的时间 默认是0
      * @constructor
      */
-    export function PlaySound(name:string, loops:number = 1, startTime:number = 0)
-    {
-        var _switch:number = +NativeApi.getLocalData("switch");
-        if(_switch == 0) return;
+    export function PlaySound(name: string, loops: number = 1, startTime: number = 0) {
+        var _switch: number = +GameLocal.getData(GameLocal.sound);
+        if (_switch == 0) return;
 
         var SoundDict = GameSound.SoundDict;
 
-        var sound:egret.Sound;
-        var channel:egret.SoundChannel;
+        var sound: egret.Sound;
+        var channel: egret.SoundChannel;
 
-        if(!SoundDict[name])
-        {
+        if (!SoundDict[name]) {
             sound = RES.getRes("" + name);
 
-            if(!sound)
-            {
-                if(!GameSound.loadList[name]) GameSound.loadMusic(name);
+            if (!sound) {
+                if (!GameSound.loadList[name]) GameSound.loadMusic(name);
                 return;
             }
         }
-        else
-        {
+        else {
             sound = SoundDict[name]["s"];
             channel = SoundDict[name]["c"];
         }
 
-        channel = sound.play(startTime,loops);
+        channel = sound.play(startTime, loops);
 
-        channel.volume = GameSound._volume;
+        channel.volume = GameSound._volume / 100;
 
-        SoundDict[name] = {"s":sound,"c":channel};
+        SoundDict[name] = {"s": sound, "c": channel};
     }
 
     /**
      * 关闭所有在播放的音效
      * @constructor
      */
-    export function CloseAllSound():void
-    {
+    export function CloseAllSound(): void {
         var SoundDict = GameSound.SoundDict;
 
-        for(var name in SoundDict)
-        {
-            var channel:egret.SoundChannel = SoundDict[name]["c"];
+        for (var name in SoundDict) {
+            var channel: egret.SoundChannel = SoundDict[name]["c"];
 
-            if(channel) channel.stop();
+            if (channel) channel.stop();
         }
     }
 
@@ -81,30 +74,26 @@ module GameSound
      * @param name
      * @constructor
      */
-    export function CloseSound(name:string):void
-    {
+    export function CloseSound(name: string): void {
 
-        if(!SoundDict[name]) return;
+        if (!SoundDict[name]) return;
 
-        var channel:egret.SoundChannel = SoundDict[name]["c"];
+        var channel: egret.SoundChannel = SoundDict[name]["c"];
 
-        if(channel) channel.stop();
+        if (channel) channel.stop();
     }
 
     /**
      * 加载一个音效
      * @param name
      */
-    export function loadMusic(name:string):void
-    {
+    export function loadMusic(name: string): void {
         GameSound.loadList[name] = name;
 
-        if(RES.hasRes(name))
-        {
-            RES.getResAsync(name,function ()
-            {
+        if (RES.hasRes(name)) {
+            RES.getResAsync(name, function () {
                 GameSound.PlaySound(name);
-            },this);
+            }, this);
         }
     }
 
@@ -112,19 +101,16 @@ module GameSound
      * 设置音效音量
      * @param volume
      */
-    export function setSoundVolume(volume:number = 0):void
-    {
+    export function setSoundVolume(volume: number = 0): void {
         GameSound._volume = volume;
 
         var SoundDict = GameSound.SoundDict;
 
-        for(var name in SoundDict)
-        {
-            var channel:egret.SoundChannel = SoundDict[name]["c"];
+        for (var name in SoundDict) {
+            var channel: egret.SoundChannel = SoundDict[name]["c"];
 
-            if(channel && channel.position > 0)
-            {
-                channel.volume = volume;
+            if (channel && channel.position > 0) {
+                channel.volume = volume / 100;
             }
         }
     }

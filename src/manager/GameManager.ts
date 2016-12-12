@@ -24,10 +24,10 @@ class GameManager extends BaseDispatcher {
     }
 
     get layerScene() {
-        return GameLayerManager.gameLayer().sceneLayer;
+        return LayerManager.gameLayer().sceneLayer;
     }
 
     get layerPanel() {
-        return GameLayerManager.gameLayer().panelLayer;
+        return LayerManager.gameLayer().panelLayer;
     }
 }

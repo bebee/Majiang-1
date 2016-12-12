@@ -18,9 +18,9 @@ class GlobalData {
     //登录等待
     public sendLogin: boolean = false;
     //牌型
-    public cardType: number = 1;
-    //牌风格
     public cardStyle: number = 1;
+    //牌风格
+    public cardColor: number = 1;
     //玩家重连次数
     public connCount: number = 0;
     //圈数，仅显示使用

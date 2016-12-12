@@ -62,14 +62,7 @@ module Global {
 			GlobalData.getInstance().connCount++;
 		}
 		else {
-			var count: number;
-
-			if (NativeApi.getLocalData("getAccessCode")) {
-				count = +NativeApi.getLocalData("getAccessCode");
-			}
-			else {
-				count = 0;
-			}
+			var count: number = +GameLocal.getData(GameLocal.loginAccessCode);
 
 			if (count < 2) {
 				var addres: string = GameConfig.wei_href_address;
@@ -78,7 +71,7 @@ module Global {
 
 				count++;
 
-				NativeApi.setLocalData("getAccessCode", count);
+				GameLocal.setData(GameLocal.loginAccessCode, count);
 			}
 			else {
 				if (!LayerManager.gameLayer().messagBox) LayerManager.gameLayer().messagBox = new MessageDialog();

@@ -1,54 +1,43 @@
 /**
  * 登陆返回
  */
-class S1
-{
-    public parseData(obj:any)
-    {
-        if(!obj) return;
+class S1 {
+    public parseData(obj: any) {
+        if (!obj) return;
 
-        if(obj["data"])
-        {
+        if (obj["data"]) {
             GlobalData.getInstance().sendLogin = false;
+            GlobalData.getInstance().connCount = 0;
 
-            GlobalData.getInstance().connCount = 0;
-            
-            GlobalData.getInstance().connCount = 0;
-            
             GlobalData.getInstance().player.update(obj["data"]);
 
-            if(SceneManager.find("LoadingScene"))
-            {
+            if (SceneManager.find("LoadingScene")) {
                 SceneManager.find("LoadingScene").onIn();
             }
 
-            NativeApi.setLocalData("getAccessCode", 0);
+            GameLocal.setData(GameLocal.loginAccessCode, 0);
 
-            if(!GameConfig.users)
-            {
-                var ver:string = GlobalData.getInstance().player.version;
+            if (!GameConfig.users) {
+                var ver: string = GlobalData.getInstance().player.version;
 
-                if(!ver) return;
+                if (!ver) return;
 
-                var arr:Array<any> = ver.split('.');
+                var arr: Array<any> = ver.split('.');
 
-                var cver:string = GlobalData.getInstance().resourceCode;
+                var cver: string = GlobalData.getInstance().resourceCode;
 
-                var carr:Array<any> = cver.split('.');
+                var carr: Array<any> = cver.split('.');
 
-                if(arr[0] != carr[0] || arr[1] != carr[1])
-                {
-                    if(!LayerManager.gameLayer().messagBox) LayerManager.gameLayer().messagBox = new MessageDialog();
-                    LayerManager.gameLayer().messagBox.showMsg(function (r)
-                    {
-                        if(r)
-                        {
-                            var h:string = GameConfig.wei_href_address;
-                            if(GameConfig.roomid) h += "?roomid=" + GameConfig.roomid;
+                if (arr[0] != carr[0] || arr[1] != carr[1]) {
+                    if (!LayerManager.gameLayer().messagBox) LayerManager.gameLayer().messagBox = new MessageDialog();
+                    LayerManager.gameLayer().messagBox.showMsg(function (r) {
+                        if (r) {
+                            var h: string = GameConfig.wei_href_address;
+                            if (GameConfig.roomid) h += "?roomid=" + GameConfig.roomid;
                             location.href = h;
                         }
 
-                    },"当前游戏版本过低，请点击确定刷新游戏！");
+                    }, "当前游戏版本过低，请点击确定刷新游戏！");
                 }
             }
         }

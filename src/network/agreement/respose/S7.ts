@@ -13,7 +13,7 @@ class S7
 
             EffectUtils.showTips("恭喜！绑定成功！", 5);
 
-            StackManager.open(ShopDialog, "ShopDialog");
+            StackManager.open(ActivityPanel, "ActivityPanel");
 
             StackManager.closeDialog("BindDialog");
         }

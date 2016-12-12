@@ -24,10 +24,7 @@ class Main extends eui.UILayer {
             }
         }
 
-        if (code) {
-            var codes = NativeApi.getLocalData("codes");
-            if (codes && codes == code)  code = null;
-        }
+        if (GameLocal.getData(GameLocal.loginCode) == code)  code = null;
 
         if (!user && !code) {
             var addres: string = GameConfig.wei_href_address;
@@ -35,7 +32,7 @@ class Main extends eui.UILayer {
             Weixin.getAccessCode(GameConfig.appid, addres);
         }
 
-        NativeApi.setLocalData("codes", GameConfig.code);
+        GameLocal.setData(GameLocal.loginCode, code);
 
         // HttpHandler.sendMsgCallBack("http://"+GameConfig.address_center.ip+":"+GameConfig.address_center.port+"/", "action=serverlist", function (obj)
         // {

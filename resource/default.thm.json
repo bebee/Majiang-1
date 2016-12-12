@@ -31,19 +31,18 @@
     "resource/eui_skins_game/other/HeadViewSkin.exml",
     "resource/eui_skins_game/other/HornSkin.exml",
     "resource/eui_skins_game/other/ResultItemViewSkin.exml",
+    "resource/eui_skins_game/panel/activity/ActivityPanelSkin.exml",
     "resource/eui_skins_game/panel/create/CreatePanelSkin.exml",
     "resource/eui_skins_game/panel/create/CreateXueliuViewSkin.exml",
     "resource/eui_skins_game/panel/protocol/ProtocolPanelSkin.exml",
     "resource/eui_skins_game/panel/rule/RulePanelSkin.exml",
-    "resource/eui_skins_game/panel/setting/SettingSkin.exml",
+    "resource/eui_skins_game/panel/setting/SettingPanelSkin.exml",
     "resource/eui_skins_game/RecordItemSkin.exml",
     "resource/eui_skins_game/RecordSkin.exml",
     "resource/eui_skins_game/RecordXItemSkin.exml",
     "resource/eui_skins_game/RoleInfoSkin.exml",
     "resource/eui_skins_game/scene/loading/LoadingSceneSkin.exml",
-    "resource/eui_skins_game/scene/main/MainSceneSkin.exml",
-    "resource/eui_skins_game/ShopItemSkin.exml",
-    "resource/eui_skins_game/ShopSkin.exml"
+    "resource/eui_skins_game/scene/main/MainSceneSkin.exml"
   ],
   "skins": {
     "eui.Button": "resource/eui_skins/ButtonSkin.exml",

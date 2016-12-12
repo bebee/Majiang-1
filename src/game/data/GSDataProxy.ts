@@ -995,8 +995,8 @@ class GSDataProxy {
             GSController.i.startView();
             GSConfig.gameConfigInit();
             //设置牌面尺寸
-            FashionTools.setViewType(GlobalData.getInstance().cardType);
-            FashionTools.setGameStyle(GlobalData.getInstance().cardStyle);
+            FashionTools.setViewType(GlobalData.getInstance().cardStyle);
+            FashionTools.setGameStyle(GlobalData.getInstance().cardColor);
 
 
             if (this.gData.rebackData) {

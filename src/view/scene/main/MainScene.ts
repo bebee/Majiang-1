@@ -97,7 +97,7 @@ class MainScene extends eui.Component {
          * 打开创建游戏
          */
         this.btn_create.addEventListener(egret.TouchEvent.TOUCH_TAP, function () {
-            StackManager.open(CreateDialog, "CreateDialog");
+            StackManager.open(CreatePanel, "CreatePanel");
 
         }, this);
 
@@ -177,13 +177,13 @@ class MainScene extends eui.Component {
 
         switch (n) {
             case "shop":
-                StackManager.open(ShopDialog, "ShopDialog");
+                StackManager.open(ActivityPanel, "ActivityPanel");
                 break;
             case "set":
-                StackManager.open(SettingDialog, "SettingDialog");
+                StackManager.open(SettingPanel, "SettingPanel");
                 break;
             case "rule":
-                StackManager.open(RuleDialog, "RuleDialog");
+                StackManager.open(RulePanel, "RulePanel");
                 break;
         }
     }

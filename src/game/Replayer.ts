@@ -284,7 +284,7 @@ class Replayer implements IUpdate{
     }
     //展示
     show(){
-        FashionTools.setGameStyle(GlobalData.getInstance().cardStyle);
+        FashionTools.setGameStyle(GlobalData.getInstance().cardColor);
 
         PublicVal.state = 6;
         GSController.i.startView();

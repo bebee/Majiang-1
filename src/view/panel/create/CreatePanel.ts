@@ -1,4 +1,4 @@
-class CreateDialog extends BasePanel {
+class CreatePanel extends BasePanel {
 
     private btn_xueliu: mui.EButton;
     private btn_xuezhan: mui.EButton;
@@ -6,7 +6,6 @@ class CreateDialog extends BasePanel {
     private scroller: eui.Scroller;
     private viewGroup: eui.Group;
 
-    private btn_selectAll: mui.EButton;
     private btn_start: mui.EButton;
 
     private xueliuView: CreateXueliuView;
@@ -24,17 +23,7 @@ class CreateDialog extends BasePanel {
     childrenCreated() {
         super.childrenCreated();
 
-        this.setTitle("create_btn");
-
-        this.horizontalCenter = 0;
-        this.verticalCenter = 0;
-
-        this.btn_selectAll = new mui.EButton("create_btn_img");
-        this.btn_selectAll.textImg.source = "create_xz1";
-        this.btn_selectAll.x = 550;
-        this.btn_selectAll.y = 278;
-        this.btn_selectAll.visible = false;
-        this.addChild(this.btn_selectAll);
+        this.bgView.setTitle("create_btn");
 
         this.ruleVo = game.ruleVo;
 
@@ -45,7 +34,6 @@ class CreateDialog extends BasePanel {
         this.btn_xueliu.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickHandler, this);
         this.btn_xuezhan.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickHandler, this);
 
-        this.btn_selectAll.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickHandler, this);
         this.btn_start.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickHandler, this);
     }
 
@@ -57,9 +45,6 @@ class CreateDialog extends BasePanel {
             case this.btn_xuezhan:
                 this.ruleVo.law = GamePlayType.xuezhandaodi;
                 break;
-            case this.btn_selectAll:
-                this.selectAll = !this.selectAll;
-                break;
             case this.btn_start:
                 this.startGame();
                 break;
@@ -70,7 +55,6 @@ class CreateDialog extends BasePanel {
 
     private initPanel() {
         this.selectAll = false;
-        this.btn_selectAll.textImg.source = "create_xz" + (this.selectAll ? 1 : 0);
 
         this.scroller.viewport.scrollV = 0;
         this.scroller.validateNow();

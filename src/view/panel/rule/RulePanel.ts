@@ -1,4 +1,4 @@
-class RuleDialog extends BasePanel {
+class RulePanel extends BasePanel {
 
     private btn_xueliu: eui.Button;
     private btn_xuezhan: eui.Button;
@@ -19,10 +19,7 @@ class RuleDialog extends BasePanel {
     childrenCreated() {
         super.childrenCreated();
 
-        this.setTitle("rule_txt");
-
-        this.horizontalCenter = 0;
-        this.verticalCenter = 0;
+        this.bgView.setTitle("rule_txt");
 
         this.type = GamePlayType.xueliuchenghe;
 

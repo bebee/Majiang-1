@@ -9,6 +9,17 @@ class game {
 
     static gameType: GameType = GameType.sichuan;
 
+    //游戏存储key
+    static get gameKey(): string {
+        var key: string = "mqkj-";
+        switch (game.gameType) {
+            case GameType.sichuan:
+                key += "scmj-";
+                break;
+        }
+        return key;
+    }
+
     //管理
     static manager: GameManager = GameManager.i;
 
@@ -41,18 +52,18 @@ class game {
         game.ruleVo = new GameRuleVo();
         game.changeThreeVo = new ChangeThreeVo();
 
-        if (!NativeApi.getLocalData("switch")) NativeApi.setLocalData("switch", 1);
-        if (!NativeApi.getLocalData("music")) NativeApi.setLocalData("music", 1);
-        if (!NativeApi.getLocalData("music_volume")) NativeApi.setLocalData("music_volume", 0.2);
-        if (!NativeApi.getLocalData("sound_volume")) NativeApi.setLocalData("sound_volume", 0.5);
-        if (!NativeApi.getLocalData("pai")) NativeApi.setLocalData("pai", 1);
-        if (!NativeApi.getLocalData("style")) NativeApi.setLocalData("style", 1);
+        if (!GameLocal.getData(GameLocal.music)) GameLocal.setData(GameLocal.music, 1);
+        if (!GameLocal.getData(GameLocal.musicVolume)) GameLocal.setData(GameLocal.musicVolume, 20);
+        if (!GameLocal.getData(GameLocal.sound)) GameLocal.setData(GameLocal.sound, 1);
+        if (!GameLocal.getData(GameLocal.soundVolume)) GameLocal.setData(GameLocal.soundVolume, 50);
+        if (!GameLocal.getData(GameLocal.style)) GameLocal.setData(GameLocal.style, 1);
+        if (!GameLocal.getData(GameLocal.color)) GameLocal.setData(GameLocal.color, 1);
 
-        GameMusic._volume = +NativeApi.getLocalData("music_volume");
-        GameSound._volume = +NativeApi.getLocalData("sound_volume");
+        GameMusic._volume = +GameLocal.getData(GameLocal.musicVolume);
+        GameSound._volume = +GameLocal.getData(GameLocal.soundVolume);
 
-        GlobalData.getInstance().cardType = +NativeApi.getLocalData("pai");
-        GlobalData.getInstance().cardStyle = +NativeApi.getLocalData("style");
+        GlobalData.getInstance().cardStyle = +GameLocal.getData(GameLocal.style);
+        GlobalData.getInstance().cardColor = +GameLocal.getData(GameLocal.color);
 
         GameParse.Initialization();
 

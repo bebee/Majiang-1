@@ -65,7 +65,7 @@ module mui
             }
 
 
-            // var dialog:CreateDialog = StackManager.findDialog(CreateDialog, "CreateDialog");
+            // var dialog:CreatePanel = StackManager.findDialog(CreatePanel, "CreatePanel");
             //
             // if(dialog && LayerManager.gameLayer().panelLayer.contains(dialog))
             // {

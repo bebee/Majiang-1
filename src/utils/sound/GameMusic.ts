@@ -1,8 +1,7 @@
-module GameMusic
-{
+module GameMusic {
     export var SoundDict = {};
 
-    export var _volume:number = 1;
+    export var _volume: number = 1;
 
     /**
      * 加载过的资源
@@ -15,91 +14,78 @@ module GameMusic
      * @param startTime 开始播放的时间 默认是0
      * @constructor
      */
-    export function PlaySound(name:string, loops:number = 0, startTime:number = 0)
-    {
-        var _switch:number = +NativeApi.getLocalData("music");
-        if(_switch == 0) return;
-        
+    export function PlaySound(name: string, loops: number = 0, startTime: number = 0) {
+        var _switch: number = +GameLocal.getData(GameLocal.music);
+        if (_switch == 0) return;
+
         var SoundDict = GameMusic.SoundDict;
 
-        var sound:egret.Sound;
-        var channel:egret.SoundChannel;
+        var sound: egret.Sound;
+        var channel: egret.SoundChannel;
 
         GameMusic.CloseAllSound();
 
-        if(!SoundDict[name])
-        {
+        if (!SoundDict[name]) {
             sound = RES.getRes("" + name);
 
-            if(!sound)
-            {
-                if(!GameSound.loadList[name]) GameMusic.loadMusic(name);
+            if (!sound) {
+                if (!GameSound.loadList[name]) GameMusic.loadMusic(name);
                 return;
             }
         }
-        else
-        {
+        else {
             sound = SoundDict[name]["s"];
             channel = SoundDict[name]["c"];
         }
 
-        channel = sound.play(startTime,loops);
+        channel = sound.play(startTime, loops);
 
-        channel.volume = GameMusic._volume;
+        channel.volume = GameMusic._volume / 100;
 
         egret.log(channel.volume);
 
-        SoundDict[name] = {"s":sound,"c":channel};
+        SoundDict[name] = {"s": sound, "c": channel};
     }
 
-    export function CloseAllSound():void
-    {
+    export function CloseAllSound(): void {
         var SoundDict = GameMusic.SoundDict;
 
-        for(var name in SoundDict)
-        {
-            var channel:egret.SoundChannel = SoundDict[name]["c"];
+        for (var name in SoundDict) {
+            var channel: egret.SoundChannel = SoundDict[name]["c"];
 
-            if(channel) channel.stop();
+            if (channel) channel.stop();
         }
     }
 
-    export function CloseSound(name:string):void
-    {
+    export function CloseSound(name: string): void {
 
-        if(!SoundDict[name]) return;
+        if (!SoundDict[name]) return;
 
-        var channel:egret.SoundChannel = SoundDict[name]["c"];
+        var channel: egret.SoundChannel = SoundDict[name]["c"];
 
-        if(channel) channel.stop();
+        if (channel) channel.stop();
     }
 
-    export function loadMusic(name:string):void
-    {
+    export function loadMusic(name: string): void {
         GameSound.loadList[name] = name;
 
-        if(RES.hasRes(name))
-        {
-            RES.getResAsync(name,function ()
-            {
-               GameMusic.PlaySound(name)
-            },this);
+        if (RES.hasRes(name)) {
+            RES.getResAsync(name, function () {
+                GameMusic.PlaySound(name)
+            }, this);
         }
     }
 
-    export function setSoundVolume(volume:number = 0):void
-    {
+    export function setSoundVolume(volume: number = 0): void {
         GameMusic._volume = volume;
 
         var SoundDict = GameMusic.SoundDict;
 
-        for(var name in SoundDict)
-        {
-            var channel:egret.SoundChannel = SoundDict[name]["c"];
+        for (var name in SoundDict) {
+            var channel: egret.SoundChannel = SoundDict[name]["c"];
 
-            if(channel && channel.position > 0)
-            {
-                channel.volume = volume;
+            if (channel && channel.position > 0) {
+                channel.volume = volume / 100;
             }
         }
     }

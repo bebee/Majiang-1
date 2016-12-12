@@ -174,7 +174,7 @@ class TouchBehaviour implements IGameTapEvent {
 
     onSettingTap() {
 
-        StackManager.open(SettingDialog, "SettingDialog");
+        StackManager.open(SettingPanel, "SettingPanel");
 
     }
 

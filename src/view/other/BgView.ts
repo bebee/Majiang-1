@@ -54,7 +54,7 @@ class BgView extends BaseGameSprite {
                 this.skinState = "normal";
                 break;
             case BgViewType.curtain:
-                this.skinState = "title";
+                this.skinState = "curtain";
                 break;
             case BgViewType.decorate:
                 this.skinState = "decorate";
@@ -78,9 +78,13 @@ class BgView extends BaseGameSprite {
         switch (type) {
             case CurtainType.green:
                 this.curtain.source = "dialog_head_img";
+                this.curtain.y = -6;
+                this.title.y = 22;
                 break;
             case CurtainType.red:
                 this.curtain.source = "shop_dialog_head_img";
+                this.curtain.y = -28;
+                this.title.y = 0;
                 break;
         }
     }

@@ -2,7 +2,7 @@
 * 调用原生api方法汇总
 * 使用方法如：Global.setCookie()
 */
-module NativeApi {
+module NativeApi11 {
 
 	// 储存数据需要key和value，都必须是字符串
 	export function setLocalData(key: string, value: any): void {

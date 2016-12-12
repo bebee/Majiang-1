@@ -15,7 +15,7 @@ class S2
 
             GSData.i.roomID = obj["data"]["roomid"];
 
-            StackManager.closeDialog("CreateDialog");
+            StackManager.closeDialog("CreatePanel");
         }
     }
 }

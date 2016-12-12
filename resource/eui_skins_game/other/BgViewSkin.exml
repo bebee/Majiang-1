@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <e:Skin class="BgViewSkin" width="800" height="200" currentState="decorate" xmlns:e="http://ns.egret.com/eui" states="normal,curtain,decorate" >
 	<e:Image source="loadingeff_bg" scale9Grid="27,25,22,16" height="100%" width="100%"/>
-	<e:Image id="curtain" y="4" horizontalCenter="0.5" x="20" includeIn="curtain" source="dialog_head_img"/>
+	<e:Image id="curtain" y="-6" horizontalCenter="0.5" x="20" includeIn="curtain" source="dialog_head_img"/>
 	<e:Image source="setting_huawen" top="50" horizontalCenter="-220" scaleX="-1" x="10" y="10" includeIn="decorate"/>
 	<e:Image source="setting_huawen" top="50" horizontalCenter="220" x="10" y="10" includeIn="decorate"/>
 	<e:Image id="title" y="22" horizontalCenter="0.5" x="10" includeIn="curtain,decorate"/>
