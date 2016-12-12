@@ -517,14 +517,14 @@ class GSController extends egret.EventDispatcher {
     //延时自动打牌
     delayAutoPushPai() {
 
-        this.delayPushInterval = egret.setTimeout(_=> {
+        this.delayPushInterval = egret.setTimeout(function () {
 
             var catchPai = GSData.i.getCatchPai(1);
-
-            SocketManager.getInstance().getGameConn().send(4, {"args": catchPai});
+            if (catchPai) {
+                SocketManager.getInstance().getGameConn().send(4, {"args": catchPai});
+            }
 
         }, this, 800);
-
     }
 
     clearDelayPushInterval() {

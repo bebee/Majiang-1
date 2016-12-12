@@ -3,7 +3,7 @@
  */
 class PersonItem extends BaseGameSprite {
 
-    dis = 105;
+    spacing = 105;
 
     private headGroup: eui.Group;
     private lab_nick: eui.Label;
@@ -16,7 +16,7 @@ class PersonItem extends BaseGameSprite {
 
     headIcon: GSHeadIcon;
     cardViews: CardView[];
-    currPos: egret.Point;
+    pos: egret.Point;
 
     constructor() {
         super();
@@ -29,36 +29,137 @@ class PersonItem extends BaseGameSprite {
     childrenCreated() {
         super.childrenCreated();
 
-        this.currPos = new egret.Point();
+        this.pos = new egret.Point();
 
         this.headIcon = new GSHeadIcon;
-        this.headGroup.addChildAt(this.headIcon, 0);
+        this.headIcon.x = 40;
+        this.headIcon.y = 40;
+        this.headGroup.addChild(this.headIcon);
     }
+
+    // //添加胡牌 1:点炮 2:自摸
+    // addHuPai(pai: any) {
+    //     var cardView: CardView = CardView.create(1, 4, pai);
+    //     this.paiGroup.addChild(cardView);
+    //
+    //     this.cardViews.push(cardView);
+    // }
 
     update(obj: any) {
 
-        this.lab_uid.text = "" + obj.uid;
-        this.lab_nick.text = "" + obj.nick;
-        this.lab_description.text = "" + this.getDescription(obj);
-        this.lab_fan.text = "合计:" + (obj.fan ? obj.fan : 0) + "番";
-        this.lab_hu.text = "    胡:" + obj.cur;
-        this.lab_gang.text = "    杠:" + obj.gang;
+        this.data = obj;
 
-        //判断牌型 可以排序
-        this.showDown(2, obj[2]);
-        this.showDown(24, obj[24]);
-        this.showDown(25, obj[25]);
+        this.lab_uid.text = "" + this.data.uid;
+        this.lab_nick.text = "" + this.data.nick;
+        this.lab_description.text = "" + this.getDescription();
+        this.lab_fan.text = "合计:" + (this.data.fan ? this.data.fan : 0) + "番";
+        this.lab_hu.text = "    胡:" + this.data.cur;
+        this.lab_gang.text = "    杠:" + this.data.gang;
 
-        this.showUp(obj.left);
+        this.showDown();
+        this.showUp();
     }
 
-    private getDescription(obj: any) {
-        var ting_desc: string = "";
-        if (GSData.i.hasTingRule) {
-            ting_desc = (obj.ting == 1 ? "听牌 " : "未听牌 ");
+    //显示手牌
+    showUp() {
+        for (var i: number = 0; i < this.data.left.length; i++) {
+            var pai = this.data.left[i];
+            var o = GSConfig.getPosByIndex(1, 4, i);
+            this.addCardView(pai, this.pos.x + o.x, this.pos.y);
         }
 
-        var hu_types: any[] = obj.hu_type;
+        //判断手牌长度进行间隔错位
+        if (GSConfig.handLens[this.data.left.length]) {
+            var cardView: CardView = <CardView>this.paiGroup.getElementAt(this.paiGroup.numElements - 1);
+            cardView.posView(cardView.pos.x + this.spacing, this.pos.y);
+        }
+    }
+
+    //显示门前牌
+    showDown() {
+        var checks: any[] = [1, 2, 24, 25];
+        for (var i: number = 0; i < checks.length; i++) {
+            var type: number = checks[i];
+            var group: any[] = this.data[type];
+            if (group && group.length) {
+                switch (type) {
+                    case 1://吃
+                    case 2://碰
+                        for (var j: number = 0; j < group.length; j++) {
+                            var pais = group[j];
+                            for (var k: number = 0; k < pais.length; k++) {
+                                var o = GSConfig.getPosByIndex(1, 4, k);
+                                this.addCardView(pais[k], this.pos.x + o.x, this.pos.y);
+                            }
+                            this.pos.x += this.spacing;
+                        }
+                        break;
+                    case 24://暗杠
+                        for (var j: number = 0; j < group.length; j++) {
+                            var pais = group[j];
+                            var centerO: any;
+                            for (var k: number = 0; k < 3; k++) {
+                                var o = GSConfig.getPosByIndex(1, 4, k);
+                                if (k == 1) {
+                                    centerO = o;
+                                }
+
+                                this.addCardView(pais[k], this.pos.x + o.x, this.pos.y, null, 0.55, 2);
+                            }
+
+                            this.addCardView(pais[0], this.pos.x + centerO.x, this.pos.y - 10);
+
+                            this.pos.x += this.spacing;
+                        }
+                        break;
+                    case 25://明杠
+                        for (var j: number = 0; j < group.length; j++) {
+                            var pais = group[j];
+                            var centerO: any;
+                            for (var k: number = 0; k < 3; k++) {
+                                var o = GSConfig.getPosByIndex(1, 4, k);
+                                if (k == 1) {
+                                    centerO = o;
+                                }
+
+                                this.addCardView(pais[k], this.pos.x + o.x, this.pos.y);
+                            }
+
+                            this.addCardView(pais[0], this.pos.x + centerO.x, this.pos.y - 10);
+
+                            this.pos.x += this.spacing;
+                        }
+                        break;
+                }
+            }
+        }
+    }
+
+    private addCardView(pai, x, y, count?, scale?, style?) {
+        var card = CardView.create(1, style ? style : 4, pai, count ? count : 1);
+        card.posView(x, y + 20);
+        scale && (card.scaleX = card.scaleY = scale);
+        this.paiGroup.addChild(card);
+
+        this.cardViews.push(card);
+    }
+
+    clear() {
+        while (this.cardViews.length) {
+            var cardView: CardView = <CardView>this.cardViews.shift();
+            this.paiGroup.removeChild(cardView);
+
+            CardView.returnCardView(cardView);
+        }
+    }
+
+    private getDescription() {
+        var ting_desc: string = "";
+        if (GSData.i.hasTingRule) {
+            ting_desc = (this.data.ting == 1 ? "听牌 " : "未听牌 ");
+        }
+
+        var hu_types: any[] = this.data.hu_type;
         var types: any[] = [];
 
         var hu_desc: string = "";
@@ -83,103 +184,5 @@ class PersonItem extends BaseGameSprite {
             hu_desc += ") ";
         }
         return ting_desc + hu_desc;
-    }
-
-    //显示手牌
-    showUp(pais: any[]) {
-        for (var i: number = 0; i < pais.length; i++) {
-            var pai = pais[i];
-            var cardView: CardView = CardView.create(1, 4, pai);
-            var o = GSConfig.getPosByIndex(1, 4, i);
-
-            cardView.posView(this.currPos.x + o.x, this.currPos.y);
-            this.paiGroup.addChild(cardView);
-
-            this.cardViews.push(cardView);
-        }
-
-        //判断手牌长度进行间隔错位
-        if (GSConfig.handLens[pais.length]) {
-            cardView.posView(cardView.pos.x + 10, this.currPos.y);
-        }
-    }
-
-    //添加胡牌 1:点炮 2:自摸
-    addHuPai(pai: any) {
-        var cardView: CardView = CardView.create(1, 4, pai);
-        this.paiGroup.addChild(cardView);
-
-        this.cardViews.push(cardView);
-    }
-
-    showDown(action: number, group: any[]) {
-        if (!group) return;
-        switch (action) {
-            case 1://吃
-            case 2://碰
-                for (var i: number = 0; i < group.length; i++) {
-                    var pais = group[i];
-                    for (var j: number = 0; j < pais.length; j++) {
-                        var o = GSConfig.getPosByIndex(1, 4, j);
-                        this.addCardView(pais[j], this.currPos.x + o.x, this.currPos.y);
-                    }
-                    this.currPos.x += this.dis;
-                }
-                break;
-            case 24://暗杠
-                for (var i: number = 0; i < group.length; i++) {
-                    var pais = group[i];
-                    var centerO: any;
-                    for (var j: number = 0; j < 3; j++) {
-                        var o = GSConfig.getPosByIndex(1, 4, j);
-                        if (j == 1) {
-                            centerO = o;
-                        }
-
-                        this.addCardView(pais[j], this.currPos.x + o.x, this.currPos.y, null, 0.55, 2);
-                    }
-
-                    this.addCardView(pais[0], this.currPos.x + centerO.x, this.currPos.y - 10);
-
-                    this.currPos.x += this.dis;
-                }
-                break;
-            case 25://明杠
-                for (var i: number = 0; i < group.length; i++) {
-                    var pais = group[i];
-                    var centerO: any;
-                    for (var j: number = 0; j < 3; j++) {
-                        var o = GSConfig.getPosByIndex(1, 4, j);
-                        if (j == 1) {
-                            centerO = o;
-                        }
-
-                        this.addCardView(pais[j], this.currPos.x + o.x, this.currPos.y);
-                    }
-
-                    this.addCardView(pais[0], this.currPos.x + centerO.x, this.currPos.y - 10);
-
-                    this.currPos.x += this.dis;
-                }
-                break;
-        }
-    }
-
-    private addCardView(pai, x, y, count?, scale?, style?) {
-        var card = CardView.create(1, style ? style : 4, pai, count ? count : 1);
-        card.posView(x + 30, y + 50);
-        scale && (card.scaleX = card.scaleY = scale);
-        this.paiGroup.addChild(card);
-
-        this.cardViews.push(card);
-    }
-
-    clear() {
-        while (this.cardViews.length) {
-            var cardView: CardView = <CardView>this.cardViews.shift();
-            this.paiGroup.removeChild(cardView);
-
-            CardView.returnCardView(cardView);
-        }
     }
 }

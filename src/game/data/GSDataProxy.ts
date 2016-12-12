@@ -112,9 +112,10 @@ class GSDataProxy {
                 if (dir == 1) {
                     game.isHuBoo = true;
 
-                    if (lastPai) {
-                        PublicVal.i.allPais[1].catchPai = lastPai;
-                        GSController.i.delayAutoPushPai();
+                    if (lastPai && lastPai != "no") {
+                        egret.setTimeout(function () {
+                            SocketManager.getInstance().getGameConn().send(4, {"args": lastPai});
+                        }, this, 2000);
                     }
                 }
             }
@@ -341,6 +342,9 @@ class GSDataProxy {
 
             this.gData.funcSelects.push({index: 6, action: 99, pai: obj[99]});
 
+            if (game.isHuBoo) {
+
+            }
         }
 
         //断线重连上来的情况
@@ -434,7 +438,7 @@ class GSDataProxy {
         var dir = this.gData.getDir(pos);
 
         this.gData.isShowFunc = false;
-        this.gData.turnDir = dir;
+        // this.gData.turnDir = dir;
 
         var poolPai: any = null;
 
@@ -636,6 +640,10 @@ class GSDataProxy {
                     }
                 }
 
+                if (this.gData.turnDir != dir) {//接炮胡
+                    poolPai = pai;
+                }
+
                 if (dir == 1) {
                     game.isHuBoo = true;
                     //删除手牌数据 3
@@ -650,6 +658,8 @@ class GSDataProxy {
                 console.log("未解析的功能菜单", action);
                 break;
         }
+
+        this.gData.turnDir = dir;
 
         if (cur != null) {
             for (var k in cur) {

@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='utf-8'?>
+<e:Skin class="HeadViewSkin" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+	<e:Group height="80" width="80">
+		<e:Image source="game_head_null" left="0" top="0" width="80" height="80"/>
+		<e:Image source="game_head_lixian" horizontalCenter="0" verticalCenter="0" width="80" height="80"/>
+		<e:Image source="head_kuang_bg" verticalCenter="0" horizontalCenter="-0.5"/>
+		<e:Image source="game_head_room" verticalCenter="-1.5" horizontalCenter="3"/>
+		<e:Image source="game_zhuang" left="-10" top="-9"/>
+		<e:Image source="JS_close" x="55" y="-24"/>
+	</e:Group>
+</e:Skin>

@@ -1,6 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <e:Skin class="ResultItemViewSkin" width="960" height="100" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
-	<e:Group id="headGroup" top="0" bottom="0" left="0" right="780">
+	<e:Group top="0" bottom="0" left="0" right="780">
+		<e:Group id="headGroup" height="80" width="80" x="405" y="241"/>
 		<e:Label id="lab_nick" fontFamily="微软雅黑" size="20" bottom="1" horizontalCenter="-390" text="昵称" width="180" textAlign="center"/>
 		<e:Label id="lab_uid" fontFamily="微软雅黑" textAlign="center" bottom="1" width="180" size="20" horizontalCenter="-390" x="10" y="10" visible="false"/>
 		<e:layout>
