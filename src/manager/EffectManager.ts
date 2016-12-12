@@ -1,206 +1,129 @@
 /**
- * Created by Administrator on 2015/12/17.
+ * EffectManager
+ * @Author Ace.c
+ * @Create 2016-12-05 16:00
  */
-//战斗特效管理器
-class EffectManager {
+class EffectManager extends BaseManager {
 
-    private static _i: EffectManager;
+    private changeThreeView: ChangeThreeView;
+    private changeThreeAnimation: ChangeThreeAnimation;
+    private queView: QueView;
+    private xiayuView: XiayuView;
+    private guafengView: GuafengView;
+    private gangshangkaihuaView: GangshangkaihuaView;
+    private hujiaozhuanyiView: HujiaozhuanyiView;
+    private yipaoduoxiangView: YipaoduoxiangView;
+    private scoreView: ScoreView;
 
-    public static get i(): EffectManager {
-
-        return this._i || (this._i = new EffectManager);
-    }
-
-    private movieDefaultProp: any;
-
-    private movieClips: egret.MovieClip[];
-
-    private movieClipDataFactory: egret.MovieClipDataFactory;
-
-    private movieClipDataMap: any;
-
-    //正在播放中的特效
-    private playingMovieClips: egret.MovieClip[];
-
-    private eps: any;
-
-    constructor() {
-
-
-        this.movieClips = [];
-        this.movieClipDataMap = {};
-
-        this.playingMovieClips = [];
-
-        this.movieClipDataFactory = new egret.MovieClipDataFactory;
-
-        this.movieDefaultProp = {
-            x: 0,
-            y: 0,
-            scaleX: 1,
-            scaleY: 1,
-            anchorOffsetX: 0,
-            anchorOffsetY: 0,
-            rotation: 0,
-            frameRate: 12
-        };
-        this.eps = {};
-
-        this.regEffectsAO();
-
+    public constructor() {
+        super();
     }
 
 
-    //注册特效偏移
-    private regEffectsAO() {
-        this.regAO("loding", "loding", 0, 0, 9);
+    init() {
+        super.init();
+
+        this.changeThreeView = new ChangeThreeView();
+        this.changeThreeAnimation = new ChangeThreeAnimation();
+        this.queView = new QueView();
+        this.xiayuView = new XiayuView();
+        this.guafengView = new GuafengView();
+        this.hujiaozhuanyiView = new HujiaozhuanyiView();
+        this.gangshangkaihuaView = new GangshangkaihuaView();
+        this.yipaoduoxiangView = new YipaoduoxiangView();
+        this.scoreView = new ScoreView();
+
+        this.gameManager.addEventListener(GameEvent.CleanAll, this.onCleanAll, this);
+        this.gameManager.addEventListener(GameEvent.ChangeThree, this.onChangeThree, this);
+        this.gameManager.addEventListener(GameEvent.ChangeThreeComplete, this.onChangeThreeComplete, this);
+        this.gameManager.addEventListener(GameEvent.Que, this.onQue, this);
+        this.gameManager.addEventListener(GameEvent.CardRaise, this.onCardRaise, this);
+        this.gameManager.addEventListener(GameEvent.CardThrow, this.onCardThrow, this);
+        this.gameManager.addEventListener(GameEvent.CardThrowTips, this.onCardThrowTips, this);
+        this.gameManager.addEventListener(GameEvent.Xiayu, this.onRaining, this);
+        this.gameManager.addEventListener(GameEvent.Guafeng, this.onWindy, this);
+        this.gameManager.addEventListener(GameEvent.Hujiaozhuanyi, this.onHujiaozhuanyi, this);
+        this.gameManager.addEventListener(GameEvent.Gangshangkaihua, this.onGangshangkaihua, this);
+        this.gameManager.addEventListener(GameEvent.Yipaoduoxiang, this.onYipaoduoxiang, this);
+        this.gameManager.addEventListener(GameEvent.ScoreTips, this.onScoreTips, this);
+
     }
 
-
-    //获取带属性的特效 id 特效id
-    public getPropEffect(id: string): egret.MovieClip {
-
-        var mc: egret.MovieClip = this.getMovieClipFPool();
-
-        if (id == "") return mc;
-
-        this.updateMovieClipData(mc, id);
-
-        return mc;
+    private onScoreTips(scores: any) {
+        this.scoreView.play(scores);
     }
 
+    private onGangshangkaihua(dir: DirType) {
+        this.gangshangkaihuaView.play(dir);
+    }
 
-    //获取元件
-    public getMovieClipFPool(): egret.MovieClip {
+    private onYipaoduoxiang(dirs: DirType[]) {
+        this.yipaoduoxiangView.play(dirs);
+    }
 
-        if (this.movieClips.length) {
+    private onHujiaozhuanyi(dirs: DirType[]) {
+        this.hujiaozhuanyiView.play(dirs);
+    }
 
-            return this.movieClips.shift();
+    private onRaining(dir: DirType) {
+        this.xiayuView.play(dir);
+    }
 
+    private onWindy(dir: DirType) {
+        this.guafengView.play(dir);
+    }
+
+    private onCleanAll() {
+        this.changeThreeView.hide();
+        this.changeThreeAnimation.hide();
+
+        this.queView.hide();
+
+        GSController.i.gsView.updateState();
+    }
+
+    private onChangeThree() {
+        GSController.i.gsView.updateState();
+
+        this.changeThreeView.show();
+        this.onCardRaise(CardRaiseMode.changeThree);
+    }
+
+    private onChangeThreeComplete(type: ChangeThreeType) {
+        this.changeThreeAnimation.setType(type);
+        this.changeThreeAnimation.show();
+    }
+
+    private onCardRaise(type: CardRaiseMode) {
+        if (type != undefined) {
+            CardRaiseEffect.play(type);
         }
-        return new egret.MovieClip;
-    }
-
-
-    //更新
-    public updateMovieClipData(mc: egret.MovieClip, name: string) {
-
-        var prop: any = this.getAO(name);
-
-        var mcData: egret.MovieClipData = this.getMovieClipData(prop.name);
-
-        mc.movieClipData = mcData;
-
-        (mc.totalFrames > 0 && mcData) && (mc.frameRate = prop.frame);
-        mc.anchorOffsetX = prop.x;
-        mc.anchorOffsetY = prop.y;
-    }
-
-    private getMovieClipData(res: string): egret.MovieClipData {
-
-        var mcData = this.movieClipDataMap[res];
-
-        if (!mcData) {
-
-            var json = this.movieClipDataFactory.mcDataSet = RES.getRes(res + "_json");
-
-            if (json) {
-
-                this.movieClipDataFactory.mcDataSet = json;
-
-                this.movieClipDataFactory.texture = RES.getRes(res + "_png");
-
-            }
-            else {
-
-                //自定义加载的资源池子里去获取
-                //json = this.movieClipDataFactory.mcDataSet = FightRes.i.getRes(res+"_json");
-                //this.movieClipDataFactory.texture = FightRes.i.getRes(res+"_png");
-
-            }
-
-            if (json == null) {
-
-                mcData = null;
-
-            } else {
-
-                this.movieClipDataMap[res] = (mcData = this.movieClipDataFactory.generateMovieClipData());
-            }
+        else {
+            CardRaiseEffect.stop();
         }
-        return mcData;
     }
 
-    removeEffect(mc: egret.MovieClip) {
-
-        this.resetMovieClip(mc);
-
-        mc.parent && mc.parent.removeChild(mc);
-
-        this.playingMovieClips.splice(this.playingMovieClips.indexOf(mc), 1);
-
-        this.movieClips.push(mc);
-    }
-
-    private resetMovieClip(mc: egret.MovieClip) {
-
-        for (var o in this.movieDefaultProp) {
-
-            mc[o] = this.movieDefaultProp[o];
+    private onQue() {
+        if (game.isChangeThreeBoo == false && game.isQueBoo) {
+            this.queView.show();
         }
-
-        mc.gotoAndStop(0);
     }
 
-    //创建特效
-    /*
-     name : 特效名
-     parent:父级容器
-     playCount:播放次数
-     propObj:属性对象
-     callback 回调 thisObj 作用域
-     */
-    public playEffect(id: string, parent: egret.DisplayObjectContainer, playCount: number = 1, propObj?: any, callback?: Function, thisObj?: any, data?: any): egret.MovieClip {
-
-        var mc: egret.MovieClip = this.getPropEffect(id);
-
-        this.playingMovieClips.push(mc);
-
-        if (propObj) for (var o in propObj) this.movieDefaultProp.hasOwnProperty(o) && (mc[o] = propObj[o]);
-
-        mc.play(playCount);
-
-        parent.addChild(mc);
-
-        if (playCount == 1) {
-
-            mc.addEventListener(egret.Event.COMPLETE, function (e) {
-
-                mc.removeEventListener(egret.Event.COMPLETE, arguments.callee, this);
-
-                this.removeEffect(mc);
-
-                callback == null || callback.call(thisObj, data);
-
-            }, this);
+    private onCardThrow(arr: any[]) {
+        if (arr && arr.length == 2) {
+            ChupaiEffect.play(arr[0], arr[1]);
         }
-
-        return mc;
+        else {
+            ChupaiEffect.stop(true);
+        }
     }
 
-    //注册偏移
-    regAO(id: string, name: string, x: number, y: number, frame: number = 12) {
-
-        this.eps[id] = {name: name, x: x, y: y, frame: frame};
-
-    }
-
-    getAO(id: string): any {
-
-        var prpo: any = this.eps[id];
-
-        if (!prpo) throw new Error("没有注册特效相关属性 : " + id);
-
-        return prpo;
+    private onCardThrowTips(arr: any[]) {
+        if (arr && arr.length == 2) {
+            ChupaiTipsEffect.play(arr[1], (arr[0] == 1 || arr[0] == 3) ? 2 : 0);
+        }
+        else {
+            ChupaiTipsEffect.stop();
+        }
     }
 }

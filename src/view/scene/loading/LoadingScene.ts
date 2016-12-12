@@ -9,14 +9,13 @@ class LoadingScene extends eui.Component {
 
     public constructor() {
         super();
-
         this.skinName = "LoadingSceneSkin";
-
-        this.touchChildren = true;
     }
 
     createChildren() {
         super.createChildren();
+
+        this.touchChildren = false;
 
         this.lab_info.text = "正在加载游戏资源···";
         this.lab_progress.visible = false;

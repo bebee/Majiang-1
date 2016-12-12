@@ -3,10 +3,7 @@
  */
 class PersonItem extends BaseGameSprite {
 
-    //胡字位置
-    huPos = {x: 838, y: 40};
     dis = 105;
-    hupaiDis: number = 44;
 
     private headGroup: eui.Group;
     private lab_nick: eui.Label;
@@ -35,9 +32,7 @@ class PersonItem extends BaseGameSprite {
         this.currPos = new egret.Point();
 
         this.headIcon = new GSHeadIcon;
-        this.headIcon.x = this.headGroup.width / 2;
-        this.headIcon.y = this.headGroup.height / 2;
-        this.headGroup.addChild(this.headIcon);
+        this.headGroup.addChildAt(this.headIcon, 0);
     }
 
     update(obj: any) {
@@ -50,14 +45,11 @@ class PersonItem extends BaseGameSprite {
         this.lab_gang.text = "    杠:" + obj.gang;
 
         //判断牌型 可以排序
-        this.switchPai(1, obj[1]);
-        this.switchPai(2, obj[2]);
-        this.switchPai(22, obj[22]);
-        this.switchPai(24, obj[24]);
-        this.switchPai(25, obj[25]);
-        this.switchPai(26, obj[26]);
+        this.showDown(2, obj[2]);
+        this.showDown(24, obj[24]);
+        this.showDown(25, obj[25]);
 
-        this.showLeft(obj.left);
+        this.showUp(obj.left);
     }
 
     private getDescription(obj: any) {
@@ -72,7 +64,7 @@ class PersonItem extends BaseGameSprite {
         var hu_desc: string = "";
         for (var i: number = 0; i < hu_types.length; i++) {
             types = hu_types[i];
-            if (types.length < 2 || typeof types[1] == "object") {
+            if (types.length < 2 || typeof types[0] == "number" || typeof types[1] == "object") {
                 continue;
             }
             hu_desc += "" + GSConfig.huTypeMap[types[0]];
@@ -94,7 +86,7 @@ class PersonItem extends BaseGameSprite {
     }
 
     //显示手牌
-    showLeft(pais: any[]) {
+    showUp(pais: any[]) {
         for (var i: number = 0; i < pais.length; i++) {
             var pai = pais[i];
             var cardView: CardView = CardView.create(1, 4, pai);
@@ -120,7 +112,7 @@ class PersonItem extends BaseGameSprite {
         this.cardViews.push(cardView);
     }
 
-    switchPai(action: number, group: any[]) {
+    showDown(action: number, group: any[]) {
         if (!group) return;
         switch (action) {
             case 1://吃
