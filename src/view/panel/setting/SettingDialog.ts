@@ -1,52 +1,23 @@
-class SettingDialog extends BaseDialog
+class SettingDialog extends BasePanel
 {
-
-    private m_UI:SettingUI;
 
     public constructor()
     {
         super("setting_txt", 700, 400);
+        super();
+
+        this.skinName = "RulePanelSkin";
     }
 
-    public slider_music:mui.EHSlider;
-
-    public slider_sound:mui.EHSlider;
-
-    createChildren()
+    childrenCreated()
     {
-        super.createChildren();
+        super.childrenCreated();
 
-        this.m_UI = new SettingUI();
+        this.setTitle("setting_txt");
 
-        this.addChild(this.m_UI);
+        this.horizontalCenter = 0;
+        this.verticalCenter = 0;
 
-        this.m_UI.horizontalCenter = 0;
-
-        this.m_UI.verticalCenter = 10;
-
-        this.slider_music = new mui.EHSlider(100, 0, "setting_progressbar_bg", "radio_btn", "setting_progressbar1");
-
-        this.slider_music.x = 95;
-
-        this.slider_music.y = 100;
-
-        this.slider_music.width = 250;
-
-        this.m_dialog._title_img.visible = false;
-
-        this.m_UI.addChild(this.slider_music);
-
-        this.slider_music.addEventListener(egret.Event.CHANGE, this.setMusic, this);
-
-        this.slider_sound = new mui.EHSlider(100, 0, "setting_progressbar_bg", "radio_btn", "setting_progressbar1");
-
-        this.slider_sound.x = 95;
-
-        this.slider_sound.y = 170;
-
-        this.slider_sound.width = 250;
-
-        this.m_UI.addChild(this.slider_sound);
 
         this.slider_sound.addEventListener(egret.Event.CHANGE, this.setSound, this);
 
