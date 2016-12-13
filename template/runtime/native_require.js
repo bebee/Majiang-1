@@ -234,6 +234,7 @@ var game_file_list = [
 	"bin-debug/view/panel/create/CreatePanel.js",
 	"bin-debug/view/panel/create/CreateXueliuView.js",
 	"bin-debug/view/panel/protocol/ProtocolDialog.js",
+	"bin-debug/view/panel/rule/RulePanel.js",
 	"bin-debug/view/panel/setting/SettingPanel.js",
 	"bin-debug/view/scene/BaseScene.js",
 	"bin-debug/view/scene/loading/DialogLoding.js",
@@ -243,7 +244,6 @@ var game_file_list = [
 	"bin-debug/vo/ChangeThreeVo.js",
 	"bin-debug/vo/GameRuleVo.js",
 	"bin-debug/vo/PlayerVo.js",
-	"bin-debug/view/panel/rule/RulePanel.js",
 	//----auto game_file_list end----
 ];
 
