@@ -12,8 +12,8 @@ class BaseDialog extends eui.Component {
 
     public constructor(title: string = "shop_txt", ui_w: number = 0, ui_h: number = 0) {
         super();
-        this.w = GameConfig.curWidth();
-        this.h = GameConfig.curHeight();
+        this.w = game.stageWidth;
+        this.h = game.stageHeight;
         this.m_dialog = new DialogUI();
         this.m_dialog.verticalCenter = 0;
         this.m_dialog.horizontalCenter = 0;

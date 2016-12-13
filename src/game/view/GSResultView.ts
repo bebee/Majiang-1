@@ -101,7 +101,6 @@ class GSResultView extends egret.DisplayObjectContainer {
 
 
     update() {
-
         this.showLogo(GSData.i.resultType);
 
         var persons = GSData.i.result.person;
@@ -114,24 +113,7 @@ class GSResultView extends egret.DisplayObjectContainer {
 
             var personItem: PersonItem = this.personItems[i];
 
-            var person_pos = person.pos;
-
-            var dir: number = GSData.i.getDir(person_pos);
-
-            personItem.headIcon.setHeadSource(person.pic);
-
-            personItem.headIcon.showFangzhu((PublicVal.i.roomOwnFlag >> dir & 1) == 1);
-
-            personItem.headIcon.showZhuang(GSData.i.result.zhuang == person_pos);
-
-            if (GSData.i.result.hupaiPos == person_pos) {
-                personItem.update(person);
-
-            } else if (GSData.i.result.dianPaoPos == person_pos) {
-                personItem.update(person);
-            } else {
-                personItem.update(person);
-            }
+            personItem.update(person);
         }
     }
 

@@ -16,7 +16,7 @@ class Main extends eui.UILayer {
             if (search != "") {
                 var rulv = new egret.URLVariables(search);
 
-                GameConfig.pushData(rulv.variables);
+                gameConfig.update(rulv.variables);
 
                 user = rulv.variables["users"];
                 code = rulv.variables["code"];
@@ -24,33 +24,33 @@ class Main extends eui.UILayer {
             }
         }
 
-        if (GameLocal.getData(GameLocal.loginCode) == code)  code = null;
+        if (gameLocal.getData(gameLocal.loginCode) == code)  code = null;
 
         if (!user && !code) {
-            var addres: string = GameConfig.wei_href_address;
+            var addres: string = gameConfig.GameUrl;
             if (roomid) addres += "?roomid=" + roomid;
-            Weixin.getAccessCode(GameConfig.appid, addres);
+            Weixin.getAccessCode(gameConfig.appid, addres);
         }
 
-        GameLocal.setData(GameLocal.loginCode, code);
+        gameLocal.setData(gameLocal.loginCode, code);
 
-        // HttpHandler.sendMsgCallBack("http://"+GameConfig.address_center.ip+":"+GameConfig.address_center.port+"/", "action=serverlist", function (obj)
+        // HttpHandler.sendMsgCallBack("http://"+gameConfig.address_center.ip+":"+gameConfig.address_center.port+"/", "action=serverlist", function (obj)
         // {
         //     var addrr = obj.addrr;
         //     var auth_port = obj.auth_port;
         //     var port = obj.port;
         //
-        //     GameConfig.http_address.ip = addrr;
-        //     GameConfig.http_address.port = auth_port;
+        //     gameConfig.address_http.ip = addrr;
+        //     gameConfig.address_http.port = auth_port;
         //
-        //     GameConfig.address_game.ip = addrr;
-        //     GameConfig.address_game.port = port;
+        //     gameConfig.address_game.ip = addrr;
+        //     gameConfig.address_game.port = port;
         // }, egret.URLRequestMethod.POST, this);
-        // GameConfig.http_address.ip = addrr;
-        // GameConfig.http_address.port = auth_port;
+        // gameConfig.address_http.ip = addrr;
+        // gameConfig.address_http.port = auth_port;
 
-        GameConfig.address_game.ip = GameConfig.address_test.ip;
-        GameConfig.address_game.port = GameConfig.address_test.port;
+        gameConfig.address_game.ip = gameConfig.address_test.ip;
+        gameConfig.address_game.port = gameConfig.address_test.port;
     }
 
     protected createChildren(): void {
@@ -60,13 +60,13 @@ class Main extends eui.UILayer {
         this.stage.registerImplementation("eui.IThemeAdapter", new ThemeAdapter());
 
         RES.addEventListener(RES.ResourceEvent.CONFIG_COMPLETE, this.onConfigComplete, this);
-        RES.loadConfig("resource" + GlobalData.getInstance().resourceCode + "/default.res.json", "resource" + GlobalData.getInstance().resourceCode + "/");
+        RES.loadConfig("resource" + gameData.version + "/default.res.json", "resource" + gameData.version + "/");
     }
 
     private onConfigComplete(): void {
         RES.removeEventListener(RES.ResourceEvent.CONFIG_COMPLETE, this.onConfigComplete, this);
 
-        var theme = new eui.Theme("resource" + GlobalData.getInstance().resourceCode + "/default.thm.json", this.stage);
+        var theme = new eui.Theme("resource" + gameData.version + "/default.thm.json", this.stage);
         theme.addEventListener(eui.UIEvent.COMPLETE, this.onThemeLoadComplete, this);
     }
 

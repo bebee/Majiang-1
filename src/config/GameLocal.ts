@@ -1,9 +1,20 @@
 /**
- * GameLocal
+ * gameLocal
  * @Author Ace.c
  * @Create 2016-12-12 19:36
  */
-class GameLocal {
+class gameLocal {
+
+    //游戏存储key
+    static get localKey(): string {
+        var key: string = "mqkj-";
+        switch (game.gameType) {
+            case GameType.sichuan:
+                key += "scmj-";
+                break;
+        }
+        return key;
+    }
 
     //登录Code
     static loginCode: string = "loginCode";
@@ -24,13 +35,22 @@ class GameLocal {
     //音效音量
     static soundVolume: string = "soundVolume";
 
+    static init() {
+        if (!gameLocal.getData(gameLocal.music)) gameLocal.setData(gameLocal.music, 1);
+        if (!gameLocal.getData(gameLocal.musicVolume)) gameLocal.setData(gameLocal.musicVolume, 20);
+        if (!gameLocal.getData(gameLocal.sound)) gameLocal.setData(gameLocal.sound, 1);
+        if (!gameLocal.getData(gameLocal.soundVolume)) gameLocal.setData(gameLocal.soundVolume, 50);
+        if (!gameLocal.getData(gameLocal.style)) gameLocal.setData(gameLocal.style, 1);
+        if (!gameLocal.getData(gameLocal.color)) gameLocal.setData(gameLocal.color, 1);
+    }
+
     //读取数据
     static getData(key: string): string {
-        return egret.localStorage.getItem(game.gameKey + key);
+        return egret.localStorage.getItem(this.localKey + key);
     }
 
     //储存数据
     static setData(key: string, value: any): void {
-        egret.localStorage.setItem(game.gameKey + key, value);
+        egret.localStorage.setItem(this.localKey + key, value);
     }
 }

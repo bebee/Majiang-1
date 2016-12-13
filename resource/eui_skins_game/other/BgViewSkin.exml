@@ -4,7 +4,7 @@
 	<e:Image id="curtain" y="-6" horizontalCenter="0.5" x="20" includeIn="curtain" source="dialog_head_img"/>
 	<e:Image source="setting_huawen" top="50" horizontalCenter="-220" scaleX="-1" x="10" y="10" includeIn="decorate"/>
 	<e:Image source="setting_huawen" top="50" horizontalCenter="220" x="10" y="10" includeIn="decorate"/>
-	<e:Image id="title" y="22" horizontalCenter="0.5" x="10" includeIn="curtain,decorate"/>
+	<e:Image id="title" y="13" horizontalCenter="1" x="10" includeIn="curtain,decorate"/>
 	<e:Button right="-20" top="-20" id="close" x="10" y="10">
 		<e:skinName>
 			<e:Skin states="up,down,disabled" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*">

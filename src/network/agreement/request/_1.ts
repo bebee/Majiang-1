@@ -4,21 +4,21 @@
 class _1 {
     public writeData(obj: any) {
         if (!obj) {
-            if (GameConfig.users) {
+            if (gameConfig.users) {
                 obj = {
                     "channel": "test",
-                    "openid": "" + GameConfig.users,
+                    "openid": "" + gameConfig.users,
                     "openkey": "123456788",
-                    "nick": "" + GameConfig.users,
-                    "pic": "" + GlobalData.getInstance().player.pic,
+                    "nick": "" + gameConfig.users,
+                    "pic": "" + gameData.player.pic,
                     "sex": "0"
                 };
             }
             else {
                 obj = {
-                    "channel": "" + GameConfig.platformType(),
-                    "length": GameConfig.code.length,
-                    "code": GameConfig.code
+                    "channel": "" + gameConfig.platformType(),
+                    "length": gameConfig.code.length,
+                    "code": gameConfig.code
                 };
             }
         }

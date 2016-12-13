@@ -213,9 +213,9 @@ class GSController extends egret.EventDispatcher {
         this.scene.readyButton.visible = false;
         this.scene.waitText.visible = false;
 
-        game.manager.dispatchEvent(GameEvent.CardThrowTips);
-        game.manager.dispatchEvent(GameEvent.CardThrow);
-        game.manager.dispatchEvent(GameEvent.CardRaise);
+        game.manager.dispatchEvent(EffectEventType.CardThrowTips);
+        game.manager.dispatchEvent(EffectEventType.CardThrow);
+        game.manager.dispatchEvent(EffectEventType.CardRaise);
         this.playTimeEffect(false, false);
     }
 
@@ -261,7 +261,7 @@ class GSController extends egret.EventDispatcher {
     updateGangCur(showAnimation: boolean = false) {
         var scores: any = {};
         var score: number = 0;
-        var head: GSHeadView;
+        var head: HeadIconRich;
         for (var i: number = 1; i <= 4; i++) {
             head = this.gsView.headViews[i];
             score = GSData.i.gangCurs[i];
@@ -277,7 +277,7 @@ class GSController extends egret.EventDispatcher {
         console.log(showAnimation, scores);
 
         if (showAnimation) {
-            game.manager.dispatchEvent(GameEvent.ScoreTips, scores);
+            game.manager.dispatchEvent(EffectEventType.ScoreTips, scores);
         }
     }
 
@@ -379,13 +379,13 @@ class GSController extends egret.EventDispatcher {
         GSController.i.gsView.resetAllChildrenTouch();
 
         if (game.status == GameStatus.changeThree && !game.statusComplete) {
-            game.manager.dispatchEvent(GameEvent.ChangeThree);
+            game.manager.dispatchEvent(EffectEventType.ChangeThree);
         }
 
 
         if (game.status == GameStatus.missing && !game.statusComplete) {
             game.isQueBoo = true;
-            game.manager.dispatchEvent(GameEvent.Que);
+            game.manager.dispatchEvent(EffectEventType.Que);
         }
 
         if (GSData.i.backTing) {
@@ -557,7 +557,7 @@ class GSController extends egret.EventDispatcher {
         GSController.i.showFuncSelectMenu();
 
         if (game.status == GameStatus.changeThree && !game.statusComplete) {
-            game.manager.dispatchEvent(GameEvent.ChangeThree);
+            game.manager.dispatchEvent(EffectEventType.ChangeThree);
         }
     }
 
@@ -792,9 +792,9 @@ class GSController extends egret.EventDispatcher {
         this.playTimeEffect(false);
 
         //显示新出的牌
-        game.manager.dispatchEvent(GameEvent.CardThrow, [dir, pai]);
+        game.manager.dispatchEvent(EffectEventType.CardThrow, [dir, pai]);
         //显示新出的牌提示点
-        game.manager.dispatchEvent(GameEvent.CardThrowTips, [dir, cardView]);
+        game.manager.dispatchEvent(EffectEventType.CardThrowTips, [dir, cardView]);
     }
 
     //显示吃牌种类选择
@@ -835,7 +835,7 @@ class GSController extends egret.EventDispatcher {
             this.gsView.funcSelectView.updateFuncView(GSData.i.funcSelects);
 
             //TODO 相关手牌提示
-            if (tip) game.manager.dispatchEvent(GameEvent.CardRaise, CardRaiseMode.funcmenu);
+            if (tip) game.manager.dispatchEvent(EffectEventType.CardRaise, CardRaiseMode.funcmenu);
         }
     }
 
@@ -859,7 +859,7 @@ class GSController extends egret.EventDispatcher {
         GSData.i.isShowFunc = false;
 
         //TODO 相关手牌提示
-        game.manager.dispatchEvent(GameEvent.CardRaise);
+        game.manager.dispatchEvent(EffectEventType.CardRaise);
     }
 
     addCardClick(view: CardView) {
@@ -1385,9 +1385,7 @@ class GSController extends egret.EventDispatcher {
 
 
     nullAllHead() {
-
         for (var i: number = 1; i <= 4; i++) {
-
             this.gsView.headViews[i].nullPlayer();
         }
     }
@@ -1411,7 +1409,7 @@ class GSController extends egret.EventDispatcher {
 
             headView.numText.visible = false;
 
-            headView.headIcon.setHeadSource(person.pic);
+            headView.headIcon.update(person);
 
         }
     }

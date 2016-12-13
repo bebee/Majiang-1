@@ -107,14 +107,14 @@ class BindDialog extends BaseDialog
 
     private addStage():void
     {
-        GameConfig.curStage().addEventListener(egret.TouchEvent.TOUCH_END, this.onMove, this);
-        GameConfig.curStage().addEventListener(egret.Event.LEAVE_STAGE, this.onMove, this);
+        game.stage.addEventListener(egret.TouchEvent.TOUCH_END, this.onMove, this);
+        game.stage.addEventListener(egret.Event.LEAVE_STAGE, this.onMove, this);
     }
 
     private removeStage():void
     {
-        GameConfig.curStage().removeEventListener(egret.TouchEvent.TOUCH_END, this.onMove, this);
-        GameConfig.curStage().removeEventListener(egret.Event.LEAVE_STAGE, this.onMove, this);
+        game.stage.removeEventListener(egret.TouchEvent.TOUCH_END, this.onMove, this);
+        game.stage.removeEventListener(egret.Event.LEAVE_STAGE, this.onMove, this);
     }
 
     private onMove(e:egret.Event = null):void
@@ -157,7 +157,7 @@ class BindDialog extends BaseDialog
     {
         super.show(true, this.width, this.height, 1, false);
 
-        StackManager.closeDialog("JoinDialog");
+        StackManager.closeDialog("JoininPanel");
 
         this.m_UI._edit.text = "";
     }

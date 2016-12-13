@@ -20,7 +20,7 @@ class S9 {
                 game.status = GameStatus.gamestart;
                 game.statusComplete = true;
 
-                game.manager.dispatchEvent(GameEvent.CardThrow);
+                game.manager.dispatchEvent(EffectEventType.CardThrow);
                 GSDataProxy.i.S2C_TurnDir(pos, dui_num, gang_end);
                 break;
             case 3://触发中断
@@ -33,8 +33,8 @@ class S9 {
             case 4://别人触发中断
                 console.log("同步其他方功能牌", obj);
 
-                game.manager.dispatchEvent(GameEvent.CardThrow);
-                game.manager.dispatchEvent(GameEvent.CardThrowTips);
+                game.manager.dispatchEvent(EffectEventType.CardThrow);
+                game.manager.dispatchEvent(EffectEventType.CardThrowTips);
                 GSDataProxy.i.S2C_FuncResult(obj.data.data);
                 break;
             case 5: //补杠被劫
@@ -43,7 +43,7 @@ class S9 {
                 GSDataProxy.i.S2C_DeletePai(obj.data.data.pos, obj.data.data.pai);
                 break;
             case 6://补杠提示
-                game.manager.dispatchEvent(GameEvent.CardThrow, [GSData.i.getDir(obj.data.data.pos), obj.data.data.pai]);
+                game.manager.dispatchEvent(EffectEventType.CardThrow, [GSData.i.getDir(obj.data.data.pos), obj.data.data.pai]);
                 break;
             case 7://换三张
                 game.status = GameStatus.changeThree;
@@ -53,7 +53,7 @@ class S9 {
                 game.status = GameStatus.missing;
                 game.statusComplete = false;
                 game.isQueBoo = true;
-                game.manager.dispatchEvent(GameEvent.Que);
+                game.manager.dispatchEvent(EffectEventType.Que);
                 break;
             case 9://同步换三张
                 var dir: number = GSDataProxy.i.gData.getDir(obj.data.data);

@@ -9,7 +9,7 @@ class DialogLoding extends egret.Sprite {
 
         this.graphics.clear();
         this.graphics.beginFill(0x0, 0.5);
-        this.graphics.drawRect(0, 0, GameConfig.curWidth(), GameConfig.curHeight());
+        this.graphics.drawRect(0, 0, game.stageWidth, game.stageWidth);
         this.graphics.endFill();
 
         this.label = new eui.Label();

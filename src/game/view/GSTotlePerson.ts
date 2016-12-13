@@ -6,7 +6,7 @@ class GSTotlePerson extends eui.Component
     /**
      * 玩家头像
      */
-    private _head:HeadIconView;
+    private _head:HeadIcon;
 
     /**
      * 玩家姓名
@@ -69,7 +69,7 @@ class GSTotlePerson extends eui.Component
 
         var pos:number = +this.pserson.pos;
 
-        this._head = new HeadIconView();
+        this._head = new HeadIcon();
         this.addChild(this._head);
         this._head.x = 40;
         this._head.y = 60;
@@ -86,7 +86,7 @@ class GSTotlePerson extends eui.Component
         this._name.size = 20;
         this._name.textAlign = "center";
         this._name.textColor = 0xffffff;
-        this._name.fontFamily = GameConfig.FontFamily;
+        this._name.fontFamily = gameConfig.FontFamily;
 
         this._name.y = 110;
         this._name.x = 40 - this._name.textWidth * 0.5;
@@ -119,7 +119,7 @@ class GSTotlePerson extends eui.Component
 
         if(+pos == 1)   //房主奖励
         {
-            this._head.showFangzhu(true);
+            this._head.isOwner = true;
         }
 
         var new_card:number = this.pserson.new_card;
@@ -144,7 +144,7 @@ class GSTotlePerson extends eui.Component
 
             if(+pos == 1)   //房主奖励
             {
-                this._head.showFangzhu(true);
+                this._head.isOwner = true;
 
                 timg.source = "card_jiangli2";
             }
@@ -196,7 +196,7 @@ class GSTotlePerson extends eui.Component
             label.text = this.showText[i] + "" + list[i];
             label.size = 20;
             label.textColor = 0xffffff;
-            label.fontFamily = GameConfig.FontFamily;
+            label.fontFamily = gameConfig.FontFamily;
             label.x = 40 - label.textWidth * 0.5;
 
             if(i == (list.length - 1))

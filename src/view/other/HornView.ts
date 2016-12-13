@@ -86,13 +86,13 @@ class HornView extends eui.Component {
     public playHorn(group: eui.Group, size: number, color: number): void {
         var my = this;
 
-        var list = GlobalData.getInstance().hornList;
+        var list = gameData.hornList;
         var str: string = list.shift();
         var text: eui.Label = new eui.Label();
         text.text = str;
         text.textAlign = "center";
         text.verticalAlign = "middle";
-        text.fontFamily = GameConfig.FontFamily;
+        text.fontFamily = gameConfig.FontFamily;
         text.size = size;
         text.textColor = color;
         text.x = my.width;
@@ -111,7 +111,7 @@ class HornView extends eui.Component {
             return;
         }
 
-        var list = GlobalData.getInstance().hornList;
+        var list = gameData.hornList;
 
         var t0: eui.Label = my.textList[0];
 

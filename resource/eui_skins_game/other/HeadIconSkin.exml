@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='utf-8'?>
+<e:Skin class="HeadIconSkin" currentState="normal" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing"  width="80" states="normal,ingame,intable"  height="80">
+	<e:Image id="img_head" source="game_head_null" width="80" height="80"/>
+	<e:Image id="img_kuang_normal" source="head_kuang_bg" x="-10" y="-10" width="98" height="98"/>
+	<e:Image id="img_kuang_owner" source="game_head_room" x="0" y="-7" width="87" height="88"/>
+	<e:Image id="img_zhuang" source="game_zhuang" x="-11" y="-10" includeIn="ingame"/>
+	<e:Image id="img_que" source="img_dq_1" x="47" y="47" width="30" height="30" includeIn="ingame"/>
+	<e:Label id="lab_nick" text="昵称" horizontalCenter="0" top="80" fontFamily="微软雅黑" size="20" includeIn="intable"/>
+	<e:Label id="lab_uid" horizontalCenter="0" text="10000" fontFamily="微软雅黑" size="20" top="100" x="10" y="10" includeIn="intable"/>
+	<e:Label id="lab_fen" y="20" horizontalCenter="0" text="10000" fontFamily="微软雅黑" size="20" top="80" x="20" includeIn="ingame"/>
+	<e:Button id="btn_kill" x="51" y="-10" width="40" height="40" includeIn="intable">
+		<e:skinName>
+			<e:Skin states="up,down,disabled">
+				<e:Image width="100%" height="100%" source="JS_close" source.down="JS_close"/>
+				<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+			</e:Skin>
+		</e:skinName>
+	</e:Button>
+</e:Skin>

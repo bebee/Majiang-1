@@ -33,19 +33,19 @@ class EffectManager extends BaseManager {
         this.yipaoduoxiangView = new YipaoduoxiangView();
         this.scoreView = new ScoreView();
 
-        this.gameManager.addEventListener(GameEvent.CleanAll, this.onCleanAll, this);
-        this.gameManager.addEventListener(GameEvent.ChangeThree, this.onChangeThree, this);
-        this.gameManager.addEventListener(GameEvent.ChangeThreeComplete, this.onChangeThreeComplete, this);
-        this.gameManager.addEventListener(GameEvent.Que, this.onQue, this);
-        this.gameManager.addEventListener(GameEvent.CardRaise, this.onCardRaise, this);
-        this.gameManager.addEventListener(GameEvent.CardThrow, this.onCardThrow, this);
-        this.gameManager.addEventListener(GameEvent.CardThrowTips, this.onCardThrowTips, this);
-        this.gameManager.addEventListener(GameEvent.Xiayu, this.onRaining, this);
-        this.gameManager.addEventListener(GameEvent.Guafeng, this.onWindy, this);
-        this.gameManager.addEventListener(GameEvent.Hujiaozhuanyi, this.onHujiaozhuanyi, this);
-        this.gameManager.addEventListener(GameEvent.Gangshangkaihua, this.onGangshangkaihua, this);
-        this.gameManager.addEventListener(GameEvent.Yipaoduoxiang, this.onYipaoduoxiang, this);
-        this.gameManager.addEventListener(GameEvent.ScoreTips, this.onScoreTips, this);
+        this.gameManager.addEventListener(EffectEventType.CleanAll, this.onCleanAll, this);
+        this.gameManager.addEventListener(EffectEventType.ChangeThree, this.onChangeThree, this);
+        this.gameManager.addEventListener(EffectEventType.ChangeThreeComplete, this.onChangeThreeComplete, this);
+        this.gameManager.addEventListener(EffectEventType.Que, this.onQue, this);
+        this.gameManager.addEventListener(EffectEventType.CardRaise, this.onCardRaise, this);
+        this.gameManager.addEventListener(EffectEventType.CardThrow, this.onCardThrow, this);
+        this.gameManager.addEventListener(EffectEventType.CardThrowTips, this.onCardThrowTips, this);
+        this.gameManager.addEventListener(EffectEventType.Xiayu, this.onRaining, this);
+        this.gameManager.addEventListener(EffectEventType.Guafeng, this.onWindy, this);
+        this.gameManager.addEventListener(EffectEventType.Hujiaozhuanyi, this.onHujiaozhuanyi, this);
+        this.gameManager.addEventListener(EffectEventType.Gangshangkaihua, this.onGangshangkaihua, this);
+        this.gameManager.addEventListener(EffectEventType.Yipaoduoxiang, this.onYipaoduoxiang, this);
+        this.gameManager.addEventListener(EffectEventType.ScoreTips, this.onScoreTips, this);
 
     }
 

@@ -90,8 +90,8 @@ class RecordItem extends eui.Component
 
         var d:RecordDialog = StackManager.findDialog(RecordDialog, "RecordDialog");
         d.pcList = this.obj.persons;
-        GlobalData.getInstance().personList = this.obj.persons;
-        GlobalData.getInstance().roomid = this.obj.roomid;
+        gameData.personList = this.obj.persons;
+        gameData.roomid = this.obj.roomid;
     }
 
     createChildren()

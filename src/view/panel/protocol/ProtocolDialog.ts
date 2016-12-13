@@ -38,14 +38,14 @@ class ProtocolDialog extends BaseDialog {
             if (json["ztitle"]) {
                 arrt.push({
                     text: "　　　　　　　　　　　" + json["ztitle"] + "\n",
-                    style: {"textColor": 0xA97144, "fontFamily": "" + GameConfig.FontFamily, "size": 24}
+                    style: {"textColor": 0xA97144, "fontFamily": "" + gameConfig.FontFamily, "size": 24}
                 });
             }
 
             if (json["title"]) {
                 arrt.push({
                     text: "　　" + json["title"],
-                    style: {"textColor": 0xA97144, "fontFamily": "" + GameConfig.FontFamily, "size": 20}
+                    style: {"textColor": 0xA97144, "fontFamily": "" + gameConfig.FontFamily, "size": 20}
                 });
             }
 
@@ -57,7 +57,7 @@ class ProtocolDialog extends BaseDialog {
 
                 arrt.push({
                     text: "\n\n" + content["desc"],
-                    style: {"textColor": 0xA97144, "fontFamily": "" + GameConfig.FontFamily, "size": 22}
+                    style: {"textColor": 0xA97144, "fontFamily": "" + gameConfig.FontFamily, "size": 22}
                 });
 
                 if (!content.list) continue;
@@ -65,7 +65,7 @@ class ProtocolDialog extends BaseDialog {
                 for (var key2 in content.list) {
                     arrt.push({
                         text: "\n" + content.list[key2],
-                        style: {"textColor": 0xA97144, "fontFamily": "" + GameConfig.FontFamily, "size": 20}
+                        style: {"textColor": 0xA97144, "fontFamily": "" + gameConfig.FontFamily, "size": 20}
                     });
                 }
             }
@@ -73,7 +73,7 @@ class ProtocolDialog extends BaseDialog {
             if (json["etitle"]) {
                 arrt.push({
                     text: "\n　　" + json["etitle"],
-                    style: {"textColor": 0xA97144, "fontFamily": "" + GameConfig.FontFamily, "size": 20}
+                    style: {"textColor": 0xA97144, "fontFamily": "" + gameConfig.FontFamily, "size": 20}
                 });
             }
             _this.lab_description.textFlow = arrt;

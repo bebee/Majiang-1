@@ -6,34 +6,34 @@ class S1 {
         if (!obj) return;
 
         if (obj["data"]) {
-            GlobalData.getInstance().sendLogin = false;
-            GlobalData.getInstance().connCount = 0;
+            gameData.sendLogin = false;
+            gameData.connCount = 0;
 
-            GlobalData.getInstance().player.update(obj["data"]);
+            gameData.player.update(obj["data"]);
 
             if (SceneManager.find("LoadingScene")) {
                 SceneManager.find("LoadingScene").onIn();
             }
 
-            GameLocal.setData(GameLocal.loginAccessCode, 0);
+            gameLocal.setData(gameLocal.loginAccessCode, 0);
 
-            if (!GameConfig.users) {
-                var ver: string = GlobalData.getInstance().player.version;
+            if (!gameConfig.users) {
+                var ver: string = gameData.player.version;
 
                 if (!ver) return;
 
                 var arr: Array<any> = ver.split('.');
 
-                var cver: string = GlobalData.getInstance().resourceCode;
+                var cver: string = gameData.version;
 
                 var carr: Array<any> = cver.split('.');
 
                 if (arr[0] != carr[0] || arr[1] != carr[1]) {
-                    if (!LayerManager.gameLayer().messagBox) LayerManager.gameLayer().messagBox = new MessageDialog();
+                    if (!LayerManager.gameLayer().messagBox) LayerManager.gameLayer().messagBox = new TipsAskPanel();
                     LayerManager.gameLayer().messagBox.showMsg(function (r) {
                         if (r) {
-                            var h: string = GameConfig.wei_href_address;
-                            if (GameConfig.roomid) h += "?roomid=" + GameConfig.roomid;
+                            var h: string = gameConfig.GameUrl;
+                            if (gameConfig.roomid) h += "?roomid=" + gameConfig.roomid;
                             location.href = h;
                         }
 

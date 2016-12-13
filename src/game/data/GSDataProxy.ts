@@ -1,3 +1,4 @@
+import Player = egret.sys.Player;
 /**
  * Created by Administrator on 2016/11/19.
  */
@@ -521,7 +522,7 @@ class GSDataProxy {
                 }
                 GameSound.PlaySound("sound_down");
 
-                game.manager.dispatchEvent(GameEvent.Xiayu, dir);//下雨特效
+                game.manager.dispatchEvent(EffectEventType.Xiayu, dir);//下雨特效
                 break;
             case 25://明杠
                 /* 分两种
@@ -549,7 +550,7 @@ class GSDataProxy {
                 if (removeLen == 3) poolPai = tmpPai;
                 GameSound.PlaySound("sound_down");
 
-                game.manager.dispatchEvent(GameEvent.Guafeng, dir);//刮风特效
+                game.manager.dispatchEvent(EffectEventType.Guafeng, dir);//刮风特效
                 break;
             case 26://中发白杠
 
@@ -624,10 +625,10 @@ class GSDataProxy {
                     for (var i: number = 0; i < hu_types.length; i++) {
                         var val: any = hu_types[i];
                         if (val == 19) {//杠上开花
-                            game.manager.dispatchEvent(GameEvent.Gangshangkaihua, dir);
+                            game.manager.dispatchEvent(EffectEventType.Gangshangkaihua, dir);
                         }
                         else if (val[0] == 41) {//呼叫转移
-                            game.manager.dispatchEvent(GameEvent.Hujiaozhuanyi, [dir, this.gData.getDir(val[1])]);
+                            game.manager.dispatchEvent(EffectEventType.Hujiaozhuanyi, [dir, this.gData.getDir(val[1])]);
                         }
                         else if (val[0] == 40) {//一炮多响
                             var posArr: any = val[1];
@@ -635,7 +636,7 @@ class GSDataProxy {
                             for (var j: number = 0; j < posArr.length; j++) {
                                 dirArr.push(this.gData.getDir(posArr[j]));
                             }
-                            game.manager.dispatchEvent(GameEvent.Yipaoduoxiang, dirArr);
+                            game.manager.dispatchEvent(EffectEventType.Yipaoduoxiang, dirArr);
                         }
                     }
                 }
@@ -876,9 +877,9 @@ class GSDataProxy {
 
             //根据pos设置数组中位置
 
-            var roomPlayer: RoomPlayer = new RoomPlayer(infos[i]);
+            var roomPlayer: PlayerVo = new PlayerVo(infos[i]);
 
-            if (+roomPlayer.uid != +GlobalData.getInstance().player.uid) {
+            if (+roomPlayer.uid != +gameData.player.uid) {
                 switch (roomPlayer.status) {
                     case "leave":
                         EffectUtils.showTips(roomPlayer.nick + " 离开了房间！", 4);
@@ -903,7 +904,7 @@ class GSDataProxy {
             this.gData.roomPlayerMap[roomPlayer.uid] = roomPlayer;
 
             //判断玩家自己,进游戏界面初始化
-            if (roomPlayer.uid == GlobalData.getInstance().player.uid) {
+            if (roomPlayer.uid == gameData.player.uid) {
 
                 PublicVal.i.ownPos = roomPlayer.pos;
 
@@ -940,7 +941,7 @@ class GSDataProxy {
 
         for (var id in this.gData.roomPlayerMap) {
 
-            var player: RoomPlayer = this.gData.roomPlayerMap[id];
+            var player: PlayerVo = this.gData.roomPlayerMap[id];
 
             var playerDir: number = this.gData.getDir(player.pos);
 
@@ -995,8 +996,8 @@ class GSDataProxy {
             GSController.i.startView();
             GSConfig.gameConfigInit();
             //设置牌面尺寸
-            FashionTools.setViewType(GlobalData.getInstance().cardStyle);
-            FashionTools.setGameStyle(GlobalData.getInstance().cardColor);
+            FashionTools.setViewType(gameData.cardStyle);
+            FashionTools.setGameStyle(gameData.cardColor);
 
 
             if (this.gData.rebackData) {
@@ -1137,7 +1138,7 @@ class GSDataProxy {
             GSController.i.startGame();
 
             if (game.status == GameStatus.changeThree && !game.statusComplete) {
-                game.manager.dispatchEvent(GameEvent.ChangeThree);
+                game.manager.dispatchEvent(EffectEventType.ChangeThree);
             }
         }
     }

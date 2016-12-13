@@ -46,53 +46,53 @@ class SettingPanel extends BasePanel {
     }
 
     private changeColor(): void {
-        GameLocal.setData(GameLocal.color, this.btn_color.selected ? 0 : 1);
+        gameLocal.setData(gameLocal.color, this.btn_color.selected ? 0 : 1);
 
-        GlobalData.getInstance().cardColor = +GameLocal.getData(GameLocal.color);
+        gameData.cardColor = +gameLocal.getData(gameLocal.color);
 
-        FashionTools.setGameStyle(GlobalData.getInstance().cardColor);
+        FashionTools.setGameStyle(gameData.cardColor);
     }
 
     private changeStyle(): void {
-        GameLocal.setData(GameLocal.style, this.btn_style.selected ? 0 : 1);
+        gameLocal.setData(gameLocal.style, this.btn_style.selected ? 0 : 1);
 
-        GlobalData.getInstance().cardStyle = +GameLocal.getData(GameLocal.style);
+        gameData.cardStyle = +gameLocal.getData(gameLocal.style);
 
-        FashionTools.setViewType(GlobalData.getInstance().cardStyle);
+        FashionTools.setViewType(gameData.cardStyle);
     }
 
     private changeMusic(): void {
-        GameLocal.setData(GameLocal.music, this.btn_music.selected ? 0 : 1);
+        gameLocal.setData(gameLocal.music, this.btn_music.selected ? 0 : 1);
         this.btn_music.selected ? GameMusic.CloseAllSound() : GameMusic.PlaySound("music_scene");
     }
 
     private changeSound(): void {
-        GameLocal.setData(GameLocal.sound, this.btn_sound.selected ? 0 : 1);
+        gameLocal.setData(gameLocal.sound, this.btn_sound.selected ? 0 : 1);
         this.btn_music.selected && GameSound.CloseAllSound();
     }
 
     private setMusic(): void {
         GameMusic.setSoundVolume(this.slider_music.value);
-        GameLocal.setData(GameLocal.musicVolume, this.slider_music.value);
+        gameLocal.setData(gameLocal.musicVolume, this.slider_music.value);
     }
 
     private setSound(): void {
         GameSound.setSoundVolume(this.slider_sound.value);
-        GameLocal.setData(GameLocal.soundVolume, this.slider_sound.value);
+        gameLocal.setData(gameLocal.soundVolume, this.slider_sound.value);
     }
 
     public show(): void {
         super.show();
 
-        this.btn_music.selected = +GameLocal.getData(GameLocal.music) == 1 ? false : true;
-        this.btn_sound.selected = +GameLocal.getData(GameLocal.sound) == 1 ? false : true;
+        this.btn_music.selected = +gameLocal.getData(gameLocal.music) == 1 ? false : true;
+        this.btn_sound.selected = +gameLocal.getData(gameLocal.sound) == 1 ? false : true;
 
-        this.btn_style.selected = +GameLocal.getData(GameLocal.style) == 1 ? false : true;
-        this.btn_color.selected = +GameLocal.getData(GameLocal.color) == 1 ? false : true;
+        this.btn_style.selected = +gameLocal.getData(gameLocal.style) == 1 ? false : true;
+        this.btn_color.selected = +gameLocal.getData(gameLocal.color) == 1 ? false : true;
 
-        this.slider_music.value = +GameLocal.getData(GameLocal.musicVolume);
-        this.slider_sound.value = +GameLocal.getData(GameLocal.soundVolume);
+        this.slider_music.value = +gameLocal.getData(gameLocal.musicVolume);
+        this.slider_sound.value = +gameLocal.getData(gameLocal.soundVolume);
 
-        this.lab_version.text = "当前版本号：" + GlobalData.getInstance().resourceCode + "    最新版本号：" + GlobalData.getInstance().player.version;
+        this.lab_version.text = "当前版本号：" + gameData.version + "    最新版本号：" + gameData.player.version;
     }
 }

@@ -12,7 +12,7 @@ class S8 {
         var info: any = obj.data.infos;
 
         for (var i = 0; i < info.length; i++) {
-            GlobalData.getInstance().player.playerInfo.push(info[i]);
+            gameData.player.playerInfo.push(info[i]);
         }
     }
 }

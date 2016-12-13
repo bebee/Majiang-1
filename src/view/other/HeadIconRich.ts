@@ -1,11 +1,7 @@
-/**
- * Created by Administrator on 2016/10/29.
- */
-//头像显示
-class GSHeadView extends egret.Sprite {
+class HeadIconRich extends egret.Sprite {
 
     //头像
-    headIcon: HeadIconView;
+    headIcon: HeadIcon;
     //姓名
     nameText: egret.TextField;
     //ID
@@ -28,7 +24,7 @@ class GSHeadView extends egret.Sprite {
 
     initView() {
 
-        this.headIcon = new HeadIconView;
+        this.headIcon = new HeadIcon;
         this.addChild(this.headIcon);
 
         this.nameText = new egret.TextField;
@@ -75,12 +71,12 @@ class GSHeadView extends egret.Sprite {
 
     //设置房主
     visibleRoomOwn(bool: boolean) {
-        this.headIcon.showFangzhu(bool);
+        this.headIcon.isOwner = bool;
     }
 
     //设置庄
     visibleZhuang(bool: boolean) {
-        this.headIcon.showZhuang(bool);
+        this.headIcon.isZhuang = bool;
     }
 
     nullPlayer() {
@@ -88,7 +84,7 @@ class GSHeadView extends egret.Sprite {
         this.headIcon.clean();
     }
 
-    player: RoomPlayer;
+    player: PlayerVo;
 
     //等待的显示
     waitView() {

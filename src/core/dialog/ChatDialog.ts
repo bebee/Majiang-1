@@ -88,7 +88,7 @@ class ChatDialog extends BaseDialog
 
     private onClickIcon(e:egret.TouchEvent):void
     {
-        var p:Player = GlobalData.getInstance().player;
+        var p:PlayerVo = gameData.player;
         var id = +e.currentTarget.name;
         SocketManager.getInstance().getGameConn().send(25, {"args":{"type":4, "expression":{"id":id, "uid":p.uid}}});
         this.hide();

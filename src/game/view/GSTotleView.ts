@@ -59,13 +59,13 @@ class GSTotleView extends eui.Component
     {
         super();
 
-        this.width = GameConfig.curWidth();
-        this.height = GameConfig.curHeight();
+        this.width = game.stageWidth;
+        this.height = game.stageHeight;
 
         this.addChild(this.spr);
         this.spr.graphics.clear();
         this.spr.graphics.beginFill(0x0, 0.5);
-        this.spr.graphics.drawRect(0,100, GameConfig.curWidth(), GameConfig.curHeight() - 200);
+        this.spr.graphics.drawRect(0,100, game.stageWidth, game.stageHeight - 200);
     }
 
     createChildren()
@@ -126,7 +126,7 @@ class GSTotleView extends eui.Component
         this.endTime.size = 20;
         this.endTime.textAlign = "center";
         this.endTime.textColor = 0xffffff;
-        this.endTime.fontFamily = GameConfig.FontFamily;
+        this.endTime.fontFamily = gameConfig.FontFamily;
         this.endTime.right = 10;
         this.endTime.bottom = 70;
     }

@@ -29,10 +29,10 @@ module PopUpUtils {
 				PopUpUtils.darkSprite = new egret.Sprite();
 				PopUpUtils.darkSprite.graphics.clear();
 				PopUpUtils.darkSprite.graphics.beginFill(0x000000, 0.6);
-				PopUpUtils.darkSprite.graphics.drawRect(0, 0, GameConfig.curWidth(), GameConfig.curHeight());
+				PopUpUtils.darkSprite.graphics.drawRect(0, 0, game.stageWidth, game.stageHeight);
 				PopUpUtils.darkSprite.graphics.endFill();
-				PopUpUtils.darkSprite.width = GameConfig.curWidth();
-				PopUpUtils.darkSprite.height = GameConfig.curHeight();
+				PopUpUtils.darkSprite.width = game.stageWidth;
+				PopUpUtils.darkSprite.height = game.stageHeight;
 			}
 
 			if (!LayerManager.gameLayer().maskLayer.contains(PopUpUtils.darkSprite)) {
@@ -45,11 +45,11 @@ module PopUpUtils {
 		}
 
 		LayerManager.gameLayer().panelLayer.addChild(panel);
-		GameConfig.curPanel = panel;
+		gameConfig.curPanel = panel;
 
 		if (popUpWidth != 0) {
-			panel.x = GameConfig.curWidth() / 2 - popUpWidth / 2;
-			panel.y = GameConfig.curHeight() / 2 - popUpHeight / 2;
+			panel.x = game.stageWidth / 2 - popUpWidth / 2;
+			panel.y = game.stageHeight / 2 - popUpHeight / 2;
 		}
 		else {
 			popUpWidth = panel.width;
@@ -57,8 +57,8 @@ module PopUpUtils {
 		}
 
 		//以下是弹窗动画
-		var leftX: number = GameConfig.curWidth() / 2 - popUpWidth / 2;
-		var upY: number = GameConfig.curHeight() / 2 - popUpHeight / 2;
+		var leftX: number = game.stageWidth / 2 - popUpWidth / 2;
+		var upY: number = game.stageHeight / 2 - popUpHeight / 2;
 
 		switch (effectType) {
 			case 0:
@@ -123,7 +123,7 @@ module PopUpUtils {
 				break;
 			case 6:
 				if (isAlert) {
-					panel.y = GameConfig.curHeight();
+					panel.y = game.stageHeight;
 					egret.Tween.get(panel).to({y: upY}, 500, egret.Ease.cubicOut);
 				}
 				else {

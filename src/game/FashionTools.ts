@@ -74,8 +74,8 @@ class FashionTools{
 
         for (var i: number = 0; i < rules.length; i++) {
 
-            if (GameConfig.rules[rules[i]]) {
-                ruleStr += GameConfig.rules[rules[i]] + " ";
+            if (gameConfig.rules[rules[i]]) {
+                ruleStr += gameConfig.rules[rules[i]] + " ";
             }
         }
         return ruleStr;

@@ -7,7 +7,7 @@ class S3
     {
         if(!obj) return;
 
-        if(+obj.code == 0) StackManager.closeDialog("JoinDialog");
+        if(+obj.code == 0) StackManager.closeDialog("JoininPanel");
 
         console.log("加入房子返回", obj);
     }

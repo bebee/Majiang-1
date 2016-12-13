@@ -1,13 +1,11 @@
 /**
- * 待定
+ * 断线重连
  */
-class S5
-{
-    public parseData(obj:any)
-    {
-        if(!obj) return;
+class S5 {
+    public parseData(obj: any) {
+        if (!obj) return;
 
-        console.log("断线重连",obj);
+        console.log("断线重连", obj);
         //
         GSController.i.exit();
 

@@ -149,7 +149,7 @@ class Weixin {
         var body:BodyMenuShareAppMessage = new BodyMenuShareAppMessage();
         body.title = "" + title;
         body.desc = "" + str;
-        body.link = "" + GameConfig.wei_href_address;
+        body.link = "" + gameConfig.GameUrl;
         body.imgUrl = "http://mj.h5sd.com/wdmj/weishare.png";
         body.type = "link";
         body.dataUrl = "";
@@ -195,9 +195,9 @@ class Weixin {
 
                 body.desc = "房　主：" + name + " 房间号：" + strroomid;
 
-                if(GlobalData.getInstance().roomRound > 0)
+                if(gameData.roomRound > 0)
                 {
-                    body.desc += "【" + GlobalData.getInstance().roomRound + "圈】" + PublicVal.i.rules;
+                    body.desc += "【" + gameData.roomRound + "圈】" + PublicVal.i.rules;
                 }
                 else
                 {
@@ -206,20 +206,20 @@ class Weixin {
 
                 body.title = "跟我一起开房的点此链接！";
 
-                body.link = GameConfig.wei_href_address + "?roomid=" + roomid;
+                body.link = gameConfig.GameUrl + "?roomid=" + roomid;
             }
             else
             {
                 body.title = "这麻将！三天不打，上房揭瓦！";
                 body.desc = "私房麻将馆，好友组局，微信登录，玩牌交友两不误！";
-                body.link = ""+ GameConfig.wei_href_address;
+                body.link = ""+ gameConfig.GameUrl;
             }
         }
         else
         {
             body.title = "这麻将！三天不打，上房揭瓦！";
             body.desc = "私房麻将馆，好友组局，微信登录，玩牌交友两不误！";
-            body.link = "" + GameConfig.wei_href_address;
+            body.link = "" + gameConfig.GameUrl;
         }
 
         body.imgUrl = "http://mj.h5sd.com/wdmj/weishare.png";
@@ -253,11 +253,11 @@ class Weixin {
         body.title = "这麻将！三天不打，上房揭瓦！";
         if(roomid)
         {
-            body.link =  GameConfig.wei_href_address + "?roomid=" + roomid;
+            body.link =  gameConfig.GameUrl + "?roomid=" + roomid;
         }
         else
         {
-            body.link = "" + GameConfig.wei_href_address;
+            body.link = "" + gameConfig.GameUrl;
         }
 
         body.imgUrl = "http://mj.h5sd.com/wdmj/weishare.png";

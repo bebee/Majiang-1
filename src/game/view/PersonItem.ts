@@ -14,7 +14,7 @@ class PersonItem extends BaseGameSprite {
     private lab_hu: eui.Label;
     private lab_gang: eui.Label;
 
-    headIcon: HeadIconView;
+    headIcon: HeadIcon;
     cardViews: CardView[];
     pos: egret.Point;
 
@@ -31,7 +31,7 @@ class PersonItem extends BaseGameSprite {
 
         this.pos = new egret.Point();
 
-        this.headIcon = new HeadIconView;
+        this.headIcon = new HeadIcon;
         this.headIcon.x = 40;
         this.headIcon.y = 40;
         this.headGroup.addChild(this.headIcon);
@@ -45,9 +45,12 @@ class PersonItem extends BaseGameSprite {
     //     this.cardViews.push(cardView);
     // }
 
-    update(obj: any) {
+    update(person: any) {
 
-        this.data = obj;
+        this.data = person;
+
+        this.headIcon.update(person);
+        this.headIcon.isZhuang = GSData.i.result.zhuang == person.pos;
 
         this.lab_uid.text = "" + this.data.uid;
         this.lab_nick.text = "" + this.data.nick;

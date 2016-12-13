@@ -23,6 +23,7 @@ class CreatePanel extends BasePanel {
     childrenCreated() {
         super.childrenCreated();
 
+        this.bgView.setType(BgViewType.curtain);
         this.bgView.setTitle("create_btn");
 
         this.ruleVo = game.ruleVo;
@@ -92,7 +93,7 @@ class CreatePanel extends BasePanel {
     }
 
     private startGame(): void {
-        GlobalData.getInstance().roomRound = this.ruleVo.ju;
+        gameData.roomRound = this.ruleVo.ju;
 
         //创建房间
         SocketManager.getInstance().getGameConn().send(2, {

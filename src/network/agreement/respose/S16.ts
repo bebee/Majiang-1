@@ -9,8 +9,8 @@ class S16 {
 
         var data = obj.data;
 
-        game.manager.dispatchEvent(GameEvent.CardThrow);
-        game.manager.dispatchEvent(GameEvent.CardThrowTips);
+        game.manager.dispatchEvent(EffectEventType.CardThrow);
+        game.manager.dispatchEvent(EffectEventType.CardThrowTips);
 
         GSDataProxy.i.S2C_FinalResult(data);
     }

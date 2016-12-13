@@ -5,20 +5,19 @@
  */
 class game {
 
+    //舞台
     static stage: egret.Stage;
-
-    static gameType: GameType = GameType.sichuan;
-
-    //游戏存储key
-    static get gameKey(): string {
-        var key: string = "mqkj-";
-        switch (game.gameType) {
-            case GameType.sichuan:
-                key += "scmj-";
-                break;
-        }
-        return key;
+    //舞台宽度
+    static get stageWidth() {
+        return this.stage.stageWidth;
     }
+    //舞台高度
+    static get stageHeight() {
+        return this.stage.stageHeight;
+    }
+
+    //游戏类型
+    static gameType: GameType = GameType.sichuan;
 
     //管理
     static manager: GameManager = GameManager.i;
@@ -49,21 +48,18 @@ class game {
 
         this.manager.init();
 
+        gameLocal.init();
+
+        gameData.player = new PlayerVo();
+
         game.ruleVo = new GameRuleVo();
         game.changeThreeVo = new ChangeThreeVo();
 
-        if (!GameLocal.getData(GameLocal.music)) GameLocal.setData(GameLocal.music, 1);
-        if (!GameLocal.getData(GameLocal.musicVolume)) GameLocal.setData(GameLocal.musicVolume, 20);
-        if (!GameLocal.getData(GameLocal.sound)) GameLocal.setData(GameLocal.sound, 1);
-        if (!GameLocal.getData(GameLocal.soundVolume)) GameLocal.setData(GameLocal.soundVolume, 50);
-        if (!GameLocal.getData(GameLocal.style)) GameLocal.setData(GameLocal.style, 1);
-        if (!GameLocal.getData(GameLocal.color)) GameLocal.setData(GameLocal.color, 1);
+        GameMusic._volume = +gameLocal.getData(gameLocal.musicVolume);
+        GameSound._volume = +gameLocal.getData(gameLocal.soundVolume);
 
-        GameMusic._volume = +GameLocal.getData(GameLocal.musicVolume);
-        GameSound._volume = +GameLocal.getData(GameLocal.soundVolume);
-
-        GlobalData.getInstance().cardStyle = +GameLocal.getData(GameLocal.style);
-        GlobalData.getInstance().cardColor = +GameLocal.getData(GameLocal.color);
+        gameData.cardStyle = +gameLocal.getData(gameLocal.style);
+        gameData.cardColor = +gameLocal.getData(gameLocal.color);
 
         GameParse.Initialization();
 
@@ -78,7 +74,7 @@ class game {
         this.statusComplete = false;
         this.allQue = {};
         this.isHuBoo = false;
-        game.manager.dispatchEvent(GameEvent.CleanAll);
+        game.manager.dispatchEvent(EffectEventType.CleanAll);
     }
 
     /**

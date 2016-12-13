@@ -42,7 +42,7 @@ class LoadingScene extends eui.Component {
 
             this.lab_info.text = "正在拉取用户信息···";
 
-            GlobalData.getInstance().sendLogin = true;
+            gameData.sendLogin = true;
             SocketManager.getInstance().getGameConn().send(1);
             Heart.getInstance();
         }
@@ -58,6 +58,6 @@ class LoadingScene extends eui.Component {
     public onIn(): void {
         SceneManager.close("LoadingScene", true);
         SceneManager.open(MainScene, "MainScene");
-        LayerManager.gameLayer().messagBox = new MessageDialog();
+        LayerManager.gameLayer().messagBox = new TipsAskPanel();
     }
 }

@@ -79,7 +79,7 @@ class BgView extends BaseGameSprite {
             case CurtainType.green:
                 this.curtain.source = "dialog_head_img";
                 this.curtain.y = -6;
-                this.title.y = 22;
+                this.title.y = 13;
                 break;
             case CurtainType.red:
                 this.curtain.source = "shop_dialog_head_img";

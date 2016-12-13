@@ -15,7 +15,7 @@ module GameMusic {
      * @constructor
      */
     export function PlaySound(name: string, loops: number = 0, startTime: number = 0) {
-        var _switch: number = +GameLocal.getData(GameLocal.music);
+        var _switch: number = +gameLocal.getData(gameLocal.music);
         if (_switch == 0) return;
 
         var SoundDict = GameMusic.SoundDict;

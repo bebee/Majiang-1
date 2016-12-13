@@ -1,0 +1,8 @@
+<?xml version='1.0' encoding='utf-8'?>
+<e:Skin class="TipsPanelSkin" width="660" height="350" xmlns:e="http://ns.egret.com/eui" xmlns:ns1="*" xmlns:w="http://ns.egret.com/wing">
+	<ns1:BgView left="0" right="0" top="0" bottom="0" skinName="BgViewSkin"/>
+	<e:Group top="90" bottom="30" left="30" right="30">
+		<e:Image source="panel_1" scale9Grid="19,18,25,18" left="0" right="0" top="0" bottom="0"/>
+		<e:Label id="lab_description" size="26" bold="true" fontFamily="微软雅黑" lineSpacing="10" textColor="0xBC0B11" verticalCenter="0" horizontalCenter="0"/>
+	</e:Group>
+</e:Skin>

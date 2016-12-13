@@ -100,7 +100,7 @@ class ChangeThreeAnimation extends BaseSprite {
 
         game.isChangeThreeBoo = false;
         if (game.isQueBoo) {
-            game.manager.dispatchEvent(GameEvent.Que);
+            game.manager.dispatchEvent(EffectEventType.Que);
         }
     }
 

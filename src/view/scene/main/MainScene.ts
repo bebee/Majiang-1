@@ -36,13 +36,13 @@ class MainScene extends eui.Component {
 
         var arr: Array<string> = ["closeWindow", "hideMenuItems", "onMenuShareAppMessage", "onMenuShareTimeline", "startRecord", "stopRecord", "onVoiceRecordEnd", "playVoice", "pauseVoice", "stopVoice", "onVoicePlayEnd", "uploadVoice", "downloadVoice"];
 
-        // HttpHandler.sendMsgCallBack("http://" + GameConfig.http_address.ip + ":" + GameConfig.http_address.port, "action=" + JSON.stringify(sss), function (obj) {
+        // HttpHandler.sendMsgCallBack("http://" + gameConfig.address_http.ip + ":" + gameConfig.address_http.port, "action=" + JSON.stringify(sss), function (obj) {
         //     if (obj.message != "error") {
         //         var some = JSON.parse(obj.message);
         //
-        //         GameConfig.pushData(some);
+        //         gameConfig.pushData(some);
         //
-        //         Weixin.config(GameConfig.appid, Number(GameConfig.timestamp), GameConfig.noncestr, GameConfig.signature, arr);
+        //         Weixin.config(gameConfig.appid, Number(gameConfig.timestamp), gameConfig.noncestr, gameConfig.signature, arr);
         //     }
         // }, egret.URLRequestMethod.POST, this);
     }
@@ -89,7 +89,7 @@ class MainScene extends eui.Component {
          * 打开加入游戏
          */
         this.btn_join.addEventListener(egret.TouchEvent.TOUCH_TAP, function () {
-            StackManager.open(JoinDialog, "JoinDialog");
+            StackManager.open(JoininPanel, "JoininPanel");
 
         }, this);
 
@@ -121,7 +121,7 @@ class MainScene extends eui.Component {
          * 打开说明
          */
         this.btn_add.addEventListener(egret.TouchEvent.TOUCH_TAP, function () {
-            StackManager.open(TipsDialog, "TipsDialog");
+            StackManager.open(TipsPanel, "TipsPanel");
 
         }, this);
 
@@ -148,9 +148,9 @@ class MainScene extends eui.Component {
          */
         //TipsManager.addTips(this._money,"再点也不会变多 <(￣︶￣)>！", 1);
 
-        //this.bg_img.width = GameConfig.curWidth();
+        //this.bg_img.width = gameConfig.curWidth();
 
-        //this.bg_img.height = GameConfig.curHeight();
+        //this.bg_img.height = gameConfig.curHeight();
     }
 
     /**
@@ -205,13 +205,13 @@ class MainScene extends eui.Component {
 
         this.update();
 
-        if (GameConfig.roomid) {
-            GSData.i.roomID = +GameConfig.roomid;
-            SocketManager.getInstance().getGameConn().send(3, {"args": {"roomid": +GameConfig.roomid, "pass": "0"}});
+        if (gameConfig.roomid) {
+            GSData.i.roomID = +gameConfig.roomid;
+            SocketManager.getInstance().getGameConn().send(3, {"args": {"roomid": +gameConfig.roomid, "pass": "0"}});
         }
 
-        var num: number = Math.floor(Math.random() * GlobalData.getInstance().gamewarmList.length);
-        GlobalData.getInstance().hornList.push(GlobalData.getInstance().gamewarmList[num]);
+        var num: number = Math.floor(Math.random() * gameConfig.gamewarmList.length);
+        gameData.hornList.push(gameConfig.gamewarmList[num]);
 
         egret.setTimeout(this.onWeiJs, this, 1000);
     }
@@ -225,7 +225,7 @@ class MainScene extends eui.Component {
     public update(): void {
         var my = this;
 
-        var player: Player = GlobalData.getInstance().player;
+        var player: PlayerVo = gameData.player;
 
         this._money_text.text = "" + player.cur;
 
@@ -241,15 +241,15 @@ class MainScene extends eui.Component {
         }
 
 
-        RES.getResByUrl(GlobalData.getInstance().player.pic, function (t: egret.Texture) {
+        RES.getResByUrl(gameData.player.pic, function (t: egret.Texture) {
             if (t) {
-                GlobalData.getInstance().player.playerHeadTexture = t;
+                gameData.player.playerHeadTexture = t;
                 my._head.source = t;
             }
             else {
                 my._head.source = "head_001";
 
-                GlobalData.getInstance().player.playerHeadTexture = my._head.texture;
+                gameData.player.playerHeadTexture = my._head.texture;
             }
 
             my._head.width = my._head.height = 77;

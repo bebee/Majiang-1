@@ -15,7 +15,7 @@ class GSData{
 
     //game_state : number = 1;
 
-    roomPlayers:RoomPlayer[];
+    roomPlayers:PlayerVo[];
 
     //根据uid存储
     roomPlayerMap = {};
@@ -319,7 +319,7 @@ class GSData{
 
     getSexByPos(pos:number){
 
-        return this.getRoomPlayerByPos(pos).sex == "1"? 1:0;
+        return this.getRoomPlayerByPos(pos).sex;
 
     }
 
@@ -399,7 +399,7 @@ class GSData{
     }
 
     //根据pos获取玩家信息
-    getRoomPlayerByPos(pos:number):RoomPlayer{
+    getRoomPlayerByPos(pos:number):PlayerVo{
 
         return this.roomPlayers[pos];
 

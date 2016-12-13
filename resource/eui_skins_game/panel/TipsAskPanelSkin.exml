@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='utf-8'?>
+<e:Skin class="TipsAskPanelSkin" width="660" height="450" xmlns:e="http://ns.egret.com/eui" xmlns:ns1="*" xmlns:w="http://ns.egret.com/wing">
+	<ns1:BgView left="0" right="0" top="0" bottom="0" skinName="BgViewSkin"/>
+	<e:Group top="90" bottom="130" left="30" right="30">
+		<e:Image source="panel_1" scale9Grid="19,18,25,18" left="0" right="0" top="0" bottom="0"/>
+		<e:Label id="lab_description" size="26" bold="true" fontFamily="微软雅黑" lineSpacing="10" textColor="0xBC0B11" verticalCenter="0" horizontalCenter="0"/>
+	</e:Group>
+	<e:Button id="btn_confirm" label="确定" horizontalCenter="100" bottom="40">
+		<e:skinName>
+			<e:Skin states="up,down,disabled">
+				<e:Image width="100%" height="100%" source="btn_green"/>
+				<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="-3.5" fontFamily="微软雅黑"/>
+			</e:Skin>
+		</e:skinName>
+	</e:Button>
+	<e:Button id="btn_cancel" label="取消" horizontalCenter="-100" x="10" bottom="40">
+		<e:skinName>
+			<e:Skin states="up,down,disabled" xmlns:w="http://ns.egret.com/wing">
+				<e:Image width="100%" height="100%" source="btn_red"/>
+				<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="-3.5" fontFamily="微软雅黑"/>
+			</e:Skin>
+		</e:skinName>
+	</e:Button>
+</e:Skin>

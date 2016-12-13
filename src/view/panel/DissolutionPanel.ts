@@ -86,7 +86,7 @@ class DissolutionPanel extends BasePanel {
         var isan: boolean = false;
 
         for (var k in GSData.i.roomPlayerMap) {
-            var p: RoomPlayer = GSData.i.roomPlayerMap[k];
+            var p: PlayerVo = GSData.i.roomPlayerMap[k];
 
             var label: eui.Label = this["_label" + index];
 

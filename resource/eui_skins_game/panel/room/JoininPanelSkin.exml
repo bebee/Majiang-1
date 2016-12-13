@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='utf-8'?>
+<e:Skin class="JoininPanelSkin" width="880" height="570" xmlns:e="http://ns.egret.com/eui" xmlns:ns1="*" xmlns:w="http://ns.egret.com/wing">
+	<ns1:BgView left="0" right="0" top="0" bottom="0" skinName="BgViewSkin" locked="true"/>
+	<e:Group horizontalCenter="0" verticalCenter="-150">
+		<e:layout>
+			<e:VerticalLayout horizontalAlign="center"/>
+		</e:layout>
+		<e:Label id="lab_roomid" x="516" y="530" textColor="0x0B941D" bold="true" fontFamily="微软雅黑" size="50" verticalAlign="middle" height="50"/>
+		<e:Rect height="4" width="405" y="153" fillColor="0x0B941D" x="164"/>
+	</e:Group>
+	<e:Group horizontalCenter="0" verticalCenter="60">
+		<e:Button id="btn_1" label="1" x="122" y="178" skinName="skins.Button_NumberSkin"/>
+		<e:Button id="btn_2" y="198" label="2" skinName="skins.Button_NumberSkin" x="142"/>
+		<e:Button x="152" label="3" y="208" skinName="skins.Button_NumberSkin" id="btn_3"/>
+		<e:Button id="btn_4" y="218" label="4" skinName="skins.Button_NumberSkin" x="162"/>
+		<e:Button x="172" label="5" y="228" skinName="skins.Button_NumberSkin" id="btn_5"/>
+		<e:Button id="btn_6" y="238" label="6" skinName="skins.Button_NumberSkin" x="182"/>
+		<e:Button x="192" label="7" y="248" skinName="skins.Button_NumberSkin" id="btn_7"/>
+		<e:Button id="btn_8" y="258" label="8" skinName="skins.Button_NumberSkin" x="202"/>
+		<e:Button x="212" label="9" y="268" skinName="skins.Button_NumberSkin" id="btn_9"/>
+		<e:Button id="btn_cancel" x="152" label="删除" y="208" skinName="skins.Button_NumberSkin"/>
+		<e:Button x="132" label="0" y="188" skinName="skins.Button_NumberSkin" id="btn_0"/>
+		<e:Button id="btn_confirm" y="198" label="确定" skinName="skins.Button_NumberSkin" x="142"/>
+		<e:layout>
+			<e:TileLayout requestedColumnCount="3"/>
+		</e:layout>
+	</e:Group>
+</e:Skin>

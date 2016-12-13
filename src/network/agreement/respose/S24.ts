@@ -7,7 +7,7 @@ class S24
     {
         if(obj.data)
         {
-            GlobalData.getInstance().player.update(obj.data);
+            gameData.player.update(obj.data);
 
             var game:MainScene = SceneManager.find("MainScene");
 

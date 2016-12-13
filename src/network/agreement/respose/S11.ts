@@ -18,8 +18,8 @@ class S11 {
                     break;
                 case 200://抓牌
                     console.log("同步己方抓牌", obj.data.pai[0]);
-                    game.manager.dispatchEvent(GameEvent.CardThrow);
-                    game.manager.dispatchEvent(GameEvent.CardRaise);
+                    game.manager.dispatchEvent(EffectEventType.CardThrow);
+                    game.manager.dispatchEvent(EffectEventType.CardRaise);
                     GSDataProxy.i.S2C_OwnCatch(obj.data.pai[0], obj.data.dui_num, obj.data.hasOwnProperty("fen"));
                     GSController.i.gsView.resetAllChildrenTouch();
                     break;
@@ -28,7 +28,7 @@ class S11 {
                     break;
                 case 301://换三张
                     game.isChangeThreeBoo = true;
-                    game.manager.dispatchEvent(GameEvent.ChangeThreeComplete, obj.data.huan_type);
+                    game.manager.dispatchEvent(EffectEventType.ChangeThreeComplete, obj.data.huan_type);
 
                     var pais: any = obj.data.pai;
                     for (var i: number = 0; i < pais.length; i++) {
@@ -43,8 +43,8 @@ class S11 {
                 case 302://订缺
                     break;
                 default://同步自己的功能牌
-                    game.manager.dispatchEvent(GameEvent.CardThrow);
-                    game.manager.dispatchEvent(GameEvent.CardThrowTips);
+                    game.manager.dispatchEvent(EffectEventType.CardThrow);
+                    game.manager.dispatchEvent(EffectEventType.CardThrowTips);
                     GSDataProxy.i.S2C_FuncResult(obj.data);
                     GSController.i.gsView.resetAllChildrenTouch();
                     break;

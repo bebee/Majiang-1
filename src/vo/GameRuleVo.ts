@@ -1,4 +1,3 @@
-import rules = GameConfig.rules;
 /**
  * GameRuleVo
  * @Author Ace.c

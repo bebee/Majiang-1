@@ -47,8 +47,8 @@ class GSScene extends egret.DisplayObjectContainer {
 
         this.bg.texture = RES.getRes(GSConfig.table_bg_res);
 
-        this.bg.width = GameConfig.curWidth();
-        this.bg.height = GameConfig.curHeight();
+        this.bg.width = game.stageWidth;
+        this.bg.height = game.stageHeight;
 
         this.gameLogo = new egret.Bitmap(GameRes.getUI("game_logo"));
         this.gameLogo.x = (GSConfig.width - this.gameLogo.width) >> 1;

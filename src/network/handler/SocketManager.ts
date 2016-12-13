@@ -20,7 +20,7 @@ class SocketManager {
 
     getCoreConn() {
         if (!this.core_conn) {
-            this.core_conn = new SocketHandler(GameConfig.address_center["ip"], GameConfig.address_center["port"], 1);
+            this.core_conn = new SocketHandler(gameConfig.address_center["ip"], gameConfig.address_center["port"], 1);
         }
 
         if (!this.core_conn.isConnected()) {
@@ -32,16 +32,16 @@ class SocketManager {
 
     getGameConn() {
         if (!this.game_conn) {
-            if (GameConfig.users) {
-                if (GameConfig.ip && GameConfig.port) {
-                    this.game_conn = new SocketHandler(GameConfig.ip, GameConfig.port, 2);
+            if (gameConfig.users) {
+                if (gameConfig.ip && gameConfig.port) {
+                    this.game_conn = new SocketHandler(gameConfig.ip, gameConfig.port, 2);
                 }
                 else {
-                    this.game_conn = new SocketHandler(GameConfig.address_test["ip"], GameConfig.address_test["port"], 2);
+                    this.game_conn = new SocketHandler(gameConfig.address_test["ip"], gameConfig.address_test["port"], 2);
                 }
             }
             else {
-                this.game_conn = new SocketHandler(GameConfig.address_game["ip"], GameConfig.address_game["port"], 2);
+                this.game_conn = new SocketHandler(gameConfig.address_game["ip"], gameConfig.address_game["port"], 2);
             }
 
         }
@@ -107,7 +107,7 @@ class SocketHandler {
 
     }
 
-    onConnect(){
+    onConnect() {
         this.socket.connect(this.ip, this.port);
 
         // this.socket.connectByUrl("wss://"+this.ip+":"+this.port);
@@ -188,8 +188,8 @@ class SocketHandler {
         console.log("==================", start);
 
         if (start == "start") {
-            if (GlobalData.getInstance().player.code) {
-                var p = GlobalData.getInstance().player;
+            if (gameData.player.code) {
+                var p = gameData.player;
                 SocketManager.getInstance().getGameConn().send(1, {
                     "uid": p.uid,
                     "code": p.code,
@@ -202,20 +202,20 @@ class SocketHandler {
             return;
         }
         else if (start == "end") {
-            var addres: string = GameConfig.wei_href_address;
-            if (GameConfig.roomid) addres += "?roomid=" + GameConfig.roomid;
-            Weixin.getAccessCode(GameConfig.appid, addres);
+            var addres: string = gameConfig.GameUrl;
+            if (gameConfig.roomid) addres += "?roomid=" + gameConfig.roomid;
+            Weixin.getAccessCode(gameConfig.appid, addres);
             return;
         }
 
         var obj: any = JSON.parse(start);
 
         if (+obj["code"] > 0) {
-            if (!GlobalData.getInstance().msgList[obj["code"]]) {
+            if (!gameConfig.msgList[obj["code"]]) {
                 EffectUtils.showTips("未知错误 code：" + obj["code"], 5);
             }
             else {
-                EffectUtils.showTips("" + GlobalData.getInstance().msgList[obj["code"]], 5);
+                EffectUtils.showTips("" + gameConfig.msgList[obj["code"]], 5);
             }
         }
 

@@ -25,7 +25,7 @@ class GSView extends egret.Sprite {
 
     draw: egret.Shape;
 
-    headViews: GSHeadView[];
+    headViews: HeadIconRich[];
 
     //中心炸弹
     centerBoom: CenterBoom;
@@ -142,7 +142,7 @@ class GSView extends egret.Sprite {
 
         for (var i: number = 1; i <= GSConfig.playerCount; i++) {
 
-            var headView = new GSHeadView(i);
+            var headView = new HeadIconRich(i);
 
             this.backUIContainer.addChild(headView);
 
@@ -259,7 +259,7 @@ class GSView extends egret.Sprite {
 
             var headView = this.headViews[i];
 
-            var player: RoomPlayer = GSData.i.getRoomPlayerByDir(i);
+            var player: any = GSData.i.getRoomPlayerByDir(i);
 
             headView.player = player;
 
@@ -279,9 +279,7 @@ class GSView extends egret.Sprite {
 
             headView.idText.text = player.uid;
 
-            headView.headIcon.setHeadSource(player.pic);
-
-            headView.headIcon.setQue(game.allQue[headView.dir]);
+            headView.headIcon.update(player);
         }
 
         this.updateState();
@@ -311,7 +309,7 @@ class GSView extends egret.Sprite {
      }*/
 
     //获取头像
-    getHeadView(dir: number): GSHeadView {
+    getHeadView(dir: number): HeadIconRich {
         return this.headViews[dir];
     }
 
@@ -354,7 +352,7 @@ class GSView extends egret.Sprite {
 
         for (var i: number = 1; i <= 4; i++) {
 
-            var headView: GSHeadView = this.headViews[i];
+            var headView: HeadIconRich = this.headViews[i];
 
             headView.scaleX = headView.scaleY = 1;
 
@@ -376,7 +374,7 @@ class GSView extends egret.Sprite {
 
         for (var i: number = 1; i <= 4; i++) {
 
-            var headView: GSHeadView = this.headViews[i];
+            var headView: HeadIconRich = this.headViews[i];
 
             headView.scaleX = headView.scaleY = .8;
             headView.x = GSConfig.headTargetPos[i].x;

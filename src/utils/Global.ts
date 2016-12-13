@@ -32,20 +32,20 @@ module Global {
 	 * 掉线处理
 	 */
 	export function reLogin(): void {
-		var count: number = GlobalData.getInstance().connCount;
+		var count: number = gameData.connCount;
 
 		switch (count) {
 			case 0:
 				Global.sendLoad();
 				break;
 			case 1:
-				if (!LayerManager.gameLayer().messagBox) LayerManager.gameLayer().messagBox = new MessageDialog();
+				if (!LayerManager.gameLayer().messagBox) LayerManager.gameLayer().messagBox = new TipsAskPanel();
 				LayerManager.gameLayer().messagBox.showMsg(function (r) {
 					Global.sendLoad();
 				}, "您已经掉线，请点击确定重连！");
 				break;
 			default:
-				GlobalData.getInstance().player.code = null;
+				gameData.player.code = null;
 				Global.sendLoad();
 				break;
 		}
@@ -55,26 +55,26 @@ module Global {
 	 * 掉线后发送重新登录消息  或者  重新拉取授权
 	 */
 	export function sendLoad() {
-		var p = GlobalData.getInstance().player;
+		var p = gameData.player;
 
 		if (p.code) {
 			SocketManager.getInstance().getGameConn().send(1, {"uid": p.uid, "code": p.code, "length": p.code.length});
-			GlobalData.getInstance().connCount++;
+			gameData.connCount++;
 		}
 		else {
-			var count: number = +GameLocal.getData(GameLocal.loginAccessCode);
+			var count: number = +gameLocal.getData(gameLocal.loginAccessCode);
 
 			if (count < 2) {
-				var addres: string = GameConfig.wei_href_address;
-				if (GameConfig.roomid) addres += "?roomid=" + GameConfig.roomid;
-				Weixin.getAccessCode(GameConfig.appid, addres);
+				var addres: string = gameConfig.GameUrl;
+				if (gameConfig.roomid) addres += "?roomid=" + gameConfig.roomid;
+				Weixin.getAccessCode(gameConfig.appid, addres);
 
 				count++;
 
-				GameLocal.setData(GameLocal.loginAccessCode, count);
+				gameLocal.setData(gameLocal.loginAccessCode, count);
 			}
 			else {
-				if (!LayerManager.gameLayer().messagBox) LayerManager.gameLayer().messagBox = new MessageDialog();
+				if (!LayerManager.gameLayer().messagBox) LayerManager.gameLayer().messagBox = new TipsAskPanel();
 				LayerManager.gameLayer().messagBox.showMsg(function (r) {
 
 				}, "登录失败，请退出游戏重试！\n\n(请检查是否在其他设备登录)");
@@ -130,7 +130,7 @@ module Global {
 		this.ipwarmisshow = true;
 		if (!this.ipwarmGroup) {
 			this.ipwarmGroup = new eui.Group();
-			this.ipwarmGroup.width = GameConfig.curWidth();
+			this.ipwarmGroup.width = game.stageWidth;
 			this.ipwarmGroup.height = 50;
 			this.ipwarmGroup.touchEnabled = false;
 			this.ipwarmGroup.touchChildren = false;
@@ -151,17 +151,17 @@ module Global {
 			this.ipwarmLabel.verticalCenter = 0;
 			this.ipwarmLabel.textAlign = "center";
 			this.ipwarmLabel.size = 20;
-			this.ipwarmLabel.fontFamily = GameConfig.FontFamily;
+			this.ipwarmLabel.fontFamily = gameConfig.FontFamily;
 			this.ipwarmLabel.text = "注意：有玩家IP地址相同，请点击玩家头像查看";
 			this.ipwarmGroup.addChild(this.ipwarmLabel);
 		}
 
 		var group = LayerManager.gameLayer();
 		group.addChild(this.ipwarmGroup);
-		this.ipwarmGroup.y = GameConfig.curHeight();
+		this.ipwarmGroup.y = game.stageHeight;
 
 		var my = this;
-		egret.Tween.get(my.ipwarmGroup, {loop: false}).to({y: GameConfig.curHeight() - my.ipwarmGroup.height + 5}, 1000).to({}, 5000).to({y: GameConfig.curHeight()}, 1000).call(function () {
+		egret.Tween.get(my.ipwarmGroup, {loop: false}).to({y: game.stageHeight - my.ipwarmGroup.height + 5}, 1000).to({}, 5000).to({y: game.stageHeight}, 1000).call(function () {
 			group.removeChild(my.ipwarmGroup);
 			my.ipwarmisshow = false;
 		}, my);
@@ -315,7 +315,7 @@ module Global {
 
 			this.share_sprite.graphics.clear();
 			this.share_sprite.graphics.beginFill(0x0, 0.8);
-			this.share_sprite.graphics.drawRect(0, 0, GameConfig.curWidth(), GameConfig.curHeight());
+			this.share_sprite.graphics.drawRect(0, 0, game.stageWidth, game.stageHeight);
 			this.share_sprite.graphics.endFill();
 
 			this.share_img.right = 0;

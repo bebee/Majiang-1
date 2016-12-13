@@ -40,7 +40,7 @@ class Heart
         {
             this.loginTime = 0;
 
-            if(GlobalData.getInstance().sendLogin) Global.reLogin();
+            if(gameData.sendLogin) Global.reLogin();
         }
 
         if(this.second >= 10)
@@ -53,15 +53,15 @@ class Heart
             {
                 this.testHorn = 0;
 
-                var index:number = GlobalData.getInstance().gamewarmIndex;
-                GlobalData.getInstance().hornList.push(GlobalData.getInstance().gamewarmList[index]);
+                var index:number = gameData.gamewarmIndex;
+                gameData.hornList.push(gameConfig.gamewarmList[index]);
 
-                GlobalData.getInstance().gamewarmIndex++;
+                gameData.gamewarmIndex++;
 
-                if(GlobalData.getInstance().gamewarmIndex > GlobalData.getInstance().gamewarmList.length) GlobalData.getInstance().gamewarmIndex = 0;
+                if(gameData.gamewarmIndex > gameConfig.gamewarmList.length) gameData.gamewarmIndex = 0;
             }
 
-            if(GlobalData.getInstance().hornList.length > 0) Global.showHorn(20, 0x40f8ff);
+            if(gameData.hornList.length > 0) Global.showHorn(20, 0x40f8ff);
         }
     }
 }

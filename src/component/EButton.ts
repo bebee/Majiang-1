@@ -128,14 +128,14 @@ module mui
 
         private addStage():void
         {
-            GameConfig.curStage().addEventListener(egret.TouchEvent.TOUCH_END, this.onMove, this);
-            GameConfig.curStage().addEventListener(egret.Event.LEAVE_STAGE, this.onMove, this);
+            game.stage.addEventListener(egret.TouchEvent.TOUCH_END, this.onMove, this);
+            game.stage.addEventListener(egret.Event.LEAVE_STAGE, this.onMove, this);
         }
 
         private removeStage():void
         {
-            GameConfig.curStage().removeEventListener(egret.TouchEvent.TOUCH_END, this.onMove, this);
-            GameConfig.curStage().removeEventListener(egret.Event.LEAVE_STAGE, this.onMove, this);
+            game.stage.removeEventListener(egret.TouchEvent.TOUCH_END, this.onMove, this);
+            game.stage.removeEventListener(egret.Event.LEAVE_STAGE, this.onMove, this);
         }
 
         public getSource()

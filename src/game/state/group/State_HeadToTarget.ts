@@ -13,7 +13,7 @@ class State_HeadToTarget extends BaseState{
 
         for(var i:number = 1; i <= GSConfig.playerCount;i++){
 
-            var headView:GSHeadView = gameView.headViews[i];
+            var headView:HeadIconRich = gameView.headViews[i];
 
             var pos = GSConfig.headTargetPos[i];
 

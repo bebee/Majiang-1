@@ -1,4 +1,4 @@
-class Player extends BaseDataVo {
+class PlayerVo extends BaseDataVo {
     //当前平台
     channel: string;
     //code
@@ -37,15 +37,26 @@ class Player extends BaseDataVo {
 
     //位置
     pos: number = -1;
+    //方向
+    dir: number = -1;
     //状态
     status: string = "";
 
     //房间玩家队列
     playerInfo: any[] = [];
 
+    constructor(data: any = null) {
+        super();
+
+        if (data) {
+            this.update(data);
+        }
+    }
+
     update(data: any) {
         super.update(data);
 
         this.sex = this.sex == GameGender.Male ? GameGender.Male : GameGender.Female;
+        this.dir = this.pos != -1 ? GSData.i.getDir(this.pos) : -1;
     }
 }

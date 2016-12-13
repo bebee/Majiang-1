@@ -5,7 +5,7 @@ class S26
 {
     public parseData(obj:any)
     {
-        if(GameConfig.users) return;
+        if(gameConfig.users) return;
 
         var data = obj.data;
 
@@ -13,27 +13,27 @@ class S26
 
         if(+type == 1)
         {
-            GlobalData.getInstance().player.version = data.data;
+            gameData.player.version = data.data;
 
-            var ver:string = GlobalData.getInstance().player.version;
+            var ver:string = gameData.player.version;
 
             if(!ver) return;
 
             var arr:Array<any> = ver.split('.');
 
-            var cver:string = GlobalData.getInstance().resourceCode;
+            var cver:string = gameData.version;
 
             var carr:Array<any> = cver.split('.');
 
             if(arr[0] != carr[0] || arr[1] != carr[1])
             {
-                if(!LayerManager.gameLayer().messagBox) LayerManager.gameLayer().messagBox = new MessageDialog();
+                if(!LayerManager.gameLayer().messagBox) LayerManager.gameLayer().messagBox = new TipsAskPanel();
                 LayerManager.gameLayer().messagBox.showMsg(function (r)
                 {
                     if(r)
                     {
-                        var h:string = GameConfig.wei_href_address;
-                        if(GameConfig.roomid) h += "?roomid=" + GameConfig.roomid;
+                        var h:string = gameConfig.GameUrl;
+                        if(gameConfig.roomid) h += "?roomid=" + gameConfig.roomid;
                         location.href = h;
                     }
                 },"当前游戏版本过低，请刷新游戏！");
