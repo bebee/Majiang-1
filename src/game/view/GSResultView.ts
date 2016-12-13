@@ -118,11 +118,11 @@ class GSResultView extends egret.DisplayObjectContainer {
 
             var dir: number = GSData.i.getDir(person_pos);
 
-            personItem.headIcon.setHeadPic(person.pic);
+            personItem.headIcon.setHeadSource(person.pic);
 
-            personItem.headIcon.visibleRoomOwn((PublicVal.i.roomOwnFlag >> dir & 1) == 1);
+            personItem.headIcon.showFangzhu((PublicVal.i.roomOwnFlag >> dir & 1) == 1);
 
-            personItem.headIcon.visibleZhuang(GSData.i.result.zhuang == person_pos);
+            personItem.headIcon.showZhuang(GSData.i.result.zhuang == person_pos);
 
             if (GSData.i.result.hupaiPos == person_pos) {
                 personItem.update(person);

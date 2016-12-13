@@ -9,7 +9,7 @@ class S8 {
 
         GSDataProxy.i.S2C_RoomPlayers(obj.data.rules, obj.data.infos);
 
-        var info: Array<any> = obj.data.infos;
+        var info: any = obj.data.infos;
 
         for (var i = 0; i < info.length; i++) {
             GlobalData.getInstance().player.playerInfo.push(info[i]);

@@ -119,7 +119,7 @@ class GSTotlePerson extends eui.Component
 
         if(+pos == 1)   //房主奖励
         {
-            this._head.visibleRoomOwn(true);
+            this._head.showFangzhu(true);
         }
 
         var new_card:number = this.pserson.new_card;
@@ -144,7 +144,7 @@ class GSTotlePerson extends eui.Component
 
             if(+pos == 1)   //房主奖励
             {
-                this._head.visibleRoomOwn(true);
+                this._head.showFangzhu(true);
 
                 timg.source = "card_jiangli2";
             }

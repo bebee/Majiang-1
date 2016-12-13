@@ -4,7 +4,18 @@
 //头像显示
 class GSHeadView extends egret.Sprite {
 
+    //头像
+    headIcon: HeadIconView;
+    //姓名
+    nameText: egret.TextField;
+    //ID
+    idText: egret.TextField;
+    //分数
+    numText: egret.TextField;
+    //方向
     dir: DirType;
+
+    //img:eui.Image;
 
     constructor(dir: number) {
 
@@ -15,34 +26,10 @@ class GSHeadView extends egret.Sprite {
         this.initView();
     }
 
-    /**
-     * 姓名
-     */
-    nameText: egret.TextField;
-
-    /**
-     * ID
-     */
-    idText: egret.TextField;
-
-    /**
-     * 分数
-     */
-    numText: egret.TextField;
-
-    /**
-     * 头像
-     */
-    headIcon: HeadIconView;
-
-
-    //img:eui.Image;
-
     initView() {
 
         this.headIcon = new HeadIconView;
-
-        //this.dirBG = new egret.Bitmap(GameRes.getUI("game_head_dirBG"));
+        this.addChild(this.headIcon);
 
         this.nameText = new egret.TextField;
 
@@ -57,8 +44,6 @@ class GSHeadView extends egret.Sprite {
         this.nameText.bold = true;
         this.idText.bold = true;
         this.numText.bold = true;
-
-        this.addChild(this.headIcon);
 
         this.addChild(this.nameText);
         this.addChild(this.idText);
@@ -90,12 +75,12 @@ class GSHeadView extends egret.Sprite {
 
     //设置房主
     visibleRoomOwn(bool: boolean) {
-        this.headIcon.visibleRoomOwn(bool);
+        this.headIcon.showFangzhu(bool);
     }
 
     //设置庄
     visibleZhuang(bool: boolean) {
-        this.headIcon.visibleZhuang(bool);
+        this.headIcon.showZhuang(bool);
     }
 
     nullPlayer() {

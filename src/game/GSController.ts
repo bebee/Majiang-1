@@ -1411,7 +1411,7 @@ class GSController extends egret.EventDispatcher {
 
             headView.numText.visible = false;
 
-            headView.headIcon.setHeadPic(person.pic);
+            headView.headIcon.setHeadSource(person.pic);
 
         }
     }

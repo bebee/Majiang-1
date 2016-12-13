@@ -279,9 +279,9 @@ class GSView extends egret.Sprite {
 
             headView.idText.text = player.uid;
 
-            headView.headIcon.setHeadPic(player.pic);
+            headView.headIcon.setHeadSource(player.pic);
 
-            headView.headIcon.setQueImg(game.allQue[headView.dir]);
+            headView.headIcon.setQue(game.allQue[headView.dir]);
         }
 
         this.updateState();

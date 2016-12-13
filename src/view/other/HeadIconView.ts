@@ -5,11 +5,15 @@ class HeadIconView extends BaseGameSprite {
 
     private img_head: eui.Image;
     private img_headMask: egret.Shape;
-    private img_kuang: egret.Bitmap;
-    private img_fangzhu: egret.Bitmap;
-    private img_zhuang: egret.Bitmap;
+    private img_kuang: eui.Image;
+    private img_fangzhu: eui.Image;
+    private img_zhuang: eui.Image;
     private img_que: eui.Image;
-    btn_kill: egret.Bitmap;
+    btn_kill: eui.Button;
+    private lab_name: eui.Label;
+    private lab_uid: eui.Label;
+
+    player: Player;
 
     constructor() {
         super();
@@ -22,9 +26,7 @@ class HeadIconView extends BaseGameSprite {
 
         this.img_headMask = new egret.Shape;
         this.img_headMask.graphics.beginFill(0);
-        this.img_headMask.graphics.drawRoundRect(0, 0, 72, 72, 30, 30);
-        this.img_headMask.anchorOffsetX = this.img_headMask.anchorOffsetY = 36;
-
+        this.img_headMask.graphics.drawRoundRect(0, 0, 80, 80, 30, 30);
         this.img_head.mask = this.img_headMask;
 
         this.clean();
@@ -39,6 +41,12 @@ class HeadIconView extends BaseGameSprite {
         }
     }
 
+    update(player: Player) {
+        this.lab_name.text = "" + player.nick;
+        this.lab_uid.text = "" + player.uid;
+
+    }
+
     /**
      * 是否显示踢人按钮
      * @param value
@@ -47,20 +55,19 @@ class HeadIconView extends BaseGameSprite {
         this.btn_kill.visible = value;
     }
 
-    setHeadPic(pic: string) {
-        var _this = this;
-        RES.getResByUrl(pic, (t)=> {
-            if (t) {
-                _this.setHeadImg(t);
-            }
-        }, this, RES.ResourceItem.TYPE_IMAGE);
+    setHeadSource(url: string = null) {
+        if (this.player && this.player.pic) {
+            this.img_head.source = url;
+        }
+        else if (this.currentState == "offline") {
+            this.img_head.source = "game_head_lixian";
+        }
+        else {
+            this.img_head.source = "game_head_null";
+        }
     }
 
-    setHeadImg(source: string | egret.Texture) {
-        this.img_head.source = source;
-    }
-
-    setQueImg(type: CardType = CardType.unknow) {
+    setQue(type: CardType = CardType.unknow) {
         switch (type) {
             case CardType.wan:
                 this.img_que.source = "img_dq_1";
@@ -77,11 +84,11 @@ class HeadIconView extends BaseGameSprite {
         }
     }
 
-    visibleRoomOwn(boo: boolean) {
+    showFangzhu(boo: boolean) {
         this.img_fangzhu.visible = boo;
     }
 
-    visibleZhuang(boo: boolean) {
+    showZhuang(boo: boolean) {
         this.img_zhuang.visible = boo;
     }
 
@@ -90,9 +97,8 @@ class HeadIconView extends BaseGameSprite {
     }
 
     clean() {
-        this.img_zhuang.visible = false;
         this.img_fangzhu.visible = false;
-        this.img_head.source = "";
+        this.img_zhuang.visible = false;
         this.img_que.source = "";
         this.btn_kill.visible = false;
     }
