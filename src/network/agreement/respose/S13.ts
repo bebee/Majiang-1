@@ -11,7 +11,7 @@ class S13
 
         GSController.i.jiesuanData = obj.data;
 
-        var dialog:DissolutionDialog = StackManager.findDialog(DissolutionDialog, "DissolutionDialog");
+        var dialog:DissolutionPanel = StackManager.findDialog(DissolutionPanel, "DissolutionPanel");
 
         if(dialog && LayerManager.gameLayer().panelLayer.contains(dialog))
         {

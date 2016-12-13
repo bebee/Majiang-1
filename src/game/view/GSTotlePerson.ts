@@ -6,7 +6,7 @@ class GSTotlePerson extends eui.Component
     /**
      * 玩家头像
      */
-    private _head:GSHeadIcon;
+    private _head:HeadIconView;
 
     /**
      * 玩家姓名
@@ -69,7 +69,7 @@ class GSTotlePerson extends eui.Component
 
         var pos:number = +this.pserson.pos;
 
-        this._head = new GSHeadIcon();
+        this._head = new HeadIconView();
         this.addChild(this._head);
         this._head.x = 40;
         this._head.y = 60;

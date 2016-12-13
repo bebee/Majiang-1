@@ -227,7 +227,7 @@ class TouchBehaviour implements IGameTapEvent {
                 if(r)
                 {
                     SocketManager.getInstance().getGameConn().send(14, {"args":{"answer":1}});//发起解散房子
-                    var dialog:DissolutionDialog = StackManager.findDialog(DissolutionDialog, "DissolutionDialog");
+                    var dialog:DissolutionPanel = StackManager.findDialog(DissolutionPanel, "DissolutionPanel");
                     dialog.isClick = true;
                 }
             }, "您确定发起解散房间吗？\n（当所有在线玩家同意解散之后房间将解散）");
@@ -297,7 +297,7 @@ class TouchBehaviour implements IGameTapEvent {
         }
         if(!player) return;
 
-        var d: RoleInfoDialog = StackManager.findDialog(RoleInfoDialog, "RoleInfoDialog");
+        var d: RoleInfoPanel = StackManager.findDialog(RoleInfoPanel, "RoleInfoPanel");
         if (d) {
             d.show();
             d.refreshRole(player);

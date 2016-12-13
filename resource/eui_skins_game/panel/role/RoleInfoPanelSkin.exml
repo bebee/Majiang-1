@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='utf-8'?>
+<e:Skin class="RoleInfoPanelSkin" width="520" height="200" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*">
+	<ns1:BgView left="0" right="0" top="0" bottom="0" skinName="BgViewSkin" locked="true"/>
+	<ns1:HeadIconView id="head" skinName="HeadIconViewSkin" x="25" y="42"/>
+
+
+
+
+	<e:Group x="127" y="44">
+		<e:Label id="lab_name" x="3" y="-16" textColor="0x774D33" fontFamily="微软雅黑" scaleX="1" scaleY="1"/>
+		<e:Label id="lab_rate" y="18" textColor="0x774D33" fontFamily="微软雅黑" x="3" size="20" verticalAlign="middle" bold="true" scaleX="1" scaleY="1"/>
+		<e:Label id="lab_id" y="49" textColor="0x774D33" fontFamily="微软雅黑" x="3" size="25" bold="true" verticalAlign="middle" scaleX="1" scaleY="1"/>
+		<e:Label id="lab_ip" y="81" textColor="0x774D33" verticalAlign="middle" fontFamily="微软雅黑" x="3" bold="true" size="25" scaleX="1" scaleY="1"/>
+		<e:layout>
+			<e:VerticalLayout/>
+		</e:layout>
+	</e:Group>
+</e:Skin>

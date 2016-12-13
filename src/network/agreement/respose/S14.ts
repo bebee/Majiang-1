@@ -11,7 +11,7 @@ class S14
 
         var vote = obj.data.vote;
 
-        var dialog:DissolutionDialog = StackManager.findDialog(DissolutionDialog, "DissolutionDialog");
+        var dialog:DissolutionPanel = StackManager.findDialog(DissolutionPanel, "DissolutionPanel");
 
         if(dialog)
         {

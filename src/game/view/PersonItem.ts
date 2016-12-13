@@ -14,7 +14,7 @@ class PersonItem extends BaseGameSprite {
     private lab_hu: eui.Label;
     private lab_gang: eui.Label;
 
-    headIcon: GSHeadIcon;
+    headIcon: HeadIconView;
     cardViews: CardView[];
     pos: egret.Point;
 
@@ -31,7 +31,7 @@ class PersonItem extends BaseGameSprite {
 
         this.pos = new egret.Point();
 
-        this.headIcon = new GSHeadIcon;
+        this.headIcon = new HeadIconView;
         this.headIcon.x = 40;
         this.headIcon.y = 40;
         this.headGroup.addChild(this.headIcon);

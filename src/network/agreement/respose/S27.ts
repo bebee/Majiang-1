@@ -8,7 +8,7 @@ class S27
         if(+obj.code != 0) return;
 
         EffectUtils.showTips("身份信息认证成功!");
-        StackManager.closeDialog("IDCardDialog");
+        StackManager.closeDialog("RealPanel");
         var gm:MainScene = SceneManager.find("MainScene");
         if(gm) gm.btn_shiming.visible = false;
         GlobalData.getInstance().player.update(obj.data);

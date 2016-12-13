@@ -7,7 +7,7 @@ module Global {
 	export var waitPanel: WaitPanel;
 
 	//喇叭界面
-	export var hornPanel: HornPanel;
+	export var hornPanel: HornView;
 
 	/**
 	 * 录音图片
@@ -423,7 +423,7 @@ module Global {
 	 * 显示喇叭界面
 	 */
 	export function showHorn(size: number = 20, color: number = 0xffffff): void {
-		if (!Global.hornPanel) Global.hornPanel = new HornPanel();
+		if (!Global.hornPanel) Global.hornPanel = new HornView();
 
 		var group: eui.Group = LayerManager.gameLayer().hornGroup;
 

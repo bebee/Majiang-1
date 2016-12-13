@@ -435,7 +435,7 @@ class GSController extends egret.EventDispatcher {
         if (PublicVal.state == StateType.start || PublicVal.state == StateType.reconnect) {
             for (var i: number = 1; i <= 4; i++) {
                 var readyIcon = this.gsView.readyIcons[i];
-                var killIcon = this.gsView.getHeadView(i).headIcon.killIcon;
+                var killIcon = this.gsView.getHeadView(i).headIcon.btn_dismiss;
                 readyIcon.visible = (GSData.i.readyFlag >> i & 1) == 1;
 
                 if (PublicVal.state == StateType.start && i > 1 && PublicVal.i.ownPos == 1) {

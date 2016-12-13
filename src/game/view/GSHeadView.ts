@@ -33,14 +33,14 @@ class GSHeadView extends egret.Sprite {
     /**
      * 头像
      */
-    headIcon: GSHeadIcon;
+    headIcon: HeadIconView;
 
 
     //img:eui.Image;
 
     initView() {
 
-        this.headIcon = new GSHeadIcon;
+        this.headIcon = new HeadIconView;
 
         //this.dirBG = new egret.Bitmap(GameRes.getUI("game_head_dirBG"));
 
@@ -100,7 +100,7 @@ class GSHeadView extends egret.Sprite {
 
     nullPlayer() {
         this.nameText.text = this.idText.text = "";
-        this.headIcon.nullIcon();
+        this.headIcon.clean();
     }
 
     player: RoomPlayer;

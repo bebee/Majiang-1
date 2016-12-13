@@ -2,7 +2,7 @@
  * 公告条
  */
 
-class HornPanel extends eui.Component {
+class HornView extends eui.Component {
     private textList: Array<any> = [];
 
     private _shape: egret.Shape;
@@ -20,7 +20,7 @@ class HornPanel extends eui.Component {
 
         this.addEventListener(eui.UIEvent.COMPLETE, this.onComplete, this);
 
-        this.skinName = "HornSkin";
+        this.skinName = "HornViewSkin";
 
         this.touchChildren = true;
     }

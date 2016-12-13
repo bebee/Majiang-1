@@ -129,7 +129,7 @@ class MainScene extends eui.Component {
          * 打开玩家信息
          */
         this._head_click.addEventListener(egret.TouchEvent.TOUCH_TAP, function () {
-            var d: RoleInfoDialog = StackManager.findDialog(RoleInfoDialog, "RoleInfoDialog");
+            var d: RoleInfoPanel = StackManager.findDialog(RoleInfoPanel, "RoleInfoPanel");
             if (d) {
                 d.show();
                 d.refreshRole();
@@ -140,7 +140,7 @@ class MainScene extends eui.Component {
          * 打开实名认证
          */
         this.btn_shiming.addEventListener(egret.TouchEvent.TOUCH_TAP, function () {
-            StackManager.open(IDCardDialog, "IDCardDialog");
+            StackManager.open(RealPanel, "RealPanel");
         }, this);
 
         /**

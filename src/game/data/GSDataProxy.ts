@@ -1016,7 +1016,7 @@ class GSDataProxy {
 
         Weixin.onMenuShareTimeline(GSData.i.roomID + "");
 
-        var diss: DissolutionDialog = StackManager.findDialog(DissolutionDialog, "DissolutionDialog");
+        var diss: DissolutionPanel = StackManager.findDialog(DissolutionPanel, "DissolutionPanel");
 
         if (diss && LayerManager.gameLayer().panelLayer.contains(diss)) diss.refresh();
     }

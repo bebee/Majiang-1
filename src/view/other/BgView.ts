@@ -66,7 +66,7 @@ class BgView extends BaseGameSprite {
      * 设置title
      * @param source
      */
-    setTitle(source: string | egret.Texture) {
+    setTitle(source: egret.Texture | string) {
         this.title.source = source;
     }
 
