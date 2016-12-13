@@ -44,6 +44,7 @@
     "eui.Button": "resource/eui_skins/ButtonSkin.exml",
     "eui.CheckBox": "resource/eui_skins/CheckBoxSkin.exml",
     "eui.HSlider": "resource/eui_skins/HSliderSkin.exml",
-    "eui.RadioButton": "resource/eui_skins/RadioButtonSkin.exml"
+    "eui.RadioButton": "resource/eui_skins/RadioButtonSkin.exml",
+    "eui.TextInput": "resource/eui_skins/TextInputSkin.exml"
   }
 }
