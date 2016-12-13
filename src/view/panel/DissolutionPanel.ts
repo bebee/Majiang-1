@@ -1,24 +1,16 @@
 class DissolutionPanel extends BasePanel {
 
-    public _img1: eui.Image;
-    public _img2: eui.Image;
-    public _img3: eui.Image;
-    public _img4: eui.Image;
-
-    public _label1: eui.Label;
-    public _label2: eui.Label;
-    public _label3: eui.Label;
-    public _label4: eui.Label;
-
-    public btn_true: mui.EButton;
-
-    public btn_false: mui.EButton;
-
-    public _desc: eui.Label;
-
-    public plist: any = {};
-
-    public isClick: boolean = false;
+    public img_sign1: eui.Image;
+    public img_sign2: eui.Image;
+    public img_sign3: eui.Image;
+    public img_sign4: eui.Image;
+    public lab_nick1: eui.Label;
+    public lab_nick2: eui.Label;
+    public lab_nick3: eui.Label;
+    public lab_nick4: eui.Label;
+    public lab_description: eui.Label;
+    public btn_cancel: mui.EButton;
+    public btn_confirm: mui.EButton;
 
     public constructor() {
         super();
@@ -26,57 +18,34 @@ class DissolutionPanel extends BasePanel {
         this.skinName = "DissolutionPanelSkin";
     }
 
-    createChildren() {
-        super.createChildren();
+    childrenCreated() {
+        super.childrenCreated();
 
-        this.btn_true.addEventListener(egret.TouchEvent.TOUCH_TAP, this.onClick, this);
-        this.btn_false.addEventListener(egret.TouchEvent.TOUCH_TAP, this.onQuxiao, this);
+        this.bgView.setType(BgViewType.normal);
+
+        this.btn_confirm.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickHandler, this);
+        this.btn_cancel.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickHandler, this);
     }
 
-    public clear(): void {
-        this.isClick = false;
-
-        this.plist = {};
-
+    private clickHandler(e: egret.TouchEvent) {
         this.hide();
-    }
-
-    private onQuxiao(): void {
-        if (this.isClick) {
-            EffectUtils.showTips("您已经选择过了", 5);
-            return;
+        switch (e.currentTarget) {
+            case this.btn_cancel:
+                SocketManager.getInstance().getGameConn().send(14, {"args": {"answer": 0}});  //发起解散房子
+                break;
+            case this.btn_confirm:
+                SocketManager.getInstance().getGameConn().send(14, {"args": {"answer": 1}});  //发起解散房子
+                break;
         }
-
-        SocketManager.getInstance().getGameConn().send(14, {"args": {"answer": 0}});  //发起解散房子
-
-        this.isClick = true;
+        // EffectUtils.showTips("您已经选择过了", 5);
     }
 
-
-    private onClick(e: egret.TouchEvent): void {
-        if (this.isClick) {
-            EffectUtils.showTips("您已经选择过了", 5);
-            return;
-        }
-        SocketManager.getInstance().getGameConn().send(14, {"args": {"answer": 1}});  //发起解散房子
-
-        this.isClick = true;
-    }
-
-    public refresh(): void {
-        if (!this.plist) return;
-
-        var my = this;
-
-        if (this.isClick) {
-            this.btn_false.visible = false;
-            this.btn_true.visible = false;
-            this._desc.visible = true;
+    refresh(): void {
+        if (game.dissolution && game.dissolution.vote && game.dissolution.vote.hasOwnProperty(gameData.player.uid)) {
+            this.skinState = "after";
         }
         else {
-            this.btn_false.visible = true;
-            this.btn_true.visible = true;
-            this._desc.visible = false;
+            this.skinState = "before";
         }
 
         var index: number = 1;
@@ -86,71 +55,76 @@ class DissolutionPanel extends BasePanel {
         var isan: boolean = false;
 
         for (var k in GSData.i.roomPlayerMap) {
-            var p: PlayerVo = GSData.i.roomPlayerMap[k];
+            var playerVo: PlayerVo = GSData.i.roomPlayerMap[k];
 
-            var label: eui.Label = this["_label" + index];
+            var lab: eui.Label = this["lab_nick" + index];
 
-            var arrt: Array<any> = [];
+            var arrt: any[] = [];
 
-            arrt.push({text: p.nick, style: {"textColor": 0xA07A4B, "fontFamily": "Microsoft YaHei", "size": 20}});
+            arrt.push({
+                text: playerVo.nick,
+                style: {"textColor": 0xA07A4B, "fontFamily": "Microsoft YaHei", "size": 20}
+            });
 
-            if (p.status == "offline") {
+            if (playerVo.status == "offline") {
                 arrt.push({text: "（离线）", style: {"textColor": 0xE7432A, "fontFamily": "Microsoft YaHei", "size": 18}});
             }
-            else if (p.status == "online") {
+            else if (playerVo.status == "online") {
                 arrt.push({text: "（在线）", style: {"textColor": 0x4BA05F, "fontFamily": "Microsoft YaHei", "size": 18}});
             }
-            else if (p.status == "leave") {
+            else if (playerVo.status == "leave") {
                 arrt.push({text: "（离开）", style: {"textColor": 0x7B7978, "fontFamily": "Microsoft YaHei", "size": 18}});
             }
 
-            label.textFlow = <Array < egret.ITextElement >>arrt;
+            lab.textFlow = arrt;
 
-            var img: eui.Image = this["_img" + index];
-
+            var img: eui.Image = this["img_sign" + index];
             img.visible = false;
 
             index++;
 
-            if (this.plist[k] >= 0) {
-                img.visible = true;
+            if (game.dissolution && game.dissolution.vote) {
+                if (game.dissolution.vote[k] >= 0) {
+                    img.visible = true;
 
-                var n: number = +this.plist[k];
+                    var n: number = +game.dissolution.vote[k];
 
-                if (n == 1) {
-                    img.source = "diss_dui";
+                    if (n == 1) {
+                        img.source = "diss_dui";
+                    }
+                    else {
+                        img.source = "diss_cuo";
+                        isan = true;
+                    }
+                    num++;
                 }
                 else {
-                    img.source = "diss_cuo";
-                    isan = true;
+                    img.visible = false;
                 }
-
-                num++;
-            }
-            else {
-                img.visible = false;
             }
         }
 
+        var _this = this;
         if (isan) {
             egret.setTimeout(function () {
-                my.clear();
-
                 EffectUtils.showTips("因有玩家拒绝解散，房间未能解散", 5);
-
+                game.dissolution = null;
+                _this.hide();
             }, this, 1000);
         }
         else {
             if (num >= 4) {
-
-
                 egret.setTimeout(function () {
-                    my.clear();
-
                     EffectUtils.showTips("房间解散成功", 5);
-
+                    _this.hide();
                 }, this, 1000);
             }
         }
+    }
+
+    show() {
+        super.show();
+
+        this.refresh();
     }
 }

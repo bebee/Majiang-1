@@ -88,7 +88,7 @@ class RecordItem extends eui.Component
         SocketManager.getInstance().getGameConn().send(20, {"args":{"id":this.obj.id}});
 
 
-        var d:RecordDialog = StackManager.findDialog(RecordDialog, "RecordDialog");
+        var d:RecordPanel = StackManager.findDialog(RecordPanel, "RecordPanel");
         d.pcList = this.obj.persons;
         gameData.personList = this.obj.persons;
         gameData.roomid = this.obj.roomid;

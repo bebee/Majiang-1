@@ -21,6 +21,11 @@ class GameManager extends BaseDispatcher {
     init() {
         this.timerManager = TimerManager.i;
         this.effectManager = new EffectManager();
+
+        this.timerManager.addEventListener(TimerManager.Second, this.timerHandler, this);
+    }
+
+    private timerHandler() {
     }
 
     get layerScene() {

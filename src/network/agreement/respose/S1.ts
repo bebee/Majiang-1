@@ -29,8 +29,7 @@ class S1 {
                 var carr: Array<any> = cver.split('.');
 
                 if (arr[0] != carr[0] || arr[1] != carr[1]) {
-                    if (!LayerManager.gameLayer().messagBox) LayerManager.gameLayer().messagBox = new TipsAskPanel();
-                    LayerManager.gameLayer().messagBox.showMsg(function (r) {
+                    game.askPanel.showMsg(function (r) {
                         if (r) {
                             var h: string = gameConfig.GameUrl;
                             if (gameConfig.roomid) h += "?roomid=" + gameConfig.roomid;

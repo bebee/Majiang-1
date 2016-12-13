@@ -42,7 +42,7 @@ class RecordXItem extends eui.Component
 
         var str:string = "";
 
-        var d:RecordDialog = StackManager.findDialog(RecordDialog, "RecordDialog");
+        var d:RecordPanel = StackManager.findDialog(RecordPanel, "RecordPanel");
         var pcl:Array<any> = d.pcList;
 
         for(var i = 2; i<= 5; i++)

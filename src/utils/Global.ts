@@ -39,8 +39,7 @@ module Global {
 				Global.sendLoad();
 				break;
 			case 1:
-				if (!LayerManager.gameLayer().messagBox) LayerManager.gameLayer().messagBox = new TipsAskPanel();
-				LayerManager.gameLayer().messagBox.showMsg(function (r) {
+				game.askPanel.showMsg(function (r) {
 					Global.sendLoad();
 				}, "您已经掉线，请点击确定重连！");
 				break;
@@ -74,9 +73,7 @@ module Global {
 				gameLocal.setData(gameLocal.loginAccessCode, count);
 			}
 			else {
-				if (!LayerManager.gameLayer().messagBox) LayerManager.gameLayer().messagBox = new TipsAskPanel();
-				LayerManager.gameLayer().messagBox.showMsg(function (r) {
-
+				game.askPanel.showMsg(function (r) {
 				}, "登录失败，请退出游戏重试！\n\n(请检查是否在其他设备登录)");
 			}
 		}
@@ -241,9 +238,7 @@ module Global {
 
 		var chat_pao: ChatPao = new ChatPao();
 
-		var d: ChatDialog = StackManager.findDialog(ChatDialog, "ChatDialog");
-
-		var chatlist: any = d.chat;
+		var chatlist: any = gameConfig.chat;
 
 		var layer = LayerManager.gameLayer().mainLayer;
 

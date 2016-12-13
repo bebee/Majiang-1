@@ -105,7 +105,7 @@ class MainScene extends eui.Component {
          * 打开战绩
          */
         this.btn_record.addEventListener(egret.TouchEvent.TOUCH_TAP, function () {
-            StackManager.open(RecordDialog, "RecordDialog");
+            StackManager.open(RecordPanel, "RecordPanel");
 
             // var rt:egret.RenderTexture = new egret.RenderTexture();
             // var clip:egret.Rectangle = new egret.Rectangle(0,0,this._head.width, this._head.height);

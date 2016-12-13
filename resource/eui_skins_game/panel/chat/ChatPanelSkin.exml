@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='utf-8'?>
+<e:Skin class="ChatPanelSkin" width="670" height="358" xmlns:e="http://ns.egret.com/eui" xmlns:ns1="*" xmlns:w="http://ns.egret.com/wing">
+	<ns1:BgView left="0" right="0" top="0" bottom="0" skinName="BgViewSkin"/>
+	<e:Group top="40" bottom="40" left="40" right="40">
+		<e:Image source="panel_1" scale9Grid="19,19,25,17" left="0" top="0" bottom="0" right="0"/>
+		<e:Scroller left="0" right="0" top="0" bottom="0">
+			<e:Group id="expGroup" visible="false">
+				<e:layout>
+					<e:TileLayout horizontalAlign="left" verticalAlign="top" horizontalGap="24" verticalGap="0"/>
+				</e:layout>
+			</e:Group>
+		</e:Scroller>
+		<e:Scroller left="0" right="0" top="0" bottom="0">
+			<e:Group id="chatGroup">
+				<e:layout>
+					<e:VerticalLayout horizontalAlign="center"/>
+				</e:layout>
+			</e:Group>
+		</e:Scroller>
+		<e:RadioButton id="btn_chat" selected="true" right="0" groupName="chatselect">
+			<e:skinName>
+				<e:Skin states="up,down,disabled">
+					<e:Image width="100%" height="100%" source="chat_btn_ca" source.down="chat_btn_cl"/>
+					<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+				</e:Skin>
+			</e:skinName>
+		</e:RadioButton>
+		<e:RadioButton id="btn_expression" right="0" bottom="0" groupName="chatselect">
+			<e:skinName>
+				<e:Skin states="up,down,disabled">
+					<e:Image width="100%" height="100%" source="chat_btn_ba" source.down="chat_btn_bl"/>
+					<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+				</e:Skin>
+			</e:skinName>
+		</e:RadioButton>
+	</e:Group>
+</e:Skin>

@@ -71,8 +71,27 @@ class Main extends eui.UILayer {
     }
 
     private onThemeLoadComplete(): void {
-        game.init(this.stage);
+        // this.startGame();
 
+        RES.addEventListener(RES.ResourceEvent.GROUP_COMPLETE, this.onResourceLoadComplete, this);
+
+        RES.loadGroup("loading");
+    }
+
+    /**
+     * 资源加载完成
+     * @param e
+     */
+    private onResourceLoadComplete(e: RES.ResourceEvent): void {
+        if (e.groupName == "loading") {
+            RES.removeEventListener(RES.ResourceEvent.GROUP_COMPLETE, this.onResourceLoadComplete, this);
+
+            this.startGame();
+        }
+    }
+
+    private startGame(){
+        game.init(this.stage);
         SceneManager.open(LoadingScene, "LoadingScene");
     }
 }

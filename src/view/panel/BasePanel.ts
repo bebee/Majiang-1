@@ -24,14 +24,16 @@ class BasePanel extends BaseGameSprite {
     show(): void {
         super.show();
 
-        this.manager.layerPanel.addChild(this);
+        // this.manager.layerPanel.addChild(this);
+        PopUpUtils.addPopUp(this, true, this.width, this.height, 1);
     }
 
     hide(): void {
         super.hide();
 
-        if (this.manager.layerPanel.contains(this)) {
-            this.manager.layerPanel.removeChild(this);
-        }
+        // if (this.manager.layerPanel.contains(this)) {
+        //     this.manager.layerPanel.removeChild(this);
+        // }
+        PopUpUtils.removePopUp(this, 1);
     }
 }

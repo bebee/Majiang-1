@@ -45,7 +45,7 @@ module PopUpUtils {
 		}
 
 		LayerManager.gameLayer().panelLayer.addChild(panel);
-		gameConfig.curPanel = panel;
+		game.topPanel = panel;
 
 		if (popUpWidth != 0) {
 			panel.x = game.stageWidth / 2 - popUpWidth / 2;

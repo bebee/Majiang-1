@@ -86,9 +86,9 @@ class Replayer implements IUpdate{
 
         this.clear();
 
-        LayerManager.gameLayer().messagBox.hide();
+        game.askPanel.hide();
 
-        StackManager.open(RecordDialog, "RecordDialog");
+        StackManager.open(RecordPanel, "RecordPanel");
 
     }
 

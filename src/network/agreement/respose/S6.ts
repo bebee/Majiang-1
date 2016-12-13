@@ -12,7 +12,7 @@ class S6 {
         // EffectUtils.showTips("房间已经解散！", 5, false);
         // GSController.i.exit();
 
-        LayerManager.gameLayer().messagBox.showMsg(function (r) {
+        game.askPanel.showMsg(function (r) {
             GSController.i.exit();
         }, "房间解散了，请进入其他房间！", null, null, true);
     }

@@ -4,7 +4,7 @@
 class TouchBehaviour implements IGameTapEvent {
 
 
-    static _i  : TouchBehaviour;
+    static _i: TouchBehaviour;
 
     static get i() {
         return TouchBehaviour._i || (TouchBehaviour._i = new TouchBehaviour);
@@ -26,7 +26,7 @@ class TouchBehaviour implements IGameTapEvent {
 
                 GSController.i.hideFuncSelectMenu();
 
-                if(GSData.i.readyTing){
+                if (GSData.i.readyTing) {
 
                     GSData.i.readyTing = false;
 
@@ -185,9 +185,8 @@ class TouchBehaviour implements IGameTapEvent {
     /**
      * 打开聊天
      */
-    onTalkTap()
-    {
-        StackManager.open(ChatDialog, "ChatDialog");
+    onTalkTap() {
+        StackManager.open(ChatPanel, "ChatPanel");
     }
 
     onSiriBegin(): void {
@@ -211,32 +210,27 @@ class TouchBehaviour implements IGameTapEvent {
 
     //踢人请求
     onKillTouch(pos: number) {
-
         SocketManager.getInstance().getGameConn().send(22, {"args": {"pos": pos}});
-
     }
 
     //解散房间
-    onJiesanTap(): void
-    {
+    onJiesanTap(): void {
 
-        if(PublicVal.state == StateType.reconnect || PublicVal.state == StateType.gamestart || PublicVal.state == StateType.ting)
-        {
-            LayerManager.gameLayer().messagBox.showMsg(function (r)
-            {
-                if(r)
-                {
-                    SocketManager.getInstance().getGameConn().send(14, {"args":{"answer":1}});//发起解散房子
-                    var dialog:DissolutionPanel = StackManager.findDialog(DissolutionPanel, "DissolutionPanel");
-                    dialog.isClick = true;
-                }
-            }, "您确定发起解散房间吗？\n（当所有在线玩家同意解散之后房间将解散）");
-        }else if(PublicVal.state == 6){
+        if (PublicVal.state == StateType.reconnect || PublicVal.state == StateType.gamestart || PublicVal.state == StateType.ting) {
+            if(game.dissolution && game.dissolution.vote){
+                StackManager.open(DissolutionPanel, "DissolutionPanel");
+            }
+            else {
+                game.askPanel.showMsg(function (r) {
+                    if (r) {
+                        SocketManager.getInstance().getGameConn().send(14, {"args": {"answer": 1}});//发起解散房子
+                    }
+                }, "您确定发起解散房间吗？\n（当所有在线玩家同意解散之后房间将解散）");
+            }
+        } else if (PublicVal.state == 6) {
 
-            LayerManager.gameLayer().messagBox.showMsg(function (r)
-            {
-                if(r)
-                {
+            game.askPanel.showMsg(function (r) {
+                if (r) {
                     Replayer.i.exit();
                 }
             }, "您确定要退出回放吗？");
@@ -245,14 +239,14 @@ class TouchBehaviour implements IGameTapEvent {
         else {
             var info: string;
 
-            if(GSData.i.roomOwnDir == 1) {
+            if (GSData.i.roomOwnDir == 1) {
                 info = "您未开始一局游戏，解散房间不扣房卡，\n是否解散？";
 
-            }else{
+            } else {
                 info = "您确定要离开房间吗？";
             }
 
-            LayerManager.gameLayer().messagBox.showMsg(function (r) {
+            game.askPanel.showMsg(function (r) {
                 if (r) {
                     SocketManager.getInstance().getGameConn().send(12, {});   //离开房子
                 }
@@ -286,16 +280,16 @@ class TouchBehaviour implements IGameTapEvent {
 
         var player = null;
 
-        if(PublicVal.state == 6){
+        if (PublicVal.state == 6) {
 
             return;
 
-        }else {
+        } else {
 
             player = GSData.i.getRoomPlayerByDir(dir);
 
         }
-        if(!player) return;
+        if (!player) return;
 
         var d: RoleInfoPanel = StackManager.findDialog(RoleInfoPanel, "RoleInfoPanel");
         if (d) {

@@ -1,6 +1,3 @@
-/**
- * 加载页面
- */
 class LoadingScene extends eui.Component {
 
     lab_info: eui.Label;
@@ -12,8 +9,8 @@ class LoadingScene extends eui.Component {
         this.skinName = "LoadingSceneSkin";
     }
 
-    createChildren() {
-        super.createChildren();
+    childrenCreated() {
+        super.childrenCreated();
 
         this.touchChildren = false;
 
@@ -58,6 +55,5 @@ class LoadingScene extends eui.Component {
     public onIn(): void {
         SceneManager.close("LoadingScene", true);
         SceneManager.open(MainScene, "MainScene");
-        LayerManager.gameLayer().messagBox = new TipsAskPanel();
     }
 }

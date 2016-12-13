@@ -21,6 +21,10 @@ class game {
 
     //管理
     static manager: GameManager = GameManager.i;
+    //询问提示面板
+    static askPanel: TipsAskPanel;
+    //最顶层显示面板
+    static topPanel: BasePanel;
 
     //规则
     static ruleVo: GameRuleVo;
@@ -39,6 +43,9 @@ class game {
     static statusComplete: boolean = false;
     //全部玩家的缺门记录
     static allQue: any = {};
+
+    //解散房间
+    static dissolution:DissolutionVo;
 
     static init(stage) {
 
@@ -62,6 +69,8 @@ class game {
         gameData.cardColor = +gameLocal.getData(gameLocal.color);
 
         GameParse.Initialization();
+
+        this.askPanel = new TipsAskPanel();
 
         stage.addChild(LayerManager.gameLayer());
     }

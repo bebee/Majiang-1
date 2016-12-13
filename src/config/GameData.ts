@@ -9,8 +9,6 @@ class gameData {
     static player: PlayerVo;
     //操作的房间ID
     static roomid: number = 0;
-    //登录等待
-    static sendLogin: boolean = false;
     //牌型
     static cardStyle: number = 1;
     //牌风格
@@ -21,6 +19,8 @@ class gameData {
     static roomRound: number = 0;
     //战绩详情用户列表
     static personList: any;
+    //登录等待
+    static sendLogin: boolean = false;
 
     //游戏提示播放顺序
     static gamewarmIndex: number = 0;

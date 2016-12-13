@@ -29,10 +29,10 @@ class JoininPanel extends BasePanel {
         this.bgView.setTitle("joingame_txt");
 
         var arr: eui.Button[] = [
+            this.btn_0,
             this.btn_1, this.btn_2, this.btn_3,
             this.btn_4, this.btn_5, this.btn_6,
-            this.btn_7, this.btn_8, this.btn_9,
-            this.btn_0
+            this.btn_7, this.btn_8, this.btn_9
         ];
 
         for (var i: number = 0; i < arr.length; i++) {

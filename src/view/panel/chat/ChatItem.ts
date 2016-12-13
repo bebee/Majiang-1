@@ -1,4 +1,4 @@
-class ChatListUI extends eui.Component {
+class ChatItem extends eui.Component {
     public clickey: number = 0;
 
     public constructor() {
@@ -6,12 +6,12 @@ class ChatListUI extends eui.Component {
 
         this.addEventListener(eui.UIEvent.COMPLETE, this.onComplete, this);
 
-        this.skinName = "ChatListSkin";
+        this.skinName = "ChatItemSkin";
 
         this.touchChildren = true;
     }
 
-    public _labels: eui.Label;
+    public lab_content: eui.Label;
 
     onComplete() {
 
@@ -36,6 +36,6 @@ class ChatListUI extends eui.Component {
         });
         //GameSound.PlaySound("chat_"+gameData.getInstance().player.sex+"_" + this.clickey);
 
-        StackManager.closeDialog("ChatDialog");
+        StackManager.closeDialog("ChatPanel");
     }
 }

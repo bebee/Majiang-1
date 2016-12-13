@@ -25,8 +25,6 @@ class LayerManager extends eui.UILayer {
     // 加载遮罩层 场景切换的时候加载资源UI
     public loadLayer: eui.UILayer = new eui.UILayer();
 
-    public messagBox: TipsAskPanel;
-
     //装喇叭的容器
     public hornGroup: eui.Group;
 

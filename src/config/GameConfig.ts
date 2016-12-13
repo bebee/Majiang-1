@@ -12,8 +12,6 @@ class gameConfig {
     static GameUrl: string = "https://mj.h5sd.com/bcmj/index.html";
     //邀请带入的房间ID
     static roomid: string;
-    //当前面板
-    static curPanel: egret.DisplayObjectContainer;
 
     //TODO 微信
     //Appid
@@ -120,6 +118,29 @@ class gameConfig {
         13: "您的房卡不够",
         14: "记录已过期",
         17: "您已经投过票了"
+    };
+
+    //聊天内容
+    static chat: any = {
+        0: {id: 0, text: "赶紧的，麻将桌都让你给靠倒了"},
+        1: {id: 1, text: "打啊，你搁那疙瘩相面呢啊？"},
+        2: {id: 2, text: "不是，你嘎哈呢啊，你打的咋这慢呢？"},
+        3: {id: 3, text: "打完别走啊，喝几瓶再来2圈。"},
+        4: {id: 4, text: "这麻将跟你打的，哎呦我天，我都怀疑人生。"},
+        5: {id: 5, text: "你跟谁俩舞舞玄玄的呢？"},
+        6: {id: 6, text: "哎你这牌，打绝了。"},
+        7: {id: 7, text: "那谁，你天生就是打麻将的料！"},
+        8: {id: 8, text: "别闹，好好玩一会。"},
+        9: {id: 9, text: "就是“蛋”多，爱咋咋滴"},
+        10: {id: 12, text: "oh money money go my home"},
+        11: {id: 13, text: "傻愣的，打牌要快啊"},
+        12: {id: 14, text: "你那是啥网络呀，太差了"},
+        13: {id: 15, text: "都别点啊，我自摸",},
+        14: {id: 16, text: "你是炮兵院校毕业的？"},
+        15: {id: 17, text: "看我仙人掌，搂宝咯！"},
+        16: {id: 18, text: "为什么受伤的总是我"},
+        17: {id: 19, text: "咋又你胡了，这脑袋嗡一下"},
+        18: {id: 20, text: "别拦着我啊，连坐五庄"}
     };
 
     static update(data: any) {

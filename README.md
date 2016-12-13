@@ -39,7 +39,7 @@
 -define(Action_Room_Create,2).%创建房间
 -define(Action_Room_Join,3).%加入房间
 -define(Action_Room_Play,4).%打牌
--define(Action_Room_Resume,5).%
+-define(Action_Room_Resume,5).%断线重连
 -define(Action_Room_Dismiss,6).%解散房间
 -define(Action_User_Bind_Agent,7).%绑定代理
 -define(Action_Room_Presence,8).%房间 出席信息同步
