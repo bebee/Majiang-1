@@ -8,7 +8,7 @@
 
 		<e:Image id="img_zhuang" source="game_zhuang" left="-10" top="-10" includeIn="inthegame"/>
 		<e:Image id="img_que" source="img_dq_1" width="30" height="30" includeIn="inthegame" bottom="0" right="0"/>
-		<e:Button id="btn_dismiss" width="40" height="40" x="50" y="-10" includeIn="offline">
+		<e:Button id="btn_kill" width="40" height="40" x="50" y="-10" includeIn="offline">
 			<e:skinName>
 				<e:Skin states="up,down,disabled">
 					<e:Image width="100%" height="100%" source="JS_close" source.down="JS_close" source.disabled="JS_close"/>

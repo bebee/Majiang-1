@@ -9,7 +9,7 @@ class HeadIconView extends BaseGameSprite {
     private img_fangzhu: egret.Bitmap;
     private img_zhuang: egret.Bitmap;
     private img_que: eui.Image;
-    btn_dismiss: egret.Bitmap;
+    btn_kill: egret.Bitmap;
 
     constructor() {
         super();
@@ -29,14 +29,22 @@ class HeadIconView extends BaseGameSprite {
 
         this.clean();
 
-        this.btn_dismiss.addEventListener(egret.TouchEvent.TOUCH_TAP, this.dismissHandler, this);
+        this.btn_kill.addEventListener(egret.TouchEvent.TOUCH_TAP, this.dismissHandler, this);
     }
 
-    private dismissHandler(e:egret.TouchEvent) {
+    private dismissHandler(e: egret.TouchEvent) {
         switch (e.currentTarget) {
-            case this.btn_dismiss:
+            case this.btn_kill:
                 break;
         }
+    }
+
+    /**
+     * 是否显示踢人按钮
+     * @param value
+     */
+    set isShowKill(value: boolean) {
+        this.btn_kill.visible = value;
     }
 
     setHeadPic(pic: string) {
@@ -86,6 +94,6 @@ class HeadIconView extends BaseGameSprite {
         this.img_fangzhu.visible = false;
         this.img_head.source = "";
         this.img_que.source = "";
-        this.btn_dismiss.visible = false;
+        this.btn_kill.visible = false;
     }
 }

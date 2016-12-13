@@ -148,9 +148,9 @@ class GSView extends egret.Sprite {
 
             this.headViews[i] = headView;
 
-            headView.headIcon.btn_dismiss.touchEnabled = true;
-            headView.headIcon.btn_dismiss.name = "" + i;
-            headView.headIcon.btn_dismiss.addEventListener(egret.TouchEvent.TOUCH_TAP, this.onKillTouch, this);
+            headView.headIcon.btn_kill.touchEnabled = true;
+            headView.headIcon.btn_kill.name = "" + i;
+            headView.headIcon.btn_kill.addEventListener(egret.TouchEvent.TOUCH_TAP, this.onKillTouch, this);
 
             headView.headIcon.touchEnabled = true;
             headView.headIcon.name = "" + i;
@@ -264,28 +264,15 @@ class GSView extends egret.Sprite {
             headView.player = player;
 
             if (player == null) {
-
                 headView.nullPlayer();
-
-                //this.visibleReadyIcon(this.readyIcons[i],false);
-
-                //this.visibleKillIcon(headView.headIcon.btn_dismiss,false);
-
                 continue;
             }
 
             if (player.status == "offline") {
-
                 headView.headIcon.visible = true;
 
-                //this.visibleReadyIcon(this.readyIcons[i],false);
-
             } else {
-
-                headView.headIcon.visible = false;
-
-                //this.visibleReadyIcon(this.readyIcons[i],true);
-
+                // headView.headIcon.offlineImg.visible = false;
             }
 
             headView.nameText.text = player.nick;
@@ -336,7 +323,7 @@ class GSView extends egret.Sprite {
 
             this.readyIcons[i].visible = false;
 
-            this.headViews[i].headIcon.btn_dismiss.visible = false;
+            this.headViews[i].headIcon.btn_kill.visible = false;
         }
     }
 
