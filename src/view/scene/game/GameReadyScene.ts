@@ -105,8 +105,16 @@ class GameReadyScene extends BaseScene {
             }
         }
 
-        if (game.roomPlayerCount == game.roomPlayerMax && game.player.pos == 1) {
-            this.lab_description.text = "所有玩家准备就绪，尽快开始游戏吧！！！";
+        if(this.currentState == "ready" || this.currentState == "start"){
+            if (game.roomPlayerCount != game.roomPlayerMax) {
+                this.lab_description.text = "等待其他玩家，请稍候...";
+            }
+            else if (game.player.pos == 1) {
+                this.lab_description.text = "所有玩家准备就绪，尽快开始游戏吧！！！";
+            }
+            else {
+                this.lab_description.text = "等待房主开始游戏，请稍候...";
+            }
         }
         else {
             this.lab_description.text = "等待其他玩家，请稍候...";
@@ -132,15 +140,12 @@ class GameReadyScene extends BaseScene {
         switch (state) {
             case GameReadySceneState.ready:
                 this.skinState = "ready";
-                this.lab_description.text = "等待其他玩家，请稍候...";
                 break;
             case GameReadySceneState.start:
                 this.skinState = "start";
-                this.lab_description.text = "等待房主开始游戏，请稍候...";
                 break;
             case GameReadySceneState.continue:
                 this.skinState = "continue";
-                this.lab_description.text = "等待其他玩家，请稍候...";
                 break;
         }
     }

@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<e:Skin class="GameReadySceneSkin" width="960" height="640" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*" states="ready,start,continue" >
+<e:Skin class="GameReadySceneSkin" width="960" height="640" currentState="ready" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*" states="ready,start,continue" >
 	<e:Image source="game_bg" left="0" right="0" top="0" bottom="0" locked="true"/>
 	<e:Image source="game_logo" horizontalCenter="0" top="160" locked="true"/>
 	<e:Label id="lab_roomid" text="房间号" fontFamily="微软雅黑" size="24" left="20" top="15"/>
