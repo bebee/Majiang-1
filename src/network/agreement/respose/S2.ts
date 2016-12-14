@@ -1,21 +1,16 @@
 /**
  * 创建房间返回
  */
-class S2
-{
-    public parseData(obj:any)
-    {
-        if(!obj) return;
+class S2 {
+    public parseData(obj: any) {
+        if (!obj || !obj.hasOwnProperty("data")) return;
 
-        if(obj["data"])
-        {
-            game.player.cur = +obj["data"]["cur"];
+        console.log("创建成功,房间ID为：" + obj.data.roomid, obj);
 
-            console.log("创建成功,房间ID为：" + obj["data"]["roomid"], obj);
+        game.player.cur = obj.data.cur;
 
-            GSData.i.roomID = obj["data"]["roomid"];
+        game.roomid = obj.data.roomid;
 
-            StackManager.closeDialog("CreatePanel");
-        }
+        StackManager.closeDialog("CreatePanel");
     }
 }

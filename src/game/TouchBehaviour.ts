@@ -257,7 +257,6 @@ class TouchBehaviour implements IGameTapEvent {
 
     //回到微信
     onWeixinTap(): void {
-
         Weixin.closeWindow();
     }
 
@@ -271,9 +270,9 @@ class TouchBehaviour implements IGameTapEvent {
 
         Global.showShare(true);
 
-        Weixin.onMenuShareAppMessage(GSData.i.roomID + "");
+        Weixin.onMenuShareAppMessage(game.roomid + "");
 
-        Weixin.onMenuShareTimeline(GSData.i.roomID + "");
+        Weixin.onMenuShareTimeline(game.roomid + "");
     }
 
     onHeadTouch(dir: number): void {

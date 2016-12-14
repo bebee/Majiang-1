@@ -261,7 +261,7 @@ class GSController extends egret.EventDispatcher {
     updateGangCur(showAnimation: boolean = false) {
         var scores: any = {};
         var score: number = 0;
-        var head: HeadIconRich;
+        var head: HeadIcon;
         for (var i: number = 1; i <= 4; i++) {
             head = this.gsView.headViews[i];
             score = GSData.i.gangCurs[i];
@@ -283,7 +283,7 @@ class GSController extends egret.EventDispatcher {
 
     //刷新房间人员信息
     updateRoom() {
-        this.scene.updateRoomID(GSData.i.roomID);
+        this.scene.updateRoomID(game.roomid);
         this.scene.updateRule(PublicVal.i.rules);
         this.gsView.updateRoom();
         this.visibleReadyIcon();
@@ -435,7 +435,7 @@ class GSController extends egret.EventDispatcher {
         if (PublicVal.state == StateType.start || PublicVal.state == StateType.reconnect) {
             for (var i: number = 1; i <= 4; i++) {
                 var readyIcon = this.gsView.readyIcons[i];
-                var killIcon = this.gsView.getHeadView(i).headIcon.btn_kill;
+                var killIcon = this.gsView.getHeadView(i).btn_kill;
                 readyIcon.visible = (GSData.i.readyFlag >> i & 1) == 1;
 
                 if (PublicVal.state == StateType.start && i > 1 && PublicVal.i.ownPos == 1) {
@@ -453,7 +453,7 @@ class GSController extends egret.EventDispatcher {
 
         for (var i: number = 1; i <= GSConfig.playerCount; i++) {
 
-            this.gsView.getHeadView(i).visibleZhuang((PublicVal.i.zhuangFlag >> i & 1) == 1);
+            this.gsView.getHeadView(i).isZhuang = ((PublicVal.i.zhuangFlag >> i & 1) == 1);
 
         }
     }
@@ -461,7 +461,7 @@ class GSController extends egret.EventDispatcher {
     //更新房主
     visibleRoomOwn() {
         for (var i: number = 1; i <= GSConfig.playerCount; i++) {
-            this.gsView.getHeadView(i).visibleRoomOwn((PublicVal.i.roomOwnFlag >> i & 1) == 1);
+            this.gsView.getHeadView(i).isOwner = ((PublicVal.i.roomOwnFlag >> i & 1) == 1);
 
         }
     }
@@ -1386,31 +1386,17 @@ class GSController extends egret.EventDispatcher {
 
     nullAllHead() {
         for (var i: number = 1; i <= 4; i++) {
-            this.gsView.headViews[i].nullPlayer();
+            this.gsView.headViews[i].clean();
         }
     }
 
     //更新replay房间信息
     updateReplayRoom(dirPersons: any) {
-
         for (var i: number = 1; i <= 4; i++) {
-
             var headView = this.gsView.headViews[i];
-
             var person: any = dirPersons[i];
-
-            headView.nameText.visible = true;
-
-            headView.idText.visible = true;
-
-            headView.nameText.text = person.nick;
-
-            headView.idText.text = person.uid;
-
-            headView.numText.visible = false;
-
-            headView.headIcon.update(person);
-
+            headView.setState(HeadIconState.ingame);
+            headView.update(person);
         }
     }
 }

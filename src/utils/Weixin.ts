@@ -44,16 +44,16 @@ class Weixin {
 
             function initJs()
             {
-                Weixin.onMenuShareAppMessage(GSData.i.roomID + "");
+                Weixin.onMenuShareAppMessage(game.roomid + "");
 
-                Weixin.onMenuShareTimeline(GSData.i.roomID + "");
+                Weixin.onMenuShareTimeline(game.roomid + "");
             }
 
             var my = this;
 
             wx.ready(function ()
             {
-                if(GSData.i.roomID)
+                if(game.roomid)
                 {
                     initJs();
                 }

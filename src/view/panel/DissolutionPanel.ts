@@ -54,8 +54,8 @@ class DissolutionPanel extends BasePanel {
 
         var isan: boolean = false;
 
-        for (var k in GSData.i.roomPlayerMap) {
-            var playerVo: PlayerVo = GSData.i.roomPlayerMap[k];
+        for (var uid in game.roomPlayers) {
+            var playerVo: PlayerVo = game.roomPlayers[uid];
 
             var lab: eui.Label = this["lab_nick" + index];
 
@@ -84,10 +84,10 @@ class DissolutionPanel extends BasePanel {
             index++;
 
             if (game.dissolution && game.dissolution.vote) {
-                if (game.dissolution.vote[k] >= 0) {
+                if (game.dissolution.vote[uid] >= 0) {
                     img.visible = true;
 
-                    var n: number = +game.dissolution.vote[k];
+                    var n: number = +game.dissolution.vote[uid];
 
                     if (n == 1) {
                         img.source = "diss_dui";

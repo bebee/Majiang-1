@@ -31,7 +31,7 @@ class PersonItem extends BaseGameSprite {
 
         this.pos = new egret.Point();
 
-        this.headIcon = new HeadIcon;
+        this.headIcon = new HeadIcon();
         this.headIcon.x = 40;
         this.headIcon.y = 40;
         this.headGroup.addChild(this.headIcon);

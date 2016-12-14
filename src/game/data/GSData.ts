@@ -17,11 +17,6 @@ class GSData{
 
     roomPlayers:PlayerVo[];
 
-    //根据uid存储
-    roomPlayerMap = {};
-
-    roomID:number;
-
     roomPass:number = 0;
 
     //玩家自己的pos
@@ -143,7 +138,7 @@ class GSData{
 
         PublicVal.i.cur_round = 1;
 
-        this.roomPlayerMap = {};
+        game.cleanRoom();
 
         this.roundStarted = false;
 
@@ -400,16 +395,10 @@ class GSData{
 
     //根据pos获取玩家信息
     getRoomPlayerByPos(pos:number):PlayerVo{
-
         return this.roomPlayers[pos];
-
     }
     //根据dir获取玩家信息
     getRoomPlayerByDir(dir:number){
-
         return this.getRoomPlayerByPos(this.getPos(dir));
-
     }
-
-
 }

@@ -58,7 +58,6 @@ class GSScene extends egret.DisplayObjectContainer {
         this.addChild(this.gameLogo);
 
 
-
         this.gsView = new GSView;
         this.gsView.visible = false;
 

@@ -1,82 +1,78 @@
 /**
  * 结算当单个人
  */
-class GSTotlePerson extends eui.Component
-{
+class GSTotlePerson extends eui.Component {
     /**
      * 玩家头像
      */
-    private _head:HeadIcon;
+    private _head: HeadIcon;
 
     /**
      * 玩家姓名
      */
-    private _name:eui.Label;
+    private _name: eui.Label;
 
     /**
      * 玩家数据
      */
-    public pserson:any;
+    public pserson: any;
 
     /**
      * 大赢家
      */
-    private iswin:eui.Image;
+    private iswin: eui.Image;
 
     /**
      * 最佳炮手
      */
-    private pao_img:eui.Image;
+    private pao_img: eui.Image;
 
     /**
      * 显示文字
      */
-    private showText:any =
+    private showText: any =
     {
-        0:"坐　庄：",
-        1:"胡　牌：",
-        2:"点　炮：",
-        3:"摸　宝：",
-        4:"宝中宝：",
-        5:"积　分："
+        0: "坐　庄：",
+        1: "胡　牌：",
+        2: "点　炮：",
+        3: "摸　宝：",
+        4: "宝中宝：",
+        5: "积　分："
     };
 
     /**
      * 奖励显示容器
      */
-    private card_group:eui.Group;
+    private card_group: eui.Group;
 
     /**
      * @param p
      */
-    constructor(p:any)
-    {
+    constructor(p: any) {
         super();
 
         this.pserson = p;
     }
-    createChildren()
-    {
+
+    createChildren() {
         super.createChildren();
     }
 
-    refresh()
-    {
+    refresh() {
         this.removeChildren();
 
         var nick = this.pserson.nick;
         var pic = this.pserson.pic;
 
-        var pos:number = +this.pserson.pos;
+        var pos: number = +this.pserson.pos;
 
         this._head = new HeadIcon();
         this.addChild(this._head);
         this._head.x = 40;
         this._head.y = 60;
 
-        RES.getResByUrl(pic, function(t:egret.Texture)
-        {
-            if(t) this._head.setHeadImg(t);
+        RES.getResByUrl(pic, function (t: egret.Texture) {
+            if (t) this._head.setHeadImg(t);
 
         }, this, RES.ResourceItem.TYPE_IMAGE);
 
@@ -93,12 +89,10 @@ class GSTotlePerson extends eui.Component
 
         this.iswin = new eui.Image();
 
-        if(this.pserson["iswin"])
-        {
+        if (this.pserson["iswin"]) {
             this.iswin.visible = true;
         }
-        else
-        {
+        else {
             this.iswin.visible = false;
         }
 
@@ -106,43 +100,40 @@ class GSTotlePerson extends eui.Component
 
         this.pao_img = new eui.Image();
 
-         if(this.pserson["ispao"])
-         {
-             this.pao_img.visible = true;
-         }
-         else
-         {
-             this.pao_img.visible = false;
-         }
+        if (this.pserson["ispao"]) {
+            this.pao_img.visible = true;
+        }
+        else {
+            this.pao_img.visible = false;
+        }
 
         this.pao_img.source = "sptFangPao";
 
-        if(+pos == 1)   //房主奖励
+        if (+pos == 1)   //房主奖励
         {
             this._head.isOwner = true;
         }
 
-        var new_card:number = this.pserson.new_card;
+        var new_card: number = this.pserson.new_card;
 
         console.log(">>  " + new_card);
 
-        if(new_card > 0)
-        {
+        if (new_card > 0) {
             this.card_group = new eui.Group();
 
-            var layout:eui.HorizontalLayout = new eui.HorizontalLayout();
+            var layout: eui.HorizontalLayout = new eui.HorizontalLayout();
             layout.horizontalAlign = "center";
             layout.verticalAlign = "middle";
             this.card_group.layout = layout;
             this.addChild(this.card_group);
 
-            var timg:eui.Image = new eui.Image();
-            var cardimg:eui.Image = new eui.Image();
+            var timg: eui.Image = new eui.Image();
+            var cardimg: eui.Image = new eui.Image();
             cardimg.source = "money_icon";
-            var cardcha:eui.Image = new eui.Image();
+            var cardcha: eui.Image = new eui.Image();
             cardcha.source = "card_cha";
 
-            if(+pos == 1)   //房主奖励
+            if (+pos == 1)   //房主奖励
             {
                 this._head.isOwner = true;
 
@@ -157,41 +148,39 @@ class GSTotlePerson extends eui.Component
             this.card_group.addChild(cardimg);
             this.card_group.addChild(cardcha);
 
-            var new_cardstr:string = "" + new_card;
-            for(var n = 0; n < new_cardstr.length; n++)
-            {
-                var new_s:string = new_cardstr.charAt(n);
+            var new_cardstr: string = "" + new_card;
+            for (var n = 0; n < new_cardstr.length; n++) {
+                var new_s: string = new_cardstr.charAt(n);
 
-                var numimg:eui.Image = new eui.Image();
+                var numimg: eui.Image = new eui.Image();
                 numimg.source = "card_" + new_s;
                 this.card_group.addChild(numimg);
             }
         }
 
 
-        var list:Array<any> = [];
+        var list: Array<any> = [];
 
-        var zhuang_num:number = this.pserson.zhuang_num;  //庄次数
+        var zhuang_num: number = this.pserson.zhuang_num;  //庄次数
         list.push(zhuang_num);
 
-        var hu_num:number = this.pserson.hu_num;  //胡牌次数
+        var hu_num: number = this.pserson.hu_num;  //胡牌次数
         list.push(hu_num);
 
-        var pao_num:number = this.pserson.pao_num;  //点炮次数
+        var pao_num: number = this.pserson.pao_num;  //点炮次数
         list.push(pao_num);
 
-        var bao_num:number = this.pserson.bao_num;  //摸宝次数
+        var bao_num: number = this.pserson.bao_num;  //摸宝次数
         list.push(bao_num);
 
-        var baozhongbao_num:number = this.pserson.baozhongbao_num;  //宝中宝次数
+        var baozhongbao_num: number = this.pserson.baozhongbao_num;  //宝中宝次数
         list.push(baozhongbao_num);
 
-        var fen_num:number = this.pserson.cur;  //玩家总分数
+        var fen_num: number = this.pserson.cur;  //玩家总分数
         list.push(fen_num);
 
-        for(var i = 0; i < list.length; i++)
-        {
-            var label:eui.Label = new eui.Label();
+        for (var i = 0; i < list.length; i++) {
+            var label: eui.Label = new eui.Label();
             this.addChild(label);
             label.text = this.showText[i] + "" + list[i];
             label.size = 20;
@@ -199,20 +188,18 @@ class GSTotlePerson extends eui.Component
             label.fontFamily = gameConfig.FontFamily;
             label.x = 40 - label.textWidth * 0.5;
 
-            if(i == (list.length - 1))
-            {
+            if (i == (list.length - 1)) {
                 label.y = 140 + ((label.textHeight + 20) * i) + 20;
 
                 this.iswin.y = label.y - 20;
 
-                if(this.card_group) this.card_group.y = label.y + 30;
+                if (this.card_group) this.card_group.y = label.y + 30;
             }
-            else
-            {
+            else {
                 label.y = 140 + ((label.textHeight + 20) * i);
             }
 
-            if(i == 2) this.pao_img.y = label.y - 20;
+            if (i == 2) this.pao_img.y = label.y - 20;
         }
 
         this.addChild(this.pao_img);
@@ -224,6 +211,6 @@ class GSTotlePerson extends eui.Component
         this.iswin.alpha = 0.6;
         this.pao_img.alpha = 0.6;
 
-        if(this.card_group) this.card_group.x = -45;
+        if (this.card_group) this.card_group.x = -45;
     }
 }

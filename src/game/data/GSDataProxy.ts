@@ -23,7 +23,7 @@ class GSDataProxy {
 
         this.gData.rebackData = obj;
 
-        this.gData.roomID = obj.roomid;
+        game.roomid = obj.roomid;
 
         PublicVal.i.bao = obj.bao;
 
@@ -846,69 +846,24 @@ class GSDataProxy {
 
     //同步继续游戏
     S2C_ContinueGame(obj: any) {
-
         var dir: number = this.gData.getDir(obj.pos);
-
-
         this.gData.readyFlag |= 1 << dir;
-
         //玩家自己的时候刷新显示
-
         GSController.i.visibleReadyIcon();
 
         if (dir == 1) {
-
             GSController.i.showStateView();
         }
     }
 
     //同步房间玩家信息,判断方位
-    S2C_RoomPlayers(rules: number[], infos: any[]) {
+    S2C_RoomPlayers() {
+        var player: PlayerVo;
+        for(var uid in game.roomPlayers) {
+            player = game.roomPlayers[uid];
 
-
-        if(rules) {
-            //听牌局
-            if(rules.indexOf(3) > - 1) GSData.i.hasTingRule = true;
-
-            PublicVal.i.rules = FashionTools.formatRules(rules);
-
-        }
-        for (var i: number = 0; i < infos.length; i++) {
-
-            //根据pos设置数组中位置
-
-            var roomPlayer: PlayerVo = new PlayerVo(infos[i]);
-
-            if (+roomPlayer.uid != +game.player.uid) {
-                switch (roomPlayer.status) {
-                    case "leave":
-                        EffectUtils.showTips(roomPlayer.nick + " 离开了房间！", 4);
-                        GameSound.PlaySound("sound_other_player_leave");
-                        break;
-                    case "offline":
-                        EffectUtils.showTips(roomPlayer.nick + " 离线了！", 4);
-                        GameSound.PlaySound("sound_other_player_leave");
-                        break;
-                    case "online":
-                        GameSound.PlaySound("sound_other_player_enter");
-                        if (GSData.i.roomPlayerMap[roomPlayer.uid]) {
-                            EffectUtils.showTips(roomPlayer.nick + " 回来了！", 4);
-                        }
-                        else {
-                            EffectUtils.showTips(roomPlayer.nick + " 加入了游戏！", 4);
-                        }
-                        break;
-                }
-            }
-
-            this.gData.roomPlayerMap[roomPlayer.uid] = roomPlayer;
-
-            //判断玩家自己,进游戏界面初始化
-            if (roomPlayer.uid == game.player.uid) {
-
-                PublicVal.i.ownPos = roomPlayer.pos;
-
-                //互相映射
+            if (player.uid == game.player.uid) {
+                PublicVal.i.ownPos = player.pos;
 
                 var a = PublicVal.i.ownPos;
                 var b = 1 + (PublicVal.i.ownPos + 0) % 4;
@@ -927,70 +882,47 @@ class GSDataProxy {
 
                 this.gData.firstInRoom = true;
             }
-
-            roomPlayer.dir = this.gData.getDir(roomPlayer.pos);
-
+            player.dir = this.gData.getDir(player.pos);
         }
 
-
+        game.roomPlayerCount = 0;
         this.gData.roomPlayers = [];
 
-        //online leave offline
-
         var leave_uid = null;
-
-        for (var id in this.gData.roomPlayerMap) {
-
-            var player: PlayerVo = this.gData.roomPlayerMap[id];
-
-            var playerDir: number = this.gData.getDir(player.pos);
-
+        for (var uid in game.roomPlayers) {
+            player = game.roomPlayers[uid];
 
             switch (player.status) {
                 case "leave":
                     this.gData.roomPlayers[player.pos] = null;
-
-                    leave_uid = id;
-
+                    leave_uid = uid;
                     //首轮开始
                     if (this.gData.roundStarted == false) {
-
-                        if ((this.gData.readyFlag >> playerDir & 1) == 1) {
-
-                            this.gData.readyFlag ^= 1 << playerDir;
-
+                        if ((this.gData.readyFlag >> player.dir & 1) == 1) {
+                            this.gData.readyFlag ^= 1 << player.dir;
                         }
-
-                        //[playerDir] = 0;
                     }
-
                     break;
                 case "offline":
                 case "online":
-                    if (this.gData.roundStarted == false) {
-
-                        this.gData.readyFlag |= 1 << playerDir;
-
-                    }
                     this.gData.roomPlayers[player.pos] = player;
-
-
+                    if (this.gData.roundStarted == false) {
+                        this.gData.readyFlag |= 1 << player.dir;
+                    }
+                    game.roomPlayerCount++;
                     break;
             }
         }
 
-        delete this.gData.roomPlayerMap[leave_uid];
-
+        delete game.roomPlayers[leave_uid];
 
         Global.showIP(this.gData.roomPlayers);
-
 
         this.gData.roomOwnDir = this.gData.getDir(1);
 
         PublicVal.i.roomOwnFlag = 1 << this.gData.roomOwnDir;
 
         if (this.gData.firstInRoom) {
-
             this.gData.firstInRoom = false;
             //每次进房间启动游戏主界面
             GSController.i.startView();
@@ -999,11 +931,9 @@ class GSDataProxy {
             FashionTools.setViewType(game.paiStyle);
             FashionTools.setGameStyle(game.paiColor);
 
-
             if (this.gData.rebackData) {
                 //至后解析
                 this.parseReback();
-
                 this.gData.rebackData = null;
             }
             else {
@@ -1013,12 +943,10 @@ class GSDataProxy {
 
         GSController.i.updateRoom();
 
-        Weixin.onMenuShareAppMessage(GSData.i.roomID + "");
-
-        Weixin.onMenuShareTimeline(GSData.i.roomID + "");
+        Weixin.onMenuShareAppMessage(game.roomid + "");
+        Weixin.onMenuShareTimeline(game.roomid + "");
 
         var diss: DissolutionPanel = StackManager.findDialog(DissolutionPanel, "DissolutionPanel");
-
         if (diss && LayerManager.gameLayer().panelLayer.contains(diss)) diss.refresh();
     }
 

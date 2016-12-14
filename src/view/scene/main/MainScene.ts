@@ -206,7 +206,6 @@ class MainScene extends eui.Component {
         this.update();
 
         if (game.roomid) {
-            GSData.i.roomID = +game.roomid;
             SocketManager.getInstance().getGameConn().send(3, {"args": {"roomid": +game.roomid, "pass": "0"}});
         }
 

@@ -5,5 +5,9 @@
  */
 class EventType {
     //玩家信息
-    static PlayerInfo: string = "PlayerInfo";
+    static Update_Player: string = "Update_Player";
+    //房间规则
+    static Update_Room_Rules: string = "Update_Room_Rules";
+    //房间玩家
+    static Update_Room_Players: string = "Update_Room_Rules";
 }

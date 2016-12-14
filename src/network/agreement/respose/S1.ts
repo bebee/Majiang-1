@@ -7,37 +7,35 @@ class S1 {
 
         if (obj["data"]) {
             game.loginWaiting = false;
-            game.reconnectCount = 0;
+            game.connectCount = 0;
 
             game.player.update(obj["data"]);
-
-            if (SceneManager.find("LoadingScene")) {
-                SceneManager.find("LoadingScene").onIn();
-            }
 
             gameLocal.setData(gameLocal.loginAccessCode, 0);
 
             if (!game.user) {
-                var ver: string = game.player.version;
+                var serverVer: string = game.player.version;
+                var clientVer: string = game.version;
 
-                if (!ver) return;
+                if (!serverVer) {
+                    return;
+                }
 
-                var arr: Array<any> = ver.split('.');
-
-                var cver: string = game.version;
-
-                var carr: Array<any> = cver.split('.');
-
-                if (arr[0] != carr[0] || arr[1] != carr[1]) {
+                if (serverVer.split('.')[0] != clientVer.split('.')[0] || serverVer.split('.')[1] != clientVer.split('.')[1]) {
                     game.askPanel.showMsg(function (r) {
                         if (r) {
-                            var h: string = gameConfig.GameUrl;
-                            if (game.roomid) h += "?roomid=" + game.roomid;
-                            location.href = h;
+                            var gameurl: string = gameConfig.GameUrl;
+                            if (game.roomid) {
+                                gameurl += "?roomid=" + game.roomid;
+                            }
+                            location.href = gameurl;
                         }
-
                     }, "当前游戏版本过低，请点击确定刷新游戏！");
                 }
+            }
+
+            if (SceneManager.find("LoadingScene")) {
+                SceneManager.find("LoadingScene").onIn();
             }
         }
     }

@@ -59,8 +59,8 @@ class JoininPanel extends BasePanel {
                     return;
                 }
 
-                GSData.i.roomID = Number(this.selectNums.join(""));
-                SocketManager.getInstance().getGameConn().send(3, {args: {roomid: GSData.i.roomID, pass: "0"}});
+                game.roomid = Number(this.selectNums.join(""));
+                SocketManager.getInstance().getGameConn().send(3, {args: {roomid: game.roomid, pass: "0"}});
                 break;
             default:
                 if (this.selectNums.length < 6) {

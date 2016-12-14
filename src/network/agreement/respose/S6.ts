@@ -3,17 +3,15 @@
  */
 class S6 {
     public parseData(obj: any) {
-        if (!obj) return;
+        if (!obj || !obj.hasOwnProperty("data")) return;
 
-        if (obj && obj["sequence"]) {
-            console.log("解散房间！");
-        }
+        console.log("解散房间！");
 
-        // EffectUtils.showTips("房间已经解散！", 5, false);
-        // GSController.i.exit();
+        game.cleanRoom();
+
+        GSController.i.exit();
 
         game.askPanel.showMsg(function (r) {
-            GSController.i.exit();
         }, "房间解散了，请进入其他房间！", null, null, true);
     }
 }

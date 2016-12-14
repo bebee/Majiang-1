@@ -17,7 +17,7 @@ class Main extends eui.UILayer {
                 var rulv = new egret.URLVariables(search);
 
                 roomid = rulv.variables["roomid"];
-                user = rulv.variables["user"];
+                user = rulv.variables["users"];
                 code = rulv.variables["code"];
 
                 game.roomid = roomid;

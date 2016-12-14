@@ -1,13 +1,11 @@
 /**
- * 打牌返回
+ * 打牌
  */
-class S4
-{
-    public parseData(obj:any)
-    {
-        if(!obj) return;
+class S4 {
+    public parseData(obj: any) {
+        if (!obj || !obj.hasOwnProperty("data")) return;
 
-        console.log("收到池中打出的牌",obj);
+        console.log("收到池中打出的牌", obj);
 
         GSDataProxy.i.S2C_PoolPai(obj);
     }

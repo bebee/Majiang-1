@@ -14,15 +14,16 @@ class HeadIcon extends BaseGameSprite {
 
     private _isOwner: boolean = false;
     private _isZhuang: boolean = false;
-    private _isIntable: boolean = false;
     private _isOffline: boolean = false;
     private _que: CardType = CardType.unknow;
 
+    dir: DirType;
     player: PlayerVo;
 
-    constructor() {
+    constructor(dir: DirType = DirType.bottom) {
         super();
         this.skinName = "HeadIconSkin";
+        this.dir = dir;
     }
 
     childrenCreated() {
@@ -49,14 +50,17 @@ class HeadIcon extends BaseGameSprite {
 
     update(player: PlayerVo) {
         this.player = player;
+        if (!player) {
+            return;
+        }
 
-        this.lab_nick.text = "" + player.nick;
-        this.lab_uid.text = "" + player.uid;
+        this.lab_nick.text = "" + this.player.nick;
+        this.lab_uid.text = "" + this.player.uid;
 
-        this.isOwner = (PublicVal.i.roomOwnFlag >> player.dir & 1) == 1;
-        this.isOffline = player.status == "offline";
+        this.isOwner = this.player.pos == 1;
+        this.isOffline = this.player.status == "offline";
 
-        this.que = game.allQue[player.dir];
+        this.que = game.allQue[this.player.dir];
     }
 
     set isOffline(value: boolean) {
@@ -71,6 +75,13 @@ class HeadIcon extends BaseGameSprite {
             else {
                 this.img_head.source = "game_head_null";
             }
+        }
+
+        if (this.currentState == "intable" && this.player) {
+            this.btn_kill.visible = game.player.pos == 1 && this.player.pos != 1;
+        }
+        else {
+            this.btn_kill.visible = false;
         }
     }
 
@@ -104,13 +115,31 @@ class HeadIcon extends BaseGameSprite {
         }
     }
 
-    set isIntable(value: boolean) {
-        this._isIntable = value;
-        this.btn_kill.visible = value;
+    getScore() {
+        return Number(this.lab_fen.text);
+    }
+
+    setScore(score: number) {
+        this.lab_fen.text = "" + score;
+    }
+
+    setState(state: HeadIconState) {
+        switch (state) {
+            case HeadIconState.normal:
+                this.skinState = "normal";
+                break;
+            case HeadIconState.ingame:
+                this.skinState = "ingame";
+                break;
+            case HeadIconState.intable:
+                this.skinState = "intable";
+                break;
+        }
     }
 
     reset() {
-        this.img_que.source = "";
+        this.isZhuang = false;
+        this.que = CardType.unknow;
     }
 
     clean() {
@@ -118,6 +147,12 @@ class HeadIcon extends BaseGameSprite {
         this.isZhuang = false;
         this.isOwner = false;
         this.que = CardType.unknow;
-        this.isIntable = false;
+        this.dir = DirType.bottom;
+        this.player = null;
+        this.setState(HeadIconState.normal);
     }
+}
+
+enum HeadIconState {
+    normal, ingame, intable
 }

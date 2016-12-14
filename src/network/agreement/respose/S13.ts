@@ -3,9 +3,9 @@
  */
 class S13 {
     public parseData(obj: any) {
-        if (!obj) return;
+        if (!obj || !obj.hasOwnProperty("data")) return;
 
-        console.log("game over", obj);
+        console.log("游戏结束！  ", obj);
 
         GSController.i.jiesuanData = obj.data;
 
@@ -17,5 +17,7 @@ class S13 {
             GSController.i.showTitleView(GSController.i.jiesuanData);
             game.dissolution = null;
         }
+
+        game.cleanRoom();
     }
 }

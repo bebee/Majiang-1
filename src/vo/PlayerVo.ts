@@ -42,9 +42,6 @@ class PlayerVo extends BaseDataVo {
     //状态
     status: string = "";
 
-    //房间玩家队列
-    playerInfo: any[] = [];
-
     constructor(data: any = null) {
         super();
 

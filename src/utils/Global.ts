@@ -32,7 +32,7 @@ module Global {
 	 * 掉线处理
 	 */
 	export function reLogin(): void {
-		var count: number = game.reconnectCount;
+		var count: number = game.connectCount;
 
 		switch (count) {
 			case 0:
@@ -58,7 +58,7 @@ module Global {
 
 		if (p.code) {
 			SocketManager.getInstance().getGameConn().send(1, {"uid": p.uid, "code": p.code, "length": p.code.length});
-			game.reconnectCount++;
+			game.connectCount++;
 		}
 		else {
 			var count: number = +gameLocal.getData(gameLocal.loginAccessCode);
@@ -182,7 +182,7 @@ module Global {
 		layer.addChild(chat_pao);
 
 
-		var player = GSData.i.roomPlayerMap[uid];
+		var player = game.roomPlayers[uid];
 		var head = GSConfig.headTargetPos[player.dir];
 
 		var _x: number = head.x;
@@ -253,7 +253,7 @@ module Global {
 			}
 		}
 
-		var player = GSData.i.roomPlayerMap[uid];
+		var player = game.roomPlayers[uid];
 		var head = GSConfig.headTargetPos[player.dir];
 
 		var _x: number = head.x;

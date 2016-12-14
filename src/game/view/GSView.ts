@@ -25,7 +25,7 @@ class GSView extends egret.Sprite {
 
     draw: egret.Shape;
 
-    headViews: HeadIconRich[];
+    headViews: HeadIcon[];
 
     //中心炸弹
     centerBoom: CenterBoom;
@@ -142,19 +142,19 @@ class GSView extends egret.Sprite {
 
         for (var i: number = 1; i <= GSConfig.playerCount; i++) {
 
-            var headView = new HeadIconRich(i);
+            var headIcon = new HeadIcon(i);
 
-            this.backUIContainer.addChild(headView);
+            this.backUIContainer.addChild(headIcon);
 
-            this.headViews[i] = headView;
+            this.headViews[i] = headIcon;
 
-            headView.headIcon.btn_kill.touchEnabled = true;
-            headView.headIcon.btn_kill.name = "" + i;
-            headView.headIcon.btn_kill.addEventListener(egret.TouchEvent.TOUCH_TAP, this.onKillTouch, this);
+            headIcon.btn_kill.touchEnabled = true;
+            headIcon.btn_kill.name = "" + i;
+            headIcon.btn_kill.addEventListener(egret.TouchEvent.TOUCH_TAP, this.onKillTouch, this);
 
-            headView.headIcon.touchEnabled = true;
-            headView.headIcon.name = "" + i;
-            headView.headIcon.addEventListener(egret.TouchEvent.TOUCH_TAP, this.onHeadTouch, this);
+            headIcon.touchEnabled = true;
+            headIcon.name = "" + i;
+            headIcon.addEventListener(egret.TouchEvent.TOUCH_TAP, this.onHeadTouch, this);
 
         }
 
@@ -254,32 +254,14 @@ class GSView extends egret.Sprite {
 
     //更新房间信息
     updateRoom() {
-
         for (var i: number = 1; i <= 4; i++) {
-
             var headView = this.headViews[i];
-
             var player: any = GSData.i.getRoomPlayerByDir(i);
-
-            headView.player = player;
-
             if (player == null) {
-                headView.nullPlayer();
+                headView.clean();
                 continue;
             }
-
-            if (player.status == "offline") {
-                headView.headIcon.visible = true;
-
-            } else {
-                // headView.headIcon.offlineImg.visible = false;
-            }
-
-            headView.nameText.text = player.nick;
-
-            headView.idText.text = player.uid;
-
-            headView.headIcon.update(player);
+            headView.update(player);
         }
 
         this.updateState();
@@ -309,7 +291,7 @@ class GSView extends egret.Sprite {
      }*/
 
     //获取头像
-    getHeadView(dir: number): HeadIconRich {
+    getHeadView(dir: number): HeadIcon {
         return this.headViews[dir];
     }
 
@@ -321,7 +303,7 @@ class GSView extends egret.Sprite {
 
             this.readyIcons[i].visible = false;
 
-            this.headViews[i].headIcon.btn_kill.visible = false;
+            this.headViews[i].btn_kill.visible = false;
         }
     }
 
@@ -349,57 +331,33 @@ class GSView extends egret.Sprite {
 
     //牌桌状态的头像重置
     readyStateHeadReset() {
-
         for (var i: number = 1; i <= 4; i++) {
-
-            var headView: HeadIconRich = this.headViews[i];
-
+            var headView: HeadIcon = this.headViews[i];
+            headView.setState(HeadIconState.intable);
             headView.scaleX = headView.scaleY = 1;
-
             headView.x = GSConfig.headinitPos[i].x;
-
             headView.y = GSConfig.headinitPos[i].y;
-
-            headView.nameText.visible = true;
-
-            headView.idText.visible = true;
-
-            headView.numText.visible = false;
             headView.reset();
         }
     }
 
     //牌局状态的头像重置
     playStateHeadReset() {
-
         for (var i: number = 1; i <= 4; i++) {
-
-            var headView: HeadIconRich = this.headViews[i];
-
+            var headView: HeadIcon = this.headViews[i];
+            headView.setState(HeadIconState.ingame);
             headView.scaleX = headView.scaleY = .8;
             headView.x = GSConfig.headTargetPos[i].x;
-
             headView.y = GSConfig.headTargetPos[i].y;
-
-            headView.nameText.visible = false;
-
-            headView.idText.visible = false;
-
-            headView.numText.visible = true;
-
         }
-
     }
 
 
     //头像的游戏位置
     headPlayPos() {
         for (var i: number = 1; i <= GSConfig.playerCount; i++) {
-
             var headView = this.headViews[i];
-
             headView.x = GSConfig.headTargetPos[i].x;
-
             headView.y = GSConfig.headTargetPos[i].y;
         }
     }
