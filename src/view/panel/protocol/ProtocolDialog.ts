@@ -1,4 +1,4 @@
-class ProtocolDialog extends BaseDialog {
+class ProtocolDialog extends BasePanel {
 
     private scroller: eui.Scroller;
     private group: eui.Group;
@@ -7,19 +7,14 @@ class ProtocolDialog extends BaseDialog {
     private text: eui.Label;
 
     public constructor() {
-        super("agreement_text", 880, 570);
-
+        super();
         this.skinName = "ProtocolPanelSkin";
     }
 
-    createChildren() {
-        super.createChildren();
+    childrenCreated() {
+        super.childrenCreated();
 
-        this.horizontalCenter = 0;
-
-        this.verticalCenter = 0;
-
-        this.m_dialog._title_img.visible = false;
+        this.bgView.setTitle("agreement_text");
 
         this.decode();
     }
