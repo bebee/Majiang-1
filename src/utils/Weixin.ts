@@ -195,9 +195,9 @@ class Weixin {
 
                 body.desc = "房　主：" + name + " 房间号：" + strroomid;
 
-                if(gameData.roomRound > 0)
+                if(game.matchSchedule > 0)
                 {
-                    body.desc += "【" + gameData.roomRound + "圈】" + PublicVal.i.rules;
+                    body.desc += "【" + game.matchSchedule + "圈】" + PublicVal.i.rules;
                 }
                 else
                 {

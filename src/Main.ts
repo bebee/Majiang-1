@@ -16,11 +16,12 @@ class Main extends eui.UILayer {
             if (search != "") {
                 var rulv = new egret.URLVariables(search);
 
-                gameConfig.update(rulv.variables);
-
-                user = rulv.variables["users"];
-                code = rulv.variables["code"];
                 roomid = rulv.variables["roomid"];
+                user = rulv.variables["user"];
+                code = rulv.variables["code"];
+
+                game.roomid = roomid;
+                game.user = user;
             }
         }
 
@@ -60,13 +61,13 @@ class Main extends eui.UILayer {
         this.stage.registerImplementation("eui.IThemeAdapter", new ThemeAdapter());
 
         RES.addEventListener(RES.ResourceEvent.CONFIG_COMPLETE, this.onConfigComplete, this);
-        RES.loadConfig("resource" + gameData.version + "/default.res.json", "resource" + gameData.version + "/");
+        RES.loadConfig("resource" + game.version + "/default.res.json", "resource" + game.version + "/");
     }
 
     private onConfigComplete(): void {
         RES.removeEventListener(RES.ResourceEvent.CONFIG_COMPLETE, this.onConfigComplete, this);
 
-        var theme = new eui.Theme("resource" + gameData.version + "/default.thm.json", this.stage);
+        var theme = new eui.Theme("resource" + game.version + "/default.thm.json", this.stage);
         theme.addEventListener(eui.UIEvent.COMPLETE, this.onThemeLoadComplete, this);
     }
 

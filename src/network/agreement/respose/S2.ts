@@ -9,7 +9,7 @@ class S2
 
         if(obj["data"])
         {
-            gameData.player.cur = +obj["data"]["cur"];
+            game.player.cur = +obj["data"]["cur"];
 
             console.log("创建成功,房间ID为：" + obj["data"]["roomid"], obj);
 

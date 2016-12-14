@@ -4,13 +4,13 @@
 class _1 {
     public writeData(obj: any) {
         if (!obj) {
-            if (gameConfig.users) {
+            if (game.user) {
                 obj = {
                     "channel": "test",
-                    "openid": "" + gameConfig.users,
+                    "openid": "" + game.user,
                     "openkey": "123456788",
-                    "nick": "" + gameConfig.users,
-                    "pic": "" + gameData.player.pic,
+                    "nick": "" + game.user,
+                    "pic": "" + game.player.pic,
                     "sex": "0"
                 };
             }

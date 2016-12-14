@@ -9,7 +9,7 @@ class S7
 
         if(obj["data"] && obj["data"]["agent"])
         {
-            gameData.player.agent = +obj["data"]["agent"];
+            game.player.agent = +obj["data"]["agent"];
 
             EffectUtils.showTips("恭喜！绑定成功！", 5);
 

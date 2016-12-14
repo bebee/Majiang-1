@@ -188,8 +188,8 @@ class MainScene extends eui.Component {
         }
     }
 
-    createChildren() {
-        super.createChildren();
+    childrenCreated() {
+        super.childrenCreated();
 
         var _shpBeMask: egret.Shape = new egret.Shape();
         _shpBeMask.graphics.lineStyle(0x000000);
@@ -205,13 +205,13 @@ class MainScene extends eui.Component {
 
         this.update();
 
-        if (gameConfig.roomid) {
-            GSData.i.roomID = +gameConfig.roomid;
-            SocketManager.getInstance().getGameConn().send(3, {"args": {"roomid": +gameConfig.roomid, "pass": "0"}});
+        if (game.roomid) {
+            GSData.i.roomID = +game.roomid;
+            SocketManager.getInstance().getGameConn().send(3, {"args": {"roomid": +game.roomid, "pass": "0"}});
         }
 
         var num: number = Math.floor(Math.random() * gameConfig.gamewarmList.length);
-        gameData.hornList.push(gameConfig.gamewarmList[num]);
+        game.hornList.push(gameConfig.gamewarmList[num]);
 
         egret.setTimeout(this.onWeiJs, this, 1000);
     }
@@ -225,7 +225,7 @@ class MainScene extends eui.Component {
     public update(): void {
         var my = this;
 
-        var player: PlayerVo = gameData.player;
+        var player: PlayerVo = game.player;
 
         this._money_text.text = "" + player.cur;
 
@@ -241,15 +241,15 @@ class MainScene extends eui.Component {
         }
 
 
-        RES.getResByUrl(gameData.player.pic, function (t: egret.Texture) {
+        RES.getResByUrl(game.player.pic, function (t: egret.Texture) {
             if (t) {
-                gameData.player.playerHeadTexture = t;
+                game.player.playerHeadTexture = t;
                 my._head.source = t;
             }
             else {
                 my._head.source = "head_001";
 
-                gameData.player.playerHeadTexture = my._head.texture;
+                game.player.playerHeadTexture = my._head.texture;
             }
 
             my._head.width = my._head.height = 77;

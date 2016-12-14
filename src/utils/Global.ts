@@ -32,7 +32,7 @@ module Global {
 	 * 掉线处理
 	 */
 	export function reLogin(): void {
-		var count: number = gameData.connCount;
+		var count: number = game.reconnectCount;
 
 		switch (count) {
 			case 0:
@@ -44,7 +44,7 @@ module Global {
 				}, "您已经掉线，请点击确定重连！");
 				break;
 			default:
-				gameData.player.code = null;
+				game.player.code = null;
 				Global.sendLoad();
 				break;
 		}
@@ -54,18 +54,18 @@ module Global {
 	 * 掉线后发送重新登录消息  或者  重新拉取授权
 	 */
 	export function sendLoad() {
-		var p = gameData.player;
+		var p = game.player;
 
 		if (p.code) {
 			SocketManager.getInstance().getGameConn().send(1, {"uid": p.uid, "code": p.code, "length": p.code.length});
-			gameData.connCount++;
+			game.reconnectCount++;
 		}
 		else {
 			var count: number = +gameLocal.getData(gameLocal.loginAccessCode);
 
 			if (count < 2) {
 				var addres: string = gameConfig.GameUrl;
-				if (gameConfig.roomid) addres += "?roomid=" + gameConfig.roomid;
+				if (game.roomid) addres += "?roomid=" + game.roomid;
 				Weixin.getAccessCode(gameConfig.appid, addres);
 
 				count++;

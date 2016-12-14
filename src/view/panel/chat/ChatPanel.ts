@@ -37,7 +37,7 @@ class ChatPanel extends BasePanel {
     }
 
     private onClickIcon(e: egret.TouchEvent): void {
-        var p: PlayerVo = gameData.player;
+        var p: PlayerVo = game.player;
         var id = +e.currentTarget.name;
         SocketManager.getInstance().getGameConn().send(25, {
             args: {

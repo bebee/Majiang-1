@@ -93,7 +93,7 @@ class CreatePanel extends BasePanel {
     }
 
     private startGame(): void {
-        gameData.roomRound = this.ruleVo.ju;
+        game.matchSchedule = this.ruleVo.ju;
 
         //创建房间
         SocketManager.getInstance().getGameConn().send(2, {

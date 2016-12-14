@@ -879,7 +879,7 @@ class GSDataProxy {
 
             var roomPlayer: PlayerVo = new PlayerVo(infos[i]);
 
-            if (+roomPlayer.uid != +gameData.player.uid) {
+            if (+roomPlayer.uid != +game.player.uid) {
                 switch (roomPlayer.status) {
                     case "leave":
                         EffectUtils.showTips(roomPlayer.nick + " 离开了房间！", 4);
@@ -904,7 +904,7 @@ class GSDataProxy {
             this.gData.roomPlayerMap[roomPlayer.uid] = roomPlayer;
 
             //判断玩家自己,进游戏界面初始化
-            if (roomPlayer.uid == gameData.player.uid) {
+            if (roomPlayer.uid == game.player.uid) {
 
                 PublicVal.i.ownPos = roomPlayer.pos;
 
@@ -996,8 +996,8 @@ class GSDataProxy {
             GSController.i.startView();
             GSConfig.gameConfigInit();
             //设置牌面尺寸
-            FashionTools.setViewType(gameData.cardStyle);
-            FashionTools.setGameStyle(gameData.cardColor);
+            FashionTools.setViewType(game.paiStyle);
+            FashionTools.setGameStyle(game.paiColor);
 
 
             if (this.gData.rebackData) {

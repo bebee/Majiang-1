@@ -11,6 +11,6 @@ class S27
         StackManager.closeDialog("RealPanel");
         var gm:MainScene = SceneManager.find("MainScene");
         if(gm) gm.btn_shiming.visible = false;
-        gameData.player.update(obj.data);
+        game.player.update(obj.data);
     }
 }

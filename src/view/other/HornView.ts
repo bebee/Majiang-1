@@ -86,7 +86,7 @@ class HornView extends eui.Component {
     public playHorn(group: eui.Group, size: number, color: number): void {
         var my = this;
 
-        var list = gameData.hornList;
+        var list = game.hornList;
         var str: string = list.shift();
         var text: eui.Label = new eui.Label();
         text.text = str;
@@ -111,7 +111,7 @@ class HornView extends eui.Component {
             return;
         }
 
-        var list = gameData.hornList;
+        var list = game.hornList;
 
         var t0: eui.Label = my.textList[0];
 

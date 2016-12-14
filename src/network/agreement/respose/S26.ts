@@ -3,22 +3,22 @@
  */
 class S26 {
     public parseData(obj: any) {
-        if (gameConfig.users) return;
+        if (game.user) return;
 
         var data = obj.data;
 
         var type = data.type;
 
         if (+type == 1) {
-            gameData.player.version = data.data;
+            game.player.version = data.data;
 
-            var ver: string = gameData.player.version;
+            var ver: string = game.player.version;
 
             if (!ver) return;
 
             var arr: Array<any> = ver.split('.');
 
-            var cver: string = gameData.version;
+            var cver: string = game.version;
 
             var carr: Array<any> = cver.split('.');
 
@@ -26,7 +26,7 @@ class S26 {
                 game.askPanel.showMsg(function (r) {
                     if (r) {
                         var h: string = gameConfig.GameUrl;
-                        if (gameConfig.roomid) h += "?roomid=" + gameConfig.roomid;
+                        if (game.roomid) h += "?roomid=" + game.roomid;
                         location.href = h;
                     }
                 }, "当前游戏版本过低，请刷新游戏！");

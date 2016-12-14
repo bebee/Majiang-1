@@ -1,17 +1,14 @@
 /**
  * 同步房卡数量
  */
-class S24
-{
-    public parseData(obj:any)
-    {
-        if(obj.data)
-        {
-            gameData.player.update(obj.data);
+class S24 {
+    public parseData(obj: any) {
+        if (obj.data) {
+            game.player.update(obj.data);
 
-            var game:MainScene = SceneManager.find("MainScene");
+            var main: MainScene = SceneManager.find("MainScene");
 
-            if(game) game.update();
+            if (main) main.update();
         }
     }
 }

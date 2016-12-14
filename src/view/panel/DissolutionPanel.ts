@@ -41,7 +41,7 @@ class DissolutionPanel extends BasePanel {
     }
 
     refresh(): void {
-        if (game.dissolution && game.dissolution.vote && game.dissolution.vote.hasOwnProperty(gameData.player.uid)) {
+        if (game.dissolution && game.dissolution.vote && game.dissolution.vote.hasOwnProperty(game.player.uid)) {
             this.skinState = "after";
         }
         else {

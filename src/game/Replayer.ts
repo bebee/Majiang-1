@@ -201,9 +201,9 @@ class Replayer implements IUpdate{
 
         this.data = data;
 
-        this.parsePersons(gameData.personList);
+        this.parsePersons(game.recordInfos);
 
-        PublicVal.i.roomid = gameData.roomid;
+        PublicVal.i.roomid = game.roomid;
 
         PublicVal.i.roomOwnFlag = 1 << this.returnDir(1);
 
@@ -284,7 +284,7 @@ class Replayer implements IUpdate{
     }
     //展示
     show(){
-        FashionTools.setGameStyle(gameData.cardColor);
+        FashionTools.setGameStyle(game.paiColor);
 
         PublicVal.state = 6;
         GSController.i.startView();
@@ -348,7 +348,7 @@ class Replayer implements IUpdate{
 
             posPerson[person.pos] = person;
 
-            if(gameData.player.uid == person.uid){
+            if(game.player.uid == person.uid){
 
                 //确定方位
                 a = person.pos;

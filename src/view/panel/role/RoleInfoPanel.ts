@@ -20,7 +20,7 @@ class RoleInfoPanel extends BasePanel {
     }
 
     public refreshRole(player: any = null): void {
-        if (!player) player = gameData.player;
+        if (!player) player = game.player;
 
         this.head.update(player);
 

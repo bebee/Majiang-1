@@ -10,8 +10,6 @@ class gameConfig {
 
     //游戏地址
     static GameUrl: string = "https://mj.h5sd.com/bcmj/index.html";
-    //邀请带入的房间ID
-    static roomid: string;
 
     //TODO 微信
     //Appid
@@ -26,14 +24,6 @@ class gameConfig {
     static signature: string;
     //
     static noncestr: string;
-
-    //TODO 测试
-    //用户
-    static users;
-    //ip
-    static ip;
-    //端口
-    static port;
 
     //是否在线
     static isOnLine: boolean = navigator.onLine;
@@ -50,7 +40,7 @@ class gameConfig {
 
     //TODO 常规设置
     //通用字体
-    static FontFamily: string = "Microsoft YaHei";
+    static FontFamily: string = "微软雅黑";
 
     //全局字体颜色表--可以扩展
     static TextColors = {
@@ -142,14 +132,6 @@ class gameConfig {
         17: {id: 19, text: "咋又你胡了，这脑袋嗡一下"},
         18: {id: 20, text: "别拦着我啊，连坐五庄"}
     };
-
-    static update(data: any) {
-        if (data) {
-            for (var key in data) {
-                gameConfig[key] = data[key];
-            }
-        }
-    }
 
     //获得平台类型 如 微信、qqzone、qq、微博、校内、facebook
     static platformType(): string {

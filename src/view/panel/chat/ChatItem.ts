@@ -29,12 +29,12 @@ class ChatItem extends eui.Component {
                 "type": 1,
                 "chat": {
                     "id": this.clickey,
-                    "sex": gameData.player.sex,
-                    "uid": gameData.player.uid
+                    "sex": game.player.sex,
+                    "uid": game.player.uid
                 }
             }
         });
-        //GameSound.PlaySound("chat_"+gameData.getInstance().player.sex+"_" + this.clickey);
+        //GameSound.PlaySound("chat_"+game.getInstance().player.sex+"_" + this.clickey);
 
         StackManager.closeDialog("ChatPanel");
     }

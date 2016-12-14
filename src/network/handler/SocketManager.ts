@@ -32,9 +32,9 @@ class SocketManager {
 
     getGameConn() {
         if (!this.game_conn) {
-            if (gameConfig.users) {
-                if (gameConfig.ip && gameConfig.port) {
-                    this.game_conn = new SocketHandler(gameConfig.ip, gameConfig.port, 2);
+            if (game.user) {
+                if (game.ip && game.port) {
+                    this.game_conn = new SocketHandler(game.ip, game.port, 2);
                 }
                 else {
                     this.game_conn = new SocketHandler(gameConfig.address_test["ip"], gameConfig.address_test["port"], 2);
@@ -188,8 +188,8 @@ class SocketHandler {
         console.log("==================", start);
 
         if (start == "start") {
-            if (gameData.player.code) {
-                var p = gameData.player;
+            if (game.player.code) {
+                var p = game.player;
                 SocketManager.getInstance().getGameConn().send(1, {
                     "uid": p.uid,
                     "code": p.code,
@@ -203,7 +203,7 @@ class SocketHandler {
         }
         else if (start == "end") {
             var addres: string = gameConfig.GameUrl;
-            if (gameConfig.roomid) addres += "?roomid=" + gameConfig.roomid;
+            if (game.roomid) addres += "?roomid=" + game.roomid;
             Weixin.getAccessCode(gameConfig.appid, addres);
             return;
         }

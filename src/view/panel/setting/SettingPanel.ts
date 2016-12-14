@@ -48,17 +48,17 @@ class SettingPanel extends BasePanel {
     private changeColor(): void {
         gameLocal.setData(gameLocal.color, this.btn_color.selected ? 0 : 1);
 
-        gameData.cardColor = +gameLocal.getData(gameLocal.color);
+        game.paiColor = +gameLocal.getData(gameLocal.color);
 
-        FashionTools.setGameStyle(gameData.cardColor);
+        FashionTools.setGameStyle(game.paiColor);
     }
 
     private changeStyle(): void {
         gameLocal.setData(gameLocal.style, this.btn_style.selected ? 0 : 1);
 
-        gameData.cardStyle = +gameLocal.getData(gameLocal.style);
+        game.paiStyle = +gameLocal.getData(gameLocal.style);
 
-        FashionTools.setViewType(gameData.cardStyle);
+        FashionTools.setViewType(game.paiStyle);
     }
 
     private changeMusic(): void {
@@ -93,6 +93,6 @@ class SettingPanel extends BasePanel {
         this.slider_music.value = +gameLocal.getData(gameLocal.musicVolume);
         this.slider_sound.value = +gameLocal.getData(gameLocal.soundVolume);
 
-        this.lab_version.text = "当前版本号：" + gameData.version + "    最新版本号：" + gameData.player.version;
+        this.lab_version.text = "当前版本号：" + game.version + "    最新版本号：" + game.player.version;
     }
 }

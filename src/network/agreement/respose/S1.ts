@@ -6,10 +6,10 @@ class S1 {
         if (!obj) return;
 
         if (obj["data"]) {
-            gameData.sendLogin = false;
-            gameData.connCount = 0;
+            game.loginWaiting = false;
+            game.reconnectCount = 0;
 
-            gameData.player.update(obj["data"]);
+            game.player.update(obj["data"]);
 
             if (SceneManager.find("LoadingScene")) {
                 SceneManager.find("LoadingScene").onIn();
@@ -17,14 +17,14 @@ class S1 {
 
             gameLocal.setData(gameLocal.loginAccessCode, 0);
 
-            if (!gameConfig.users) {
-                var ver: string = gameData.player.version;
+            if (!game.user) {
+                var ver: string = game.player.version;
 
                 if (!ver) return;
 
                 var arr: Array<any> = ver.split('.');
 
-                var cver: string = gameData.version;
+                var cver: string = game.version;
 
                 var carr: Array<any> = cver.split('.');
 
@@ -32,7 +32,7 @@ class S1 {
                     game.askPanel.showMsg(function (r) {
                         if (r) {
                             var h: string = gameConfig.GameUrl;
-                            if (gameConfig.roomid) h += "?roomid=" + gameConfig.roomid;
+                            if (game.roomid) h += "?roomid=" + game.roomid;
                             location.href = h;
                         }
 

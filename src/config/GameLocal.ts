@@ -7,10 +7,10 @@ class gameLocal {
 
     //游戏存储key
     static get localKey(): string {
-        var key: string = "mqkj-";
+        var key: string = "mqbj-";
         switch (game.gameType) {
             case GameType.sichuan:
-                key += "scmj-";
+                key += "mj-" + game.gameType;
                 break;
         }
         return key;
@@ -45,7 +45,7 @@ class gameLocal {
     }
 
     //读取数据
-    static getData(key: string): string {
+    static getData(key: string) {
         return egret.localStorage.getItem(this.localKey + key);
     }
 
