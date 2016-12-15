@@ -635,6 +635,10 @@ class GSDataProxy {
                             var dirArr: any = [];
                             for (var j: number = 0; j < posArr.length; j++) {
                                 dirArr.push(this.gData.getDir(posArr[j]));
+                                if (dir != this.gData.getDir(posArr[j])) {
+                                    mjview = GSController.i.gsView.MJViews[this.gData.getDir(posArr[j])];
+                                    mjview.pushHu(pai);
+                                }
                             }
                             game.manager.dispatchEvent(EffectEventType.Yipaoduoxiang, dirArr);
                         }
