@@ -276,20 +276,6 @@ class GSView extends egret.Sprite {
         }
     }
 
-    /*    visibleReadyIcon(icon,boo){
-
-     if(GSData.i.game_state == 1 || GSData.i.game_state == 2) {
-     icon.visible = boo;
-     }
-     }
-     visibleKillIcon(icon,boo){
-
-     if(GSData.i.game_state == 1 && GSData.i.ownPos == 1){
-
-     icon.visible = boo;
-     }
-     }*/
-
     //获取头像
     getHeadView(dir: number): HeadIcon {
         return this.headViews[dir];

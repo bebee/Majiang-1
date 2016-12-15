@@ -124,14 +124,10 @@ class game {
         game.manager.dispatchEvent(EffectEventType.CleanAll);
     }
 
-    //初始化房间信息
-    static initRoom() {
-    }
-
     //清空房间信息
     static cleanRoom() {
-        game.roomid = null;
+        game.roomid = 0;
         game.roomRules = [];
-        game.roomPlayers = [];
+        game.roomPlayers = {};
     }
 }

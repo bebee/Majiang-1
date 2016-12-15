@@ -138,8 +138,6 @@ class GSData{
 
         PublicVal.i.cur_round = 1;
 
-        game.cleanRoom();
-
         this.roundStarted = false;
 
         this.readyFlag = 0;

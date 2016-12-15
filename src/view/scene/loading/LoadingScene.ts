@@ -53,7 +53,6 @@ class LoadingScene extends eui.Component {
     }
 
     public onIn(): void {
-        SceneManager.close("LoadingScene", true);
-        SceneManager.open(MainScene, "MainScene");
+        SceneManager.open("MainScene");
     }
 }

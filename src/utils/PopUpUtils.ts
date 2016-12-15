@@ -1,9 +1,9 @@
 /**
 * 面板弹出管理类
 */
-module PopUpUtils {
+class PopUpUtils {
 
-	export var darkSprite: egret.Sprite;
+	static darkSprite: egret.Sprite;
 
 	/**
 	 * 添加面板方法
@@ -13,7 +13,7 @@ module PopUpUtils {
 	 * popUpHeight        指定弹窗高度，定位使用
 	 * effectType        0：没有动画 1:从中间轻微弹出 2：从中间猛烈弹出  3：从左向右 4：从右向左 5、从上到下 6、从下到上
 	 */
-	export function addPopUp(panel, dark: boolean = false, popUpWidth: number = 0, popUpHeight: number = 0, effectType: number = 0, isAlert: boolean = false): void {
+	static addPopUp(panel, dark: boolean = false, popUpWidth: number = 0, popUpHeight: number = 0, effectType: number = 0, isAlert: boolean = false): void {
 		//判断是否包含panel
 		if (LayerManager.gameLayer().panelLayer.contains(panel)) {
 			return;
@@ -142,7 +142,7 @@ module PopUpUtils {
 	 * panel            面板
 	 * effectType        0：没有动画 1:从中间缩小消失 2：  3：从左向右 4：从右向左 5、从上到下 6、从下到上
 	 */
-	export function removePopUp(panel, effectType: number = 0): void {
+	static removePopUp(panel, effectType: number = 0): void {
 		var my = this;
 
 		function close() {

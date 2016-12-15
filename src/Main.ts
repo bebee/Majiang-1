@@ -93,6 +93,6 @@ class Main extends eui.UILayer {
 
     private startGame(){
         game.init(this.stage);
-        SceneManager.open(LoadingScene, "LoadingScene");
+        SceneManager.open("LoadingScene");
     }
 }

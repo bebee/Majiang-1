@@ -9,12 +9,14 @@ class S8 {
 
         var data: any = obj.data;
 
-        game.roomRules = data.rules;
-        PublicVal.i.rules = FashionTools.formatRules(game.roomRules);
+        if (data.hasOwnProperty("rules")) {
+            game.roomRules = data.rules;
+            PublicVal.i.rules = FashionTools.formatRules(game.roomRules);
 
-        //听牌局
-        if (game.roomRules.indexOf(GameRule.kouting) != -1) {
-            GSData.i.hasTingRule = true;
+            //听牌局
+            if (game.roomRules.indexOf(GameRule.kouting) != -1) {
+                GSData.i.hasTingRule = true;
+            }
         }
 
         var infos: any[] = data.infos;
@@ -43,9 +45,6 @@ class S8 {
 
             game.roomPlayers[player.uid] = player;
         }
-
-        game.manager.dispatchEvent(EventType.Update_Room_Rules);
-        game.manager.dispatchEvent(EventType.Update_Room_Players);
 
         GSDataProxy.i.S2C_RoomPlayers();
     }

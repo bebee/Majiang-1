@@ -1,47 +1,49 @@
-/**
- * 场景管理
- */
 class SceneManager {
-
     static dict = {};
 
-    static open(sceneClass: any, sceneName: string) {
-        LayerManager.gameLayer().sceneLayer.removeChildren();
-
-        if (this.dict[sceneName] == null) {
-            this.dict[sceneName] = new sceneClass();
-
-            LayerManager.gameLayer().sceneLayer.addChild(this.dict[sceneName]);
-        }
-        else {
-            if (!LayerManager.gameLayer().sceneLayer.contains(this.dict[sceneName])) {
-                LayerManager.gameLayer().sceneLayer.addChild(this.dict[sceneName]);
-            }
-            else {
-                this.dict[sceneName].update();
-            }
-        }
+    static get layer() {
+        return LayerManager.gameLayer().sceneLayer;
     }
 
-    static close(sceneName: string, destroy: boolean = false) {
-        if (!this.dict[sceneName]) return;
+    static open(name: string):any {
+        if (!name) return;
 
-        if (LayerManager.gameLayer().sceneLayer.contains(this.dict[sceneName])) {
-            LayerManager.gameLayer().sceneLayer.removeChild(this.dict[sceneName]);
+        var SceneClass: any = egret.getDefinitionByName(name);
+        if (!SceneClass) {
+            console.log("找不到对应的场景---", name);
+            return;
         }
 
-        if (destroy) delete this.dict[sceneName];
-    }
-
-    static update(sceneName: string): any {
-        if (this.dict[sceneName]) this.dict[sceneName].update();
-    }
-
-    static find(sceneName: string): any {
-        if (sceneName && this.dict[sceneName]) {
-            return this.dict[sceneName];
+        if (this.dict[name] == null) {
+            this.dict[name] = new SceneClass();
         }
 
-        return null;
+        this.layer.removeChildren();
+
+        var scene: BaseGameSprite = this.dict[name];
+        this.layer.addChild(scene);
+
+        return scene;
+    }
+
+    static close(name: string, destroy: boolean = false) {
+        if (!this.dict[name]) return;
+
+        var scene: BaseGameSprite = this.dict[name];
+
+        if (this.layer.contains(scene)) {
+            this.layer.removeChild(scene);
+        }
+
+        if (destroy) delete this.dict[name];
+    }
+
+    static update(name: string): any {
+        if (this.dict[name]) this.dict[name].update();
+    }
+
+    static find(name: string): any {
+        if (!name || !this.dict[name])return null;
+        else return this.dict[name];
     }
 }

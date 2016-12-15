@@ -1,10 +1,9 @@
-/**弹出界面管理**/
-module StackManager {
-    export var dict = {};
+class StackManager {
+    static dict = {};
 
-    export var delayed = {};
+    static delayed = {};
 
-    export function closeDialog(dialogName: string, all: boolean = false) {
+    static closeDialog(dialogName: string, all: boolean = false) {
         if (all) {
             for (var key in this.dict) {
                 if (this.dict[key]) {
@@ -19,24 +18,13 @@ module StackManager {
         }
     }
 
-    /**
-     * 延迟执行
-     * @param dialogClass
-     * @param dialogName
-     * @param listener
-     * @param thisObject
-     */
-    export function delayedDialog(dialogClass: any, dialogName: string, listener: string, thisObject: any) {
+    static delayedDialog(dialogClass: any, dialogName: string, listener: string, thisObject: any) {
         StackManager.delayed[dialogName] = {meth: listener, my: thisObject};
 
         StackManager.open(dialogClass, dialogName);
     }
 
-    /**
-     * @param dialogClass 界面类
-     * @param dialogName 界面name {key}
-     */
-    export function open(dialogClass: any, dialogName: string, callback: Function = null) {
+    static open(dialogClass: any, dialogName: string, callback: Function = null) {
         if (this.dict[dialogName] == null) {
             var dialog = new dialogClass();
             dialog.show();
@@ -48,7 +36,7 @@ module StackManager {
         }
     }
 
-    export function Update(_class: any, _className: string, isOnlyShow: boolean = true): void {
+    static Update(_class: any, _className: string, isOnlyShow: boolean = true): void {
         if (_class && _className) {
             if (this.dict[_className]) {
                 if (isOnlyShow && !this.dict[_className].showing) return;
@@ -58,7 +46,7 @@ module StackManager {
         }
     }
 
-    export function findDialog(_class: any, _className: string, isNew: boolean = true): any {
+    static findDialog(_class: any, _className: string, isNew: boolean = true): any {
         if (_class && _className) {
             if (this.dict[_className]) {
                 return this.dict[_className];

@@ -87,15 +87,10 @@ class MJView extends eui.Component {
     }
 
     getHandCard(index: number): CardView {
-
         for (var i: number = 0; i < this.handCon.numChildren; i++) {
-
             var card: CardView = <CardView> this.handCon.getChildAt(i);
-
             if (card.index == index) return card;
-
         }
-
     }
 
     //根据方位
