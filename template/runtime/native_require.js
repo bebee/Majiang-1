@@ -1,7 +1,7 @@
 
 var game_file_list = [
     //以下为自动修改，请勿修改
-    //----auto game_file_list start----
+    //----auto game_file_list ready----
 	"libs/modules/egret/egret.js",
 	"libs/modules/egret/egret.native.js",
 	"libs/modules/eui/eui.js",
@@ -250,7 +250,7 @@ egret_native.egretInit = function () {
 egret_native.egretStart = function () {
     var option = {
         //以下为自动修改，请勿修改
-        //----auto option start----
+        //----auto option ready----
 		entryClassName: "Main",
 		frameRate: 30,
 		scaleMode: "showAll",

@@ -64,7 +64,7 @@ module PopUpUtils {
 			case 0:
 				break;
 			case 1:
-				panel.alpha = 0;
+				panel.alpha = 1;
 				panel.scaleX = 0.5;
 				panel.scaleY = 0.5;
 				panel.x = panel.x + popUpWidth / 4;

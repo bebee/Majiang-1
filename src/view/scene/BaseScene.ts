@@ -7,8 +7,6 @@ class BaseScene extends BaseGameSprite {
         super();
     }
 
-
-
     show(): void {
         super.show();
 

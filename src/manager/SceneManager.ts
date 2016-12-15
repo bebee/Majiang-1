@@ -1,14 +1,11 @@
 /**
  * 场景管理
  */
-module SceneManager {
-    export var dict = {};
+class SceneManager {
 
-    export function update(sceneName: string): any {
-        if (this.dict[sceneName]) this.dict[sceneName].update();
-    }
+    static dict = {};
 
-    export function open(sceneClass: any, sceneName: string) {
+    static open(sceneClass: any, sceneName: string) {
         LayerManager.gameLayer().sceneLayer.removeChildren();
 
         if (this.dict[sceneName] == null) {
@@ -26,7 +23,7 @@ module SceneManager {
         }
     }
 
-    export function close(sceneName: string, destroy: boolean = false) {
+    static close(sceneName: string, destroy: boolean = false) {
         if (!this.dict[sceneName]) return;
 
         if (LayerManager.gameLayer().sceneLayer.contains(this.dict[sceneName])) {
@@ -36,7 +33,11 @@ module SceneManager {
         if (destroy) delete this.dict[sceneName];
     }
 
-    export function find(sceneName: string): any {
+    static update(sceneName: string): any {
+        if (this.dict[sceneName]) this.dict[sceneName].update();
+    }
+
+    static find(sceneName: string): any {
         if (sceneName && this.dict[sceneName]) {
             return this.dict[sceneName];
         }
