@@ -44,6 +44,10 @@ class S8 {
             }
 
             game.roomPlayers[player.uid] = player;
+
+            if (player.uid == game.player.uid) {
+                GSDataProxy.i.gData.firstInRoom = true;
+            }
         }
 
         GSDataProxy.i.S2C_RoomPlayers();

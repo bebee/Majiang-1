@@ -481,8 +481,6 @@ class GSDataProxy {
                 GameSound.PlaySound("sound_down");
                 break;
             case 22://幺九杠
-
-
                 //number 判断是幺杠 还是九杠
                 if (pai[0].number == 1) {//
                     GameSound.PlaySound("yaogang_" + this.gData.getSexByPos(pos));
@@ -638,6 +636,9 @@ class GSDataProxy {
                                 if (dir != this.gData.getDir(posArr[j])) {
                                     mjview = GSController.i.gsView.MJViews[this.gData.getDir(posArr[j])];
                                     mjview.pushHu(pai);
+                                }
+                                if (this.gData.getDir(posArr[j]) == 1) {
+                                    game.isHuBoo = true;
                                 }
                             }
                             game.manager.dispatchEvent(EffectEventType.Yipaoduoxiang, dirArr);
@@ -865,7 +866,6 @@ class GSDataProxy {
         var player: PlayerVo;
         for(var uid in game.roomPlayers) {
             player = game.roomPlayers[uid];
-
             if (player.uid == game.player.uid) {
                 PublicVal.i.ownPos = player.pos;
 
@@ -883,8 +883,6 @@ class GSDataProxy {
                 this.gData.pos2Dir[b] = 2;
                 this.gData.pos2Dir[c] = 3;
                 this.gData.pos2Dir[d] = 4;
-
-                this.gData.firstInRoom = true;
             }
             player.dir = this.gData.getDir(player.pos);
         }

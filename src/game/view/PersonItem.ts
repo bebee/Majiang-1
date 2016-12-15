@@ -5,7 +5,7 @@ class PersonItem extends BaseGameSprite {
 
     spacing = 105;
 
-    private headGroup: eui.Group;
+    // private headGroup: eui.Group;
     private lab_nick: eui.Label;
     private lab_uid: eui.Label;
     private lab_description: eui.Label;
@@ -31,10 +31,10 @@ class PersonItem extends BaseGameSprite {
 
         this.pos = new egret.Point();
 
-        this.headIcon = new HeadIcon();
-        this.headIcon.x = 40;
-        this.headIcon.y = 40;
-        this.headGroup.addChild(this.headIcon);
+        // this.headIcon = new HeadIcon();
+        // this.headIcon.x = 40;
+        // this.headIcon.y = 40;
+        // this.headGroup.addChild(this.headIcon);
     }
 
     // //添加胡牌 1:点炮 2:自摸
