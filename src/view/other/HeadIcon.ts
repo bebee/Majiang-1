@@ -8,7 +8,7 @@ class HeadIcon extends BaseGameSprite {
     private lab_nick: eui.Label;
     private lab_uid: eui.Label;
     private lab_fen: eui.Label;
-    btn_kill: eui.Button;
+    private btn_kill: eui.Button;
 
     private img_headMask: egret.Shape;
 
@@ -29,8 +29,6 @@ class HeadIcon extends BaseGameSprite {
     childrenCreated() {
         super.childrenCreated();
 
-        this.skinState = "normal";
-
         this.img_headMask = new egret.Shape;
         this.img_headMask.graphics.beginFill(0);
         this.img_headMask.graphics.drawRoundRect(0, 0, 80, 80, 30, 30);
@@ -38,29 +36,41 @@ class HeadIcon extends BaseGameSprite {
 
         this.clean();
 
-        this.btn_kill.addEventListener(egret.TouchEvent.TOUCH_TAP, this.dismissHandler, this);
+        this.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickHandler, this);
     }
 
-    private dismissHandler(e: egret.TouchEvent) {
-        switch (e.currentTarget) {
+    private clickHandler(e: egret.TouchEvent) {
+        switch (e.target) {
             case this.btn_kill:
+                if (this.player) {
+                    SocketManager.getInstance().getGameConn().send(22, {"args": {"pos": this.player.pos}});
+                }
+                break;
+            default:
+                var roleInfoPanel: RoleInfoPanel = StackManager.findDialog(RoleInfoPanel, "RoleInfoPanel");
+                if (roleInfoPanel && this.player) {
+                    roleInfoPanel.show();
+                    roleInfoPanel.refreshRole(this.player);
+                }
                 break;
         }
     }
 
     update(player: PlayerVo) {
         this.player = player;
-        if (!player) {
-            return;
+        if (player) {
+            this.lab_nick.text = "" + this.player.nick;
+            this.lab_uid.text = "" + this.player.uid;
+            this.lab_fen.text = "" + this.player.cur;
+            this.isOwner = this.player.pos == 1;
+
+            this.isOffline = this.player.status == "offline";
+            // this.que = player.que;
+
         }
-
-        this.lab_nick.text = "" + this.player.nick;
-        this.lab_uid.text = "" + this.player.uid;
-
-        this.isOwner = this.player.pos == 1;
-        this.isOffline = this.player.status == "offline";
-
-        this.que = game.allQue[this.player.dir];
+        else {
+            this.clean();
+        }
     }
 
     set isOffline(value: boolean) {
@@ -78,7 +88,7 @@ class HeadIcon extends BaseGameSprite {
         }
 
         if (this.currentState == "intable" && this.player) {
-            this.btn_kill.visible = game.player.pos == 1 && this.player.pos != 1;
+            this.btn_kill.visible = game.roomOwner && this.player.pos != 1;
         }
         else {
             this.btn_kill.visible = false;
@@ -92,12 +102,14 @@ class HeadIcon extends BaseGameSprite {
 
     set isOwner(value: boolean) {
         this._isOwner = value;
-        this.img_kuang_normal.visible = !value;
         this.img_kuang_owner.visible = value;
+        this.img_kuang_normal.visible = !value;
     }
 
     set que(value: CardType) {
         this._que = value;
+
+        this.img_que.visible = true;
 
         switch (value) {
             case CardType.wan:
@@ -111,6 +123,7 @@ class HeadIcon extends BaseGameSprite {
                 break;
             default:
                 this.img_que.source = "";
+                this.img_que.visible = false;
                 break;
         }
     }
@@ -147,8 +160,10 @@ class HeadIcon extends BaseGameSprite {
         this.isZhuang = false;
         this.isOwner = false;
         this.que = CardType.unknow;
-        this.dir = DirType.bottom;
         this.player = null;
+        this.lab_nick.text = "";
+        this.lab_uid.text = "";
+        this.lab_fen.text = "";
     }
 }
 

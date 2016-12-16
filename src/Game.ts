@@ -50,6 +50,8 @@ class game {
     static roomPlayerMax: number = 4;
     //当前房间玩家数量
     static roomPlayerCount: number = 1;
+    //是否是房主
+    static roomOwner:boolean = false;
 
     //规则
     static ruleVo: GameRuleVo;

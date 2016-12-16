@@ -385,15 +385,15 @@ class GSController extends egret.EventDispatcher {
         if (PublicVal.state == StateType.ready || PublicVal.state == StateType.continue) {
             for (var i: number = 1; i <= 4; i++) {
                 var readyIcon = this.gsView.readyIcons[i];
-                var killIcon = this.gsView.getHeadView(i).btn_kill;
+                // var killIcon = this.gsView.getHeadView(i).btn_kill;
                 readyIcon.visible = (GSData.i.readyFlag >> i & 1) == 1;
 
-                if (PublicVal.state == StateType.ready && i > 1 && PublicVal.i.ownPos == 1) {
-
-                    killIcon.visible = readyIcon.visible;
-                } else {
-                    killIcon.visible = false;
-                }
+                // if (PublicVal.state == StateType.ready && i > 1 && PublicVal.i.ownPos == 1) {
+                //
+                //     killIcon.visible = readyIcon.visible;
+                // } else {
+                //     killIcon.visible = false;
+                // }
             }
         }
     }

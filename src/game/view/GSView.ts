@@ -148,9 +148,9 @@ class GSView extends egret.Sprite {
 
             this.headViews[i] = headIcon;
 
-            headIcon.btn_kill.touchEnabled = true;
-            headIcon.btn_kill.name = "" + i;
-            headIcon.btn_kill.addEventListener(egret.TouchEvent.TOUCH_TAP, this.onKillTouch, this);
+            // headIcon.btn_kill.touchEnabled = true;
+            // headIcon.btn_kill.name = "" + i;
+            // headIcon.btn_kill.addEventListener(egret.TouchEvent.TOUCH_TAP, this.onKillTouch, this);
 
             headIcon.touchEnabled = true;
             headIcon.name = "" + i;
@@ -289,7 +289,7 @@ class GSView extends egret.Sprite {
 
             this.readyIcons[i].visible = false;
 
-            this.headViews[i].btn_kill.visible = false;
+            // this.headViews[i].btn_kill.visible = false;
         }
     }
 

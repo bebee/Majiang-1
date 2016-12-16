@@ -51,6 +51,8 @@ class S8 {
 
                     GSDataProxy.i.gData.firstInRoom = player.uid == game.player.uid;
                 }
+
+                game.roomOwner = player.uid == game.player.uid && player.pos == 1
             }
         }
 
