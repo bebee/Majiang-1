@@ -36,6 +36,8 @@ class TipsAskPanel extends BasePanel {
     public showMsg(callback: Function, text: string = "", b1: string = null, b2: string = null, hide: boolean = false): void {
         this.show();
 
+        this.showClose();
+
         b1 = b1 == null ? "确  定" : b1;
         b2 = b2 == null ? "取  消" : b2;
 
@@ -53,5 +55,13 @@ class TipsAskPanel extends BasePanel {
             this.btn_cancel.visible = true;
             this.btn_confirm.horizontalCenter = 100;
         }
+    }
+
+    hideClose() {
+        this.bgView.hideClose();
+    }
+
+    showClose() {
+        this.bgView.showClose();
     }
 }

@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='utf-8'?>
+<e:Skin class="GameSceneSkin" width="960" height="640" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*">
+	<e:Image source="game_bg" left="0" right="0" top="0" bottom="0" locked="true"/>
+	<e:Image source="game_logo" horizontalCenter="0" top="160" locked="true"/>
+	<e:Label id="lab_roomid" text="房间号" fontFamily="微软雅黑" size="24" left="20" top="15"/>
+	<e:Label id="lab_rule" horizontalCenter="0" fontFamily="微软雅黑" size="20" textColor="0xC4E6A2" text="规则" top="220"/>
+	<ns1:HeadIcon id="head_4" skinName="HeadIconSkin" left="20" top="250"/>
+	<ns1:HeadIcon id="head_3" skinName="HeadIconSkin" top="20" right="150"/>
+	<ns1:HeadIcon id="head_2" skinName="HeadIconSkin" right="20" top="250"/>
+	<ns1:HeadIcon id="head_1" skinName="HeadIconSkin" bottom="130" left="20"/>
+	<e:Image id="img_battleTxt" source="game_fight" horizontalCenter="0" verticalCenter="0" visible="false"/>
+</e:Skin>

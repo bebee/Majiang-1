@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='utf-8'?>
+<e:Skin class="GameReadySceneSkin" width="960" height="640" currentState="ready" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*" states="ready,start,continue" >
+	<e:Image source="game_bg" left="0" right="0" top="0" bottom="0" locked="true"/>
+	<e:Image source="game_logo" horizontalCenter="0" top="160" locked="true"/>
+	<e:Label id="lab_roomid" text="房间号" fontFamily="微软雅黑" size="24" left="20" top="15"/>
+	<e:Label id="lab_rule" horizontalCenter="0" fontFamily="微软雅黑" size="20" textColor="0xC4E6A2" text="规则" top="220"/>
+	<e:Label id="lab_description" verticalCenter="0" horizontalCenter="0" fontFamily="微软雅黑"/>
+	<ns1:HeadIcon id="head_4" verticalCenter="0" y="20" skinName="HeadIconSkin" left="90"/>
+	<ns1:HeadIcon id="head_3" skinName="HeadIconSkin" horizontalCenter="0" top="50"/>
+	<ns1:HeadIcon id="head_2" skinName="HeadIconSkin" verticalCenter="0" right="90"/>
+	<ns1:HeadIcon id="head_1" skinName="HeadIconSkin" horizontalCenter="0" bottom="90"/>
+	<e:Button id="btn_weixin" label="返回微信" y="40" x="744" includeIn="ready,start">
+		<e:skinName>
+			<e:Skin states="up,down,disabled">
+				<e:Image width="100%" height="100%" source="game_jiesan_button" height.down="100%" width.down="100%"/>
+				<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0" fontFamily="微软雅黑" size="24" size.down="22" bold="true"/>
+			</e:Skin>
+		</e:skinName>
+	</e:Button>
+	<e:Button id="btn_quit" label="解散房间" x="744" y="120" includeIn="ready,start">
+		<e:skinName>
+			<e:Skin states="up,down,disabled" xmlns:w="http://ns.egret.com/wing">
+				<e:Image width="100%" height="100%" source="game_weixin_button"/>
+				<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0" fontFamily="微软雅黑" size="24" size.down="22" bold="true"/>
+			</e:Skin>
+		</e:skinName>
+	</e:Button>
+	<e:Button id="btn_invite" label="邀请好友" right="100" bottom="100" includeIn="ready">
+		<e:skinName>
+			<e:Skin states="up,down,disabled">
+				<e:Image width="100%" height="100%" source="game_invite_button"/>
+				<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="-5" fontFamily="微软雅黑" size.down="28" bold="true"/>
+			</e:Skin>
+		</e:skinName>
+	</e:Button>
+	<e:Button id="btn_start" label="开始游戏" bottom="100" right="100" includeIn="start">
+		<e:skinName>
+			<e:Skin states="up,down,disabled" xmlns:w="http://ns.egret.com/wing">
+				<e:Image width="100%" height="100%" source="game_invite_button"/>
+				<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="-5" fontFamily="微软雅黑" size.down="28" bold="true"/>
+			</e:Skin>
+		</e:skinName>
+	</e:Button>
+	<e:Button id="btn_continue" label="继续游戏" right="100" bottom="100" includeIn="continue">
+		<e:skinName>
+			<e:Skin states="up,down,disabled" xmlns:w="http://ns.egret.com/wing">
+				<e:Image width="100%" height="100%" source="game_invite_button"/>
+				<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="-5" fontFamily="微软雅黑" size.down="28" bold="true"/>
+			</e:Skin>
+		</e:skinName>
+	</e:Button>
+</e:Skin>

@@ -8,12 +8,18 @@
   */
 class gameConfig {
 
+    //协议类型
+    static protocolType: string = "https://";
+    //游戏域名
+    static domainName: string = "weixinhlmj.37gjw.com/";
+    // static domainName: string = "mj.h5sd.com/";
     //游戏地址
-    static GameUrl: string = "https://mj.h5sd.com/bcmj/index.html";
+    static clientUrl: string = gameConfig.protocolType + gameConfig.domainName + "chuanma/game.html";
 
     //TODO 微信
     //Appid
-    static appid: string = "wxb6349744356b5312";
+    static appid: string = "wx1310f5f590acf9d5";
+    // static appid: string = "wxb6349744356b5312";
     //回调状态
     static state: string;
     //回调code
@@ -28,15 +34,15 @@ class gameConfig {
     //是否在线
     static isOnLine: boolean = navigator.onLine;
 
-    //HTTP服务器地址
-    static address_http: any = {ip: "dbmj01.h5sd.com", port: 9009};
-    //游戏服务器地址
-    static address_game: any = {ip: "dbmj01.h5sd.com", port: 10415};
-    //测试游戏服务器地址
-    static address_test: any = {ip: "192.168.2.22", port: 10415};
 
     //中心服务器地址 注意：这两个更换测试服 一定要改
-    static address_center: any = {ip: "lyqptest.h5sd.com", port: 10416};   //dbmj01.h5sd.com   lyqptest.h5sd.com
+    static address_center: any = {ip: "sichuan01.37gjw.com", port: 10416};   //dbmj01.h5sd.com   lyqptest.h5sd.com
+    //HTTP服务器地址
+    static address_http: any = {ip: "sichuan01.37gjw.com", port: 9009};
+    //游戏服务器地址
+    static address_game: any = {ip: "sichuan01.37gjw.com", port: 10415};
+    //测试游戏服务器地址
+    static address_test: any = {ip: "192.168.2.22", port: 10415};
 
     //TODO 常规设置
     //通用字体
@@ -112,16 +118,16 @@ class gameConfig {
 
     //聊天内容
     static chat: any = {
-        0:{"text":"你太牛了！", "id":0},
-        1:{"text":"哈哈，手气真好。", "id":1},
-        2:{"text":"快点出牌呀。", "id":2},
-        3:{"text":"今天真高兴。", "id":3},
-        4:{"text":"你放炮，我不胡！", "id":4},
-        5:{"text":"你家里是开银行的吧？", "id":5},
-        6:{"text":"不好意思，我有事要先走一步啦。", "id":6},
-        7:{"text":"你的牌打的太好了。", "id":7},
-        8:{"text":"大家好，很高兴见到各位", "id":8},
-        9:{"text":"怎么又断线了，网络怎么这么差呀？", "id":9},
+        0: {"text": "你太牛了！", "id": 0},
+        1: {"text": "哈哈，手气真好。", "id": 1},
+        2: {"text": "快点出牌呀。", "id": 2},
+        3: {"text": "今天真高兴。", "id": 3},
+        4: {"text": "你放炮，我不胡！", "id": 4},
+        5: {"text": "你家里是开银行的吧？", "id": 5},
+        6: {"text": "不好意思，我有事要先走一步啦。", "id": 6},
+        7: {"text": "你的牌打的太好了。", "id": 7},
+        8: {"text": "大家好，很高兴见到各位", "id": 8},
+        9: {"text": "怎么又断线了，网络怎么这么差呀？", "id": 9},
     };
 
     //获得平台类型 如 微信、qqzone、qq、微博、校内、facebook
@@ -151,6 +157,13 @@ class gameConfig {
         }
         else {
             return "other";
+        }
+    }
+
+    static pushData(data: any) {
+        if (!data)return;
+        for (var key in data) {
+            this[key] = data;
         }
     }
 }

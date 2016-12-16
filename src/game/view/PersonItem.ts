@@ -31,6 +31,8 @@ class PersonItem extends BaseGameSprite {
 
         this.pos = new egret.Point();
 
+        this.headIcon.setState(HeadIconState.ingame);
+
         // this.headIcon = new HeadIcon();
         // this.headIcon.x = 40;
         // this.headIcon.y = 40;
@@ -46,6 +48,7 @@ class PersonItem extends BaseGameSprite {
     // }
 
     update(person: any) {
+        this.pos.x = this.pos.y = 0;
 
         this.data = person;
 
@@ -168,23 +171,28 @@ class PersonItem extends BaseGameSprite {
         var hu_desc: string = "";
         for (var i: number = 0; i < hu_types.length; i++) {
             types = hu_types[i];
-            if (types.length < 2 || typeof types[0] == "number" || typeof types[1] == "object") {
+            if (types.length < 2 || typeof types[1] == "object") {
                 continue;
             }
-            hu_desc += "" + GSConfig.huTypeMap[types[0]];
-            hu_desc += "(";
-            for (var j: number = 1; j < types.length; j++) {
-                if (types[j].length) {
-                    hu_desc += GSConfig.huTypeMap[types[j][0]] + "x" + types[j][1];
-                }
-                else {
-                    hu_desc += GSConfig.huTypeMap[types[j]];
-                }
-                if (j != types.length - 1) {
-                    hu_desc += " ";
-                }
+            if (types[0] == 24 || types[0] == 25) {
+                hu_desc += "" + GSConfig.huTypeMap[types[0]] + "x" + types[1] + " ";
             }
-            hu_desc += ") ";
+            else {
+                hu_desc += "" + GSConfig.huTypeMap[types[0]];
+                hu_desc += "(";
+                for (var j: number = 1; j < types.length; j++) {
+                    if (types[j].length) {
+                        hu_desc += GSConfig.huTypeMap[types[j][0]] + "x" + types[j][1];
+                    }
+                    else {
+                        hu_desc += GSConfig.huTypeMap[types[j]];
+                    }
+                    if (j != types.length - 1) {
+                        hu_desc += " ";
+                    }
+                }
+                hu_desc += ") ";
+            }
         }
         return ting_desc + hu_desc;
     }

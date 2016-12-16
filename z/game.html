@@ -1,0 +1,18 @@
+<!DOCTYPE HTML>
+<html>
+<body>
+    <script>
+        function getParam(key) {
+            var r = new RegExp("(\\?|#|&)" + key + "=([^&#]*)(&|#|$)");
+            var m = location.href.match(r);
+            return decodeURIComponent(!m ? "" : m[2]);
+        }
+
+		location.href = "" +
+                "https://mj.h5sd.com/chuanma/161216151949/index.html" +
+                "?roomid=" + getParam("roomid") +
+                "&users=" + getParam("users") +
+                "&code=" + getParam("code");
+    </script>
+</body>
+</html>

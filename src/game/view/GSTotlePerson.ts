@@ -35,9 +35,7 @@ class GSTotlePerson extends eui.Component {
         0: "坐　庄：",
         1: "胡　牌：",
         2: "点　炮：",
-        3: "摸　宝：",
-        4: "宝中宝：",
-        5: "积　分："
+        3: "积　分："
     };
 
     /**
@@ -68,8 +66,8 @@ class GSTotlePerson extends eui.Component {
 
         this._head = new HeadIcon();
         this.addChild(this._head);
-        this._head.x = 40;
-        this._head.y = 60;
+        // this._head.x = 40;
+        this._head.y = 20;
 
         RES.getResByUrl(pic, function (t: egret.Texture) {
             if (t) this._head.setHeadImg(t);
@@ -171,10 +169,10 @@ class GSTotlePerson extends eui.Component {
         list.push(pao_num);
 
         var bao_num: number = this.pserson.bao_num;  //摸宝次数
-        list.push(bao_num);
+        // list.push(bao_num);
 
         var baozhongbao_num: number = this.pserson.baozhongbao_num;  //宝中宝次数
-        list.push(baozhongbao_num);
+        // list.push(baozhongbao_num);
 
         var fen_num: number = this.pserson.cur;  //玩家总分数
         list.push(fen_num);

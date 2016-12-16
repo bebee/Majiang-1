@@ -293,9 +293,7 @@ class GSController extends egret.EventDispatcher {
                     this.scene.waitText.text = "等待房主开始游戏，请稍候...";
 
                 } else {
-
                     this.scene.waitText.text = "等待其他玩家，请稍候...";
-
                 }
             }
         }

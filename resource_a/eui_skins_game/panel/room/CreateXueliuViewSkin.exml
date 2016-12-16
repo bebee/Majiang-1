@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='utf-8'?>
+<e:Skin class="CreateXueliuViewSkin" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+	<e:Rect left="0" right="0" top="0" bottom="0" visible="false"/>
+	<e:Group right="0" left="0" x="10">
+		<e:layout>
+			<e:HorizontalLayout gap="20"/>
+		</e:layout>
+		<e:Label touchEnabled="false" verticalAlign="middle" left="0" textColor="0xA07A4B" size="24" text="房间模式:" fontFamily="微软雅黑" textAlign="right" width="110" height="38" top="0" locked="true"/>
+		<e:Group left="130" top="0">
+			<e:Group width="438" left="0" locked="true">
+				<e:layout>
+					<e:HorizontalLayout gap="0" horizontalAlign="justify"/>
+				</e:layout>
+				<e:Image id="btn_ju4" source="select_left" right="136" left="0" scale9Grid="56,5,58,30"/>
+				<e:Image id="btn_ju8" source="select_right" right="0" scale9Grid="17,5,68,30"/>
+			</e:Group>
+			<e:Label id="lab_ju4" touchEnabled="false" textColor="0xA07A4B" text="4局（房卡x2）" fontFamily="微软雅黑" textAlign="left" bold="true" verticalAlign="middle" size="16" top="44" x="4" locked="true"/>
+			<e:Label id="lab_ju8" touchEnabled="false" textColor="0xA07A4B" text="8局（房卡x3）" fontFamily="微软雅黑" textAlign="center" bold="true" verticalAlign="middle" size="16" top="44" right="-77" locked="true"/>
+			<e:Image id="btn_ju" source="room_btn" touchEnabled="false"/>
+		</e:Group>
+	</e:Group>
+	<e:Group right="0" left="0" top="100" x="10" y="10">
+		<e:layout>
+			<e:HorizontalLayout gap="20" verticalAlign="middle"/>
+		</e:layout>
+		<e:Label touchEnabled="false" left="20" textColor="0xA07A4B" text="封顶:" fontFamily="微软雅黑" verticalAlign="middle" size="24" x="10" y="10" top="90" textAlign="right" width="110"/>
+		<e:Group left="130" top="0" width="525">
+			<e:RadioButton id="btn_fan0" label="2番" x="336" y="358" groupName="fanshu" selected="true"/>
+			<e:RadioButton x="346" label="3番" y="368" id="btn_fan1" groupName="fanshu" selected="false"/>
+			<e:RadioButton id="btn_fan2" y="378" label="4番" x="356" groupName="fanshu" selected="false"/>
+			<e:layout>
+				<e:HorizontalLayout horizontalAlign="justify"/>
+			</e:layout>
+		</e:Group>
+	</e:Group>
+	<e:Group right="0" left="0" top="161" x="10" y="10">
+		<e:layout>
+			<e:HorizontalLayout gap="20"/>
+		</e:layout>
+		<e:Label touchEnabled="false" verticalAlign="middle" left="20" textColor="0xA07A4B" text="玩法:" fontFamily="微软雅黑" textAlign="right" width="110" size="24" top="140"/>
+		<e:Group left="150" top="140">
+			<e:RadioButton x="10" y="10" label="自摸加底" selected="true" id="btn_rule0" groupName="zimo"/>
+			<e:RadioButton id="btn_rule1" y="20" label="自摸加番" x="20" groupName="zimo"/>
+			<e:RadioButton id="btn_rule2" y="30" label="点杠花（点炮）" selected="true" x="30" groupName="diangang"/>
+			<e:RadioButton id="btn_rule3" y="40" label="点杠花（自摸）" x="40" groupName="diangang"/>
+			<e:CheckBox id="btn_rule4" y="50" label="换三张" selected="true" x="50"/>
+			<e:CheckBox id="btn_rule5" y="60" label="幺九将对" selected="true" x="60"/>
+			<e:CheckBox id="btn_rule6" y="70" label="门清中张" selected="true" x="70"/>
+			<e:CheckBox id="btn_rule7" y="80" label="天地胡" selected="true" x="80"/>
+			<e:layout>
+				<e:TileLayout requestedColumnCount="3"/>
+			</e:layout>
+		</e:Group>
+	</e:Group>
+</e:Skin>

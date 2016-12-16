@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='utf-8'?>
+<e:Skin class="RealPanelSkin" width="666" height="324" xmlns:e="http://ns.egret.com/eui" xmlns:ns1="*" xmlns:w="http://ns.egret.com/wing">
+	<ns1:BgView left="0" right="0" top="0" bottom="0" skinName="BgViewSkin"/>
+
+	<e:Group horizontalCenter="0" verticalCenter="0">
+		<e:Group x="44" y="153" scaleX="1" scaleY="1">
+			<e:Label text="姓名：" x="115" y="136" textColor="0x7A5008" fontFamily="微软雅黑" verticalAlign="middle" bold="true" textAlign="right"/>
+			<e:TextInput id="lab_name" x="93" y="-109" scaleX="1" scaleY="1" prompt="请输入姓名"/>
+			<e:layout>
+			<e:HorizontalLayout verticalAlign="middle"/>
+			</e:layout>
+		</e:Group>
+		<e:Group x="431" y="120" scaleX="1" scaleY="1">
+			<e:Label verticalAlign="middle" y="-16" text="身份证号：" fontFamily="微软雅黑" x="-419" textColor="0x7A5008" bold="true" scaleX="1" scaleY="1" textAlign="right"/>
+			<e:TextInput id="lab_id" x="-295" y="-4" scaleX="1" scaleY="1" prompt="请输入身份证号"/>
+			<e:layout>
+			<e:HorizontalLayout verticalAlign="middle"/>
+			</e:layout>
+		</e:Group>
+		<e:layout>
+			<e:VerticalLayout horizontalAlign="right"/>
+		</e:layout>
+	</e:Group>
+	<e:Button id="btn_confirm" label="认证" skinName="skins.Button_GreenSkin" horizontalCenter="0" verticalCenter="100">
+	</e:Button>
+
+
+
+
+
+</e:Skin>

@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='utf-8'?>
+<e:Skin class="SettingPanelSkin" width="700" height="394" xmlns:e="http://ns.egret.com/eui" xmlns:mui="mui.*" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*">
+	<ns1:BgView left="0" right="0" top="0" bottom="0" skinName="BgViewSkin"/>
+	<e:Group horizontalCenter="0" top="100">
+		<e:Group verticalCenter="0">
+			<e:Group>
+				<e:Label text="音乐" x="28" y="115" size="24" fontFamily="微软雅黑" textColor="0xA97144" textAlign="center" verticalAlign="middle"/>
+				<e:HSlider id="slider_music" x="96" y="101" skinName="skins.HSliderSkin" width="220" value="100" maximum="100"/>
+				<e:CheckBox id="btn_music" x="338" y="109" skinName="skins.CheckBox_SoundSkin"/>
+				<e:layout>
+					<e:HorizontalLayout verticalAlign="middle"/>
+				</e:layout>
+			</e:Group>
+			<e:Group x="190" y="282">
+				<e:Label textColor="0xA97144" verticalAlign="middle" text="音效" fontFamily="微软雅黑" textAlign="center" size="24"/>
+				<e:HSlider id="slider_sound" skinName="skins.HSliderSkin" width="220" value="100" maximum="100"/>
+				<e:CheckBox id="btn_sound" skinName="skins.CheckBox_SoundSkin"/>
+				<e:layout>
+					<e:HorizontalLayout verticalAlign="middle"/>
+				</e:layout>
+			</e:Group>
+			<e:layout>
+				<e:VerticalLayout/>
+			</e:layout>
+		</e:Group>
+		<e:Image source="setting_line" x="415" y="94" height="150"/>
+		<e:Group x="437" y="247">
+			<e:Group y="257" x="447">
+				<e:Label textColor="0xA97144" verticalAlign="middle" text="手牌尺寸" fontFamily="微软雅黑" textAlign="center" size="24"/>
+				<e:CheckBox id="btn_style" skinName="skins.CheckBox_PaiSkin"/>
+				<e:layout>
+					<e:HorizontalLayout verticalAlign="middle"/>
+				</e:layout>
+			</e:Group>
+			<e:Group y="267" x="457">
+				<e:Label verticalAlign="middle" textColor="0xA97144" text="手牌颜色" fontFamily="微软雅黑" textAlign="center" size="24"/>
+				<e:CheckBox id="btn_color" skinName="skins.CheckBox_PaiColorSkin"/>
+				<e:layout>
+					<e:HorizontalLayout verticalAlign="middle"/>
+				</e:layout>
+			</e:Group>
+			<e:layout>
+				<e:VerticalLayout/>
+			</e:layout>
+		</e:Group>
+		<e:layout>
+			<e:HorizontalLayout verticalAlign="middle"/>
+		</e:layout>
+	</e:Group>
+	<e:Label id="lab_version" size="20" textAlign="center" verticalAlign="middle" fontFamily="微软雅黑" textColor="0xA97144" lineSpacing="10" horizontalCenter="0" text="版本号" top="300"/>
+</e:Skin>

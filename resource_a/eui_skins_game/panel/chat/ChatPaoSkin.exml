@@ -1,0 +1,6 @@
+<?xml version='1.0' encoding='utf-8'?>
+<e:Skin class="ChatPaoSkin" width="336" height="86" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+	<e:Image source="match_pic_pop" scale9Grid="22,14,53,4" left="0" right="0" top="0" bottom="10"/>
+	<e:Image id="_biao" source="match_pic_jian" bottom="0" x="301"/>
+	<e:Label id="_txt" x="22" y="5" width="301" height="58" size="20" bold="true" fontFamily="微软雅黑" textAlign="left" verticalAlign="middle" lineSpacing="5"/>
+</e:Skin>

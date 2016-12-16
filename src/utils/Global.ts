@@ -1,37 +1,36 @@
 /**
 * 游戏公用方法汇总
 */
-
-module Global {
+class Global {
 	//等待界面，主要用在通讯等待展示
-	export var waitPanel: WaitPanel;
+	static waitPanel: WaitPanel;
 
 	//喇叭界面
-	export var hornPanel: HornView;
+	static hornPanel: HornView;
 
 	/**
 	 * 录音图片
 	 */
-	export var _voiceImg: eui.Image;
+	static _voiceImg: eui.Image;
 
 	/**
 	 * 分享图片
 	 */
-	export var share_img: eui.Image;
-	export var share_sprite: egret.Sprite;
+	static share_img: eui.Image;
+	static share_sprite: egret.Sprite;
 
 	/**
 	 * IP相同提醒
 	 */
-	export var ipwarmGroup: eui.Group;
-	export var ipwarmSprite: egret.Sprite;
-	export var ipwarmLabel: eui.Label;
-	export var ipwarmisshow: boolean = false;
+	static ipwarmGroup: eui.Group;
+	static ipwarmSprite: egret.Sprite;
+	static ipwarmLabel: eui.Label;
+	static ipwarmisshow: boolean = false;
 
 	/**
 	 * 掉线处理
 	 */
-	export function reLogin(): void {
+	static reLogin(): void {
 		var count: number = game.connectCount;
 
 		switch (count) {
@@ -53,7 +52,7 @@ module Global {
 	/**
 	 * 掉线后发送重新登录消息  或者  重新拉取授权
 	 */
-	export function sendLoad() {
+	static sendLoad() {
 		var p = game.player;
 
 		if (p.code) {
@@ -64,12 +63,8 @@ module Global {
 			var count: number = +gameLocal.getData(gameLocal.loginAccessCode);
 
 			if (count < 2) {
-				var addres: string = gameConfig.GameUrl;
-				if (game.roomid) addres += "?roomid=" + game.roomid;
-				Weixin.getAccessCode(gameConfig.appid, addres);
-
+				Weixin.getAccessCode(gameConfig.appid, gameConfig.clientUrl, game.roomid);
 				count++;
-
 				gameLocal.setData(gameLocal.loginAccessCode, count);
 			}
 			else {
@@ -85,7 +80,7 @@ module Global {
 	 * 手机震动
 	 * @param num 震动时间
 	 */
-	export function phoneVibrate(num: number = 2000): void {
+	static phoneVibrate(num: number = 2000): void {
 		if (navigator.vibrate) {
 			navigator.vibrate(num);
 		}
@@ -95,7 +90,7 @@ module Global {
 	 * 显示IP相同提示
 	 * @param arr
 	 */
-	export function showIP(arr: Array<any> = []): void {
+	static showIP(arr: Array<any> = []): void {
 		if (this.ipwarmisshow) return;
 
 		if (!arr || arr.length <= 0) return;
@@ -170,7 +165,7 @@ module Global {
 	 * 聊天表情
 	 * @param some
 	 */
-	export function showExpression(some: any): void {
+	static showExpression(some: any): void {
 		var my = this;
 
 		var chatid: number = +some.id;
@@ -231,7 +226,7 @@ module Global {
 	 * 显示聊天气泡
 	 * @param some
 	 */
-	export function showPao(some: any): void {
+	static showPao(some: any): void {
 		var my = this;
 
 		var chatid: number = +some.id;
@@ -298,7 +293,7 @@ module Global {
 		egret.setTimeout(hideThis, my, 3000);
 	}
 
-	export function showShare(b: boolean = false) {
+	static showShare(b: boolean = false) {
 		var panel = LayerManager.gameLayer().loadLayer;
 
 		if (b) {
@@ -307,8 +302,8 @@ module Global {
 
 			this.share_img.source = "share_img";
 
-			panel.addChild(share_sprite);
-			panel.addChild(share_img);
+			panel.addChild(this.share_sprite);
+			panel.addChild(this.share_img);
 
 			this.share_sprite.graphics.clear();
 			this.share_sprite.graphics.beginFill(0x0, 0.8);
@@ -331,7 +326,7 @@ module Global {
 	}
 
 	//显示等待界面
-	export function showWaritPanel(): void {
+	static showWaritPanel(): void {
 		if (Global.waitPanel && LayerManager.gameLayer().maskLayer.contains(Global.waitPanel)) return;
 
 		Global.waitPanel = new WaitPanel(1);
@@ -342,14 +337,14 @@ module Global {
 	}
 
 	//移除界面
-	export function hideWaritPanel(): void {
+	static hideWaritPanel(): void {
 		if ((Global.waitPanel != null) && LayerManager.gameLayer().maskLayer.contains(Global.waitPanel)) {
 			LayerManager.gameLayer().maskLayer.removeChild(Global.waitPanel);
 		}
 	}
 
 	//获取html文本
-	export function getTextFlow(str: string): egret.ITextElement[] {
+	static getTextFlow(str: string): egret.ITextElement[] {
 		var styleParser = new egret.HtmlTextParser();
 
 		return styleParser.parser(str);
@@ -367,7 +362,7 @@ module Global {
 	 * @param kn 指定对象是否具有挖空效果，暂未实现
 	 * @returns {egret.GlowFilter[]}
 	 */
-	export function getGlowFilter(cl: number = 0x33CCFF, ap: number = 0.8, bx: number = 35, by: number = 35, st: number = 2, qu: number = egret.BitmapFilterQuality.HIGH, inn: boolean = false, kn: boolean = false) {
+	static getGlowFilter(cl: number = 0x33CCFF, ap: number = 0.8, bx: number = 35, by: number = 35, st: number = 2, qu: number = egret.BitmapFilterQuality.HIGH, inn: boolean = false, kn: boolean = false) {
 		return [new egret.GlowFilter(cl, ap, bx, by, st, qu, inn, kn)];
 	}
 
@@ -375,7 +370,7 @@ module Global {
 	 * 创建一个颜色转换滤镜（图片变灰）
 	 * @returns {egret.ColorMatrixFilter[]}
 	 */
-	export function getColorFlilter() {
+	static getColorFlilter() {
 		//颜色矩阵数组
 		var colorMatrix = [
 			0.3, 0.6, 0, 0, 0,
@@ -393,7 +388,7 @@ module Global {
 	 * @param dy 垂直模糊量
 	 * @returns {egret.BlurFilter[]}
 	 */
-	export function getBlurFliter(dx: number = 1, dy: number = 1) {
+	static getBlurFliter(dx: number = 1, dy: number = 1) {
 		return [new egret.BlurFilter(dx, dy)];
 	}
 
@@ -411,7 +406,7 @@ module Global {
 	 * @param kn 指定对象是否具有挖空效果，暂未实现
 	 * @returns {egret.DropShadowFilter[]}
 	 */
-	export function getDropShadowFilter(di: number = 6, an: number = 45, co: number = 0x000000, al: number = 0.7, bx: number = 16, by: number = 16, st: number = 0.65, qu: number = egret.BitmapFilterQuality.LOW, inn: boolean = false, kn: boolean = false) {
+	static getDropShadowFilter(di: number = 6, an: number = 45, co: number = 0x000000, al: number = 0.7, bx: number = 16, by: number = 16, st: number = 0.65, qu: number = egret.BitmapFilterQuality.LOW, inn: boolean = false, kn: boolean = false) {
 
 		return [new egret.DropShadowFilter(di, an, co, al, bx, by, st, qu, inn, kn)];
 	}
@@ -419,7 +414,7 @@ module Global {
 	/**
 	 * 显示喇叭界面
 	 */
-	export function showHorn(size: number = 20, color: number = 0xffffff): void {
+	static showHorn(size: number = 20, color: number = 0xffffff): void {
 		if (!Global.hornPanel) Global.hornPanel = new HornView();
 
 		var group: eui.Group = LayerManager.gameLayer().hornGroup;
@@ -446,7 +441,7 @@ module Global {
 	/**
 	 * 显示录音
 	 */
-	export function showVoice(): void {
+	static showVoice(): void {
 		if (!this._voiceImg) this._voiceImg = new eui.Image();
 
 		this._voiceImg.source = "voice_icon";
@@ -461,8 +456,8 @@ module Global {
 	/**
 	 * 关闭录音
 	 */
-	export function hideVoice(): void {
-		this.voiceStop = true;
+	static hideVoice(): void {
+		// this.voiceStop = true;
 
 		if (!this._voiceImg) return;
 
@@ -476,7 +471,7 @@ module Global {
 	 * @param seconds
 	 * @returns {string}
 	 */
-	export function getStringBySeconds(millisecond: number): string {
+	static getStringBySeconds(millisecond: number): string {
 
 		if (!(millisecond >= 1000)) return "00:00:00";
 		var seconds: number = Math.floor(millisecond / 1000);

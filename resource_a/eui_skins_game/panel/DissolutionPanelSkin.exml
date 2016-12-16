@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='utf-8'?>
+<e:Skin class="DissolutionPanelSkin" width="670" height="388" xmlns:e="http://ns.egret.com/eui" xmlns:ns1="*" xmlns:w="http://ns.egret.com/wing" states="before,after" >
+	<ns1:BgView left="0" right="0" top="0" bottom="0" skinName="BgViewSkin"/>
+	<e:Group left="30" right="30" top="90" bottom="110">
+		<e:Image source="panel_1" scale9Grid="19,19,25,16" left="0" right="0" top="0" bottom="0"/>
+		<e:Group horizontalCenter="0" top="20">
+			<e:Group x="129" y="15">
+				<e:Label id="lab_nick1" x="24" y="134" textColor="0xA07A4B" size="20" fontFamily="微软雅黑" textAlign="right" verticalAlign="middle" bold="true"/>
+				<e:Image id="img_sign1" x="260" y="133" source="diss_dui"/>
+				<e:layout>
+					<e:HorizontalLayout verticalAlign="middle"/>
+				</e:layout>
+			</e:Group>
+			<e:Group x="346" y="96">
+				<e:Label id="lab_nick2" y="134" textColor="0xA07A4B" verticalAlign="middle" fontFamily="微软雅黑" textAlign="right" bold="true" size="20" x="284"/>
+				<e:Image id="img_sign2" y="133" x="520" source="diss_dui"/>
+				<e:layout>
+					<e:HorizontalLayout verticalAlign="middle"/>
+				</e:layout>
+			</e:Group>
+			<e:Group y="106" x="356">
+				<e:Label id="lab_nick3" y="204" textColor="0xA07A4B" verticalAlign="middle" fontFamily="微软雅黑" textAlign="right" bold="true" size="20" x="24"/>
+				<e:Image id="img_sign3" source="diss_dui" y="203" x="260"/>
+				<e:layout>
+					<e:HorizontalLayout verticalAlign="middle"/>
+				</e:layout>
+			</e:Group>
+			<e:Group y="116" x="366">
+				<e:Label id="lab_nick4" y="204" textColor="0xA07A4B" verticalAlign="middle" fontFamily="微软雅黑" textAlign="right" bold="true" size="20" x="284"/>
+				<e:Image id="img_sign4" source="diss_dui" y="203" x="520"/>
+				<e:layout>
+					<e:HorizontalLayout verticalAlign="middle"/>
+				</e:layout>
+			</e:Group>
+			<e:layout>
+				<e:TileLayout requestedColumnCount="2" verticalGap="20" horizontalAlign="right" horizontalGap="50"/>
+			</e:layout>
+		</e:Group>
+		<e:Label textAlign="center" verticalAlign="middle" size="20" bold="true" fontFamily="微软雅黑" textColor="0xA07A4B" text="玩家离线5分钟后将视为同意解散" y="143" horizontalCenter="0"/>
+	</e:Group>
+	<e:Label id="lab_description" y="311" verticalAlign="middle" textAlign="center" fontFamily="微软雅黑" size="25" textColor="0xBC4741" horizontalCenter="0" text="请等待其他玩家表态" includeIn="after"/>
+	<e:Button id="btn_cancel" label="取消" horizontalCenter="-120" bottom="30" includeIn="before">
+		<e:skinName>
+			<e:Skin states="up,down,disabled">
+				<e:Image width="100%" height="100%" source="btn_red"/>
+				<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="-3.5" fontFamily="微软雅黑"/>
+			</e:Skin>
+		</e:skinName>
+	</e:Button>
+	<e:Button id="btn_confirm" label="确定" horizontalCenter="120" bottom="30" includeIn="before">
+		<e:skinName>
+			<e:Skin states="up,down,disabled">
+				<e:Image width="100%" height="100%" source="btn_green"/>
+				<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="-3.5" fontFamily="微软雅黑"/>
+			</e:Skin>
+		</e:skinName>
+	</e:Button>
+</e:Skin>

@@ -9,27 +9,24 @@ class S26 {
 
         var type = data.type;
 
-        if (+type == 1) {
-            game.player.version = data.data;
+        if (type == 1) {
 
-            var ver: string = game.player.version;
+            if (!game.player.version || game.player.version == "") {
+                game.player.version = data.data;
+            }
+            else {
+                var newVer: string = data.data;
+                var newArr: Array<any> = newVer.split('.');
+                var oldVer: string = game.player.version;
+                var oldArr: Array<any> = oldVer.split('.');
 
-            if (!ver) return;
+                if (oldArr[0] != newArr[0] || oldArr[1] != newArr[1]) {
+                    game.askPanel.showMsg(function (r) {
+                        location.href = gameConfig.clientUrl += "?roomid=" + game.roomid;
+                    }, "当前游戏版本过低，请刷新游戏！");
 
-            var arr: Array<any> = ver.split('.');
-
-            var cver: string = game.version;
-
-            var carr: Array<any> = cver.split('.');
-
-            if (arr[0] != carr[0] || arr[1] != carr[1]) {
-                game.askPanel.showMsg(function (r) {
-                    if (r) {
-                        var h: string = gameConfig.GameUrl;
-                        if (game.roomid) h += "?roomid=" + game.roomid;
-                        location.href = h;
-                    }
-                }, "当前游戏版本过低，请刷新游戏！");
+                    game.askPanel.hideClose();
+                }
             }
         }
     }

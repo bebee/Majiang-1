@@ -36,15 +36,15 @@ class MainScene extends eui.Component {
 
         var arr: Array<string> = ["closeWindow", "hideMenuItems", "onMenuShareAppMessage", "onMenuShareTimeline", "startRecord", "stopRecord", "onVoiceRecordEnd", "playVoice", "pauseVoice", "stopVoice", "onVoicePlayEnd", "uploadVoice", "downloadVoice"];
 
-        // HttpHandler.sendMsgCallBack("http://" + gameConfig.address_http.ip + ":" + gameConfig.address_http.port, "action=" + JSON.stringify(sss), function (obj) {
-        //     if (obj.message != "error") {
-        //         var some = JSON.parse(obj.message);
-        //
-        //         gameConfig.pushData(some);
-        //
-        //         Weixin.config(gameConfig.appid, Number(gameConfig.timestamp), gameConfig.noncestr, gameConfig.signature, arr);
-        //     }
-        // }, egret.URLRequestMethod.POST, this);
+        HttpHandler.sendMsgCallBack(gameConfig.protocolType + gameConfig.address_http.ip + ":" + gameConfig.address_http.port, "action=" + JSON.stringify(sss), function (obj) {
+            if (obj.message != "error") {
+                var some = JSON.parse(obj.message);
+
+                gameConfig.pushData(some);
+
+                Weixin.config(gameConfig.appid, Number(gameConfig.timestamp), gameConfig.noncestr, gameConfig.signature, arr);
+            }
+        }, egret.URLRequestMethod.POST, this);
     }
 
     head_group: eui.Group;
@@ -240,7 +240,7 @@ class MainScene extends eui.Component {
         }
 
 
-        RES.getResByUrl(game.player.pic, function (t: egret.Texture) {
+        RES.getResByUrl(gameConfig.protocolType + game.player.pic.split("//")[1], function (t: egret.Texture) {
             if (t) {
                 game.player.playerHeadTexture = t;
                 my._head.source = t;

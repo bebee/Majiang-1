@@ -32,6 +32,8 @@ class HeadIcon extends BaseGameSprite {
         this.img_headMask = new egret.Shape;
         this.img_headMask.graphics.beginFill(0);
         this.img_headMask.graphics.drawRoundRect(0, 0, 80, 80, 30, 30);
+        this.addChild(this.img_headMask);
+
         this.img_head.mask = this.img_headMask;
 
         this.clean();
@@ -63,12 +65,15 @@ class HeadIcon extends BaseGameSprite {
         this.player = player;
 
         if (player) {
+
+            this.setHeadImg(game.player.pic);
+
             this.lab_nick.text = "" + this.player.nick;
             this.lab_uid.text = "" + this.player.uid;
-            this.lab_fen.text = "" + this.player.cur;
+            // this.lab_fen.text = "" + this.player.cur;
             this.isOwner = this.player.pos == 1;
             this.isOffline = this.player.status == "offline";
-            // this.que = player.que;
+            this.que = game.allQue[player.dir];
         }
         else {
             this.clean();
@@ -82,7 +87,7 @@ class HeadIcon extends BaseGameSprite {
         }
         else {
             if (this.player && this.player.pic) {
-                this.img_head.source = this.player.pic;
+                this.setHeadImg(this.player.pic);
             }
             else {
                 this.img_head.source = "game_head_null";
@@ -138,6 +143,19 @@ class HeadIcon extends BaseGameSprite {
         this.lab_fen.text = "" + score;
     }
 
+    setHeadImg(source: string|egret.Texture) {
+        if (typeof source == "string") {
+            // this.img_head.source = gameConfig.protocolType + this.player.pic.split("//")[1];
+            var _this = this;
+            RES.getResByUrl(gameConfig.protocolType + this.player.pic.split("//")[1], function (t) {
+                _this.img_head.source = t;
+            }, this, RES.ResourceItem.TYPE_IMAGE)
+        }
+        else {
+            this.img_head.source = source;
+        }
+    }
+
     setState(state: HeadIconState) {
         switch (state) {
             case HeadIconState.normal:
@@ -163,6 +181,7 @@ class HeadIcon extends BaseGameSprite {
         this.isOwner = false;
         this.que = CardType.unknow;
         this.player = null;
+        this.img_head.source = "game_head_null";
         this.lab_nick.text = "";
         this.lab_uid.text = "";
         this.lab_fen.text = "";

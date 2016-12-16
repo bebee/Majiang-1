@@ -45,6 +45,13 @@ class BgView extends BaseGameSprite {
     }
 
     /**
+     * 显示关闭按钮
+     */
+    showClose() {
+        this.close.visible = true;
+    }
+
+    /**
      * 设置显示
      * @param type
      */

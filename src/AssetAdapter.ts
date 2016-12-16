@@ -27,25 +27,25 @@
 class AssetAdapter implements eui.IAssetAdapter {
 
 
-    public getAsset(source:string, callBack:(data:any, source:string) => void, thisObject:any):void {
+    public getAsset(source: string, callBack: (data: any, source: string) => void, thisObject: any): void {
 
-        function onGetRes(data:any):void{
-            callBack.call(thisObject,data,source);
+        function onGetRes(data: any): void {
+            callBack.call(thisObject, data, source);
         }
 
-        if(RES.hasRes(source)){
+        if (RES.hasRes(source)) {
             var data = RES.getRes(source);
-            if(data){
+            if (data) {
                 onGetRes(data);
             }
-            else{
-                RES.getResAsync(source,onGetRes,this);
+            else {
+                RES.getResAsync(source, onGetRes, this);
             }
         }
-        else{
-           RES.getResByUrl(source,function(data:any){
+        else {
+            RES.getResByUrl(source, function (data: any) {
                 onGetRes(data);
-           },this);
+            }, this);
         }
     }
 }

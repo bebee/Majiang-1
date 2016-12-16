@@ -108,9 +108,12 @@ class SocketHandler {
     }
 
     onConnect() {
-        this.socket.connect(this.ip, this.port);
-
-        // this.socket.connectByUrl("wss://"+this.ip+":"+this.port);
+        if (gameConfig.code && gameConfig.protocolType == "https://") {
+            this.socket.connectByUrl("wss://" + this.ip + ":" + this.port);
+        }
+        else {
+            this.socket.connect(this.ip, this.port);
+        }
 
         this.status = 1;
         console.log("请求链接！" + this.type);
@@ -202,9 +205,7 @@ class SocketHandler {
             return;
         }
         else if (start == "end") {
-            var addres: string = gameConfig.GameUrl;
-            if (game.roomid) addres += "?roomid=" + game.roomid;
-            Weixin.getAccessCode(gameConfig.appid, addres);
+            Weixin.getAccessCode(gameConfig.appid, gameConfig.clientUrl, game.roomid);
             return;
         }
 
@@ -229,7 +230,6 @@ class SocketHandler {
             console.log("can't find the response messageID:" + msgId + " data is: ", obj.data);
         }
         else {
-            // console.log("the response messageID:" + msgId + " data is: ", obj.data);
             console.log(">>Read<<---------:  ", msgId, obj.data);
             response.parseData(obj);
         }
@@ -237,18 +237,16 @@ class SocketHandler {
 
 
     send(messageID: number, obj: any = null) {
-
         var request = SocketManager.getInstance().Agree["_" + messageID];
-
-        if (!request) {
-            console.log("can't find the request messageID:" + "_" + messageID);
-        }
-        else {
+        if (request) {
             if (obj && messageID != 1) obj["sequence"] = messageID;
 
             console.log("<<Send>>---------:  ", messageID, obj);
 
             this.socket.writeUTF(request.writeData(obj));
+        }
+        else {
+            console.log("can't find the request messageID:" + "_" + messageID);
         }
     }
 }

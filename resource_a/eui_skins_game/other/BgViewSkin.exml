@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='utf-8'?>
+<e:Skin class="BgViewSkin" width="800" height="200" currentState="decorate" xmlns:e="http://ns.egret.com/eui" states="normal,curtain,decorate" >
+	<e:Image source="loadingeff_bg" scale9Grid="27,25,22,16" height="100%" width="100%"/>
+	<e:Image id="curtain" y="-6" horizontalCenter="0.5" x="20" includeIn="curtain" source="dialog_head_img"/>
+	<e:Image source="setting_huawen" top="50" horizontalCenter="-220" scaleX="-1" x="10" y="10" includeIn="decorate"/>
+	<e:Image source="setting_huawen" top="50" horizontalCenter="220" x="10" y="10" includeIn="decorate"/>
+	<e:Image id="title" y="13" horizontalCenter="1" x="10" includeIn="curtain,decorate"/>
+	<e:Button right="-20" top="-20" id="close" x="10" y="10">
+		<e:skinName>
+			<e:Skin states="up,down,disabled" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*">
+				<e:Image width="100%" height="100%" source="close_btn" source.down="close_btn" height.down="95%" width.down="95%" x.down="2" y.down="2"/>
+				<e:Label id="labelDisplay1" horizontalCenter="0" verticalCenter="0"/>
+			</e:Skin>
+		</e:skinName>
+	</e:Button>
+</e:Skin>
