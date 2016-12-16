@@ -959,57 +959,36 @@ class GSDataProxy {
     }
 
     parseReback() {
-
         switch (this.gData.rebackStatus) {
-
             case 1:
-
-                PublicVal.state = StateType.start;
-
+                PublicVal.state = StateType.ready;
                 break;
-
             case 3:
-
                 PublicVal.state = StateType.gamestart;
                 //解析重连牌局
                 this.parseRebackPai();
-
                 GSController.i.rebackGame();
-
                 //GSController.i.gsView.updateAllCount(this.gData);
-
                 break;
             case 2://重连继续牌桌
-
-                PublicVal.state = StateType.reconnect;
-
+                PublicVal.state = StateType.continue;
                 var gContinue: any = this.gData.rebackData.continue;
-
                 if (gContinue.length > 0) {
-
                     for (var i: number = 0; i < gContinue.length; i++) {
-
                         var pos = gContinue[i];
-
                         var dir = this.gData.getDir(pos);
-
                         this.gData.readyFlag |= 1 << dir;
-
                     }
                 }
 
                 //判断显示 准备按钮
                 if ((this.gData.readyFlag >> 1 & 1) == 0) {
-
                     GSController.i.scene.readyButton.visible = true;
-
                 }
 
                 //断线重连继续界面
                 GSController.i.startView();
-
                 //GSController.i.visibleReadyIcon();
-
                 break;
         }
     }

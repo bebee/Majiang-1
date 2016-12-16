@@ -4,29 +4,20 @@
 
 //主控制器
 class GSController extends egret.EventDispatcher {
-    static _i: GSController;
+
+    private static _i: GSController;
     static get i() {
         return GSController._i || (GSController._i = new GSController);
     }
 
     scene: GSScene;
-
     gsView: GSView;
-
     gsResultView: GSResultView;
-
     gsTitleView: GSTotleView;
-
     activateCard: CardView = null;
-
-    // bg: egret.Bitmap;
-
     isAllowFuncClick: boolean;
-
     funcSelectAction: number;
-
     jiesuanData: any;
-
     //延时出牌计时器
     delayPushInterval: number;
 
@@ -51,49 +42,27 @@ class GSController extends egret.EventDispatcher {
     }
 
     init() {
-
         this.isAllowFuncClick = true;
-
         this.allowPushCard = true;
-
         this.sameCardViews = [];
-
         GSUpdate.i.start();
-
         GSStateMgr.i.init();
-
         this.initView();
-
     }
 
     //启动游戏主界面
     startView() {
-
         LayerManager.gameLayer().openMainLayer();
 
         this.scene.updateTableBG();
 
         this.showStateView();
-        //this.gsView.visible = true;
-
-        //测试
-        /*
-         GSData.i.setHandPais(1,GSConfig.testPais);
-         GSData.i.setHandPais(2,new Array(13));
-         GSData.i.setHandPais(3,new Array(13));
-         GSData.i.setHandPais(4,new Array(13));
-
-         GSStateMgr.i.setState(GSState.State_CardPutline);
-         */
     }
 
     //显示状态内容
     showStateView() {
-
         switch (PublicVal.state) {
-
-            case StateType.start://首次加入牌桌界面
-
+            case StateType.ready://首次加入牌桌界面
                 this.visibleTwoFuncButton(true);
                 this.visibleFourFuncButton(false, false);
                 this.visibleReadyIcon();
@@ -116,8 +85,7 @@ class GSController extends egret.EventDispatcher {
                 this.updateGangCur();
                 this.updateJiesanButtonText();
                 break;
-            case StateType.reconnect://继续牌桌界面
-
+            case StateType.continue://继续牌桌界面
                 this.gsResultView.visible = false;
 
                 this.visibleTwoFuncButton(true);
@@ -163,8 +131,6 @@ class GSController extends egret.EventDispatcher {
                 this.gsView.playStateHeadReset();
 
                 this.updateGangCur();
-
-
                 break;
             case StateType.gameover://进入每轮牌局结算界面
                 GSData.i.readyFlag = 0;
@@ -202,7 +168,6 @@ class GSController extends egret.EventDispatcher {
         }
     }
 
-
     closeGSView() {
         this.visibleTwoFuncButton(false);
         this.hideLightSame();
@@ -220,18 +185,15 @@ class GSController extends egret.EventDispatcher {
     }
 
     closeResultView() {
-
         this.gsResultView.clear();
         this.gsResultView.visible = false;
     }
 
     //刷新解散按钮的文字
     updateJiesanButtonText() {
-
         if (PublicVal.state == 1) {
             if (PublicVal.i.ownPos == 1) {
                 this.scene.jiesanButton.getChildAt(0)["textField"].text = "解散房间";
-
             }
             else {
                 this.scene.jiesanButton.getChildAt(0)["textField"].text = "离开房间";
@@ -245,10 +207,8 @@ class GSController extends egret.EventDispatcher {
 
     //显示隐藏两个功能按钮(解散房间和返回微信)
     visibleTwoFuncButton(boo1: boolean) {
-
         this.scene.weixinButton.visible = boo1;
         this.scene.jiesanButton.visible = boo1;  //bool2
-
     }
 
     //显示隐藏两个功能按钮(设置/解散/语音)
@@ -268,7 +228,9 @@ class GSController extends egret.EventDispatcher {
 
             if (showAnimation) {
                 var diff: number = score - head.getScore();
-                scores[i] = diff;
+                if(diff != 0){
+                    scores[i] = diff;
+                }
             }
 
             head.setScore(score);
@@ -292,13 +254,9 @@ class GSController extends egret.EventDispatcher {
 
     //开始按钮的显示和隐藏
     visibleStartButton() {
-
-        if (PublicVal.state == StateType.start) {
-
+        if (PublicVal.state == StateType.ready) {
             var hasLeave: boolean = false;
-
             var allOnline: boolean = true;
-
 
             for (var i: number = 1; i <= 4; i++) {
                 var player = GSData.i.roomPlayers[i];
@@ -358,22 +316,14 @@ class GSController extends egret.EventDispatcher {
         this.showStateView();
         this.updateBaoView();
 
-        //this.gsView.updateBaoPai(PublicVal.i.bao);
-
-        //this.gsResultView.updateBaoPai(PublicVal.i.bao);
-
         this.setBoomDir(PublicVal.i.ownPos);
         this.setArrowDir(GSData.i.turnDir);
         this.updateCenterInfo();
         this.updateRebackPais();
 
-        //this.showFuncSelectMenu();
-
         //缓存的显示刷新
         while (GSData.i.rebackViewFuncs.length) {
-
             GSData.i.rebackViewFuncs.shift().call(this);
-
         }
 
         GSController.i.gsView.resetAllChildrenTouch();
@@ -394,10 +344,8 @@ class GSController extends egret.EventDispatcher {
             PublicVal.state = -4;
 
             if (GSConfig.handLens[PublicVal.i.getHandPais(1).length]) {
-
                 //自动出牌
                 this.delayAutoPushPai();
-
             }
         }
     }
@@ -432,13 +380,13 @@ class GSController extends egret.EventDispatcher {
     //显示隐藏某个方位准备图标和踢人图标
     visibleReadyIcon() {
 
-        if (PublicVal.state == StateType.start || PublicVal.state == StateType.reconnect) {
+        if (PublicVal.state == StateType.ready || PublicVal.state == StateType.continue) {
             for (var i: number = 1; i <= 4; i++) {
                 var readyIcon = this.gsView.readyIcons[i];
                 var killIcon = this.gsView.getHeadView(i).btn_kill;
                 readyIcon.visible = (GSData.i.readyFlag >> i & 1) == 1;
 
-                if (PublicVal.state == StateType.start && i > 1 && PublicVal.i.ownPos == 1) {
+                if (PublicVal.state == StateType.ready && i > 1 && PublicVal.i.ownPos == 1) {
 
                     killIcon.visible = readyIcon.visible;
                 } else {
