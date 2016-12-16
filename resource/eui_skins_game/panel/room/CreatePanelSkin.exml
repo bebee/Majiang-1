@@ -34,7 +34,6 @@
 					</e:Skin>
 				</e:skinName>
 			</e:Button>
-			<e:Image source="create_kspj" verticalCenter="0" horizontalCenter="0" touchEnabled="false"/>
 		</e:Group>
 	</e:Group>
 </e:Skin>

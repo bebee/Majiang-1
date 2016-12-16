@@ -120,6 +120,9 @@ class CardView extends egret.DisplayObjectContainer {
 
     //iconBG:eui.Rect;
 
+    static text_big_arg = {y:70,size:35};
+    static text_small_arg = {y:30,size:18};
+
     constructor() {
 
         super();
@@ -147,11 +150,12 @@ class CardView extends egret.DisplayObjectContainer {
         // this.countText.width = 40;
         // this.countText.height = 20;
         this.countText.bold = true;
+        //this.countText.size = 35;
         this.countText.background = true;
         this.countText.backgroundColor = 0;
         this.countText.textColor = 0x8ebd49;
         //this.countText.x = 24;
-        this.countText.y = 70;
+        //this.countText.y = 70;
 
         this.addChild(this.top);
 
@@ -282,10 +286,17 @@ class CardView extends egret.DisplayObjectContainer {
 
         var type = this.dir * 10 + this.style;
 
+        //字的尺寸类型
+        var ZType = "X_";
+
+        var text_arg = CardView.text_small_arg;
+
         switch (type) {
             case 11:
             case 12:
             case 13:
+                ZType = "Z_";
+                text_arg = CardView.text_big_arg;
                 break;
             case 14:
                 type = 33;
@@ -312,10 +323,13 @@ class CardView extends egret.DisplayObjectContainer {
                 type = 23;
                 break;
         }
-
         this.resType = type;
 
         this.changeBGStyle();
+
+        this.countText.y = text_arg.y;
+        this.countText.size = text_arg.size;
+
 
         if (this.count > 1) {
             this.countText.text = "x" + this.count;
@@ -328,7 +342,7 @@ class CardView extends egret.DisplayObjectContainer {
             this.countText.text = "";
         } else {
             if (this.pai != null) {
-                var up_res = "Z_" + (this.pai.type * 10 + this.pai.number);
+                var up_res = ZType + (this.pai.type * 10 + this.pai.number);
                 this.icon.texture = GameRes.getCard(up_res);
 
             } else {

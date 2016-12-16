@@ -25,9 +25,6 @@ class S8 {
         for (var i = 0; i < infos.length; i++) {
             player = new PlayerVo(infos[i]);
 
-            //更新自己数据
-            game.player.uid == player.uid && game.player.update(infos[i]);
-
             switch (player.status) {
                 case "leave":
                     GameSound.PlaySound("sound_other_player_leave");

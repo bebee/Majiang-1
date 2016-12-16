@@ -6,7 +6,7 @@ class S25
     public parseData(obj:any)
     {
 
-        console.log("25 广播消息", obj);
+        //console.log("25 广播消息", obj);
 
         if(obj.data.message)
         {

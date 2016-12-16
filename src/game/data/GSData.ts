@@ -9,6 +9,13 @@ class GSData{
     }
 
     roomPlayers:PlayerVo[];
+
+    //庄家是否出过牌
+    //isZhuangPush:boolean;
+
+    //更新轮到别人抓牌(庄家出完牌算开始抓牌!)
+    //gang_end:boolean;
+    //---------------------------------------
     roomPass:number = 0;
     dir2Pos:any = {};
     pos2Dir:any = {};
@@ -28,7 +35,7 @@ class GSData{
     //牌局开始过
     roundStarted:boolean;
     //更新轮到别人抓牌(庄家出完牌算开始抓牌!)
-    gang_end:boolean;
+    // gang_end:boolean;
     //杠的分数
     gangCurs:number[];
 
@@ -59,7 +66,7 @@ class GSData{
     //是否显示功能菜单
     isShowFunc:boolean;
     //庄家是否出过牌
-    isZhuangPush:boolean;
+    // isZhuangPush:boolean;
     //前一次庄家位置
     lastZhuangPos:number;
     //是否连庄
@@ -87,6 +94,7 @@ class GSData{
         this.gangCurs = [0,0,0,0,0];
         this.lastZhuangPos = 0;
         this.hasTingRule = false;
+        this.isLianZhuang = false;
     }
 
     //继续回合的部分数据重置
@@ -95,8 +103,8 @@ class GSData{
         PublicVal.state = StateType.continue;
 
         this.roundReady = 0;
-        this.gang_end = false;
-        this.isZhuangPush = false;
+        // this.gang_end = false;
+        // this.isZhuangPush = false;
         this.turnDir = 0;
         this.isShowFunc = false;
         this.fen = false;

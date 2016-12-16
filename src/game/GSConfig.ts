@@ -81,7 +81,6 @@ class GSConfig {
      重放手牌的起点位置
      */
     static replayHandPos = {
-
         1: {x: 60, y: 580, dx: 178, dy: 0, px: 60, py: 0},
         2: {x: 850, y: 495, dx: 0, dy: -88, px: 0, py: -45},
         3: {x: 625, y: 47, dx: -96, dy: 0, px: -35, py: 0},
@@ -108,9 +107,9 @@ class GSConfig {
     //功能牌起点位置
     static funcPos = {
         1: {x: 60, y: 580, dx: 178, dy: 0, px: 60, py: 0},
-        2: {x: 850, y: 500, dx: 0, dy: -88, px: 0, py: -45},
+        2: {x: 840, y: 500, dx: 0, dy: -88, px: 0, py: -45},
         3: {x: 625, y: 47, dx: -96, dy: 0, px: -35, py: 0},
-        4: {x: 110, y: 124, dx: 0, dy: 90, px: 0, py: 45}
+        4: {x: 120, y: 124, dx: 0, dy: 90, px: 0, py: 45}
     };
 
     //动态手牌位
@@ -468,7 +467,6 @@ class GSConfig {
 
     static handLens = {2: true, 5: true, 8: true, 11: true, 14: true};
 
-
     static huTypeMap = {
         6: "庄家",
         7: "自摸",
@@ -511,6 +509,11 @@ class GSConfig {
     static replayAnGangStyle = {1: 3, 2: 3, 3: 3, 4: 3};
 
     static anGangStylePlus: any;
+
+    static allowLens(len: number) {
+
+        return GSConfig.handLens[len];
+    }
 
     //手牌激活
     static handCardActivate: boolean;

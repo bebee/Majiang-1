@@ -74,6 +74,8 @@ module Global {
 			}
 			else {
 				game.askPanel.showMsg(function (r) {
+					NativeApi.setLocalData("getAccessCode", 0);
+					Weixin.closeWindow();
 				}, "登录失败，请退出游戏重试！\n\n(请检查是否在其他设备登录)");
 			}
 		}

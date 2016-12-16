@@ -77,6 +77,7 @@ class LayerManager extends eui.UILayer {
     public openMainLayer(): void {
         this.setLayerVisible(false, "sceneLayer");
         this.setLayerVisible(true, "mainLayer");
+        GSController.i.jiesuanData = null;
     }
 
     /**

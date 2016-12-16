@@ -56,10 +56,10 @@ class GSDataProxy {
         }
 
         //步骤大于4，表示过了开局杠牌时间
-        if (obj.step > 4) {
+        /*if (obj.step > 4) {
             this.gData.isZhuangPush = true;
             this.gData.gang_end = true;
-        }
+        }*/
 
         switch (obj.status) {
             case "wait_for_join":
@@ -187,15 +187,25 @@ class GSDataProxy {
             }
             else {//自己的牌
                 //判断长度
-                if (GSConfig.handLens[shou.length]) {
-                    var startPai = shou.pop();
-                    FashionTools.sortPai(shou);
-                    shou.push(startPai);
+                if(GSConfig.handLens[shou.length]){
+                    var zhuangpai = null;
+                    if(person.draw == "no"){
+                        zhuangpai = (this.gData.rebackData.step == 5 ? person.zhuangpai:null);
+                    }else{
+                        zhuangpai = person.draw;
+                    }
 
-                    this.gData.setCatchPai(1, startPai);
+                    if(zhuangpai){
+                        FashionTools.removePai(shou,zhuangpai);
+                        FashionTools.sortPai(shou);
+                        shou.push(zhuangpai);
+                        this.gData.setCatchPai(1, zhuangpai);
 
-                } else {
-
+                    }else{
+                        FashionTools.sortPai(shou);
+                        this.gData.setCatchPai(1, shou[shou.length - 1]);
+                    }
+                }else{
                     FashionTools.sortPai(shou);
                 }
                 this.gData.setHandPais(1, shou);
@@ -207,6 +217,7 @@ class GSDataProxy {
             }
         }
     }
+
 
     //删除手牌
     S2C_DeletePai(pos: number, pai: any) {
@@ -223,6 +234,9 @@ class GSDataProxy {
         更新功能菜单，吃蹦杠
      */
     S2C_Function(obj: any) {
+
+        //准备听的状态，忽略其他人上线刷新的功能菜单
+        if(GSData.i.readyTing) return;
 
         //不能操作出牌
         this.gData.isShowFunc = true;
@@ -355,7 +369,6 @@ class GSDataProxy {
             GSController.i.showFuncSelectMenu();
         }
 
-
         //GSData.i.roundStartHasFunction = true;
 
         //GSController.i.showFuncSelectMenu();
@@ -372,7 +385,7 @@ class GSDataProxy {
 
         PublicVal.i.dui_num = dui_num;
 
-        if (gang_end != null) this.gData.gang_end = true;
+        //if(gang_end != null) this.gData.gang_end = true;
 
         if (this.gData.turnDir != 1 && PublicVal.state != StateType.shuffle) {// && this.gData.isZhuangPush) {
             //轮到他人的时候，并且庄家出完牌,进行假象牌的添加
@@ -439,7 +452,6 @@ class GSDataProxy {
         var dir = this.gData.getDir(pos);
 
         this.gData.isShowFunc = false;
-        // this.gData.turnDir = dir;
 
         var poolPai: any = null;
 
@@ -666,6 +678,8 @@ class GSDataProxy {
                     this.gData.removeOtherHandPai(dir, 1);
                 }
                 break;
+            case 4://听牌
+                break;
             default:
                 console.log("未解析的功能菜单", action);
                 break;
@@ -718,20 +732,25 @@ class GSDataProxy {
 
             PublicVal.i.removeHandPai(dir, this.gData.currPoolPai);
 
+            if(PublicVal.state == -4) GSController.i.clearDelayPushInterval();
+
         }else{
 
             PublicVal.i.removeHandPai(dir, null);
+
         }
 
         console.log("出牌人的方位:", dir);
         //触发出牌显示
         GSController.i.pushPoolCard(dir, this.gData.currPoolPai);
 
+
     }
 
     S2C_FinalResult(result: any) {
 
         this.gData.result = result;
+        GSController.i.clearDelayPushInterval();
 
         if (PublicVal.state == StateType.fen) {//分张 延时
 
@@ -744,7 +763,6 @@ class GSDataProxy {
     }
 
     delay_Final() {
-
         if (PublicVal.state == StateType.ting) {
             GSData.i.tingEndShow = true;
         }
@@ -876,7 +894,7 @@ class GSDataProxy {
                 PublicVal.i.ownPos = player.pos;
 
                 var a = PublicVal.i.ownPos;
-                var b = 1 + (PublicVal.i.ownPos + 0) % 4;
+                var b = 1 + (PublicVal.i.ownPos) % 4;
                 var c = 1 + (PublicVal.i.ownPos + 1) % 4;
                 var d = 1 + (PublicVal.i.ownPos + 2) % 4;
 
@@ -889,6 +907,8 @@ class GSDataProxy {
                 this.gData.pos2Dir[b] = 2;
                 this.gData.pos2Dir[c] = 3;
                 this.gData.pos2Dir[d] = 4;
+
+                if(!this.gData.rebackData)this.gData.zhuangPos = 0;
             }
             player.dir = this.gData.getDir(player.pos);
         }
@@ -1017,8 +1037,14 @@ class GSDataProxy {
             //进入开局
             PublicVal.i.allPais[1].handPais = obj.data.pai;
 
-            if (GSConfig.handLens[obj.data.pai.length]) {
-                PublicVal.i.allPais[1].catchPai = PublicVal.i.allPais[1].handPais.shift();
+            if(obj.data.pai.length == 14)
+            {
+
+                PublicVal.i.allPais[1].catchPai = obj.data.zhuangpai;
+
+                //移除手牌里的庄牌
+                FashionTools.removePai(obj.data.pai,obj.data.zhuangpai);
+
             }
 
             this.gData.zhuangPos = obj.data.zhuang;

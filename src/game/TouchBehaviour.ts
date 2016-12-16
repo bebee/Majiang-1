@@ -16,7 +16,9 @@ class TouchBehaviour implements IGameTapEvent {
         var obj = GSData.i.funcSelects[funcIndex];
         switch (obj.index) {
             case 0://过
-                SocketManager.getInstance().getGameConn().send(15, {"args": {"action": obj.action, "pai": []}});
+                GSData.i.isShowFunc = false;
+                SocketManager.getInstance().getGameConn().send(15, {"args":{"action":obj.action, "pai":[]}});
+
                 GSController.i.hideFuncSelectMenu();
 
                 if (GSData.i.readyTing) {
@@ -101,7 +103,7 @@ class TouchBehaviour implements IGameTapEvent {
             game.prestart();
             GSController.i.showStateView();
             GSController.i.showTitleView(GSController.i.jiesuanData);
-        } else {
+        }else{
             //清理回合数据
             GSData.i.roundReset();
             SocketManager.getInstance().getGameConn().send(17, {});

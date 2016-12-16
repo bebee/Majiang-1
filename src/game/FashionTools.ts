@@ -112,4 +112,18 @@ class FashionTools{
         });
     }
 
+    //移除队列某张牌
+    static removePai(list:any,pai:any){
+
+        for(var i:number = 0 ; i < list.length;i++){
+
+            if(list[i].type== pai.type  && list[i].number == pai.number){
+
+                list.splice(i,1);
+
+                break;
+            }
+        }
+    }
+
 }

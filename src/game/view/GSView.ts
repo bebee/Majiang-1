@@ -208,7 +208,7 @@ class GSView extends egret.Sprite {
 
         this.replayControllView = new ReplayControllView;
         this.replayControllView.x = (GSConfig.width - this.replayControllView.width) >> 1;
-        this.replayControllView.y = 365;
+        this.replayControllView.y = 272;
         this.addChild(this.replayControllView);
         this.replayControllView.visible = false;
         //牌长度
