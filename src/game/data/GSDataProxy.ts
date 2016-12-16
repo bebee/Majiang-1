@@ -505,8 +505,8 @@ class GSDataProxy {
                 console.log("旋风杠未解析");
                 break;
             case 24://暗杠
-
-                GameSound.PlaySound("gang_" + this.gData.getSexByPos(pos));
+                // GameSound.PlaySound("gang_" + this.gData.getSexByPos(pos));
+                GameSound.PlaySound("sound_xiayu");
 
                 this.gData.addFuncPai(1, dir, action, pai);
 
@@ -522,12 +522,9 @@ class GSDataProxy {
 
                 game.manager.dispatchEvent(EffectEventType.Xiayu, dir);//下雨特效
                 break;
-            case 25://明杠
-                /* 分两种
-                 3张手牌杠池牌
-                 已经碰牌再明杠
-                 */
-                GameSound.PlaySound("gang_" + this.gData.getSexByPos(pos));
+            case 25://明杠分(两种 1.3张手牌杠池牌 2.已经碰牌再明杠)
+                // GameSound.PlaySound("gang_" + this.gData.getSexByPos(pos));
+                GameSound.PlaySound("sound_guafeng");
 
                 var tmpPai = pai[0];
 
@@ -623,14 +620,17 @@ class GSDataProxy {
                     for (var i: number = 0; i < hu_types.length; i++) {
                         var val: any = hu_types[i];
                         if (val == 19) {//杠上开花
+                            GameSound.PlaySound("zimo_" + this.gData.getSexByPos(data.turn));
                             game.manager.dispatchEvent(EffectEventType.Gangshangkaihua, dir);
                         }
                         else if (val[0] == 41) {//呼叫转移
+                            GameSound.PlaySound("dianpao_" + this.gData.getSexByPos(data.turn));
                             game.manager.dispatchEvent(EffectEventType.Hujiaozhuanyi, [dir, this.gData.getDir(val[1])]);
                         }
                         else if (val[0] == 40) {//一炮多响
                             var posArr: any = val[1];
                             var dirArr: any = [];
+                            var timeDelay = 300;
                             for (var j: number = 0; j < posArr.length; j++) {
                                 dirArr.push(this.gData.getDir(posArr[j]));
                                 if (dir != this.gData.getDir(posArr[j])) {
@@ -640,10 +640,16 @@ class GSDataProxy {
                                 if (this.gData.getDir(posArr[j]) == 1) {
                                     game.isHuBoo = true;
                                 }
+
+                                egret.setTimeout(GameSound.PlaySound, GameSound, timeDelay * i, "dianpao_" + this.gData.getSexByPos(posArr[i]));
+                                // GameSound.PlaySound("dianpao_" + this.gData.getSexByPos(posArr[i]));
                             }
                             game.manager.dispatchEvent(EffectEventType.Yipaoduoxiang, dirArr);
                         }
                     }
+                }
+                else {
+                    GameSound.PlaySound((this.gData.turnDir != dir ? "dianpao_" : "zimo_") + this.gData.getSexByPos(data.turn));
                 }
 
                 if (this.gData.turnDir != dir) {//接炮胡

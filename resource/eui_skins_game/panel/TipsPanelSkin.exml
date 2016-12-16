@@ -3,6 +3,6 @@
 	<ns1:BgView left="0" right="0" top="0" bottom="0" skinName="BgViewSkin"/>
 	<e:Group top="90" bottom="30" left="30" right="30">
 		<e:Image source="panel_1" scale9Grid="19,18,25,18" left="0" right="0" top="0" bottom="0"/>
-		<e:Label id="lab_description" size="26" bold="true" fontFamily="微软雅黑" lineSpacing="10" textColor="0xBC0B11" verticalCenter="0" horizontalCenter="0" textAlign="center" verticalAlign="middle"/>
+		<e:Label id="lab_description" size="26" bold="true" fontFamily="微软雅黑" lineSpacing="10" textColor="0xBC0B11" verticalCenter="0" horizontalCenter="0" textAlign="left" verticalAlign="middle"/>
 	</e:Group>
 </e:Skin>

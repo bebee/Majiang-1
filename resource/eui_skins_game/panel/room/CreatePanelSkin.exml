@@ -25,13 +25,16 @@
 		</e:Scroller>
 		<e:Label textColor="0xA07A4B" height="28" text="注：牌局未开始解散房间，则退回房卡!" fontFamily="微软雅黑" textAlign="center" width="579" size="16" touchEnabled="false" verticalAlign="middle" horizontalCenter="0" top="313" locked="true"/>
 		<e:Image source="img_line" width="632" horizontalCenter="0" top="343" locked="true"/>
-		<e:Button id="btn_start" label="开始牌局" horizontalCenter="0" bottom="10">
-			<e:skinName>
-				<e:Skin states="up,down,disabled">
-					<e:Image width="100%" height="100%" source="game_create" source.down="game_create"/>
-					<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0" fontFamily="微软雅黑"/>
-				</e:Skin>
-			</e:skinName>
-		</e:Button>
+		<e:Group horizontalCenter="0" bottom="10">
+			<e:Button id="btn_start">
+				<e:skinName>
+					<e:Skin states="up,down,disabled">
+						<e:Image width="100%" height="100%" source="game_create" source.down="game_create"/>
+						<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0" fontFamily="微软雅黑"/>
+					</e:Skin>
+				</e:skinName>
+			</e:Button>
+			<e:Image source="create_kspj" verticalCenter="0" horizontalCenter="0" touchEnabled="false"/>
+		</e:Group>
 	</e:Group>
 </e:Skin>
