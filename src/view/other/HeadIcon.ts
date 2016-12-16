@@ -40,7 +40,7 @@ class HeadIcon extends BaseGameSprite {
     }
 
     private clickHandler(e: egret.TouchEvent) {
-        if(PublicVal.state == StateType.ready){
+        if (PublicVal.state == StateType.replay) {
             return;
         }
         switch (e.target) {
@@ -60,10 +60,6 @@ class HeadIcon extends BaseGameSprite {
     }
 
     update(player: PlayerVo) {
-
-        console.log("*--------------------");
-        console.log(player);
-
         this.player = player;
 
         if (player) {

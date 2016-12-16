@@ -19,7 +19,7 @@ class S8 {
             }
         }
 
-        if (data.hasOwnProperty("rules")) {
+        if (data.hasOwnProperty("infos")) {
             var infos: any[] = data.infos;
             var player: PlayerVo;
 
@@ -48,12 +48,12 @@ class S8 {
                         break;
                 }
 
-                if (player.status == "leave") {
-                    delete game.roomPlayers[player.uid];
-                }
-                else {
+                // if (player.status == "leave") {
+                //     delete game.roomPlayers[player.uid];
+                // }
+                // else {
                     game.roomPlayers[player.uid] = player;
-                }
+                // }
 
                 if (player.uid == game.player.uid) {
                     game.roomOwner = player.pos == 1;
