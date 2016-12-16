@@ -149,7 +149,6 @@ class HeadIcon extends BaseGameSprite {
         this.que = CardType.unknow;
         this.dir = DirType.bottom;
         this.player = null;
-        this.setState(HeadIconState.normal);
     }
 }
 

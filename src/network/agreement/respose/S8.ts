@@ -19,33 +19,42 @@ class S8 {
             }
         }
 
-        var infos: any[] = data.infos;
-        var player: PlayerVo;
+        if (data.hasOwnProperty("rules")) {
+            var infos: any[] = data.infos;
+            var player: PlayerVo;
 
-        for (var i = 0; i < infos.length; i++) {
-            player = new PlayerVo(infos[i]);
+            for (var i = 0; i < infos.length; i++) {
+                if (game.roomPlayers[infos[i].uid]) {
+                    player = game.roomPlayers[infos[i].uid];
+                }
+                else {
+                    player = new PlayerVo(infos[i]);
+                }
 
-            switch (player.status) {
-                case "leave":
-                    GameSound.PlaySound("sound_other_player_leave");
-                    EffectUtils.showTips(player.nick + " 离开了房间！", 4);
-                    break;
-                case "offline":
-                    GameSound.PlaySound("sound_other_player_leave");
-                    EffectUtils.showTips(player.nick + " 离线了！", 4);
-                    break;
-                case "online":
-                    GameSound.PlaySound("sound_other_player_enter");
-                    EffectUtils.showTips(player.nick + (game.roomPlayers[player.uid] ? " 回来了！" : " 加入了游戏！"), 4);
-                    break;
-            }
+                switch (player.status) {
+                    case "leave":
+                        GameSound.PlaySound("sound_other_player_leave");
+                        EffectUtils.showTips(player.nick + " 离开了房间！", 4);
+                        break;
+                    case "offline":
+                        GameSound.PlaySound("sound_other_player_leave");
+                        EffectUtils.showTips(player.nick + " 离线了！", 4);
+                        break;
+                    case "online":
+                        GameSound.PlaySound("sound_other_player_enter");
+                        EffectUtils.showTips(player.nick + (game.roomPlayers[player.uid] ? " 回来了！" : " 加入了游戏！"), 4);
+                        break;
+                }
 
-            game.roomPlayers[player.uid] = player;
+                if (player.status != "leave") {
+                    game.roomPlayers[player.uid] = player;
 
-            if (player.uid == game.player.uid) {
-                GSDataProxy.i.gData.firstInRoom = true;
+                    GSDataProxy.i.gData.firstInRoom = player.uid == game.player.uid;
+                }
             }
         }
+
+        game.initGameDir();
 
         GSDataProxy.i.S2C_RoomPlayers();
     }

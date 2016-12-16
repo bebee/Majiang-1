@@ -887,36 +887,13 @@ class GSDataProxy {
 
     //同步房间玩家信息,判断方位
     S2C_RoomPlayers() {
-        var player: PlayerVo;
-        for(var uid in game.roomPlayers) {
-            player = game.roomPlayers[uid];
-            if (player.uid == game.player.uid) {
-                PublicVal.i.ownPos = player.pos;
-
-                var a = PublicVal.i.ownPos;
-                var b = 1 + (PublicVal.i.ownPos) % 4;
-                var c = 1 + (PublicVal.i.ownPos + 1) % 4;
-                var d = 1 + (PublicVal.i.ownPos + 2) % 4;
-
-                this.gData.dir2Pos[1] = a;
-                this.gData.dir2Pos[2] = b;
-                this.gData.dir2Pos[3] = c;
-                this.gData.dir2Pos[4] = d;
-
-                this.gData.pos2Dir[a] = 1;
-                this.gData.pos2Dir[b] = 2;
-                this.gData.pos2Dir[c] = 3;
-                this.gData.pos2Dir[d] = 4;
-
-                if(!this.gData.rebackData)this.gData.zhuangPos = 0;
-            }
-            player.dir = this.gData.getDir(player.pos);
-        }
+        if(!this.gData.rebackData)this.gData.zhuangPos = 0;
 
         game.roomPlayerCount = 0;
         this.gData.roomPlayers = [];
 
         var leave_uid = null;
+        var player:PlayerVo;
         for (var uid in game.roomPlayers) {
             player = game.roomPlayers[uid];
 

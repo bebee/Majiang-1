@@ -5,25 +5,6 @@
  */
 class game {
 
-    //舞台
-    static stage: egret.Stage;
-    //舞台宽度
-    static get stageWidth() {
-        return this.stage.stageWidth;
-    }
-
-    //舞台高度
-    static get stageHeight() {
-        return this.stage.stageHeight;
-    }
-
-    //管理
-    static manager: GameManager = GameManager.i;
-    //询问提示面板
-    static askPanel: TipsAskPanel;
-    //最顶层显示面板
-    static topPanel: BasePanel;
-
     //游戏类型
     static gameType: GameType = GameType.sichuan;
 
@@ -35,10 +16,19 @@ class game {
     //登录等待
     static loginWaiting: boolean = false;
 
+    //舞台
+    static stage: egret.Stage;
+    //管理
+    static manager: GameManager = GameManager.i;
+    //询问提示面板
+    static askPanel: TipsAskPanel;
+    //最顶层显示面板
+    static topPanel: BasePanel;
+
     //版本号
     static version: string = "";  //0.2.0
     //用户
-    static user;
+    static user: string;
     //牌风格
     static paiStyle: number = 1;
     //牌颜色
@@ -60,20 +50,24 @@ class game {
     static roomPlayerMax: number = 4;
     //当前房间玩家数量
     static roomPlayerCount: number = 1;
+
     //规则
     static ruleVo: GameRuleVo;
     //换三张
     static changeThreeVo: ChangeThreeVo;
+
     //是否正在换牌中
     static isChangeThreeBoo: boolean = false;
     //是否正在订缺中
     static isQueBoo: boolean = false;
     //是否正在胡牌中
     static isHuBoo: boolean = false;
+
     //当前状态
     static status: GameStatus = GameStatus.gamestart;
     //当前状态是否完成
     static statusComplete: boolean = false;
+
     //全部玩家的缺门记录
     static allQue: any = {};
     //解散房间
@@ -86,14 +80,14 @@ class game {
     static hornList: string[] = [];
 
     static init(stage) {
-
-        acekit.init(stage);
-
         this.stage = stage;
 
+        acekit.init(stage);
+        gameLocal.init();
         this.manager.init();
 
-        gameLocal.init();
+        stage.addChild(LayerManager.gameLayer());
+        this.askPanel = new TipsAskPanel();
 
         game.player = new PlayerVo();
 
@@ -107,15 +101,30 @@ class game {
         game.paiColor = +gameLocal.getData(gameLocal.color);
 
         GameParse.Initialization();
-
-        this.askPanel = new TipsAskPanel();
-
-        stage.addChild(LayerManager.gameLayer());
     }
 
-    /**
-     * 游戏开始前状态
-     */
+    //初始化游戏方向
+    static initGameDir() {
+        PublicVal.i.ownPos = game.userPos;
+
+        var gData = GSDataProxy.i.gData;
+        var a = PublicVal.i.ownPos;
+        var b = 1 + (PublicVal.i.ownPos) % 4;
+        var c = 1 + (PublicVal.i.ownPos + 1) % 4;
+        var d = 1 + (PublicVal.i.ownPos + 2) % 4;
+
+        gData.dir2Pos[1] = a;
+        gData.dir2Pos[2] = b;
+        gData.dir2Pos[3] = c;
+        gData.dir2Pos[4] = d;
+
+        gData.pos2Dir[a] = 1;
+        gData.pos2Dir[b] = 2;
+        gData.pos2Dir[c] = 3;
+        gData.pos2Dir[d] = 4;
+    }
+
+    //游戏开始前状态
     static prestart() {
         this.status = GameStatus.unknow;
         this.statusComplete = false;
@@ -129,5 +138,20 @@ class game {
         game.roomid = 0;
         game.roomRules = [];
         game.roomPlayers = {};
+    }
+
+    //用户所在的牌桌位置
+    static get userPos() {
+        return this.roomPlayers[this.player.uid].pos;
+    }
+
+    //舞台宽度
+    static get stageWidth() {
+        return this.stage.stageWidth;
+    }
+
+    //舞台高度
+    static get stageHeight() {
+        return this.stage.stageHeight;
     }
 }
