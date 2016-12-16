@@ -28,8 +28,10 @@ class S8 {
                     player = game.roomPlayers[infos[i].uid];
                 }
                 else {
-                    player = new PlayerVo(infos[i]);
+                    player = new PlayerVo();
                 }
+
+                player.update(infos[i]);
 
                 switch (player.status) {
                     case "leave":
@@ -46,13 +48,17 @@ class S8 {
                         break;
                 }
 
-                if (player.status != "leave") {
+                if (player.status == "leave") {
+                    delete game.roomPlayers[player.uid];
+                }
+                else {
                     game.roomPlayers[player.uid] = player;
-
-                    GSDataProxy.i.gData.firstInRoom = player.uid == game.player.uid;
                 }
 
-                game.roomOwner = player.uid == game.player.uid && player.pos == 1
+                if (player.uid == game.player.uid) {
+                    game.roomOwner = player.pos == 1;
+                    GSDataProxy.i.gData.firstInRoom = true;
+                }
             }
         }
 

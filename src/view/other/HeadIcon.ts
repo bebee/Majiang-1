@@ -40,6 +40,9 @@ class HeadIcon extends BaseGameSprite {
     }
 
     private clickHandler(e: egret.TouchEvent) {
+        if(PublicVal.state == StateType.ready){
+            return;
+        }
         switch (e.target) {
             case this.btn_kill:
                 if (this.player) {
@@ -57,16 +60,19 @@ class HeadIcon extends BaseGameSprite {
     }
 
     update(player: PlayerVo) {
+
+        console.log("*--------------------");
+        console.log(player);
+
         this.player = player;
+
         if (player) {
             this.lab_nick.text = "" + this.player.nick;
             this.lab_uid.text = "" + this.player.uid;
             this.lab_fen.text = "" + this.player.cur;
             this.isOwner = this.player.pos == 1;
-
             this.isOffline = this.player.status == "offline";
             // this.que = player.que;
-
         }
         else {
             this.clean();
@@ -87,8 +93,8 @@ class HeadIcon extends BaseGameSprite {
             }
         }
 
-        if (this.currentState == "intable" && this.player) {
-            this.btn_kill.visible = game.roomOwner && this.player.pos != 1;
+        if (this.player && PublicVal.state == StateType.ready) {
+            this.btn_kill.visible = this.player && PublicVal.state == StateType.ready && game.roomOwner && this.player.pos != 1;
         }
         else {
             this.btn_kill.visible = false;

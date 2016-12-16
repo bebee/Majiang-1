@@ -143,7 +143,7 @@ class TouchBehaviour implements IGameTapEvent {
 
     //踢人请求
     onKillTouch(pos: number) {
-        SocketManager.getInstance().getGameConn().send(22, {"args": {"pos": pos}});
+        // SocketManager.getInstance().getGameConn().send(22, {"args": {"pos": pos}});
     }
 
     //解散房间
@@ -201,20 +201,20 @@ class TouchBehaviour implements IGameTapEvent {
     }
 
     onHeadTouch(dir: number): void {
-        var player = null;
-        if (PublicVal.state == 6) {
-            return;
-        } else {
-            player = GSData.i.getRoomPlayerByDir(dir);
-        }
-
-        if (!player) return;
-
-        var d: RoleInfoPanel = StackManager.findDialog(RoleInfoPanel, "RoleInfoPanel");
-        if (d) {
-            d.show();
-            d.refreshRole(player);
-        }
+        // var player = null;
+        // if (PublicVal.state == 6) {
+        //     return;
+        // } else {
+        //     player = GSData.i.getRoomPlayerByDir(dir);
+        // }
+        //
+        // if (!player) return;
+        //
+        // var d: RoleInfoPanel = StackManager.findDialog(RoleInfoPanel, "RoleInfoPanel");
+        // if (d) {
+        //     d.show();
+        //     d.refreshRole(player);
+        // }
     }
 
     onReplayPlayTap(): void {

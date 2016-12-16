@@ -151,10 +151,10 @@ class GSView extends egret.Sprite {
             // headIcon.btn_kill.touchEnabled = true;
             // headIcon.btn_kill.name = "" + i;
             // headIcon.btn_kill.addEventListener(egret.TouchEvent.TOUCH_TAP, this.onKillTouch, this);
-
-            headIcon.touchEnabled = true;
-            headIcon.name = "" + i;
-            headIcon.addEventListener(egret.TouchEvent.TOUCH_TAP, this.onHeadTouch, this);
+            //
+            // headIcon.touchEnabled = true;
+            // headIcon.name = "" + i;
+            // headIcon.addEventListener(egret.TouchEvent.TOUCH_TAP, this.onHeadTouch, this);
 
         }
 
@@ -256,12 +256,7 @@ class GSView extends egret.Sprite {
     updateRoom() {
         for (var i: number = 1; i <= 4; i++) {
             var headView = this.headViews[i];
-            var player: any = GSData.i.getRoomPlayerByDir(i);
-            if (player == null) {
-                headView.clean();
-                continue;
-            }
-            headView.update(player);
+            headView.update(GSData.i.getRoomPlayerByDir(i));
         }
 
         this.updateState();
@@ -284,11 +279,8 @@ class GSView extends egret.Sprite {
 
     //隐藏所有准备图标
     hideReadyIcons() {
-
         for (var i: number = 1; i <= 4; i++) {
-
             this.readyIcons[i].visible = false;
-
             // this.headViews[i].btn_kill.visible = false;
         }
     }

@@ -385,9 +385,10 @@ class GSController extends egret.EventDispatcher {
         if (PublicVal.state == StateType.ready || PublicVal.state == StateType.continue) {
             for (var i: number = 1; i <= 4; i++) {
                 var readyIcon = this.gsView.readyIcons[i];
-                // var killIcon = this.gsView.getHeadView(i).btn_kill;
                 readyIcon.visible = (GSData.i.readyFlag >> i & 1) == 1;
 
+                // var killIcon = this.gsView.getHeadView(i).btn_kill;
+                //
                 // if (PublicVal.state == StateType.ready && i > 1 && PublicVal.i.ownPos == 1) {
                 //
                 //     killIcon.visible = readyIcon.visible;
@@ -400,19 +401,19 @@ class GSController extends egret.EventDispatcher {
 
     //更新庄家
     visibleZhuang() {
-
         for (var i: number = 1; i <= GSConfig.playerCount; i++) {
-
-            this.gsView.getHeadView(i).isZhuang = ((PublicVal.i.zhuangFlag >> i & 1) == 1);
-
+            if (this.gsView.getHeadView(i)) {
+                this.gsView.getHeadView(i).isZhuang = ((PublicVal.i.zhuangFlag >> i & 1) == 1);
+            }
         }
     }
 
     //更新房主
     visibleRoomOwn() {
         for (var i: number = 1; i <= GSConfig.playerCount; i++) {
-            this.gsView.getHeadView(i).isOwner = ((PublicVal.i.roomOwnFlag >> i & 1) == 1);
-
+            if (this.gsView.getHeadView(i)) {
+                this.gsView.getHeadView(i).isOwner = ((PublicVal.i.roomOwnFlag >> i & 1) == 1);
+            }
         }
     }
 
