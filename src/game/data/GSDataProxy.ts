@@ -14,6 +14,7 @@ class GSDataProxy {
     gData:GSData;
 
     constructor(){
+
         this.gData = GSData.i;
     }
 
@@ -40,14 +41,11 @@ class GSDataProxy {
 
         PublicVal.i.max_round = obj.max_round;
 
-
-
-
         //步骤大于4，表示过了开局杠牌时间
-        if (obj.step > 4) {
+        /*if (obj.step > 4) {
             this.gData.isZhuangPush = true;
             this.gData.gang_end = true;
-        }
+        }*/
 
         switch (obj.status) {
 
@@ -195,14 +193,30 @@ class GSDataProxy {
                 //判断长度
                 if(GSConfig.handLens[shou.length]){
 
-                    var startPai = shou.pop();
+                    var zhuangpai = null;
 
-                    FashionTools.sortPai(shou);
+                    if(person.draw == "no"){
 
-                    shou.push(startPai);
+                        zhuangpai = (this.gData.rebackData.step == 5 ? person.zhuangpai:null);
 
-                    this.gData.setCatchPai(1, startPai);
+                    }else{
 
+                        zhuangpai = person.draw;
+                    }
+
+                    if(zhuangpai){
+
+                        FashionTools.removePai(shou,zhuangpai);
+                        FashionTools.sortPai(shou);
+                        shou.push(zhuangpai);
+                        this.gData.setCatchPai(1, zhuangpai);
+
+                    }else{
+
+                        FashionTools.sortPai(shou);
+
+                        this.gData.setCatchPai(1, shou[shou.length - 1]);
+                    }
                 }else{
 
                     FashionTools.sortPai(shou);
@@ -223,6 +237,7 @@ class GSDataProxy {
         }
     }
 
+
     //删除手牌
     S2C_DeletePai(pos: number, pai: any) {
         var dir = this.gData.getDir(pos);
@@ -238,6 +253,9 @@ class GSDataProxy {
         更新功能菜单，吃蹦杠
      */
     S2C_Function(obj: any) {
+
+        //准备听的状态，忽略其他人上线刷新的功能菜单
+        if(GSData.i.readyTing) return;
 
         //不能操作出牌
         this.gData.isShowFunc = true;
@@ -371,7 +389,6 @@ class GSDataProxy {
             GSController.i.showFuncSelectMenu();
         }
 
-
         //GSData.i.roundStartHasFunction = true;
 
         //GSController.i.showFuncSelectMenu();
@@ -388,7 +405,7 @@ class GSDataProxy {
 
         PublicVal.i.dui_num = dui_num;
 
-        if(gang_end != null) this.gData.gang_end = true;
+        //if(gang_end != null) this.gData.gang_end = true;
 
         if (this.gData.turnDir != 1 && PublicVal.state != -1){// && this.gData.isZhuangPush) {
             //轮到他人的时候，并且庄家出完牌,进行假象牌的添加
@@ -450,6 +467,7 @@ class GSDataProxy {
 
     //更新结果 cur是当前分数
     S2C_FuncResult(action, pai, pos,cur = null) {
+
         this.gData.isShowFunc = false;
 
         var dir = this.gData.getDir(pos);
@@ -627,6 +645,10 @@ class GSDataProxy {
                 }
                 GameSound.PlaySound("sound_down");
                 break;
+            case 4://听牌
+
+                break;
+
             default:
                 console.log("未解析的功能菜单", action);
                 break;
@@ -683,19 +705,25 @@ class GSDataProxy {
 
             PublicVal.i.removeHandPai(dir, this.gData.currPoolPai);
 
+            if(PublicVal.state == -4) GSController.i.clearDelayPushInterval();
+
         }else{
 
             PublicVal.i.removeHandPai(dir, null);
+
         }
 
         console.log("出牌人的方位:", dir);
         //触发出牌显示
         GSController.i.pushPoolCard(dir, this.gData.currPoolPai);
 
+
     }
     S2C_FinalResult(result:any) {
 
         this.gData.result = result;
+
+        GSController.i.clearDelayPushInterval();
 
         if(PublicVal.state == -2){//分张 延时
 
@@ -708,11 +736,6 @@ class GSDataProxy {
     }
     delay_Final(){
 
-        if(PublicVal.state == -4){
-
-            GSData.i.tingEndShow = true;
-
-        }
 
         PublicVal.state = 4;
 
@@ -863,7 +886,6 @@ class GSDataProxy {
     //同步房间玩家信息,判断方位
     S2C_RoomPlayers(rules:number[],infos:any[]){
 
-
         if(rules) {
             //听牌局
             if(rules.indexOf(3) > - 1) GSData.i.hasTingRule = true;
@@ -928,6 +950,8 @@ class GSDataProxy {
                 this.gData.pos2Dir[d] = 4;
 
                 this.gData.firstInRoom = true;
+
+                if(!this.gData.rebackData)this.gData.zhuangPos = 0;
             }
 
             roomPlayer.dir = this.gData.getDir(roomPlayer.pos);
@@ -1104,7 +1128,12 @@ class GSDataProxy {
 
             if(obj.data.pai.length == 14)
             {
-                PublicVal.i.allPais[1].catchPai = PublicVal.i.allPais[1].handPais.shift();
+
+                PublicVal.i.allPais[1].catchPai = obj.data.zhuangpai;
+
+                //移除手牌里的庄牌
+                FashionTools.removePai(obj.data.pai,obj.data.zhuangpai);
+
             }
 
             this.gData.zhuangPos = obj.data.zhuang;

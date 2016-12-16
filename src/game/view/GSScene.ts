@@ -105,7 +105,7 @@ class GSScene extends egret.DisplayObjectContainer {
         //this.visibleFirstRoundButton(false);
         this.startButton.visible = this.inviteButton.visible = false;
 
-        this.readyButton = new mui.EButton("JS_continue_button_png", "继续游戏");
+        this.readyButton = new mui.EButton("JS_continue_button", "继续游戏");
         this.readyButton.x = 554;
         this.readyButton.y = 452;
         this.readyButton.textField.verticalCenter = -8;

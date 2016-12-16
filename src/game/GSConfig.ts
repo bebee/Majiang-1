@@ -72,9 +72,9 @@ class GSConfig{
     //手中牌起始位置 dx,dy 明牌的间隔
     static gameHandPos = {
         1: {x: 60,  y: 580,dx:178,dy:0,px:60,py:0},
-        2: {x: 850, y: 495,dx:0,dy:-88,px:0,py:-45},
+        2: {x: 840, y: 495,dx:0,dy:-88,px:0,py:-45},
         3: {x: 625, y: 47,dx:-96,dy:0,px:-35,py:0},
-        4: {x: 110, y: 124,dx:0,dy:90,px:0,py:45},
+        4: {x: 120, y: 124,dx:0,dy:90,px:0,py:45},
         5: {x: 140,  y: 580,dx:178,dy:0,px:60,py:0}
     };
     /*
@@ -83,9 +83,9 @@ class GSConfig{
     static replayHandPos = {
 
         1: {x: 60,  y: 580,dx:178,dy:0,px:60,py:0},
-        2: {x: 850, y: 495,dx:0,dy:-88,px:0,py:-45},
+        2: {x: 840, y: 495,dx:0,dy:-88,px:0,py:-45},
         3: {x: 625, y: 47,dx:-96,dy:0,px:-35,py:0},
-        4: {x: 110, y: 124,dx:0,dy:90,px:0,py:45}
+        4: {x: 120, y: 124,dx:0,dy:90,px:0,py:45}
 
     };
 
@@ -108,9 +108,9 @@ class GSConfig{
     //功能牌起点位置
     static funcPos = {
         1: {x: 60,  y: 580,dx:178,dy:0,px:60,py:0},
-        2: {x: 850, y: 500,dx:0,dy:-88,px:0,py:-45},
+        2: {x: 840, y: 500,dx:0,dy:-88,px:0,py:-45},
         3: {x: 625, y: 47,dx:-96,dy:0,px:-35,py:0},
-        4: {x: 110, y: 124,dx:0,dy:90,px:0,py:45}
+        4: {x: 120, y: 124,dx:0,dy:90,px:0,py:45}
     };
 
     //动态手牌位
@@ -149,32 +149,32 @@ class GSConfig{
 
     //位置规则 1-4 逆时针 5:精致版 {1:立面,2:背面,3:躺 4:池}
     static posRule = {
-        1:{ 1:new Rule({bgosX:32,bgosY:40,toposX:24,toposY:20,spacH:64,spacV:79,showTop:false}),
+        1:{ 1:new Rule({bgosX:32,bgosY:40,toposX:24,toposY:22,spacH:64,spacV:79,showTop:false}),
             2:new Rule({bgosX:32,bgosY:40,toposX:24,toposY:23,spacH:56,spacV:79,showTop:true}),
             3:new Rule({bgosX:34,bgosY:44,toposX:26,toposY:40,topScaleX:0.9,topScaleY:0.9,spacH:56,spacV:70,showTop:true}),
-            4:new Rule({bgosX:18,bgosY:23,toposX:23,toposY:40,topScaleX:0.48,topScaleY:0.48,spacH:30,spacV:40,showTop:true}),
+            4:new Rule({bgosX:18,bgosY:23,toposX:13,toposY:19,spacH:30,spacV:40,showTop:true}),
             5:new Rule({bgosX:32,bgosY:40,bgScaleX:1.1,bgScaleY:1.1,toposX:24,toposY:23,spacH:56,spacV:79,showTop:true})
         },
         2:{ 1:new Rule({bgosX:19,bgosY:44,bgScaleX:-1,topRot:-90,spacH:23,spacV:24,showTop:false}),
             2:new Rule({bgosX:23,bgosY:18,bgScaleX:-1,topRot:-90,spacH:23,spacV:24,showTop:false}),
-            3:new Rule({bgosX:23,bgosY:18,bgScaleX:-1,toposX:18,toposY:37,topRot:-90,topScaleX:0.4,topScaleY:0.4,spacH:25,spacV:24,showTop:true}),
-            4:new Rule({bgosX:23,bgosY:18,bgScaleX:-1,toposX:18,toposY:37,topRot:-90,topScaleX:0.4,topScaleY:0.4,spacH:25,spacV:40,showTop:true})
+            3:new Rule({bgosX:23,bgosY:18,bgScaleX:-1,toposX:9,toposY:18,topRot:-90,topScaleX:0.75,spacH:25,spacV:24,showTop:true}),
+            4:new Rule({bgosX:23,bgosY:18,bgScaleX:-1,toposX:9,toposY:18,topRot:-90,topScaleX:0.75,spacH:25,spacV:40,showTop:true})
         },
         3:{ 1:new Rule({bgosX:18,bgosY:29,topRot:-180,topScaleX:0.5,topScaleY:0.5,spacH:30,spacV:36,showTop:false}),
             2:new Rule({bgosX:18,bgosY:29,topRot:-180,topScaleX:0.5,topScaleY:0.5,spacH:30,spacV:36,showTop:false}),
-            3:new Rule({bgosX:18,bgosY:23,toposX:23,toposY:40,topScaleX:0.48,topScaleY:0.48,spacH:30,spacV:34,showTop:true}),
-            4:new Rule({bgosX:18,bgosY:23,toposX:23,toposY:40,topScaleX:0.48,topScaleY:0.48,spacH:30,spacV:40,showTop:true})
+            3:new Rule({bgosX:18,bgosY:23,toposX:13,toposY:19,spacH:30,spacV:34,showTop:true}),
+            4:new Rule({bgosX:18,bgosY:23,toposX:13,toposY:19,spacH:30,spacV:40,showTop:true})
 
         },
         4:{ 1:new Rule({bgosX:19,bgosY:44,topRot:90,spacH:23,spacV:24,showTop:false}),
             2:new Rule({bgosX:23,bgosY:18,topRot:90,spacH:23,spacV:24,showTop:false}),
-            3:new Rule({bgosX:23,bgosY:18,toposX:33,toposY:38,topRot:90,topScaleX:0.4,topScaleY:0.4,spacH:25,spacV:24,showTop:true}),
-            4:new Rule({bgosX:23,bgosY:18,toposX:33,toposY:38,topRot:90,topScaleX:0.4,topScaleY:0.4,spacH:25,spacV:40,showTop:true})
+            3:new Rule({bgosX:23,bgosY:18,toposX:18,toposY:18,topRot:90,topScaleX:0.75,spacH:25,spacV:24,showTop:true}),
+            4:new Rule({bgosX:23,bgosY:18,toposX:18,toposY:18,topRot:90,topScaleX:0.75,spacH:25,spacV:40,showTop:true})
         },
-        5:{ 1:new Rule({bgosX:32,bgosY:40,toposX:24,toposY:20,spacH:64*0.92,spacV:79,scale:0.92,showTop:false}),
+        5:{ 1:new Rule({bgosX:32,bgosY:40,toposX:24,toposY:22,spacH:64*0.92,spacV:79,scale:0.92,showTop:false}),
             2:new Rule({bgosX:32,bgosY:40,toposX:24,toposY:23,spacH:56,spacV:79,showTop:true}),
             3:new Rule({bgosX:34,bgosY:44,toposX:26,toposY:40,topScaleX:0.9,topScaleY:0.9,spacH:56,spacV:70,showTop:true}),
-            4:new Rule({bgosX:18,bgosY:23,toposX:23,toposY:40,topScaleX:0.48,topScaleY:0.48,spacH:30,spacV:40,showTop:true}),
+            4:new Rule({bgosX:18,bgosY:23,toposX:13,toposY:19,spacH:30,spacV:40,showTop:true}),
             5:new Rule({bgosX:32,bgosY:40,bgScaleX:1.1,bgScaleY:1.1,toposX:24,toposY:23,spacH:56,spacV:79,showTop:true})
         }
     };
@@ -310,6 +310,10 @@ class GSConfig{
     }
     static handLens = {2:true,5:true,8:true,11:true,14:true};
 
+    static allowLens(len:number){
+
+        return GSConfig.handLens[len];
+    }
 
     static huTypeMap = {6:"庄家",
                         7:"自摸",

@@ -47,8 +47,6 @@ module GameMusic
 
         channel.volume = GameMusic._volume;
 
-        egret.log(channel.volume);
-
         SoundDict[name] = {"s":sound,"c":channel};
     }
 

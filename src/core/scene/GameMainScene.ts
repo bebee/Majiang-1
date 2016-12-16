@@ -39,7 +39,7 @@ class GameMainScene extends eui.Component
 
         var arr:Array<string> = ["closeWindow","hideMenuItems","onMenuShareAppMessage","onMenuShareTimeline","startRecord", "stopRecord", "onVoiceRecordEnd", "playVoice", "pauseVoice", "stopVoice", "onVoicePlayEnd", "uploadVoice", "downloadVoice"];
 
-        HttpHandler.sendMsgCallBack("http://" + GameConfig.http_address.ip + ":" + GameConfig.http_address.port, "action=" + JSON.stringify(sss), function (obj)
+        HttpHandler.sendMsgCallBack("https://" + GameConfig.http_address.ip + ":" + GameConfig.http_address.port, "action=" + JSON.stringify(sss), function (obj)
         {
             if(obj.message != "error")
             {

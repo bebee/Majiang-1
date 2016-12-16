@@ -23,6 +23,8 @@ class TouchBehaviour implements IGameTapEvent{
 
             case 0://过
 
+                GSData.i.isShowFunc = false;
+
                 SocketManager.getInstance().getGameConn().send(15, {"args":{"action":obj.action, "pai":[]}});
 
                 GSController.i.hideFuncSelectMenu();
@@ -156,6 +158,7 @@ class TouchBehaviour implements IGameTapEvent{
             GSController.i.showStateView();
 
             GSController.i.showTitleView(GSController.i.jiesuanData);
+
 
         }else{
 

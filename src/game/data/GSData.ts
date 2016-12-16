@@ -13,7 +13,17 @@ class GSData{
         return GSData._i || (GSData._i = new GSData);
     }
 
-    //game_state : number = 1;
+
+    //------------暂时无用----------//////////
+    //庄家是否出过牌
+    //isZhuangPush:boolean;
+
+    //更新轮到别人抓牌(庄家出完牌算开始抓牌!)
+    //gang_end:boolean;
+    //---------------------------------------
+
+
+
 
     roomPlayers:RoomPlayer[];
 
@@ -87,14 +97,10 @@ class GSData{
     rebackViewFuncs:any[] = [];
 
 
-    //庄家是否出过牌
-    isZhuangPush:boolean;
-
     //结算类型 1-3 :胜利 失败 流局
     resultType:number;
 
-    //更新轮到别人抓牌(庄家出完牌算开始抓牌!)
-    gang_end:boolean;
+
 
     //首次进入某房间
     firstInRoom:boolean;
@@ -126,11 +132,18 @@ class GSData{
     //是否听牌局
     hasTingRule:boolean;
 
+    //玩家辅助数据
+    //playerDB : PlayerDB;
+
     constructor(){
+
+        //this.playerDB = new PlayerDB;
 
         this.clear();
 
     }
+
+
 
     //所有数据清理
     clear(){
@@ -153,7 +166,11 @@ class GSData{
 
         this.lastZhuangPos = 0;
 
+        this.isLianZhuang = false;
+
         this.hasTingRule = false;
+
+        //this.playerDB.clearReadyFlags();
 
     }
 
@@ -164,24 +181,15 @@ class GSData{
 
         this.roundReady = 0;
 
-
         PublicVal.state = 2;
 
-        this.gang_end = false;
-        this.isZhuangPush = false;
 
         this.turnDir = 0;
         this.isShowFunc = false;
 
         this.fen = false;
 
-        /*this.allPais[1] = {handPais:null,catchPai:null,funcPais:[],poolPais:[]};
-        this.allPais[2] = {handPais:null,catchPai:null,funcPais:[],poolPais:[]};
-        this.allPais[3] = {handPais:null,catchPai:null,funcPais:[],poolPais:[]};
-        this.allPais[4] = {handPais:null,catchPai:null,funcPais:[],poolPais:[]};*/
-
         this.funcSelects = [];
-
 
         this.readyTing = false;
 

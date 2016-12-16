@@ -94,7 +94,7 @@ class GameLayerManager extends eui.UILayer
         this.setLayerVisible(false, "sceneLayer");
         this.setLayerVisible(true, "mainLayer");
 
-        
+        GSController.i.jiesuanData = null;
     }
 
     /**

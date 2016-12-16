@@ -58,7 +58,6 @@ class Replayer implements IUpdate{
     clear(){
 
         //this.isPause = false;
-
         this.isFB = false;
 
         this.index = 0;
@@ -227,11 +226,12 @@ class Replayer implements IUpdate{
         var all = arr[1];
         for(var k:number= 0;k < all.length;k++){
             var obj = all[k];
-            //1万 2条 3桶 4中发白
+            //1万 2条 3桶 4中发白 5东南西北
             var pais = FashionTools.formatPai(1,obj[1]).
-            concat(FashionTools.formatPai(2,obj[2])).
-            concat(FashionTools.formatPai(3,obj[3])).
-            concat(FashionTools.formatPai(4,obj[4]));
+                        concat(FashionTools.formatPai(2,obj[2])).
+                        concat(FashionTools.formatPai(3,obj[3])).
+                        concat(FashionTools.formatPai(4,obj[4])).
+                        concat(FashionTools.formatPai(5,obj[5]));
             //console.log(pais);
 
             PublicVal.i.allPais[this.returnDir(k + 1)].handPais = pais;
@@ -265,6 +265,8 @@ class Replayer implements IUpdate{
                 this.actions.push({index:index,action: 5, funcID:funcID, pais:arr[3], pos:pos ,from: arr[3][0].pos});
                 break;
             case 4://听牌
+                this.actions.push({index:index,action: 5, funcID:funcID,pos:pos});
+            case 1001://潇洒
                 this.actions.push({index:index,action: 5, funcID:funcID,pos:pos});
                 break;
             case 99://胡牌
@@ -381,7 +383,6 @@ class Replayer implements IUpdate{
         return this.dirMap[pos];
 
     }
-
 
     play_action_2(action:any){
 

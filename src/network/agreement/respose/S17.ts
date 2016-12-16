@@ -7,7 +7,7 @@ class S17
     {
         if(!obj) return;
 
-        console.log("17", obj);
+        //console.log("17", obj);
 
         //点击继续游戏 触发的  重新开始牌局
 

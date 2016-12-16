@@ -31,7 +31,7 @@ class GSController extends egret.EventDispatcher{
     jiesuanData:any;
 
     //延时出牌计时器
-    delayPushInterval:number;
+    delayPushInterval:number = 0;
 
     constructor(){
         super();
@@ -420,7 +420,9 @@ class GSController extends egret.EventDispatcher{
 
             PublicVal.state = -4;
 
-            if(GSConfig.handLens[PublicVal.i.getHandPais(1).length]){
+            GSData.i.tingEndShow = true;
+
+            if(GSData.i.funcSelects.length == 0){
 
                 //自动出牌
                 this.delayAutoPushPai();
@@ -559,7 +561,7 @@ class GSController extends egret.EventDispatcher{
 
             this.playTimeEffect(true,false);
         }
-
+        //最后分张抓牌
         if(PublicVal.state == -2){
 
             this.playTimeEffect(false,false);
@@ -569,18 +571,40 @@ class GSController extends egret.EventDispatcher{
     //延时自动打牌
     delayAutoPushPai(){
 
-        this.delayPushInterval = egret.setTimeout(_=>{
+        this.clearDelayPushInterval();
 
-            var catchPai = GSData.i.getCatchPai(1);
+        console.log("-------进入自动打牌------");
 
-            SocketManager.getInstance().getGameConn().send(4, {"args":catchPai});
+        if(GSConfig.handLens[PublicVal.i.getHandPais(1).length]) {
 
-        },this,800);
+            this.delayPushInterval = egret.setInterval(_=> {
+
+                //功能菜单开启停止自动打牌
+                if(GSData.i.isShowFunc) return;
+
+                var catchPai = GSData.i.getCatchPai(1);
+
+                this.sendPai(catchPai);
+
+            }, this, 1000);
+        }
 
     }
+    //发送打牌
+    sendPai(pai:any){
 
+        if(pai == null) return;
+
+        console.log("----发送打牌",pai);
+
+        SocketManager.getInstance().getGameConn().send(4, {"args": pai});
+
+    }
     clearDelayPushInterval(){
-        egret.clearTimeout(this.delayPushInterval);
+
+        console.log("-------清除自动打牌------");
+
+        egret.clearInterval(this.delayPushInterval);
         this.delayPushInterval = 0;
     }
 
@@ -637,7 +661,6 @@ class GSController extends egret.EventDispatcher{
 
     //胡牌
     hupaiShow(){
-
 
         //摊牌
         //遍历index大于-1的牌
@@ -780,6 +803,23 @@ class GSController extends egret.EventDispatcher{
 
         var cardView:CardView = <CardView>e.currentTarget;
 
+        var pai = cardView.pai;
+
+        if(GSData.i.readyTing && this.allowPushCard) {
+
+            //发送听牌
+            SocketManager.getInstance().getGameConn().send(15, {"args":{"action":4, "pai":[pai]}});
+
+            //this.hideFuncSelectMenu();
+
+            this.allowPushCard = false;
+
+            this.startPushTimeInterval();
+
+            return;
+
+        }
+
         if(this.activateCard != cardView){
 
             this.moveBack();
@@ -788,41 +828,19 @@ class GSController extends egret.EventDispatcher{
 
         }else{
 
-            if(GSData.i.turnDir == 1 && GSConfig.handLens[PublicVal.i.getHandPais(1).length] && this.allowPushCard){
+            if(GSData.i.turnDir == 1 && GSConfig.allowLens(PublicVal.i.getHandPais(1).length) && this.allowPushCard){
 
-                //进入打牌
-
-                var pai = this.activateCard.pai;
-
-
-                if(GSData.i.readyTing) {
-
-                    //发送听牌
-                    SocketManager.getInstance().getGameConn().send(15, {"args":{"action":4, "pai":[pai]}});
-
-                    PublicVal.state = -4;
-
-                    GSData.i.readyTing = false;
-
-                    this.hideFuncSelectMenu();
-
-                }else {
-
-                    SocketManager.getInstance().getGameConn().send(4, {"args": pai});
-
-                    console.log("发送自己的打牌信息",pai);
-                }
+                this.sendPai(pai);
 
                 this.allowPushCard = false;
 
                 this.startPushTimeInterval();
 
-
-            }else if(!GSData.i.gang_end && GSData.i.zhuangDir == 1) {//开局轮杠中
+            }/*else if(!GSData.i.gang_end && GSData.i.zhuangDir == 1) {//开局轮杠中
 
                 EffectUtils.showTips("等待其他玩家杠牌，请稍候...", 5);
 
-            }
+            }*/
             /*else{
                 this.moveBack();
             }*/
@@ -870,11 +888,21 @@ class GSController extends egret.EventDispatcher{
 
         mjview.addPoolCard(cardView);
 
-
         this.updateMJView(dir);
-        //听牌状态
-        if(PublicVal.state == -4 ) {
 
+
+        if(dir == 1 && GSData.i.readyTing){
+
+            GSData.i.readyTing = false;
+
+            PublicVal.state = -4;
+
+            GSData.i.tingEndShow = true;
+
+        }
+        if(PublicVal.state == -4){
+
+            //听牌状态至灰
             this.tingingView();
         }
 
@@ -909,10 +937,14 @@ class GSController extends egret.EventDispatcher{
         this.gsView.funcSelectView.updateGroupConViewByBudan(funcSelect.group);
 
     }
+
+
+
+
     //显示吃碰杠功能菜单
     showFuncSelectMenu(tip:boolean = true) {
 
-        if(PublicVal.state == 3 && GSData.i.funcSelects.length > 0) {
+        if((PublicVal.state == 3 || PublicVal.state == -4 )&& GSData.i.funcSelects.length > 0) {
 
             this.moveBack(false);
 
@@ -943,8 +975,6 @@ class GSController extends egret.EventDispatcher{
 
         this.gsView.funcSelectView.clearGroupConView();
 
-        GSData.i.isShowFunc = false;
-
         //TODO 相关手牌提示
         GameDispatcher.ins.dispatchEvent(EventType.Trigger_Prompt, false);
 
@@ -969,12 +999,6 @@ class GSController extends egret.EventDispatcher{
 
     clear(){
 
-/*        for(var i:number = 1;i <= 4;i++){
-
-            GSConfig.dymnicHandPos[i].x = GSConfig.handPosPlus[i].x;
-            GSConfig.dymnicHandPos[i].y = GSConfig.handPosPlus[i].y;
-
-        }*/
         this.allowPushCard = true;
 
         this.isAllowFuncClick = true;
@@ -1198,14 +1222,7 @@ class GSController extends egret.EventDispatcher{
 
             if (updatePool) {
                 //池牌
-               /* mjView.removeAllPoolCard();
 
-                for (var i: number = 0; i < poolPais.length; i++) {
-                    var cardView: CardView = CardView.create(dir, 4, poolPais[i]);
-                    var o = GSConfig.getPoolPos(dir, i);
-                    cardView.posView(o.x, o.y);
-                    mjView.addPoolCard(cardView);
-                }*/
                this.updatePoolPaiView(dir);
             }
         }
@@ -1304,17 +1321,21 @@ class GSController extends egret.EventDispatcher{
 
         var playPais = [];
 
+        var playFlags = {};
+
         for(var i = 0 ; i < group.length;i++){
 
             var obj = group[i];
 
-            playPais.push(obj.play);
+            var flag = obj.play.type << 8 | obj.play.number;
+
+            if(!playFlags[flag]) {
+                playFlags[flag] = true;
+                playPais.push(obj.play);
+            }
+
         }
-        GSData.i.funcSelects = [{index: 0, action: 0, pai: null}];
 
-        //GSData.i.roundStartHasFunction = true;
-
-        this.showFuncSelectMenu(false);
 
         this.readyTingView(playPais);
 
@@ -1341,7 +1362,7 @@ class GSController extends egret.EventDispatcher{
 
                         card.enabled = true;
                         card.touchEnabled = true;
-
+                        card.y = card.pos.y-25;
                         pais.splice(j,1);
 
                         break;
@@ -1378,6 +1399,8 @@ class GSController extends egret.EventDispatcher{
             var card = <CardView>handCon.getChildAt(i);
 
             if (card.index > -1) {
+
+                card.y = card.pos.y;
 
                 card.touchEnabled = false;
 

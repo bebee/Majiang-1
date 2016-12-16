@@ -45,10 +45,10 @@ class ReplayControllView extends egret.DisplayObjectContainer{
 
         var ax:number = 76 /2 ;
         var ay:number = 58 /2 ;
-        this.PlayButton = GameRes.createCenterButton(ax,ay,238,49,"RP_xin2");
-        this.PauseButton = GameRes.createCenterButton(ax,ay,238,49,"RP_xin3");
-        this.FBButton = GameRes.createCenterButton(ax,ay,100,49,"RP_xin5");
-        this.FFButton = GameRes.createCenterButton(ax,ay,376,49,"RP_xin4");
+        this.PlayButton = GameRes.createCenterButton(ax,ay,200,49,"RP_xin2");
+        this.PauseButton = GameRes.createCenterButton(ax,ay,200,49,"RP_xin3");
+        this.FBButton = GameRes.createCenterButton(ax,ay,70,49,"RP_xin5");
+        this.FFButton = GameRes.createCenterButton(ax,ay,336,49,"RP_xin4");
 
 
         this.addChild(this.bg);

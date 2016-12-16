@@ -150,7 +150,7 @@ class Weixin {
         body.title = "" + title;
         body.desc = "" + str;
         body.link = "" + GameConfig.wei_href_address;
-        body.imgUrl = "http://mj.h5sd.com/wdmj/weishare.png";
+        body.imgUrl = "https://mj.h5sd.com/wdmj/weishare.png";
         body.type = "link";
         body.dataUrl = "";
         body.success = success;
@@ -166,13 +166,11 @@ class Weixin {
     {
         function success()
         {
-            egret.log("分享朋友成功");
             Global.showShare();
         }
 
         function cancel()
         {
-            egret.log("取消分享到朋友");
             Global.showShare();
         }
 
@@ -222,7 +220,7 @@ class Weixin {
             body.link = "" + GameConfig.wei_href_address;
         }
 
-        body.imgUrl = "http://mj.h5sd.com/wdmj/weishare.png";
+        body.imgUrl = "https://mj.h5sd.com/wdmj/weishare.png";
         body.type = "link";
         body.dataUrl = "";
         body.success = success;
@@ -239,13 +237,11 @@ class Weixin {
     {
         function success()
         {
-            egret.log("分享朋友圈成功");
             Global.showShare();
         }
 
         function cancel()
         {
-            egret.log("取消分享到朋友圈");
             Global.showShare();
         }
 
@@ -260,7 +256,7 @@ class Weixin {
             body.link = "" + GameConfig.wei_href_address;
         }
 
-        body.imgUrl = "http://mj.h5sd.com/wdmj/weishare.png";
+        body.imgUrl = "https://mj.h5sd.com/wdmj/weishare.png";
         body.success = success;
         body.cancel = cancel;
         wx.onMenuShareTimeline(body);

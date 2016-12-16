@@ -65,6 +65,8 @@ class PublicVal{
         this.allPais[4] = {handPais:null,catchPai:null,funcPais:[],poolPais:[]};
     }
 
+
+
     //获取手牌牌
     getHandPais(dir:number){
         return this.allPais[dir].handPais;
@@ -101,7 +103,9 @@ class PublicVal{
             return;
         }
 
-        for(var i:number = 0 ; i<pais.length;i++){
+        FashionTools.removePai(pais,pai);
+
+        /*for(var i:number = 0 ; i<pais.length;i++){
 
             var p = pais[i];
 
@@ -111,7 +115,7 @@ class PublicVal{
 
                 break;
             }
-        }
+        }*/
 
         if(sort) FashionTools.sortPai(pais);
 

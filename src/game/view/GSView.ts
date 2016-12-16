@@ -303,8 +303,8 @@ class GSView extends egret.Sprite {
 
         var rightTopBG: egret.Bitmap = new egret.Bitmap(GameRes.getUI("game_buttons_bg"));
 
-        this.settingButton = new mui.EButton("game_button_setting_png");
-        this.quitButton = new mui.EButton("game_button_quit_png");
+        this.settingButton = new mui.EButton("game_button_setting");
+        this.quitButton = new mui.EButton("game_button_quit");
         this.settingButton.x = 10;
         this.quitButton.x = 82;
         this.rightTopButtonCon.addChild(rightTopBG);
@@ -312,11 +312,11 @@ class GSView extends egret.Sprite {
         this.rightTopButtonCon.addChild(this.quitButton);
 
 
-        this.talkButton = new mui.EButton("game_talk_png");
+        this.talkButton = new mui.EButton("game_talk");
 
 
         //this.siriButton = new mui.EButton("game_siri_png");
-        this.siriButton = new mui.EButton("game_siri_png");
+        this.siriButton = new mui.EButton("game_siri");
         this.siriButton.y = 72;
         this.rightButtonCon.addChild(this.talkButton);
 
@@ -397,7 +397,7 @@ class GSView extends egret.Sprite {
 
         this.replayControllView = new ReplayControllView;
         this.replayControllView.x = (GSConfig.width - this.replayControllView.width) >> 1;
-        this.replayControllView.y = 365;
+        this.replayControllView.y = 272;
         this.addChild(this.replayControllView);
         this.replayControllView.visible = false;
         //牌长度
