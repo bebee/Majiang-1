@@ -36,15 +36,12 @@ class MainScene extends eui.Component {
 
         var arr: Array<string> = ["closeWindow", "hideMenuItems", "onMenuShareAppMessage", "onMenuShareTimeline", "startRecord", "stopRecord", "onVoiceRecordEnd", "playVoice", "pauseVoice", "stopVoice", "onVoicePlayEnd", "uploadVoice", "downloadVoice"];
 
-        HttpHandler.sendMsgCallBack(gameConfig.protocolType + gameConfig.address_http.ip + ":" + gameConfig.address_http.port, "action=" + JSON.stringify(sss), function (obj) {
+        HttpHandler.sendMsgCallBack(gameConfig.protocolType + gameConfig.address_http.ip + ":" + gameConfig.address_http.port, function (obj) {
             if (obj.message != "error") {
-                var some = JSON.parse(obj.message);
-
-                gameConfig.pushData(some);
-
+                gameConfig.pushData(JSON.parse(obj.message));
                 Weixin.config(gameConfig.appid, Number(gameConfig.timestamp), gameConfig.noncestr, gameConfig.signature, arr);
             }
-        }, egret.URLRequestMethod.POST, this);
+        }, this, "action=" + JSON.stringify(sss));
     }
 
     head_group: eui.Group;
@@ -239,20 +236,21 @@ class MainScene extends eui.Component {
             this.btn_shiming.visible = true;
         }
 
+        if (game.player.pic != "") {
+            RES.getResByUrl(gameConfig.protocolType + game.player.pic.split("//")[1], function (t: egret.Texture) {
+                if (t) {
+                    game.player.playerHeadTexture = t;
+                    my._head.source = t;
+                }
+                else {
+                    my._head.source = "head_001";
 
-        RES.getResByUrl(gameConfig.protocolType + game.player.pic.split("//")[1], function (t: egret.Texture) {
-            if (t) {
-                game.player.playerHeadTexture = t;
-                my._head.source = t;
-            }
-            else {
-                my._head.source = "head_001";
+                    game.player.playerHeadTexture = my._head.texture;
+                }
 
-                game.player.playerHeadTexture = my._head.texture;
-            }
+                my._head.width = my._head.height = 77;
 
-            my._head.width = my._head.height = 77;
-
-        }, this, RES.ResourceItem.TYPE_IMAGE);
+            }, this, RES.ResourceItem.TYPE_IMAGE);
+        }
     }
 }

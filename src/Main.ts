@@ -47,6 +47,13 @@ class Main extends eui.UILayer {
         }
 
         gameLocal.setData(gameLocal.loginCode, code);
+
+        HttpHandler.sendMsgCallBack(gameConfig.protocolType + gameConfig.address_center.ip + ":" + gameConfig.address_center.port + "/", function (obj) {
+            gameConfig.address_http.ip = obj.addrr;
+            gameConfig.address_http.port = obj.auth_port;
+            gameConfig.address_game.ip = obj.addrr;
+            gameConfig.address_game.port = obj.port;
+        }, this, "action=serverlist");
     }
 
     protected createChildren(): void {
@@ -82,16 +89,7 @@ class Main extends eui.UILayer {
         if (e.groupName == "loading") {
             RES.removeEventListener(RES.ResourceEvent.GROUP_COMPLETE, this.onResourceLoadComplete, this);
 
-            var _this = this;
-            HttpHandler.sendMsgCallBack(gameConfig.protocolType + gameConfig.address_center.ip + ":" + gameConfig.address_center.port + "/", "action=serverlist", function (obj) {
-                gameConfig.address_http.ip = obj.addrr;
-                gameConfig.address_http.port = obj.auth_port;
-
-                gameConfig.address_game.ip = obj.addrr;
-                gameConfig.address_game.port = obj.port;
-
-                _this.startGame();
-            }, egret.URLRequestMethod.POST, this);
+            this.startGame();
         }
     }
 

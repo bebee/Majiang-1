@@ -883,7 +883,7 @@ class GSController extends egret.EventDispatcher {
 
     playEffect(dir: number, action: number) {
 
-        // this.gsView.playFuncEffect(dir, action);
+        this.gsView.playFuncEffect(dir, action);
 
     }
 

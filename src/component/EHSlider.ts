@@ -1,19 +1,17 @@
 /**
  * 滑动选择器（左右）
  */
-module mui
-{
-    export class EHSlider extends eui.HSlider
-    {
-        public _strack:string = "";
+module mui {
+    export class EHSlider extends eui.HSlider {
+        public _strack: string = "";
 
-        public _sthumb:string = "";
+        public _sthumb: string = "";
 
-        public _shap:string = "";
+        public _shap: string = "";
 
-        private maxNum:number = 10;
+        private maxNum: number = 10;
 
-        private minNum:number = 0;
+        private minNum: number = 0;
 
         /**
          * @param max  可滑动最大值
@@ -22,8 +20,7 @@ module mui
          * @param ths  滑动条按钮
          * @param tps  滑动条进度图
          */
-        public constructor(max:number = 10, min:number = 0,trs:string = "setting_progressbar_bg", ths:string = "radio_btn", tps:string = "setting_progressbar1")
-        {
+        public constructor(max: number = 10, min: number = 0, trs: string = "setting_progressbar_bg", ths: string = "radio_btn", tps: string = "setting_progressbar1") {
             super();
 
             this.skinName = "EHSliderSkin";
@@ -39,14 +36,13 @@ module mui
             this.minNum = min;
         }
 
-        public track:eui.Image;
+        public track: eui.Image;
 
-        public thumb:eui.Image;
+        public thumb: eui.Image;
 
-        public shap:eui.Image;
+        public shap: eui.Image;
 
-        public createChildren():void
-        {
+        public createChildren(): void {
             super.createChildren();
 
             this.setTrack();
@@ -56,66 +52,53 @@ module mui
             this.setMin();
         }
 
-        public changeShap():void
-        {
-            var v:number = this.value;
-            var n:number = this.maximum;
-            var w:number = this.width;
+        public changeShap(): void {
+            var v: number = this.value;
+            var n: number = this.maximum;
+            var w: number = this.width;
 
-            var nw:number = 0;
-            if(v == 0) nw = 0;
-            else if(v == n) nw = w - 5;
-            else
-            {
+            var nw: number = 0;
+            if (v == 0) nw = 0;
+            else if (v == n) nw = w - 5;
+            else {
                 nw = (v / n) * w;
             }
 
             this.shap.width = nw;
         }
 
-        public setTrack(t:string = this._strack):void
-        {
-            if(this.track)
-            {
+        public setTrack(t: string = this._strack): void {
+            if (this.track) {
                 this.track.source = t;
             }
-            else
-            {
+            else {
                 this._strack = t;
             }
         }
 
-        public setThumb(t:string = this._sthumb):void
-        {
-            if(this.thumb)
-            {
+        public setThumb(t: string = this._sthumb): void {
+            if (this.thumb) {
                 this.thumb.source = t;
             }
-            else
-            {
+            else {
                 this._sthumb = t;
             }
         }
 
-        public setShap(t:string = this._shap):void
-        {
-            if(this.shap)
-            {
+        public setShap(t: string = this._shap): void {
+            if (this.shap) {
                 this.shap.source = t;
             }
-            else
-            {
+            else {
                 this._shap = t;
             }
         }
 
-        public setMax(n:number = this.maxNum):void
-        {
+        public setMax(n: number = this.maxNum): void {
             this.maximum = this.maxNum = n;
         }
 
-        public setMin(n:number = this.minNum):void
-        {
+        public setMin(n: number = this.minNum): void {
             this.minimum = this.minNum = n;
         }
     }
