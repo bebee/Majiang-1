@@ -11,14 +11,14 @@ module GameSound {
     /**
      * 加载过的资源
      */
-    export var loadList = {};
+    export var  loadList = {};
 
     /**
      * 音效音量
      * @type {number}
      * @private
      */
-    export var _volume: number = 1;
+    export var  _volume: number = 1;
 
     /**
      * @param name  音乐文件名

@@ -178,9 +178,9 @@ class GSController extends egret.EventDispatcher {
         this.scene.readyButton.visible = false;
         this.scene.waitText.visible = false;
 
-        game.manager.dispatchEvent(EffectEventType.CardThrowTips);
-        game.manager.dispatchEvent(EffectEventType.CardThrow);
-        game.manager.dispatchEvent(EffectEventType.CardRaise);
+        game.manager.dispatchEvent(EffectEvent.CardThrowTips);
+        game.manager.dispatchEvent(EffectEvent.CardThrow);
+        game.manager.dispatchEvent(EffectEvent.CardRaise);
         this.playTimeEffect(false, false);
     }
 
@@ -239,7 +239,7 @@ class GSController extends egret.EventDispatcher {
         console.log(showAnimation, scores);
 
         if (showAnimation) {
-            game.manager.dispatchEvent(EffectEventType.ScoreTips, scores);
+            game.manager.dispatchEvent(EffectEvent.ScoreTips, scores);
         }
     }
 
@@ -327,13 +327,13 @@ class GSController extends egret.EventDispatcher {
         GSController.i.gsView.resetAllChildrenTouch();
 
         if (game.status == GameStatus.changeThree && !game.statusComplete) {
-            game.manager.dispatchEvent(EffectEventType.ChangeThree);
+            game.manager.dispatchEvent(EffectEvent.ChangeThree);
         }
 
 
         if (game.status == GameStatus.missing && !game.statusComplete) {
-            game.isQueBoo = true;
-            game.manager.dispatchEvent(EffectEventType.Que);
+            game.isQue = true;
+            game.manager.dispatchEvent(EffectEvent.Que);
         }
 
         if (GSData.i.backTing) {
@@ -450,7 +450,7 @@ class GSController extends egret.EventDispatcher {
                 this.delayAutoPushPai();
             }
 
-            if (game.isHuBoo) {//胡牌状态
+            if (game.isHu) {//胡牌状态
                 this.delayAutoPushPai();
             }
 
@@ -511,7 +511,7 @@ class GSController extends egret.EventDispatcher {
 
         this.gsView.centerBoom.updateLeftCount(PublicVal.i.dui_num);
 
-        this.gsView.centerBoom.updateRoundCount(PublicVal.i.cur_round, PublicVal.i.max_round);
+        this.gsView.centerBoom.updateRoundCount();
 
     }
 
@@ -526,7 +526,7 @@ class GSController extends egret.EventDispatcher {
         GSController.i.showFuncSelectMenu();
 
         if (game.status == GameStatus.changeThree && !game.statusComplete) {
-            game.manager.dispatchEvent(EffectEventType.ChangeThree);
+            game.manager.dispatchEvent(EffectEvent.ChangeThree);
         }
     }
 
@@ -787,9 +787,9 @@ class GSController extends egret.EventDispatcher {
         this.playTimeEffect(false);
 
         //显示新出的牌
-        game.manager.dispatchEvent(EffectEventType.CardThrow, [dir, pai]);
+        game.manager.dispatchEvent(EffectEvent.CardThrow, [dir, pai]);
         //显示新出的牌提示点
-        game.manager.dispatchEvent(EffectEventType.CardThrowTips, [dir, cardView]);
+        game.manager.dispatchEvent(EffectEvent.CardThrowTips, [dir, cardView]);
     }
 
     //显示吃牌种类选择
@@ -828,7 +828,7 @@ class GSController extends egret.EventDispatcher {
             this.gsView.funcSelectView.updateFuncView(GSData.i.funcSelects);
 
             //TODO 相关手牌提示
-            if (tip) game.manager.dispatchEvent(EffectEventType.CardRaise, CardRaiseMode.funcmenu);
+            if (tip) game.manager.dispatchEvent(EffectEvent.CardRaise, CardRaiseMode.funcmenu);
         }
     }
 
@@ -850,7 +850,7 @@ class GSController extends egret.EventDispatcher {
         this.gsView.funcSelectView.clearGroupConView();
 
         //TODO 相关手牌提示
-        game.manager.dispatchEvent(EffectEventType.CardRaise);
+        game.manager.dispatchEvent(EffectEvent.CardRaise);
     }
 
     addCardClick(view: CardView) {
@@ -866,9 +866,7 @@ class GSController extends egret.EventDispatcher {
     }
 
     setArrowDir(dir: number) {
-
         this.gsView.centerBoom.setArrowDir(dir);
-
     }
 
     clear(){
@@ -882,9 +880,7 @@ class GSController extends egret.EventDispatcher {
     }
 
     playEffect(dir: number, action: number) {
-
         this.gsView.playFuncEffect(dir, action);
-
     }
 
 

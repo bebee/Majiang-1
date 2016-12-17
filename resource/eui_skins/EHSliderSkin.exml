@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="skins.EHSliderSkin" minWidth="20" minHeight="8" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+	<e:Image id="track" source="setting_progressbar_bg" x="0" verticalCenter="0" scale9Grid="36,5,221,11" width="100%"/>
+	<e:Image id="scale" height="18" scale9Grid="8,7,17,2" width="20" x="4" verticalCenter="-1" source="setting_progressbar1"/>
+    <e:Image id="thumb" source="radio_btn" verticalCenter="0"/>
+</e:Skin>

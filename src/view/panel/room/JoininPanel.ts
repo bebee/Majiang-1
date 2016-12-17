@@ -37,7 +37,7 @@ class JoininPanel extends BasePanel {
 
         for (var i: number = 0; i < arr.length; i++) {
             arr[i].name = "" + i;
-            arr[i].scaleX = arr[i].scaleY = 1.2;
+            // arr[i].scaleX = arr[i].scaleY = 1.2;
             arr[i].addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickHandler, this);
         }
 

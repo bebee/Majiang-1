@@ -28,11 +28,59 @@ class GameManager extends BaseDispatcher {
     private timerHandler() {
     }
 
-    get layerScene() {
-        return LayerManager.gameLayer().sceneLayer;
-    }
+    playEffect(type: InterruptType, pos: number, ...args) {
+        var gender: Gender = GSDataProxy.i.gData.getSexByPos(pos);
+        var dir: DirType = GSDataProxy.i.gData.getDir(pos);
+        var sound: string;
+        switch (type) {
+            case InterruptType.chi:
+                sound = "chi_" + gender;
+                break;
+            case InterruptType.peng:
+                sound = "cha_" + gender;
 
-    get layerPanel() {
-        return LayerManager.gameLayer().panelLayer;
+                GSController.i.gsView.playFuncEffect(dir, 2);
+                break;
+            case InterruptType.minggang:
+                if (game.gameType == GameType.sichuan) {
+                    sound = "sound_guafeng";
+                }
+                else {
+                    sound = "gang_" + gender;
+                }
+                break;
+            case InterruptType.angang:
+                if (game.gameType == GameType.sichuan) {
+                    sound = "sound_xiayu";
+                }
+                else {
+                    sound = "gang_" + gender;
+                }
+                break;
+            case InterruptType.ting:
+                break;
+            case InterruptType.hu:
+                sound = (args[0] ? "zimo_" : "dianpao_") + gender;
+
+                GSController.i.gsView.playFuncEffect(dir, 99);
+                break;
+            case InterruptType.gangshangkaihua:
+                sound = "zimo_" + gender;
+
+                game.manager.dispatchEvent(EffectEvent.Gangshangkaihua, dir);
+                break;
+            case InterruptType.yipaoduoxiang:
+                sound = "dianpao_" + gender;
+                game.manager.dispatchEvent(EffectEvent.Yipaoduoxiang, args[0]);
+                break;
+            case InterruptType.hujiaozhuanyi:
+                sound = "dianpao_" + gender;
+
+                game.manager.dispatchEvent(EffectEvent.Hujiaozhuanyi, [dir, args[0]]);
+                break;
+        }
+
+        GameSound.PlaySound(sound);
+        GameSound.PlaySound("sound_down");
     }
 }

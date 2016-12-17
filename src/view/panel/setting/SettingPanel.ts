@@ -1,8 +1,8 @@
 class SettingPanel extends BasePanel {
 
-    private slider_music: eui.HSlider;
+    private slider_music: mui.EHSlider;
     private btn_music: eui.CheckBox;
-    private slider_sound: eui.HSlider;
+    private slider_sound: mui.EHSlider;
     private btn_sound: eui.CheckBox;
     private btn_style: eui.CheckBox;
     private btn_color: eui.CheckBox;
@@ -28,6 +28,20 @@ class SettingPanel extends BasePanel {
         this.btn_color.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickHandler, this);
     }
 
+    private setMusic(): void {
+        GameMusic.setSoundVolume(this.slider_music.value);
+        gameLocal.setData(gameLocal.musicVolume, this.slider_music.value);
+        this.btn_music.selected = false;
+        this.changeMusic();
+    }
+
+    private setSound(): void {
+        GameSound.setSoundVolume(this.slider_sound.value);
+        gameLocal.setData(gameLocal.soundVolume, this.slider_sound.value);
+        this.btn_sound.selected = false;
+        this.changeSound();
+    }
+
     private clickHandler(e: egret.TouchEvent) {
         switch (e.currentTarget) {
             case this.btn_music:
@@ -45,12 +59,18 @@ class SettingPanel extends BasePanel {
         }
     }
 
-    private changeColor(): void {
-        gameLocal.setData(gameLocal.color, this.btn_color.selected ? 0 : 1);
+    private changeMusic(): void {
+        gameLocal.setData(gameLocal.music, this.btn_music.selected ? 0 : 1);
+        this.btn_music.selected ? GameMusic.CloseAllSound() : GameMusic.PlaySound("music_scene");
+        this.btn_music.label = this.btn_music.selected ? "关闭音乐" : "开启音乐";
+        this.slider_music.enable = !this.btn_music.selected;
+    }
 
-        game.paiColor = +gameLocal.getData(gameLocal.color);
-
-        FashionTools.setGameStyle(game.paiColor);
+    private changeSound(): void {
+        gameLocal.setData(gameLocal.sound, this.btn_sound.selected ? 0 : 1);
+        this.btn_sound.selected && GameSound.CloseAllSound();
+        this.btn_sound.label = this.btn_sound.selected ? "关闭音效" : "开启音效";
+        this.slider_sound.enable = !this.btn_sound.selected;
     }
 
     private changeStyle(): void {
@@ -61,37 +81,29 @@ class SettingPanel extends BasePanel {
         FashionTools.setViewType(game.paiStyle);
     }
 
-    private changeMusic(): void {
-        gameLocal.setData(gameLocal.music, this.btn_music.selected ? 0 : 1);
-        this.btn_music.selected ? GameMusic.CloseAllSound() : GameMusic.PlaySound("music_scene");
-    }
+    private changeColor(): void {
+        gameLocal.setData(gameLocal.color, this.btn_color.selected ? 0 : 1);
 
-    private changeSound(): void {
-        gameLocal.setData(gameLocal.sound, this.btn_sound.selected ? 0 : 1);
-        this.btn_music.selected && GameSound.CloseAllSound();
-    }
+        game.paiColor = +gameLocal.getData(gameLocal.color);
 
-    private setMusic(): void {
-        GameMusic.setSoundVolume(this.slider_music.value);
-        gameLocal.setData(gameLocal.musicVolume, this.slider_music.value);
-    }
-
-    private setSound(): void {
-        GameSound.setSoundVolume(this.slider_sound.value);
-        gameLocal.setData(gameLocal.soundVolume, this.slider_sound.value);
+        FashionTools.setGameStyle(game.paiColor);
     }
 
     public show(): void {
         super.show();
 
         this.btn_music.selected = +gameLocal.getData(gameLocal.music) == 1 ? false : true;
+        this.btn_music.label = this.btn_music.selected ? "关闭音乐" : "开启音乐";
         this.btn_sound.selected = +gameLocal.getData(gameLocal.sound) == 1 ? false : true;
+        this.btn_sound.label = this.btn_sound.selected ? "关闭音效" : "开启音效";
 
         this.btn_style.selected = +gameLocal.getData(gameLocal.style) == 1 ? false : true;
         this.btn_color.selected = +gameLocal.getData(gameLocal.color) == 1 ? false : true;
 
         this.slider_music.value = +gameLocal.getData(gameLocal.musicVolume);
+        this.slider_music.enable = !this.btn_music.selected;
         this.slider_sound.value = +gameLocal.getData(gameLocal.soundVolume);
+        this.slider_sound.enable = !this.btn_sound.selected;
 
         this.lab_version.text = "当前版本号：" + game.version + "    最新版本号：" + game.player.version;
     }

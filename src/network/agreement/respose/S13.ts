@@ -18,6 +18,6 @@ class S13 {
             game.dissolution = null;
         }
 
-        game.cleanRoom();
+        game.roomClean();
     }
 }

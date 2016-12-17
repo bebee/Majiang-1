@@ -1,9 +1,9 @@
 /**
- * EffectEventType
+ * EffectEvent
  * @Author Ace.c
  * @Create 2016-11-28 15:56
  */
-class EffectEventType {
+class EffectEvent {
 
     /**
      * 清除所有

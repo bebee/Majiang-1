@@ -7,7 +7,7 @@ class S12 {
 
         console.log("离开房间！");
 
-        game.cleanRoom();
+        game.roomClean();
 
         GSController.i.exit();
     }

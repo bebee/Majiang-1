@@ -65,15 +65,12 @@ class HeadIcon extends BaseGameSprite {
         this.player = player;
 
         if (player) {
-
             this.setHeadImg(game.player.pic);
-
             this.lab_nick.text = "" + this.player.nick;
             this.lab_uid.text = "" + this.player.uid;
-            // this.lab_fen.text = "" + this.player.cur;
             this.isOwner = this.player.pos == 1;
             this.isOffline = this.player.status == "offline";
-            this.que = game.allQue[player.dir];
+            this.que = game.roomQue[player.dir];
         }
         else {
             this.clean();
@@ -85,17 +82,15 @@ class HeadIcon extends BaseGameSprite {
         if (value) {
             this.img_head.source = "game_head_lixian";
         }
+        else if (!this.player) {
+            this.img_head.source = "game_head_null";
+        }
         else {
-            if (this.player && this.player.pic) {
-                this.setHeadImg(this.player.pic);
-            }
-            else {
-                this.img_head.source = "game_head_null";
-            }
+            this.setHeadImg(this.player.pic);
         }
 
         if (this.player && PublicVal.state == StateType.ready) {
-            this.btn_kill.visible = this.player && PublicVal.state == StateType.ready && game.roomOwner && this.player.pos != 1;
+            this.btn_kill.visible = this.player && PublicVal.state == StateType.ready && game.isRoomOwner && this.player.pos != 1;
         }
         else {
             this.btn_kill.visible = false;
@@ -144,12 +139,17 @@ class HeadIcon extends BaseGameSprite {
     }
 
     setHeadImg(source: string|egret.Texture) {
+        console.log("================", source);
         if (typeof source == "string") {
-            // this.img_head.source = gameConfig.protocolType + this.player.pic.split("//")[1];
-            var _this = this;
-            RES.getResByUrl(gameConfig.protocolType + this.player.pic.split("//")[1], function (t) {
-                _this.img_head.source = t;
-            }, this, RES.ResourceItem.TYPE_IMAGE)
+            if (source != "") {
+                var _this = this;
+                RES.getResByUrl(gameConfig.protocolType + this.player.pic.split("//")[1], function (t) {
+                    _this.img_head.source = t;
+                }, this, RES.ResourceItem.TYPE_IMAGE)
+            }
+            else {
+                this.img_head.source = "game_head_null";
+            }
         }
         else {
             this.img_head.source = source;

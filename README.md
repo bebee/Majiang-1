@@ -88,9 +88,6 @@
 -define(Interrupt_Gang,3).
 -define(Interrupt_Ting,4).
 -define(Interrupt_Xi,5).
--define(Interrupt_Jiang,999).
--define(Interrupt_Hu,99).
--define(Interrupt_Dingque,9999).
 -define(Interrupt_Hu_Zhuang,6).%%庄家
 -define(Interrupt_Hu_Zimo,7).%%自摸
 -define(Interrupt_Hu_zhanli,8).%%站立
@@ -132,3 +129,8 @@
 -define(Interrupt_Hu_Qianggang,44).%%抢杠胡
 -define(Interrupt_Hu_Dianpao_Rcv,45).%%接炮
 -define(Interrupt_Hu_Gen,46).%%根儿
+-define(Interrupt_Hu_Chadajiao,47).%%查大叫
+-define(Interrupt_Hu_Kaertiao,48).%%卡二条
+-define(Interrupt_Hu,99).
+-define(Interrupt_Jiang,999).
+-define(Interrupt_Dingque,9999).

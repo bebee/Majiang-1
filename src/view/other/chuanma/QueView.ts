@@ -38,6 +38,12 @@ class QueView extends BaseSprite {
     }
 
     private clickHandler(e: egret.TouchEvent) {
+
+        if (game.roomPlayerOffline > 0) {
+            EffectUtils.showTips("有人掉线啦，请耐心等待一下。",5);
+            return;
+        }
+
         this.hide();
 
         var type: number;
@@ -54,7 +60,7 @@ class QueView extends BaseSprite {
                 break;
         }
 
-        game.isQueBoo = false;
+        game.isQue = false;
 
         SocketManager.getInstance().getGameConn().send(15, {
             "args": {

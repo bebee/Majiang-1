@@ -1273,6 +1273,10 @@
 				{
 					"compress":false,
 					"key":"yellow_game_btn"
+				},
+				{
+					"compress":false,
+					"key":"setting_progressbar2"
 				}
 			],
 			"sort":0
@@ -1309,6 +1313,10 @@
 		{
 			"compress":false,
 			"key":"lymj_bg"
+		},
+		{
+			"compress":false,
+			"key":"table_mask"
 		}
 	]
 }

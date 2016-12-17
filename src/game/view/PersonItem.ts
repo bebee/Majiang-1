@@ -10,9 +10,9 @@ class PersonItem extends BaseGameSprite {
     private lab_uid: eui.Label;
     private lab_description: eui.Label;
     private paiGroup: eui.Group;
-    private lab_fan: eui.Label;
     private lab_hu: eui.Label;
     private lab_gang: eui.Label;
+    private lab_zong: eui.Label;
 
     headIcon: HeadIcon;
     cardViews: CardView[];
@@ -58,9 +58,9 @@ class PersonItem extends BaseGameSprite {
         this.lab_uid.text = "" + this.data.uid;
         this.lab_nick.text = "" + this.data.nick;
         this.lab_description.text = "" + this.getDescription();
-        this.lab_fan.text = "合计:" + (this.data.fan ? this.data.fan : 0) + "番";
-        this.lab_hu.text = "    胡:" + this.data.cur;
-        this.lab_gang.text = "    杠:" + this.data.gang;
+        this.lab_hu.text = "胡:" + this.data.cur;
+        this.lab_gang.text = "杠:" + this.data.gang;
+        this.lab_zong.text = "合计:" + (this.data.gang + this.data.cur);
 
         this.showDown();
         this.showUp();
@@ -166,15 +166,21 @@ class PersonItem extends BaseGameSprite {
         }
 
         var hu_types: any[] = this.data.hu_type;
-        var types: any[] = [];
+        var types: any;
 
         var hu_desc: string = "";
         for (var i: number = 0; i < hu_types.length; i++) {
             types = hu_types[i];
+
+            if (typeof types == "number") {
+                hu_desc += GSConfig.huTypeMap[types] + " ";
+                continue;
+            }
+
             if (types.length < 2 || typeof types[1] == "object") {
                 continue;
             }
-            if (types[0] == 24 || types[0] == 25) {
+            if (types[0] == 24 || types[0] == 25 || types[0] == 49) {
                 hu_desc += "" + GSConfig.huTypeMap[types[0]] + "x" + types[1] + " ";
             }
             else {

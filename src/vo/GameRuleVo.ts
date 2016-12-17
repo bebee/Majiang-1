@@ -5,8 +5,7 @@
  */
 class GameRuleVo extends BaseVo {
 
-    law: GamePlayType = GamePlayType.xueliuchenghe;
-    ju: number = 4;
-    rate: GameRate = GameRate.rate_2;
+    quan: number = 4;
+    rate: number = 1;
     rules: any[];
 }

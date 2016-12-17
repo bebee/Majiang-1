@@ -56,7 +56,7 @@ class S8 {
                 // }
 
                 if (player.uid == game.player.uid) {
-                    game.roomOwner = player.pos == 1;
+                    game.isRoomOwner = player.pos == 1;
                     GSDataProxy.i.gData.firstInRoom = true;
                 }
             }

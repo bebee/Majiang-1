@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<e:Skin class="skins.CheckBox_SoundSkin" states="up,down,disabled,upAndSelected,downAndSelected,disabledAndSelected" xmlns:e="http://ns.egret.com/eui">
+<e:Skin class="skins.CheckBox_SoundSkin" states="up,down,disabled,upAndSelected,downAndSelected,disabledAndSelected" xmlns:e="http://ns.egret.com/eui" height="55">
     <e:Group width="100%" height="100%">
-        <e:layout>
-            <e:HorizontalLayout verticalAlign="middle"/>
-        </e:layout>
+			<e:layout>
+				<e:VerticalLayout horizontalAlign="center"/>
+			</e:layout>
         <e:Image fillMode="scale" alpha="1" alpha.disabled="0.5" alpha.down="0.7"
                  source="sound_open_btn"
                  source.downAndSelected="sound_close_btn"
                  source.disabledAndSelected="sound_close_btn" 
-                 source.upAndSelected="sound_close_btn"/>
+                 source.upAndSelected="sound_close_btn"/>
+			<e:Label textColor="0xA07A4B" verticalAlign="middle" fontFamily="微软雅黑" textAlign="center" size="18" id="labelDisplay" x="10" y="10"/>
     </e:Group>
 </e:Skin>

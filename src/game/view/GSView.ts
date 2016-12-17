@@ -342,14 +342,12 @@ class GSView extends egret.Sprite {
 
     //播放功能特效
     playFuncEffect(dir: number, action: number) {
-        if (action == 2) {
+        var texture = GameRes.getUI(GSConfig.funcSelectRes[GSConfig.actionPVP[action]]);
 
-            var texture = GameRes.getUI(GSConfig.funcSelectRes[GSConfig.actionPVP[action]]);
-            this.funcEffect.x = GSConfig.funcPlayPos[dir].x;
-            this.funcEffect.y = GSConfig.funcPlayPos[dir].y;
+        this.funcEffect.x = GSConfig.funcPlayPos[dir].x;
+        this.funcEffect.y = GSConfig.funcPlayPos[dir].y;
 
-            this.funcEffect.play(texture);
-        }
+        this.funcEffect.play(texture);
     }
 
     //播放换宝特效

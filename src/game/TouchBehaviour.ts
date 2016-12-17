@@ -27,7 +27,7 @@ class TouchBehaviour implements IGameTapEvent {
                     GSController.i.activateCard = null;
                 }
 
-                if (game.isHuBoo) {//胡牌状态
+                if (game.isHu) {//胡牌状态
                     GSController.i.delayAutoPushPai();
                 }
                 break;
@@ -100,7 +100,7 @@ class TouchBehaviour implements IGameTapEvent {
         if (GSController.i.jiesuanData) {
             //清理回合数据
             PublicVal.state = StateType.over;
-            game.prestart();
+            game.roomReady();
             GSController.i.showStateView();
             GSController.i.showTitleView(GSController.i.jiesuanData);
         }else{

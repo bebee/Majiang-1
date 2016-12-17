@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<e:Skin class="ActivityPanelSkin" width="880" height="570" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*">
+<e:Skin class="ActivityPanelSkin" width="806" height="468" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*">
 	<ns1:BgView left="0" right="0" top="0" bottom="0" skinName="BgViewSkin"/>
 	<e:Group left="13" bottom="30" top="110">
 		<e:Image source="activit_jian" y="92" x="104"/>

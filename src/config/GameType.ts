@@ -51,17 +51,17 @@ enum CardRaiseMode {
 }
 
 /**
- * 游戏玩法
+ * 中断类型
  */
-enum GamePlayType {
-    xuezhandaodi = 17, xueliuchenghe, sanren_2 = 20, sanren_3, siren_2
+enum InterruptType {
+    chi, peng, minggang, angang, ting, hu, gangshangkaihua, yipaoduoxiang, hujiaozhuanyi
 }
 
 /**
- * 游戏倍率(番数)
+ * 游戏玩法
  */
-enum GameRate {
-    rate_2 = 2, rate_3, rate_4
+enum PlayType {
+    xuezhandaodi = 17, xueliuchenghe, sanren_2 = 20, sanren_3, siren_2
 }
 
 /**

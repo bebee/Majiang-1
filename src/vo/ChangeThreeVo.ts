@@ -48,6 +48,7 @@ class ChangeThreeVo extends BaseDataVo {
         }
 
         if (this.cards.length >= 3) {
+            EffectUtils.showTips("最多只能选择3张牌，点击已选择的牌取消选择后才能选择其他牌。", 5);
             return false;
         }
 

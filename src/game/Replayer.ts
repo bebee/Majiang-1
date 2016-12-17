@@ -183,8 +183,8 @@ class Replayer implements IUpdate{
      [
      data([rules]),
      data([dui_num]),
-     data([cur_round]),
-     data([max_round])
+     data([roomRoundCur]),
+     data([roomRoundMax])
      ]
      Shou1 =
      [
@@ -277,12 +277,12 @@ class Replayer implements IUpdate{
     __action_6(arr,index:number){
         PublicVal.i.rules = FashionTools.formatRules(arr[1][0]);
         PublicVal.i.dui_num = arr[1][1];
-        PublicVal.i.cur_round = arr[1][2];
-        PublicVal.i.max_round = arr[1][3];
+        game.roomRoundCur = arr[1][2];
+        game.roomRoundMax = arr[1][3];
         PublicVal.i.bao = arr[1][4];
         PublicVal.i.zhuang = arr[1][5];
         PublicVal.i.zhuangFlag = 1 << this.returnDir(PublicVal.i.zhuang);
-        //console.log(PublicVal.i.rules,PublicVal.i.dui_num,PublicVal.i.cur_round,PublicVal.i.max_round);
+        //console.log(PublicVal.i.rules,PublicVal.i.dui_num,PublicVal.i.roomRoundCur,PublicVal.i.roomRoundMax);
     }
     //展示
     show(){

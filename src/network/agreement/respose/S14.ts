@@ -14,7 +14,7 @@ class S14 {
         var dialog: DissolutionPanel = StackManager.findDialog(DissolutionPanel, "DissolutionPanel");
 
         if (dialog) {
-            if (!game.manager.layerPanel.contains(dialog)) {
+            if (!LayerManager.gameLayer().panelLayer.contains(dialog)) {
                 dialog.show();
             }
 

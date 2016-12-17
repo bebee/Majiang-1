@@ -7,14 +7,8 @@ class game {
 
     //游戏类型
     static gameType: GameType = GameType.sichuan;
-
-    //服务器地址
-    static ip: any;
-    //服务器端口
-    static port: any;
-
-    //登录等待
-    static loginWaiting: boolean = false;
+    //版本号
+    static version: string = "0.1.0";
 
     //舞台
     static stage: egret.Stage;
@@ -24,9 +18,21 @@ class game {
     static askPanel: TipsAskPanel;
     //最顶层显示面板
     static topPanel: BasePanel;
+    //规则
+    static ruleVo: GameRuleVo;
+    //换三张
+    static changeThreeVo: ChangeThreeVo;
+    //解散房间
+    static dissolution: DissolutionVo;
 
-    //版本号
-    static version: string = "";  //0.2.0
+    //登录等待
+    static loginWaiting: boolean = false;
+
+    //服务器地址
+    static ip: any;
+    //服务器端口
+    static port: any;
+
     //用户
     static user: string;
     //牌风格
@@ -35,45 +41,44 @@ class game {
     static paiColor: number = 1;
     //玩家连接次数
     static connectCount: number = 0;
-    //牌局进度（圈数或者局数）
-    static matchSchedule: number = 0;
 
     //玩家信息
     static player: PlayerVo;
-    //当前房间ID
+    //房间ID
     static roomid: number = 0;
-    //当前房间规则
+    //房间玩法(血流血战等等)
+    static roomPlayType: PlayType;
+    //房间规则
     static roomRules: any[] = [];
-    //当前房间玩家
+    //当前局数
+    static roomRoundCur: number;
+    //最大局数
+    static roomRoundMax: number;
+    //房间玩家
     static roomPlayers: any = {};
-    //当前房间玩家最大数量
+    //房间玩家最大数量
     static roomPlayerMax: number = 4;
-    //当前房间玩家数量
-    static roomPlayerCount: number = 1;
+    //房间玩家当前数量
+    static roomPlayerCur: number = 0;
+    //房间玩家离线数量
+    static roomPlayerOffline: number = 0;
+    //房间玩家缺门记录
+    static roomQue: any = {};
+
     //是否是房主
-    static roomOwner:boolean = false;
-
-    //规则
-    static ruleVo: GameRuleVo;
-    //换三张
-    static changeThreeVo: ChangeThreeVo;
-
+    static isRoomOwner: boolean = false;
     //是否正在换牌中
-    static isChangeThreeBoo: boolean = false;
+    static isChangeThree: boolean = false;
     //是否正在订缺中
-    static isQueBoo: boolean = false;
+    static isQue: boolean = false;
     //是否正在胡牌中
-    static isHuBoo: boolean = false;
+    static isHu: boolean = false;
 
     //当前状态
     static status: GameStatus = GameStatus.gamestart;
     //当前状态是否完成
     static statusComplete: boolean = false;
 
-    //全部玩家的缺门记录
-    static allQue: any = {};
-    //解散房间
-    static dissolution: DissolutionVo;
     //战绩详情用户列表
     static recordInfos: any;
     //游戏提示播放顺序
@@ -126,17 +131,17 @@ class game {
         gData.pos2Dir[d] = 4;
     }
 
-    //游戏开始前状态
-    static prestart() {
+    //房间准备
+    static roomReady() {
         this.status = GameStatus.unknow;
         this.statusComplete = false;
-        this.allQue = {};
-        this.isHuBoo = false;
-        game.manager.dispatchEvent(EffectEventType.CleanAll);
+        this.roomQue = {};
+        this.isHu = false;
+        game.manager.dispatchEvent(EffectEvent.CleanAll);
     }
 
-    //清空房间信息
-    static cleanRoom() {
+    //清理房间
+    static roomClean() {
         game.roomid = 0;
         game.roomRules = [];
         game.roomPlayers = {};

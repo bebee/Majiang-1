@@ -34,6 +34,12 @@ class ChangeThreeView extends BaseSprite {
     }
 
     private clickHandler(e: egret.TouchEvent) {
+
+        if (game.roomPlayerOffline > 0) {
+            EffectUtils.showTips("有人掉线啦，请耐心等待一下。",5);
+            return;
+        }
+
         switch (e.currentTarget) {
             case this.btn_confirm:
                 if (game.changeThreeVo.cards.length < 3) {

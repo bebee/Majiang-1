@@ -98,9 +98,9 @@ class ChangeThreeAnimation extends BaseSprite {
         GSController.i.updateMJView(3);
         GSController.i.updateMJView(4);
 
-        game.isChangeThreeBoo = false;
-        if (game.isQueBoo) {
-            game.manager.dispatchEvent(EffectEventType.Que);
+        game.isChangeThree = false;
+        if (game.isQue) {
+            game.manager.dispatchEvent(EffectEvent.Que);
         }
     }
 

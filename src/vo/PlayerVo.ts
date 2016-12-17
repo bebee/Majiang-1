@@ -56,6 +56,6 @@ class PlayerVo extends BaseDataVo {
     update(data: any) {
         super.update(data);
 
-        this.sex = this.sex == GameGender.Male ? GameGender.Male : GameGender.Female;
+        this.sex = this.sex == Gender.male ? Gender.male : Gender.female;
     }
 }

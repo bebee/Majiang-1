@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="skins.CheckBox_Round_LeftSkin" states="up,down,disabled,upAndSelected,downAndSelected,disabledAndSelected" xmlns:e="http://ns.egret.com/eui" height="55">
+    <e:Group width="100%" height="100%">
+			<e:layout>
+				<e:VerticalLayout horizontalAlign="left"/>
+			</e:layout>
+        <e:Image fillMode="scale" alpha="1" alpha.disabled="0.5" alpha.down="0.7"
+                
+                 source.downAndSelected="sound_close_btn"
+                 source.disabledAndSelected="sound_close_btn" 
+                 source.upAndSelected="sound_close_btn" source="select_left"/>
+			<e:Label verticalAlign="middle" fontFamily="微软雅黑" textAlign="center" size="18" id="labelDisplay" x="10" y="10" textColor="0xA07A4B"/>
+    </e:Group>
+</e:Skin>

@@ -1,26 +1,26 @@
 <?xml version='1.0' encoding='utf-8'?>
-<e:Skin class="SettingPanelSkin" width="700" height="394" xmlns:e="http://ns.egret.com/eui" xmlns:mui="mui.*" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*">
+<e:Skin class="SettingPanelSkin" width="700" height="400" xmlns:e="http://ns.egret.com/eui" xmlns:mui="mui.*" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*">
 	<ns1:BgView left="0" right="0" top="0" bottom="0" skinName="BgViewSkin"/>
 	<e:Group horizontalCenter="0" top="100">
 		<e:Group verticalCenter="0">
 			<e:Group>
 				<e:Label text="音乐" x="28" y="115" size="24" fontFamily="微软雅黑" textColor="0xA97144" textAlign="center" verticalAlign="middle"/>
-				<e:HSlider id="slider_music" x="96" y="101" skinName="skins.HSliderSkin" width="220" value="100" maximum="100"/>
-				<e:CheckBox id="btn_music" x="338" y="109" skinName="skins.CheckBox_SoundSkin"/>
+				<mui:EHSlider id="slider_music" x="126" y="471" width="220" value="100" maximum="100" skinName="skins.EHSliderSkin"/>
+				<e:CheckBox id="btn_music" x="338" y="109" skinName="skins.CheckBox_SoundSkin" label="开启音乐"/>
 				<e:layout>
 					<e:HorizontalLayout verticalAlign="middle"/>
 				</e:layout>
 			</e:Group>
 			<e:Group x="190" y="282">
 				<e:Label textColor="0xA97144" verticalAlign="middle" text="音效" fontFamily="微软雅黑" textAlign="center" size="24"/>
-				<e:HSlider id="slider_sound" skinName="skins.HSliderSkin" width="220" value="100" maximum="100"/>
-				<e:CheckBox id="btn_sound" skinName="skins.CheckBox_SoundSkin"/>
+				<mui:EHSlider id="slider_sound" value="100" y="481" maximum="100" width="220" x="136" skinName="skins.EHSliderSkin"/>
+				<e:CheckBox id="btn_sound" skinName="skins.CheckBox_SoundSkin" label="开启音效"/>
 				<e:layout>
 					<e:HorizontalLayout verticalAlign="middle"/>
 				</e:layout>
 			</e:Group>
 			<e:layout>
-				<e:VerticalLayout/>
+				<e:VerticalLayout gap="30"/>
 			</e:layout>
 		</e:Group>
 		<e:Image source="setting_line" x="415" y="94" height="150"/>

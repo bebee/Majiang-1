@@ -27,10 +27,6 @@ class PublicVal {
     rules: string;
     //剩余牌数
     dui_num: number;
-    //当前局数
-    cur_round: number;
-    //总局数
-    max_round: number;
     //宝牌
     bao: any;
     //庄家pos

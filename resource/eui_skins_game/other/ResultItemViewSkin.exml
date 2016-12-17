@@ -15,10 +15,10 @@
 			<e:VerticalLayout gap="0"/>
 		</e:layout>
 	</e:Group>
-	<e:Group width="200" top="0" bottom="0" right="0">
-		<e:Label id="lab_fan" fontFamily="微软雅黑" size="26"/>
+	<e:Group width="200" top="0" bottom="0" right="0">
 		<e:Label id="lab_hu" size="20" fontFamily="微软雅黑" x="10" y="10"/>
 		<e:Label id="lab_gang" y="20" size="20" fontFamily="微软雅黑" x="20"/>
+		<e:Label id="lab_zong" fontFamily="微软雅黑" size="26" height="40" verticalAlign="bottom"/>
 		<e:layout>
 			<e:VerticalLayout gap="10"/>
 		</e:layout>

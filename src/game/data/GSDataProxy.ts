@@ -37,9 +37,9 @@ class GSDataProxy {
 
         PublicVal.i.dui_num = obj.dui_num;
 
-        PublicVal.i.cur_round = obj.cur_round;
+        game.roomRoundCur = obj.roomRoundCur;
 
-        PublicVal.i.max_round = obj.max_round;
+        game.roomRoundMax = obj.roomRoundMax;
 
         switch (this.gData.rebackData.ex_status) {
             case 0://初始化
@@ -111,7 +111,7 @@ class GSDataProxy {
                 }
 
                 if (dir == 1) {
-                    game.isHuBoo = true;
+                    game.isHu = true;
 
                     if (lastPai && lastPai != "no") {
                         egret.setTimeout(function () {
@@ -129,7 +129,7 @@ class GSDataProxy {
             }
 
             if (game.status == GameStatus.gamestart) {
-                game.allQue[dir] = person.que;
+                game.roomQue[dir] = person.que;
             }
 
             GSData.i.gangCurs[dir] = cur;
@@ -357,7 +357,7 @@ class GSDataProxy {
 
             this.gData.funcSelects.push({index: 6, action: 99, pai: obj[99]});
 
-            if (game.isHuBoo) {
+            if (game.isHu) {
 
             }
         }
@@ -456,15 +456,9 @@ class GSDataProxy {
         var poolPai: any = null;
 
         switch (action) {
-
             case 1://吃
-
-                GameSound.PlaySound("chi_" + this.gData.getSexByPos(pos));
-
+                game.manager.playEffect(InterruptType.chi, pos);
                 this.gData.addFuncPai(5, dir, action, pai);
-
-                //funcPais.push({sort:0,action:action,pai:pai});
-
                 if (dir == 1) {
                     //删除手牌数据
                     this.gData.removeOwnHandPais([pai[0], pai[2]]);
@@ -473,15 +467,10 @@ class GSDataProxy {
                     this.gData.removeOtherHandPai(dir, 2);
                 }
                 poolPai = pai[1];
-                GameSound.PlaySound("sound_down");
                 break;
             case 2://碰
-                GameSound.PlaySound("cha_" + this.gData.getSexByPos(pos));
-
+                game.manager.playEffect(InterruptType.peng, pos);
                 this.gData.addFuncPai(4, dir, action, pai);
-
-                //funcPais.push({sort:1,action:action,pai:pai});
-
                 if (dir == 1) {
                     //删除手牌数据
                     this.gData.removeOwnHandPais([pai[0], pai[2]]);
@@ -490,39 +479,25 @@ class GSDataProxy {
                     this.gData.removeOtherHandPai(dir, 2);
                 }
                 poolPai = pai[1];
-                GameSound.PlaySound("sound_down");
+                break;
+            case 4://听牌
                 break;
             case 22://幺九杠
-                //number 判断是幺杠 还是九杠
-                if (pai[0].number == 1) {//
-                    GameSound.PlaySound("yaogang_" + this.gData.getSexByPos(pos));
-
-                } else {
-
-                    GameSound.PlaySound("jiugang_" + this.gData.getSexByPos(pos));
-
-                }
-
-                this.gData.addFuncPai(3, dir, action, pai, pai[0].number, true);
-
-                if (dir == 1) {
-                    //删除手牌数据 3
-                    this.gData.removeOwnHandPais([pai[0], pai[1], pai[2]]);
-                } else {
-                    this.gData.removeOtherHandPai(dir, 3);
-                }
-                GameSound.PlaySound("sound_down");
+                // GameSound.PlaySound((pai[0].number == 1 ? "yaogang_" : "jiugang_") + this.gData.getSexByPos(pos));
+                // this.gData.addFuncPai(3, dir, action, pai, pai[0].number, true);
+                // if (dir == 1) {
+                //     //删除手牌数据 3
+                //     this.gData.removeOwnHandPais([pai[0], pai[1], pai[2]]);
+                // } else {
+                //     this.gData.removeOtherHandPai(dir, 3);
+                // }
+                // GameSound.PlaySound("sound_down");
                 break;
             case 23://旋风杠
-                console.log("旋风杠未解析");
                 break;
             case 24://暗杠
-                // GameSound.PlaySound("gang_" + this.gData.getSexByPos(pos));
-                GameSound.PlaySound("sound_xiayu");
-
+                game.manager.playEffect(InterruptType.angang, pos);
                 this.gData.addFuncPai(1, dir, action, pai);
-
-                //funcPais.push({sort:2,action:action,pai:pai});
                 //删除手牌数据 3
                 if (dir == 1) {
                     //删除手牌数据 4
@@ -530,17 +505,14 @@ class GSDataProxy {
                 } else {
                     this.gData.removeOtherHandPai(dir, 4);
                 }
-                GameSound.PlaySound("sound_down");
 
-                game.manager.dispatchEvent(EffectEventType.Xiayu, dir);//下雨特效
+                game.manager.dispatchEvent(EffectEvent.Xiayu, dir);//下雨特效
                 break;
             case 25://明杠分(两种 1.3张手牌杠池牌 2.已经碰牌再明杠)
-                // GameSound.PlaySound("gang_" + this.gData.getSexByPos(pos));
-                GameSound.PlaySound("sound_guafeng");
+                game.manager.playEffect(InterruptType.minggang, pos);
+                this.gData.addFuncPai(2, dir, action, pai);
 
                 var tmpPai = pai[0];
-
-                this.gData.addFuncPai(2, dir, action, pai);
                 //有碰就删除掉
                 var removeLen = PublicVal.i.removePengFunc(dir, tmpPai) ? 1 : 3;
 
@@ -555,73 +527,54 @@ class GSDataProxy {
                     this.gData.removeOtherHandPai(dir, removeLen);
                 }
                 if (removeLen == 3) poolPai = tmpPai;
-                GameSound.PlaySound("sound_down");
 
-                game.manager.dispatchEvent(EffectEventType.Guafeng, dir);//刮风特效
+                game.manager.dispatchEvent(EffectEvent.Guafeng, dir);//刮风特效
                 break;
             case 26://中发白杠
-
-                GameSound.PlaySound("xuanfenggang_" + this.gData.getSexByPos(pos));
-
-                this.gData.addFuncPai(0, dir, action, pai, 0, true);
-
-                //funcPais.push({sort:2,action:action,pai:pai,ever:[1,1,1]});
-
-                if (dir == 1) {
-                    //删除手牌数据 3
-                    this.gData.removeOwnHandPais([pai[0], pai[1], pai[2]]);
-                } else {
-                    this.gData.removeOtherHandPai(dir, 3);
-                }
-                GameSound.PlaySound("sound_down");
+                // GameSound.PlaySound("xuanfenggang_" + this.gData.getSexByPos(pos));
+                // this.gData.addFuncPai(0, dir, action, pai, 0, true);
+                // if (dir == 1) {
+                //     //删除手牌数据 3
+                //     this.gData.removeOwnHandPais([pai[0], pai[1], pai[2]]);
+                // } else {
+                //     this.gData.removeOtherHandPai(dir, 3);
+                // }
+                // GameSound.PlaySound("sound_down");
                 break;
             case 27://幺九杠 补蛋
-
-                GameSound.PlaySound("bugang_" + this.gData.getSexByPos(pos));
-
-                pai.length -= 3;
-
-                var everPai = PublicVal.i.getPai(dir, 22, pai[0].number);
-
-                var everSrc = [1, 1, 1];
-
-                for (var i: number = 0; i < pai.length; i++) {
-
-                    everSrc[pai[i].type - 1]++;
-
-                }
-                everPai.ever = everSrc;
-
-                if (dir == 1) {
-                    //删除手牌数据 3
-                    this.gData.removeOwnHandPais([pai[0]]);
-                } else {
-                    this.gData.removeOtherHandPai(dir, 1);
-                }
-                GameSound.PlaySound("sound_down");
+                // GameSound.PlaySound("bugang_" + this.gData.getSexByPos(pos));
+                // pai.length -= 3;
+                // var everPai = PublicVal.i.getPai(dir, 22, pai[0].number);
+                // var everSrc = [1, 1, 1];
+                // for (var i: number = 0; i < pai.length; i++) {
+                //     everSrc[pai[i].type - 1]++;
+                //
+                // }
+                // everPai.ever = everSrc;
+                // if (dir == 1) {
+                //     //删除手牌数据 3
+                //     this.gData.removeOwnHandPais([pai[0]]);
+                // } else {
+                //     this.gData.removeOtherHandPai(dir, 1);
+                // }
+                // GameSound.PlaySound("sound_down");
                 break;
             case 28://中发白  补蛋
-
-                GameSound.PlaySound("bugang_" + this.gData.getSexByPos(pos));
-
-                pai.length -= 3;
-
-                var everPai = PublicVal.i.getPai(dir, 26);
-
-                var everSrc = [1, 1, 1];
-
-                for (var i: number = 0; i < pai.length; i++) {
-                    everSrc[pai[i].number - 1]++;
-                }
-                everPai.ever = everSrc;
-
-                if (dir == 1) {
-                    //删除手牌数据 3
-                    this.gData.removeOwnHandPais([pai[0]]);
-                } else {
-                    this.gData.removeOtherHandPai(dir, 1);
-                }
-                GameSound.PlaySound("sound_down");
+                // GameSound.PlaySound("bugang_" + this.gData.getSexByPos(pos));
+                // pai.length -= 3;
+                // var everPai = PublicVal.i.getPai(dir, 26);
+                // var everSrc = [1, 1, 1];
+                // for (var i: number = 0; i < pai.length; i++) {
+                //     everSrc[pai[i].number - 1]++;
+                // }
+                // everPai.ever = everSrc;
+                // if (dir == 1) {
+                //     //删除手牌数据 3
+                //     this.gData.removeOwnHandPais([pai[0]]);
+                // } else {
+                //     this.gData.removeOtherHandPai(dir, 1);
+                // }
+                // GameSound.PlaySound("sound_down");
                 break;
             case 99://胡牌
                 var mjview: MJView = GSController.i.gsView.MJViews[dir];
@@ -632,17 +585,14 @@ class GSDataProxy {
                     for (var i: number = 0; i < hu_types.length; i++) {
                         var val: any = hu_types[i];
                         if (val == 19) {//杠上开花
-                            GameSound.PlaySound("zimo_" + this.gData.getSexByPos(data.turn));
-                            game.manager.dispatchEvent(EffectEventType.Gangshangkaihua, dir);
+                            game.manager.playEffect(InterruptType.gangshangkaihua, data.turn);
                         }
                         else if (val[0] == 41) {//呼叫转移
-                            GameSound.PlaySound("dianpao_" + this.gData.getSexByPos(data.turn));
-                            game.manager.dispatchEvent(EffectEventType.Hujiaozhuanyi, [dir, this.gData.getDir(val[1])]);
+                            game.manager.playEffect(InterruptType.hujiaozhuanyi, data.turn, this.gData.getDir(val[1]));
                         }
                         else if (val[0] == 40) {//一炮多响
                             var posArr: any = val[1];
                             var dirArr: any = [];
-                            var timeDelay = 300;
                             for (var j: number = 0; j < posArr.length; j++) {
                                 dirArr.push(this.gData.getDir(posArr[j]));
                                 if (dir != this.gData.getDir(posArr[j])) {
@@ -650,35 +600,26 @@ class GSDataProxy {
                                     mjview.pushHu(pai);
                                 }
                                 if (this.gData.getDir(posArr[j]) == 1) {
-                                    game.isHuBoo = true;
+                                    game.isHu = true;
                                 }
-
-                                egret.setTimeout(GameSound.PlaySound, GameSound, timeDelay * i, "dianpao_" + this.gData.getSexByPos(posArr[i]));
-                                // GameSound.PlaySound("dianpao_" + this.gData.getSexByPos(posArr[i]));
                             }
-                            game.manager.dispatchEvent(EffectEventType.Yipaoduoxiang, dirArr);
+
+                            game.manager.playEffect(InterruptType.yipaoduoxiang, posArr[i], dirArr);
                         }
                     }
                 }
                 else {
-                    GameSound.PlaySound((this.gData.turnDir != dir ? "dianpao_" : "zimo_") + this.gData.getSexByPos(data.turn));
+                    game.manager.playEffect(InterruptType.hu, data.turn, this.gData.turnDir == dir);
                 }
 
                 if (this.gData.turnDir != dir) {//接炮胡
                     poolPai = pai;
                 }
 
-                if (dir == 1) {
-                    game.isHuBoo = true;
-                    //删除手牌数据 3
-                    if (this.gData.getDir(pai.pos) == 1) {
-                        this.gData.removeOwnHandPais([pai]);
-                    }
-                } else {
-                    this.gData.removeOtherHandPai(dir, 1);
-                }
-                break;
-            case 4://听牌
+                dir == 1 && (game.isHu = true);
+
+                dir == 1 && this.gData.getDir(pai.pos) == 1 && this.gData.removeOwnHandPais([pai]);
+                dir != 1 && this.gData.removeOtherHandPai(dir, 1);
                 break;
             default:
                 console.log("未解析的功能菜单", action);
@@ -697,21 +638,15 @@ class GSDataProxy {
 
         //删除池子牌显示
         if (poolPai && poolPai.pos > 0) {
-            var poolPaiDir = GSData.i.getDir(poolPai.pos);
-
-            PublicVal.i.popPoolPai(poolPaiDir);
-            GSController.i.removePoolCard(poolPaiDir);
+            PublicVal.i.popPoolPai(GSData.i.getDir(poolPai.pos));
+            GSController.i.removePoolCard(GSData.i.getDir(poolPai.pos));
         }
 
         GSController.i.setArrowDir(dir);
         GSController.i.updateMJView(dir);
-        GSController.i.playEffect(dir, action);
+        // GSController.i.playEffect(dir, action);
 
-        if (dir == 1) {
-            GSController.i.playTimeEffect(true, true);
-        } else {
-            GSController.i.playTimeEffect(true, false);
-        }
+        GSController.i.playTimeEffect(true, dir == 1);
     }
 
     //S2C 更新打入池中的牌子
@@ -889,7 +824,8 @@ class GSDataProxy {
     S2C_RoomPlayers() {
         if(!this.gData.rebackData)this.gData.zhuangPos = 0;
 
-        game.roomPlayerCount = 0;
+        game.roomPlayerCur = 0;
+        game.roomPlayerOffline = 0;
         this.gData.roomPlayers = [];
 
         var leave_uid = null;
@@ -914,7 +850,8 @@ class GSDataProxy {
                     if (this.gData.roundStarted == false) {
                         this.gData.readyFlag |= 1 << player.dir;
                     }
-                    game.roomPlayerCount++;
+                    game.roomPlayerCur++;
+                    game.roomPlayerOffline += player.status == "offline" ? 1 : 0;
                     break;
             }
         }
@@ -942,7 +879,7 @@ class GSDataProxy {
                 this.gData.rebackData = null;
             }
             else {
-                game.prestart();
+                game.roomReady();
             }
         }
 
@@ -994,7 +931,7 @@ class GSDataProxy {
     //同步开局牌的信息(自己牌)
     S2C_OwnCardInfo(obj: any) {
 
-        game.prestart();
+        game.roomReady();
 
         var paiLen: number = obj.data.pai.length;
 
@@ -1002,8 +939,8 @@ class GSDataProxy {
 
         PublicVal.i.bao = obj.data.bao;
 
-        PublicVal.i.cur_round = obj.data.cur_round;
-        PublicVal.i.max_round = obj.data.max_round;
+        game.roomRoundCur = obj.data.roomRoundCur;
+        game.roomRoundMax = obj.data.roomRoundMax;
 
         PublicVal.i.allPais[2].handPais = new Array(13);
         PublicVal.i.allPais[3].handPais = new Array(13);
@@ -1056,7 +993,7 @@ class GSDataProxy {
             GSController.i.startGame();
 
             if (game.status == GameStatus.changeThree && !game.statusComplete) {
-                game.manager.dispatchEvent(EffectEventType.ChangeThree);
+                game.manager.dispatchEvent(EffectEvent.ChangeThree);
             }
         }
     }

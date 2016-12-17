@@ -18,7 +18,7 @@
 			<e:VerticalLayout horizontalAlign="center"/>
 		</e:layout>
 	</e:Group>
-	<e:Group width="682" bottom="31" right="24" height="430">
+	<e:Group bottom="31" right="24" left="173" top="109">
 		<e:Image source="panel_1" left="0" bottom="0" top="0" scale9Grid="20,20,23,15" right="0" x="10" y="10" locked="true"/>
 		<e:Scroller id="scroller" left="10" right="10" top="10" bottom="10">
 			<e:Group id="group">

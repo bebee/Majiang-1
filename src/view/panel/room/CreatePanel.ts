@@ -9,10 +9,11 @@ class CreatePanel extends BasePanel {
     private btn_start: mui.EButton;
 
     private xueliuView: CreateXueliuView;
+    private xuezhanView: CreateXuezhanView;
 
     private selectAll: boolean;
 
-    private ruleVo: GameRuleVo;
+    private playType: PlayType = PlayType.xueliuchenghe;
 
     public constructor() {
         super();
@@ -26,9 +27,8 @@ class CreatePanel extends BasePanel {
         this.bgView.setType(BgViewType.curtain);
         this.bgView.setTitle("create_btn");
 
-        this.ruleVo = game.ruleVo;
-
         this.xueliuView = new CreateXueliuView();
+        this.xuezhanView = new CreateXuezhanView();
 
         this.initPanel();
 
@@ -41,10 +41,10 @@ class CreatePanel extends BasePanel {
     private clickHandler(e: egret.TouchEvent) {
         switch (e.currentTarget) {
             case this.btn_xueliu:
-                this.ruleVo.law = GamePlayType.xueliuchenghe;
+                this.playType = PlayType.xueliuchenghe;
                 break;
             case this.btn_xuezhan:
-                this.ruleVo.law = GamePlayType.xuezhandaodi;
+                this.playType = PlayType.xuezhandaodi;
                 break;
             case this.btn_start:
                 this.startGame();
@@ -72,35 +72,33 @@ class CreatePanel extends BasePanel {
             arr[i].enabled = true;
         }
 
-        switch (this.ruleVo.law) {
-            case GamePlayType.xueliuchenghe:
+        switch (this.playType) {
+            case PlayType.xueliuchenghe:
+                this.viewGroup.addChild(this.xueliuView);
+                this.xueliuView.update();
                 this.btn_xueliu.enabled = false;
-                this.viewGroup.addChild(this.xueliuView);
-                this.xueliuView.update();
                 break;
-            case GamePlayType.xuezhandaodi:
+            case PlayType.xuezhandaodi:
+                this.viewGroup.addChild(this.xuezhanView);
+                this.xuezhanView.update();
                 this.btn_xuezhan.enabled = false;
-                this.viewGroup.addChild(this.xueliuView);
-                this.xueliuView.update();
                 break;
-            case GamePlayType.sanren_2:
+            case PlayType.sanren_2:
                 break;
-            case GamePlayType.sanren_3:
+            case PlayType.sanren_3:
                 break;
-            case GamePlayType.siren_2:
+            case PlayType.siren_2:
                 break;
         }
     }
 
     private startGame(): void {
-        game.matchSchedule = this.ruleVo.ju;
-
         //创建房间
         SocketManager.getInstance().getGameConn().send(2, {
             "args": {
                 "type": game.gameType,
-                "round": this.ruleVo.ju,
-                "rules": this.ruleVo.rules,
+                "round": game.ruleVo.quan,
+                "rules": game.ruleVo.rules,
                 "pass": "0"
             }
         });

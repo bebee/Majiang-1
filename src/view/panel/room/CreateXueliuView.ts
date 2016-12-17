@@ -3,7 +3,7 @@
  * @Author Ace.c
  * @Create 2016-12-06 18:24
  */
-class CreateXueliuView extends BaseSprite {
+class CreateXueliuView extends BaseGameSprite {
 
     private btn_ju: eui.Image;
     private btn_ju4: eui.Image;
@@ -24,8 +24,10 @@ class CreateXueliuView extends BaseSprite {
     private btn_rule6: eui.CheckBox;
     private btn_rule7: eui.CheckBox;
 
-    private ju: number;
-    private rate: GameRate;
+    //圈数
+    private quan: number = 1;
+    //番数
+    private rate: number = 2;
 
     private ruleVo: GameRuleVo;
 
@@ -42,46 +44,27 @@ class CreateXueliuView extends BaseSprite {
 
         this.btn_ju.touchEnabled = false;
 
-        this.ju = 4;
-        this.rate = 2;
-
         this.update();
 
         this.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickHandler, this);
-
-        // this.btn_ju4.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickHandler, this);
-        // this.btn_ju8.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickHandler, this);
-        //
-        // this.btn_fan0.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickHandler, this);
-        // this.btn_fan1.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickHandler, this);
-        // this.btn_fan2.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickHandler, this);
-        //
-        // this.btn_rule0.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickHandler, this);
-        // this.btn_rule1.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickHandler, this);
-        // this.btn_rule2.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickHandler, this);
-        // this.btn_rule3.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickHandler, this);
-        // this.btn_rule4.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickHandler, this);
-        // this.btn_rule5.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickHandler, this);
-        // this.btn_rule6.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickHandler, this);
-        // this.btn_rule7.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickHandler, this);
     }
 
     private clickHandler(e: egret.TouchEvent) {
         switch (e.target) {
             case this.btn_ju4:
-                this.ju = 4;
+                this.quan = 1;
                 break;
             case this.btn_ju8:
-                this.ju = 8;
+                this.quan = 2;
                 break;
             case this.btn_fan0:
-                this.rate = GameRate.rate_2;
+                this.rate = 2;
                 break;
             case this.btn_fan1:
-                this.rate = GameRate.rate_3;
+                this.rate = 3;
                 break;
             case this.btn_fan2:
-                this.rate = GameRate.rate_4;
+                this.rate = 4;
                 break;
         }
 
@@ -89,24 +72,24 @@ class CreateXueliuView extends BaseSprite {
     }
 
     update() {
-        switch (this.ju) {
-            case 4:
+        switch (this.quan) {
+            case 1:
                 this.btn_ju.x = 0;
                 this.lab_ju4.textColor = 0xff2f19;
                 this.lab_ju8.textColor = 0xA07A4B;
                 break;
-            case 8:
+            case 2:
                 this.btn_ju.x = 400;
                 this.lab_ju4.textColor = 0xA07A4B;
                 this.lab_ju8.textColor = 0xA07A4B;
                 break;
         }
 
-        this.ruleVo.ju = this.ju;
+        this.ruleVo.quan = this.quan;
         this.ruleVo.rate = this.rate;
-        this.ruleVo.rules = [];
 
-        this.ruleVo.rules.push(this.ruleVo.law);
+        this.ruleVo.rules = [];
+        this.ruleVo.rules.push(PlayType.xueliuchenghe);
         this.ruleVo.rules.push([19, this.rate]);
 
         var box: eui.CheckBox;

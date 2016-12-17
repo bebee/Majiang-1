@@ -87,7 +87,7 @@ class GSData{
         this.roundReset();
 
         PublicVal.state = StateType.ready;
-        PublicVal.i.cur_round = 1;
+        game.roomRoundCur = 1;
         this.firstInRoom = false;
         this.roundStarted = false;
         this.readyFlag = 0;

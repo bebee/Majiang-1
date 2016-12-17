@@ -1,49 +1,49 @@
 /**
  * Created by Administrator on 2016/11/26.
  */
-class FashionTools{
+class FashionTools {
 
     //自动出牌
-    static autoPush()
-    {
+    static autoPush() {
 
-       /* if(GSConfig.auto) {
+        /* if(GSConfig.auto) {
 
-            var pai = GSData.i.getCatchPai(1);
+         var pai = GSData.i.getCatchPai(1);
 
-            SocketManager.getInstance().getGameConn().send(4, {"args": pai});
-        }*/
+         SocketManager.getInstance().getGameConn().send(4, {"args": pai});
+         }*/
     }
+
     //自动过
-    static autoPass(){
+    static autoPass() {
 
-       /* if(GSConfig.auto) {
+        /* if(GSConfig.auto) {
 
-            SocketManager.getInstance().getGameConn().send(15, {"args": {"action": 0, "pai": []}});
+         SocketManager.getInstance().getGameConn().send(15, {"args": {"action": 0, "pai": []}});
 
-            GSController.i.hideFuncSelectMenu();
+         GSController.i.hideFuncSelectMenu();
 
 
-            var pais = GSData.i.getHandPais(1);
+         var pais = GSData.i.getHandPais(1);
 
-            if(pais){
+         if(pais){
 
-                if(GSConfig.handLens[pais.length]) {
+         if(GSConfig.handLens[pais.length]) {
 
-                    FashionTools.autoPush();
-                }
-            }
+         FashionTools.autoPush();
+         }
+         }
 
-        }*/
+         }*/
     }
 
     /*显示类型 标准/精致
      * */
-    static setViewType(type:number){
-        if(type == 1) {
+    static setViewType(type: number) {
+        if (type == 1) {
             GSConfig.posRulePlus[1] = GSConfig.posRule[1];
             GSConfig.handPosPlus[1] = GSConfig.gameHandPos[1];
-        }else{
+        } else {
             GSConfig.posRulePlus[1] = GSConfig.posRule[5];
             GSConfig.handPosPlus[1] = GSConfig.gameHandPos[5];
         }
@@ -51,13 +51,13 @@ class FashionTools{
     }
 
     /*
-        设置游戏牌风格
+     设置游戏牌风格
      */
-    static setGameStyle(type:number){
-        if(type == 1) {
+    static setGameStyle(type: number) {
+        if (type == 1) {
             GSConfig.card_bg_style = GSConfig.soft_card_bg_style;
             GSConfig.table_bg_res = GSConfig.soft_table_bg_res;
-        }else{
+        } else {
             GSConfig.card_bg_style = GSConfig.normal_card_bg_style;
             GSConfig.table_bg_res = GSConfig.normal_table_bg_res;
         }
@@ -66,9 +66,9 @@ class FashionTools{
 
 
     /*
-        格式化规则文字
+     格式化规则文字
      */
-    static formatRules(rules:number[]) {
+    static formatRules(rules: number[]) {
 
         var ruleStr: string = "";
 
@@ -80,18 +80,19 @@ class FashionTools{
         }
         return ruleStr;
     }
+
     /*
-        格式化牌型
+     格式化牌型
      */
-    static formatPai(type:number,paiNums:number[]){
+    static formatPai(type: number, paiNums: number[]) {
 
         var arr = [];
 
-        if(paiNums){
+        if (paiNums) {
 
-            for(var i:number = 0 ; i < paiNums.length;i++){
+            for (var i: number = 0; i < paiNums.length; i++) {
 
-                arr.push({type:type,number:paiNums[i]});
+                arr.push({type: type, number: paiNums[i]});
             }
 
         }
@@ -100,30 +101,44 @@ class FashionTools{
     }
 
     //排序手牌
-    static sortPai(pais:any = null){
-
+    static sortPai(pais: any = null) {
         //if(pais == null) pais = PublicVal.i.allPais[1].handPais;
-        pais.sort((a,b)=>{
+
+        pais.sort((a, b)=> {
             var _a = a.type * 10 + a.number;
             var _b = b.type * 10 + b.number;
-            if(_a > _b) return 1;
-            if(_a == _b) return 0;
-            if(_a<_b) return -1;
+
+            if (a.type == game.roomQue[1]) {
+                _a += 100;
+            }
+
+            if (b.type == game.roomQue[1]) {
+                _b += 100;
+            }
+
+            if (_a > _b) {
+                return 1;
+            }
+            else if (_a == _b) {
+                return 0;
+            }
+            else if (_a < _b) {
+                return -1;
+            }
         });
     }
 
     //移除队列某张牌
-    static removePai(list:any,pai:any){
+    static removePai(list: any, pai: any) {
 
-        for(var i:number = 0 ; i < list.length;i++){
+        for (var i: number = 0; i < list.length; i++) {
 
-            if(list[i].type== pai.type  && list[i].number == pai.number){
+            if (list[i].type == pai.type && list[i].number == pai.number) {
 
-                list.splice(i,1);
+                list.splice(i, 1);
 
                 break;
             }
         }
     }
-
 }

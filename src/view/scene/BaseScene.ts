@@ -12,16 +12,16 @@ class BaseScene extends BaseGameSprite {
 
         this.top = this.bottom = this.left = this.right = 0;
 
-        if (!this.manager.layerScene.contains(this)) {
-            this.manager.layerScene.addChild(this);
+        if (!LayerManager.gameLayer().sceneLayer.contains(this)) {
+            LayerManager.gameLayer().sceneLayer.addChild(this);
         }
     }
 
     hide(): void {
         super.hide();
 
-        if (this.manager.layerScene.contains(this)) {
-            this.manager.layerScene.removeChild(this);
+        if (LayerManager.gameLayer().sceneLayer.contains(this)) {
+            LayerManager.gameLayer().sceneLayer.removeChild(this);
         }
     }
 }

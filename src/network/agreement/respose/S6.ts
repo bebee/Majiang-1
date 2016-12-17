@@ -7,7 +7,7 @@ class S6 {
 
         console.log("解散房间！");
 
-        game.cleanRoom();
+        game.roomClean();
 
         GSController.i.exit();
 

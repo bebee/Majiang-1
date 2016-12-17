@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <e:Skin class="YipaoduoxiangViewSkin" width="960" height="640" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
-	<e:Rect left="0" right="0" top="0" bottom="0" fillAlpha="0.3" locked="true"/>
+	<e:Image source="table_mask" left="0" top="0" right="0" bottom="0" y="20" x="20"/>
 	<e:Image id="icon2" x="294" y="328" source="room_yipaoduoxiang"/>
 	<e:Image source="room_yipaoduoxiang" y="338" x="304" id="icon0"/>
 	<e:Image source="room_yipaoduoxiang" y="348" id="icon1" x="314"/>

@@ -176,8 +176,8 @@ class Weixin {
 
                 body.desc = "房　主：" + name + " 房间号：" + strroomid;
 
-                if (game.matchSchedule > 0) {
-                    body.desc += "【" + game.matchSchedule + "圈】" + PublicVal.i.rules;
+                if (game.roomRoundMax > 0) {
+                    body.desc += "【" + game.roomRoundMax + "局】" + PublicVal.i.rules;
                 }
                 else {
                     body.desc += " " + PublicVal.i.rules;

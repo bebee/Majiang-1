@@ -8,7 +8,7 @@ class RulePanel extends BasePanel {
 
     private text: eui.Label;
 
-    private type: GamePlayType;
+    private type: PlayType;
 
     public constructor() {
         super();
@@ -21,7 +21,7 @@ class RulePanel extends BasePanel {
 
         this.bgView.setTitle("rule_txt");
 
-        this.type = GamePlayType.xueliuchenghe;
+        this.type = PlayType.xueliuchenghe;
 
         this.decode();
 
@@ -36,11 +36,11 @@ class RulePanel extends BasePanel {
         switch (e.currentTarget) {
             case this.btn_xueliu:
                 this.btn_xuezhan.enabled = true;
-                this.type = GamePlayType.xueliuchenghe;
+                this.type = PlayType.xueliuchenghe;
                 break;
             case this.btn_xuezhan:
                 this.btn_xueliu.enabled = true;
-                this.type = GamePlayType.xuezhandaodi;
+                this.type = PlayType.xuezhandaodi;
                 break;
         }
 
@@ -51,10 +51,10 @@ class RulePanel extends BasePanel {
 
         var key: string;
         switch (this.type) {
-            case GamePlayType.xuezhandaodi:
+            case PlayType.xuezhandaodi:
                 key = "rule_xuezhandaodi";
                 break;
-            case GamePlayType.xueliuchenghe:
+            case PlayType.xueliuchenghe:
             default:
                 key = "rule_xueliuchenghe";
                 break;
