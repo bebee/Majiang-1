@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
-<e:Skin class="skins.TextInputSkin" minHeight="40" minWidth="300" states="normal,disabled,normalWithPrompt,disabledWithPrompt" xmlns:e="http://ns.egret.com/eui">
-	<e:Image left="0" right="0" top="0" bottom="0" source="money_bg" scale9Grid="20,18,20,3"/>
+<e:Skin class="skins.TextInputSkin" minHeight="40" minWidth="300" states="normal,disabled,normalWithPrompt,disabledWithPrompt" xmlns:e="http://ns.egret.com/eui" height="40">
+	<e:Image left="0" right="0" top="0" bottom="0" source="record_img2" scale9Grid="9,11,44,34"/>
  	<e:EditableText id="textDisplay" left="10" right="10"
-	                width="100%"  fontFamily="微软雅黑" text="" verticalAlign="middle" textColor="0xFFFFFF" textColor.disabled="0xFFFFFF" top="10" bottom="10" size="20"/>
+	                width="100%"  fontFamily="微软雅黑" verticalAlign="middle" textColor="0xFFFFFF" textColor.disabled="0xFFFFFF" top="10" bottom="10" size="20"/>
 	<e:Label id="promptDisplay" left="10" right="10"
-	                width="100%" touchEnabled="false" includeIn="normalWithPrompt,disabledWithPrompt" fontFamily="微软雅黑" verticalAlign="middle" textColor="0xBBB5B5" top="10" bottom="10" size="20"/>
+	                width="100%" touchEnabled="false" includeIn="normalWithPrompt,disabledWithPrompt" fontFamily="微软雅黑" verticalAlign="middle" top="10" bottom="10" size="20" textColor="0xEBEBEB"/>
 </e:Skin>

@@ -4,7 +4,7 @@
 	<e:Image id="img_kuang_normal" source="head_kuang_bg" x="-10" y="-10" width="98" height="98"/>
 	<e:Image id="img_kuang_owner" source="game_head_room" x="0" y="-7" width="87" height="88" includeIn="ingame,intable"/>
 	<e:Image id="img_zhuang" source="game_zhuang" x="-11" y="-10" includeIn="ingame" visible="false"/>
-	<e:Image id="img_que" source="img_dq_1" x="47" y="47" width="30" height="30" includeIn="ingame" visible="false"/>
+	<e:Image id="img_que" source="img_dq_1" x="47" y="47" width="30" height="30" includeIn="ingame"/>
 	<e:Label id="lab_nick" horizontalCenter="0" top="80" fontFamily="微软雅黑" size="20" includeIn="intable"/>
 	<e:Label id="lab_uid" horizontalCenter="0" fontFamily="微软雅黑" size="20" top="100" x="10" y="10" includeIn="intable"/>
 	<e:Label id="lab_fen" y="20" horizontalCenter="0" fontFamily="微软雅黑" size="20" top="80" x="20" includeIn="ingame"/>

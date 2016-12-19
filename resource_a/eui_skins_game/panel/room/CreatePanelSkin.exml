@@ -17,6 +17,10 @@
 					<e:Button id="btn_xuezhan"/>
 					<e:Image source="create_xuezhan" verticalCenter="-3" horizontalCenter="0" touchEnabled="false"/>
 				</e:Group>
+				<e:Group y="665" x="464">
+					<e:Button id="btn_siren2" label="四人两房"/>
+					<e:Image source="create_xuezhan" verticalCenter="-3" touchEnabled="false" horizontalCenter="0" visible="false"/>
+				</e:Group>
 			</e:Group>
 		</e:Scroller>
 		<e:Image source="activit_jian" y="442" scaleY="-1" x="104" locked="true"/>
@@ -40,7 +44,7 @@
 					</e:Skin>
 				</e:skinName>
 			</e:Button>
-			<e:Image source="create_kspj" verticalCenter="-5" horizontalCenter="0" scaleX="1.2" scaleY="1.2"/>
+			<e:Image source="create_kspj" verticalCenter="-5" horizontalCenter="0" touchEnabled="false"/>
 		</e:Group>
 	</e:Group>
 </e:Skin>

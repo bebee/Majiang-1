@@ -62,7 +62,7 @@ class QueCompleteView extends BaseGameSprite {
                     break;
             }
 
-            this.animation(img, tarx, tary);
+            this.animation(img, tarx + 47, tary + 47);
         }
     }
 
@@ -75,7 +75,7 @@ class QueCompleteView extends BaseGameSprite {
             .to({scaleX: 1.1, scaleY: 1.1, alpha: 1.0}, 500)
             .to({scaleX: 1.0, scaleY: 1.0}, 100)
             .wait(1000)
-            .to({x: tarx, y: tary, scaleX: 0.6, scaleY: 0.6, alpha: 0}, 300)
+            .to({x: tarx, y: tary, scaleX: 0.4, scaleY: 0.4}, 300)
             .call(this.animationComplete, this);
     }
 

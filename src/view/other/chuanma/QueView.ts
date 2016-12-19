@@ -65,14 +65,14 @@ class QueView extends BaseSprite {
             egret.Tween.removeTweens(btn);
 
             if (btn != this.queBtn) {
-                egret.Tween.get(btn).to({alpha: 0}, 300);
+                egret.Tween.get(btn)
+                    .to({alpha: 0}, 200);
             }
             else {
                 egret.Tween.get(btn)
-                    .wait(1000)
-                    .to({x: 135, scaleX: 1.5, scaleY: 1.5}, 500)
-                    .to({scaleX: 0.6, scaleY: 0.6}, 300)
-                    .wait(300)
+                    .wait(500)
+                    .to({alpha: 0}, 200)
+                    .wait(500)
                     .call(this.selectedComplete, this);
             }
         }

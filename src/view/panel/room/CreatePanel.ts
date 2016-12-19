@@ -1,13 +1,15 @@
 class CreatePanel extends BasePanel {
 
-    private btn_xueliu: mui.EButton;
-    private btn_xuezhan: mui.EButton;
+    private btn_xuezhan: eui.Button;
+    private btn_xueliu: eui.Button;
+    private btn_siren2: eui.Button;
     private scroller: eui.Scroller;
     private viewGroup: eui.Group;
-    private btn_start: mui.EButton;
+    private btn_start: eui.Button;
 
-    private xueliuView: CreateXueliuView;
     private xuezhanView: CreateXuezhanView;
+    private xueliuView: CreateXueliuView;
+    private siren2View: CreateSiren2View;
 
     private playType: PlayType = PlayType.xueliuchenghe;
     private view: CreateBaseView;
@@ -24,24 +26,29 @@ class CreatePanel extends BasePanel {
         this.bgView.setType(BgViewType.curtain);
         this.bgView.setTitle("create_btn");
 
-        this.xueliuView = new CreateXueliuView();
         this.xuezhanView = new CreateXuezhanView();
+        this.xueliuView = new CreateXueliuView();
+        this.siren2View = new CreateSiren2View();
 
         this.update();
 
         this.btn_start.addEventListener(egret.TouchEvent.TOUCH_TAP, this.startGame, this);
 
-        this.btn_xueliu.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickHandler, this);
         this.btn_xuezhan.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickHandler, this);
+        this.btn_xueliu.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickHandler, this);
+        this.btn_siren2.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickHandler, this);
     }
 
     private clickHandler(e: egret.TouchEvent) {
         switch (e.currentTarget) {
+            case this.btn_xuezhan:
+                this.playType = PlayType.xuezhandaodi;
+                break;
             case this.btn_xueliu:
                 this.playType = PlayType.xueliuchenghe;
                 break;
-            case this.btn_xuezhan:
-                this.playType = PlayType.xuezhandaodi;
+            case this.btn_siren2:
+                this.playType = PlayType.siren_2;
                 break;
         }
 
@@ -66,6 +73,7 @@ class CreatePanel extends BasePanel {
             case PlayType.sanren_3:
                 break;
             case PlayType.siren_2:
+                this.view = this.siren2View;
                 break;
         }
 
@@ -74,6 +82,9 @@ class CreatePanel extends BasePanel {
 
     clear() {
         this.viewGroup.removeChildren();
+
+        this.scroller.viewport.scrollV = 0;
+        this.scroller.validateNow();
 
         var arr: any[] = [this.btn_xueliu, this.btn_xuezhan];
         for (var i: number = 0; i < arr.length; i++) {
