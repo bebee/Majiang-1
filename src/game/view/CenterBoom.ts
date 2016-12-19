@@ -112,6 +112,8 @@ class CenterBoom extends egret.DisplayObjectContainer{
         // var b = roomRoundMax /4 ^ 0;
         // if(a > b) a = b;
         // this.roundCountText.text = a +"/"+ b;
+        console.log("==============================");
+        console.log(game.roomRoundCur, game.roomRoundMax);
         this.roundCountText.text = game.roomRoundCur +"/"+ game.roomRoundMax;
     }
 

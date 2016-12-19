@@ -1,14 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<e:Skin class="skins.CheckBox_Round_LeftSkin" states="up,down,disabled,upAndSelected,downAndSelected,disabledAndSelected" xmlns:e="http://ns.egret.com/eui" height="55">
-    <e:Group width="100%" height="100%">
-			<e:layout>
-				<e:VerticalLayout horizontalAlign="left"/>
-			</e:layout>
-        <e:Image fillMode="scale" alpha="1" alpha.disabled="0.5" alpha.down="0.7"
-                
-                 source.downAndSelected="sound_close_btn"
-                 source.disabledAndSelected="sound_close_btn" 
-                 source.upAndSelected="sound_close_btn" source="select_left"/>
-			<e:Label verticalAlign="middle" fontFamily="微软雅黑" textAlign="center" size="18" id="labelDisplay" x="10" y="10" textColor="0xA07A4B"/>
-    </e:Group>
+<e:Skin class="skins.CheckBox_Round_LeftSkin" states="up,down,disabled,upAndSelected,downAndSelected,disabledAndSelected" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" height="40">
+	<e:Image source="select_left" scale9Grid="39,5,75,30" width.disabledAndSelected="100%" width="100%"/>
+	<e:Image source="room_btn" x="0" y="1" includeIn="upAndSelected,downAndSelected,disabledAndSelected"/>
+	<e:Label verticalAlign="middle" fontFamily="微软雅黑" textAlign="center" size="18" id="labelDisplay" textColor="0xA07A4B" top="45" textColor.upAndSelected="0xFE0004" textColor.downAndSelected="0xFE0004" textColor.disabledAndSelected="0xFE0004" bold="true"/>
 </e:Skin>

@@ -1317,6 +1317,26 @@
 		{
 			"compress":false,
 			"key":"table_mask"
+		},
+		{
+			"compress":false,
+			"key":"create_mode"
+		},
+		{
+			"compress":false,
+			"key":"create_play"
+		},
+		{
+			"compress":false,
+			"key":"create_rate"
+		},
+		{
+			"compress":false,
+			"key":"create_xueliu"
+		},
+		{
+			"compress":false,
+			"key":"create_xuezhan"
 		}
 	]
 }

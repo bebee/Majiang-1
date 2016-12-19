@@ -8,6 +8,9 @@ class QueView extends BaseSprite {
     private btn_wan: eui.Button;
     private btn_tiao: eui.Button;
     private btn_tong: eui.Button;
+    private tipGroup: eui.Group;
+
+    private queBtn: eui.Button;
 
     public constructor() {
         super();
@@ -18,49 +21,80 @@ class QueView extends BaseSprite {
     public childrenCreated() {
         super.childrenCreated();
 
-        this.btn_wan.scaleX = this.btn_wan.scaleY = 1.5;
-        this.btn_tiao.scaleX = this.btn_tiao.scaleY = 1.5;
-        this.btn_tong.scaleX = this.btn_tong.scaleY = 1.5;
-
         this.anchorOffsetX = this.width >> 1;
-        this.anchorOffsetY = this.height >> 1;
+        this.x = acekit.width >> 1;
+        this.y = acekit.height / 2 + 80;
+
+        var arr: eui.Button[] = [this.btn_wan, this.btn_tiao, this.btn_tong];
+        var btn: eui.Button;
+        for (var i: number = 0; i < arr.length; i++) {
+            btn = arr[i];
+            btn.anchorOffsetX = btn.width >> 1;
+            btn.anchorOffsetY = btn.height >> 1;
+            btn.x = 35 + i * 100;
+            btn.y = 35;
+        }
 
         this.btn_wan.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickHandler, this);
         this.btn_tiao.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickHandler, this);
         this.btn_tong.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickHandler, this);
-
-        TimerManager.i.addEventListener(TimerManager.Second, this.timeHandler, this);
-    }
-
-    private timeHandler() {
-        if (!this.initComplete)return;
-
     }
 
     private clickHandler(e: egret.TouchEvent) {
 
         if (game.roomPlayerOffline > 0) {
-            EffectUtils.showTips("有人掉线啦，请耐心等待一下。",5);
+            EffectUtils.showTips("有人掉线啦，请耐心等待一下。", 5);
             return;
         }
 
+        game.isQue = false;
+
+        this.queBtn = e.currentTarget;
+
+        this.selected();
+    }
+
+    private selected() {
+        this.tipGroup.visible = false;
+
+        var arr: eui.Button[] = [this.btn_wan, this.btn_tiao, this.btn_tong];
+        var btn: eui.Button;
+        for (var i: number = 0; i < arr.length; i++) {
+            btn = arr[i];
+
+            egret.Tween.removeTweens(btn);
+
+            if (btn != this.queBtn) {
+                egret.Tween.get(btn).to({alpha: 0}, 300);
+            }
+            else {
+                egret.Tween.get(btn)
+                    .wait(1000)
+                    .to({x: 135, scaleX: 1.5, scaleY: 1.5}, 500)
+                    .to({scaleX: 0.6, scaleY: 0.6}, 300)
+                    .wait(300)
+                    .call(this.selectedComplete, this);
+            }
+        }
+    }
+
+    private selectedComplete() {
+
         this.hide();
 
-        var type: number;
+        var type: CardType = CardType.unknow;
 
-        switch (e.currentTarget) {
+        switch (this.queBtn) {
             case this.btn_wan:
-                type = 1;
+                type = CardType.wan;
                 break;
             case this.btn_tiao:
-                type = 2;
+                type = CardType.tiao;
                 break;
             case this.btn_tong:
-                type = 3;
+                type = CardType.tong;
                 break;
         }
-
-        game.isQue = false;
 
         SocketManager.getInstance().getGameConn().send(15, {
             "args": {
@@ -74,48 +108,50 @@ class QueView extends BaseSprite {
         var type: CardType = gamePai.getCtShortest();
         switch (type) {
             case CardType.tiao:
-                this.setTween(this.btn_tiao);
+                this.playRecommend(this.btn_tiao);
                 break;
             case CardType.tong:
-                this.setTween(this.btn_tong);
+                this.playRecommend(this.btn_tong);
                 break;
             case CardType.wan:
-                this.setTween(this.btn_wan);
+                this.playRecommend(this.btn_wan);
                 break;
         }
+
         var types: CardType[] = [CardType.tong, CardType.tiao, CardType.wan];
 
         for (var i: number = 0; i < types.length; i++) {
             if (types[i] != type && gamePai.getCtLength(type) == gamePai.getCtLength(types[i])) {
                 switch (types[i]) {
                     case CardType.tiao:
-                        this.setTween(this.btn_tiao);
+                        this.playRecommend(this.btn_tiao);
                         break;
                     case CardType.tong:
-                        this.setTween(this.btn_tong);
+                        this.playRecommend(this.btn_tong);
                         break;
                     case CardType.wan:
-                        this.setTween(this.btn_wan);
+                        this.playRecommend(this.btn_wan);
                         break;
                 }
             }
         }
     }
 
-    private setTween(target: any) {
-        target.alpha = 1;
-        egret.Tween.get(target, {loop: true}).to({alpha: 0.5}, 300).to({alpha: 1}, 300);
+    private playRecommend(target: any) {
+        egret.Tween.get(target, {loop: true})
+            .to({scaleX: 1.1, scaleY: 1.1}, 300)
+            .to({scaleX: 1.0, scaleY: 1.0}, 300);
     }
 
     show() {
         super.show();
 
-        this.x = acekit.width >> 1;
-        this.y = acekit.height - 220;
-        GSController.i.gsView.frontUIContainer.addChild(this);
-
         this.clean();
         this.recommend();
+
+        GSController.i.gsView.updateState();
+
+        GSController.i.gsView.frontUIContainer.addChild(this);
     }
 
     hide() {
@@ -129,10 +165,19 @@ class QueView extends BaseSprite {
     }
 
     clean() {
-        egret.Tween.removeTweens(this.btn_tiao);
-        egret.Tween.removeTweens(this.btn_tong);
-        egret.Tween.removeTweens(this.btn_wan);
+        var arr: eui.Button[] = [this.btn_wan, this.btn_tiao, this.btn_tong];
+        var btn: eui.Button;
+        for (var i: number = 0; i < arr.length; i++) {
+            btn = arr[i];
 
-        this.btn_tong.alpha = this.btn_tiao.alpha = this.btn_wan.alpha = 1;
+            egret.Tween.removeTweens(btn);
+
+            btn.scaleX = btn.scaleY = 1;
+            btn.alpha = 1;
+            btn.x = 35 + i * 100;
+            btn.y = 35;
+        }
+
+        this.tipGroup.visible = true;
     }
 }

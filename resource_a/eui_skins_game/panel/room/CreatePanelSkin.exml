@@ -2,18 +2,24 @@
 <e:Skin class="CreatePanelSkin" width="880" height="570" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:mui="mui.*" xmlns:ns1="*">
 	<ns1:BgView left="0" right="0" top="0" bottom="0" skinName="BgViewSkin"/>
 	<e:Group left="13" bottom="30" top="110">
-		<e:Image source="activit_jian" y="92" x="104"/>
-		<e:Image source="lashen_15" y="127" scale9Grid="2,1,2,2" width="166" height="3" x="35"/>
+		<e:Image source="activit_jian" y="92" x="104" locked="true"/>
+		<e:Image source="lashen_15" y="127" scale9Grid="2,1,2,2" width="166" height="3" x="35" locked="true"/>
 		<e:Scroller y="132" height="346" x="35">
 			<e:Group>
 				<e:layout>
 					<e:VerticalLayout horizontalAlign="left"/>
 				</e:layout>
-				<e:Button id="btn_xueliu" label="血流成河" x="923" y="511" enabled="false"/>
-				<e:Button id="btn_xuezhan" y="521" label="血战到底" x="933"/>
+				<e:Group x="444" y="645">
+					<e:Button id="btn_xueliu" enabled="false"/>
+					<e:Image source="create_xueliu" verticalCenter="-3" horizontalCenter="0" touchEnabled="false"/>
+				</e:Group>
+				<e:Group y="655" x="454">
+					<e:Button id="btn_xuezhan"/>
+					<e:Image source="create_xuezhan" verticalCenter="-3" horizontalCenter="0" touchEnabled="false"/>
+				</e:Group>
 			</e:Group>
 		</e:Scroller>
-		<e:Image source="activit_jian" y="442" scaleY="-1" x="104"/>
+		<e:Image source="activit_jian" y="442" scaleY="-1" x="104" locked="true"/>
 		<e:layout>
 			<e:VerticalLayout horizontalAlign="center"/>
 		</e:layout>
@@ -34,6 +40,7 @@
 					</e:Skin>
 				</e:skinName>
 			</e:Button>
+			<e:Image source="create_kspj" verticalCenter="-5" horizontalCenter="0" scaleX="1.2" scaleY="1.2"/>
 		</e:Group>
 	</e:Group>
 </e:Skin>

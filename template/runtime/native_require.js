@@ -180,7 +180,7 @@ var game_file_list = [
 	"bin-debug/utils/UtilsClass/TipsUtils.js",
 	"bin-debug/utils/Weixin.js",
 	"bin-debug/view/other/BgView.js",
-	"bin-debug/view/other/chuanma/ChangeThreeAnimation.js",
+	"bin-debug/view/other/chuanma/ChangeThreeCompleteView.js",
 	"bin-debug/view/other/chuanma/ChangeThreeView.js",
 	"bin-debug/view/other/chuanma/GangshangkaihuaView.js",
 	"bin-debug/view/other/chuanma/GuafengView.js",

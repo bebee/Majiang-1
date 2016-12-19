@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="skins.CheckBox_Round_RightSkin" states="up,down,disabled,upAndSelected,downAndSelected,disabledAndSelected" xmlns:e="http://ns.egret.com/eui" height="40">
+	<e:Image source="select_right" scale9Grid="17,5,79,30" width="100%"/>
+	<e:Image source="room_btn" includeIn="upAndSelected,downAndSelected,disabledAndSelected" right="0"/>
+	<e:Label verticalAlign="middle" fontFamily="微软雅黑" textAlign="center" size="18" id="labelDisplay" textColor="0xA07A4B" top="45" textColor.upAndSelected="0xFE0004" textColor.downAndSelected="0xFE0004" textColor.disabledAndSelected="0xFE0004" right="0" bold="true"/>
+</e:Skin>

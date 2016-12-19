@@ -21,6 +21,7 @@ class S9 {
                 game.statusComplete = true;
 
                 game.manager.dispatchEvent(EffectEvent.CardThrow);
+
                 GSDataProxy.i.S2C_TurnDir(pos, dui_num, gang_end);
                 break;
             case 3://触发中断
@@ -67,9 +68,7 @@ class S9 {
                     game.roomQue[GSDataProxy.i.gData.getDir(Number(key))] = obj.data.data[key];
                 }
 
-                GSController.i.gsView.updateRoom();
-                FashionTools.sortPai(PublicVal.i.getHandPais(1));
-                GSController.i.updateMJView(1);
+                game.manager.dispatchEvent(EffectEvent.QueComplete);
                 break;
         }
     }

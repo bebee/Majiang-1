@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<e:Skin class="QueCompleteViewSkin" width="960" height="640" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+	<e:Image id="dir_1" x="442" y="351" source="img_dq_1"/>
+	<e:Image source="img_dq_1" y="248" id="dir_2" x="559"/>
+	<e:Image source="img_dq_1" y="163" x="442" id="dir_3"/>
+	<e:Image id="dir_4" source="img_dq_1" y="250" x="310"/>
+</e:Skin>

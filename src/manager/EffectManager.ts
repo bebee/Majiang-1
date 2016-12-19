@@ -6,8 +6,9 @@
 class EffectManager extends BaseManager {
 
     private changeThreeView: ChangeThreeView;
-    private changeThreeAnimation: ChangeThreeAnimation;
+    private changeThreeAnimation: ChangeThreeCompleteView;
     private queView: QueView;
+    private queCompleteView: QueCompleteView;
     private xiayuView: XiayuView;
     private guafengView: GuafengView;
     private gangshangkaihuaView: GangshangkaihuaView;
@@ -24,8 +25,9 @@ class EffectManager extends BaseManager {
         super.init();
 
         this.changeThreeView = new ChangeThreeView();
-        this.changeThreeAnimation = new ChangeThreeAnimation();
+        this.changeThreeAnimation = new ChangeThreeCompleteView();
         this.queView = new QueView();
+        this.queCompleteView = new QueCompleteView();
         this.xiayuView = new XiayuView();
         this.guafengView = new GuafengView();
         this.hujiaozhuanyiView = new HujiaozhuanyiView();
@@ -37,6 +39,7 @@ class EffectManager extends BaseManager {
         this.gameManager.addEventListener(EffectEvent.ChangeThree, this.onChangeThree, this);
         this.gameManager.addEventListener(EffectEvent.ChangeThreeComplete, this.onChangeThreeComplete, this);
         this.gameManager.addEventListener(EffectEvent.Que, this.onQue, this);
+        this.gameManager.addEventListener(EffectEvent.QueComplete, this.onQueComplete, this);
         this.gameManager.addEventListener(EffectEvent.CardRaise, this.onCardRaise, this);
         this.gameManager.addEventListener(EffectEvent.CardThrow, this.onCardThrow, this);
         this.gameManager.addEventListener(EffectEvent.CardThrowTips, this.onCardThrowTips, this);
@@ -105,9 +108,12 @@ class EffectManager extends BaseManager {
 
     private onQue() {
         if (game.isChangeThree == false && game.isQue) {
-            GSController.i.gsView.updateState();
             this.queView.show();
         }
+    }
+
+    private onQueComplete() {
+        this.queCompleteView.show();
     }
 
     private onCardThrow(arr: any[]) {

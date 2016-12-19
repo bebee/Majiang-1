@@ -70,18 +70,20 @@ class MJView extends eui.Component {
                 break;
         }
 
+        this.stateImg.anchorOffsetX = this.stateImg.width >> 1;
+        this.stateImg.anchorOffsetY = this.stateImg.height >> 1;
+        this.stateImg.x = acekit.width >> 1;
+        this.stateImg.y = acekit.height >> 1;
+
         switch (this.dir) {
+            case DirType.right:
+                this.stateImg.x += 300;
+                break;
             case DirType.top:
-                this.stateImg.x = (game.stage.stageWidth - this.stateImg.width ) / 2;
-                this.stateImg.y = 100;
+                this.stateImg.y -= 200;
                 break;
             case DirType.left:
-                this.stateImg.x = 160;
-                this.stateImg.y = (game.stage.stageHeight - this.stateImg.height ) / 2;
-                break;
-            case DirType.right:
-                this.stateImg.x = game.stage.stageWidth - 160 - this.stateImg.width;
-                this.stateImg.y = (game.stage.stageHeight - this.stateImg.height ) / 2;
+                this.stateImg.x -= 300;
                 break;
         }
     }

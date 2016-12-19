@@ -1,9 +1,9 @@
 /**
- * ChangeThreeAnimation
+ * ChangeThreeCompleteView
  * @Author Ace.c
  * @Create 2016-11-30 17:05
  */
-class ChangeThreeAnimation extends BaseSprite {
+class ChangeThreeCompleteView extends BaseSprite {
 
     private lab_description: eui.Label;
     private img_change_1: eui.Image;
@@ -14,7 +14,7 @@ class ChangeThreeAnimation extends BaseSprite {
 
     public constructor(type?: ChangeThreeType) {
         super();
-        this.skinName = "ChangeThreeAnimationSkin";
+        this.skinName = "ChangeThreeCompleteViewSkin";
 
         this.type = type;
     }

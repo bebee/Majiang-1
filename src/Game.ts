@@ -50,10 +50,10 @@ class game {
     static roomPlayType: PlayType;
     //房间规则
     static roomRules: any[] = [];
-    //当前局数
-    static roomRoundCur: number;
     //最大局数
     static roomRoundMax: number;
+    //当前局数
+    static roomRoundCur: number;
     //房间玩家
     static roomPlayers: any = {};
     //房间玩家最大数量

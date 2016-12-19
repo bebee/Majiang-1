@@ -24,10 +24,16 @@ class EffectEvent {
     static ChangeThreeComplete: string = "ChangeThreeComplete";
 
     /**
-     * 订缺
+     * 定缺
      * @type {string}
      */
     static Que: string = "Que";
+
+    /**
+     * 定缺完成
+     * @type {string}
+     */
+    static QueComplete: string = "QueComplete";
 
     /**
      * 麻将抬起

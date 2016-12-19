@@ -144,6 +144,11 @@ class GSScene extends egret.DisplayObjectContainer {
 
         egret.Tween.get(this.startButton,{loop:true}).to({alpha:.5},600).to({alpha:1},600);
 
+        // egret.Tween.get(this.startButton, {loop: true})
+        //     .to({scaleX: 1.1, scaleY: 1.1}, 600)
+        //     .to({scaleX: 1.0, scaleY: 1.0}, 600)
+        //     .wait(1000);
+
     }
 
     //更新背景颜色

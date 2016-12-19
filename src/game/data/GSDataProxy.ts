@@ -37,9 +37,9 @@ class GSDataProxy {
 
         PublicVal.i.dui_num = obj.dui_num;
 
-        game.roomRoundCur = obj.roomRoundCur;
+        game.roomRoundCur = obj.cur_round;
 
-        game.roomRoundMax = obj.roomRoundMax;
+        game.roomRoundMax = obj.max_round;
 
         switch (this.gData.rebackData.ex_status) {
             case 0://初始化
@@ -939,8 +939,8 @@ class GSDataProxy {
 
         PublicVal.i.bao = obj.data.bao;
 
-        game.roomRoundCur = obj.data.roomRoundCur;
-        game.roomRoundMax = obj.data.roomRoundMax;
+        game.roomRoundCur = obj.data.cur_round;
+        game.roomRoundMax = obj.data.max_round;
 
         PublicVal.i.allPais[2].handPais = new Array(13);
         PublicVal.i.allPais[3].handPais = new Array(13);
