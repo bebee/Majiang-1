@@ -187,20 +187,20 @@ class Global {
 
 		switch (+player.dir) {
 			case 1:
-				_y -= 75;
-				_x -= 0;
+				_x += 40;
+				_y -= 40;
 				break;
 			case 2:
-				_x -= 160;
-				_y -= 75;
+				_x -= 120;
+				_y -= 40;
 				break;
 			case 3:
-				_y -= 75;
-				_x -= 160;
+				_x -= 120;
+				_y -= 40;
 				break;
 			case 4:
-				_y -= 75;
-				_x -= 0;
+				_x += 40;
+				_y -= 40;
 				break;
 		}
 
@@ -258,23 +258,23 @@ class Global {
 
 		switch (+player.dir) {
 			case 1:
-				_y -= 120;
-				_x -= 30;
 				chat_pao._biao.x = 21;
+				_x += 10;
+				_y -= 80;
 				break;
 			case 2:
 				chat_pao._biao.x = 301;
-				_x -= 306;
-				_y -= 120;
+				_x -= 266;
+				_y -= 80;
 				break;
 			case 3:
 				chat_pao._biao.x = 301;
-				_y -= 50;
-				_x -= 366;
+				_x -= 326;
+				_y -= 10;
 				break;
 			case 4:
-				_y -= 120;
-				_x -= 30;
+				_x += 10;
+				_y -= 80;
 				chat_pao._biao.x = 21;
 				break;
 		}
