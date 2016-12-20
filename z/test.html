@@ -8,12 +8,17 @@
             return decodeURIComponent(!m ? "" : m[2]);
         }
 
-        location.href = "" +
-                "https://weixinhlmj.37gjw.com/chuanma/161219193054/index.html" +
-                "?roomid=" + getParam("roomid") +
-                "&users=" + getParam("users") +
-                "&code=" + getParam("code") +
-                "&accessType=test";
+        if(getParam("v") == ""){
+            location.href = "https://weixinhlmj.37gjw.com/chuanma/test.html?v=" + Math.random();
+        }
+        else {
+            location.href = "" +
+                    "https://weixinhlmj.37gjw.com/chuanma/161220142001/index.html" +
+                    "?roomid=" + getParam("roomid") +
+                    "&users=" + getParam("users") +
+                    "&code=" + getParam("code") +
+                    "&accessType=test";
+        }
     </script>
 </body>
 </html>

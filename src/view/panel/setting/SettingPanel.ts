@@ -78,7 +78,7 @@ class SettingPanel extends BasePanel {
 
         game.paiStyle = +gameLocal.getData(gameLocal.style);
 
-        FashionTools.setViewType(game.paiStyle);
+        FashionTools.setPaiStyle(game.paiStyle);
     }
 
     private changeColor(): void {
@@ -86,7 +86,7 @@ class SettingPanel extends BasePanel {
 
         game.paiColor = +gameLocal.getData(gameLocal.color);
 
-        FashionTools.setGameStyle(game.paiColor);
+        FashionTools.setPaiColor(game.paiColor);
     }
 
     public show(): void {

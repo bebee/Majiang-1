@@ -37,9 +37,11 @@ class FashionTools {
          }*/
     }
 
-    /*显示类型 标准/精致
-     * */
-    static setViewType(type: number) {
+    /**
+     * 设置麻将风格(标准/精致)
+     * @param type
+     */
+    static setPaiStyle(type: number) {
         if (type == 1) {
             GSConfig.posRulePlus[1] = GSConfig.posRule[1];
             GSConfig.handPosPlus[1] = GSConfig.gameHandPos[1];
@@ -50,10 +52,11 @@ class FashionTools {
         GSController.i.updateHandViewSize();
     }
 
-    /*
-     设置游戏牌风格
+    /**
+     * 设置麻将颜色
+     * @param type
      */
-    static setGameStyle(type: number) {
+    static setPaiColor(type: number) {
         if (type == 1) {
             GSConfig.card_bg_style = GSConfig.soft_card_bg_style;
             GSConfig.table_bg_res = GSConfig.soft_table_bg_res;
@@ -65,42 +68,50 @@ class FashionTools {
     }
 
 
-    /*
-     格式化规则文字
+    /**
+     * 格式化规则文字
+     * @param rules
+     * @returns {string}
      */
     static formatRules(rules: number[]) {
-
         var ruleStr: string = "";
-
         for (var i: number = 0; i < rules.length; i++) {
-
-            if (gameConfig.rules[rules[i]]) {
-                ruleStr += gameConfig.rules[rules[i]] + " ";
+            if (typeof rules[i] == "number") {
+                if (gameConfig.rules[rules[i]]) {
+                    ruleStr += gameConfig.rules[rules[i]] + " ";
+                }
+            }
+            else {
+                switch (rules[i][0]) {
+                    case GameRule.fengding:
+                        ruleStr += rules[i][1] + "番" + gameConfig.rules[rules[i][0]] + " ";
+                        break;
+                }
             }
         }
         return ruleStr;
     }
 
-    /*
-     格式化牌型
+    /**
+     * 格式化牌型
+     * @param type
+     * @param paiNums
+     * @returns {Array}
      */
     static formatPai(type: number, paiNums: number[]) {
-
         var arr = [];
-
         if (paiNums) {
-
             for (var i: number = 0; i < paiNums.length; i++) {
-
                 arr.push({type: type, number: paiNums[i]});
             }
-
         }
-
         return arr;
     }
 
-    //排序手牌
+    /**
+     * 排序手牌
+     * @param pais
+     */
     static sortPai(pais: any = null) {
         //if(pais == null) pais = PublicVal.i.allPais[1].handPais;
 
@@ -128,15 +139,15 @@ class FashionTools {
         });
     }
 
-    //移除队列某张牌
+    /**
+     * 移除队列某张牌
+     * @param list
+     * @param pai
+     */
     static removePai(list: any, pai: any) {
-
         for (var i: number = 0; i < list.length; i++) {
-
             if (list[i].type == pai.type && list[i].number == pai.number) {
-
                 list.splice(i, 1);
-
                 break;
             }
         }

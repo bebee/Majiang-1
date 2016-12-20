@@ -73,6 +73,7 @@ class CreatePanel extends BasePanel {
             case PlayType.sanren_3:
                 break;
             case PlayType.siren_2:
+                this.btn_siren2.enabled = false;
                 this.view = this.siren2View;
                 break;
         }
@@ -86,7 +87,7 @@ class CreatePanel extends BasePanel {
         this.scroller.viewport.scrollV = 0;
         this.scroller.validateNow();
 
-        var arr: any[] = [this.btn_xueliu, this.btn_xuezhan];
+        var arr: any[] = [this.btn_xueliu, this.btn_xuezhan, this.btn_siren2];
         for (var i: number = 0; i < arr.length; i++) {
             arr[i].enabled = true;
         }

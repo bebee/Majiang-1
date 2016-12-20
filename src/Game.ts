@@ -50,6 +50,10 @@ class game {
     static roomPlayType: PlayType;
     //房间规则
     static roomRules: any[] = [];
+    //房间番数
+    static roomRate: number = 1;
+    //房间牌张
+    static roomZhang: number = 13;
     //最大局数
     static roomRoundMax: number;
     //当前局数
@@ -110,8 +114,8 @@ class game {
         GameParse.Initialization();
     }
 
-    //初始化游戏方向
-    static initGameDir() {
+    //初始化房间方向
+    static initRoomDir() {
         PublicVal.i.ownPos = game.userPos;
 
         var gData = GSDataProxy.i.gData;
@@ -129,6 +133,31 @@ class game {
         gData.pos2Dir[b] = 2;
         gData.pos2Dir[c] = 3;
         gData.pos2Dir[d] = 4;
+    }
+
+    //初始化房间方向
+    static initRoomRule() {
+        for (var i: number = 0; i < game.roomRules.length; i++) {
+            if (typeof game.roomRules[i] == "object") {
+                var arr: number = game.roomRules[i];
+                if (arr[0] == 19) {//番数
+                    game.roomRate = arr[1];
+                }
+                else if (arr[0] == 23) {//张数
+                    game.roomZhang = arr[1];
+                }
+                continue;
+            }
+            switch (game.roomRules[i]) {
+                case PlayType.xueliuchenghe:
+                case PlayType.xuezhandaodi:
+                case PlayType.siren_2:
+                case PlayType.sanren_3:
+                case PlayType.sanren_2:
+                    game.roomPlayType = game.roomRules[i];
+                    break;
+            }
+        }
     }
 
     //房间准备

@@ -1,62 +1,60 @@
 /**
  * 结算界面
  */
-class GSTotleView extends eui.Component
-{
+class GSTotleView extends eui.Component {
     /**
      * 半透的背景
      */
-    private spr:egret.Sprite = new egret.Sprite();
+    private spr: egret.Sprite = new egret.Sprite();
 
     /**
      * 装组件的容器
      */
-    private _group:eui.Group;
+    private _group: eui.Group;
 
     /**
      * 顶上牌局结束的介绍文字
      */
-    private descImg:eui.Image;
+    private descImg: eui.Image;
 
     /**
      * 游戏logo
      */
-    private logoImg:eui.Image;
+    private logoImg: eui.Image;
 
     /**
      * 关闭按钮
      */
-    private btn_close:mui.EButton;
+    private btn_close: mui.EButton;
 
     /**
      * 分享按钮
      */
-    private btn_fen:mui.EButton;
+    private btn_fen: mui.EButton;
 
     /**
      * 结束时间
      */
-    private endTime:eui.Label;
+    private endTime: eui.Label;
 
     /**
      * 规则
      */
-    private ruleLabel:eui.Label;
+    private ruleLabel: eui.Label;
 
     /**
      * 玩家列表
      */
-    private roleList:Array<any> = [];
+    private roleList: Array<any> = [];
 
 
     /**
      * 分数列表
      * @type {Array}
      */
-    private fenList:Array<any> = [];
+    private fenList: Array<any> = [];
 
-    constructor()
-    {
+    constructor() {
         super();
 
         this.width = game.stageWidth;
@@ -65,11 +63,10 @@ class GSTotleView extends eui.Component
         this.addChild(this.spr);
         this.spr.graphics.clear();
         this.spr.graphics.beginFill(0x0, 0.5);
-        this.spr.graphics.drawRect(0,100, game.stageWidth, game.stageHeight - 200);
+        this.spr.graphics.drawRect(0, 100, game.stageWidth, game.stageHeight - 200);
     }
 
-    createChildren()
-    {
+    createChildren() {
         super.createChildren();
 
         this.descImg = new eui.Image();
@@ -89,7 +86,7 @@ class GSTotleView extends eui.Component
         this._group = new eui.Group();
         this._group.right = this._group.left = this._group.bottom = this._group.top = 0;
 
-        var layout:eui.HorizontalLayout = new eui.HorizontalLayout();
+        var layout: eui.HorizontalLayout = new eui.HorizontalLayout();
         layout.horizontalAlign = "center";
         //layout.verticalAlign = "middle";
 
@@ -131,16 +128,14 @@ class GSTotleView extends eui.Component
         this.endTime.bottom = 70;
     }
 
-    private onFen():void
-    {
+    private onFen(): void {
         Weixin.onClickShare(this.fenList);
     }
-    public onClose():void
-    {
+
+    public onClose(): void {
         var p = this.parent;
 
-        if(p && p.contains(this))
-        {
+        if (p && p.contains(this)) {
             p.removeChild(this);
 
             GSController.i.jiesuanData = null;
@@ -149,62 +144,55 @@ class GSTotleView extends eui.Component
         }
     }
 
-    public show(obj:any):void
-    {
+    public show(obj: any): void {
         var p = LayerManager.gameLayer().mainLayer;
 
         this.top = this.right = this.bottom = this.left = 0;
 
         p.addChild(this);
 
-        if(!obj) return;
-
+        if (!obj) return;
 
 
         this._group.removeChildren();
 
 
-        var persons:Array<any> = []; //数组 四个人
+        var persons: Array<any> = []; //数组 四个人
 
-        for(var key in obj.persons)
-        {
+        for (var key in obj.persons) {
             persons.push(obj.persons[key]);
         }
 
-        persons.sort(function (a, b)
-        {
-            if(+a.pos > +b.pos) return 1;
+        persons.sort(function (a, b) {
+            if (+a.pos > +b.pos) return 1;
             else return -1;
         });
 
-        var paolist:Array<number> = [];
+        var paolist: Array<number> = [];
 
         var settlement = obj.settlement;  //json  四个分
 
 
-        for(var k = 0; k < persons.length; k++)
-        {
+        for (var k = 0; k < persons.length; k++) {
             var ps = persons[k];
 
             var pos = ps.pos;
 
-            var cur:number = +settlement[pos];
+            var cur: number = +settlement[pos];
 
-            var pao_num:number = +ps["pao_num"];
+            var pao_num: number = +ps["pao_num"];
 
             ps["iswin"] = this.getMaxNum(settlement, cur);
 
             ps["cur"] = cur;
 
-            var head:GSTotlePerson;
-            if(this.roleList[k])
-            {
+            var head: GSTotlePerson;
+            if (this.roleList[k]) {
                 head = this.roleList[k];
 
                 head.pserson = ps;
             }
-            else
-            {
+            else {
                 head = new GSTotlePerson(ps);
 
                 this.roleList.push(head);
@@ -216,58 +204,49 @@ class GSTotleView extends eui.Component
         }
 
 
-        for(var pi = 0; pi < this.roleList.length; pi++)
-        {
-            var pn:GSTotlePerson = this.roleList[pi];
+        for (var pi = 0; pi < this.roleList.length; pi++) {
+            var pn: GSTotlePerson = this.roleList[pi];
 
 
-            if(+pn.pserson["pao_num"] > 0)
-            {
+            if (+pn.pserson["pao_num"] > 0) {
                 pn.pserson["ispao"] = true;
             }
 
-            for(var k = 0; k < paolist.length; k++)
-            {
-                var kn:number = paolist[k];
+            for (var k = 0; k < paolist.length; k++) {
+                var kn: number = paolist[k];
 
-                if(+pn.pserson["pao_num"] < kn)
-                {
+                if (+pn.pserson["pao_num"] < kn) {
                     pn.pserson["ispao"] = false;
                 }
             }
         }
 
 
-        for(var c = 0; c < this.roleList.length; c++)
-        {
-            var cc:GSTotlePerson = this.roleList[c];
+        for (var c = 0; c < this.roleList.length; c++) {
+            var cc: GSTotlePerson = this.roleList[c];
             this._group.addChild(cc);
             cc.refresh();
         }
 
-        var date:Date = new Date(Date.now());
-        var times:string = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate() +" " +
+        var date: Date = new Date(Date.now());
+        var times: string = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate() + " " +
             date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
         this.endTime.text = "" + times;
 
         Weixin.onClickShare(this.fenList, false);
     }
 
-    getMaxNum(arr:any, fen:number)
-    {
-        var b:boolean = true;
+    getMaxNum(arr: any, fen: number) {
+        var b: boolean = true;
 
-        if(fen <= 0)
-        {
+        if (fen <= 0) {
             return false;
         }
 
-        for(var k in arr)
-        {
-            var num:number = +arr[k];
+        for (var k in arr) {
+            var num: number = +arr[k];
 
-            if(fen < num)
-            {
+            if (fen < num) {
                 b = false;
                 break;
             }
@@ -276,8 +255,7 @@ class GSTotleView extends eui.Component
         return b;
     }
 
-    update()
-    {
+    update() {
 
     }
 }

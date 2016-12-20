@@ -57,7 +57,7 @@ class CreateXueliuView extends CreateBaseView {
         var rule: any[] = [];
 
         rule.push(PlayType.xueliuchenghe);
-        rule.push([19, this.getRate()]);
+        rule.push([GameRule.fengding, this.getRate()]);
 
         var box: eui.CheckBox;
         for (var i: number = 1; i <= 8; i++) {

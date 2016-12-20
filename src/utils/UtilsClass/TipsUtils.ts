@@ -12,10 +12,10 @@ module TipsUtils {
         effectTips.size = 24;
         effectTips.y = game.stageHeight / 2;
         if (isWarning) {
-            effectTips.textColor = gameConfig.TextColors.red;
+            effectTips.textColor = Color.red;
         }
         else {
-            effectTips.textColor = gameConfig.TextColors.green;
+            effectTips.textColor = Color.green;
         }
         effectTips.alpha = 0;
 
@@ -60,10 +60,10 @@ module TipsUtils {
         effectTips.y = game.stageHeight / 2;
 
         if (isWarning) {
-            effectTips.textColor = gameConfig.TextColors.red;
+            effectTips.textColor = Color.red;
         }
         else {
-            effectTips.textColor = gameConfig.TextColors.green;
+            effectTips.textColor = Color.green;
         }
 
         effectTips.alpha = 0;
@@ -141,10 +141,10 @@ module TipsUtils {
         effectTips.y = game.stageHeight / 2;
 
         if (isWarning) {
-            effectTips.textColor = gameConfig.TextColors.red;
+            effectTips.textColor = Color.red;
         }
         else {
-            effectTips.textColor = gameConfig.TextColors.green;
+            effectTips.textColor = Color.green;
         }
         effectTips.alpha = 0;
 
@@ -188,10 +188,10 @@ module TipsUtils {
         effectTips.size = 24;
         effectTips.y = game.stageHeight / 2;
         if (isWarning) {
-            effectTips.textColor = gameConfig.TextColors.red;
+            effectTips.textColor = Color.red;
         }
         else {
-            effectTips.textColor = gameConfig.TextColors.green;
+            effectTips.textColor = Color.green;
         }
         effectTips.alpha = 0;
 

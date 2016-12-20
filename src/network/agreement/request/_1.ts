@@ -16,7 +16,7 @@ class _1 {
             }
             else {
                 obj = {
-                    "channel": "" + gameConfig.platformType(),
+                    "channel": "" + Universal.platformType(),
                     "length": gameConfig.code.length,
                     "code": gameConfig.code
                 };

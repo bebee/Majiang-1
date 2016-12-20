@@ -38,7 +38,7 @@ class Weixin {
         var bodyConfig: BodyConfig = new BodyConfig();
         bodyConfig.appId = appid;
         bodyConfig.debug = false;
-        bodyConfig.timestamp = timestamp;
+        bodyConfig.timestamp = +timestamp;
         bodyConfig.nonceStr = nonceStr;
         bodyConfig.signature = signature;
         bodyConfig.jsApiList = jsApiList;
@@ -139,7 +139,7 @@ class Weixin {
         body.title = "" + title;
         body.desc = "" + str;
         body.link = "" + gameConfig.clientUrl;
-        body.imgUrl = "http://mj.h5sd.com/wdmj/weishare.png";
+        body.imgUrl = gameConfig.shareImgUrl;
         body.type = "link";
         body.dataUrl = "";
         body.success = success;
@@ -199,7 +199,7 @@ class Weixin {
             body.link = "" + gameConfig.clientUrl;
         }
 
-        body.imgUrl = "https://mj.h5sd.com/wdmj/weishare.png";
+        body.imgUrl = gameConfig.shareImgUrl;
         body.type = "link";
         body.dataUrl = "";
         body.success = success;
@@ -230,7 +230,7 @@ class Weixin {
             body.link = "" + gameConfig.clientUrl;
         }
 
-        body.imgUrl = "https://mj.h5sd.com/wdmj/weishare.png";
+        body.imgUrl = gameConfig.shareImgUrl;
         body.success = success;
         body.cancel = cancel;
         wx.onMenuShareTimeline(body);

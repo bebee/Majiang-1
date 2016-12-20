@@ -48,12 +48,34 @@ class Main extends eui.UILayer {
 
         gameLocal.setData(gameLocal.loginCode, code);
 
+        var _this = this;
         HttpHandler.sendMsgCallBack(gameConfig.protocolType + gameConfig.address_center.ip + ":" + gameConfig.address_center.port + "/", function (obj) {
             gameConfig.address_http.ip = obj.addrr;
             gameConfig.address_http.port = obj.auth_port;
             gameConfig.address_game.ip = obj.addrr;
             gameConfig.address_game.port = obj.port;
+
+            _this.wxConfig();
         }, this, "action=serverlist");
+    }
+
+    private wxConfig() {
+        var sss: any = {"role": "user", "mod": "mod_auths", "fun": "auth_signature", "args": {}};
+
+        var arr: Array<string> = ["closeWindow", "hideMenuItems", "onMenuShareAppMessage", "onMenuShareTimeline", "startRecord", "stopRecord", "onVoiceRecordEnd", "playVoice", "pauseVoice", "stopVoice", "onVoicePlayEnd", "uploadVoice", "downloadVoice"];
+
+        HttpHandler.sendMsgCallBack(gameConfig.protocolType + gameConfig.address_http.ip + ":" + gameConfig.address_http.port, function (obj) {
+            if (obj.message != "error") {
+                var data:any = JSON.parse(obj.message);
+                Weixin.config(
+                    gameConfig.appid,
+                    data.timestamp,
+                    data.noncestr,
+                    data.signature,
+                    arr
+                );
+            }
+        }, this, "action=" + JSON.stringify(sss));
     }
 
     protected createChildren(): void {

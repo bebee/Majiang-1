@@ -11,53 +11,58 @@
 			<e:RadioButton id="btn_quan_2" label="8局（房卡x3）" horizontalCenter="0" x="10" y="10" skinName="skins.CheckBox_Round_RightSkin" groupName="siren2_quan" selected="true"/>
 			<e:layout>
 				<e:HorizontalLayout gap="0" horizontalAlign="justify"/>
-			</e:layout>
-		</e:Group>
-	</e:Group>
-	<e:Group left="0" top="100" right="0" y="20" x="20">
-		<e:layout>
-			<e:HorizontalLayout gap="20" verticalAlign="middle"/>
-		</e:layout>
-		<e:Image source="create_rate" y="-96" x="564"/>
-		<e:Group width="525" left="130" top="0">
-			<e:layout>
-				<e:HorizontalLayout horizontalAlign="left"/>
-			</e:layout>
-			<e:RadioButton id="btn_shou_7" x="336" groupName="siren2_shou" y="358" label="7张" width="170"/>
-			<e:RadioButton id="btn_shou_10" x="346" selected="true" groupName="siren2_shou" y="368" label="10张" width="170"/>
-			<e:RadioButton id="btn_shou_13" groupName="siren2_shou" y="378" label="13张" x="356" width="170"/>
-		</e:Group>
-	</e:Group>
-	<e:Group right="0" left="0" top="160" x="10" y="10">
-		<e:layout>
-			<e:HorizontalLayout gap="20" verticalAlign="middle"/>
-		</e:layout>
-		<e:Image source="create_rate" x="564" y="-96"/>
-		<e:Group left="130" top="0" width="525">
-			<e:RadioButton id="btn_rate_2" label="2番" x="336" y="358" groupName="siren2_rate" width="170"/>
-			<e:RadioButton id="btn_rate_3" x="346" label="3番" y="368" selected="true" groupName="siren2_rate" width="170"/>
-			<e:RadioButton id="btn_rate_4" y="378" label="4番" x="356" groupName="siren2_rate" width="170"/>
-			<e:layout>
-				<e:HorizontalLayout horizontalAlign="left"/>
 			</e:layout>
 		</e:Group>
-	</e:Group>
-	<e:Group right="0" left="0" top="220" x="10" y="10">
-		<e:layout>
-			<e:HorizontalLayout gap="20"/>
-		</e:layout>
-		<e:Image source="create_play" x="505" y="-122"/>
-		<e:Group left="150" top="140">
-			<e:RadioButton id="btn_rule_1" x="10" y="10" label="自摸加底" selected="true" groupName="siren2_zimo" width="170"/>
-			<e:RadioButton id="btn_rule_2" y="20" label="自摸加番" x="20" groupName="siren2_zimo" width="170"/>
-			<e:RadioButton id="btn_rule_3" y="30" label="点杠花（点炮）" x="30" groupName="siren2_dian" selected="true" width="170"/>
-			<e:RadioButton id="btn_rule_4" y="40" label="点杠花（自摸）" x="40" groupName="siren2_dian" width="170"/>
-			<e:CheckBox id="btn_rule_5" y="50" label="卡二条" x="50" selected="true" width="170"/>
-			<e:CheckBox id="btn_rule_6" y="60" label="幺九将对" x="60" selected="true" width="170"/>
-			<e:CheckBox id="btn_rule_7" y="80" label="天地胡" x="80" selected="true" width="170"/>
+	</e:Group>
+	<e:Group left="0" right="0" top="70" bottom="0">
+		<e:Group left="0" top="100" right="0" y="20" x="20">
 			<e:layout>
-				<e:TileLayout requestedColumnCount="3"/>
+				<e:HorizontalLayout gap="20" verticalAlign="middle"/>
 			</e:layout>
+			<e:Image y="-96" x="564" source="create_shou"/>
+			<e:Group width="525" left="130" top="0">
+				<e:layout>
+					<e:HorizontalLayout horizontalAlign="left"/>
+				</e:layout>
+				<e:RadioButton id="btn_shou_7" x="336" groupName="siren2_shou" y="358" label="7张" width="170"/>
+				<e:RadioButton id="btn_shou_10" x="346" selected="true" groupName="siren2_shou" y="368" label="10张" width="170"/>
+				<e:RadioButton id="btn_shou_13" groupName="siren2_shou" y="378" label="13张" x="356" width="170"/>
+			</e:Group>
 		</e:Group>
+		<e:Group right="0" left="0" top="160" x="10" y="10">
+			<e:layout>
+				<e:HorizontalLayout gap="20" verticalAlign="middle"/>
+			</e:layout>
+			<e:Image source="create_rate" x="564" y="-96"/>
+			<e:Group left="130" top="0" width="525">
+				<e:RadioButton id="btn_rate_2" label="2番" x="336" y="358" groupName="siren2_rate" width="170"/>
+				<e:RadioButton id="btn_rate_3" x="346" label="3番" y="368" selected="true" groupName="siren2_rate" width="170"/>
+				<e:RadioButton id="btn_rate_4" y="378" label="4番" x="356" groupName="siren2_rate" width="170"/>
+				<e:layout>
+					<e:HorizontalLayout horizontalAlign="left"/>
+				</e:layout>
+			</e:Group>
+		</e:Group>
+		<e:Group right="0" left="0" top="220" x="10" y="10">
+			<e:layout>
+				<e:HorizontalLayout gap="20"/>
+			</e:layout>
+			<e:Image source="create_play" x="505" y="-122"/>
+			<e:Group left="150" top="140">
+				<e:RadioButton id="btn_rule_1" x="10" y="10" label="自摸加底" selected="true" groupName="siren2_zimo" width="170"/>
+				<e:RadioButton id="btn_rule_2" y="20" label="自摸加番" x="20" groupName="siren2_zimo" width="170"/>
+				<e:RadioButton id="btn_rule_3" y="30" label="点杠花（点炮）" x="30" groupName="siren2_dian" selected="true" width="170"/>
+				<e:RadioButton id="btn_rule_4" y="40" label="点杠花（自摸）" x="40" groupName="siren2_dian" width="170"/>
+				<e:CheckBox id="btn_rule_5" y="50" label="卡二条" x="50" selected="true" width="170"/>
+				<e:CheckBox id="btn_rule_6" y="60" label="幺九将对" x="60" selected="true" width="170"/>
+				<e:CheckBox id="btn_rule_7" y="80" label="天地胡" x="80" selected="true" width="170"/>
+				<e:layout>
+					<e:TileLayout requestedColumnCount="3"/>
+				</e:layout>
+			</e:Group>
+		</e:Group>
+		<e:layout>
+			<e:VerticalLayout/>
+		</e:layout>
 	</e:Group>
 </e:Skin>

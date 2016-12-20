@@ -1,7 +1,8 @@
 class RulePanel extends BasePanel {
 
-    private btn_xueliu: eui.Button;
     private btn_xuezhan: eui.Button;
+    private btn_xueliu: eui.Button;
+    private btn_siren2: eui.Button;
     private scroller: eui.Scroller;
     private group: eui.Group;
     private lab_description: eui.Label;
@@ -25,22 +26,26 @@ class RulePanel extends BasePanel {
 
         this.decode();
 
-        this.btn_xueliu.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickHandler, this);
         this.btn_xuezhan.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickHandler, this);
+        this.btn_xueliu.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickHandler, this);
+        this.btn_siren2.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickHandler, this);
     }
 
     private clickHandler(e: egret.TouchEvent) {
 
         this.cleanButton();
 
+        e.currentTarget.enabled = true;
+
         switch (e.currentTarget) {
             case this.btn_xueliu:
-                this.btn_xuezhan.enabled = true;
                 this.type = PlayType.xueliuchenghe;
                 break;
             case this.btn_xuezhan:
-                this.btn_xueliu.enabled = true;
                 this.type = PlayType.xuezhandaodi;
+                break;
+            case this.btn_siren2:
+                this.type = PlayType.siren_2;
                 break;
         }
 
@@ -55,6 +60,11 @@ class RulePanel extends BasePanel {
                 key = "rule_xuezhandaodi";
                 break;
             case PlayType.xueliuchenghe:
+                key = "rule_xueliuchenghe";
+                break;
+            case PlayType.siren_2:
+                key = "rule_sirenliangfang";
+                break;
             default:
                 key = "rule_xueliuchenghe";
                 break;
@@ -98,7 +108,8 @@ class RulePanel extends BasePanel {
     }
 
     private cleanButton() {
-        this.btn_xueliu.enabled = false;
         this.btn_xuezhan.enabled = false;
+        this.btn_xueliu.enabled = false;
+        this.btn_siren2.enabled = false;
     }
 }

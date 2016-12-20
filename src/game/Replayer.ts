@@ -286,7 +286,7 @@ class Replayer implements IUpdate{
     }
     //展示
     show(){
-        FashionTools.setGameStyle(game.paiColor);
+        FashionTools.setPaiColor(game.paiColor);
 
         PublicVal.state = 6;
         GSController.i.startView();

@@ -870,8 +870,8 @@ class GSDataProxy {
             GSController.i.startView();
             GSConfig.gameConfigInit();
             //设置牌面尺寸
-            FashionTools.setViewType(game.paiStyle);
-            FashionTools.setGameStyle(game.paiColor);
+            FashionTools.setPaiStyle(game.paiStyle);
+            FashionTools.setPaiColor(game.paiColor);
 
             if (this.gData.rebackData) {
                 //至后解析

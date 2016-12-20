@@ -14,9 +14,9 @@ class S8 {
             PublicVal.i.rules = FashionTools.formatRules(game.roomRules);
 
             //听牌局
-            if (game.roomRules.indexOf(GameRule.kouting) != -1) {
-                GSData.i.hasTingRule = true;
-            }
+            GSData.i.hasTingRule = game.roomRules.indexOf(GameRule.kouting) != -1;
+
+            game.initRoomRule();
         }
 
         if (data.hasOwnProperty("infos")) {
@@ -62,7 +62,7 @@ class S8 {
             }
         }
 
-        game.initGameDir();
+        game.initRoomDir();
 
         GSDataProxy.i.S2C_RoomPlayers();
     }

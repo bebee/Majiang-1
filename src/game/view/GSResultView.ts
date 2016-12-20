@@ -53,12 +53,12 @@ class GSResultView extends egret.DisplayObjectContainer {
 
         this.shareButton = new mui.EButton("JS_share_button", "分　享");
         this.shareButton.x = 220;
-        this.shareButton.y = 580;
+        this.shareButton.y = 565;
         this.shareButton.textField.verticalCenter = -8;
 
         this.continueButton = new mui.EButton("JS_continue_button", "继续游戏");
         this.continueButton.x = 585;
-        this.continueButton.y = 580;
+        this.continueButton.y = 565;
         this.continueButton.textField.verticalCenter = -8;
 
         this.addChild(this.shareButton);
@@ -78,16 +78,12 @@ class GSResultView extends egret.DisplayObjectContainer {
         this.personItems = [];
 
         for (var i: number = 0; i < 4; i++) {
-
             var personItem = new PersonItem();
-
             personItem.y = this.po[i];
-
             this.addChild(personItem);
-
             this.personItems.push(personItem);
-
         }
+
         this.baoPaiView = new BaoPaiView;
         this.baoPaiView.x = 910;
         this.baoPaiView.y = 167;
@@ -95,10 +91,8 @@ class GSResultView extends egret.DisplayObjectContainer {
     }
 
     updateBaoPai(pai: any) {
-
         this.baoPaiView.updatePai(pai);
     }
-
 
     update() {
         this.showLogo(GSData.i.resultType);
@@ -106,20 +100,14 @@ class GSResultView extends egret.DisplayObjectContainer {
         var persons = GSData.i.result.person;
 
         var pai = GSData.i.result.hupai.pai;
-
         for (var i: number = 0; i < persons.length; i++) {
-
             var person = persons[i];
-
             var personItem: PersonItem = this.personItems[i];
-
             personItem.update(person);
         }
     }
 
-
     createLogCon(x: number, y: number) {
-
         this.logoCon = new egret.DisplayObjectContainer();
         this.logoCon.x = x;
         this.logoCon.y = y;
@@ -152,7 +140,6 @@ class GSResultView extends egret.DisplayObjectContainer {
         this.logoCon.addChild(this.liujuTop);
         this.addChild(this.logoCon);
         //this.drawLine(this.logoCon);
-
     }
 
     drawLine(obj: any) {
@@ -160,19 +147,15 @@ class GSResultView extends egret.DisplayObjectContainer {
         this.drawShape.graphics.drawRect(obj.x, obj.y, obj.width, obj.height);
     }
 
-
     createLine(y: number) {
-
         var line: egret.Bitmap = new egret.Bitmap;
         line.texture = GameRes.getUI("JS_dot");
         line.width = GSConfig.width;
         line.y = y;
         this.addChild(line);
-
     }
 
     showLogo(type: number) {
-
         switch (type) {
             case 1://胜利
                 this.winTop.visible = true;
@@ -202,11 +185,8 @@ class GSResultView extends egret.DisplayObjectContainer {
     }
 
     clear() {
-
         for (var i: number = 0; i < this.personItems.length; i++) {
-
             var personItem: PersonItem = this.personItems[i];
-
             personItem.clear();
         }
     }

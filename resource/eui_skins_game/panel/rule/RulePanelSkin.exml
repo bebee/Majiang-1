@@ -14,6 +14,10 @@
 					<e:Button id="btn_xuezhan"/>
 					<e:Image source="create_xuezhan" verticalCenter="-3" horizontalCenter="0" touchEnabled="false"/>
 				</e:Group>
+				<e:Group y="618" x="390" visible="false">
+					<e:Button id="btn_siren2"/>
+					<e:Image verticalCenter="-3" horizontalCenter="0" touchEnabled="false" source="create_siren2"/>
+				</e:Group>
 				<e:layout>
 					<e:VerticalLayout horizontalAlign="left"/>
 				</e:layout>

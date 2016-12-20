@@ -863,6 +863,14 @@
 				{
 					"compress":false,
 					"key":"create_xuezhan"
+				},
+				{
+					"compress":false,
+					"key":"create_shou"
+				},
+				{
+					"compress":false,
+					"key":"create_siren2"
 				}
 			],
 			"sort":0

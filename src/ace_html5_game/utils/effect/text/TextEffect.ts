@@ -79,9 +79,9 @@ class TextEffect {
         effectTips.size = 24;
         effectTips.y = acekit.height / 2;
         if (isWarning) {
-            effectTips.textColor = GameColor.Red;
+            effectTips.textColor = Color.red;
         } else {
-            effectTips.textColor = GameColor.Green;
+            effectTips.textColor = Color.green;
         }
         effectTips.alpha = 0;
 
@@ -124,9 +124,9 @@ class TextEffect {
         effectTips.size = 24;
         effectTips.y = acekit.height / 2;
         if (isWarning) {
-            effectTips.textColor = GameColor.Red;
+            effectTips.textColor = Color.red;
         } else {
-            effectTips.textColor = GameColor.Green;
+            effectTips.textColor = Color.green;
         }
         effectTips.alpha = 0;
 
@@ -192,9 +192,9 @@ class TextEffect {
         effectTips.size = 24;
         effectTips.y = acekit.height / 2;
         if (isWarning) {
-            effectTips.textColor = GameColor.Red;
+            effectTips.textColor = Color.red;
         } else {
-            effectTips.textColor = GameColor.Green;
+            effectTips.textColor = Color.green;
         }
         effectTips.alpha = 0;
 
@@ -236,9 +236,9 @@ class TextEffect {
         effectTips.size = 24;
         effectTips.y = acekit.height / 2;
         if (isWarning) {
-            effectTips.textColor = GameColor.Red;
+            effectTips.textColor = Color.red;
         } else {
-            effectTips.textColor = GameColor.Green;
+            effectTips.textColor = Color.green;
         }
         effectTips.alpha = 0;
 

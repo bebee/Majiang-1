@@ -1,39 +1,8 @@
 # 四川麻将
 
 
-# 规则
 
-%%自摸加底
--define(Choice_Rule_Zimojiadi,9).
-%%自摸加番
--define(Choice_Rule_Zimojiafan,10).
-%%点杠花（点炮）
--define(Choice_Rule_Dianganghua_Pao,11).
-%%点杠花（自摸）
--define(Choice_Rule_Zerenzhi_Mo,12).
-%%换三张
--define(Choice_Rule_Huansanzhang,13).
-%%幺九将对
--define(Choice_Rule_Yaojiujiangdui,14).
-%%门清中张
--define(Choice_Rule_Menqingzhongzhang,15).
-%%天地胡
--define(Choice_Rule_Tiandihu,16).
-%%血战到底
--define(Choice_Rule_Xuezhan,17).
-%%血流成河
--define(Choice_Rule_Xueliu,18).
-%%封顶
--define(Choice_Rule_Fengding,19).
-%%三人两房
--define(Choice_Rule_Sanrenliangfang,20).
-%%三人三房
--define(Choice_Rule_Sanrensanfang,21).
-%%四人两房
--define(Choice_Rule_Sirenliangfang,22).
-
-
-# 传输协议定义
+# -----------------------------------传输协议定义
 
 -define(Action_Room_Login,1).%登录
 -define(Action_Room_Create,2).%创建房间
@@ -81,13 +50,66 @@
 -define(Action_Msg_Broadcast_All,26).%所有消息广播
 
 
-# --------------------
 
--define(Interrupt_Chi,1).
--define(Interrupt_Cha,2).
--define(Interrupt_Gang,3).
--define(Interrupt_Ting,4).
--define(Interrupt_Xi,5).
+# -----------------------------------规则
+
+%%夹五
+-define(Choice_Rule_Jiawu,1).
+%%清一色
+-define(Choice_Rule_Qingyise,2).
+%%扣听
+-define(Choice_Rule_Kouting,3).
+%%鸡胡
+-define(Choice_Rule_Jihu,4).
+%%攒杠
+-define(Choice_Rule_Cuangang,5).
+%%手把一
+-define(Choice_Rule_Shoubayi,6).
+%%背靠背
+-define(Choice_Rule_Beikaobei,7).
+%%责任制
+-define(Choice_Rule_Zerenzhi,8).
+%%自摸加底
+-define(Choice_Rule_Zimojiadi,9).
+%%自摸加番
+-define(Choice_Rule_Zimojiafan,10).
+%%点杠花（点炮）
+-define(Choice_Rule_Dianganghua_Pao,11).
+%%点杠花（自摸）
+-define(Choice_Rule_Zerenzhi_Mo,12).
+%%换三张
+-define(Choice_Rule_Huansanzhang,13).
+%%幺九将对
+-define(Choice_Rule_Yaojiujiangdui,14).
+%%门清中张
+-define(Choice_Rule_Menqingzhongzhang,15).
+%%天地胡
+-define(Choice_Rule_Tiandihu,16).
+%%血战到底
+-define(Choice_Rule_Xuezhan,17).
+%%血流成河
+-define(Choice_Rule_Xueliu,18).
+%%封顶
+-define(Choice_Rule_Fengding,19).
+%%三人两房
+-define(Choice_Rule_Sanrenliangfang,20).
+%%三人三房
+-define(Choice_Rule_Sanrensanfang,21).
+%%四人两房
+-define(Choice_Rule_Sirenliangfang,22).
+%%手牌数
+-define(Choice_Rule_Shoupaishu,23).
+%%卡二条
+-define(Choice_Rule_Kaertiao,24).
+
+
+# -----------------------------------中断类型
+
+-define(Interrupt_Chi,1).%%吃
+-define(Interrupt_Cha,2).%%碰
+-define(Interrupt_Gang,3).%%杠
+-define(Interrupt_Ting,4).%%听
+-define(Interrupt_Xi,5).%%
 -define(Interrupt_Hu_Zhuang,6).%%庄家
 -define(Interrupt_Hu_Zimo,7).%%自摸
 -define(Interrupt_Hu_zhanli,8).%%站立
@@ -131,6 +153,8 @@
 -define(Interrupt_Hu_Gen,46).%%根儿
 -define(Interrupt_Hu_Chadajiao,47).%%查大叫
 -define(Interrupt_Hu_Kaertiao,48).%%卡二条
+-define(Interrupt_Gang_Dian,49).%%点杠
+-define(Interrupt_Hu_Jiangdui,50).%%将对
 -define(Interrupt_Hu,99).
 -define(Interrupt_Jiang,999).
 -define(Interrupt_Dingque,9999).

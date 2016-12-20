@@ -28,17 +28,6 @@ class GSTotlePerson extends eui.Component {
     private pao_img: eui.Image;
 
     /**
-     * 显示文字
-     */
-    private showText: any =
-    {
-        0: "坐　庄：",
-        1: "胡　牌：",
-        2: "点　炮：",
-        3: "积　分："
-    };
-
-    /**
      * 奖励显示容器
      */
     private card_group: eui.Group;
@@ -157,36 +146,36 @@ class GSTotlePerson extends eui.Component {
         }
 
 
-        var list: Array<any> = [];
+        var numlist: number[] = [
+            this.pserson.zimo_num,
+            this.pserson.paorcv_num,
+            this.pserson.pao_num,
+            this.pserson.gang_an_num,
+            this.pserson.gang_ming_num,
+            this.pserson.chajiao_num,
+            this.pserson.cur
+        ];
 
-        var zhuang_num: number = this.pserson.zhuang_num;  //庄次数
-        list.push(zhuang_num);
+        var txtList: string[] = [
+            "自  摸",
+            "接  炮",
+            "点  炮",
+            "暗  杠",
+            "明  杠",
+            "查大叫",
+            "积  分"
+        ];
 
-        var hu_num: number = this.pserson.hu_num;  //胡牌次数
-        list.push(hu_num);
-
-        var pao_num: number = this.pserson.pao_num;  //点炮次数
-        list.push(pao_num);
-
-        var bao_num: number = this.pserson.bao_num;  //摸宝次数
-        // list.push(bao_num);
-
-        var baozhongbao_num: number = this.pserson.baozhongbao_num;  //宝中宝次数
-        // list.push(baozhongbao_num);
-
-        var fen_num: number = this.pserson.cur;  //玩家总分数
-        list.push(fen_num);
-
-        for (var i = 0; i < list.length; i++) {
+        for (var i = 0; i < numlist.length; i++) {
             var label: eui.Label = new eui.Label();
             this.addChild(label);
-            label.text = this.showText[i] + "" + list[i];
+            label.text = txtList[i] + "：" + numlist[i];
             label.size = 20;
             label.textColor = 0xffffff;
             label.fontFamily = gameConfig.FontFamily;
             label.x = 40 - label.textWidth * 0.5;
 
-            if (i == (list.length - 1)) {
+            if (i == (numlist.length - 1)) {
                 label.y = 140 + ((label.textHeight + 20) * i) + 20;
 
                 this.iswin.y = label.y - 20;

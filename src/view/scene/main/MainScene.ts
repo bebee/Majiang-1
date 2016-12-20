@@ -31,17 +31,6 @@ class MainScene extends eui.Component {
         this.skinName = "MainSceneSkin";
 
         this.touchChildren = true;
-
-        var sss: any = {"role": "user", "mod": "mod_auths", "fun": "auth_signature", "args": {}};
-
-        var arr: Array<string> = ["closeWindow", "hideMenuItems", "onMenuShareAppMessage", "onMenuShareTimeline", "startRecord", "stopRecord", "onVoiceRecordEnd", "playVoice", "pauseVoice", "stopVoice", "onVoicePlayEnd", "uploadVoice", "downloadVoice"];
-
-        HttpHandler.sendMsgCallBack(gameConfig.protocolType + gameConfig.address_http.ip + ":" + gameConfig.address_http.port, function (obj) {
-            if (obj.message != "error") {
-                gameConfig.pushData(JSON.parse(obj.message));
-                Weixin.config(gameConfig.appid, Number(gameConfig.timestamp), gameConfig.noncestr, gameConfig.signature, arr);
-            }
-        }, this, "action=" + JSON.stringify(sss));
     }
 
     head_group: eui.Group;

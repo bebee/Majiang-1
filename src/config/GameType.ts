@@ -70,5 +70,5 @@ enum PlayType {
 enum GameRule {
     jiawu = 1, qingyise, kouting, jihujipiao, zangang, shoubayi, beikaobei, zerenzhi,
     zimojiadi = 9, zimojiafan, dianganghua_pao, dianganghua_zimo, huansanzhang, yaojiujiangdui, menqingzhongzhang, tiandihu,
-    kaertiao
+    fengding = 19, paizhang = 23, kaertiao = 24
 }

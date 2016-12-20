@@ -22,13 +22,13 @@ class DissolutionPanel extends BasePanel {
         super.childrenCreated();
 
         this.bgView.setType(BgViewType.normal);
+        this.bgView.hideClose();
 
         this.btn_confirm.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickHandler, this);
         this.btn_cancel.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickHandler, this);
     }
 
     private clickHandler(e: egret.TouchEvent) {
-        this.hide();
         switch (e.currentTarget) {
             case this.btn_cancel:
                 SocketManager.getInstance().getGameConn().send(14, {"args": {"answer": 0}});  //发起解散房子
@@ -37,7 +37,6 @@ class DissolutionPanel extends BasePanel {
                 SocketManager.getInstance().getGameConn().send(14, {"args": {"answer": 1}});  //发起解散房子
                 break;
         }
-        // EffectUtils.showTips("您已经选择过了", 5);
     }
 
     refresh(): void {
